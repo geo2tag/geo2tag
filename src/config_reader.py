@@ -15,3 +15,6 @@ def getPort():
 
 def getDbName():
     return 'geomongo'
+
+def getInstancePrefix():
+    return 'instance'
