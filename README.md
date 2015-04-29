@@ -12,11 +12,11 @@ sudo ./scripts/local_deploy.sh
 ## Как проверить, что все развернулось ##
 
 Выполнение команды
-curl http://geomongo/tags/111
+curl http://geomongo/instance/status
 
 должно вернуть 
 ```
 #!python
 
-{'errno':1}
+"OK"
 ```
