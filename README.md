@@ -3,6 +3,7 @@
 ## Как подготовить среду  ##
 
 sudo apt-get install mongodb python-pip python-dev git vim apache2 libapache2-mod-wsgi
+
 git clone git@bitbucket.org:osll/geomongo.git
 
 ## Как локально развертывать ##
