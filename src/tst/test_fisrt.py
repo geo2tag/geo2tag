@@ -6,4 +6,4 @@ from unittest import TestCase
 class TestFirst(TestCase):
     def testFirst(self):
         print 'First test'
-        self.assertTrue(True)
+        self.assertTrue(False)
