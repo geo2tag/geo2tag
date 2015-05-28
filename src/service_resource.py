@@ -5,7 +5,7 @@ from flask_restful import reqparse
 class ServiceResource(Resource):
     def get(self, serviceName):
         parserList = parse()
-        return {serviceName: parserList}
+        return {serviceName: 'Service description'}
 
     def put(self, serviceName):
         parserList = parse()
