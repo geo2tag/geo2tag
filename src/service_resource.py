@@ -15,11 +15,6 @@ class ServiceResource(Resource):
         parserList = parse()
         return {serviceName: 'Service removed'} 
 
-class ServiceListResource(Resource):
-    def post(self):
-        parser = reqparse.RequestParser()
-        args = parser.parse_args()
-
 def parse():
     parser = reqparse.RequestParser()
     parser.add_argument('name', type=str, required=True)
