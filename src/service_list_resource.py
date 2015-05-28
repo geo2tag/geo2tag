@@ -1,4 +1,4 @@
-from service_resource import parse
+from flask_restful import reqparse
 
 class ServiceListResource():
 
@@ -15,3 +15,9 @@ class ServiceListResource():
         serviceList = getServiceList(number, offset)
         return serviceList
         
+def parser():
+    parser = reqparse.RequestParser()
+    parser.add_argument('number', type=int, default=None)
+    parser.add_argument('offset', type=int, default=None)
+    args = parser.parse_args()
+    return args
