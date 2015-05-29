@@ -17,8 +17,7 @@ class ServiceResource(Resource):
 
 class ServiceListResource(Resource):
     def post(self):
-        parser = reqparse.RequestParser()
-        args = parser.parse_args()
+        listAgrs = parse()
 
 def parse():
     parser = reqparse.RequestParser()
