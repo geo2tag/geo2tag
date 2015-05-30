@@ -1,11 +1,17 @@
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
-from db_model import addService
+from db_model import addService, getServiceIdByName
+from  service_not_found_exception import ServiceNotFoundException
 
 class ServiceResource(Resource):
     def get(self, serviceName):
         parserList = parse()
+        try:
+            getServiceResult = getServiceIdByName(serviceName)
+        except Exception, e:
+            ServiceExceprion = ServiceNotFoundException(e)
+            return ServiceExceprion.getReturnObject()
         return {serviceName: 'Service description'}
 
     def put(self, serviceName):
