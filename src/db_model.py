@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
+from  service_not_found_exception import ServiceNotFoundException
 
 # Collections
 TAGS = 'tags'
@@ -22,3 +23,8 @@ def addService(name, logSize, ownerld):
 
 #    def getNearTags(self, latitude, longitude):
 
+def  getServiceIdByName(name):
+    obj = db[COLLECTION].find_one({'name' : name})
+    if obj != None:
+        return obj
+    return ServiceNotFoundException(NameError)
