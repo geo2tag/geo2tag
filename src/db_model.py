@@ -27,4 +27,5 @@ def  getServiceIdByName(name):
     obj = db[COLLECTION].find_one({'name' : name})
     if obj != None:
         return obj
-    return getReturnObject()
+    ServiceExceprion = ServiceNotFoundException(NameError)
+    return ServiceExceprion.getReturnObject()
