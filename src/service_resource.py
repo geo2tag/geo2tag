@@ -1,7 +1,7 @@
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
-#from db_model import addService
+from db_model import addService
 
 class ServiceResource(Resource):
     def get(self, serviceName):
@@ -19,7 +19,7 @@ class ServiceResource(Resource):
 class ServiceListResource(Resource):
     def post(self):
         listAgrs = parse()
-        #addService(listAgrs.get('name', 0), listAgrs.get('logSize', 0), listAgrs.get('ownerId', 0))
+        result = addService(listAgrs.get('name', 0), listAgrs.get('logSize', 0), listAgrs.get('ownerId', 0))
 
 def parse():
     parser = reqparse.RequestParser()
