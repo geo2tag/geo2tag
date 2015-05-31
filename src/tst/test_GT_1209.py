@@ -18,9 +18,11 @@ class test_getServiceById(unittest.TestCase):
         collection = client[TEST_DB]["services"]
         obj = collection.find_one({"_id": TEST_ID})
         print('Test object: ' + str(obj))
+        testObject1 = {}
         try:
             testObject1 =  getServiceById(TEST_ID)
             print('Test object with getServiceById: ' + str(obj))
+            print 'testObject1' + str(testObject1)
         except Exception, e:
             ServiceException = ServiceNotFoundException(e)
             self.assertTrue(testObject1.get('_id') == obj.get('_id'))
