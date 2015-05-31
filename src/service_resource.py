@@ -1,7 +1,6 @@
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
-from db_model import addService
 
 class ServiceResource(Resource):
     def get(self, serviceName):
