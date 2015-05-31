@@ -16,7 +16,6 @@ class test_getServiceIdByName(unittest.TestCase):
         client = MongoClient()
         collection = client[TEST_DB]["services"]
         obj = collection.find_one({"_id": TEST_ID})
-        print type(TEST_ID)
         print('Test object: ' + str(obj))
         try:
             testObject =  getServiceIdByName('testservice')
