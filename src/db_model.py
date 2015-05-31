@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 from  service_not_found_exception import ServiceNotFoundException
+from pymongo import Connection
 
 # Collections
 TAGS = 'tags'
@@ -29,3 +30,8 @@ def  getServiceIdByName(name):
         return obj
     ServiceExceprion = ServiceNotFoundException(NameError)
     return ServiceExceprion.getReturnObject()
+
+def removeService(name):
+    obj = db[COLLECTION].remove({'name' : name})
+    connection = Connection()
+    connection.drop_database(name)
