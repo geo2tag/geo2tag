@@ -1,1 +1,0 @@
-{ "_id" : { "$oid" : "55671e2b13293c504d515a35" }, "user_id" : "stub", "date" : { "$date" : 1432821291832 }, "message" : "test", "service" : "testservice" }
