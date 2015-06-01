@@ -19,11 +19,9 @@ class test_getServiceIdByName(unittest.TestCase):
         print('Test object: ' + str(obj))
         try:
             testObject =  getServiceIdByName('testservice')
-        except Exception, e:
-            ServiceException = ServiceNotFoundException(e)
-            self.assertTrue(testObject.get('_id') == obj.get('_id'))
+        except ServiceNotFoundException as e:
+            self.assertTrue(False)
         try:
             testObject =  getServiceIdByName('OlchikovTestService')
-        except Exception, e:
-            ServiceException = ServiceNotFoundException(e)
-            self.assertTrue(('Service not found', 400) == ServiceException.getReturnObject())
+        except ServiceNotFoundException as e:
+            self.assertEquals(('Service not found', 400), e.getReturnObject())
