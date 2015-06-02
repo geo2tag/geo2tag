@@ -7,6 +7,10 @@ from pymongo import Connection
 TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
+NAME = 'name'
+CONFIG = 'config'
+LOG_SIZE = 'log_size'
+OWNERID = 'owner_id'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -15,25 +19,22 @@ def addService(name, logSize, ownerld):
     obj = db[COLLECTION].find_one({'name' : name})
     if obj != None:
         return False
-    db[COLLECTION].save({'name' : name, 'config' : {'log_size' : logSize}, 'owner_id' : ownerld})
-    obj = db[COLLECTION].find_one({'name' : name})
-    if obj == None:
+    obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
+    if obj_id == None:
     	return None
     else:
-    	return obj['_id']
+    	return obj_id
 
 def getServiceList(number, offset):
     return {}
-#    def getNearTags(self, latitude, longitude):
 
-def  getServiceIdByName(name):
+def getServiceIdByName(name):
     obj = db[COLLECTION].find_one({'name' : name})
     if obj != None:
         return obj
-    ServiceExceprion = ServiceNotFoundException(NameError)
-    return ServiceExceprion.getReturnObject()
+    raise ServiceNotFoundException()
 
 def removeService(name):
-    obj = db[COLLECTION].remove({'name' : name})
+    obj = db[COLLECTION].remove({NAME : name})
     connection = Connection()
     connection.drop_database(name)
