@@ -9,4 +9,3 @@ def addTag(tag):
     db[TAGS].insert(tag)
 
 #    def getNearTags(self, latitude, longitude):
-
