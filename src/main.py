@@ -1,6 +1,7 @@
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
-from service_resource import ServiceResource, ServiceListResource
+from service_resource import ServiceResource
+from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from config_reader import getInstancePrefix
 
