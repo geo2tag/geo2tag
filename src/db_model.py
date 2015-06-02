@@ -22,8 +22,8 @@ def addService(name, logSize, ownerld):
         return obj['_id']
 
 def getServiceList(number, offset):
-     return {}
-     
+    return {}
+
 #    def getNearTags(self, latitude, longitude):
 
 def  getServiceIdByName(name):
