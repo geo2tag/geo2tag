@@ -1,9 +1,12 @@
 from flask_restful import reqparse
+from flask.ext.restful import Resource
+from db_model import addService, getServiceList
+from service_resource import parse
 
-class ServiceListResource():
+class ServiceListResource(Resource):
 
     def get(self):
-        args = parse()
+        args = parser()
         if 'number' in args:
             number = args['number']
         else:
@@ -14,6 +17,10 @@ class ServiceListResource():
             offset = None
         serviceList = getServiceList(number, offset)
         return serviceList
+
+    def post(self):
+        listAgrs = parse()
+        result = addService(listAgrs.get('name'), listAgrs.get('logSize'), listAgrs.get('ownerId'))
         
 def parser():
     parser = reqparse.RequestParser()
