@@ -10,6 +10,7 @@ api = Api(app)
 
 api.add_resource(ServiceResource, '/'+getInstancePrefix()+'/service/<string:serviceName>')
 api.add_resource(StatusResource, '/'+getInstancePrefix()+'/status')
+api.add_resource(ServiceListResource, '/'+getInstancePrefix()+'/service/')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

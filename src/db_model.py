@@ -24,8 +24,9 @@ def addService(name, logSize, ownerld):
 
 def getServiceList(number, offset):
     return {}
-    
+
 #    def getNearTags(self, latitude, longitude):
+
 def  getServiceById(id):
     obj = db[COLLECTION].find_one({'_id' : id})
     if obj != None:
