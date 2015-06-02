@@ -1,0 +1,4 @@
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "testservice.points", "name" : "_id_" }
+{ "v" : 1, "key" : { "location" : "2dsphere" }, "ns" : "testservice.points", "name" : "location_2dsphere" }
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "testservice.log", "name" : "_id_" }
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "testservice.channels", "name" : "_id_" }
