@@ -13,6 +13,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
 NAME = 'name'
 TEST_OBJECT = 'test_GT_1208'
+
 class TestRemoveService(TestCase):
     def testRemoveService(self):
         db[COLLECTION].save({NAME : TEST_OBJECT})
