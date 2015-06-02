@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
+from  service_not_found_exception import ServiceNotFoundException
 
 # Collections
 TAGS = 'tags'
@@ -15,4 +16,4 @@ def  getServiceById(id):
     obj = db[COLLECTION].find_one({'_id' : id})
     if obj != None:
         return obj
-    return getReturnObject()
+    raise ServiceNotFoundException()
