@@ -6,12 +6,10 @@ from  service_not_found_exception import ServiceNotFoundException
 
 class ServiceResource(Resource):
     def get(self, serviceName):
-        parserList = parse()
         try:
             getServiceResult = getServiceIdByName(serviceName)
-        except Exception, e:
-            ServiceExceprion = ServiceNotFoundException(e)
-            return ServiceExceprion.getReturnObject()
+        except ServiceNotFoundException as e:
+            return e.getReturnObject()
         return {serviceName: 'Service description'}
 
     def put(self, serviceName):
