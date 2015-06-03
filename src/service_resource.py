@@ -3,15 +3,17 @@ from flask.ext.restful import Resource
 from flask_restful import reqparse
 from db_model import addService, getServiceIdByName
 from  service_not_found_exception import ServiceNotFoundException
-
+import json
+from bson import json_util
 
 class ServiceResource(Resource):
     def get(self, serviceName):
         try:
             getServiceResult = getServiceIdByName(serviceName)
+            print getServiceResult
         except ServiceNotFoundException as e:
             return e.getReturnObject()
-        return {serviceName: 'Service description'}
+        return json.loads(json_util.dumps(getServiceResult))
 
     def put(self, serviceName):
         parserList = parse()

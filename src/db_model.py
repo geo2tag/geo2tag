@@ -27,6 +27,8 @@ def getServiceList(number, offset):
 
 def  getServiceIdByName(name):
     obj = db[COLLECTION].find_one({'name' : name})
+    print obj
+    print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     if obj != None:
         return obj
-    raise ServiceNotFoundException
+    raise ServiceNotFoundException()
