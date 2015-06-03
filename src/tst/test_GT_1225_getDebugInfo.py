@@ -11,7 +11,7 @@ TEST_FILE_DATA = ('''{
 	'commit': COMMIT,
 	'date' : DATE,
 	'branch': BRANCH,
-	'version': VERSIO
+	'version': VERSION
 }''')
 
 def prepareDebugFile() :
