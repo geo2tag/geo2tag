@@ -29,12 +29,11 @@ def addService(name, logSize, ownerld):
     obj = db[COLLECTION].find_one({'name' : name})
     if obj != None:
         return False
-    db[COLLECTION].save({'name' : name, 'config' : {'log_size' : logSize}, 'owner_id' : ownerld})
-    obj = db[COLLECTION].find_one({'name' : name})
-    if obj == None:
+    obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
+    if obj_id == None:
         return None
     else:
-        return obj['_id']
+        return obj_id
 
 def getServiceList(number, offset):
     return {}
