@@ -15,7 +15,7 @@ class ServiceResource(Resource):
         return dumps(getServiceResult, ensure_ascii=False).encode('utf8')
 
     def put(self, serviceName):
-        parserList = parse()
+        parserList = parsePut()
         return {serviceName: 'Service updated'}
 
     def delete(self, serviceName):
@@ -27,5 +27,11 @@ def parse():
     parser.add_argument('name', type=str, required=True)
     parser.add_argument('logSize', type=int, default=1048576)
     parser.add_argument('ownerId', type=str, default='STUB')
+    args = parser.parse_args()
+    return args
+
+def parsePut():
+    parser = reqparse.RequestParser()
+    parser.add_argument('logSize', type=int, required=True)
     args = parser.parse_args()
     return args
