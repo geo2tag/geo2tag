@@ -3,8 +3,7 @@ from flask.ext.restful import Resource
 from flask_restful import reqparse
 from db_model import addService, getServiceIdByName
 from  service_not_found_exception import ServiceNotFoundException
-import json
-from bson import json_util
+from bson.json_util import dumps
 
 class ServiceResource(Resource):
     def get(self, serviceName):
@@ -13,7 +12,7 @@ class ServiceResource(Resource):
             print getServiceResult
         except ServiceNotFoundException as e:
             return e.getReturnObject()
-        return json.loads(json_util.dumps(getServiceResult))
+        return dumps(getServiceResult, ensure_ascii=False).encode('utf8')
 
     def put(self, serviceName):
         parserList = parse()
