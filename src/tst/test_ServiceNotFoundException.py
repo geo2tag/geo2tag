@@ -7,9 +7,7 @@ sys.path.append('../')
 
 from  service_not_found_exception import ServiceNotFoundException
 
-class test_ServiceNotFoundException(unittest.TestCase):
-    def test_ServiceNotFoundException_func(self):
-        try:
+class TestServiceNotFoundException(unittest.TestCase):
+    def testServiceNotFoundException(self):
+        with self.assertRaises(ServiceNotFoundException) as e:
             raise ServiceNotFoundException()
-        except ServiceNotFoundException as e:
-            self.assertEquals(('Service not found', 400), e.getReturnObject())
