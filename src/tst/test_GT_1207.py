@@ -21,7 +21,5 @@ class test_getServiceIdByName(unittest.TestCase):
             testObject =  getServiceIdByName('testservice')
         except ServiceNotFoundException as e:
             self.assertTrue(False)
-        try:
+        with self.assertRaises(ServiceNotFoundException):
             testObject =  getServiceIdByName('OlchikovTestService')
-        except ServiceNotFoundException as e:
-            self.assertEquals(('Service not found', 400), e.getReturnObject())
