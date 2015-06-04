@@ -21,9 +21,10 @@ class ServiceListResource(Resource):
 
     def post(self):
         listAgrs = parse()
-        result = addService(listAgrs.get('name'), listAgrs.get('logSize'), listAgrs.get('ownerId'))
-        if result is None:
-            return  "Service already exists", 400
+        try:
+            result = addService(listAgrs.get('name'), listAgrs.get('logSize'), listAgrs.get('ownerId'))
+        except ServiceAlreadyExistsException as e:
+            return e.getReturnObject()
         return dumps(result, ensure_ascii=False).encode('utf8')
         
 def parser():

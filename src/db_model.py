@@ -3,6 +3,7 @@ from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
+from service_already_exists_exception import ServiceAlreadyExistsException
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -26,14 +27,15 @@ def addTag(tag):
     db[TAGS].insert(tag)
 
 def addService(name, logSize, ownerld):
-    obj = db[COLLECTION].find_one({'name' : name})
-    if obj != None:
-        return False
-    obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
-    if obj_id == None:
-        return None
-    else:
-        return obj_id
+    try:
+        obj = getServiceIdByName(name)
+        raise ServiceAlreadyExistsException()
+    except ServiceNotFoundException as e:
+        obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
+        if obj_id == None:
+            return None
+        else:
+            return obj_id
 
 def getServiceList(number, offset):
     return {}
