@@ -1,5 +1,0 @@
-[main]
-db_name=geomongo
-host=localhost
-port=27017
-instanceprefix=instance1
