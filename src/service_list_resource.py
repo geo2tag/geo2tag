@@ -1,12 +1,12 @@
 from flask_restful import reqparse
 from flask.ext.restful import Resource
 from db_model import addService, getServiceList
-from service_parsers import ServiceParser
+from service_parsers import ServiceListParser
 
 class ServiceListResource(Resource):
 
     def get(self):
-        args = ServiceParser.parseGetParameters()
+        args = ServiceListParser.parseGetParameters()
         if 'number' in args:
             number = args['number']
         else:
@@ -19,7 +19,7 @@ class ServiceListResource(Resource):
         return serviceList
 
     def post(self):
-        listAgrs = ServiceParser.parsePostParameters()
+        listAgrs = ServiceListParser.parsePostParameters()
         result = addService(listAgrs.get('name'), listAgrs.get('logSize'), listAgrs.get('ownerId'))
         if result is None:
             return  "Service already exists", 400

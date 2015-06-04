@@ -9,7 +9,7 @@ sys.path.append('../')
 import service_list_resource 
 import service_resource
 from json import dumps
-from service_parsers import ServiceParser
+from service_parsers import ServiceListParser
 
 NUMBER = 'number'
 NUMBER_VALUE = 0
@@ -38,24 +38,24 @@ app = Flask(__name__)
 class TestParserServiceList(TestCase):
     def testGetParser(self):
         with app.test_request_context('/?'+CORRECT_ARGS):
-            args = ServiceParser.parseGetParameters()
+            args = ServiceListParser.parseGetParameters()
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
             self.assertEquals(args[NUMBER], NUMBER_VALUE)
 
         with app.test_request_context('/?'+INCORRECT_ARGS):
-            args = ServiceParser.parseGetParameters()
+            args = ServiceListParser.parseGetParameters()
             self.assertIsNone(args.get(OFFSET))
             self.assertIsNone(args.get(NUMBER))
 
     def testPostParser(self):
         with app.test_request_context('/', data=CORRECT_FORM, method='POST'):
-            args = ServiceParser.parsePostParameters()
+            args = ServiceListParser.parsePostParameters()
             self.assertEquals(args[NAME], NAME_VALUE)
             self.assertEquals(args[LOG_SIZE], LOG_SIZE_VALUE)
             self.assertEquals(args[OWNER_ID], OWNER_ID_VALUE)
 
         with app.test_request_context('/', data=SEMIFILLED_FORM, method='POST'):
-            args = ServiceParser.parsePostParameters()
+            args = ServiceListParser.parsePostParameters()
             self.assertEquals(args[NAME], NAME_VALUE)
             self.assertEquals(args[LOG_SIZE], DEFAULT_LOG_SIZE)
             self.assertEquals(args[OWNER_ID], DEFAULT_OWNER_ID)
