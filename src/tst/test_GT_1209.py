@@ -11,6 +11,7 @@ from db_model import getServiceById
 TEST_ID = ObjectId("55671ae113293c504d515a33")
 TESTID = "55671ae113293c504d515a33"
 TEST_DB = 'geomongo'
+BAD_TEST_ID = ObjectId("aa671ae113293c504d515abb")
 
 class test_getServiceById(unittest.TestCase):
     def test_getServiceById_func(self):
@@ -25,7 +26,6 @@ class test_getServiceById(unittest.TestCase):
             print 'testObject1' + str(testObject1)
         except ServiceNotFoundException as e:
             self.assertTrue(False)
-        try:
-            testObject2 =  getServiceById('aa671ae113293c504d515abb')
-        except ServiceNotFoundException as e:
-            self.assertEquals(('Service not found', 400), e.getReturnObject())
+        with self.assertRaises(ServiceNotFoundException):
+            testObject2 =  getServiceById(BAD_TEST_ID)
+            print 'testObject2' + str(testObject2)
