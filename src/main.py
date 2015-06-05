@@ -11,7 +11,7 @@ api = Api(app)
 
 api.add_resource(ServiceResource, '/'+getInstancePrefix()+'/service/<string:serviceName>')
 api.add_resource(StatusResource, '/'+getInstancePrefix()+'/status')
-api.add_resource(ServiceListResource, '/'+getInstancePrefix()+'/service/')
+api.add_resource(ServiceListResource, '/'+getInstancePrefix()+'/service')
 api.add_resource(DebugInfoResource, '/'+getInstancePrefix()+'/debug_info/')
 
 if __name__ == '__main__':
