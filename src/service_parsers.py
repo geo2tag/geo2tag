@@ -1,6 +1,13 @@
 from flask_restful import reqparse
-from service_resource import ARGS_LOG_SIZE
-from service_list_resource import GET_ARGS_NUMBER, GET_ARGS_OFFSET, POST_ARGS_NAME, POST_ARGS_LOG_SIZE, POST_ARGS_OWNER_ID, DEFAULT_OWNER_ID
+
+ARGS_LOG_SIZE = "logSize"
+
+GET_ARGS_NUMBER = "number"
+GET_ARGS_OFFSET = "offset"
+POST_ARGS_NAME = "name"
+POST_ARGS_LOG_SIZE = "logSize"
+POST_ARGS_OWNER_ID = "ownerId"
+DEFAULT_OWNER_ID = 'STUB'
 
 class ServiceParser():
     @staticmethod
