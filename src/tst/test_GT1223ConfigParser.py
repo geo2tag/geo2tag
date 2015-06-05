@@ -5,7 +5,7 @@ import os
 import sys
 
 sys.path.append('../')
-CONFIG_PATH = os.path.dirname(os.path.realpath(__file__))+'/DEBUG'
+CONFIG_PATH = os.path.dirname(os.path.realpath(__file__))+'/config.ini'
 SECTION = 'main'
 OPTION_HOST = 'host'
 OPTION_PORT = 'port'
