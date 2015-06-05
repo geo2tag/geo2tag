@@ -16,7 +16,7 @@ NAME = 'name'
 CONFIG = 'config'
 LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
-
+ID = '_id'
 # Collections
 TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
@@ -26,7 +26,7 @@ def addTag(tag):
     db[TAGS].insert(tag)
 
 def addService(name, logSize, ownerld):
-    obj = db[COLLECTION].find_one({'name' : name})
+    obj = db[COLLECTION].find_one({NAME: name})
     if obj != None:
         return False
     obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
@@ -59,13 +59,13 @@ def getLog(dbName, number, offset, dateFrom, dateTo) :
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
 def  getServiceIdByName(name):
-    obj = db[COLLECTION].find_one({"name" : name})
+    obj = db[COLLECTION].find_one({NAME : name})
     if obj != None:
         return obj
     raise ServiceNotFoundException()
 
 def  getServiceById(id):
-    obj = db[COLLECTION].find_one({'_id' : id})
+    obj = db[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
     raise ServiceNotFoundException()
