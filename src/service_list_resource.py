@@ -17,7 +17,6 @@ class ServiceListResource(Resource):
 
     def get(self):
         args = ServiceListParser.parseGetParameters()
-        args = parser()
         if GET_ARGS_NUMBER in args:
             number = args[GET_ARGS_NUMBER]
         else:
