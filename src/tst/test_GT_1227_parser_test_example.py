@@ -9,7 +9,7 @@ sys.path.append('../')
 import service_list_resource 
 import service_resource
 from json import dumps
-from service_parsers import ServiceListParser
+from service_list_parsers import ServiceListParser
 
 NUMBER = 'number'
 NUMBER_VALUE = 0
