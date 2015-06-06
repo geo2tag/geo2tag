@@ -66,9 +66,13 @@ def  getServiceIdByName(name):
     raise ServiceNotFoundException()
 
 def removeService(name):
-    obj = db[COLLECTION].remove({NAME : name})
-    connection = Connection()
-    connection.drop_database(name)
+    try:
+        obj = getServiceIdByName(name)
+        db[COLLECTION].remove({ID : obj['_id']})
+        connection = Connection()
+        connection.drop_database(name)
+    except ServiceNotFoundException as e:
+        print e.getReturnObject()
 
 def  getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
