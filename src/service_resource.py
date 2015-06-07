@@ -27,4 +27,4 @@ class ServiceResource(Resource):
             removeService(serviceName)
         except ServiceNotFoundException as e:
             return e.getReturnObject()
-        return {serviceName: SRV_NAME_RM} 
+        return {serviceName: SRV_NAME_RM}
