@@ -22,9 +22,9 @@ class ServiceResource(Resource):
         return {serviceName: SRV_NAME_UPD}
 
     def delete(self, serviceName):
-		#args = ServiceParser.parsePutParameters()
-		try:
-			removeService(serviceName)
-		except ServiceNotFoundException as e:
-			return e.getReturnObject()
+        #args = ServiceParser.parsePutParameters()
+        try:
+            removeService(serviceName)
+        except ServiceNotFoundException as e:
+            return e.getReturnObject()
         return {serviceName: SRV_NAME_RM} 
