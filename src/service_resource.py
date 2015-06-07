@@ -1,7 +1,7 @@
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
-from db_model import addService, getServiceIdByName
+from db_model import addService, getServiceIdByName, updateService
 from  service_not_found_exception import ServiceNotFoundException
 from bson.json_util import dumps
 from service_parsers import ServiceParser
@@ -27,7 +27,7 @@ class ServiceResource(Resource):
         try:
             updateService()
         except ServiceNotFoundException as e:
-            return 'e.getReturnObject()'
+            return e.getReturnObject()
         return {serviceName: SRV_NAME_UPD}
 
     def delete(self, serviceName):
