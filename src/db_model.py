@@ -4,6 +4,7 @@ import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from service_already_exists_exception import ServiceAlreadyExistsException
+from pymongo import Connection
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -65,6 +66,15 @@ def  getServiceIdByName(name):
     if obj != None:
         return obj
     raise ServiceNotFoundException()
+
+def removeService(name):
+    try:
+        obj = getServiceIdByName(name)
+        db[COLLECTION].remove({ID : obj['_id']})
+        connection = Connection()
+        connection.drop_database(name)
+    except ServiceNotFoundException as e:
+        raise
 
 def  getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
