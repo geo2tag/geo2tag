@@ -70,5 +70,5 @@ def  getServiceById(id):
         return obj
     raise ServiceNotFoundException()
 
-def updateService():
-    pass
+def updateService(name):
+    result = getServiceIdByName(name)
