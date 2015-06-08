@@ -3,3 +3,4 @@ pymongo==2.7.1
 Flask==0.10.1
 configparser
 flask-restful==0.3.2
+requests==2.2.1
