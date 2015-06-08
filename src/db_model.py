@@ -69,3 +69,12 @@ def  getServiceById(id):
     if obj != None:
         return obj
     raise ServiceNotFoundException()
+
+def getServiceList(number, offset):
+    db = MongoClient(getHost(), getPort())[getDbName()]
+    if number is None:
+        number = db['services'].count()
+    if offset is None:
+        offset = 0
+    result = list(db['services'].find().sort('name', 1).skip(offset).limit(number))
+    return result
