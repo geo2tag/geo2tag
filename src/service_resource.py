@@ -5,6 +5,8 @@ from db_model import addService, getServiceIdByName, updateService
 from  service_not_found_exception import ServiceNotFoundException
 from bson.json_util import dumps
 from service_parsers import ServiceParser
+from db_model import removeService
+from  service_not_found_exception import ServiceNotFoundException
 
 SRV_NAME_DISCR = 'Service description'
 SRV_NAME_UPD = 'Service updated'
@@ -31,4 +33,9 @@ class ServiceResource(Resource):
         return {serviceName: SRV_NAME_UPD}
 
     def delete(self, serviceName):
-        return {serviceName: SRV_NAME_RM} 
+        #args = ServiceParser.parsePutParameters()
+        try:
+            removeService(serviceName)
+        except ServiceNotFoundException as e:
+            return e.getReturnObject()
+        return {serviceName: SRV_NAME_RM}
