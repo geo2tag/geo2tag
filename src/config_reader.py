@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 from configparser import  SafeConfigParser
 import os
-CONFIG_PATH = 'config.ini'
+CONFIG_PATH = os.path.dirname(os.path.realpath(__file__))+'/config.ini'
 SECTION = 'main'
 OPTION_HOST = 'host'
 OPTION_PORT = 'port'
