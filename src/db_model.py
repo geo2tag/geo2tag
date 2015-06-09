@@ -79,3 +79,6 @@ def  getServiceById(id):
     if obj != None:
         return obj
     raise ServiceNotFoundException()
+
+def updateService(name):
+    result = getServiceIdByName(name)
