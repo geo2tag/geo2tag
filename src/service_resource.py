@@ -5,6 +5,7 @@ from db_model import addService, getServiceIdByName
 from  service_not_found_exception import ServiceNotFoundException
 from bson.json_util import dumps
 from service_parsers import ServiceParser
+import json
 
 SRV_NAME_DISCR = 'Service description'
 SRV_NAME_UPD = 'Service updated'
@@ -18,9 +19,11 @@ class ServiceResource(Resource):
     def get(self, serviceName):
         try:
             getServiceResult = getServiceIdByName(serviceName)
+            print type(getServiceResult)
         except ServiceNotFoundException as e:
             return e.getReturnObject()
-        return dumps(getServiceResult, ensure_ascii=False).encode('utf8')
+        print type(getServiceResult)
+        return getServiceResult
 
     def put(self, serviceName):
         parserList = ServiceParser.parsePutParameters()

@@ -1,4 +1,5 @@
+from flask import make_response
 class ServiceNotFoundException(Exception):
     def getReturnObject(self):
           ERROR = 'Service not found'
-          return ERROR, 400
+          return make_response(ERROR, 400)
