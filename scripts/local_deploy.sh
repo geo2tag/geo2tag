@@ -22,10 +22,10 @@ DATE=$(date -R)
 VERSION=$(git describe)
 [ ${#VERSION} == 0 ] && VERSION="no version" 
 echo "{ 
-'commit' : $COMMIT 
-'date' : $DATE
-'branch' : $BRANCH
-'version' : $VERSION
+'commit' : '$COMMIT' 
+'date' : '$DATE'
+'branch' : '$BRANCH'
+'version' : '$VERSION'
 }" > $DEBUG_FILE
 
 chown -R www-data:www-data /var/www/geomongo
