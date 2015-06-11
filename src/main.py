@@ -14,7 +14,7 @@ def output_json(obj, code, headers=None):
         resp = make_response(dumps(obj), code)
         resp.headers.extend(headers or {}) 
     elif isinstance(obj, dict):
-        return json.loads(json_util.dumps(obj))
+        return make_response(json_util.dumps(obj), code)
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)

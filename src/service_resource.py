@@ -19,10 +19,8 @@ class ServiceResource(Resource):
     def get(self, serviceName):
         try:
             getServiceResult = getServiceIdByName(serviceName)
-            print type(getServiceResult)
         except ServiceNotFoundException as e:
             return e.getReturnObject()
-        print type(getServiceResult)
         return getServiceResult
 
     def put(self, serviceName):
