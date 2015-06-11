@@ -7,7 +7,6 @@ from config_reader import getInstancePrefix
 from debug_info_resource import DebugInfoResource
 from flask import make_response
 from bson import json_util
-import json
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
