@@ -3,9 +3,7 @@ from flask.ext.restful import Resource
 from flask_restful import reqparse
 from db_model import addService, getServiceIdByName, updateService
 from  service_not_found_exception import ServiceNotFoundException
-from bson.json_util import dumps
 from service_parsers import ServiceParser
-import json
 from db_model import removeService
 SRV_NAME_DISCR = 'Service description'
 SRV_NAME_UPD = 'Service updated'

@@ -11,8 +11,7 @@ import json
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
-        resp = make_response(dumps(obj), code)
-        resp.headers.extend(headers or {}) 
+        return make_response(obj)
     elif isinstance(obj, dict):
         return make_response(json_util.dumps(obj), code)
 
