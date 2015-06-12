@@ -27,3 +27,4 @@ class TestServiceListPostRequest(BasicIntegrationTest):
         responseCode = response.status_code
         self.assertEquals(responseText, EXIST_RESPONSE_TEXT)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
+        removeService(VALID_NAME)
