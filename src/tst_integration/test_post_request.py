@@ -16,7 +16,6 @@ EXIST_RESPONSE_TEXT = 'Service already exists'
 VALID_RESPONSE_CODE = 200
 class TestServiceListPostRequest(BasicIntegrationTest):
     def testServiceListPostRequest(self):
-        removeService(VALID_NAME)
         response = requests.post(self.getUrl(TEST_URL), data = DATA)
         responseText = response.text
         responseCode = response.status_code
