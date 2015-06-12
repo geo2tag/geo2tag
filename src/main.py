@@ -5,9 +5,19 @@ from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from config_reader import getInstancePrefix
 from debug_info_resource import DebugInfoResource
+from flask import make_response
+from bson import json_util
 
+def output_json(obj, code, headers=None):
+    if isinstance(obj, str) == True:
+        return make_response(obj)
+    elif isinstance(obj, dict):
+        return make_response(json_util.dumps(obj), code)
+
+DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
 api = Api(app)
+api.representations = DEFAULT_REPRESENTATIONS
 
 def getPathWithPrefix(str):
     path = '/'+getInstancePrefix()+str
