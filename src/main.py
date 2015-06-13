@@ -11,8 +11,7 @@ from bson import json_util
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj)
-    elif isinstance(obj, dict):
-        return make_response(json_util.dumps(obj), code)
+    return make_response(json_util.dumps(obj), code)
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
