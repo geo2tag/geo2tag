@@ -9,19 +9,21 @@ from pymongo import Connection
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
 
+#updateService constants
+COLLECTION_SERVICES_NAME = "services"
+COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
+
 # Collections
 TAGS = 'tags'
-db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
 NAME = 'name'
 CONFIG = 'config'
 LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
 ID = '_id'
-# Collections
-TAGS = 'tags'
+
+#db initialisation
 db = MongoClient(getHost(), getPort())[getDbName()]
-COLLECTION = 'services'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -59,6 +61,21 @@ def getLog(dbName, number, offset, dateFrom, dateTo) :
             return None
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
+def updateService(name, config) :
+    services_collection = db[COLLECTION_SERVICES_NAME]
+    for el in config :
+        tmp_el_to_set = COLLECTION_SERVICES_EL_CONFIG_NAME + '.' + str(el)
+        services_collection.update(
+            {"name" : name},
+            #changes will affect on service's sub-document called 'config'
+            #if there is no such sub-document called 'config', it will be created
+            {"$set" : {tmp_el_to_set : config[el]}},
+            #changes will affect on all services with name mentioned above
+            multi = True
+        )
+    #changed service(s) cursor in return
+    return services_collection.find({"name" : name})
+
 def  getServiceIdByName(name):
     obj = db[COLLECTION].find_one({NAME : name})
     if obj != None:
@@ -79,6 +96,3 @@ def  getServiceById(id):
     if obj != None:
         return obj
     raise ServiceNotFoundException()
-
-def updateService(name):
-    result = getServiceIdByName(name)
