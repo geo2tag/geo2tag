@@ -2,10 +2,13 @@ import unittest
 import sys
 from basic_integration_test import BasicIntegrationTest 
 from test_status_request import TestStatusRequest
+from test_get_service_name import TestServiceGetRequest
+
 
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestServiceGetRequest, param=host))
     
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
