@@ -3,11 +3,8 @@ from flask.ext.restful import Resource
 from flask_restful import reqparse
 from db_model import addService, getServiceIdByName, updateService
 from  service_not_found_exception import ServiceNotFoundException
-from bson.json_util import dumps
 from service_parsers import ServiceParser
 from db_model import removeService
-from  service_not_found_exception import ServiceNotFoundException
-
 SRV_NAME_DISCR = 'Service description'
 SRV_NAME_UPD = 'Service updated'
 SRV_NAME_RM = 'Service removed'
@@ -22,7 +19,7 @@ class ServiceResource(Resource):
             getServiceResult = getServiceIdByName(serviceName)
         except ServiceNotFoundException as e:
             return e.getReturnObject()
-        return dumps(getServiceResult, ensure_ascii=False).encode('utf8')
+        return getServiceResult
 
     def put(self, serviceName):
         parserList = ServiceParser.parsePutParameters()
