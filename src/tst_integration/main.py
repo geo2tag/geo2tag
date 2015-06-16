@@ -7,8 +7,8 @@ from test_post_request import TestServiceListPostRequest
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestServicePutRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServiceListPostRequest, param=host))
-
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
