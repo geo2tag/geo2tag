@@ -2,6 +2,7 @@ import unittest
 import sys
 from basic_integration_test import BasicIntegrationTest 
 from test_status_request import TestStatusRequest
+from test_put_service_name import TestServicePutRequest
 from test_post_request import TestServiceListPostRequest
 
 def main(host):
