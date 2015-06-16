@@ -39,7 +39,7 @@ def addService(name, logSize, ownerld):
             return obj_id
 
 def getServiceList(number, offset):
-    return {}
+    return []
 
 #    def getNearTags(self, latitude, longitude):
 
@@ -81,3 +81,6 @@ def  getServiceById(id):
     if obj != None:
         return obj
     raise ServiceNotFoundException()
+
+def updateService(name):
+    result = getServiceIdByName(name)

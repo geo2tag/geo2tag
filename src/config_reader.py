@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 from configparser import  SafeConfigParser
 import os
-CONFIG_PATH = 'config.ini'
+CONFIG_PATH = os.path.dirname(os.path.realpath(__file__))+'/config.ini'
 SECTION = 'main'
 OPTION_HOST = 'host'
 OPTION_PORT = 'port'
@@ -14,12 +14,12 @@ DBNAME = 'geomongo'
 INSTANCEPREFIX = 'instance'
 
 def getConfigParser():
-	config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX})
-	config.read(CONFIG_PATH)
-	return config
+    config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX})
+    config.read(CONFIG_PATH)
+    return config
 	
 def getHost():
-	return getConfigParser().get(SECTION,OPTION_HOST) 
+    return getConfigParser().get(SECTION,OPTION_HOST) 
 
 def getPort():
     return int(getConfigParser().get(SECTION,OPTION_PORT))
@@ -28,6 +28,6 @@ def getDbName():
     return getConfigParser().get(SECTION,OPTION_DBNAME) 
 
 def getInstancePrefix():
-	return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
+    return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
    	
  
