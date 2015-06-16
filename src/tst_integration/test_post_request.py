@@ -14,6 +14,7 @@ DATA2 = {'name': EXIST_NAME}
 VALID_RESPONSE_TEXT = {}
 EXIST_RESPONSE_TEXT = 'Service already exists'
 VALID_RESPONSE_CODE = 200
+NOT_VALID_RESPONSE_CODE = 400
 class TestServiceListPostRequest(BasicIntegrationTest):
     def testServiceListPostRequest(self):
         response = requests.post(self.getUrl(TEST_URL), data = DATA)
@@ -25,5 +26,5 @@ class TestServiceListPostRequest(BasicIntegrationTest):
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, EXIST_RESPONSE_TEXT)
-        self.assertEquals(responseCode, VALID_RESPONSE_CODE)
+        self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
         removeService(VALID_NAME)
