@@ -22,6 +22,7 @@ ID = '_id'
 TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
+CHANNELS_COLLECTION = 'channels'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -82,3 +83,16 @@ def  getServiceById(id):
 
 def updateService(name):
     result = getServiceIdByName(name)
+
+def getChannelsList(serviceName, substring="", number=-1, offset=-1):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    if substring != "" and number != -1 and offset != -1:
+       return db[CHANNELS_COLLECTION].find({'name':{'$regex':substring}}).skip(offset).limit(number)
+    if substring != "" and number != -1:
+        return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}}).limit(number)
+    elif substring != "":
+        return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}})
+    elif number != -1:
+        return db[CHANNELS_COLLECTION].find().limit(number)
+    elif offset != -1:
+        return db[CHANNELS_COLLECTION].find().skip(offset)
