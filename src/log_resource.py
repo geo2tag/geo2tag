@@ -1,3 +1,5 @@
+from db_model import getLog
+from config_reader import getDbName
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
@@ -18,17 +20,13 @@ DATE_TO = 'date_to'
 
 
 class LogResource(Resource):
-    def get(self, serviceName):
+    def get(self, serviceName = None):
         parser_dict = parse()
-        return {serviceName: 'Service description'}
+        if serviceName == None:
+            serviceName = getDbName()
 
-    def put(self, serviceName):
-        parser_dict = parse()
-        return {serviceName: 'Service updated'}
-
-    def delete(self, serviceName):
-        parser_dict = parse()
-        return {serviceName: 'Service removed'} 
+        return getLog(serviceName, parser_dict['number'], parser_dict['offset'], 
+            parser_dict['dateFrom'], parser_dict['dateTo'])
 
 def datetimeSerialiser(obj):
     if isinstance(obj, datetime):
@@ -59,4 +57,3 @@ def parse():
     args = parser.parse_args()
     return args
 
- 
