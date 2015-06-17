@@ -32,15 +32,15 @@ class TestParserLogResource(TestCase):
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
             self.assertEquals(args[NUMBER], NUMBER_VALUE)
             loadedDatetime_from = json.loads(args[DATE_FROM], object_hook = log_resource.datetimeDeserialiser)
-	        self.assertEquals(loadedDatetime_from, DATE_FROM_VALUE)
-	        loadedDatetime_to = json.loads(args[DATE_TO], object_hook = log_resource.datetimeDeserialiser)
-	        self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
+	    self.assertEquals(loadedDatetime_from, DATE_FROM_VALUE)
+	    loadedDatetime_to = json.loads(args[DATE_TO], object_hook = log_resource.datetimeDeserialiser)
+	    self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
 
         with app.test_request_context('/?'+INCORRECT_ARGS):
             args = log_resource.parse()
             self.assertIsNone(args.get(OFFSET))
             self.assertIsNone(args.get(NUMBER))
-	        self.assertIsNone(args.get(loadedDatetime_from))
+	    self.assertIsNone(args.get(loadedDatetime_from))
             self.assertIsNone(args.get(loadedDatetime_to))
   
              
