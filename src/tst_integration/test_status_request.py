@@ -5,7 +5,7 @@ from basic_integration_test import BasicIntegrationTest
 
 TEST_URL = '/instance/status'
 VALID_RESPONSE_CODE = 200
-VALID_RESPONSE_TEXT = '"OK"'
+VALID_RESPONSE_TEXT = "OK"
 
 class TestStatusRequest(BasicIntegrationTest):
     def testStatusRequest(self):
