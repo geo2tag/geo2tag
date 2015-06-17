@@ -5,5 +5,4 @@ from db_model import getChannelsList
 class ChannelsListResource(Resource):
     def get(self, serviceName):
         parserResult = ChannelsListResourceParser.parseGetParameters()
-        print parserResult.get('substring', ''), parserResult.get('number', -1), parserResult.get('offset', -1)
-        return getChannelsList(serviceName, parserResult.get('substring', ''), parserResult.get('number', -1), parserResult.get('offset', -1))
+        return getChannelsList(serviceName, parserResult.get('substring', None), parserResult.get('number', None), parserResult.get('offset', None))
