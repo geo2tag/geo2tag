@@ -84,15 +84,19 @@ def  getServiceById(id):
 def updateService(name):
     result = getServiceIdByName(name)
 
-def getChannelsList(serviceName, substring="", number=-1, offset=-1):
+def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
-    if substring != "" and number != -1 and offset != -1:
+    if substring != None and number is not None and offset is not None:
        return db[CHANNELS_COLLECTION].find({'name':{'$regex':substring}}).skip(offset).limit(number)
-    if substring != "" and number != -1:
+    elif substring != None and offset != None:
+        return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}}).skip(offset)
+    elif substring != None and number != None:
         return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}}).limit(number)
-    elif substring != "":
+    elif offset is not None and number != None:
+        return db[CHANNELS_COLLECTION].find().skip(offset).limit(number)
+    elif substring != None:
         return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}})
-    elif number != -1:
+    elif number is not None:
         return db[CHANNELS_COLLECTION].find().limit(number)
-    elif offset != -1:
+    elif offset is not None:
         return db[CHANNELS_COLLECTION].find().skip(offset)
