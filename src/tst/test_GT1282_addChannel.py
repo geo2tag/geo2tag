@@ -24,3 +24,4 @@ class TestAddChannel(unittest.TestCase):
     	result = addChannel(NAME, JSON, OWNER_ID, SERVICE_NAME)
     	self.assertNotEqual(result, None)
     	self.assertNotEquals(list(db['channels'].find({'_id': result})), [])
+    	db['channels'].remove({'_id': result})
