@@ -14,12 +14,12 @@ DBNAME = 'geomongo'
 INSTANCEPREFIX = 'instance'
 
 def getConfigParser():
-	config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX})
-	config.read(CONFIG_PATH)
-	return config
+    config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX})
+    config.read(CONFIG_PATH)
+    return config
 	
 def getHost():
-	return getConfigParser().get(SECTION,OPTION_HOST) 
+    return getConfigParser().get(SECTION,OPTION_HOST) 
 
 def getPort():
     return int(getConfigParser().get(SECTION,OPTION_PORT))
@@ -28,6 +28,6 @@ def getDbName():
     return getConfigParser().get(SECTION,OPTION_DBNAME) 
 
 def getInstancePrefix():
-	return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
+    return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
    	
  
