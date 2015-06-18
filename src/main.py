@@ -8,7 +8,6 @@ from log_resource import LogResource
 from debug_info_resource import DebugInfoResource
 from flask import make_response
 from bson import json_util
-from channels_list_resource import ChannelsListResource
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -30,8 +29,8 @@ api.add_resource(ServiceListResource, getPathWithPrefix('/service/'))
 api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info/'))
 
 api.add_resource(LogResource, '/'+getInstancePrefix()+'/service/<string:serviceName>/log',
-                              '/'+getInstancePrefix()+'/log')
-api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel/'))
+	                          '/'+getInstancePrefix()+'/log')
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
