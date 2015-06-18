@@ -22,6 +22,7 @@ ID = '_id'
 TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
+CHANNELS_COLLECTION = 'channels'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -82,3 +83,7 @@ def  getServiceById(id):
 
 def updateService(name):
     result = getServiceIdByName(name)
+
+def addChannel(name, json, owner_id, serviceName):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
