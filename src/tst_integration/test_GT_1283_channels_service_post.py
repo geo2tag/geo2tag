@@ -23,9 +23,7 @@ class TestChannelServicePostRequest(BasicIntegrationTest):
         response = requests.post(self.getUrl(TEST_URL), data = DATA)
         responseText = response.text
         responseCode = response.status_code
-        print responseText, responseCode
         ID = json.loads(responseText)
-        print ID
         db['channels'].remove({'_id': ObjectId(ID['$oid'])})
         self.assertNotEquals(responseText, [])
         self.assertNotEquals(responseText, {})
@@ -33,6 +31,4 @@ class TestChannelServicePostRequest(BasicIntegrationTest):
         response = requests.post(self.getUrl(TEST_URL), data = DATA2)
         responseText = response.text
         responseCode = response.status_code
-        self.assertNotEquals(responseText, [])
-        self.assertNotEquals(responseText, {})
         self.assertEquals(responseCode, 400)
