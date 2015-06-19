@@ -4,15 +4,34 @@ from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from config_reader import getInstancePrefix
+from log_resource import LogResource
 from debug_info_resource import DebugInfoResource
+from flask import make_response
+from bson import json_util
+from channels_list_resource import ChannelsListResource
 
+def output_json(obj, code, headers=None):
+    if isinstance(obj, str) == True:
+        return make_response(obj, code)
+    return make_response(json_util.dumps(obj), code)
+
+DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
 api = Api(app)
+api.representations = DEFAULT_REPRESENTATIONS
 
-api.add_resource(ServiceResource, '/'+getInstancePrefix()+'/service/<string:serviceName>')
-api.add_resource(StatusResource, '/'+getInstancePrefix()+'/status')
-api.add_resource(ServiceListResource, '/'+getInstancePrefix()+'/service/')
-api.add_resource(DebugInfoResource, '/'+getInstancePrefix()+'/debug_info/')
+def getPathWithPrefix(str):
+    path = '/'+getInstancePrefix()+str
+    return path
+
+api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
+api.add_resource(StatusResource, getPathWithPrefix('/status'))
+api.add_resource(ServiceListResource, getPathWithPrefix('/service/'))
+api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info/'))
+
+api.add_resource(LogResource, '/'+getInstancePrefix()+'/service/<string:serviceName>/log',
+                              '/'+getInstancePrefix()+'/log')
+api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel/'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

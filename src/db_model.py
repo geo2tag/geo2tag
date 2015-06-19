@@ -3,6 +3,7 @@ from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
+from pymongo import Connection
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -21,6 +22,7 @@ ID = '_id'
 TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
+CHANNELS_COLLECTION = 'channels'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -36,7 +38,7 @@ def addService(name, logSize, ownerld):
         return obj_id
 
 def getServiceList(number, offset):
-    return {}
+    return []
 
 #    def getNearTags(self, latitude, longitude):
 
@@ -64,6 +66,15 @@ def  getServiceIdByName(name):
         return obj
     raise ServiceNotFoundException()
 
+def removeService(name):
+    try:
+        obj = getServiceIdByName(name)
+        db[COLLECTION].remove({ID : obj['_id']})
+        connection = Connection()
+        connection.drop_database(name)
+    except ServiceNotFoundException as e:
+        raise
+
 def  getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
     if obj != None:
@@ -77,3 +88,23 @@ def getServiceList(number, offset):
         offset = 0
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
+
+def updateService(name):
+    result = getServiceIdByName(name)
+
+def getChannelsList(serviceName, substring, number, offset):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    if substring != None and number is not None and offset is not None:
+       return db[CHANNELS_COLLECTION].find({'name':{'$regex':substring}}).skip(offset).limit(number)
+    elif substring != None and offset != None:
+        return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}}).skip(offset)
+    elif substring != None and number != None:
+        return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}}).limit(number)
+    elif offset is not None and number != None:
+        return db[CHANNELS_COLLECTION].find().skip(offset).limit(number)
+    elif substring != None:
+        return db[CHANNELS_COLLECTION].find({'name':{'$regex': substring}})
+    elif number is not None:
+        return db[CHANNELS_COLLECTION].find().limit(number)
+    elif offset is not None:
+        return db[CHANNELS_COLLECTION].find().skip(offset)
