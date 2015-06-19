@@ -1,7 +1,7 @@
 from unittest import TestCase
 import sys
 sys.path.append('../')
-from service_resource import getServiceList
+from db_model import getServiceList
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 
