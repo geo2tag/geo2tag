@@ -20,6 +20,6 @@ class ChannelsListResourceParser():
     def parsePostParameters():
         parser = reqparse.RequestParser()
         parser.add_argument(ARGS_NAME, type=str, required=True)
-        parser.add_argument(ARGS_JSON, type=dict, required=True)
+        parser.add_argument(ARGS_JSON, type=str, required=True)
         args = parser.parse_args()
         return args
