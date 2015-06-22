@@ -31,7 +31,7 @@ class ServiceListResource(Resource):
     def post(self):
         listAgrs = ServiceListParser.parsePostParameters()
         result = addService(listAgrs.get(POST_ARGS_NAME), listAgrs.get(POST_ARGS_LOG_SIZE), listAgrs.get(POST_ARGS_OWNER_ID))
-        if result is None:
+        if result is False:
             return  SERVICE_ALREADY_EXIST_MSG, 400
         return dumps(result, ensure_ascii=False).encode('utf8')
         
