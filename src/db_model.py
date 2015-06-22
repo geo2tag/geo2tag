@@ -6,6 +6,7 @@ from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
+from channel_does_not_exist import  ChannelDoesNotExist
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -105,10 +106,11 @@ def getChannelsList(serviceName, substring, number, offset):
 
 def deleteChannelById(serviceName, channelId):
     db = MongoClient(getHost(), getPort())[serviceName]
-    obj = {}
-    try:
-        obj = db[CHANNELS_COLLECTION].find({'_id': ObjectId(channelId)})
-        result = db[CHANNELS_COLLECTION].remove({'_id': ObjectId(channelId)})
-        print list(obj), channelId
-    except InvalidId:
-        pass
+    if isinstance(channelId, str):
+        result = list(db[CHANNELS_COLLECTION].find({'_id': ObjectId(channelId)}))
+    else:
+        result = list(db[CHANNELS_COLLECTION].find({'_id': channelId}))
+    if len(result) > 0:
+        db[CHANNELS_COLLECTION].remove({'_id': channelId})
+    else:
+        raise ChannelDoesNotExist()

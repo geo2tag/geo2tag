@@ -18,9 +18,11 @@ db = MongoClient(getHost(), getPort())['testservice']
 
 class ChannelResourceDelete(BasicIntegrationTest):
     def testChannelResourceDelete(self):
-        db['channels'].insert({"name" : "test_channel_GT-1290", "json" : {  }, "owner_id" : "STUB"})
-    	result = list(getChannelsList(TEST_SERVICE, 'test_channel_GT-1290', None, None))
+        #db['channels'].insert({"name" : "test_channel_GT-1290", "json" : {  }, "owner_id" : "STUB"})
+    	result = list(db['channels'].find({'name': 'test_channel_GT-1290'}))
+        print result
     	TEST_URL2 = TEST_URL + str(result[0].get('_id')) + '/'
+        print TEST_URL2
         response = requests.delete(self.getUrl(TEST_URL2))
         responseText = response.text
         responseCode = response.status_code
@@ -30,5 +32,5 @@ class ChannelResourceDelete(BasicIntegrationTest):
         responseText = response.text
         responseCode = response.status_code
         print responseText, responseCode
-        #self.assertEquals(responseText, NOT_VALID_RESPONSE_TEXT)
-        #self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
+        self.assertEquals(responseText, NOT_VALID_RESPONSE_TEXT)
+        self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
