@@ -102,8 +102,4 @@ def getChannelsList(serviceName, substring, number, offset):
         return db[CHANNELS_COLLECTION].find().skip(offset)
 
 def deleteChannelById(serviceName, channelId):
-    db = MongoClient(getHost(), getPort())[serviceName]
-    obj = db[CHANNELS_COLLECTION].find({'_id': channelId})
-
-def deleteChannelById(serviceName, channelId):
     pass
