@@ -9,9 +9,9 @@ from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
 TEST_URL = '/instance/service/testservice/channel/558807a47ec8ff5da755ee48/'
-BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111'
+BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111/'
 LIST_ARGS = {'name': 'test_channel_GT-1290'}
-BAD_LIST_ARGS = {}
+BAD_LIST_ARGS = {'name': 'test_channel_GT-1290_2'}
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
@@ -26,10 +26,8 @@ class ChannelResourcePut(BasicIntegrationTest):
         responseCode = response.status_code
         self.assertEquals(responseText, VALID_RESPONSE_TEXT)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        print responseText, responseCode
-        response = requests.put(self.getUrl(BAD_TEST_URL), data = LIST_ARGS)
+        response = requests.put(self.getUrl(BAD_TEST_URL), data = BAD_LIST_ARGS)
         responseText = response.text
         responseCode = response.status_code
-        print responseText, responseCode
         self.assertEquals(responseText, NOT_VALID_RESPONSE_TEXT)
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
