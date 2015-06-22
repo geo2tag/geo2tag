@@ -20,7 +20,6 @@ class ChannelResourceDelete(BasicIntegrationTest):
     def testChannelResourceDelete(self):
         db['channels'].insert({"name" : "test_channel_GT-1290", "json" : {  }, "owner_id" : "STUB"})
     	result = list(db['channels'].find({'name': 'test_channel_GT-1290'}))
-        print result
     	TEST_URL2 = TEST_URL + str(result[0].get('_id')) + '/'
         print TEST_URL2
         response = requests.delete(self.getUrl(TEST_URL2))
