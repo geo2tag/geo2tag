@@ -4,6 +4,7 @@ import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
+from channel_does_not_exist import ChannelDoesNotExist
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -100,3 +101,16 @@ def getChannelsList(serviceName, substring, number, offset):
         return db[CHANNELS_COLLECTION].find().limit(number)
     elif offset is not None:
         return db[CHANNELS_COLLECTION].find().skip(offset)
+
+def updateChannel(serviceName, channelId, name, json, acl):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    obj = db[CHANNELS_COLLECTION].find_one({ID: channelId})
+    if obj == None:
+        raise ChannelDoesNotExist()
+    else:
+        obj['name'] = name
+        if json != None:
+            obj['json'] = json
+        if acl != None:
+            obj['acl'] = acl
+        db[CHANNELS_COLLECTION].save(obj)    
