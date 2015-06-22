@@ -13,8 +13,8 @@ COLLECTION = "channels"
 ID = "_id"
 NAME = 'name'
 
-class TestAddService(unittest.TestCase):
-    def testAddService(self):
+class TestUpdateChannel(unittest.TestCase):
+    def testUpdateChannel(self):
         client = MongoClient()
         collection = client[DB][COLLECTION]
         obj_id = collection.save({NAME: 'test_GT_1292'})
