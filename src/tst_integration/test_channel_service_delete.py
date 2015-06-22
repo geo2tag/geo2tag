@@ -9,7 +9,7 @@ from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
 TEST_URL = '/instance/service/testservice/channel/558807a47ec8ff5da755ee48/'
-BAD_TEST_URL = '/instance/service/testservice/channel/test_channel_id'
+BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
@@ -19,8 +19,6 @@ db = MongoClient(getHost(), getPort())['testservice']
 class ChannelResourceDelete(BasicIntegrationTest):
     def testChannelResourceDelete(self):
         result = list(db['channels'].find({"name" : u"test_channel_GT-1290"}))
-        print TEST_URL
-        print result
         response = requests.delete(self.getUrl(TEST_URL))
         responseText = response.text
         responseCode = response.status_code
@@ -29,6 +27,5 @@ class ChannelResourceDelete(BasicIntegrationTest):
         response = requests.delete(self.getUrl(BAD_TEST_URL))
         responseText = response.text
         responseCode = response.status_code
-        print responseText, responseCode
         self.assertEquals(responseText, NOT_VALID_RESPONSE_TEXT)
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
