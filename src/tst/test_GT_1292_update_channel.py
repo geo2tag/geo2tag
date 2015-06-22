@@ -19,7 +19,7 @@ class TestAddService(unittest.TestCase):
         collection = client[DB][COLLECTION]
         obj_id = collection.save({NAME: 'test_GT_1292'})
         with self.assertRaises(ChannelDoesNotExist) as e:
-        	updateChannel('testservice', '111', 'test', None, None)
+            updateChannel('testservice', '111', 'test', None, None)
         updateChannel('testservice', obj_id, 'test', 1, 2)
         obj = collection.find_one({ID: obj_id})
         self.assertEqual(obj['name'], 'test')
