@@ -5,3 +5,4 @@ from channels_list_parsers import ChannelsListResourceParser
 class ChannelsListResource(Resource):
     def get(self, serviceName):
         return ChannelsListResourceParser.parseGetParameters()
+        

@@ -9,7 +9,7 @@ from debug_info_resource import DebugInfoResource
 from flask import make_response
 from bson import json_util
 from channels_list_resource import ChannelsListResource
-from channels_resource import ChannelResource
+from channel_resource import ChannelResource
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
