@@ -6,9 +6,11 @@ from test_get_service_name import TestServiceGetRequest
 from test_get_request import TestServiceListGetRequest
 from test_put_service_name import TestServicePutRequest
 from test_post_request import TestServiceListPostRequest
+from test_get_channel_by_id import TestChannelGetRequest
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(BasicIntegrationTest.parametrize(TestChannelGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServicePutRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServiceListGetRequest, param=host))
