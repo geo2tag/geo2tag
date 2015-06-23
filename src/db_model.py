@@ -4,6 +4,9 @@ import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
+from channel_does_not_exist import ChannelDoesNotExist
+
+from bson.objectid import ObjectId
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -112,3 +115,17 @@ def getChannelsList(serviceName, substring, number, offset):
 def addChannel(name, json, owner_id, serviceName):
     db = MongoClient(getHost(), getPort())[serviceName]
     return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
+
+def getChannelById(serviceName, channelId):
+    db = getDbObject(serviceName)
+    if isinstance(channelId, str) or isinstance(channelId, unicode):
+        obj = db[CHANNELS_COLLECTION].find_one({'_id': ObjectId(channelId)})
+    else:
+        obj = db[CHANNELS_COLLECTION].find_one({'_id': channelId})
+    if obj != None:
+        return obj
+    raise ChannelDoesNotExist()
+
+def getDbObject(dbName):
+    return MongoClient(getHost(), getPort())[dbName]
+
