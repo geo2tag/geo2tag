@@ -4,7 +4,7 @@ METHODS = ['post', 'get', 'put', 'delete']
 INCLUDE_MODULE = 'from flask_restful import reqparse\n\
 from flask.ext.restful import Resource\n\n'
 TAB = '    '
-DEF = ' def '
+DEF = 'def '
 def make_generator(args):
     print args.m
     if args.m is None or args.name is None:
