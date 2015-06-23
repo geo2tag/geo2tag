@@ -6,6 +6,8 @@ from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
 from channel_does_not_exist import ChannelDoesNotExist
 
+from bson.objectid import ObjectId
+
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
@@ -82,6 +84,14 @@ def  getServiceById(id):
         return obj
     raise ServiceNotFoundException()
 
+def getServiceList(number, offset):
+    if number is None:
+        number = db[COLLECTION].count()
+    if offset is None:
+        offset = 0
+    result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
+    return result
+
 def updateService(name):
     result = getServiceIdByName(name)
 
@@ -103,8 +113,14 @@ def getChannelsList(serviceName, substring, number, offset):
         return db[CHANNELS_COLLECTION].find().skip(offset)
 
 def getChannelById(serviceName, channelId):
-    db = MongoClient(getHost(), getPort())[serviceName]
-    obj = db[CHANNELS_COLLECTION].find_one({ID: channelId})
+    db = getDbObject(serviceName)
+    if isinstance(channelId, str) or isinstance(channelId, unicode):
+        obj = db[CHANNELS_COLLECTION].find_one({'_id': ObjectId(channelId)})
+    else:
+        obj = db[CHANNELS_COLLECTION].find_one({'_id': channelId})
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
+
+def getDbObject(dbName):
+    return MongoClient(getHost(), getPort())[dbName]
