@@ -129,3 +129,9 @@ def getChannelById(serviceName, channelId):
 def getDbObject(dbName):
     return MongoClient(getHost(), getPort())[dbName]
 
+def getChannelByName(serviceName, channelName):
+    db = getDbObject(serviceName)
+    obj = db[CHANNELS_COLLECTION].find_one({'name': channelName})
+    if obj != None:
+        return obj
+    raise ChannelDoesNotExist()
