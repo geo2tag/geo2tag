@@ -5,6 +5,7 @@ from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
 from channel_does_not_exist import ChannelDoesNotExist
+from bson.objectid import ObjectId
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
