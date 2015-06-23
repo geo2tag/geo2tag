@@ -108,3 +108,7 @@ def getChannelsList(serviceName, substring, number, offset):
         return db[CHANNELS_COLLECTION].find().limit(number)
     elif offset is not None:
         return db[CHANNELS_COLLECTION].find().skip(offset)
+
+def addChannel(name, json, owner_id, serviceName):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
