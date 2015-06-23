@@ -126,3 +126,7 @@ def updateChannel(serviceName, channelId, name, json, acl):
         if acl != None:
             obj['acl'] = acl
         db[CHANNELS_COLLECTION].save(obj)    
+
+def addChannel(name, json, owner_id, serviceName):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
