@@ -1,3 +1,4 @@
+import os
 METHODS = ['post', 'get', 'put', 'delete']
 
 INCLUDE_MODULE = 'from flask_restful import reqparse\n\
@@ -15,6 +16,7 @@ def make_generator(args):
             return
 
     fileName = args.name + '.py'
+    os.chdir('../src')
     newResource = open(fileName, 'w')
     newResource.write(INCLUDE_MODULE)
     newResource.write('class ' + args.name + '(Resource):\n')
