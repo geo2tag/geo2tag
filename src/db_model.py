@@ -81,6 +81,14 @@ def  getServiceById(id):
         return obj
     raise ServiceNotFoundException()
 
+def getServiceList(number, offset):
+    if number is None:
+        number = db[COLLECTION].count()
+    if offset is None:
+        offset = 0
+    result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
+    return result
+
 def updateService(name):
     result = getServiceIdByName(name)
 
