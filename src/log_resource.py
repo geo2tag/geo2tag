@@ -16,8 +16,8 @@ ISO8601_FMT = '%Y-%m-%dT%H:%M:%S'
 
 NUMBER = 'number'
 OFFSET = 'offset'
-DATE_FROM = 'date_from'
-DATE_TO = 'date_to'
+DATE_FROM = 'dateFrom'
+DATE_TO = 'dateTo'
 
 
 class LogResource(Resource):
@@ -26,8 +26,8 @@ class LogResource(Resource):
         if serviceName == None:
             serviceName = getDbName()
 
-        return getLog(serviceName, parser_dict['number'], parser_dict['offset'], 
-            parser_dict['dateFrom'], parser_dict['dateTo'])
+        return getLog(serviceName, parser_dict[NUMBER], parser_dict[OFFSET], 
+            parser_dict[DATE_FROM], parser_dict[DATE_TO])
 
 def datetimeSerialiser(obj):
     if isinstance(obj, datetime):
