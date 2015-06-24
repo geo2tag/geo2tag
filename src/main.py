@@ -33,7 +33,6 @@ api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info/'))
 api.add_resource(LogResource, '/'+getInstancePrefix()+'/service/<string:serviceName>/log',
                               '/'+getInstancePrefix()+'/log')
 api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel/'))
-
 api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>/'))
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
