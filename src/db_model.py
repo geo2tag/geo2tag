@@ -4,6 +4,7 @@ import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
+from channel_does_not_exist import ChannelDoesNotExist
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
@@ -84,6 +85,14 @@ def  getServiceById(id):
         return obj
     raise ServiceNotFoundException()
 
+def getServiceList(number, offset):
+    if number is None:
+        number = db[COLLECTION].count()
+    if offset is None:
+        offset = 0
+    result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
+    return result
+
 def updateService(name):
     result = getServiceIdByName(name)
 
@@ -104,6 +113,19 @@ def getChannelsList(serviceName, substring, number, offset):
     elif offset is not None:
         return db[CHANNELS_COLLECTION].find().skip(offset)
 
+def getChannelById(serviceName, channelId):
+    db = getDbObject(serviceName)
+    if isinstance(channelId, str) or isinstance(channelId, unicode):
+        obj = db[CHANNELS_COLLECTION].find_one({'_id': ObjectId(channelId)})
+    else:
+        obj = db[CHANNELS_COLLECTION].find_one({'_id': channelId})
+    if obj != None:
+        return obj
+    raise ChannelDoesNotExist()
+
+def getDbObject(dbName):
+    return MongoClient(getHost(), getPort())[dbName]
+
 def deleteChannelById(serviceName, channelId):
     db = MongoClient(getHost(), getPort())[serviceName]
     if isinstance(channelId, str) or isinstance(channelId, unicode):
@@ -114,3 +136,6 @@ def deleteChannelById(serviceName, channelId):
         db[CHANNELS_COLLECTION].remove({'_id': channelId})
     else:
         raise ChannelDoesNotExist()
+def addChannel(name, json, owner_id, serviceName):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})

@@ -22,4 +22,4 @@ class TestDeleteChannelById(unittest.TestCase):
         obj_string = obj[0].get('_id')
         deleteChannelById(SERVICE_NAME, obj_string)
         with self.assertRaises(ChannelDoesNotExist) as e:
-        	deleteChannelById(SERVICE_NAME, BAD_ID) 
+            deleteChannelById(SERVICE_NAME, BAD_ID) 

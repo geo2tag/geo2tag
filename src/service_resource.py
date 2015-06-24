@@ -1,6 +1,8 @@
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
+from pymongo import MongoClient
+from config_reader import getHost, getPort, getDbName
 from db_model import addService, getServiceIdByName, updateService
 from  service_not_found_exception import ServiceNotFoundException
 from service_parsers import ServiceParser
@@ -12,6 +14,7 @@ SRV_NAME_RM = 'Service removed'
 ARGS_NAME = "name"
 ARGS_LOG_SIZE = "logSize"
 ARGS_OWNER_ID = "ownerId"
+
 
 class ServiceResource(Resource):
     def get(self, serviceName):
@@ -30,7 +33,6 @@ class ServiceResource(Resource):
         return {serviceName: SRV_NAME_UPD}
 
     def delete(self, serviceName):
-        #args = ServiceParser.parsePutParameters()
         try:
             removeService(serviceName)
         except ServiceNotFoundException as e:

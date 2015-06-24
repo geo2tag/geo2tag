@@ -34,10 +34,3 @@ class ServiceListResource(Resource):
         if result is False:
             return  SERVICE_ALREADY_EXIST_MSG, 400
         return dumps(result, ensure_ascii=False).encode('utf8')
-        
-def parser():
-    parser = reqparse.RequestParser()
-    parser.add_argument(GET_ARGS_NUMBER, type=int, default=None)
-    parser.add_argument(GET_ARGS_OFFSET, type=int, default=None)
-    args = parser.parse_args()
-    return args
