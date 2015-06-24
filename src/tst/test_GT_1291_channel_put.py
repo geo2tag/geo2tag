@@ -15,7 +15,10 @@ NAME = 'test_name'
 JSON = "{'1':2}"
 ACL = 10
 
-CORRECT_ARGS = {'name': NAME, 'json': JSON, 'acl': ACL}
+_NAME = 'name'
+_JSON = 'json'
+_ACL = 'acl'
+CORRECT_ARGS = {_NAME: NAME, _JSON: JSON, _ACL: ACL}
 INCORRECT_ARGS = {}
 
 app = Flask(__name__)
@@ -25,9 +28,9 @@ class test_GT_1291_Channel_Parser(TestCase):
     	
         with app.test_request_context(URL, data=CORRECT_ARGS, method='PUT'):
             args = ChannelResourceParser.parsePutParameters()
-            self.assertEqual(args['name'], 'test_name')
-            self.assertEqual(args['json'], "{'1':2}")
-            self.assertEqual(args['acl'], 10)
+            self.assertEqual(args[_NAME], NAME)
+            self.assertEqual(args[_JSON], JSON)
+            self.assertEqual(args[_ACL], ACL)
 
         with app.test_request_context(URL, data=INCORRECT_ARGS, method='PUT'):
             with self.assertRaises(BadRequest):
