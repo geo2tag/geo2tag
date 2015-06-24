@@ -4,15 +4,10 @@ import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
-<<<<<<< HEAD
 from channel_does_not_exist import ChannelDoesNotExist
-
-from bson.objectid import ObjectId
-=======
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
->>>>>>> master
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
