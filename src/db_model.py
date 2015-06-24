@@ -154,4 +154,4 @@ def updateChannel(serviceName, channelId, name, json, acl):
             obj['json'] = json
         if acl != None:
             obj['acl'] = acl
-        db[CHANNELS_COLLECTION].save(obj)    
+        db[CHANNELS_COLLECTION].save(obj)
