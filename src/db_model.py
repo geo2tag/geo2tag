@@ -4,9 +4,15 @@ import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
 from pymongo import Connection
+<<<<<<< HEAD
 from channel_does_not_exist import ChannelDoesNotExist
 
 from bson.objectid import ObjectId
+=======
+from bson.objectid import ObjectId
+from bson.errors import InvalidId
+from channel_does_not_exist import  ChannelDoesNotExist
+>>>>>>> master
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -124,3 +130,18 @@ def getChannelById(serviceName, channelId):
 
 def getDbObject(dbName):
     return MongoClient(getHost(), getPort())[dbName]
+
+def deleteChannelById(serviceName, channelId):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    if isinstance(channelId, str) or isinstance(channelId, unicode):
+        result = list(db[CHANNELS_COLLECTION].find({'_id': ObjectId(channelId)}))
+    else:
+        result = list(db[CHANNELS_COLLECTION].find({'_id': channelId}))
+    if len(result) > 0:
+        db[CHANNELS_COLLECTION].remove({'_id': channelId})
+    else:
+        raise ChannelDoesNotExist()
+
+def addChannel(name, json, owner_id, serviceName):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
