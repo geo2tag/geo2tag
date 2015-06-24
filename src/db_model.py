@@ -136,7 +136,6 @@ def deleteChannelById(serviceName, channelId):
         db[CHANNELS_COLLECTION].remove({'_id': channelId})
     else:
         raise ChannelDoesNotExist()
-
 def addChannel(name, json, owner_id, serviceName):
     db = MongoClient(getHost(), getPort())[serviceName]
     return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
