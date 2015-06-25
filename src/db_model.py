@@ -7,10 +7,7 @@ from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
