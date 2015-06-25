@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from service_resource import possibleException
 from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
@@ -60,12 +61,14 @@ def getLog(dbName, number, offset, dateFrom, dateTo) :
             return None
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
-def  getServiceIdByName(name):
+@possibleException
+def getServiceIdByName(name):
     obj = db[COLLECTION].find_one({NAME : name})
     if obj != None:
         return obj
     raise ServiceNotFoundException()
 
+@possibleException
 def removeService(name):
     try:
         obj = getServiceIdByName(name)
@@ -75,7 +78,7 @@ def removeService(name):
     except ServiceNotFoundException as e:
         raise
 
-def  getServiceById(id):
+def getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
@@ -89,6 +92,7 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
+@possibleException
 def updateService(name):
     result = getServiceIdByName(name)
 
