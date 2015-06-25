@@ -33,16 +33,6 @@ testConfigDictForPathAndSizeAndDate = {LOG_PATH : TEST, LOG_SIZE : 100, LOG_DATE
 db = MongoClient(getHost(), getPort())[getDbName()]
 services_collection = db[SERVICES]
 
-def prepareDb() :
-	"making unique services"
-	services_collection.remove()
-	for i in range(100) :
-		services_collection.insert({
-			"config" : { LOG_PATH : NOT_TESTED_LOG_PATH, LOG_SIZE : NOT_TESTED_LOG_SIZE }, 
-			"name" : (TEST_SERVICE + str(i)), 
-			"owner_id" : "" 
-		})
-
 def prepareDbRemoveSubDoc() :
 	"removing sub-document called 'config' from service called 'testservice_1'"
 	services_collection.update(
@@ -52,8 +42,16 @@ def prepareDbRemoveSubDoc() :
 	)
 
 class TestUpdateService(TestCase) :
-	def testUpdateServiceWithoutConfigSubDocuments(self) :
-		prepareDb()
+	def setUp(self) :
+		"making unique services"
+		services_collection.remove()
+		for i in range(100) :
+			services_collection.insert({
+				"config" : { LOG_PATH : NOT_TESTED_LOG_PATH, LOG_SIZE : NOT_TESTED_LOG_SIZE }, 
+				"name" : (TEST_SERVICE + str(i)), 
+				"owner_id" : "" 
+			})		
+	def testUpdateServiceAddPathAndSize(self) :
 		prepareDbRemoveSubDoc()
 		#checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
 		#and creating 'config' with 'path' and 'size' in it
@@ -63,8 +61,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_PATH], testConfigDictForPathAndSize[LOG_PATH])
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE], testConfigDictForPathAndSize[LOG_SIZE])
-
-		prepareDb()
+	def testUpdateServiceAddOnlyPath(self) :
 		prepareDbRemoveSubDoc()
 		#checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
 		#and creating 'config' with only 'path' in it
@@ -74,8 +71,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_PATH], testConfigDictForPath[LOG_PATH])
 		self.assertTrue(LOG_SIZE not in changed_service[CONFIG])
-
-		prepareDb()
+	def testUpdateServiceAddOnlySize(self) :
 		prepareDbRemoveSubDoc()
 		#checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
 		#and creating 'config' with only 'size' in it
@@ -85,8 +81,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE], testConfigDictForSize[LOG_SIZE])
 		self.assertTrue(LOG_PATH not in changed_service[CONFIG])
-
-		prepareDb()
+	def testUpdateServiceAddNothing(self) :
 		prepareDbRemoveSubDoc()
 		#checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
 		#and creating 'config' with only 'size' in it but it's not going to happend, dict to get changes is empty
@@ -94,8 +89,7 @@ class TestUpdateService(TestCase) :
 		for doc in updateService(TEST_SERVICE  + "1", testConfigDictForNoChanges) :
 			changed_service = doc
 		self.assertTrue(CONFIG not in changed_service)
-
-		prepareDb()
+	def testUpdateServiceAddPathSizeAndDate(self) :
 		prepareDbRemoveSubDoc()
 		#checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
 		#and creating 'config' with 'path' and 'size' in it
@@ -106,10 +100,7 @@ class TestUpdateService(TestCase) :
 		self.assertEqual(changed_service[CONFIG][LOG_PATH], testConfigDictForPathAndSizeAndDate[LOG_PATH])
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE], testConfigDictForPathAndSizeAndDate[LOG_SIZE])
 		self.assertEqual(changed_service[CONFIG][LOG_DATE], testConfigDictForPathAndSizeAndDate[LOG_DATE])
-
-
-	def testUpdateServiceWithinConfigSubDocuments(self) :
-		prepareDb()
+	def testUpdateServiceChangePathAndSize(self) :
 		changed_service = None
 		#considering that every service is unique
 		for doc in updateService(TEST_SERVICE  + "1", testConfigDictForPathAndSize) :
@@ -117,8 +108,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_PATH], testConfigDictForPathAndSize[LOG_PATH])
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE], testConfigDictForPathAndSize[LOG_SIZE])
-
-		prepareDb()
+	def testUpdateServiceChangePath(self) :
 		changed_service = None
 		#considering that every service is unique
 		for doc in updateService(TEST_SERVICE  + "1", testConfigDictForPath) :
@@ -126,8 +116,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_PATH], testConfigDictForPath[LOG_PATH])
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE],NOT_TESTED_LOG_SIZE)
-
-		prepareDb()
+	def testUpdateServiceChangeSize(self) :
 		changed_service = None
 		#considering that every service is unique
 		for doc in updateService(TEST_SERVICE  + "1", testConfigDictForSize) :
@@ -135,8 +124,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE], testConfigDictForSize[LOG_SIZE])
 		self.assertEqual(changed_service[CONFIG][LOG_PATH],NOT_TESTED_LOG_PATH)
-
-		prepareDb()
+	def testUpdateServiceChangeNothing(self) :
 		changed_service = None
 		#considering that every service is unique
 		for doc in updateService(TEST_SERVICE  + "1", testConfigDictForNoChanges) :
@@ -144,8 +132,7 @@ class TestUpdateService(TestCase) :
 		self.assertTrue(CONFIG in changed_service)
 		self.assertEqual(changed_service[CONFIG][LOG_PATH],NOT_TESTED_LOG_PATH)
 		self.assertEqual(changed_service[CONFIG][LOG_SIZE],NOT_TESTED_LOG_SIZE)
-
-		prepareDb()
+	def testUpdateServiceChangePathSizeAndDate(self) :
 		changed_service = None
 		#considering that every service is unique
 		for doc in updateService(TEST_SERVICE  + "1", testConfigDictForPathAndSizeAndDate) :

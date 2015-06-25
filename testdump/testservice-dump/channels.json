@@ -4,3 +4,4 @@
 { "_id" : { "$oid" : "556721a52a2e7febd2744303" }, "name" : "test_channel_3", "json" : {}, "owner_id" : "STUB" }
 { "_id" : { "$oid" : "556721a52a2e7febd2744204" }, "name" : "test_channel_4", "json" : {}, "owner_id" : "STUB" }
 { "_id" : { "$oid" : "556721a52a2e7febd2744203" }, "name" : "test_channel_5", "json" : {}, "owner_id" : "STUB" }
+{ "_id" : { "$oid" : "558807a47ec8ff5da755ee48" }, "json" : {  }, "name" : "test_channel_GT-1290", "owner_id" : "STUB" }
