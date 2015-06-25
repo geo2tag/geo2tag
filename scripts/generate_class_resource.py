@@ -1,5 +1,6 @@
 import os
 import sys
+sys.path.append('../')
 METHODS = ['post', 'get', 'put', 'delete']
 TYPES = ['bool', 'int', 'float', 'tuple', 'list', 'str', 'dict', 'set']
 INCLUDE_MODULE = 'from flask_restful import reqparse\n\
@@ -10,11 +11,14 @@ PARSER_TEMPLETE = 'parser = reqparse.RequestParser()'
 ADD_ARGUMENT = 'parser.add_argument('
 TAB = '    '
 DEF = 'def '
+GET_PATH_FUNC = "getPathWithPrefix('"
 MAIN_STR = "if __name__ == '__main__':\n"
 addResource = 'api.add_resource('
 MAIN_FILE = 'main.py'
 PARSER_ARGS = {}
+
 def make_generator(args):
+    IMPORT_RESOURCE = 'from ' + args.name + ' import ' + args.name + '\n'
     if args.m is None or args.name is None:
         parser.print_help()
         return
@@ -24,7 +28,7 @@ def make_generator(args):
             return
 
     fileName = args.name + '.py'
-    os.chdir('../src')
+    os.chdir('src')
     newResource = open(fileName, 'w')
     newResource.write(INCLUDE_MODULE)
     newResource.write('class ' + args.name + '(Resource):\n')
@@ -41,11 +45,12 @@ def make_generator(args):
         print 'file main.py has invalid format'
         return
 
+    mainWrite.write(IMPORT_RESOURCE)
     for string in mainStrings:
         if MAIN_STR != string:
             mainWrite.write(string)
         else:
-            mainWrite.write(addResource + args.name + ')\n')
+            mainWrite.write(addResource + args.name + ', ' + GET_PATH_FUNC + args.url + "\'))\n")
             mainWrite.write(MAIN_STR)
     print 'Resourse added successfully'
 
@@ -81,10 +86,14 @@ def make_generator(args):
         newParser.write(TAB + TAB + '\n')
         i+=1
 
+def run():
+    import argparse
+    parser = argparse.ArgumentParser(description='Generate class resourse')
+    parser.add_argument('--name', help='enter name of resourse class', required=True)
+    parser.add_argument('--m', type = str, help='enter methods of resourse class', required=True, nargs = '+')
+    parser.add_argument('--url', type=str, help='enter url of resourse', required=True)
+    args = parser.parse_args()
+    make_generator(args)
 
-import argparse
-parser = argparse.ArgumentParser(description='Generate class resourse')
-parser.add_argument('--name', help='enter name of resourse class', required=True)
-parser.add_argument('--m', type = str, help='enter methods of resourse class', required=True, nargs = '+')
-args = parser.parse_args()
-make_generator(args)
+if __name__ == '__main__':
+    run()
