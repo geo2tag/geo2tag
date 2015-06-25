@@ -52,7 +52,6 @@ def make_generator(args):
     flag = True
     i = 0
     while flag:
-        print('Enter arguments of parser:')
         while i < len(args.m):
             countArgs = int(input('Enter count of arguments by method ' + args.m[i] + ' '))
             j = 0
