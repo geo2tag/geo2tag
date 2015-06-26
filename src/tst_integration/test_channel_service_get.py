@@ -3,7 +3,7 @@ import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/instance/service/testservice/channel/?substring=test_channel_&number=3&offset=3'
+TEST_URL = '/instance/service/testservice/channel/?substring=test_channel_&number=2&offset=3'
 TEST_URL2 = '/instance/service/testservice/channel/?substring=test_channel_&number=3&offset=str'
 VALID_NAME = 'test_servise_post'
 EXIST_NAME = 'testservice'

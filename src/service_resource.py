@@ -38,5 +38,3 @@ class ServiceResource(Resource):
         #args = ServiceParser.parsePutParameters()
         removeService(serviceName)
         return {serviceName: SRV_NAME_RM}
-
-

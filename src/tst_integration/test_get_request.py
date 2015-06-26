@@ -9,7 +9,7 @@ sys.path.append('../')
 from db_model import addService, removeService
 from config_reader import getHost, getPort, getDbName
 
-TEST_URL = '/instance/service/'
+TEST_URL = '/instance/service'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '[]'
 NOT_VALID_RESPONSE_CODE = 400
