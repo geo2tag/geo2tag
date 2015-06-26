@@ -6,6 +6,7 @@ import sys
 from pymongo import MongoClient
 sys.path.append('../')
 from db_model import addService
+from service_already_exists_exception import ServiceAlreadyExistsException
 
 DB = "geomongo"
 COLLECTION = "services"
@@ -15,8 +16,8 @@ class TestAddService(unittest.TestCase):
     def testAddService(self):
         client = MongoClient()
         collection = client[DB][COLLECTION]
-        obj = addService("testservice", 1, ' ')
-        self.assertEqual(obj, False)
+        with self.assertRaises(ServiceAlreadyExistsException) as e:
+            obj = addService("testservice", 1, ' ')
         obj_id = addService("test_GT_1203", 1, ' ')
         obj = collection.find_one({ID : obj_id})
         self.assertNotEqual(obj, None)

@@ -3,6 +3,7 @@ from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
+from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
@@ -31,14 +32,15 @@ def addTag(tag):
     db[TAGS].insert(tag)
 
 def addService(name, logSize, ownerld):
-    obj = db[COLLECTION].find_one({NAME: name})
-    if obj != None:
-        return False
-    obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
-    if obj_id == None:
-        return None
-    else:
-        return obj_id
+    try:
+        obj = getServiceIdByName(name)
+        raise ServiceAlreadyExistsException()
+    except ServiceNotFoundException as e:
+        obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
+        if obj_id == None:
+            return None
+        else:
+            return obj_id
 
 def getServiceList(number, offset):
     return []
@@ -94,7 +96,7 @@ def getServiceList(number, offset):
 
 def updateService(name):
     result = getServiceIdByName(name)
-
+    
 def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
     if substring != None and number is not None and offset is not None:
