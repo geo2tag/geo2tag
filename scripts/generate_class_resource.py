@@ -34,7 +34,7 @@ def make_generator(args):
     newResource.write('class ' + args.name + '(Resource):\n')
 
     for methods in args.m:
-        newResource.write(TAB + DEF + methods.lower() + '():\n')
+        newResource.write(TAB + DEF + methods.lower() + '(self):\n')
         newResource.write(TAB + TAB + '\n')
         PARSER_ARGS[methods] = {}
 
