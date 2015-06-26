@@ -9,6 +9,7 @@ from debug_info_resource import DebugInfoResource
 from flask import make_response
 from bson import json_util
 from channels_list_resource import ChannelsListResource
+from channel_resource import ChannelResource
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -26,12 +27,13 @@ def getPathWithPrefix(str):
 
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
 api.add_resource(StatusResource, getPathWithPrefix('/status'))
-api.add_resource(ServiceListResource, getPathWithPrefix('/service/'))
+api.add_resource(ServiceListResource, getPathWithPrefix('/service'))
 api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info/'))
 
 api.add_resource(LogResource, '/'+getInstancePrefix()+'/service/<string:serviceName>/log',
                               '/'+getInstancePrefix()+'/log')
 api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel/'))
+api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>/'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
