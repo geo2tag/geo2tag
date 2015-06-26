@@ -161,7 +161,7 @@ def updateChannel(serviceName, channelId, name, json, acl):
 
 def getChannelByName(serviceName, channelName):
     db = getDbObject(serviceName)
-    obj = db[CHANNELS_COLLECTION].find_one({name: channelName})
+    obj = db[CHANNELS_COLLECTION].find_one({NAME: channelName})
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
