@@ -27,7 +27,7 @@ def getPathWithPrefix(str):
 
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
 api.add_resource(StatusResource, getPathWithPrefix('/status'))
-api.add_resource(ServiceListResource, getPathWithPrefix('/service/'))
+api.add_resource(ServiceListResource, getPathWithPrefix('/service'))
 api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info/'))
 
 api.add_resource(LogResource, '/'+getInstancePrefix()+'/service/<string:serviceName>/log',

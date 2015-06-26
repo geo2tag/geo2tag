@@ -5,8 +5,9 @@ from basic_integration_test import BasicIntegrationTest
 
 sys.path.append("../")
 from db_model import removeService
+from  service_not_found_exception import ServiceNotFoundException
 
-TEST_URL = '/instance/service/'
+TEST_URL = '/instance/service'
 VALID_NAME = 'test_servise_post'
 EXIST_NAME = 'testservice'
 DATA = {'name': VALID_NAME}
