@@ -7,6 +7,7 @@ from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
+
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
@@ -134,13 +135,17 @@ def deleteChannelById(serviceName, channelId):
         db[CHANNELS_COLLECTION].remove({'_id': channelId})
     else:
         raise ChannelDoesNotExist()
+
 def addChannel(name, json, owner_id, serviceName):
     db = MongoClient(getHost(), getPort())[serviceName]
     return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
 
 def updateChannel(serviceName, channelId, name, json, acl):
     db = MongoClient(getHost(), getPort())[serviceName]
-    obj = db[CHANNELS_COLLECTION].find_one({ID: channelId})
+    try:
+        obj = db[CHANNELS_COLLECTION].find_one({ID: ObjectId(channelId)})
+    except:
+        raise ChannelDoesNotExist()
     if obj == None:
         raise ChannelDoesNotExist()
     else:
