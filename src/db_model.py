@@ -27,6 +27,9 @@ TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
+JSON = 'json'
+ACL = 'acl'
+OWNER_GROUP = 'owner_group'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -140,7 +143,7 @@ def deleteChannelById(serviceName, channelId):
 
 def addChannel(name, json, owner_id, serviceName):
     db = MongoClient(getHost(), getPort())[serviceName]
-    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
+    return db[CHANNELS_COLLECTION].insert({NAME: name, JSON: json, OWNERID: owner_id, OWNER_GROUP: 'STUB', ACL: 777})
 
 def updateChannel(serviceName, channelId, name, json, acl):
     db = MongoClient(getHost(), getPort())[serviceName]
@@ -157,3 +160,10 @@ def updateChannel(serviceName, channelId, name, json, acl):
         if acl != None:
             obj['acl'] = acl
         db[CHANNELS_COLLECTION].save(obj)
+
+def getChannelByName(serviceName, channelName):
+    db = getDbObject(serviceName)
+    obj = db[CHANNELS_COLLECTION].find_one({NAME: channelName})
+    if obj != None:
+        return obj
+    raise ChannelDoesNotExist()

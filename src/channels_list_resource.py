@@ -2,7 +2,9 @@ from flask_restful import reqparse
 from flask.ext.restful import Resource
 from channels_list_parsers import ChannelsListResourceParser
 from db_model import addChannel
-from db_model import getChannelsList
+from db_model import getChannelsList, getChannelByName
+from channel_does_not_exist import ChannelDoesNotExist
+from channel_already_exists import ChannelAlreadyExists
 
 SUBSTRING = 'substring'
 NUMBER = 'number'
@@ -18,4 +20,10 @@ class ChannelsListResource(Resource):
 
     def post(self, serviceName):
         listArgs = ChannelsListResourceParser.parsePostParameters()
-        return addChannel(listArgs.get(NAME, None), listArgs.get(JSON, None), STUB, serviceName)
+        try:
+            obj = getChannelByName(serviceName, listArgs.get(NAME, None))
+        except ChannelDoesNotExist as e:
+            return addChannel(listArgs.get(NAME, None), listArgs.get(JSON, None), STUB, serviceName)
+        else:
+            e = ChannelAlreadyExists()
+            return e.getReturnObject()
