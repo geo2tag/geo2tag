@@ -36,10 +36,3 @@ class ServiceListResource(Resource):
         except ServiceAlreadyExistsException as e:
             return e.getReturnObject()
         return dumps(result, ensure_ascii=False).encode('utf8')
-        
-def parser():
-    parser = reqparse.RequestParser()
-    parser.add_argument(GET_ARGS_NUMBER, type=int, default=None)
-    parser.add_argument(GET_ARGS_OFFSET, type=int, default=None)
-    args = parser.parse_args()
-    return args
