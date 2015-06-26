@@ -31,6 +31,18 @@ JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
 
+def possibleException(func):
+    def funcPossibleExeption(*args, **kwargs):
+        print '----------!!!------------'
+        print args
+        print func
+        try:
+            return func(*args, **kwargs)
+        except ServiceNotFoundException as e:
+            print "----exp----"
+            return e.getReturnObject()
+    return funcPossibleExeption
+
 def addTag(tag):
     db[TAGS].insert(tag)
 
@@ -68,22 +80,31 @@ def getLog(dbName, number, offset, dateFrom, dateTo) :
             return None
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
-def  getServiceIdByName(name):
+@possibleException
+def getServiceIdByName(name):
+    print "getServiceIdByName"
+    print name
     obj = db[COLLECTION].find_one({NAME : name})
+    print obj
     if obj != None:
         return obj
     raise ServiceNotFoundException()
 
+@possibleException
 def removeService(name):
+    print "NAME"
+    print name
     try:
         obj = getServiceIdByName(name)
+        print obj
         db[COLLECTION].remove({ID : obj['_id']})
         connection = Connection()
         connection.drop_database(name)
+        print 'rem success'
     except ServiceNotFoundException as e:
         raise
 
-def  getServiceById(id):
+def getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
@@ -97,6 +118,7 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
+@possibleException
 def updateService(name):
     result = getServiceIdByName(name)
     
@@ -167,3 +189,4 @@ def getChannelByName(serviceName, channelName):
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
+
