@@ -34,7 +34,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 services_collection = db[SERVICES]
 
 def prepareDbRemoveSubDoc() :
-    "removing sub-document called 'config' from service called 'testservice_1'"
+    """removing sub-document called 'config' from service called 'testservice_1'"""
     services_collection.update(
         {"name" : TEST_SERVICE + "1"},
         {"$unset" : {CONFIG : ""}},
@@ -43,14 +43,18 @@ def prepareDbRemoveSubDoc() :
 
 class TestUpdateService(TestCase) :
     def setUp(self) :
-        "making unique services"
-        services_collection.remove()
-        for i in range(100) :
-            services_collection.insert({
-                "config" : { LOG_PATH : NOT_TESTED_LOG_PATH, LOG_SIZE : NOT_TESTED_LOG_SIZE }, 
-                "name" : (TEST_SERVICE + str(i)), 
-                "owner_id" : "" 
-            })
+        """making unique services"""
+        services_collection.insert({
+            "config" : { LOG_PATH : NOT_TESTED_LOG_PATH, LOG_SIZE : NOT_TESTED_LOG_SIZE }, 
+            "name" : (TEST_SERVICE + "1"), 
+            "owner_id" : "" 
+        })
+    def tearDown(self) :
+        """removing unique service"""
+        services_collection.remove(
+            { "name" : TEST_SERVICE + "1" },
+            justOne = True
+        )
     def testUpdateServiceAddPathAndSize(self) :
         prepareDbRemoveSubDoc()
         #checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist

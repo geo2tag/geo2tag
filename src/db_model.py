@@ -116,8 +116,8 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
-def updateService(name):
-    result = getServiceIdByName(name)
+#def updateService(name):
+#    result = getServiceIdByName(name)
     
 def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
