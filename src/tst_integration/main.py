@@ -12,9 +12,11 @@ from test_channel_service_get import TestChannelServiceGetRequest
 from test_GT_1283_channels_service_post import TestChannelServicePostRequest
 from test_channel_service_delete import ChannelResourceDelete
 from test_channel_service_put import ChannelResourcePut
+from test_delete_point_by_id import TestPointResourceDelete
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(BasicIntegrationTest.parametrize(TestPointResourceDelete, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestChannelGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServiceDeleteRequest, param=host))
