@@ -14,8 +14,8 @@ COLLECTION = "points"
 ID = "_id"
 NAME = 'name'
 
-class TestGetChannelById(unittest.TestCase):
-    def testGetChannelById(self):
+class TestDeletePointById(unittest.TestCase):
+    def testDeletePointById(self):
         db = getDbObject(DB)
         obj_id = db[COLLECTION].save({NAME: 'test_GT_1306'})
         with self.assertRaises(PointDoesNotExist) as e:
