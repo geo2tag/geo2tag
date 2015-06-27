@@ -8,7 +8,7 @@ from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
-
+from point_does_not_exist import PointDoesNotExist
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
@@ -27,6 +27,7 @@ TAGS = 'tags'
 db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
+POINTS_COLLECTIONS = 'points'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
@@ -167,3 +168,18 @@ def getChannelByName(serviceName, channelName):
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
+
+def updatePoint(serviceName, pointId, changes):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    try:
+        obj = db[POINTS_COLLECTIONS].find_one({ID: ObjectId(pointId)})
+        print obj
+    except:
+        raise PointDoesNotExist()
+    if obj == None:
+        raise PointDoesNotExist()
+    else:
+        for key in changes.keys():
+            obj[key] = changes[key]
+            db[POINTS_COLLECTIONS].save(obj)
+    print obj
