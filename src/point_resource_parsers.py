@@ -7,9 +7,9 @@ JSON = 'json'
 CHANNEL_ID = 'channel_id'
 
 class PointResourceParsers():
-	@staticmethod
-	def parsePutParameters():
-		parser = reqparse.RequestParser()
+    @staticmethod
+    def parsePutParameters():
+        parser = reqparse.RequestParser()
         parser.add_argument(LAT, type=float)
         parser.add_argument(LON, type=float)
         parser.add_argument(ALT, type=float)
