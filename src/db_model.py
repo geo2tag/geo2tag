@@ -8,10 +8,15 @@ from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
+from point_does_not_exist import  PointDoesNotExist
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
+
+# getPointById constants
+COLLECTION_POINTS_NAME = "points"
+POINTS_FIND_AND_KEY = "_id"
 
 #updateService constants
 COLLECTION_SERVICES_NAME = "services"
@@ -186,3 +191,10 @@ def getChannelByName(serviceName, channelName):
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
+
+def getPointById(serviceName, pointId) :
+    pointsCollection = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    point = pointsCollection.find_one({POINTS_FIND_AND_KEY : ObjectId(str(pointId))})
+    if point != None :
+        return point
+    raise PointDoesNotExist()
