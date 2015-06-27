@@ -3,10 +3,12 @@ from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
 from  service_not_found_exception import ServiceNotFoundException
+from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import  ChannelDoesNotExist
+
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
@@ -29,19 +31,23 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
+JSON = 'json'
+ACL = 'acl'
+OWNER_GROUP = 'owner_group'
 
 def addTag(tag):
     db[TAGS].insert(tag)
 
 def addService(name, logSize, ownerld):
-    obj = db[COLLECTION].find_one({NAME: name})
-    if obj != None:
-        return False
-    obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
-    if obj_id == None:
-        return None
-    else:
-        return obj_id
+    try:
+        obj = getServiceIdByName(name)
+        raise ServiceAlreadyExistsException()
+    except ServiceNotFoundException as e:
+        obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
+        if obj_id == None:
+            return None
+        else:
+            return obj_id
 
 def getServiceList(number, offset):
     return []
@@ -110,6 +116,9 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
+def updateService(name):
+    result = getServiceIdByName(name)
+    
 def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
     if substring != None and number is not None and offset is not None:
@@ -150,13 +159,17 @@ def deleteChannelById(serviceName, channelId):
         db[CHANNELS_COLLECTION].remove({'_id': channelId})
     else:
         raise ChannelDoesNotExist()
+
 def addChannel(name, json, owner_id, serviceName):
     db = MongoClient(getHost(), getPort())[serviceName]
-    return db[CHANNELS_COLLECTION].insert({'name': name, 'json': json, 'owner_id': owner_id, 'owner_group': 'STUB', 'acl': 777})
+    return db[CHANNELS_COLLECTION].insert({NAME: name, JSON: json, OWNERID: owner_id, OWNER_GROUP: 'STUB', ACL: 777})
 
 def updateChannel(serviceName, channelId, name, json, acl):
     db = MongoClient(getHost(), getPort())[serviceName]
-    obj = db[CHANNELS_COLLECTION].find_one({ID: channelId})
+    try:
+        obj = db[CHANNELS_COLLECTION].find_one({ID: ObjectId(channelId)})
+    except:
+        raise ChannelDoesNotExist()
     if obj == None:
         raise ChannelDoesNotExist()
     else:
@@ -166,3 +179,10 @@ def updateChannel(serviceName, channelId, name, json, acl):
         if acl != None:
             obj['acl'] = acl
         db[CHANNELS_COLLECTION].save(obj)
+
+def getChannelByName(serviceName, channelName):
+    db = getDbObject(serviceName)
+    obj = db[CHANNELS_COLLECTION].find_one({NAME: channelName})
+    if obj != None:
+        return obj
+    raise ChannelDoesNotExist()
