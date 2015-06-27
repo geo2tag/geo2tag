@@ -166,4 +166,3 @@ def updateChannel(serviceName, channelId, name, json, acl):
         if acl != None:
             obj['acl'] = acl
         db[CHANNELS_COLLECTION].save(obj)
->>>>>>> master
