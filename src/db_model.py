@@ -7,7 +7,8 @@ from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
-from channel_does_not_exist import  ChannelDoesNotExist
+from channel_does_not_exist import ChannelDoesNotExist
+from point_does_not_exist import PointDoesNotExist
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
