@@ -55,6 +55,7 @@ def addService(name, logSize, ownerld):
 #    def getNearTags(self, latitude, longitude):
 
 def getLog(dbName, number, offset, dateFrom, dateTo) :
+    db = getDbObject(dbName)
     collection = db[COLLECTION_LOG_NAME]
     #if collection.count() == 0
     #   collection.drop()
