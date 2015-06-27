@@ -30,6 +30,7 @@ CHANNELS_COLLECTION = 'channels'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
+POINTS_COLLECTION = 'points'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -167,3 +168,11 @@ def getChannelByName(serviceName, channelName):
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
+
+def deletePointById(serviceName, pointId):
+    db = getDbObject(serviceName)
+    obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    if obj != None:
+        db[POINTS_COLLECTION].remove({ID: ObjectId(pointId)})
+    else:
+        raise PointDoesNotExist()
