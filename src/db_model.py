@@ -173,7 +173,6 @@ def updatePoint(serviceName, pointId, changes):
     db = MongoClient(getHost(), getPort())[serviceName]
     try:
         obj = db[POINTS_COLLECTIONS].find_one({ID: ObjectId(pointId)})
-        print obj
     except:
         raise PointDoesNotExist()
     if obj == None:
@@ -181,5 +180,5 @@ def updatePoint(serviceName, pointId, changes):
     else:
         for key in changes.keys():
             obj[key] = changes[key]
-            db[POINTS_COLLECTIONS].save(obj)
+        db[POINTS_COLLECTIONS].save(obj)
     print obj
