@@ -181,5 +181,5 @@ def updatePoint(serviceName, pointId, changes):
     else:
         for key in changes.keys():
             obj[key] = changes[key]
-            db[POINTS_COLLECTIONS].save(obj)
+        db[POINTS_COLLECTIONS].save(obj)
     print obj
