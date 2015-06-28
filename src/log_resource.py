@@ -27,28 +27,37 @@ class LogResource(Resource):
             serviceName = getDbName()
 
         return getLog(serviceName, parser_dict[NUMBER], parser_dict[OFFSET], 
-            parser_dict[DATE_FROM], parser_dict[DATE_TO])
+            dateFromDeserialiser(parser_dict), dateToDeserialiser(parser_dict))
 
-def datetimeSerialiser(obj):
+def dateSerialiser(obj):
     if isinstance(obj, datetime) :
         return obj.isoformat()
     raise TypeError("%r is not JSON serializable" % obj)
 
-def datetimeDeserialiser(dict):
-    if "date" in dict :
-        try :
-            date = datetime.strptime(str(dict["date"]), "%Y-%m-%dT%H:%M:%S")
-            return date
-        except  ValueError:
-            print "Non ISO8601 format"
-            raise
-    return dict
+def dateToDeserialiser(dict):
+    try :
+        if DATE_TO in dict and dict[DATE_TO] != None :
+            obj = dict[DATE_TO].replace("'", "").replace("\"", "")
+            return datetime.strptime(str(obj), ISO8601_FMT)
+    except  ValueError:
+        print "Non ISO8601 format"
+        raise
+    return None
+
+def dateFromDeserialiser(dict):
+    try :
+        if DATE_FROM in dict and dict[DATE_FROM] != None :
+            obj = dict[DATE_FROM].replace("'", "").replace("\"", "")
+            return datetime.strptime(str(obj), ISO8601_FMT)
+    except  ValueError:
+        print "Non ISO8601 format"
+        raise
+    return None
 
 def datetime_from_iso8601(datetime_str):
-    obj = datetime_str.replace("'", "").replace("\"", "")
-    print obj
     try :
-        return json.dumps(aniso8601.parse_datetime(obj), default = datetimeSerialiser)
+        obj = datetime_str.replace("'", "").replace("\"", "")
+        return json.dumps(aniso8601.parse_datetime(obj), default = dateSerialiser)
     except  ValueError :
         raise
     return None
