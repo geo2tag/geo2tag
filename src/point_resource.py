@@ -3,9 +3,14 @@ from flask.ext.restful import Resource
 from point_does_not_exist import PointDoesNotExist
 from point_resource_parsers import PointResourceParsers
 from db_model import updatePoint
+from db_model import getPointById
 class PointResource(Resource):
     def get(self, serviceName, pointId):
-        pass
+        try:
+            newPoint = getPointById(serviceName, pointId)
+        except PointDoesNotExist as e:
+            return e.getReturnObject()
+        return newPoint
     def post(self):
         pass
     def put(self, serviceName, pointId):
