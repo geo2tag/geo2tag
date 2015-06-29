@@ -10,13 +10,14 @@ import pymongo
 import json
 import aniso8601
 import pytz
+from log_parsers import LogParser
 
 ISO8601_FMT = '%Y-%m-%dT%H:%M:%S'
 
 NUMBER = 'number'
 OFFSET = 'offset'
-DATE_FROM = 'date_from'
-DATE_TO = 'date_to'
+DATE_FROM = 'dateFrom'
+DATE_TO = 'dateTo'
 
 
 class LogResource(Resource):
@@ -25,8 +26,8 @@ class LogResource(Resource):
         if serviceName == None:
             serviceName = getDbName()
 
-        return getLog(serviceName, parser_dict['number'], parser_dict['offset'], 
-            parser_dict['dateFrom'], parser_dict['dateTo'])
+        return getLog(serviceName, parser_dict[NUMBER], parser_dict[OFFSET], 
+            parser_dict[DATE_FROM], parser_dict[DATE_TO])
 
 def datetimeSerialiser(obj):
     if isinstance(obj, datetime):
@@ -40,7 +41,7 @@ def datetimeDeserialiser(dict):
             dict[key] = u''
             continue
         try:
-            datetime_obj = datetime.datetime.strptime(value, ISO8601_FMT)
+            datetime_obj = datetime.strptime(value, ISO8601_FMT)
             dict[key] = datetime_obj
         except (ValueError, TypeError):
             continue
@@ -48,12 +49,3 @@ def datetimeDeserialiser(dict):
 
 def datetime_from_iso8601(datetime_str):
     return json.dumps(datetime.fromtimestamp(timegm(aniso8601.parse_datetime(datetime_str).utctimetuple()), tz=pytz.UTC), default = datetimeSerialiser)
-def parse():
-    parser = reqparse.RequestParser()
-    parser.add_argument(NUMBER, type=int, default=None)
-    parser.add_argument(OFFSET, type=int, default=None)
-    parser.add_argument(DATE_FROM, type=datetime_from_iso8601, default=None)
-    parser.add_argument(DATE_TO, type=datetime_from_iso8601, default=None)
-    args = parser.parse_args()
-    return args
-
