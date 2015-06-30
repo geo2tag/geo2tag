@@ -1,6 +1,6 @@
 from flask_restful import reqparse
 
-class PointListParser():
+class PointListResourceParser():
     @staticmethod
     def parseGetParameters():
-    	return []
+        return []
