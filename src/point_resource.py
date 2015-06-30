@@ -7,7 +7,7 @@ class PointResource(Resource):
         try:
             newPoint = getPointById(serviceName, pointId)
         except PointDoesNotExist as e:
-        	return e.getReturnObject()
+            return e.getReturnObject()
         return newPoint
     def post(self):
         pass
