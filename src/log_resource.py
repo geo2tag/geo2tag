@@ -27,27 +27,16 @@ class LogResource(Resource):
             serviceName = getDbName()
 
         return getLog(serviceName, parser_dict[NUMBER], parser_dict[OFFSET], 
-            dateFromDeserialiser(parser_dict), dateToDeserialiser(parser_dict))
+            dateDeserialiser(parser_dict, DATE_FROM), dateDeserialiser(parser_dict, DATE_TO))
 
 def dateSerialiser(obj):
     if isinstance(obj, datetime) :
         return obj.isoformat()
     raise TypeError("%r is not JSON serializable" % obj)
-
-def dateToDeserialiser(dict):
+def dateDeserialiser(dict, param_date):
     try :
-        if DATE_TO in dict and dict[DATE_TO] != None :
-            obj = dict[DATE_TO].replace("'", "").replace("\"", "")
-            return datetime.strptime(str(obj), ISO8601_FMT)
-    except  ValueError:
-        print "Non ISO8601 format"
-        raise
-    return None
-
-def dateFromDeserialiser(dict):
-    try :
-        if DATE_FROM in dict and dict[DATE_FROM] != None :
-            obj = dict[DATE_FROM].replace("'", "").replace("\"", "")
+        if param_date in dict and dict[param_date] != None :
+            obj = dict[param_date].replace("'", "").replace("\"", "")
             return datetime.strptime(str(obj), ISO8601_FMT)
     except  ValueError:
         print "Non ISO8601 format"
