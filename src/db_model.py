@@ -14,18 +14,26 @@ from point_does_not_exist import PointDoesNotExist
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
 
+# getPointById constants
+COLLECTION_POINTS_NAME = "points"
+POINTS_FIND_AND_KEY = "_id"
+
+#updateService constants
+COLLECTION_SERVICES_NAME = "services"
+COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
+
 # Collections
 TAGS = 'tags'
-db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
 NAME = 'name'
 CONFIG = 'config'
 LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
 ID = '_id'
-# Collections
-TAGS = 'tags'
+
+#db initialisation
 db = MongoClient(getHost(), getPort())[getDbName()]
+
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
 JSON = 'json'
@@ -47,8 +55,8 @@ def addService(name, logSize, ownerld):
         else:
             return obj_id
 
-def getServiceList(number, offset):
-    return []
+#def getServiceList(number, offset):
+#    return []
 
 #    def getNearTags(self, latitude, longitude):
 
@@ -69,6 +77,21 @@ def getLog(dbName, number, offset, dateFrom, dateTo) :
         if dateFrom > dateTo :
             return None
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
+
+def updateService(name, config) :
+    services_collection = db[COLLECTION_SERVICES_NAME]
+    for el in config :
+        tmp_el_to_set = COLLECTION_SERVICES_EL_CONFIG_NAME + '.' + str(el)
+        services_collection.update(
+            {"name" : name},
+            #changes will affect on service's sub-document called 'config'
+            #if there is no such sub-document called 'config', it will be created
+            {"$set" : {tmp_el_to_set : config[el]}},
+            #changes will affect on all services with name mentioned above
+            multi = True
+        )
+    #changed service(s) cursor in return
+    return services_collection.find({"name" : name})
 
 def  getServiceIdByName(name):
     obj = db[COLLECTION].find_one({NAME : name})
@@ -99,8 +122,8 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
-def updateService(name):
-    result = getServiceIdByName(name)
+#def updateService(name):
+#    result = getServiceIdByName(name)
     
 def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
@@ -177,3 +200,10 @@ def deletePointById(serviceName, pointId):
         db[POINTS_COLLECTION].remove({ID: ObjectId(pointId)})
     else:
         raise PointDoesNotExist()
+
+def getPointById(serviceName, pointId) :
+    pointsCollection = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    point = pointsCollection.find_one({POINTS_FIND_AND_KEY : ObjectId(str(pointId))})
+    if point != None :
+        return point
+    raise PointDoesNotExist()
