@@ -198,3 +198,14 @@ def getPointById(serviceName, pointId) :
     if point != None :
         return point
     raise PointDoesNotExist()
+
+def addPoints(serviceName, pointsArray):
+    db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    for point in pointsArray:
+        obj = {}
+        obj['json'] = point['json']
+        obj['location'] = {'type': 'Point', 'coordinates': [point['lon'], point['lat']]}
+        obj['alt'] = point['alt']
+        obj['channel_id'] = point['channel_id']
+        obj['date'] = datetime.now()
+        db.save(obj)
