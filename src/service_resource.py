@@ -24,7 +24,7 @@ class ServiceResource(Resource):
     @possibleException
     def put(self, serviceName):
         parserList = ServiceParser.parsePutParameters()
-        updateService(serviceName)
+        updateService(serviceName, parserList)
         return {serviceName: SRV_NAME_UPD}
 
     @possibleException

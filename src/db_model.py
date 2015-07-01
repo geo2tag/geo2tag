@@ -45,7 +45,7 @@ def possibleException(func):
         try:
             return func(*args, **kwargs)
         except Exception as e:
-            if hasattr(e, getReturnObject):
+            if hasattr(e, 'getReturnObject'):
                 return e.getReturnObject()
             else:
                 raise
