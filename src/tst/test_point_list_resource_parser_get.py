@@ -6,12 +6,13 @@ import json
 import aniso8601
 import pytz
 from werkzeug.exceptions import BadRequest
+from geojson import MultiPoint
 
 import sys
 sys.path.append('../')
 import log_resource
 from point_list_resource_parser import PointListResourceParser
-from geojson import MultiPoint
+
 
 NUMBER = 'number'
 NUMBER_VALUE = 0

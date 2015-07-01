@@ -1,5 +1,6 @@
 from flask_restful import reqparse
 import log_resource
+from geojson import MultiPoint
 
 CHANNEL_IDS = 'channel_ids'
 NUMBER = 'number'
@@ -18,7 +19,7 @@ class PointListResourceParser():
         parser = reqparse.RequestParser()
         parser.add_argument(CHANNEL_IDS, type=str, required=True)
         parser.add_argument(NUMBER, type=int, required=True)
-        parser.add_argument(GEOMETRY, type=str)
+        parser.add_argument(GEOMETRY, type=list)
         parser.add_argument(ALTITUDE_FROM, type=float)
         parser.add_argument(ALTITUDE_TO, type=float)
         parser.add_argument(SUBSTRING, type=str)
