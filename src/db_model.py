@@ -42,14 +42,13 @@ OWNER_GROUP = 'owner_group'
 
 def possibleException(func):
     def funcPossibleExeption(*args, **kwargs):
-        print '----------!!!------------'
-        print args
-        print func
         try:
             return func(*args, **kwargs)
-        except ServiceNotFoundException as e:
-            print "----exp----"
-            return e.getReturnObject()
+        except Exception as e:
+            if hasattr(e, getReturnObject):
+                return e.getReturnObject()
+            else:
+                raise
     return funcPossibleExeption
 
 def addTag(tag):
@@ -89,7 +88,6 @@ def getLog(dbName, number, offset, dateFrom, dateTo) :
             return None
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
-@possibleException
 def updateService(name, config) :
     services_collection = db[COLLECTION_SERVICES_NAME]
     for el in config :
@@ -105,7 +103,6 @@ def updateService(name, config) :
     #changed service(s) cursor in return
     return services_collection.find({"name" : name})
 
-@possibleException
 def getServiceIdByName(name):
     obj = db[COLLECTION].find_one({NAME : name})
     print obj
@@ -113,17 +110,12 @@ def getServiceIdByName(name):
         return obj
     raise ServiceNotFoundException()
 
-@possibleException
 def removeService(name):
-    print "NAME"
-    print name
     try:
         obj = getServiceIdByName(name)
-        print obj
         db[COLLECTION].remove({ID : obj['_id']})
         connection = Connection()
         connection.drop_database(name)
-        print 'rem success'
     except ServiceNotFoundException as e:
         raise
 
