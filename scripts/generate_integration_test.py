@@ -17,7 +17,11 @@ def generateIntegrationTest(args):
     unittestFile.write(INCLUDE_MODULE)
     unittestFile.write('class Test' + args.name + '(BasicIntegrationTest):\n')
     unittestFile.write(TAB + 'def test' + args.name + '(self):\n')
-    unittestFile.write(TAB + TAB + 'response = requests.get(self.getUrl(TEST_URL))')
+    unittestFile.write(TAB + TAB + 'response = requests.get(self.getUrl(TEST_URL))\n')
+    unittestFile.write(TAB + TAB + 'responseText = response.text\n')
+    unittestFile.write(TAB + TAB + 'responseCode = response.status_code\n')
+    unittestFile.write(TAB + TAB + 'self.assertEquals(responseText, VALID_RESPONSE_TEXT)\n')
+    unittestFile.write(TAB + TAB + 'self.assertEquals(responseCode, VALID_RESPONSE_CODE)\n')
     mainFile = open(MAIN_FILE, 'r')
     mainStrings = mainFile.readlines()
     mainFile.close()
@@ -38,7 +42,7 @@ def run():
     parser.add_argument('--name', help='enter unittest name', required=True)
     args = parser.parse_args()
     generateIntegrationTest(args)
-    print ("Success. File created. File - /src/tst_integration/" + FILE_NAME + args.name + '.py')
+    print ("Success. File created. File - src/tst_integration/" + FILE_NAME + args.name + '.py')
 
 if __name__ == '__main__':
     run()
