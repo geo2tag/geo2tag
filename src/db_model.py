@@ -36,7 +36,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
-POINTS_COLLECTIONS = 'points'
+POINTS_COLLECTION = 'points'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
@@ -196,16 +196,16 @@ def getChannelByName(serviceName, channelName):
 def updatePoint(serviceName, pointId, changes):
     db = MongoClient(getHost(), getPort())[serviceName]
     try:
-        obj = db[POINTS_COLLECTIONS].find_one({ID: ObjectId(pointId)})
-        print obj
+        obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
     except:
         raise PointDoesNotExist()
     if obj == None:
         raise PointDoesNotExist()
     else:
         for key in changes.keys():
-            obj[key] = changes[key]
-        db[POINTS_COLLECTIONS].save(obj)
+            if key in obj.keys():
+                obj[key] = changes[key]
+        db[POINTS_COLLECTION].save(obj)
     print obj
 def getPointById(serviceName, pointId) :
     pointsCollection = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
