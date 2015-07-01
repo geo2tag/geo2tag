@@ -13,6 +13,8 @@ from test_GT_1283_channels_service_post import TestChannelServicePostRequest
 from test_channel_service_delete import ChannelResourceDelete
 from test_channel_service_put import ChannelResourcePut
 from test_instance_log import TestInstanceLogRequest
+from test_point_resource_get import TestPointGetRequest
+
 
 def main(host):
     suite = unittest.TestSuite()
@@ -28,6 +30,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(ChannelResourceDelete, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(ChannelResourcePut, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestInstanceLogRequest, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestPointGetRequest, param=host))
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
