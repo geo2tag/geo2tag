@@ -12,7 +12,7 @@ import sys
 sys.path.append('../')
 import log_resource
 from point_list_resource_parser import PointListResourceParser
-
+import geo_json_type
 
 NUMBER = 'number'
 NUMBER_VALUE = 0
@@ -25,25 +25,24 @@ DATE_TO_VALUE = '2015-06-15T17:00:00'
 CHANNEL_IDS = 'channel_ids'
 CHANNEL_IDS_VALUE = 'channel_ids_value'
 GEOMETRY = 'geometry'
-GEOMETRY_VALUE_LIST = [(-155.52, 19.61), (-156.22, 20.74), (-157.97, 21.46)]
-GEOMETRY_VALUE_STR = '[(-155.52, 19.61), (-156.22, 20.74), (-157.97, 21.46)]'
+GEOMETRY_VALUE = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
+GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
 
-CORRECT_ARGS = NUMBER+'='+str(NUMBER_VALUE)+'&'+OFFSET+'='+str(OFFSET_VALUE)+'&'+DATE_FROM+'='+str(DATE_FROM_VALUE)+'&'+DATE_TO+'='+str(DATE_TO_VALUE)+'&'+CHANNEL_IDS+'='+CHANNEL_IDS_VALUE+'&'+GEOMETRY+'='+GEOMETRY_VALUE_STR
+CORRECT_ARGS = NUMBER+'='+str(NUMBER_VALUE)+'&'+OFFSET+'='+str(OFFSET_VALUE)+'&'+DATE_FROM+'='+str(DATE_FROM_VALUE)+'&'+DATE_TO+'='+str(DATE_TO_VALUE)+'&'+CHANNEL_IDS+'='+CHANNEL_IDS_VALUE+'&'+GEOMETRY+'='+GEOMETRY_VALUE
 INCORRECT_ARGS='incorect='
 app = Flask(__name__)
 class TestParserPointListGetResource(TestCase):
     def testParserPointListGetResource(self):
         with app.test_request_context('/instance/service/testservice/point/?' + CORRECT_ARGS):
             args = PointListResourceParser.parseGetParameters()
-            print args
-            print CORRECT_ARGS
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
             self.assertEquals(args[NUMBER], NUMBER_VALUE)
             loadedDatetime_from = json.loads(args[DATE_FROM], object_hook = log_resource.datetimeDeserialiser(args))
             self.assertEquals(loadedDatetime_from, DATE_FROM_VALUE)
             loadedDatetime_to = json.loads(args[DATE_TO], object_hook = log_resource.datetimeDeserialiser(args))
             self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
-
+            geometryValue = geo_json_type.GeoJsonType(str(args.get(GEOMETRY)))
+            self.assertEquals(GEOMETRY_VALUE_JSON, geometryValue)
 
         with app.test_request_context('/instance/service/testservice/point/?'+INCORRECT_ARGS):
             with self.assertRaises(BadRequest):
