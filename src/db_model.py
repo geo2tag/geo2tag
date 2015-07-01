@@ -198,3 +198,8 @@ def getPointById(serviceName, pointId) :
     if point != None :
         return point
     raise PointDoesNotExist()
+
+def addServiceDb(dbName):
+    db = MongoClient(getHost(), getPort())[dbName]
+    db[COLLECTION_POINTS_NAME].ensure_index([("location", "2dsphere")])
+    db[COLLECTION_POINTS_NAME].create_index([("date", -1)])
