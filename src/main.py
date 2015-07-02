@@ -1,3 +1,4 @@
+from ResourseTest import ResourseTest
 from point_resource import PointResource
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
@@ -37,5 +38,6 @@ api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:servi
 api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>/'))
 
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
+api.add_resource(ResourseTest, getPathWithPrefix('/instance/service/testservice/channelfff'))
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
