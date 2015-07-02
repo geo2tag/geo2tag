@@ -40,6 +40,15 @@ JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
 POINTS_COLLECTION = 'points'
+LOCATION = 'location'
+TYPE = 'type'
+POINT = 'Point'
+COORDINATES = 'coordinates'
+LON = 'lon'
+LAT = 'lat'
+ALT = 'alt'
+CHANNEL_ID = 'channel_id'
+DATE = 'date'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -212,9 +221,9 @@ def addPoints(serviceName, pointsArray):
     db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
     for point in pointsArray:
         obj = {}
-        obj['json'] = point['json']
-        obj['location'] = {'type': 'Point', 'coordinates': [point['lon'], point['lat']]}
-        obj['alt'] = point['alt']
-        obj['channel_id'] = point['channel_id']
-        obj['date'] = datetime.now()
+        obj[JSON] = point[JSON]
+        obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
+        obj[ALT] = point[ALT]
+        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[DATE] = datetime.now()
         db.save(obj)
