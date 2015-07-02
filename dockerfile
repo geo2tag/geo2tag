@@ -44,7 +44,7 @@ EXPOSE 27017
 ADD scripts/ /app/scripts
 ADD config/ /app/config
 WORKDIR /app
-RUN ["scripts/setup_pip_dependencies.sh"]
+RUN ["scripts/local_deploy.sh"]
 
 CMD ["scripts/docker_run.sh"]
 
