@@ -42,7 +42,7 @@ OWNER_GROUP = 'owner_group'
 POINTS_COLLECTION = 'points'
 
 def possibleException(func):
-    def funcPossibleExeption(*args, **kwargs):
+    def funcPossibleException(*args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Exception as e:
@@ -50,7 +50,7 @@ def possibleException(func):
                 return e.getReturnObject()
             else:
                 raise
-    return funcPossibleExeption
+    return funcPossibleException
 
 def addTag(tag):
     db[TAGS].insert(tag)

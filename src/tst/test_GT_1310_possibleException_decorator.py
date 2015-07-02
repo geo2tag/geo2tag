@@ -6,6 +6,7 @@ sys.path.append('../')
 
 TEST_VALID_EXCEPTION = ServiceNotFoundException
 TEST_NOT_VALID_EXCEPTION = ArithmeticError
+TEST_VALID_TUPLE = ('Service not found', 400)
 TEST_NOT_VALID_EXCEPTION_STRING = 'This is not valid exception'
 
 @possibleException
@@ -14,8 +15,7 @@ def funcForTesting(Exc):
 
 class TestPossibleExceptionDecorator(TestCase):
     def testPossibleExceptionDecorator(self):
-        funcForTesting(TEST_VALID_EXCEPTION)
+        self.assertEqual(funcForTesting(TEST_VALID_EXCEPTION), TEST_VALID_TUPLE)
         with self.assertRaises(TEST_NOT_VALID_EXCEPTION) as context:
             funcForTesting(TEST_NOT_VALID_EXCEPTION)
-        self.assertRaises(TEST_NOT_VALID_EXCEPTION_STRING in context.exception)
-        
+        self.assertTrue(TEST_NOT_VALID_EXCEPTION_STRING in context.exception)        
