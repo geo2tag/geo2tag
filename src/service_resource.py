@@ -27,7 +27,7 @@ class ServiceResource(Resource):
     def put(self, serviceName):
         parserList = ServiceParser.parsePutParameters()
         try:
-            updateService(serviceName)
+            updateService(serviceName, parserList)
         except ServiceNotFoundException as e:
             return e.getReturnObject()
         return {serviceName: SRV_NAME_UPD}
