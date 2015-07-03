@@ -8,7 +8,7 @@ from db_model import getChannelsList
 from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
-TEST_URL = '/instance/service/testservice/channel/558807a47ec8ff5da755ee48/'
+TEST_URL = '/instance/service/testservice/channel/558807a47ec8ff5da755ee48'
 BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '{}'
