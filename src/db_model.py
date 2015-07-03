@@ -55,7 +55,7 @@ def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now().isoformat()
     client = MongoClient()
     collection = client[dbName][LOG]
-    if dbName == getDbName():
+    if dbName == getDbName():        
         collection.save({ "user_id" : userId, "date" : currentDate, "message" : message, "service":service})
     else:
         collection.save({USER_ID : userId, "date" : currentDate, "message" : message})
