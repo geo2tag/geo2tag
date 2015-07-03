@@ -7,7 +7,7 @@ from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
-from channel_does_not_exist import  ChannelDoesNotExist
+from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
 
 # getLog constants
@@ -36,11 +36,20 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
-POINTS_COLLECTIONS = 'points'
+POINTS_COLLECTION = 'points'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
 POINTS_COLLECTION = 'points'
+LOCATION = 'location'
+TYPE = 'type'
+POINT = 'Point'
+COORDINATES = 'coordinates'
+LON = 'lon'
+LAT = 'lat'
+ALT = 'alt'
+CHANNEL_ID = 'channel_id'
+DATE = 'date'
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -209,16 +218,28 @@ def getPointById(serviceName, pointId) :
         return point
     raise PointDoesNotExist()
 
+def addPoints(serviceName, pointsArray):
+    db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    for point in pointsArray:
+        obj = {}
+        obj[JSON] = point[JSON]
+        obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
+        obj[ALT] = point[ALT]
+        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[DATE] = datetime.now()
+        db.save(obj)
+
 def updatePoint(serviceName, pointId, changes):
     db = MongoClient(getHost(), getPort())[serviceName]
     try:
-        obj = db[POINTS_COLLECTIONS].find_one({ID: ObjectId(pointId)})
+        obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
     except:
         raise PointDoesNotExist()
     if obj == None:
         raise PointDoesNotExist()
     else:
         for key in changes.keys():
-            obj[key] = changes[key]
-        db[POINTS_COLLECTIONS].save(obj)
+            if key in obj.keys():
+                obj[key] = changes[key]
+        db[POINTS_COLLECTION].save(obj)
     print obj
