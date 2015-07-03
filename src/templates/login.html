@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Geomongo Login</title>
-		<link href="http://geomongo/static/css/bootstrap.min.css" rel="stylesheet">
-		<link href="http://geomongo/static/css/main.css" rel="stylesheet">
-		<script src="http://geomongo/static/js/jquery-latest.min.js"></script>
-	</head>
-	<body>
-		<script src="http://geomongo/static/js/bootstrap.min.js"></script>
-		<div class="container">
+{% extends "base.html" %}
+{% block content %}
 			<header>
 				<h2>Login with</h2>
 			</header>
@@ -17,9 +8,4 @@
 					<img class="google_authorized" src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png" alt="Sign in with Google">
 				</a>
 			</button>
-			<div class="navbar-fixed-bottom row-fluid">
-				<div>Powered by Geo2tag - <a href="http://geo2tag.com">geo2tag.com</a></div>
-			</div>
-		</div>
-	</body>
-</html>
+{% endblock %}
