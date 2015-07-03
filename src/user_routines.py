@@ -1,19 +1,19 @@
 from pymongo import MongoClient
 from log import writeInstanceLog
 from config_reader import getDbName
-
-# Collection
-SESSION = 'session'
+from flask import session
 
 #DB initialisation
 client = MongoClient()
 dbName = getDbName()
-collection = client[dbName][SESSION]
+
+USER_ID = 'user_id'
 
 def logUserIn(_id):
-    collection.save({'user_id' : _id})
+    session[USER_ID] = _id
     writeInstanceLog(_id, 'login')
 
 def logUserOut(_id):
-    collection.remove({'user_id' : _id})
+    if USER_ID in session:
+        session.pop(USER_ID)
     writeInstanceLog(_id, 'logout')

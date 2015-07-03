@@ -7,7 +7,6 @@ from config_reader import getDbName
 
 TEST_MASTER_DB = getDbName()
 TEST_COLLECTION_LOG = 'log'
-TEST_COLLECTION_SESSION = 'session'
 
 TEST_MSG_LOGIN = 'login'
 TEST_MSG_LOGOUT = 'logout'
@@ -28,7 +27,6 @@ class TestUserRoutines(unittest.TestCase):
         obj = objects[0]
         self.assertEqual(obj[TEST_MSG_FIELD], TEST_MSG_LOGIN)
         db[TEST_COLLECTION_LOG].remove({TEST_USER_ID_FIELD : TEST_ID})
-        objects = list(db[TEST_COLLECTION_SESSION].find({TEST_USER_ID_FIELD : TEST_ID}))
         self.assertEqual(len(objects), 1)
         logUserOut(TEST_ID)
         objects = list(db[TEST_COLLECTION_LOG].find({TEST_USER_ID_FIELD : TEST_ID}))
@@ -36,6 +34,4 @@ class TestUserRoutines(unittest.TestCase):
         obj = objects[0]
         self.assertEqual(obj[TEST_MSG_FIELD], TEST_MSG_LOGOUT)
         db[TEST_COLLECTION_LOG].remove({TEST_USER_ID_FIELD : TEST_ID})
-        objects = list(db[TEST_COLLECTION_SESSION].find({TEST_USER_ID_FIELD : TEST_ID}))
-        self.assertEqual(len(objects), 0)
         

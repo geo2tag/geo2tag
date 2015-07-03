@@ -4,7 +4,7 @@ import string
 
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/instance/debug_info/'
+TEST_URL = '/instance/debug_info'
 
 VALID_RESPONSE_CODE = 200
 
