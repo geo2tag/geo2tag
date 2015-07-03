@@ -13,9 +13,10 @@ HOST = 'localhost'
 PORT = 27017
 DBNAME = 'geomongo'
 INSTANCEPREFIX = 'instance'
+DEBUG_USERS = ''
 
 def getConfigParser():
-    config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX})
+    config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX,OPTION_DEBUG_USERS:DEBUG_USERS})
     config.read(CONFIG_PATH)
     return config
 	
@@ -33,7 +34,5 @@ def getInstancePrefix():
    	
 def getDebugUsers():
     str = getConfigParser().get(SECTION,OPTION_DEBUG_USERS)
-    if str is None:
-        str = ''
     list = str.split(',')
     return list
