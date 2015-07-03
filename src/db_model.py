@@ -41,6 +41,7 @@ MESSAGE = 'message'
 SERVICE = 'service'
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
+POINTS_COLLECTION = 'points'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
@@ -240,3 +241,18 @@ def addPoints(serviceName, pointsArray):
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
         db.save(obj)
+
+def updatePoint(serviceName, pointId, changes):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    try:
+        obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    except:
+        raise PointDoesNotExist()
+    if obj == None:
+        raise PointDoesNotExist()
+    else:
+        for key in changes.keys():
+            if key in obj.keys():
+                obj[key] = changes[key]
+        db[POINTS_COLLECTION].save(obj)
+    print obj
