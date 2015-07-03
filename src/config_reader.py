@@ -33,5 +33,7 @@ def getInstancePrefix():
    	
 def getDebugUsers():
     str = getConfigParser().get(SECTION,OPTION_DEBUG_USERS)
+    if str is None:
+        str = ''
     list = str.split(',')
     return list
