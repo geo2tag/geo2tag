@@ -30,7 +30,8 @@ CONFIG = 'config'
 LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
 ID = '_id'
-
+LOG = 'log'
+USER_ID = 'user_id'
 #db initialisation
 db = MongoClient(getHost(), getPort())[getDbName()]
 
@@ -40,6 +41,15 @@ JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
 POINTS_COLLECTION = 'points'
+
+def addLogEntry(dbName, userId, message, service='instance'):
+    currentDate = datetime.now().isoformat()
+    client = MongoClient()
+    collection = client[dbName][LOG]
+    if dbName == getDbName():
+        collection.save({ "user_id" : userId, "date" : currentDate, "message" : message, "service":service})
+    else:
+        collection.save({USER_ID : userId, "date" : currentDate, "message" : message})
 
 def addTag(tag):
     db[TAGS].insert(tag)
