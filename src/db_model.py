@@ -51,6 +51,17 @@ ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 DATE = 'date'
 
+def possibleException(func):
+    def funcPossibleException(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            if hasattr(e, 'getReturnObject'):
+                return e.getReturnObject()
+            else:
+                raise
+    return funcPossibleException
+
 def addTag(tag):
     db[TAGS].insert(tag)
 
@@ -103,8 +114,9 @@ def updateService(name, config) :
     #changed service(s) cursor in return
     return services_collection.find({"name" : name})
 
-def  getServiceIdByName(name):
+def getServiceIdByName(name):
     obj = db[COLLECTION].find_one({NAME : name})
+    print obj
     if obj != None:
         return obj
     raise ServiceNotFoundException()
@@ -118,7 +130,7 @@ def removeService(name):
     except ServiceNotFoundException as e:
         raise
 
-def  getServiceById(id):
+def getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
@@ -132,9 +144,6 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
-#def updateService(name):
-#    result = getServiceIdByName(name)
-    
 def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
     if substring != None and number is not None and offset is not None:
