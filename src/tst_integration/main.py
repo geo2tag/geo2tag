@@ -1,6 +1,6 @@
 import unittest
 import sys
-from basic_integration_test import BasicIntegrationTest 
+from basic_integration_test import BasicIntegrationTest
 from test_status_request import TestStatusRequest
 from test_delete_service_name import TestServiceDeleteRequest
 from test_get_service_name import TestServiceGetRequest
@@ -15,6 +15,7 @@ from test_channel_service_delete import ChannelResourceDelete
 from test_channel_service_put import ChannelResourcePut
 from test_instance_log import TestInstanceLogRequest
 from test_point_resource_get import TestPointGetRequest
+from test_debug_info_resource import TestDebugInfoResource
 
 
 def main(host):
@@ -33,6 +34,8 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(ChannelResourcePut, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestInstanceLogRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointGetRequest, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestDebugInfoResource, param=host))
+
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
