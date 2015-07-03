@@ -7,7 +7,7 @@ sys.path.append('../')
 from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
-TEST_URL = '/instance/service/testservice/channel/'
+TEST_URL = '/instance/service/testservice/channel'
 BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 404
@@ -18,7 +18,7 @@ CHANNELS_COLLECTION = 'channels'
 class TestChannelGetRequest(BasicIntegrationTest):
     def testChannelGetRequest(self):
         obj_id = db[CHANNELS_COLLECTION].save({'name': 'test_get_channel_by_id'})
-        response = requests.get(self.getUrl(TEST_URL + str(obj_id) + '/'))
+        response = requests.get(self.getUrl(TEST_URL + '/' + str(obj_id)))
         VALID_RESPONSE_TEXT = '{"_id": {"$oid": "' + str(obj_id) + '"}, "name": "test_get_channel_by_id"}'
         responseText = response.text
         responseCode = response.status_code
