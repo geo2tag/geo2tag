@@ -41,6 +41,15 @@ JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
 POINTS_COLLECTION = 'points'
+LOCATION = 'location'
+TYPE = 'type'
+POINT = 'Point'
+COORDINATES = 'coordinates'
+LON = 'lon'
+LAT = 'lat'
+ALT = 'alt'
+CHANNEL_ID = 'channel_id'
+DATE = 'date'
 
 def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now().isoformat()
@@ -217,3 +226,14 @@ def getPointById(serviceName, pointId) :
     if point != None :
         return point
     raise PointDoesNotExist()
+
+def addPoints(serviceName, pointsArray):
+    db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    for point in pointsArray:
+        obj = {}
+        obj[JSON] = point[JSON]
+        obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
+        obj[ALT] = point[ALT]
+        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[DATE] = datetime.now()
+        db.save(obj)
