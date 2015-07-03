@@ -7,6 +7,7 @@ OPTION_HOST = 'host'
 OPTION_PORT = 'port'
 OPTION_DBNAME = 'db_name'
 OPTION_INSTANCEPREFIX = 'instance_prefix'
+OPTION_DEBUG_USERS = 'debug_users'
 
 HOST = 'localhost'
 PORT = 27017
@@ -30,4 +31,7 @@ def getDbName():
 def getInstancePrefix():
     return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
    	
- 
+def getDebugUsers():
+    str = getConfigParser().get(SECTION,OPTION_DEBUG_USERS)
+    list = str.split(',')
+    return list
