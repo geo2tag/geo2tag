@@ -22,6 +22,7 @@ POINTS_FIND_AND_KEY = "_id"
 COLLECTION_SERVICES_NAME = "services"
 COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
 
+
 # Collections
 TAGS = 'tags'
 COLLECTION = 'services'
@@ -30,10 +31,14 @@ CONFIG = 'config'
 LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
 ID = '_id'
-
+LOG = 'log'
 #db initialisation
 db = MongoClient(getHost(), getPort())[getDbName()]
-
+#keys
+USER_ID = 'user_id'
+DATE = 'date'
+MESSAGE = 'message'
+SERVICE = 'service'
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
 POINTS_COLLECTION = 'points'
@@ -49,7 +54,15 @@ LON = 'lon'
 LAT = 'lat'
 ALT = 'alt'
 CHANNEL_ID = 'channel_id'
-DATE = 'date'
+
+def addLogEntry(dbName, userId, message, service='instance'):
+    currentDate = datetime.now().isoformat()
+    client = MongoClient()
+    collection = client[dbName][LOG]
+    if dbName == getDbName():
+        collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message, SERVICE : service})
+    else:
+        collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message})
 
 def possibleException(func):
     def funcPossibleException(*args, **kwargs):
