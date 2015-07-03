@@ -36,10 +36,20 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
+POINTS_COLLECTION = 'points'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
 POINTS_COLLECTION = 'points'
+LOCATION = 'location'
+TYPE = 'type'
+POINT = 'Point'
+COORDINATES = 'coordinates'
+LON = 'lon'
+LAT = 'lat'
+ALT = 'alt'
+CHANNEL_ID = 'channel_id'
+DATE = 'date'
 
 def possibleException(func):
     def funcPossibleException(*args, **kwargs):
@@ -216,3 +226,29 @@ def getPointById(serviceName, pointId) :
     if point != None :
         return point
     raise PointDoesNotExist()
+
+def addPoints(serviceName, pointsArray):
+    db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    for point in pointsArray:
+        obj = {}
+        obj[JSON] = point[JSON]
+        obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
+        obj[ALT] = point[ALT]
+        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[DATE] = datetime.now()
+        db.save(obj)
+
+def updatePoint(serviceName, pointId, changes):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    try:
+        obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    except:
+        raise PointDoesNotExist()
+    if obj == None:
+        raise PointDoesNotExist()
+    else:
+        for key in changes.keys():
+            if key in obj.keys():
+                obj[key] = changes[key]
+        db[POINTS_COLLECTION].save(obj)
+    print obj
