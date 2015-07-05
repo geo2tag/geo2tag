@@ -1,6 +1,6 @@
 from base_exception import BaseException
 
-class ChannelDoesNotExist(BaseException):
+class PointDoesNotExist(BaseException):
     def getReturnObject(self):
-        ERROR = "Channel does not exist"
+        ERROR = "Point does not exist"
         return ERROR, 404
