@@ -1,1 +1,1 @@
-{ "_id" : { "$oid" : "55671ae113293c504d515a33" }, "name" : "test_service_GT-1330", "owner_id" : "", "config" : { "log_size" : 1048576 } }
+{ "_id" : { "$oid" : "55671ae113293c504d515a33" }, "name" : "testservice", "owner_id" : "", "config" : { "log_size" : 1048576 } }
