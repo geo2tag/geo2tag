@@ -10,7 +10,6 @@ TEST_SERVICE = 'testservice'
 COLLECTION = 'points'
 NAME = 'name'
 NAME_TEST_OBJECT = 'test_GT_1307'
-TEST_URL = '/instance/service/testservice/point/'
 BAD_TEST_URL = '/instance/service/testservice/point/111117a47ec8115da7551111'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '{}'
@@ -21,7 +20,9 @@ class TestPointResourceDelete(BasicIntegrationTest):
     def testPointResourceDelete(self):
         db = getDbObject(TEST_SERVICE)
         obj_id = db[COLLECTION].save({NAME: NAME_TEST_OBJECT})
-        response = requests.delete(self.getUrl(TEST_URL + str(obj_id)))
+        TEST_URL = '/instance/service/testservice/point/' + unicode(obj_id)
+        print TEST_URL
+        response = requests.delete(self.getUrl(TEST_URL))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, VALID_RESPONSE_TEXT)

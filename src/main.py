@@ -11,7 +11,6 @@ from flask import make_response
 from bson import json_util
 from channels_list_resource import ChannelsListResource
 from channel_resource import ChannelResource
-from point_resource import PointResource
 from point_list_resource import PointListResource
 from login_resource import LoginResource
 
