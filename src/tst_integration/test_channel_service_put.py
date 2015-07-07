@@ -8,8 +8,8 @@ from db_model import getChannelsList
 from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
-TEST_URL = '/instance/service/testservice/channel/558807a47ec8ff5da755ee48/'
-BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111/'
+TEST_URL = '/instance/service/testservice/channel/558807a47ec8ff5da755ee48'
+BAD_TEST_URL = '/instance/service/testservice/channel/111117a47ec8115da7551111'
 LIST_ARGS = {'name': 'test_channel_GT-1290'}
 BAD_LIST_ARGS = {'name': 'test_channel_GT-1290_2'}
 VALID_RESPONSE_CODE = 200

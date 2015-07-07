@@ -36,7 +36,7 @@ class TestGetLog(TestCase):
         print "Test for dates"
     	prepareDb()
         #Test when dateFrom and dateTo vars are equal to None
-        self.assertIsNone(getLog(DB, None, None, None, None))
+        self.assertEqual(getLog(DB, None, None, None, None), [])
     	#Test when dateTo is equal to None
     	log = getLog(DB, None, None, DATE_FROM, None)
     	self.assertTrue(log.count(True) > 0)
@@ -44,7 +44,7 @@ class TestGetLog(TestCase):
     	log = getLog(DB, None, None, None, DATE_TO)
     	self.assertTrue(log.count(True) > 0)
     	#Test when dateTo is lower than dateFrom
-    	self.assertIsNone(getLog(DB, None, None, WRONG_DATE_FROM, DATE_TO))
+    	self.assertEqual(getLog(DB, None, None, WRONG_DATE_FROM, DATE_TO), [])
     	#Test when dateTo and dateFrom are normal
     	log = getLog(DB, None, None, DATE_FROM, DATE_TO)
     	self.assertTrue(log.count(True) > 0)
