@@ -5,13 +5,6 @@ from point_does_not_exist import PointDoesNotExist
 from point_resource_parsers import PointResourceParsers
 
 class PointResource(Resource):
-    def delete(self, serviceName, pointId):
-        try:
-            deletePointById(serviceName, pointId) 
-        except PointDoesNotExist as e:
-            return e.getReturnObject()
-        return {}, 200
-
     def get(self, serviceName, pointId):
         try:
             newPoint = getPointById(serviceName, pointId)
@@ -25,6 +18,13 @@ class PointResource(Resource):
         args = PointResourceParsers.parsePutParameters()
         try:
             updatePoint(serviceName, pointId, args)
+        except PointDoesNotExist as e:
+            return e.getReturnObject()
+        return {}, 200
+        
+    def delete(self, serviceName, pointId):
+        try:
+            deletePointById(serviceName, pointId) 
         except PointDoesNotExist as e:
             return e.getReturnObject()
         return {}, 200

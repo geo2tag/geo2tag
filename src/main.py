@@ -36,6 +36,7 @@ api.add_resource(LogResource, getPathWithPrefix('/service/<string:serviceName>/l
                               getPathWithPrefix('/log'))
 api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel'))
 api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
+
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
 api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
