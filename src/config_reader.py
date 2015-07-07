@@ -42,7 +42,9 @@ def getDebugUsers():
     str = getConfigParser().get(SECTION,OPTION_DEBUG_USERS)
     list = str.split(',')
     return list
+
 def getGoogleClientID():
     return getConfigParser().get(GOOGLE_SECTION,GOOGLE_CLIENT_ID) 
+
 def getGoogleClientSecret():
     return str(getConfigParser().get(GOOGLE_SECTION,GOOGLE_CLIENT_SECRET))
