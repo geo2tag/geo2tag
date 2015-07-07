@@ -21,7 +21,6 @@ from test_delete_point_by_id import TestPointResourceDelete
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(BasicIntegrationTest.parametrize(TestPointResourceDelete, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestChannelGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServiceDeleteRequest, param=host))
@@ -38,6 +37,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(TestPointGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestDebugInfoResource, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(PointResourcePut, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestPointResourceDelete, param=host))
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 

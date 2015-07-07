@@ -28,5 +28,3 @@ class PointResource(Resource):
         except PointDoesNotExist as e:
             return e.getReturnObject()
         return {}, 200
-    def delete(self):
-        pass
