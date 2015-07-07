@@ -31,8 +31,8 @@ api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceNam
 api.add_resource(StatusResource, getPathWithPrefix('/status'))
 api.add_resource(ServiceListResource, getPathWithPrefix('/service'))
 api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info'))
-api.add_resource(LogResource, '/'+getInstancePrefix()+'/service/<string:serviceName>/log',
-                              '/'+getInstancePrefix()+'/log')
+api.add_resource(LogResource, getPathWithPrefix('/service/<string:serviceName>/log'),
+                              getPathWithPrefix('/log'))
 api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel'))
 api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
 
