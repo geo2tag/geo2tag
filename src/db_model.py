@@ -265,3 +265,10 @@ def updatePoint(serviceName, pointId, changes):
                 obj[key] = changes[key]
         db[POINTS_COLLECTION].save(obj)
     print obj
+
+def addServiceDb(dbName):
+    db = MongoClient(getHost(), getPort())[dbName]
+    pymongo.GEOSPHERE = '2dsphere'
+    pymongo.DESCENDING = -1
+    db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
+    db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
