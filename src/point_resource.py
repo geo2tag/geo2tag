@@ -22,7 +22,6 @@ class PointResource(Resource):
         
     def post(self):
         pass
-
     def put(self, serviceName, pointId):
         args = PointResourceParsers.parsePutParameters()
         try:
