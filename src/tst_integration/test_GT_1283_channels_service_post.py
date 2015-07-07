@@ -7,7 +7,7 @@ import json
 from bson.objectid import ObjectId
 sys.path.append('../')
 from config_reader import getHost, getPort
-TEST_URL = '/instance/service/testservice/channel/'
+TEST_URL = '/instance/service/testservice/channel'
 
 TEST_SERVICE = 'testservice'
 NAME = 'tes t_name'

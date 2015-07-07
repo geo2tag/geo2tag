@@ -7,29 +7,73 @@ from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
-from channel_does_not_exist import  ChannelDoesNotExist
+from channel_does_not_exist import ChannelDoesNotExist
+from point_does_not_exist import PointDoesNotExist
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
 
+# getPointById constants
+COLLECTION_POINTS_NAME = "points"
+POINTS_FIND_AND_KEY = "_id"
+
+#updateService constants
+COLLECTION_SERVICES_NAME = "services"
+COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
+
+
 # Collections
 TAGS = 'tags'
-db = MongoClient(getHost(), getPort())[getDbName()]
 COLLECTION = 'services'
 NAME = 'name'
 CONFIG = 'config'
 LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
 ID = '_id'
-# Collections
-TAGS = 'tags'
+LOG = 'log'
+#db initialisation
 db = MongoClient(getHost(), getPort())[getDbName()]
+#keys
+USER_ID = 'user_id'
+DATE = 'date'
+MESSAGE = 'message'
+SERVICE = 'service'
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
+POINTS_COLLECTION = 'points'
 JSON = 'json'
 ACL = 'acl'
 OWNER_GROUP = 'owner_group'
+POINTS_COLLECTION = 'points'
+LOCATION = 'location'
+TYPE = 'type'
+POINT = 'Point'
+COORDINATES = 'coordinates'
+LON = 'lon'
+LAT = 'lat'
+ALT = 'alt'
+CHANNEL_ID = 'channel_id'
+
+def addLogEntry(dbName, userId, message, service='instance'):
+    currentDate = datetime.now().isoformat()
+    client = MongoClient()
+    collection = client[dbName][LOG]
+    if dbName == getDbName():
+        collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message, SERVICE : service})
+    else:
+        collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message})
+
+def possibleException(func):
+    def funcPossibleException(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except BaseException as e:
+            if hasattr(e, 'getReturnObject'):
+                return e.getReturnObject()
+            else:
+                raise
+    return funcPossibleException
 
 def addTag(tag):
     db[TAGS].insert(tag)
@@ -45,31 +89,47 @@ def addService(name, logSize, ownerld):
         else:
             return obj_id
 
-def getServiceList(number, offset):
-    return []
+#def getServiceList(number, offset):
+#    return []
 
 #    def getNearTags(self, latitude, longitude):
 
 def getLog(dbName, number, offset, dateFrom, dateTo) :
+    db = getDbObject(dbName)
     collection = db[COLLECTION_LOG_NAME]
-    #if collection.count() == 0
-    #   collection.drop()
-    #   return None
+    if collection.count() == 0 :
+        return []
     number = 0 if (number == None or number < 0) else number
     offset = 0 if (offset == None or offset < 0) else offset
     if (dateFrom == None and dateTo == None) :
-        return None
+        return []
     elif dateFrom == None :
         return collection.find({FIND_AND_SORT_KEY : {"$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)    
     elif dateTo == None :
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
     else :
         if dateFrom > dateTo :
-            return None
-        return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
+            return []
+        return collection.find({FIND_AND_SORT_KEY : { "$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
-def  getServiceIdByName(name):
+def updateService(name, config) :
+    services_collection = db[COLLECTION_SERVICES_NAME]
+    for el in config :
+        tmp_el_to_set = COLLECTION_SERVICES_EL_CONFIG_NAME + '.' + str(el)
+        services_collection.update(
+            {"name" : name},
+            #changes will affect on service's sub-document called 'config'
+            #if there is no such sub-document called 'config', it will be created
+            {"$set" : {tmp_el_to_set : config[el]}},
+            #changes will affect on all services with name mentioned above
+            multi = True
+        )
+    #changed service(s) cursor in return
+    return services_collection.find({"name" : name})
+
+def getServiceIdByName(name):
     obj = db[COLLECTION].find_one({NAME : name})
+    print obj
     if obj != None:
         return obj
     raise ServiceNotFoundException()
@@ -83,7 +143,7 @@ def removeService(name):
     except ServiceNotFoundException as e:
         raise
 
-def  getServiceById(id):
+def getServiceById(id):
     obj = db[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
@@ -97,9 +157,6 @@ def getServiceList(number, offset):
     result = list(db[COLLECTION].find().sort(NAME, 1).skip(offset).limit(number))
     return result
 
-def updateService(name):
-    result = getServiceIdByName(name)
-    
 def getChannelsList(serviceName, substring, number, offset):
     db = MongoClient(getHost(), getPort())[serviceName]
     if substring != None and number is not None and offset is not None:
@@ -167,3 +224,51 @@ def getChannelByName(serviceName, channelName):
     if obj != None:
         return obj
     raise ChannelDoesNotExist()
+
+def deletePointById(serviceName, pointId):
+    db = getDbObject(serviceName)
+    obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    if obj != None:
+        db[POINTS_COLLECTION].remove({ID: ObjectId(pointId)})
+    else:
+        raise PointDoesNotExist()
+
+def getPointById(serviceName, pointId) :
+    pointsCollection = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    point = pointsCollection.find_one({POINTS_FIND_AND_KEY : ObjectId(str(pointId))})
+    if point != None :
+        return point
+    raise PointDoesNotExist()
+
+def addPoints(serviceName, pointsArray):
+    db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    for point in pointsArray:
+        obj = {}
+        obj[JSON] = point[JSON]
+        obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
+        obj[ALT] = point[ALT]
+        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[DATE] = datetime.now()
+        db.save(obj)
+
+def updatePoint(serviceName, pointId, changes):
+    db = MongoClient(getHost(), getPort())[serviceName]
+    try:
+        obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    except:
+        raise PointDoesNotExist()
+    if obj == None:
+        raise PointDoesNotExist()
+    else:
+        for key in changes.keys():
+            if key in obj.keys():
+                obj[key] = changes[key]
+        db[POINTS_COLLECTION].save(obj)
+    print obj
+
+def addServiceDb(dbName):
+    db = MongoClient(getHost(), getPort())[dbName]
+    pymongo.GEOSPHERE = '2dsphere'
+    pymongo.DESCENDING = -1
+    db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
+    db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
