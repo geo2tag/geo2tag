@@ -1,4 +1,5 @@
-from LoginGoogleResource import LoginGoogleResource
+from login_google_authorized_resource import LoginGoogleAuthorizedResource, AUTHORIZED_URL
+from login_google_resource import LoginGoogleResource
 from point_resource import PointResource
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
@@ -13,7 +14,6 @@ from channels_list_resource import ChannelsListResource
 from channel_resource import ChannelResource
 from point_list_resource import PointListResource
 from login_resource import LoginResource
-
 from url_utils import getPathWithPrefix
 
 def output_json(obj, code, headers=None):
@@ -23,9 +23,9 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
+app.secret_key='11121212121'
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
-
 
 
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
@@ -40,6 +40,7 @@ api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceNam
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
 api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
+api.add_resource(LoginGoogleAuthorizedResource, getPathWithPrefix('/login/google/authorized'))
 api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 
 

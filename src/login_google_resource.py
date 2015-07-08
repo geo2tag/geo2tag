@@ -1,10 +1,7 @@
 from flask_restful import reqparse
 from flask.ext.restful import Resource
-from config_reader import getGoogleClientID, getGoogleClientSecret 
+from config_reader import getGoogleClientID, getGoogleClientSecret, getGoogleRedirectUrl 
 from flask_oauth import OAuth
-from url_utils import getPathWithPrefix
-
-AUTHORIZED = '/login/google/authorized'
 
 oauth = OAuth()
 
@@ -20,9 +17,8 @@ google = oauth.remote_app('google',
                           consumer_key=getGoogleClientID(),
                           consumer_secret=getGoogleClientSecret())
 
-def getAuthorizedUrl():
-    return url_for(getPathWithPrefix(AUTHORIZED), _external=True) 
 
 class LoginGoogleResource(Resource):
     def get(self):
-        return google.authorize(callback=getAuthorizedUrl())
+        print "getGoogleRedirectUrl() {0}".format(getGoogleRedirectUrl())
+        return google.authorize(callback=getGoogleRedirectUrl())
