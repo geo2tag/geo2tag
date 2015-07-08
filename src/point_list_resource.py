@@ -7,6 +7,10 @@ class PointListResource(Resource):
     def get(self, serviceName):
         newPoint = PointListResourceParser.parseGetParameters()
         return newPoint
-    def post(self):
-        poinList = PointParser.parsePostParameters()
-        addPoints(poinList)
+    def post(self, serviceName):
+        try:
+            poinList = PointParser.parsePostParameters()
+        except ValueError as e:
+            return {}, 400
+        addPoints(serviceName, poinList)
+        return {}, 200

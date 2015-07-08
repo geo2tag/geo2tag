@@ -1,11 +1,13 @@
 from flask_restful import reqparse
-
+from flask import request
 ARGS_LOG_SIZE = "logSize"
 
 class PointParser():
     @staticmethod
     def parsePostParameters():
-        args = validatePointsList(request.get_json(force=True))
+    	jsonData = request.get_json(force=True)
+    	print jsonData
+        args = validatePointsList(jsonData)
         return args
 
 def validatePointsList(json):
@@ -17,9 +19,11 @@ def validatePointsList(json):
 			raise ValueError
 		else: 
 			if not ((type(obj['lat']) == type(1) or type(obj['lat']) == type(1.1)) and (type(obj['lon']) == type(1) or type(obj['lon']) == type(1.1))):
+				print 1
 				raise ValueError
 			if not (type(obj['alt']) == type(1) or type(obj['alt']) == type(1.1)):
+				print 2
 				raise ValueError
-			if not (type(obj['json']) == type({}) and type(obj['channel_id']) == type('')):
+			if not (type(obj['json']) == type({}) and type(obj['channel_id']) == type(u'')):
 				raise ValueError
 	return json
