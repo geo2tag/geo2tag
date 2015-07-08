@@ -1,1 +1,2 @@
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "geomongo.log", "name" : "_id_" }
 { "v" : 1, "key" : { "_id" : 1 }, "ns" : "geomongo.services", "name" : "_id_" }
