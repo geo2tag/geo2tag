@@ -7,8 +7,6 @@ import sys
 sys.path.append('../')
 from point_parsers import PointParser
 
-app = Flask(__name__)
-
 JSON = 'json'
 LAT = 'lat'
 LON = 'lon'
