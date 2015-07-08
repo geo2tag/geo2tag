@@ -1,6 +1,5 @@
 import unittest
 import sys
-from pymongo import MongoClient
 from config_reader import getDebugUsers
 sys.path.append('../')
 

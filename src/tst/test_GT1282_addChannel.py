@@ -3,10 +3,9 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 from bson.objectid import ObjectId
 sys.path.append('../')
-from db_model import addChannel
+from db_model import addChannel, getDbObject
 from config_reader import getHost, getPort
 
 TEST_SERVICE = 'testservice'
@@ -17,7 +16,7 @@ OWNER_GROUP = 'STUB'
 SERVICE_NAME = 'testservice'
 ACl = 777
 
-db = MongoClient(getHost(), getPort())[SERVICE_NAME]
+db = getDbObject(SERVICE_NAME)
 
 class TestAddChannel(unittest.TestCase):
     def testAddChannel(self):

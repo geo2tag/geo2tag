@@ -3,14 +3,13 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 sys.path.append('../')
-from db_model import deleteChannelById, getChannelsList
+from db_model import deleteChannelById, getChannelsList, getDbObject
 from config_reader import getHost, getPort
-from channel_does_not_exist import  ChannelDoesNotExist
+from channel_does_not_exist import ChannelDoesNotExist
 
 SERVICE_NAME = 'testservice'
-db = MongoClient(getHost(), getPort())[SERVICE_NAME]
+db = getDbObject(SERVICE_NAME)
 CHANNELS = 'channels'
 class TestDeleteChannelById(unittest.TestCase):
     def testDeleteChannelById(self):
