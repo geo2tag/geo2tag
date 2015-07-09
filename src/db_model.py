@@ -33,7 +33,7 @@ OWNERID = 'owner_id'
 ID = '_id'
 LOG = 'log'
 #db initialisation
-MONGO_CLIENT = MongoClient(getHost(), getPort())
+MONGO_CLIENT = None#MongoClient(getHost(), getPort())
 
 db = MongoClient(getHost(), getPort())[getDbName()]
 #keys
@@ -184,11 +184,13 @@ def getChannelById(serviceName, channelId):
     raise ChannelDoesNotExist()
 
 def getDbObject(dbName = getDbName()):
-    global MONGO_CLIENT
-    return MONGO_CLIENT[dbName]
+    return getClientObject()[dbName]
 
 def getClientObject():
     global MONGO_CLIENT
+    if MONGO_CLIENT == None:
+        MONGO_CLIENT = MongoClient(getHost(), getPort())
+    print "getClientObject: {0}".format(hex(id(MONGO_CLIENT)))
     return MONGO_CLIENT
 
 def deleteChannelById(serviceName, channelId):
@@ -271,7 +273,7 @@ def updatePoint(serviceName, pointId, changes):
     print obj
 
 def addServiceDb(dbName):
-    db = getDbObject(serviceName)
+    db = getDbObject(dbName)
     pymongo.GEOSPHERE = '2dsphere'
     pymongo.DESCENDING = -1
     db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
