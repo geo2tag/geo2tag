@@ -95,22 +95,22 @@ def addService(name, logSize, ownerld):
 #    def getNearTags(self, latitude, longitude):
 
 def getLog(dbName, number, offset, dateFrom, dateTo) :
+    db = getDbObject(dbName)
     collection = db[COLLECTION_LOG_NAME]
-    #if collection.count() == 0
-    #   collection.drop()
-    #   return None
+    if collection.count() == 0 :
+        return []
     number = 0 if (number == None or number < 0) else number
     offset = 0 if (offset == None or offset < 0) else offset
     if (dateFrom == None and dateTo == None) :
-        return None
+        return []
     elif dateFrom == None :
         return collection.find({FIND_AND_SORT_KEY : {"$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)    
     elif dateTo == None :
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
     else :
         if dateFrom > dateTo :
-            return None
-        return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
+            return []
+        return collection.find({FIND_AND_SORT_KEY : { "$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
 def updateService(name, config) :
     services_collection = db[COLLECTION_SERVICES_NAME]
@@ -265,3 +265,10 @@ def updatePoint(serviceName, pointId, changes):
                 obj[key] = changes[key]
         db[POINTS_COLLECTION].save(obj)
     print obj
+
+def addServiceDb(dbName):
+    db = MongoClient(getHost(), getPort())[dbName]
+    pymongo.GEOSPHERE = '2dsphere'
+    pymongo.DESCENDING = -1
+    db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
+    db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
