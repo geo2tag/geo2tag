@@ -3,7 +3,6 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 from bson.objectid import ObjectId
 sys.path.append('../')
 from db_model import getChannelsList

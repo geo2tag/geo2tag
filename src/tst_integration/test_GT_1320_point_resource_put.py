@@ -1,10 +1,9 @@
 import unittest
 import requests
-from pymongo import MongoClient
 from basic_integration_test import BasicIntegrationTest
 import sys
 sys.path.append('../')
-from db_model import getChannelsList
+from db_model import getChannelsList, getDbObject
 from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
@@ -14,10 +13,10 @@ VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
 NOT_VALID_RESPONSE_TEXT = "Point does not exist"
-db = MongoClient(getHost(), getPort())['testservice']
 
 class PointResourcePut(BasicIntegrationTest):
     def testPointResourcePut(self):
+        db = getDbObject(TEST_SERVICE)
         response = requests.put(self.getUrl(TEST_URL))
         responseText = response.text
         responseCode = response.status_code

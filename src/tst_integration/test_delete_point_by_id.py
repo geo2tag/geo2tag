@@ -1,6 +1,5 @@
 import unittest
 import requests
-from pymongo import MongoClient
 from basic_integration_test import BasicIntegrationTest
 import sys
 sys.path.append('../')

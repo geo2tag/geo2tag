@@ -5,7 +5,7 @@ sys.path.append('../')
 
 
 FILE_NAME = 'test_'
-INCLUDE_MODULE = 'import unittest\nimport sys\nfrom pymongo import MongoClient\nsys.path.append(' + "'../'" + ')\n\n'
+INCLUDE_MODULE = 'import unittest\nimport sys\nsys.path.append(' + "'../'" + ')\nfrom db_model import getDbObject\n\n'
 TAB = '    '
 
 def generateUnittest(args):
