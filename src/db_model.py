@@ -190,7 +190,7 @@ def getClientObject():
     global MONGO_CLIENT
     if MONGO_CLIENT == None:
         MONGO_CLIENT = MongoClient(getHost(), getPort())
-    print "getClientObject: {0}".format(hex(id(MONGO_CLIENT)))
+#    print "getClientObject: {0}".format(hex(id(MONGO_CLIENT)))
     return MONGO_CLIENT
 
 def deleteChannelById(serviceName, channelId):
