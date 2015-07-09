@@ -3,13 +3,12 @@
 
 from unittest import TestCase
 from datetime import datetime
-from pymongo import MongoClient
 
 import sys
 sys.path.append('../')
 
 from config_reader import getHost, getPort, getDbName
-from db_model import updateService
+from db_model import updateService, getDbObject
 
 SERVICES = "services"
 TEST = "test"
@@ -30,7 +29,7 @@ testConfigDictForSize = {LOG_SIZE : 100}
 testConfigDictForNoChanges = {}
 testConfigDictForPathAndSizeAndDate = {LOG_PATH : TEST, LOG_SIZE : 100, LOG_DATE : DATE_TODAY}
 
-db = MongoClient(getHost(), getPort())[getDbName()]
+db = getDbObject() 
 services_collection = db[SERVICES]
 
 def prepareDbRemoveSubDoc() :

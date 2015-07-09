@@ -33,6 +33,8 @@ OWNERID = 'owner_id'
 ID = '_id'
 LOG = 'log'
 #db initialisation
+MONGO_CLIENT = None#MongoClient(getHost(), getPort())
+
 db = MongoClient(getHost(), getPort())[getDbName()]
 #keys
 USER_ID = 'user_id'
@@ -57,8 +59,7 @@ CHANNEL_ID = 'channel_id'
 
 def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now().isoformat()
-    client = MongoClient()
-    collection = client[dbName][LOG]
+    collection = getDbObject(dbName) [LOG]
     if dbName == getDbName():
         collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message, SERVICE : service})
     else:
@@ -76,9 +77,10 @@ def possibleException(func):
     return funcPossibleException
 
 def addTag(tag):
-    db[TAGS].insert(tag)
+    getDbObject()[TAGS].insert(tag)
 
 def addService(name, logSize, ownerld):
+    db = getDbObject()
     try:
         obj = getServiceIdByName(name)
         raise ServiceAlreadyExistsException()
@@ -89,28 +91,24 @@ def addService(name, logSize, ownerld):
         else:
             return obj_id
 
-#def getServiceList(number, offset):
-#    return []
-
-#    def getNearTags(self, latitude, longitude):
 
 def getLog(dbName, number, offset, dateFrom, dateTo) :
+    db = getDbObject(dbName)
     collection = db[COLLECTION_LOG_NAME]
-    #if collection.count() == 0
-    #   collection.drop()
-    #   return None
+    if collection.count() == 0 :
+        return []
     number = 0 if (number == None or number < 0) else number
     offset = 0 if (offset == None or offset < 0) else offset
     if (dateFrom == None and dateTo == None) :
-        return None
+        return []
     elif dateFrom == None :
         return collection.find({FIND_AND_SORT_KEY : {"$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)    
     elif dateTo == None :
         return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
     else :
         if dateFrom > dateTo :
-            return None
-        return collection.find({FIND_AND_SORT_KEY : {"$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
+            return []
+        return collection.find({FIND_AND_SORT_KEY : { "$gte" : dateFrom , "$lte" : dateTo}}, None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
 
 def updateService(name, config) :
     services_collection = db[COLLECTION_SERVICES_NAME]
@@ -128,7 +126,7 @@ def updateService(name, config) :
     return services_collection.find({"name" : name})
 
 def getServiceIdByName(name):
-    obj = db[COLLECTION].find_one({NAME : name})
+    obj = getDbObject()[COLLECTION].find_one({NAME : name})
     print obj
     if obj != None:
         return obj
@@ -144,12 +142,13 @@ def removeService(name):
         raise
 
 def getServiceById(id):
-    obj = db[COLLECTION].find_one({ID : id})
+    obj = getDbObject()[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
     raise ServiceNotFoundException()
 
 def getServiceList(number, offset):
+    db = getDbObject()
     if number is None:
         number = db[COLLECTION].count()
     if offset is None:
@@ -158,7 +157,7 @@ def getServiceList(number, offset):
     return result
 
 def getChannelsList(serviceName, substring, number, offset):
-    db = MongoClient(getHost(), getPort())[serviceName]
+    db = getDbObject(serviceName)
     if substring != None and number is not None and offset is not None:
        return db[CHANNELS_COLLECTION].find({'name':{'$regex':substring}}).skip(offset).limit(number)
     elif substring != None and offset != None:
@@ -184,11 +183,18 @@ def getChannelById(serviceName, channelId):
         return obj
     raise ChannelDoesNotExist()
 
-def getDbObject(dbName):
-    return MongoClient(getHost(), getPort())[dbName]
+def getDbObject(dbName = getDbName()):
+    return getClientObject()[dbName]
+
+def getClientObject():
+    global MONGO_CLIENT
+    if MONGO_CLIENT == None:
+        MONGO_CLIENT = MongoClient(getHost(), getPort())
+#    print "getClientObject: {0}".format(hex(id(MONGO_CLIENT)))
+    return MONGO_CLIENT
 
 def deleteChannelById(serviceName, channelId):
-    db = MongoClient(getHost(), getPort())[serviceName]
+    db = getDbObject(serviceName)
     if isinstance(channelId, str) or isinstance(channelId, unicode):
         result = list(db[CHANNELS_COLLECTION].find({'_id': ObjectId(channelId)}))
     else:
@@ -199,11 +205,11 @@ def deleteChannelById(serviceName, channelId):
         raise ChannelDoesNotExist()
 
 def addChannel(name, json, owner_id, serviceName):
-    db = MongoClient(getHost(), getPort())[serviceName]
+    db = getDbObject(serviceName)
     return db[CHANNELS_COLLECTION].insert({NAME: name, JSON: json, OWNERID: owner_id, OWNER_GROUP: 'STUB', ACL: 777})
 
 def updateChannel(serviceName, channelId, name, json, acl):
-    db = MongoClient(getHost(), getPort())[serviceName]
+    db = getDbObject(serviceName)
     try:
         obj = db[CHANNELS_COLLECTION].find_one({ID: ObjectId(channelId)})
     except:
@@ -252,7 +258,7 @@ def addPoints(serviceName, pointsArray):
         db.save(obj)
 
 def updatePoint(serviceName, pointId, changes):
-    db = MongoClient(getHost(), getPort())[serviceName]
+    db = getDbObject(serviceName)
     try:
         obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
     except:
@@ -265,3 +271,10 @@ def updatePoint(serviceName, pointId, changes):
                 obj[key] = changes[key]
         db[POINTS_COLLECTION].save(obj)
     print obj
+
+def addServiceDb(dbName):
+    db = getDbObject(dbName)
+    pymongo.GEOSPHERE = '2dsphere'
+    pymongo.DESCENDING = -1
+    db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
+    db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])

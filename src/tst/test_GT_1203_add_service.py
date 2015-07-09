@@ -3,9 +3,8 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 sys.path.append('../')
-from db_model import addService
+from db_model import addService, getDbObject
 from service_already_exists_exception import ServiceAlreadyExistsException
 
 DB = "geomongo"
@@ -14,8 +13,7 @@ ID = "_id"
 
 class TestAddService(unittest.TestCase):
     def testAddService(self):
-        client = MongoClient()
-        collection = client[DB][COLLECTION]
+        collection = getDbObject(DB)[COLLECTION]
         with self.assertRaises(ServiceAlreadyExistsException) as e:
             obj = addService("testservice", 1, ' ')
         obj_id = addService("test_GT_1203", 1, ' ')
