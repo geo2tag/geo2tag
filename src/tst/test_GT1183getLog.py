@@ -3,12 +3,11 @@
 
 from unittest import TestCase
 from datetime import datetime, date, time
-from pymongo import MongoClient
 
 import sys
 sys.path.append('../')
 from config_reader import getHost, getPort, getDbName
-from db_model import getLog
+from db_model import getLog, getDbObject
 
 DB = "geomongo"
 WRONG_DB = "wrong_db"
@@ -21,7 +20,7 @@ WRONG_DATE_FROM = datetime(3000, 1, 1)
 
 def prepareDb() :
     #Connecting to db 'geomongo', collection 'log'
-    db = MongoClient(getHost(), getPort())[getDbName()]
+    db = getDbObject()
     collection = db[COLLECTION]
     for i in range(100) :
         #Inserting new post with date

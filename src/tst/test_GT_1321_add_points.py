@@ -3,7 +3,6 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 sys.path.append('../')
 from db_model import addPoints, getDbObject
 from bson.objectid import ObjectId
