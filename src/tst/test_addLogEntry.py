@@ -1,11 +1,10 @@
 import unittest
 import sys
-from pymongo import MongoClient
 sys.path.append('../')
-from db_model import addLogEntry
+from db_model import addLogEntry, getDbObject, getClientObject
 from config_reader import getDbName
 
-client = MongoClient()
+client = getClientObject()
 
 #DB
 TEST_DB = 'test_db'
@@ -24,8 +23,8 @@ TEST_USER_ID_FIELD = 'user_id'
 TEST_MSG_FIELD = 'message'
 TEST_SERVICE_FIELD = 'service'
 
-db = client[TEST_DB]
-db_master = client[TEST_DB_MASTER]
+db = getDbObject(TEST_DB)
+db_master = getDbObject(TEST_DB_MASTER)
 
 class TestAddLogEntry(unittest.TestCase):
     def testAddLogEntry(self):

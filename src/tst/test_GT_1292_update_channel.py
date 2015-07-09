@@ -3,9 +3,8 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 sys.path.append('../')
-from db_model import updateChannel
+from db_model import updateChannel, getDbObject
 from channel_does_not_exist import ChannelDoesNotExist
 
 DB = "testservice"
@@ -15,8 +14,7 @@ NAME = 'name'
 
 class TestUpdateChannel(unittest.TestCase):
     def testUpdateChannel(self):
-        client = MongoClient()
-        collection = client[DB][COLLECTION]
+        collection = getDbObject(DB)[COLLECTION]
         obj_id = collection.save({NAME: 'test_GT_1292'})
         with self.assertRaises(ChannelDoesNotExist) as e:
             updateChannel('testservice', '111', 'test', None, None)
