@@ -13,8 +13,8 @@ LON = 'lon'
 CHANNEL_ID = 'channel_id'
 ALT = 'alt'
 CHANNEL_IDS_VALUE = 'channel_id_value'
-TEST_URL = '/instance/service/testservice/point/'
-BAD_TEST_URL = '/instance/service/testservice/point/?'
+TEST_URL = '/instance/service/testservice/point'
+BAD_TEST_URL = '/instance/service/testservice/point'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
 class TestPointListPostRequest(BasicIntegrationTest):

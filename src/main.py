@@ -38,7 +38,7 @@ api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:servi
 api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
 
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
-api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point/'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
+api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
