@@ -12,6 +12,8 @@ from bson import json_util
 from channels_list_resource import ChannelsListResource
 from channel_resource import ChannelResource
 from point_list_resource import PointListResource
+from os import urandom
+from logout_resource import LogoutResource
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -20,6 +22,7 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
+app.secret_key = urandom(32)
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 
