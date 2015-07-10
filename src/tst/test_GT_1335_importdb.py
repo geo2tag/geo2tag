@@ -20,5 +20,4 @@ COUNT = 1
 class TestImportDb(TestCase):
     def testMyImport(self):
         count_mycoll = db[MYCOLLECTION].count()
-        count_mycoll = 1
         self.assertEqual(count_mycoll, COUNT)
