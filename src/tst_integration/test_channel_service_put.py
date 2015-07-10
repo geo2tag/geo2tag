@@ -1,10 +1,9 @@
 import unittest
 import requests
-from pymongo import MongoClient
 from basic_integration_test import BasicIntegrationTest
 import sys
 sys.path.append('../')
-from db_model import getChannelsList
+from db_model import getChannelsList, getDbObject
 from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
@@ -16,10 +15,10 @@ VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
 NOT_VALID_RESPONSE_TEXT = "Channel does not exist"
-db = MongoClient(getHost(), getPort())['testservice']
 
 class ChannelResourcePut(BasicIntegrationTest):
     def testChannelResourcePut(self):
+        db = getDbObject(TEST_SERVICE)
         result = list(db['channels'].find({"name" : u"test_channel_GT-1290"}))
         response = requests.put(self.getUrl(TEST_URL), data = LIST_ARGS)
         responseText = response.text

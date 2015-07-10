@@ -3,7 +3,6 @@
 
 import unittest
 import sys
-from pymongo import MongoClient
 sys.path.append('../')
 from db_model import getChannelByName, getDbObject
 from channel_does_not_exist import ChannelDoesNotExist
