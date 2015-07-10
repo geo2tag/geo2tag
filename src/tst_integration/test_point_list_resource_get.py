@@ -24,7 +24,7 @@ GEOMETRY_VALUE = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
 GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
 
 CORRECT_ARGS = NUMBER+'='+str(NUMBER_VALUE)+'&'+OFFSET+'='+str(OFFSET_VALUE)+'&'+DATE_FROM+'='+str(DATE_FROM_VALUE)+'&'+DATE_TO+'='+str(DATE_TO_VALUE)+'&'+CHANNEL_IDS+'='+CHANNEL_IDS_VALUE+'&'+GEOMETRY+'='+GEOMETRY_VALUE
-TEST_URL = '/instance/service/testservice/point/?' + CORRECT_ARGS
+TEST_URL = '/instance/service/testservice/point?' + CORRECT_ARGS
 BAD_TEST_URL = '/instance/service/testservice/point'
 VALID_RESPONSE_TEXT = u'{"altitude_from": null, "geometry": {"type": "Point", "coordinates": [-115.8, 37.2]}, "channel_ids": "channel_ids_value", "date_from": "\\"1970-06-15T18:00:00\\"", "offset": 0, "number": 0, "substring": null, "radius": 1000, "date_to": "\\"2015-06-15T17:00:00\\"", "altitude_to": null}'
 NOT_VALID_RESPONSE_TEXT = u'{"message": "[channel_ids]: Missing required parameter in the JSON body or the post body or the query string"}'
