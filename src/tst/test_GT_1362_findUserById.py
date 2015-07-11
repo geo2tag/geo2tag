@@ -11,10 +11,10 @@ from user_does_not_exist import UserDoesNotExist
 
 COLLECTION_NAME_USERS = "users"
 
-FIELD_USER_ID = "user_id"
+FIELD_USER_ID = "_id"
 
+USER_ID = "user_id"
 GOOD_USER_ID = "user_id_5"
-BAD_USER_ID = "user_id"
 
 collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
 
@@ -25,7 +25,7 @@ class TestFindUserById(TestCase):
         for i in range(10) :
             collectionUsers.insert(
                 {
-                    FIELD_USER_ID : FIELD_USER_ID + "_" + str(i),
+                    FIELD_USER_ID : USER_ID + "_" + str(i),
                     "first_name":"string",
                     "last_name":"string"
                 }
@@ -34,5 +34,5 @@ class TestFindUserById(TestCase):
         collectionUsers.drop()
     def testFindUserById(self):
         with self.assertRaises(UserDoesNotExist) as e:
-            findUserById(BAD_USER_ID)
+            findUserById(USER_ID)
         self.assertTrue(findUserById(GOOD_USER_ID)[FIELD_USER_ID] == GOOD_USER_ID)
