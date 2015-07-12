@@ -13,6 +13,7 @@ from channels_list_resource import ChannelsListResource
 from channel_resource import ChannelResource
 from point_list_resource import PointListResource
 from login_resource import LoginResource
+from debug_login_resource import DebugLoginResource
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -40,5 +41,7 @@ api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceNam
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
 api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
+api.add_resource(DebugLoginResource, getPathWithPrefix('/debug_login'))
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

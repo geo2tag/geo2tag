@@ -1,27 +1,22 @@
 from flask_restful import reqparse
 from flask.ext.restful import Resource
-from config_reader import getDebugUsers;
+from config_reader import getDebugUsers
+from user_routines import logUserIn
 
-
-    def parseId():
-        parser = reqparse.RequestParser()
-        parser.add_argument(_id, type=string, default=None)
-        args = parser.parse_args()
-        return args
+ID = "_id"
+def parseId():
+    parser = reqparse.RequestParser()
+    parser.add_argument(ID, type=str, default=None)
+    args = parser.parse_args()
+    return args
 
 
 class DebugLoginResource(Resource):
-    def get(self, _id):
+    def get(self):
         parser_dict = parseId()
-        usersList = getDebugUsers
-        _id = parser_dict[_id]
+        usersList = getDebugUsers()
+        _id = parser_dict[ID]
         if  _id in usersList:
         	logUserIn(_id)
         else:
-        	#return ('Credentials are incorrect', 401)
-
-
-
-
-        return getLog(serviceName, parser_dict[NUMBER], parser_dict[OFFSET], 
-            dateDeserialiser(parser_dict, DATE_FROM), dateDeserialiser(parser_dict, DATE_TO))
+        	return ('Credentials are incorrect', 401)
