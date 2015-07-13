@@ -22,6 +22,7 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 

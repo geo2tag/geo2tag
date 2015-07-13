@@ -18,6 +18,7 @@ from test_point_resource_get import TestPointGetRequest
 from test_debug_info_resource import TestDebugInfoResource
 from test_GT_1320_point_resource_put import PointResourcePut
 from test_delete_point_by_id import TestPointResourceDelete
+from test_debug_login_resource import TestDebugLoginResource
 
 def main(host):
     suite = unittest.TestSuite()
@@ -38,6 +39,8 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(TestDebugInfoResource, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(PointResourcePut, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointResourceDelete, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestDebugLoginResource, param=host))
+
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
