@@ -16,6 +16,7 @@ from test_channel_service_put import ChannelResourcePut
 from test_instance_log import TestInstanceLogRequest
 from test_point_resource_get import TestPointGetRequest
 from test_debug_info_resource import TestDebugInfoResource
+from test_logout_resource import TestLogoutResource
 from test_GT_1320_point_resource_put import PointResourcePut
 from test_delete_point_by_id import TestPointResourceDelete
 from test_point_list_resource_get import TestPointListGetRequest
@@ -38,6 +39,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(TestInstanceLogRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestDebugInfoResource, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestLogoutResource, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(PointResourcePut, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointResourceDelete, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListGetRequest, param=host))

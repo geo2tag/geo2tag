@@ -12,6 +12,8 @@ from bson import json_util
 from channels_list_resource import ChannelsListResource
 from channel_resource import ChannelResource
 from point_list_resource import PointListResource
+from os import urandom
+from logout_resource import LogoutResource
 from login_resource import LoginResource
 
 def output_json(obj, code, headers=None):
@@ -21,6 +23,7 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
+app.secret_key = urandom(32)
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 
@@ -38,7 +41,9 @@ api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:servi
 api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
 
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
-api.add_resource(LoginResource, getPathWithPrefix('/login'))
 api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
+
+api.add_resource(LogoutResource, getPathWithPrefix('/logout'))
+api.add_resource(LoginResource, getPathWithPrefix('/login'))
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
