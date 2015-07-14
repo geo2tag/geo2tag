@@ -1,8 +1,9 @@
 import unittest
 import sys
-from config_reader import getDebugUsers
-sys.path.append('../')
+from pymongo import MongoClient
 
+sys.path.append('../')
+from config_reader import getDebugUsers
 TEST_VALID_RESULT = ['debug_user1','debug_user2','debug_user3']
 
 class TestConfigReader(unittest.TestCase):
