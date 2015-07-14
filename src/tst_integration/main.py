@@ -24,7 +24,7 @@ from test_delete_point_by_id import TestPointResourceDelete
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(BasicIntegrationTest.parametrize(Testtest_tests_page, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(Test_tests_page, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestChannelGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServiceDeleteRequest, param=host))
