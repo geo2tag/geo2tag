@@ -278,3 +278,12 @@ def addServiceDb(dbName):
     pymongo.DESCENDING = -1
     db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
     db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
+
+def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=None, altitude_to=None, substring=None, date_from=None, date_to=None, offset=None, radius=1000):
+    db = getDbObject(serviceName)
+    points = []
+    for channel_id in channel_ids:
+        obj = db[POINTS_COLLECTION].find_one({CHANNEL_ID: channel_id, ALT: {'$lte': altitude_from}, ALT: {'$lte': altitude_to}})
+        if obj != None:
+            points.append(obj)
+    return points
