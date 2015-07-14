@@ -1,3 +1,4 @@
+from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
@@ -45,5 +46,6 @@ api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceN
 
 api.add_resource(LogoutResource, getPathWithPrefix('/logout'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
+api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

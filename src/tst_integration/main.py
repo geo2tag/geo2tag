@@ -1,6 +1,8 @@
 import unittest
 import sys
 from basic_integration_test import BasicIntegrationTest
+from test_test_tests_page import Testtest_tests_page
+from basic_integration_test import BasicIntegrationTest
 from test_status_request import TestStatusRequest
 from test_delete_service_name import TestServiceDeleteRequest
 from test_get_service_name import TestServiceGetRequest
@@ -22,6 +24,7 @@ from test_delete_point_by_id import TestPointResourceDelete
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(BasicIntegrationTest.parametrize(Testtest_tests_page, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestChannelGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestStatusRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestServiceDeleteRequest, param=host))
