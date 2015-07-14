@@ -15,8 +15,9 @@ def generateIntegrationTest(args):
     os.chdir('src/tst_integration')
     unittestFile = open(FILE_NAME + args.name + '.py', 'w')
     unittestFile.write(INCLUDE_MODULE)
-    unittestFile.write('class Test' + args.name + '(BasicIntegrationTest):\n')
-    unittestFile.write(TAB + 'def test' + args.name + '(self):\n')
+    className = checkFileName(args.name)
+    unittestFile.write('class Test' + className + '(BasicIntegrationTest):\n')
+    unittestFile.write(TAB + 'def test' + className + '(self):\n')
     unittestFile.write(TAB + TAB + 'response = requests.get(self.getUrl(TEST_URL))\n')
     unittestFile.write(TAB + TAB + 'responseText = response.text\n')
     unittestFile.write(TAB + TAB + 'responseCode = response.status_code\n')
@@ -29,10 +30,10 @@ def generateIntegrationTest(args):
     for string in mainStrings:
         if MAIN_STRING == string:
             mainFile.write(string)
-            mainFile.write('from ' + FILE_NAME + args.name + ' import Test' + args.name + '\n')
+            mainFile.write('from ' + FILE_NAME + args.name + ' import Test' + className + '\n')
         if MAIN_STRING2 == string:
             mainFile.write(string)
-            mainFile.write(TAB + 'suite.addTest(BasicIntegrationTest.parametrize(Test' + args.name + ', param=host))\n')
+            mainFile.write(TAB + 'suite.addTest(BasicIntegrationTest.parametrize(Test' + className + ', param=host))\n')
         else:
             mainFile.write(string)
     
@@ -43,6 +44,14 @@ def run():
     args = parser.parse_args()
     generateIntegrationTest(args)
     print ("Success. File created. File - src/tst_integration/" + FILE_NAME + args.name + '.py')
+
+def checkFileName(FileName):
+    i = FileName.find('_')
+    FileName = FileName.capitalize()
+    while i != -1:
+        FileName = FileName[0:i] + FileName[i+1:].capitalize()
+        i = FileName.find('_')
+    return FileName
 
 if __name__ == '__main__':
     run()

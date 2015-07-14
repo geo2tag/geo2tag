@@ -33,3 +33,4 @@ def addUser(_id, firstName, lastName, email):
     except UserDoesNotExist:
         collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
         return collectionUsers.insert({FIND_KEY_ID : _id, FIRST_NAME : firstName, LAST_NAME : lastName, EMAIL : email})
+
