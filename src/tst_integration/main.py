@@ -1,7 +1,7 @@
 import unittest
 import sys
 from basic_integration_test import BasicIntegrationTest
-from test_test_tests_page import Test_tests_page
+from test_tests_page import Test_tests_page
 from basic_integration_test import BasicIntegrationTest
 from test_status_request import TestStatusRequest
 from test_delete_service_name import TestServiceDeleteRequest
