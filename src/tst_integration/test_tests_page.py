@@ -2,7 +2,7 @@ import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/tests'
+TEST_URL = '/instance/tests'
 VALID_RESPONSE_CODE = 200
 
 class Test_tests_page(BasicIntegrationTest):
