@@ -9,6 +9,8 @@ INCLUDE_MODULE_PARSER = 'from flask_restful import reqparse\n\n'
 STATIC = '@staticmethod\n'
 PARSER_TEMPLETE = 'parser = reqparse.RequestParser()'
 ADD_ARGUMENT = 'parser.add_argument('
+RETURN = '        args = parser.parse_args()\n\
+        return args\n'
 TAB = '    '
 DEF = 'def '
 GET_PATH_FUNC = "getPathWithPrefix('"
@@ -37,6 +39,7 @@ def make_generator(args):
     for methods in args.m:
         newResource.write(TAB + DEF + methods.lower() + '(self):\n')
         newResource.write(TAB + TAB + 'pass\n')
+        newResource.write(TAB + TAB + '#This method is empty. You can add code here\n')
         PARSER_ARGS[methods] = {}
 
     main = open(MAIN_FILE, 'r')
@@ -84,6 +87,7 @@ def make_generator(args):
         newParser.write(TAB + TAB + PARSER_TEMPLETE + '\n')
         for arg in PARSER_ARGS[methods]:
             newParser.write(TAB + TAB + ADD_ARGUMENT + arg + ', type = ' + PARSER_ARGS[methods][arg] + ')\n')
+        newParser.write(RETURN)
         newParser.write(TAB + TAB + '\n')
         i+=1
 
