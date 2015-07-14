@@ -10,13 +10,13 @@ FIND_KEY_ID = "_id"
 COLLECTION_NAME_USERS = "users"
 
 def logUserIn(_id):
-    session[USER_ID] = _id
-    writeInstanceLog(_id, 'login')
+    session[USER_ID] = _id    
+    writeInstanceLog(session[USER_ID], 'login')
 
-def logUserOut(_id):
+def logUserOut():
     if USER_ID in session:
-        session.pop(USER_ID)
-    writeInstanceLog(_id, 'logout')
+        SESSION_VALUE = session.pop(USER_ID)
+        writeInstanceLog(SESSION_VALUE, 'logout')
 
 def findUserById(_id) :
     collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
