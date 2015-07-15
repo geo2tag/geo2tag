@@ -17,7 +17,7 @@ class PointListResourceParser():
     @staticmethod
     def parseGetParameters():
         parser = reqparse.RequestParser()
-        parser.add_argument(CHANNEL_IDS, type=str, required=True)
+        parser.add_argument(CHANNEL_IDS, type=str, required=True, action='append')
         parser.add_argument(NUMBER, type=int, required=True)
         parser.add_argument(GEOMETRY, type=geo_json_type.GeoJsonType)
         parser.add_argument(ALTITUDE_FROM, type=float)
