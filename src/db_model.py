@@ -2,13 +2,14 @@ from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
-from  service_not_found_exception import ServiceNotFoundException
+from service_not_found_exception import ServiceNotFoundException
 from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
 from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
+from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, GEOJSON_COORDINATES
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -279,11 +280,49 @@ def addServiceDb(dbName):
     db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
     db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
 
-def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=None, altitude_to=None, substring=None, date_from=None, date_to=None, offset=None, radius=1000):
+
+def applyFromToCriterion(field, value_from, value_to, criterion):
+    if value_from or value_to:
+        fieldCriterion = {}
+        if value_from:
+            fieldCriterion['$gte'] = value_from
+        if altitude_to:
+            fieldCriterion['$lte'] = value_to
+        criterion[field] = fieldCriterion
+
+def applyGeometryCriterion(geometry, radius, criterion):
+    if geometry:
+        locationCriterion = {}
+        if geometry[GEOJSON_TYPE] in GEOJSON_POLYGON_TYPES:
+            # Filter as polygon
+            locationCriterion = {'$geometry': geometry}}
+        else: 
+            # Filter as cirlce
+            longitude = geometry[GEOJSON_COORDINATES][0] 
+            latitude = geometry[GEOJSON_COORDINATES][1]
+            locationCriterion = {'$centerSphere': [[longitude, latitude], radius]}}
+        criterion[LOCATION] = {'$geoWithin': locationCriterion}      
+
+# Substring is skipped
+def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=None, \
+    altitude_to=None, substring=None, date_from=None, date_to=None, offset=None, \
+    radius=1000):
+
     db = getDbObject(serviceName)
-    points = []
-    for channel_id in channel_ids:
-        obj = db[POINTS_COLLECTION].find_one({CHANNEL_ID: channel_id, ALT: {'$lte': altitude_from}, ALT: {'$lte': altitude_to}})
-        if obj != None:
-            points.append(obj)
+
+    # Converting types
+    channel_ids = [ ObjectId(channel_id) for channel_id in channel_ids]
+    criterion = {CHANNEL_ID : {'$in' : channel_ids}}
+
+    applyFromToCriterion(DATE, date_from, date_to, criterion)
+    applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
+
+    applyGeometryCriterion(geometry, radius, criterion)
+
+    points = db[POINTS_COLLECTION].find(criterion).sort(DATE, pymongo.DESCENDING)
+
+    if offset:
+        points.skip(offset)    
+
+    points.limit(number)
     return points
