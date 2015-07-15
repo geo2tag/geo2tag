@@ -1,3 +1,4 @@
+from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
@@ -12,6 +13,8 @@ from bson import json_util
 from channels_list_resource import ChannelsListResource
 from channel_resource import ChannelResource
 from point_list_resource import PointListResource
+from os import urandom
+from logout_resource import LogoutResource
 from login_resource import LoginResource
 from debug_login_resource import DebugLoginResource
 
@@ -22,7 +25,7 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.secret_key = urandom(32)
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 
@@ -41,8 +44,11 @@ api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceNam
 
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
 api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
+
+api.add_resource(LogoutResource, getPathWithPrefix('/logout'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/debug_login'))
 
+api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)

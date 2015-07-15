@@ -9,6 +9,8 @@ INCLUDE_MODULE_PARSER = 'from flask_restful import reqparse\n\n'
 STATIC = '@staticmethod\n'
 PARSER_TEMPLETE = 'parser = reqparse.RequestParser()'
 ADD_ARGUMENT = 'parser.add_argument('
+RETURN = '        args = parser.parse_args()\n\
+        return args\n'
 TAB = '    '
 DEF = 'def '
 GET_PATH_FUNC = "getPathWithPrefix('"
@@ -18,7 +20,8 @@ MAIN_FILE = 'main.py'
 PARSER_ARGS = {}
 
 def make_generator(args):
-    IMPORT_RESOURCE = 'from ' + args.name + ' import ' + args.name + '\n'
+    className = checkFileName(args.name)
+    IMPORT_RESOURCE = 'from ' + args.name + ' import ' + className + '\n'
     if args.m is None or args.name is None:
         parser.print_help()
         return
@@ -31,11 +34,12 @@ def make_generator(args):
     os.chdir('src')
     newResource = open(fileName, 'w')
     newResource.write(INCLUDE_MODULE)
-    newResource.write('class ' + args.name + '(Resource):\n')
+    newResource.write('class ' + className + '(Resource):\n')
 
     for methods in args.m:
         newResource.write(TAB + DEF + methods.lower() + '(self):\n')
         newResource.write(TAB + TAB + 'pass\n')
+        newResource.write(TAB + TAB + '#This method is empty. You can add code here\n')
         PARSER_ARGS[methods] = {}
 
     main = open(MAIN_FILE, 'r')
@@ -50,7 +54,7 @@ def make_generator(args):
         if MAIN_STR != string:
             mainWrite.write(string)
         else:
-            mainWrite.write(addResource + args.name + ', ' + GET_PATH_FUNC + args.url + "\'))\n")
+            mainWrite.write(addResource + className + ', ' + GET_PATH_FUNC + args.url + "\'))\n")
             mainWrite.write(MAIN_STR)
     print 'Resourse added successfully'
 
@@ -75,7 +79,7 @@ def make_generator(args):
     fileNameParser = args.name + '_parser.py'
     newParser = open(fileNameParser, 'w')
     newParser.write(INCLUDE_MODULE_PARSER)
-    newParser.write('class ' + args.name  + 'Parser():\n')
+    newParser.write('class ' + className + 'Parser():\n')
     i = 0
     for methods in args.m:
         newParser.write(TAB + STATIC)
@@ -83,6 +87,7 @@ def make_generator(args):
         newParser.write(TAB + TAB + PARSER_TEMPLETE + '\n')
         for arg in PARSER_ARGS[methods]:
             newParser.write(TAB + TAB + ADD_ARGUMENT + arg + ', type = ' + PARSER_ARGS[methods][arg] + ')\n')
+        newParser.write(RETURN)
         newParser.write(TAB + TAB + '\n')
         i+=1
 
@@ -94,6 +99,14 @@ def run():
     parser.add_argument('--url', type=str, help='enter url of resourse', required=True)
     args = parser.parse_args()
     make_generator(args)
+
+def checkFileName(FileName):
+    i = FileName.find('_')
+    FileName = FileName.capitalize()
+    while i != -1:
+        FileName = FileName[0:i] + FileName[i+1:].capitalize()
+        i = FileName.find('_')
+    return FileName
 
 if __name__ == '__main__':
     run()

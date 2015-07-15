@@ -1,5 +1,6 @@
 import pymongo
 import unittest
+from flask import session
 from os import urandom
 from flask import Flask, request, session
 
@@ -41,10 +42,9 @@ class TestUserRoutines(unittest.TestCase):
             self.assertTrue(IS_USER_LOGIN.count() == 1)
             self.assertTrue(list(IS_USER_LOGIN)[0][MESSAGE] == MSG_LOGIN)
             #Emulating logout session
-            with app.test_request_context(LOGOUT_REQUEST_CONTEXT + REQUEST_PARAM) :
-                logUserOut(request.args[USER_ID_FIELD])
-                self.assertTrue(USER_ID_FIELD not in session)
-                #Testing writing in log
-                IS_USER_LOGOUT = COLLECTION_LOG.find({USER_ID_FIELD : TEST_ID, MESSAGE : MSG_LOGOUT}, None, 0, 1).sort("_id", pymongo.DESCENDING)
-                self.assertTrue(IS_USER_LOGOUT.count() == 1)
-                self.assertTrue(list(IS_USER_LOGOUT)[0][MESSAGE] == MSG_LOGOUT)
+            logUserOut()
+            self.assertTrue(USER_ID_FIELD not in session)
+            #Testing writing in log
+            IS_USER_LOGOUT = COLLECTION_LOG.find({USER_ID_FIELD : TEST_ID, MESSAGE : MSG_LOGOUT}, None, 0, 1).sort("_id", pymongo.DESCENDING)
+            self.assertTrue(IS_USER_LOGOUT.count() == 1)
+            self.assertTrue(list(IS_USER_LOGOUT)[0][MESSAGE] == MSG_LOGOUT)
