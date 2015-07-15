@@ -17,7 +17,7 @@ class DebugLoginResource(Resource):
         usersList = getDebugUsers()
         _id = parser_dict[ID]
         if  _id in usersList:
-        	logUserIn(_id)
-        	return('')
+            logUserIn(_id)
+            return('')
         else:
-        	return ('Credentials are incorrect', 401)
+            return ('Credentials are incorrect', 401)

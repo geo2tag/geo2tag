@@ -16,11 +16,11 @@ class test_GT_1347_parser(TestCase):
     def test_GT_1347_parser(self):
 
         with app.test_request_context(data=CORRECT_ARGS):
-        	arr = parseId()
-        	self.assertEqual(arr['_id'], USERNAME)
+            arr = parseId()
+            self.assertEqual(arr['_id'], USERNAME)
         with app.test_request_context(data=INCORRECT_ARGS):
-        	arr = parseId()
-        	self.assertEqual(arr['_id'], None)
+            arr = parseId()
+            self.assertEqual(arr['_id'], None)
 
 
             
