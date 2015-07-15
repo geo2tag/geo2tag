@@ -286,7 +286,7 @@ def applyFromToCriterion(field, value_from, value_to, criterion):
         fieldCriterion = {}
         if value_from:
             fieldCriterion['$gte'] = value_from
-        if altitude_to:
+        if value_to:
             fieldCriterion['$lte'] = value_to
         criterion[field] = fieldCriterion
 
@@ -295,12 +295,12 @@ def applyGeometryCriterion(geometry, radius, criterion):
         locationCriterion = {}
         if geometry[GEOJSON_TYPE] in GEOJSON_POLYGON_TYPES:
             # Filter as polygon
-            locationCriterion = {'$geometry': geometry}}
+            locationCriterion = {'$geometry': geometry}
         else: 
             # Filter as cirlce
             longitude = geometry[GEOJSON_COORDINATES][0] 
             latitude = geometry[GEOJSON_COORDINATES][1]
-            locationCriterion = {'$centerSphere': [[longitude, latitude], radius]}}
+            locationCriterion = {'$centerSphere': [[longitude, latitude], radius]}
         criterion[LOCATION] = {'$geoWithin': locationCriterion}      
 
 # Substring is skipped
@@ -318,6 +318,9 @@ def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=No
     applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
 
     applyGeometryCriterion(geometry, radius, criterion)
+
+    print "findPoints"
+    print criterion
 
     points = db[POINTS_COLLECTION].find(criterion).sort(DATE, pymongo.DESCENDING)
 
