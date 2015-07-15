@@ -23,7 +23,7 @@ from test_GT_1320_point_resource_put import PointResourcePut
 from test_delete_point_by_id import TestPointResourceDelete
 from test_point_list_resource_get import TestPointListGetRequest
 from test_point_list_resource_post import TestPointListPostRequest
-
+from test_GT_1386 import Test_GT_1386
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicIntegrationTest.parametrize(Test_tests_page, param=host))
@@ -47,6 +47,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(TestPointResourceDelete, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListGetRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListPostRequest, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1386, param=host))
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
