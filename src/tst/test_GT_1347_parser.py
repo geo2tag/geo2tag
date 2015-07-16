@@ -15,10 +15,10 @@ app = Flask(__name__)
 class test_GT_1347_parser(TestCase):
     def test_GT_1347_parser(self):
 
-        with app.test_request_context(data=CORRECT_ARGS):
+        with app.test_request_context('/login/debug', data=CORRECT_ARGS, method='GET'):
             arr = parseId()
             self.assertEqual(arr['_id'], USERNAME)
-        with app.test_request_context(data=INCORRECT_ARGS):
+        with app.test_request_context('/login/debug', data=INCORRECT_ARGS, method='GET'):
             arr = parseId()
             self.assertEqual(arr['_id'], None)
 
