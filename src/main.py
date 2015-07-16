@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
@@ -32,6 +33,13 @@ api.representations = DEFAULT_REPRESENTATIONS
 def getPathWithPrefix(str):
     path = '/'+getInstancePrefix()+str
     return path
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+    return response
 
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
 api.add_resource(StatusResource, getPathWithPrefix('/status'))

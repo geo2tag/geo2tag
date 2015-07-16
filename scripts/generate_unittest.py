@@ -23,7 +23,7 @@ def run():
     parser.add_argument('--name', help='enter unittest name', required=True)
     args = parser.parse_args()
     generateUnittest(args)
-    print ("Success. File created. File - /src/tst/" + FILE_NAME + args.name + '.py')
+    print ("Success. File created. File - src/tst/" + FILE_NAME + args.name + '.py')
 
 def checkFileName(FileName):
     i = FileName.find('_')

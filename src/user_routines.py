@@ -8,6 +8,9 @@ from user_does_not_exist import UserDoesNotExist
 USER_ID = 'user_id'
 FIND_KEY_ID = "_id"
 COLLECTION_NAME_USERS = "users"
+FIRST_NAME = 'first_name'
+LAST_NAME = 'last_name'
+EMAIL = 'email'
 
 def logUserIn(_id):
     session[USER_ID] = _id    
@@ -24,3 +27,10 @@ def findUserById(_id) :
     if userById != None :
         return userById
     raise UserDoesNotExist
+def addUser(_id, firstName, lastName, email):
+    try:
+        findUserById(_id)
+    except UserDoesNotExist:
+        collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
+        return collectionUsers.insert({FIND_KEY_ID : _id, FIRST_NAME : firstName, LAST_NAME : lastName, EMAIL : email})
+
