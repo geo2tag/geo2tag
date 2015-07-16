@@ -47,7 +47,7 @@ api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceN
 
 api.add_resource(LogoutResource, getPathWithPrefix('/logout'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
-api.add_resource(DebugLoginResource, getPathWithPrefix('/debug_login'))
+api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 if __name__ == '__main__':

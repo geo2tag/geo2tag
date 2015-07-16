@@ -4,8 +4,8 @@ from basic_integration_test import BasicIntegrationTest
 from flask import Flask, request
 from debug_login_resource import DebugLoginResource
 
-TEST_URL = '/instance/debug_login?_id=debug_user1'
-BAD_TEST_URL = '/instance/debug_login?_id=wrongUser'
+TEST_URL = '/instance/login/debug?_id=debug_user1'
+BAD_TEST_URL = '/instance/login/debug?_id=wrongUser'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 401
 NOT_VALID_RESPONSE_TEXT = 'Credentials are incorrect'
