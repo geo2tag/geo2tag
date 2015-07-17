@@ -1,5 +1,4 @@
-from login_google_authorized_resource import LoginGoogleAuthorizedResource, AUTHORIZED_URL
-from login_google_resource import LoginGoogleResource
+from login_google_resource import LoginGoogleResource, LoginGoogleAuthorizedResource, AUTHORIZED_URL
 from point_resource import PointResource
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
