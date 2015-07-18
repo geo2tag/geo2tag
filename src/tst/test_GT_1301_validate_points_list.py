@@ -6,7 +6,7 @@ import sys
 from pymongo import MongoClient
 sys.path.append('../')
 from bson.objectid import ObjectId
-from point_parsers import validatePointsList
+from point_list_resource_parser import validatePointsList
 
 TEST_ARGS = [{'lat':1.1, 'lon':1.1, 'alt':5,'json':{}, 'channel_id':'' }]
 INCORRECT_ARGS1 = [{'lat': 1}]
