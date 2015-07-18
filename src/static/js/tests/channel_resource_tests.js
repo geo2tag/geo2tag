@@ -11,7 +11,7 @@ var test_data_debug = {
     }
 };
 
-QUnit.test( test_data_debug.PUT.url + JSON.stringify(test_data_debug.PUT.data),
+QUnit.test( 'PUT' + test_data_debug.PUT.url + JSON.stringify(test_data_debug.PUT.data),
     function( assert ) { 
     var done = assert.async();
     var putCallbackFail = function() {
@@ -26,7 +26,7 @@ QUnit.test( test_data_debug.PUT.url + JSON.stringify(test_data_debug.PUT.data),
         .fail(putCallbackFail).done(putCallbackSuccess);
     });
 
-QUnit.test( test_data_debug.GET.url, function( assert ) {
+QUnit.test('GET' + test_data_debug.GET.url, function( assert ) {
     var done = assert.async();
     var getCallbackFail = function() {
         assert.ok(false, 'ChannelResource get failed' );
@@ -41,7 +41,7 @@ QUnit.test( test_data_debug.GET.url, function( assert ) {
  
 });
 
-QUnit.test( test_data_debug.DELETE.url, function( assert ) {
+QUnit.test('DELETE' + test_data_debug.DELETE.url, function( assert ) {
     var done = assert.async();
     
     var deleteCallbackFail = function() {
