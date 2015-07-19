@@ -4,7 +4,7 @@ var channel_list_resource_tests = {
         url : '/instance/service/testservice/channel'
     },
     'POST':{
-        data:{'name': 'tes t_name', 'json': "{'1': 2, '2': '4'}"},
+        data:{'name': 'test_name' + String(Math.random() * (1000 - 1) + 1), 'json': "{'1': 2, '2': '4'}"},
         url : '/instance/service/testservice/channel'
     }
 };
@@ -24,16 +24,15 @@ QUnit.test( 'GET ' + channel_list_resource_tests.GET.url + JSON.stringify(channe
 });
 QUnit.test( 'POST ' + channel_list_resource_tests.POST.url + JSON.stringify(channel_list_resource_tests.POST.data), function( assert ) {
     var done = assert.async(); 
-    var getCallbackFail = function() {
+    var postCallbackFail = function() {
         assert.ok(false, 'POST failed' );
         done();
     };
-    var getCallbackSuccess = function() {
+    var postCallbackSuccess = function() {
         assert.ok(true, 'POST success' );
         done();
     };
-    $.post(channel_list_resource_tests.POST.url, channel_list_resource_tests.POST.data )
-        .fail(getCallbackFail).done(getCallbackSuccess);
- 
+    $.post(channel_list_resource_tests.POST.url,channel_list_resource_tests.POST.data)
+    .done(postCallbackSuccess) 
+    .fail(postCallbackFail);
 });
-
