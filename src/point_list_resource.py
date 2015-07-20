@@ -4,7 +4,6 @@ from point_list_resource_parser import PointListResourceParser, \
     CHANNEL_IDS, NUMBER, GEOMETRY, ALTITUDE_FROM, ALTITUDE_TO,  \
     SUBSTRING, DATE_FROM, DATE_TO, OFFSET, RADIUS 
 
-from point_list_resource_parser import PointListResourceParser
 from db_model import addPoints, findPoints
 
 class PointListResource(Resource):
