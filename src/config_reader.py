@@ -1,7 +1,8 @@
-from configparser import ConfigParser
-from configparser import  SafeConfigParser
+from configparser import ConfigParser, SafeConfigParser
+
 import os
 CONFIG_PATH = os.path.dirname(os.path.realpath(__file__))+'/config.ini'
+
 SECTION = 'main'
 OPTION_HOST = 'host'
 OPTION_PORT = 'port'
@@ -20,9 +21,18 @@ GOOGLE_CLIENT_ID = 'GOOGLE_CLIENT_ID'
 GOOGLE_CLIENT_SECRET = 'GOOGLE_CLIENT_SECRET'
 GOOGLE_CLIENT_ID_KEY = '599917606278-5drdaru9i21nk7q0s3h5k95dchausmne.apps.googleusercontent.com'
 GOOGLE_CLIENT_SECRET_KEY = 'rzGBHKuBfXdCcmg4Vwn7mVCR'
+GOOGLE_REDIRECT_URL = 'GOOGLE_REDIRECT_URL'
+GOOGLE_REDIRECT_URL_KEY = 'http://geomongo/instance/login/google/authorized'
 
 def getConfigParser():
-    config = SafeConfigParser({OPTION_HOST:HOST,OPTION_PORT:PORT,OPTION_DBNAME:DBNAME,OPTION_INSTANCEPREFIX:INSTANCEPREFIX,OPTION_DEBUG_USERS:DEBUG_USERS, GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID_KEY, GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET_KEY})
+    config = SafeConfigParser({OPTION_HOST:HOST,
+        OPTION_PORT:PORT,
+        OPTION_DBNAME:DBNAME,
+        OPTION_INSTANCEPREFIX:INSTANCEPREFIX,
+        OPTION_DEBUG_USERS:DEBUG_USERS, 
+        GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID_KEY, 
+        GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET_KEY, 
+        GOOGLE_REDIRECT_URL: GOOGLE_REDIRECT_URL_KEY})
     config.read(CONFIG_PATH)
     return config
 	
@@ -42,7 +52,12 @@ def getDebugUsers():
     str = getConfigParser().get(SECTION,OPTION_DEBUG_USERS)
     list = str.split(',')
     return list
+
 def getGoogleClientID():
-    return getConfigParser().get(GOOGLE_SECTION,GOOGLE_CLIENT_ID) 
+    return getConfigParser().get(GOOGLE_SECTION, GOOGLE_CLIENT_ID) 
+
 def getGoogleClientSecret():
-    return str(getConfigParser().get(GOOGLE_SECTION,GOOGLE_CLIENT_SECRET))
+    return str(getConfigParser().get(GOOGLE_SECTION, GOOGLE_CLIENT_SECRET))
+
+def getGoogleRedirectUrl():
+    return getConfigParser().get(GOOGLE_SECTION, GOOGLE_REDIRECT_URL)

@@ -6,7 +6,6 @@ from flask.ext.restful import Resource, Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
-from config_reader import getInstancePrefix
 from log_resource import LogResource
 from debug_info_resource import DebugInfoResource
 from flask import make_response
@@ -17,6 +16,9 @@ from point_list_resource import PointListResource
 from os import urandom
 from logout_resource import LogoutResource
 from login_resource import LoginResource
+from url_utils import getPathWithPrefix
+from debug_login_resource import DebugLoginResource
+from login_google_resource import LoginGoogleResource, google_oauth
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -25,13 +27,12 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
+app.register_blueprint(google_oauth)
+
 app.secret_key = urandom(32)
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 
-def getPathWithPrefix(str):
-    path = '/'+getInstancePrefix()+str
-    return path
 
 @app.after_request
 def after_request(response):
@@ -54,6 +55,9 @@ api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceN
 
 api.add_resource(LogoutResource, getPathWithPrefix('/logout'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
+api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
+api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

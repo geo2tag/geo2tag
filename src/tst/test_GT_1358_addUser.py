@@ -29,4 +29,4 @@ class TestaddUserById(TestCase):
         self.assertEqual(TEST_ID, result_id)
         result_id = addUser(TEST_ID,TEST_FIRSTNAME,TEST_LASTNAME,TEST_EMAIL)
         print result_id
-        self.assertEqual(TEST_ID_NONE,result_id)
+        self.assertEqual(TEST_ID, result_id)
