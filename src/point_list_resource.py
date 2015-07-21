@@ -4,8 +4,8 @@ from point_list_resource_parser import PointListResourceParser, \
     CHANNEL_IDS, NUMBER, GEOMETRY, ALTITUDE_FROM, ALTITUDE_TO,  \
     SUBSTRING, DATE_FROM, DATE_TO, OFFSET, RADIUS 
 from possible_exception import possibleException
-from point_parsers import PointParser
 from db_model import addPoints, findPoints
+from point_parsers import PointParser
 
 class PointListResource(Resource):
     @possibleException
@@ -21,7 +21,7 @@ class PointListResource(Resource):
     @possibleException
     def post(self, serviceName):
         try:
-            poinList = PointParser.parsePostParameters()
+            poinList =  PointListResourceParser.parsePostParameters()
         except ValueError as e:
             return {}, 400
         addPoints(serviceName, poinList)

@@ -5,7 +5,6 @@ from flask import Flask, request
 from basic_integration_test import BasicIntegrationTest
 import sys
 sys.path.append('../')
-from point_parsers import PointParser
 
 JSON = 'json'
 LAT = 'lat'
