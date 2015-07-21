@@ -5,7 +5,6 @@ from point_list_resource_parser import PointListResourceParser, \
     SUBSTRING, DATE_FROM, DATE_TO, OFFSET, RADIUS 
 from possible_exception import possibleException
 from db_model import addPoints, findPoints
-from point_parsers import PointParser
 
 class PointListResource(Resource):
     @possibleException
