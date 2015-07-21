@@ -27,10 +27,12 @@ def findUserById(_id) :
     if userById != None :
         return userById
     raise UserDoesNotExist
+
 def addUser(_id, firstName, lastName, email):
     try:
         findUserById(_id)
     except UserDoesNotExist:
         collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
-        return collectionUsers.insert({FIND_KEY_ID : _id, FIRST_NAME : firstName, LAST_NAME : lastName, EMAIL : email})
-
+        collectionUsers.insert({FIND_KEY_ID : _id, FIRST_NAME : firstName, LAST_NAME : lastName, EMAIL : email})
+    finally:
+        return _id
