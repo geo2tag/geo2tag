@@ -16,7 +16,6 @@ var test_data_service_list_resource = {
     }
 };
 
-
 QUnit.test( 'GET' + test_data_service_list_resource.GET.url + JSON.stringify(test_data_service_list_resource.GET.data), function( assert ) {
     var done = assert.async();
 

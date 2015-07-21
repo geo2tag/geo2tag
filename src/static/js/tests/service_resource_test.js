@@ -7,7 +7,6 @@ var test_data_service_resource = {
     'DELETE' : {url : '/instance/service/testservice'}
 };
 
-
 QUnit.test('GET' + test_data_service_resource.GET.url, function( assert ) {
     var done = assert.async();
 
