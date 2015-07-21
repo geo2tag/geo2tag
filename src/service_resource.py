@@ -1,7 +1,6 @@
 from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
-from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 from db_model import getServiceIdByName, updateService, removeService, possibleException
 from  service_not_found_exception import ServiceNotFoundException
