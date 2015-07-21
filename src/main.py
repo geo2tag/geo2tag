@@ -1,4 +1,4 @@
-from login_google_resource import LoginGoogleResource, LoginGoogleAuthorizedResource, AUTHORIZED_URL
+from login_google_resource import LoginGoogleResource, google_oauth
 from point_resource import PointResource
 from flask import Flask, current_app
 from flask.ext.restful import Resource, Api
@@ -23,6 +23,8 @@ def output_json(obj, code, headers=None):
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
 app.secret_key='11121212121'
+app.register_blueprint(google_oauth)
+
 api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 
@@ -39,9 +41,9 @@ api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceNam
 api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
 api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
 api.add_resource(LoginResource, getPathWithPrefix('/login'))
-api.add_resource(LoginGoogleAuthorizedResource, getPathWithPrefix('/login/google/authorized'))
+#api.add_resource(LoginGoogleAuthorizedResource, getPathWithPrefix('/login/google/authorized'))
 api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

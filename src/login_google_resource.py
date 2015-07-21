@@ -3,6 +3,10 @@ from flask.ext.restful import Resource
 from config_reader import getGoogleClientID, getGoogleClientSecret, getGoogleRedirectUrl 
 from flask_oauth import OAuth
 from flask import Blueprint
+from url_utils import getPathWithPrefix
+from urllib2 import Request, urlopen, URLError
+from json import loads
+from user_routines import addUser, logUserIn
 
 oauth = OAuth()
 
@@ -28,11 +32,17 @@ class LoginGoogleResource(Resource):
 
 AUTHORIZED_URL = '/login/google/authorized' 
 
-#class LoginGoogleAuthorizedResource(Resource):
-#    @google.authorized_handler
-#    def get(self):
 
-@google_oauth.route(REDIRECT_URI)
+def processGoogleData(data):
+    EMAIL = 'email'
+    _ID = 'id'
+    FIRST_NAME = 'given_name'
+    LAST_NAME  = 'family_name'
+    userDict = loads (data)
+    return addUser(userDict[_ID], userDict[FIRST_NAME], userDict[LAST_NAME], userDict[EMAIL])
+    
+
+@google_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
 @google.authorized_handler
 def authorized(resp):
     access_token = resp['access_token']
@@ -46,6 +56,8 @@ def authorized(resp):
         # Unauthorized - bad token
            return 'Error1'
         return res.read()
+    _id = processGoogleData(res.read())
+    logUserIn(_id) 
 
-    return res.read()
+    return session['user_id']
 
