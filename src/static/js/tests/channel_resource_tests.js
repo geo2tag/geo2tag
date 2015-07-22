@@ -1,4 +1,4 @@
-var test_data_debug = {
+var test_data_channel_resource = {
     'GET':{
         url : '/instance/service/testservice/channel/558807a47ec8ff5da755ee49'
     },
@@ -11,7 +11,7 @@ var test_data_debug = {
     }
 };
 
-QUnit.test( 'PUT' + test_data_debug.PUT.url + JSON.stringify(test_data_debug.PUT.data),
+QUnit.test( 'PUT' + test_data_channel_resource.PUT.url + JSON.stringify(test_data_channel_resource.PUT.data),
     function( assert ) { 
     var done = assert.async();
     var putCallbackFail = function() {
@@ -22,11 +22,11 @@ QUnit.test( 'PUT' + test_data_debug.PUT.url + JSON.stringify(test_data_debug.PUT
         assert.ok(true, 'ChannelResource put success' );
         done();
     };
-    $.put(test_data_debug.PUT.url, test_data_debug.PUT.data )
+    $.put(test_data_channel_resource.PUT.url, test_data_channel_resource.PUT.data )
         .fail(putCallbackFail).done(putCallbackSuccess);
     });
 
-QUnit.test('GET' + test_data_debug.GET.url, function( assert ) {
+QUnit.test('GET' + test_data_channel_resource.GET.url, function( assert ) {
     var done = assert.async();
     var getCallbackFail = function() {
         assert.ok(false, 'ChannelResource get failed' );
@@ -36,12 +36,12 @@ QUnit.test('GET' + test_data_debug.GET.url, function( assert ) {
         assert.ok(true, 'ChannelResource get success' );
         done();
     };
-    $.get(test_data_debug.GET.url, test_data_debug.GET.data )
+    $.get(test_data_channel_resource.GET.url, test_data_channel_resource.GET.data )
         .fail(getCallbackFail).done(getCallbackSuccess);
  
 });
 
-QUnit.test('DELETE' + test_data_debug.DELETE.url, function( assert ) {
+QUnit.test('DELETE' + test_data_channel_resource.DELETE.url, function( assert ) {
     var done = assert.async();
     
     var deleteCallbackFail = function() {
@@ -52,6 +52,6 @@ QUnit.test('DELETE' + test_data_debug.DELETE.url, function( assert ) {
         assert.ok(true, 'ChannelResource delete success' );
         done();
     };
-    $.delete(test_data_debug.DELETE.url)
+    $.delete(test_data_channel_resource.DELETE.url)
         .fail(deleteCallbackFail).done(deleteCallbackSuccess);
 });
