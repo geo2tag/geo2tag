@@ -1,4 +1,4 @@
-var test_data = {
+var test_data_service_resource = {
     'GET' : {url : '/instance/service/testservice'},
     'PUT' : {
         url : '/instance/service/testservice',
@@ -7,8 +7,7 @@ var test_data = {
     'DELETE' : {url : '/instance/service/testservice'}
 };
 
-
-QUnit.test('GET' + test_data.GET.url, function( assert ) {
+QUnit.test('GET' + test_data_service_resource.GET.url, function( assert ) {
     var done = assert.async();
 
     var callbackFail = function() {
@@ -21,12 +20,12 @@ QUnit.test('GET' + test_data.GET.url, function( assert ) {
         done();
     };
 
-    $.get(test_data.GET.url)
+    $.get(test_data_service_resource.GET.url)
         .fail( callbackFail )
         .done( callbackOk )
 });
 
-QUnit.test('PUT' + test_data.PUT.url + JSON.stringify(test_data.PUT.data), function( assert ) {
+QUnit.test('PUT' + test_data_service_resource.PUT.url + JSON.stringify(test_data_service_resource.PUT.data), function( assert ) {
     var done = assert.async();
 
     var callbackFail = function() {
@@ -39,7 +38,7 @@ QUnit.test('PUT' + test_data.PUT.url + JSON.stringify(test_data.PUT.data), funct
         done();
     };
 
-    $.put = function( url, data) {
+    $.put = function( url, data ) {
         return $.ajax({
             type: 'PUT',
             url: url,
@@ -47,32 +46,32 @@ QUnit.test('PUT' + test_data.PUT.url + JSON.stringify(test_data.PUT.data), funct
         });
     };
 
-    $.put(test_data.PUT.url, test_data.PUT.data)
+    $.put( test_data_service_resource.PUT.url, test_data_service_resource.PUT.data )
         .fail( callbackFail )
         .done( callbackOk )
 });
 
-QUnit.test('DELETE' + test_data.DELETE.url, function( assert ) {
+QUnit.test('DELETE' + test_data_service_resource.DELETE.url, function( assert ) {
     var done = assert.async();
 
     var callbackFail = function() {
-        assert.ok(false, 'get failed' );
+        assert.ok( false, 'get failed' );
         done();
     };
 
     var callbackOk = function() {
-        assert.ok(true, 'went ok' );
+        assert.ok( true, 'went ok' );
         done();
     };
 
-    $.delete = function( url) {
+    $.delete = function( url ) {
         return $.ajax({
-            type: 'DELETE',
-            url: url
+            type : 'DELETE',
+            url : url
         });
     };
 
-    $.delete(test_data.DELETE.url)
+    $.delete( test_data_service_resource.DELETE.url )
         .fail( callbackFail )
         .done( callbackOk )
 });
