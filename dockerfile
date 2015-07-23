@@ -41,10 +41,18 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 EXPOSE 80
 EXPOSE 27017
 
-ADD src/ /app/src
-ADD scripts/ /app/scripts
-ADD config /app/config
+RUN mkdir /app
+
+#ADD src/ /app/src
+#ADD scripts/docker_run.sh /app
+#ADD config/ /app/config
+#RUN mkdir /app/scripts
+
+ADD scripts/req* /app/scripts/
+ADD scripts/setup_pip* /app/scripts/
+
 WORKDIR /app
-RUN ["scripts/local_deploy.sh"]
+#RUN ["pip install -r requirements.txt"]
+RUN ["scripts/setup_pip_dependencies.sh"]
 
 CMD ["scripts/docker_run.sh"]
