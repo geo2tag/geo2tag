@@ -59,7 +59,7 @@ ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 
 def addLogEntry(dbName, userId, message, service='instance'):
-    currentDate = datetime.now().isoformat()
+    currentDate = datetime.now()
     collection = getDbObject(dbName) [LOG]
     if dbName == getDbName():
         collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message, SERVICE : service})
