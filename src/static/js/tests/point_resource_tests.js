@@ -1,4 +1,4 @@
-var test_data_debug = {
+var test_data_point_resource = {
     'GET':{
         url : '/instance/service/testservice/point/55282f3b5c0dd1178d37f7a6'
     },
@@ -12,7 +12,21 @@ var test_data_debug = {
 };
 
 
-QUnit.test( 'GET ' + test_data_debug.GET.url, function( assert ) {
+QUnit.test( 'PUT ' + test_data_point_resource.PUT.url + JSON.stringify(test_data_point_resource.PUT.data), function( assert ) {
+    var done = assert.async();
+    var putCallbackFail = function() {
+        assert.ok(false, 'Point resource put failed' );
+        done();
+    };
+    var putCallbackSuccess = function() {
+        assert.ok(true, 'Point resource put success' );
+        done();
+    };
+    $.put(test_data_point_resource.PUT.url, test_data_point_resource.PUT.data )
+        .fail(putCallbackFail).done(putCallbackSuccess);
+});
+
+QUnit.test( 'GET ' + test_data_point_resource.GET.url, function( assert ) {
     var done = assert.async();
     var getCallbackFail = function() {
         assert.ok(false, 'Point resource get failed' );
@@ -22,25 +36,12 @@ QUnit.test( 'GET ' + test_data_debug.GET.url, function( assert ) {
         assert.ok(true, 'Point resource get success' );
         done();
     };
-    $.get(test_data_debug.GET.url, test_data_debug.GET.data )
+    $.get(test_data_point_resource.GET.url, test_data_point_resource.GET.data )
         .fail(getCallbackFail).done(getCallbackSuccess);
 });
 
-QUnit.test( 'PUT ' + test_data_debug.PUT.url + JSON.stringify(test_data_debug.PUT.data), function( assert ) { 
-    var done = assert.async();
-    var putCallbackFail = function() {
-        assert.ok(false, 'Point resource put failed' );
-        done();
-    }; 
-    var putCallbackSuccess = function() {
-        assert.ok(true, 'Point resource put success' );
-        done();
-    };
-    $.put(test_data_debug.PUT.url, test_data_debug.PUT.data )
-        .fail(putCallbackFail).done(putCallbackSuccess);
-});
 
-QUnit.test( 'DELETE ' + test_data_debug.DELETE.url, function( assert ) {
+QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) {
     var done = assert.async();
     
     var deleteCallbackFail = function() {
@@ -51,6 +52,6 @@ QUnit.test( 'DELETE ' + test_data_debug.DELETE.url, function( assert ) {
         assert.ok(true, 'Point resource delete success' );
         done();
     };
-    $.delete(test_data_debug.DELETE.url)
+    $.delete(test_data_point_resource.DELETE.url)
         .fail(deleteCallbackFail).done(deleteCallbackSuccess);
 });
