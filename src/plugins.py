@@ -13,6 +13,3 @@ def getPluginList():
         if os.path.isdir(joinpath('plugins',i)):
             pluginsList.append(i)
     return pluginsList
-
-if __name__ == '__main__':
-    getPluginList()
