@@ -3,11 +3,10 @@
 
 import sys
 import os
-
+from os.path import join as pathjoin
 
 import imp
 from main import api
-from os.path import join as pathjoin
 from url_routines import getPluginUrl
 
 def enablePlugin(api, pluginName):
