@@ -19,6 +19,9 @@ from login_resource import LoginResource
 from url_utils import getPathWithPrefix
 from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
+from db_model import closeConnection
+import atexit
+
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -59,5 +62,8 @@ api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 
+atexit.register(closeConnection)
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)
+

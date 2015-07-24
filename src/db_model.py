@@ -329,3 +329,8 @@ def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=No
 
     points.limit(number)
     return points
+
+def closeConnection():
+    global MONGO_CLIENT
+    if MONGO_CLIENT != None:
+        MONGO_CLIENT.close()
