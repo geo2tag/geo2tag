@@ -4,10 +4,18 @@
 import sys
 import os
 from os.path import join as pathjoin
-
+sys.path.append('plugins')
 import imp
 from main import api
 from url_routines import getPluginUrl
+
+def getPluginList():
+    pluginsDirList = os.listdir('plugins')
+    pluginsList = []
+    for i in pluginsDirList:
+        if os.path.isdir(pathjoin('plugins',i)):
+            pluginsList.append(i)
+    return pluginsList
 
 def enablePlugin(api, pluginName):
     dirName = 'plugins/' + pluginName
