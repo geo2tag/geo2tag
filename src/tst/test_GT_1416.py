@@ -11,8 +11,6 @@ class TestGt1416(unittest.TestCase):
         app = Flask(__name__)
         api = Api(app)
         os.chdir('../')
-        print '11111111', os.getcwd()
         enablePlugin(api, 'testPlugin1')
-        print '2222222', os.getcwd()
         os.chdir('../../tst')
         self.assertTrue('resource_gt_1416' in api.endpoints)
