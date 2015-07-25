@@ -3,7 +3,7 @@
 
 import sys
 import os
-from os.path import join as pathjoin
+from os.path import join as joinpath
 sys.path.append('plugins')
 import imp
 from main import api
@@ -13,14 +13,14 @@ def getPluginList():
     pluginsDirList = os.listdir('plugins')
     pluginsList = []
     for i in pluginsDirList:
-        if os.path.isdir(pathjoin('plugins',i)):
+        if os.path.isdir(joinpath('plugins',i)):
             pluginsList.append(i)
     return pluginsList
 
 def enablePlugin(api, pluginName):
     dirName = 'plugins/' + pluginName
     os.chdir(dirName)
-    fileName = pathjoin(os.getcwd(), 'main.py')
+    fileName = joinpath(os.getcwd(), 'main.py')
     module = imp.load_source('getPluginResources',  fileName)
     pluginResourcesList = module.getPluginResources()
     for pluginResource in pluginResourcesList:

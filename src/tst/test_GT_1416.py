@@ -12,4 +12,5 @@ class TestGt1416(unittest.TestCase):
         api = Api(app)
         os.chdir('../')
         enablePlugin(api, 'testPlugin1')
+        os.chdir('tst')
         self.assertTrue('resource_gt_1416' in api.endpoints)
