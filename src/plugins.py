@@ -13,3 +13,6 @@ def getPluginList():
         if os.path.isdir(joinpath('plugins',i)):
             pluginsList.append(i)
     return pluginsList
+
+def getPluginState(pluginName):
+	return True
