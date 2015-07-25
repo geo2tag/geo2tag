@@ -22,7 +22,6 @@ def enablePlugin(api, pluginName):
     fileName = joinpath(os.getcwd(), 'main.py')
     module = imp.load_source('getPluginResources',  fileName)
     pluginResourcesList = module.getPluginResources()
-    from main import api
     for pluginResource in pluginResourcesList:
         api.add_resource(pluginResource.values()[0], getPluginUrl(pluginResource.keys()[0], pluginName))
 

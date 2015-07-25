@@ -64,7 +64,7 @@ api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 
 atexit.register(closeConnection)
 
-def initApp():
+def initApp(api):
     import os
     homeDir = os.getcwd()
     pluginList = getPluginList()
