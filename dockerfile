@@ -56,3 +56,4 @@ WORKDIR /app
 RUN ["scripts/setup_pip_dependencies.sh"]
 
 CMD ["scripts/docker_run.sh"]
+

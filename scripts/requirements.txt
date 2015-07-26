@@ -4,3 +4,6 @@ Flask==0.10.1
 configparser==3.3.0r1
 flask-restful==0.3.2
 requests==2.2.1
+geojson==1.2.1
+Flask-OAuth==0.12
+python-dateutil==1.5

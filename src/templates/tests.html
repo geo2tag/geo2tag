@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block styles%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/qunit-1.18.0.css') }}">
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/login_resource_test.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/logout_resource_test.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/put_delete_methods.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/channel_resource_tests.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/point_resource_tests.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/service_resource_test.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/service_list_resource_test.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/log_resource_test.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/channel_list_resource_tests.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/point_list_resource_tests.js') }}"></script>
+
+{% endblock %}
+{% block content %}
+<header>
+    <h2>Integration tests</h2>
+</header>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+{% endblock %}

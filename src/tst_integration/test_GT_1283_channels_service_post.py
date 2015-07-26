@@ -2,12 +2,12 @@ import sys
 import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-from pymongo import MongoClient
 import json 
 from bson.objectid import ObjectId
 sys.path.append('../')
+from db_model import getDbObject
 from config_reader import getHost, getPort
-TEST_URL = '/instance/service/testservice/channel/'
+TEST_URL = '/instance/service/testservice/channel'
 
 TEST_SERVICE = 'testservice'
 NAME = 'tes t_name'
@@ -16,10 +16,10 @@ JSON2 = [1,2,3]
 DATA = {'name': NAME, 'json': JSON}
 DATA2 = {'name': 123}
 
-db = MongoClient(getHost(), getPort())[TEST_SERVICE]
 
 class TestChannelServicePostRequest(BasicIntegrationTest):
     def testChannelServicePostRequest(self):
+        db = getDbObject(TEST_SERVICE)
         response = requests.post(self.getUrl(TEST_URL), data = DATA)
         responseText = response.text
         responseCode = response.status_code
