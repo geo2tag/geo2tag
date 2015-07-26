@@ -1,7 +1,7 @@
 Exception:
 1)Cahnnel already exist.Status:404(Wrong).Fix:400.File:channel_already_exist.py
 2)Channel does not exist.Status:404(OK).File:channel_does_not_exist.py
-3)Unauthorized.Status:401(OK).File:login_google_resource.py
+3)Credentials are incorrect.Status:401(OK).File:debug_login_resource.py
 4)Point does not exist.Status:404(OK).File:point_does_not_exist.py
 5)Service already exist.Status:400(OK).File:service_already_exists_exception.py
 6)Service not found.Status:400(Wrong).Fix:404.File:service_not_found_exception.py
@@ -9,7 +9,7 @@ Exception:
 List:
 Cahnnel already exist - 400
 Channel does not exist - 404
-Unauthorized - 401
+Credentials are incorrect - 401
 Point does not exist - 404
 Service already exist - 400
 Service not found - 404
