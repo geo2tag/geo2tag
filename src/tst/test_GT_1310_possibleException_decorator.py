@@ -17,5 +17,5 @@ class TestPossibleExceptionDecorator(TestCase):
     def testPossibleExceptionDecorator(self):
         self.assertEqual(funcForTesting(TEST_VALID_EXCEPTION), TEST_VALID_TUPLE)
         with self.assertRaises(TEST_NOT_VALID_EXCEPTION) as context:
-        funcForTesting(TEST_NOT_VALID_EXCEPTION)
+        	funcForTesting(TEST_NOT_VALID_EXCEPTION)
         self.assertTrue(TEST_NOT_VALID_EXCEPTION_STRING in context.exception)        
