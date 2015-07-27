@@ -32,4 +32,4 @@ def enablePlugin(api, pluginName):
         for pluginResource in pluginResourcesList:
             api.add_resource(pluginResource.values()[0], getPluginUrl(pluginResource.keys()[0], pluginName))
     except:
-        raise Exception(EXCEPT_ERROR_TEXT)
+        print EXCEPT_ERROR_TEXT
