@@ -26,12 +26,12 @@ def enablePlugin(api, pluginName):
     dirName = CONCAT_PLUGIN_DIR + pluginName
     os.chdir(dirName)
     fileName = joinpath(os.getcwd(), MAIN_FILE)
+    module = imp.load_source(GET_PLUGIN_RESOURCES,  fileName)
     try:
-        module = imp.load_source(GET_PLUGIN_RESOURCES,  fileName)
         pluginResourcesList = module.getPluginResources()
         for pluginResource in pluginResourcesList:
             api.add_resource(pluginResource.values()[0], getPluginUrl(pluginResource.keys()[0], pluginName))
-    except Exception as e:
+    except:
         print EXCEPT_ERROR_TEXT
 
 def getPluginState(pluginName):
