@@ -1,10 +1,10 @@
 from unittest import TestCase
-from  service_not_found_exception import ServiceNotFoundException
+from  service_not_exist_exception import ServiceNotExistException
 from db_model import possibleException
 import sys
 sys.path.append('../')
 
-TEST_VALID_EXCEPTION = ServiceNotFoundException
+TEST_VALID_EXCEPTION = ServiceNotExistException
 TEST_NOT_VALID_EXCEPTION = ArithmeticError
 TEST_VALID_TUPLE = ('Service not found', 404)
 TEST_NOT_VALID_EXCEPTION_STRING = 'This is not valid exception'
