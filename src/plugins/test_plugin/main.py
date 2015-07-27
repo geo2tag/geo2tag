@@ -8,7 +8,7 @@ def getPluginResources():
     return result
 
 def getPluginInfo():
-    info = 'This plugin was creating for present plugins feature. The function getPluginResources for return TestResource1 and TestResource2 '
+    info = 'This plugin was creating for present plugins feature. The function getPluginResources is for return TestResource1 and TestResource2 '
     return info
 
 def getPluginUrl():
