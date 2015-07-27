@@ -1,13 +1,13 @@
 var test_data_point_resource = {
     'GET':{
-        url : '/' + getUrlWithPrefix() + '/service/testservice/point/55282f3b5c0dd1178d37f7a6'
+        url : getUrlWithPrefix('/service/testservice/point/55282f3b5c0dd1178d37f7a6')
     },
     'PUT':{
         data: {'alt': 5},
-        url : '/' + getUrlWithPrefix() + '/service/testservice/point/55282f3b5c0dd1178d37f7a6'
+        url : getUrlWithPrefix('/service/testservice/point/55282f3b5c0dd1178d37f7a6')
     },
    'DELETE':{
-        url : '/' + getUrlWithPrefix() + '/service/testservice/point/55282f3b5c0dd1178d37f7a6'
+        url : getUrlWithPrefix('/service/testservice/point/55282f3b5c0dd1178d37f7a6')
     }
 };
 

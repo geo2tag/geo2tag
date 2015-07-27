@@ -1,13 +1,13 @@
 var test_data_service_list_resource = {
     'GET' : {
-        url : '/' + getUrlWithPrefix() + '/service',
+        url : getUrlWithPrefix('/service'),
         data : {
             'number' : 0,
             'offset' : 0
         }
     },
     'POST' : {
-        url : '/' + getUrlWithPrefix() + '/service',
+        url : getUrlWithPrefix('/service'),
         data : {
             'name' : 'serviceListResourceTestName',
             'ownerId' : 'serviceListResourceTestOwnerId',

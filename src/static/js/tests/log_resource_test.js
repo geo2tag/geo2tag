@@ -1,10 +1,10 @@
 var log_resource_test_data = { 'GET':{
-        url : '/' + getUrlWithPrefix() + '/log'
+        url : getUrlWithPrefix('/log')
     } 
 };
   
 var log_resource_serviceName_test_data = { 'GET':{
-        url : '/' + getUrlWithPrefix() + '/service/test_service_name/log'
+        url : getUrlWithPrefix('/service/test_service_name/log')
     } 
 };
 

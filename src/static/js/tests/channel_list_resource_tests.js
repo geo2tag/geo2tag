@@ -1,11 +1,11 @@
 var channel_list_resource_tests = {
     'GET':{
         data:{'number':2,'offset':1},
-        url : '/' + getUrlWithPrefix() + '/service/testservice/channel'
+        url : getUrlWithPrefix('/service/testservice/channel')
     },
     'POST':{
         data:{'name': 'test_name' + String(Math.random() * (1000 - 1) + 1), 'json': "{'1': 2, '2': '4'}"},
-        url : '/' + getUrlWithPrefix() + '/service/testservice/channel'
+        url : getUrlWithPrefix('/service/testservice/channel')
     }
 };
 QUnit.test( 'GET ' + channel_list_resource_tests.GET.url + JSON.stringify(channel_list_resource_tests.GET.data), function( assert ) {
