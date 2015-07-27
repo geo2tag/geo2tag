@@ -33,7 +33,7 @@ echo "{
 
 chown -R www-data:www-data /var/www/geomongo
 
-a2ensite geomongo.conf
+a2ensite ${1:-'geomongo.conf'}
 
 service apache2 restart
 
