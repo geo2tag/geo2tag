@@ -6,8 +6,12 @@ var test_data_point_resource = {
         data: {'alt': 5},
         url : '/instance/service/testservice/point/55282f3b5c0dd1178d37f7a6'
     },
+   'POST':{
+        data:{'lat':1.1, 'lon':1.1,  'alt':1.1,  'json':{'a':'b'}, 'channel_id':'channel_id_value'},
+        url : '/instance/service/testservice/point'
+    },
    'DELETE':{
-        url : '/instance/service/testservice/point/55282f3b5c0dd1178d37f7a6'
+        url : '/instance/service/testservice/point/55282f3b5c0dd1178d37f711'
     }
 };
 
@@ -41,6 +45,27 @@ QUnit.test( 'GET ' + test_data_point_resource.GET.url, function( assert ) {
 });
 
 
+QUnit.test( 'POST ' + test_data_point_resource.POST.url + JSON.stringify(test_data_point_resource.POST.data), function( assert ) {
+    var done = assert.async();
+
+    var postCallbackFail = function() {
+        
+        assert.ok(false, 'Point resource create failed' );
+        done();
+    };
+    var postCallbackSuccess = function() {
+        assert.ok(true, 'Point resource create success' );
+        done();
+    };
+    $.post(test_data_point_resource.POST.url, test_data_point_resource.POST.data)
+        .fail(postCallbackFail).done(postCallbackSuccess).error(function(xhr, error, statusText){
+
+        assert.ok(false, statusText);
+
+    })
+});
+
+
 QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) {
     var done = assert.async();
     
@@ -55,3 +80,4 @@ QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) 
     $.delete(test_data_point_resource.DELETE.url)
         .fail(deleteCallbackFail).done(deleteCallbackSuccess);
 });
+
