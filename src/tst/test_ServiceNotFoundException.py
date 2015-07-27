@@ -5,9 +5,9 @@ import unittest
 import sys
 sys.path.append('../')
 
-from  service_not_found_exception import ServiceNotFoundException
+from  service_not_exist_exception import ServiceNotExistException
 
-class TestServiceNotFoundException(unittest.TestCase):
-    def testServiceNotFoundException(self):
-        with self.assertRaises(ServiceNotFoundException) as e:
-            raise ServiceNotFoundException()
+class TestServiceNotExistException(unittest.TestCase):
+    def testServiceNotExistException(self):
+        with self.assertRaises(ServiceNotExistException) as e:
+            raise ServiceNotExistException()

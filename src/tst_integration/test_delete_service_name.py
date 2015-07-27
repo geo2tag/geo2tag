@@ -9,7 +9,7 @@ TEST_URL = '/instance/service/testservice_1'
 TEST_NOT_VALID_URL = '/instance/service/nameservicenotvalid'
 
 VALID_RESPONSE_CODE = 200
-VALID_RESPONSE_CODE_NOT_VALID_URL = 400
+VALID_RESPONSE_CODE_NOT_VALID_URL = 404
 
 
 class TestServiceDeleteRequest(BasicIntegrationTest):

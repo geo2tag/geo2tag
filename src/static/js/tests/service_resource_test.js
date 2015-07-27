@@ -1,10 +1,10 @@
 var test_data_service_resource = {
-    'GET' : {url : '/instance/service/testservice'},
+    'GET' : {url : getUrlWithPrefix('/service/testservice')},
     'PUT' : {
-        url : '/instance/service/testservice',
+        url : getUrlWithPrefix('/service/testservice'),
         data : {logSize : 10}
     },
-    'DELETE' : {url : '/instance/service/testservice'}
+    'DELETE' : {url : getUrlWithPrefix('/service/testservice')}
 };
 
 QUnit.test('GET' + test_data_service_resource.GET.url, function( assert ) {
