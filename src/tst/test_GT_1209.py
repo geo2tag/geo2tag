@@ -5,7 +5,7 @@ import unittest
 import sys
 from bson.objectid import ObjectId
 sys.path.append('../')
-from  service_not_found_exception import ServiceNotFoundException
+from  service_not_exist_exception import ServiceNotExistException
 from db_model import getServiceById, getDbObject
 TEST_ID = ObjectId("55671ae113293c504d515a33")
 TESTID = "55671ae113293c504d515a33"
@@ -22,8 +22,8 @@ class test_getServiceById(unittest.TestCase):
             testObject1 =  getServiceById(TEST_ID)
             print('Test object with getServiceById: ' + str(obj))
             print 'testObject1' + str(testObject1)
-        except ServiceNotFoundException as e:
+        except ServiceNotExistException as e:
             self.assertTrue(False)
-        with self.assertRaises(ServiceNotFoundException):
+        with self.assertRaises(ServiceNotExistException):
             testObject2 =  getServiceById(BAD_TEST_ID)
             print 'testObject2' + str(testObject2)
