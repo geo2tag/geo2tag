@@ -1,5 +1,3 @@
-import sys
-sys.path.append("../../")
 from test_resource_1 import TestResource1
 from test_resource_2 import TestResource2
 
@@ -11,6 +9,3 @@ def getPluginInfo():
     info = 'This plugin was creating for present plugins feature. The function getPluginResources is for return TestResource1 and TestResource2 '
     return info
 
-def getPluginUrl():
-    url = '/instance/plugin/TestPlugin/'
-    return url
