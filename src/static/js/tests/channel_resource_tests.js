@@ -1,13 +1,13 @@
 var test_data_channel_resource = {
     'GET':{
-        url : '/instance/service/testservice/channel/558807a47ec8ff5da755ee49'
+        url : '/' + getUrlWithPrefix() + '/service/testservice/channel/558807a47ec8ff5da755ee49'
     },
     'PUT':{
         data: {'name': 'test_channel_GT-1389_2'},
-        url : '/instance/service/testservice/channel/558807a47ec8ff5da755ee49'
+        url : '/' + getUrlWithPrefix() + '/service/testservice/channel/558807a47ec8ff5da755ee49'
     },
     'DELETE':{
-        url : '/instance/service/testservice/channel/558807a47ec8ff5da755ee49'
+        url : '/' + getUrlWithPrefix() + '/service/testservice/channel/558807a47ec8ff5da755ee49'
     }
 };
 

@@ -1,5 +1,5 @@
 var test_data_logout = { 'GET':{
-        url : '/instance/logout'
+        url : '/' + getUrlWithPrefix() + '/logout'
     } ,
 };
   
