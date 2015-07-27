@@ -12,9 +12,7 @@ class TestGt1417(unittest.TestCase):
         api = Api(app)
         os.chdir('..')
         initApp(api)
-        os.chdir('../..')
         resources = api.endpoints
-        print resources, '0000000000000000000000'
         self.assertTrue('resource_gt_1416' in resources)
         self.assertTrue('resource_gt_1417' in resources)
         os.chdir('tst')

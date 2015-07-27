@@ -72,6 +72,7 @@ def initApp(api):
         if getPluginState(pluginName) is True:
             os.chdir(homeDir)
             enablePlugin(api, pluginName)
+    os.chdir(homeDir)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)

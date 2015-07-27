@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
-from service_not_found_exception import ServiceNotFoundException
+from service_not_exist_exception import ServiceNotExistException
 from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
@@ -85,7 +85,7 @@ def addService(name, logSize, ownerld):
     try:
         obj = getServiceIdByName(name)
         raise ServiceAlreadyExistsException()
-    except ServiceNotFoundException as e:
+    except ServiceNotExistException as e:
         obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
         if obj_id == None:
             return None
@@ -131,7 +131,7 @@ def getServiceIdByName(name):
     print obj
     if obj != None:
         return obj
-    raise ServiceNotFoundException()
+    raise ServiceNotExistException()
 
 def removeService(name):
     try:
@@ -139,14 +139,14 @@ def removeService(name):
         db[COLLECTION].remove({ID : obj['_id']})
         connection = Connection()
         connection.drop_database(name)
-    except ServiceNotFoundException as e:
+    except ServiceNotExistException as e:
         raise
 
 def getServiceById(id):
     obj = getDbObject()[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
-    raise ServiceNotFoundException()
+    raise ServiceNotExistException()
 
 def getServiceList(number, offset):
     db = getDbObject()

@@ -1,2 +1,3 @@
+from config_reader import getInstancePrefix
 def getPluginUrl(url, pluginName):
-	return url
+    return '/' + getInstancePrefix() + '/plugins/' + pluginName + '/' + url
