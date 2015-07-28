@@ -21,7 +21,7 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
-
+from plugins import getPluginList, getPluginState, enablePlugin
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -63,6 +63,16 @@ api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 
 atexit.register(closeConnection)
+
+def initApp(api):
+    import os
+    homeDir = os.getcwd()
+    pluginList = getPluginList()
+    for pluginName in pluginList:
+        if getPluginState(pluginName) is True:
+            os.chdir(homeDir)
+            enablePlugin(api, pluginName)
+    os.chdir(homeDir)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)

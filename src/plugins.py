@@ -34,3 +34,6 @@ def enablePlugin(api, pluginName):
     except Exception as e:
         print EXCEPT_ERROR_TEXT + pluginName
         print e
+
+def getPluginState(pluginName):
+    return True
