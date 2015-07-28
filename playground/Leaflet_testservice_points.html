@@ -38,7 +38,8 @@
 
 
 		/*
-		Создадим карту. В понятии Leaflea-a , карта - это объект, умеющий работать с 
+		Создадим карту. 
+		В понятии Leaflea-a , карта - это объект, умеющий работать с 
 		координатами, пользоваельским вводом и еще некоторыми вещами. Но не рисующий 
 		саму "карту" с домами и дорогами. Поэтому, если просто добавить эту строчку,
 		то в диве появится "серый прямоугольник без карты"
@@ -48,7 +49,8 @@
 		*/
 		var map = L.map('map').setView([5.0, 6.0], 4);
 		/*
-		Добавим слой карты. Так как Leaflet не определяет, само визуальное представление карты, 
+		Добавим слой карты.
+		 Так как Leaflet не определяет, само визуальное представление карты, 
 		то для этого можно использовать разные картографичесие сервисы, например GoogleMaps, или 
 		OSM. Здесь мы будем использовать Mapbox.
 		Первый параметр - это  URL template. 
@@ -68,16 +70,75 @@
 		Объект типа 'Feature' объеденяет в себе сведения о форме географического
 		объекта и описание его параметров.
 
-		В leaflet GeoJSON объекты рисуются на отдельном слое. Создадим его. 
+		В leaflet GeoJSON объекты рисуются на отдельном слое. Создадим его и 
+		добавим на карту. 
 		*/
 		var myLayer = L.geoJson().addTo(map);
 
-		
-		for (var i in data){
+		/*
+		Нарисуем наши данные на карте  в виде точек, причем так, чтобы у тех записей, 
+		у тоторых объявлен атрибут "name", в pop-up  окне выводилось его значение, а у тех,
+		у которых в атрибуте "json" есть ссылка на картинку, в pop-up окне выводилась она.
+		Также некоторые точки будем отображать в виде обычных маркеров, а некоторым поменяем 
+		отображение
 
-			myLayer.addData(data[i].location)
-        }
+		Для начала приведем наши данные к объекту типа Feature, собрав нужные и отбросив лишние 
+		атрибуты.
+		*/
+		var featureArr = [];
+		for(var i in data){
 
+			var geojsonFeature = {
+   			 "type": "Feature",
+    		 "geometry": data[i].location,
+    		 "customizeView":Math.floor(Math.random()*2) // случайно 0 или 1
+			}
+			if(data[i].hasOwnProperty('name'))
+				geojsonFeature.popupContent = data[i].name;
+			else if(data[i].hasOwnProperty('json') && data[i].json.hasOwnProperty('image_url'))
+				geojsonFeature.popupContent = '<a href="'+ data[i].json.image_url+'" > image_link </a>';
+
+			featureArr.push(geojsonFeature);
+		}
+
+
+		/*
+		У объекта L есть метод geoJson. Этот метод возвращает объект geojson, 
+		который уже можно прикрепить на карту. 
+		Параметры метода geoJson: L.geoJson( <Object> geojson?, <GeoJSON options> options? )
+		Первый - сам объект, который будем крепить на карту
+		Второй - объект, описывающий опции прикрепления. 
+		Подробнее здесь: http://leafletjs.com/reference.html#geojson
+
+		Одна из опций - функция onEachFeature , вызывающаяся для каждого объекта перед 
+		добавлением его на GeoJSON layer. Используем ее для привязки pop-up окна
+		к каждой из точек.
+		*/
+		function onEachFeature(feature, layer) {
+   		if(feature.hasOwnProperty('popupContent'))
+            layer.bindPopup(feature.popupContent);
+		}
+var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+
+
+
+		/*
+		Теперь добавим все точки на GeoJSON layer, указав 
+		в опциях нашу функцию 	
+		*/
+	
+         L.geoJson(featureArr, {
+             onEachFeature: onEachFeature
+    
+         }).addTo(map);
 
 
 
