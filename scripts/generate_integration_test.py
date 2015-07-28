@@ -47,9 +47,9 @@ def run():
 
 def checkFileName(FileName):
     i = FileName.find('_')
-    FileName = FileName.capitalize()
+    FileName = FileName[0].capitalize() + FileName[1:]
     while i != -1:
-        FileName = FileName[0:i] + FileName[i+1:].capitalize()
+        FileName = FileName[0:i] + FileName[i+1].capitalize() + FileName[i+2:]
         i = FileName.find('_')
     return FileName
 
