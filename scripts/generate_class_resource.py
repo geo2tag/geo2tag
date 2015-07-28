@@ -4,7 +4,7 @@ sys.path.append('../')
 METHODS = ['post', 'get', 'put', 'delete']
 TYPES = ['bool', 'int', 'float', 'tuple', 'list', 'str', 'dict', 'set']
 INCLUDE_MODULE = 'from flask_restful import reqparse\n\
-from flask.ext.restful import Resource\n\n'
+from flask.ext.restful import Resource\nfrom possible_exception import possibleException\n\n'
 INCLUDE_MODULE_PARSER = 'from flask_restful import reqparse\n\n'
 STATIC = '@staticmethod\n'
 PARSER_TEMPLETE = 'parser = reqparse.RequestParser()'
@@ -14,7 +14,7 @@ RETURN = '        args = parser.parse_args()\n\
 TAB = '    '
 DEF = 'def '
 GET_PATH_FUNC = "getPathWithPrefix('"
-MAIN_STR = "if __name__ == '__main__':\n"
+MAIN_STR = "def initApp():\n"
 addResource = 'api.add_resource('
 MAIN_FILE = 'main.py'
 PARSER_ARGS = {}
@@ -37,6 +37,7 @@ def make_generator(args):
     newResource.write('class ' + className + '(Resource):\n')
 
     for methods in args.m:
+        newResource.write(TAB + '@possibleException\n')
         newResource.write(TAB + DEF + methods.lower() + '(self):\n')
         newResource.write(TAB + TAB + 'pass\n')
         newResource.write(TAB + TAB + '#This method is empty. You can add code here\n')

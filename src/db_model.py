@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo
 from datetime import datetime
-from service_not_found_exception import ServiceNotFoundException
+from service_not_exist_exception import ServiceNotExistException
 from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
@@ -59,7 +59,7 @@ ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 
 def addLogEntry(dbName, userId, message, service='instance'):
-    currentDate = datetime.now().isoformat()
+    currentDate = datetime.now()
     collection = getDbObject(dbName) [LOG]
     if dbName == getDbName():
         collection.save({USER_ID : userId, DATE : currentDate, MESSAGE : message, SERVICE : service})
@@ -85,7 +85,7 @@ def addService(name, logSize, ownerld):
     try:
         obj = getServiceIdByName(name)
         raise ServiceAlreadyExistsException()
-    except ServiceNotFoundException as e:
+    except ServiceNotExistException as e:
         obj_id = db[COLLECTION].save({NAME : name, CONFIG : {LOG_SIZE : logSize}, OWNERID : ownerld})
         if obj_id == None:
             return None
@@ -131,7 +131,7 @@ def getServiceIdByName(name):
     print obj
     if obj != None:
         return obj
-    raise ServiceNotFoundException()
+    raise ServiceNotExistException()
 
 def removeService(name):
     try:
@@ -139,14 +139,14 @@ def removeService(name):
         db[COLLECTION].remove({ID : obj['_id']})
         connection = Connection()
         connection.drop_database(name)
-    except ServiceNotFoundException as e:
+    except ServiceNotExistException as e:
         raise
 
 def getServiceById(id):
     obj = getDbObject()[COLLECTION].find_one({ID : id})
     if obj != None:
         return obj
-    raise ServiceNotFoundException()
+    raise ServiceNotExistException()
 
 def getServiceList(number, offset):
     db = getDbObject()
@@ -329,3 +329,8 @@ def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=No
 
     points.limit(number)
     return points
+
+def closeConnection():
+    global MONGO_CLIENT
+    if MONGO_CLIENT != None:
+        MONGO_CLIENT.close()

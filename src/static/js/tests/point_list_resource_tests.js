@@ -1,11 +1,11 @@
 var point_list_resource_tests = {
     'GET':{
         data:{'number':100,'channel_ids':'556721a52a2e7febd2744202','channel_ids':'556721a52a2e7febd2744201','altitude_from':1.1},
-        url : '/instance/service/testservice/point'
+        url : getUrlWithPrefix('/service/testservice/point')
     },
     'POST':{
         data:{'lat':1.1, 'lon':1.1,  'alt':1.1,  'json':{'a':'b'}, 'channel_id':'channel_id_value'},
-        url : '/instance/service/testservice/point'
+        url : getUrlWithPrefix('/service/testservice/point')
     }
 };
 QUnit.test( 'GET ' + point_list_resource_tests.GET.url + JSON.stringify(point_list_resource_tests.GET.data), function( assert ) {

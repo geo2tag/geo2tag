@@ -1,3 +1,4 @@
+from possible_exception import possibleException
 from flask_restful import reqparse
 from flask.ext.restful import Resource
 from db_model import addService, getServiceList, possibleException
@@ -15,7 +16,7 @@ SERVICE_ALREADY_EXIST_MSG = "Service already exists"
 
 
 class ServiceListResource(Resource):
-
+    @possibleException
     def get(self):
         args = ServiceListParser.parseGetParameters()
         if GET_ARGS_NUMBER in args:
@@ -28,7 +29,6 @@ class ServiceListResource(Resource):
             offset = None
         serviceList = getServiceList(number, offset)
         return serviceList
-
     @possibleException
     def post(self):
         listAgrs = ServiceListParser.parsePostParameters()

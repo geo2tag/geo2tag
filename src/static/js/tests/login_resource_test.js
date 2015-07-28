@@ -1,5 +1,5 @@
 var test_data_login = { 'GET':{
-        url : '/instance/login'
+        url : getUrlWithPrefix('/login')
     } ,
 };
   
