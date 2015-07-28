@@ -24,7 +24,7 @@ cp config/$CONFIG_FILE /etc/apache2/sites-available/
 COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git status |head -1| cut -d' ' -f 3)
 DATE=$(date -R)
-VERSION=$(git describe)
+VERSION=$(git tag | tail -1)
 [ ${#VERSION} == 0 ] && VERSION="no version" 
 echo "{ 
 'commit' : '$COMMIT' 
