@@ -10,7 +10,6 @@ class TestGt1417(unittest.TestCase):
     def testGt1417(self):
         app = Flask(__name__)
         api = Api(app)
-        os.chdir('..')
         initApp(api)
         resources = api.endpoints
         self.assertTrue('resource_gt_1416' in resources)
