@@ -17,6 +17,7 @@ cp src/*  /var/www/geomongo
 cp config/config.ini /var/www/geomongo
 cp -r src/static /var/www/geomongo/static/
 cp -r src/templates /var/www/geomongo/templates/
+cp -r src/plugins /var/www/geomongo/plugins
 cp config/$CONFIG_FILE /etc/apache2/sites-available/
 
 ./scripts/setup_pip_dependencies.sh
