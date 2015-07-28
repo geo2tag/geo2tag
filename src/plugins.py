@@ -30,6 +30,7 @@ def enablePlugin(api, pluginName):
         module = imp.load_source(GET_PLUGIN_RESOURCES,  fileName)
         pluginResourcesList = module.getPluginResources()
         for pluginResource in pluginResourcesList:
+            print getPluginUrl(pluginResource.keys()[0], pluginName)
             api.add_resource(pluginResource.values()[0], getPluginUrl(pluginResource.keys()[0], pluginName))
     except Exception as e:
         print EXCEPT_ERROR_TEXT + pluginName
