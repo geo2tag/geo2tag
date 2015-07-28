@@ -249,6 +249,7 @@ def getPointById(serviceName, pointId) :
 
 def addPoints(serviceName, pointsArray):
     db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    list_id = []
     for point in pointsArray:
         obj = {}
         obj[JSON] = point[JSON]
@@ -256,7 +257,10 @@ def addPoints(serviceName, pointsArray):
         obj[ALT] = point[ALT]
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
-        return db.save(obj)
+        list_id.append(db.save(obj))
+    return list_id
+
+
 
 def updatePoint(serviceName, pointId, changes):
     db = getDbObject(serviceName)
