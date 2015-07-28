@@ -5,6 +5,7 @@ from point_list_resource_parser import PointListResourceParser, \
     SUBSTRING, DATE_FROM, DATE_TO, OFFSET, RADIUS 
 from possible_exception import possibleException
 from db_model import addPoints, findPoints
+from bson.json_util import dumps
 
 class PointListResource(Resource):
     @possibleException
@@ -23,5 +24,5 @@ class PointListResource(Resource):
             poinList = PointListResourceParser.parsePostParameters()
         except ValueError as e:
             return {}, 400
-        addPoints(serviceName, poinList)
-        return {}, 200
+        result = addPoints(serviceName, poinList)
+        return dumps(result, ensure_ascii=False).encode('utf8')
