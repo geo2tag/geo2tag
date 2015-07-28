@@ -1,9 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+if ARGV[0] == 'up'
+    $LOAD_PATH.unshift(File.expand_path("#{File.dirname(__FILE__)}/plugins/vagrant-host-shell/lib"))
+    require "vagrant-host-shell"
+end
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
-
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu14.04"
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
@@ -12,19 +16,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.cpus = 2
   end
 
-  #config.vm.network :forwarded_port, guest: 80, host: 5555
-  #config.vm.network :public_network, ip: "geomongo"
-
   ###################################################################
   # Next lines fixing error with github private repo authentication #
-  # and used in git_sync recipe 								    #
+  # and used in git_sync recipe                                     #
   ###################################################################
-  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
-  config.vm.provision "shell" do |sh|
+  config.vm.provision :file, source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
+  config.vm.provision :shell do |sh|
     sh.inline = "#!/bin/bash 
-    			mv /home/vagrant/id_rsa /root/.ssh/id_rsa 
-    			echo 'Host *\nStrictHostKeyChecking no' > /root/.ssh/config 
-    			chmod 400 /root/.ssh/id_rsa"
+                mv /home/vagrant/id_rsa /root/.ssh/id_rsa 
+                echo 'Host *\nStrictHostKeyChecking no' > /root/.ssh/config 
+                chmod 400 /root/.ssh/id_rsa"
     sh.privileged = true
   end
 
@@ -40,10 +41,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ###################################################################
   # Local deploy & test                                             #
   ###################################################################
-  config.vm.provision "shell" do |sh|
+  config.vm.provision :shell do |sh|
     sh.inline = "cd /home/vagrant/geomongo
-    			./scripts/local_deploy.sh
-    			curl http://geomongo/instance/status"
+                ./scripts/local_deploy.sh
+                curl http://geomongo/instance/status"
     sh.privileged = true
   end
+
+  ###################################################################
+  # Setting new storage size                                        #
+  ###################################################################
+  config.vm.provision :host_shell do |host_shell|
+    if ARGV[0] == 'up'
+        host_shell.inline = './resize_storage.sh 40960'
+    end
+  end  
 end

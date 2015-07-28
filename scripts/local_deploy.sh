@@ -2,6 +2,8 @@
 
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
+CONFIG_FILE=${1:-'geomongo.conf'}
+
 if ! grep -Fxq "$HOSTS_STRING" /etc/hosts
 then
 	echo "$HOSTS_STRING" >> /etc/hosts
@@ -15,14 +17,15 @@ cp src/*  /var/www/geomongo
 cp config/config.ini /var/www/geomongo
 cp -r src/static /var/www/geomongo/static/
 cp -r src/templates /var/www/geomongo/templates/
-cp config/geomongo.conf /etc/apache2/sites-available/ 
+cp -r src/plugins /var/www/geomongo/plugins/
+cp config/$CONFIG_FILE /etc/apache2/sites-available/
 
 ./scripts/setup_pip_dependencies.sh
 
 COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git status |head -1| cut -d' ' -f 3)
 DATE=$(date -R)
-VERSION=$(git describe)
+VERSION=$(git tag | tail -1)
 [ ${#VERSION} == 0 ] && VERSION="no version" 
 echo "{ 
 'commit' : '$COMMIT' 
@@ -33,7 +36,7 @@ echo "{
 
 chown -R www-data:www-data /var/www/geomongo
 
-a2ensite geomongo.conf
+a2ensite $CONFIG_FILE
 
 service apache2 restart
 
