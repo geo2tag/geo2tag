@@ -12,7 +12,7 @@ from url_routines import getPluginUrl
 CONCAT_PLUGIN_DIR = 'plugins/'
 MAIN_FILE = 'main.py'
 GET_PLUGIN_RESOURCES = 'getPluginResources'
-EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin'
+EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
 
 def getPluginList():
     pluginsDirList = os.listdir(PLUGINS_DIR_NAME)
@@ -31,5 +31,6 @@ def enablePlugin(api, pluginName):
         pluginResourcesList = module.getPluginResources()
         for pluginResource in pluginResourcesList:
             api.add_resource(pluginResource.values()[0], getPluginUrl(pluginResource.keys()[0], pluginName))
-    except:
-        print EXCEPT_ERROR_TEXT
+    except Exception as e:
+        print EXCEPT_ERROR_TEXT + pluginName
+        print e
