@@ -10,11 +10,15 @@ var test_data_point_resource = {
         data:{'lat':1.1, 'lon':1.1,  'alt':1.1,  'json':{'a':'b'}, 'channel_id':'channel_id_value'},
         url : '/instance/service/testservice/point'
     },
+    'FIND':{
+        data:{'number':1,'channel_ids':'channel_id_value'},
+        url : '/instance/service/testservice/point'
+    },
+
    'DELETE':{
-        url : '/instance/service/testservice/point/55282f3b5c0dd1178d37f711'
+        url : '/instance/service/testservice/point'
     }
 };
-
 
 QUnit.test( 'PUT ' + test_data_point_resource.PUT.url + JSON.stringify(test_data_point_resource.PUT.data), function( assert ) {
     var done = assert.async();
@@ -44,27 +48,34 @@ QUnit.test( 'GET ' + test_data_point_resource.GET.url, function( assert ) {
         .fail(getCallbackFail).done(getCallbackSuccess);
 });
 
-
 QUnit.test( 'POST ' + test_data_point_resource.POST.url + JSON.stringify(test_data_point_resource.POST.data), function( assert ) {
     var done = assert.async();
-
     var postCallbackFail = function() {
-        
-        assert.ok(false, 'Point resource create failed' );
+        assert.ok(false, 'POST failed' );
         done();
     };
-    var postCallbackSuccess = function() {
-        assert.ok(true, 'Point resource create success' );
+    var postCallbackSuccess = function(data) {
+        assert.ok(true, data );
         done();
     };
-    $.post(test_data_point_resource.POST.url, test_data_point_resource.POST.data)
-        .fail(postCallbackFail).done(postCallbackSuccess).error(function(xhr, error, statusText){
-
-        assert.ok(false, statusText);
-
-    })
+    $.post(test_data_point_resource.POST.url,JSON.stringify([test_data_point_resource.POST.data]))
+        .done(postCallbackSuccess).fail(postCallbackFail);
 });
 
+QUnit.test( 'GET ' + test_data_point_resource.FIND.url + JSON.stringify(test_data_point_resource.FIND.data), function( assert ) {
+    var done = assert.async();
+    var getCallbackFail = function() {
+        assert.ok(false, 'GET failed' );
+        done();
+    };
+    var getCallbackSuccess = function(data) {
+        assert.ok(true, data );
+        done();
+    };
+    $.get(test_data_point_resource.FIND.url, test_data_point_resource.FIND.data )
+        .fail(getCallbackFail).done(getCallbackSuccess);
+
+});
 
 QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) {
     var done = assert.async();
@@ -80,4 +91,5 @@ QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) 
     $.delete(test_data_point_resource.DELETE.url)
         .fail(deleteCallbackFail).done(deleteCallbackSuccess);
 });
+
 

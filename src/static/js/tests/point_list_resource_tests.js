@@ -8,6 +8,7 @@ var point_list_resource_tests = {
         url : '/instance/service/testservice/point'
     }
 };
+
 QUnit.test( 'GET ' + point_list_resource_tests.GET.url + JSON.stringify(point_list_resource_tests.GET.data), function( assert ) {
     var done = assert.async(); 
     var getCallbackFail = function() {
@@ -22,6 +23,7 @@ QUnit.test( 'GET ' + point_list_resource_tests.GET.url + JSON.stringify(point_li
         .fail(getCallbackFail).done(getCallbackSuccess);
  
 });
+
 QUnit.test( 'POST ' + point_list_resource_tests.POST.url + JSON.stringify(point_list_resource_tests.POST.data), function( assert ) {
     var done = assert.async(); 
     var postCallbackFail = function() {
