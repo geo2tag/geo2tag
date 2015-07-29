@@ -65,6 +65,7 @@ api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 
 def initApp(api):
     import os
+    print '----------------------------------------------'
     print os.getcwd()
     homeDir = os.getcwd()
     if os.getcwd().find('/var/www') != -1:
