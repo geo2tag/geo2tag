@@ -65,15 +65,18 @@ api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 
 def initApp(api):
     import os
-    print '----------------------------------------------'
+    print '----------------------------------------------gt-1444'
     print os.getcwd()
     homeDir = os.getcwd()
     if os.getcwd().find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'
         os.chdir(homeDir)
+        
     else:
-        if os.getcwd().find('geomongo/src/tst') != -1:
-            os.chdir('..')
+        if os.getcwd().find('src/tst') != -1:
+            print 'geomongo/src/tst--'
+            os.chdir('../')
+            print os.getcwd()
     homeDir = os.getcwd()
     print os.getcwd()
     pluginList = getPluginList()
