@@ -58,6 +58,8 @@ LAT = 'lat'
 ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 
+EARTH_RADIUS = 6371
+
 def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName) [LOG]
@@ -300,7 +302,7 @@ def applyGeometryCriterion(geometry, radius, criterion):
             # Filter as cirlce
             longitude = geometry[GEOJSON_COORDINATES][0] 
             latitude = geometry[GEOJSON_COORDINATES][1]
-            locationCriterion = {'$centerSphere': [[longitude, latitude], radius]}
+            locationCriterion = {'$centerSphere': [[longitude, latitude], radius/EARTH_RADIUS ]}
         criterion[LOCATION] = {'$geoWithin': locationCriterion}      
 
 # Substring is skipped
