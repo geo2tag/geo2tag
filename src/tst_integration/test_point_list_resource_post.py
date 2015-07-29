@@ -31,5 +31,6 @@ class TestPointListPostRequest(BasicIntegrationTest):
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.post(self.getUrl(TEST_URL), data = json.dumps([{LAT:'1.1', LON:1.1,  ALT:1.1,  JSON:[], CHANNEL_ID:''}]))
         responseCode = response.status_code
+        responseText = response.text
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
-        self.assertEquals(response.text, '{}')
+        self.assertEquals(responseText, '{}')
