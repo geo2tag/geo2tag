@@ -70,7 +70,7 @@ def initApp(api):
         homeDir = '/var/www/geomongo/'
         os.chdir(homeDir)        
     else:
-        if os.getcwd().find('geomongo/src/tst') != -1:
+        if os.getcwd().find('src/tst') != -1:
             os.chdir('..')
     homeDir = os.getcwd()
     pluginList = getPluginList()
