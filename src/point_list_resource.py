@@ -25,4 +25,4 @@ class PointListResource(Resource):
         except ValueError as e:
             return {}, 400
         result = addPoints(serviceName, poinList)
-        return dumps(result, ensure_ascii=False).encode('utf8')
+        return result

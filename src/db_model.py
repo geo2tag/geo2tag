@@ -257,7 +257,7 @@ def addPoints(serviceName, pointsArray):
         obj[ALT] = point[ALT]
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
-        list_id.append(db.save(obj))
+        list_id.append(str(db.save(obj)))
     return list_id
 
 
