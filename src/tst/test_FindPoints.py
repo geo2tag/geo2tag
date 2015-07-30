@@ -19,17 +19,15 @@ class TestFindpoints(unittest.TestCase):
         self.assertEquals(VALID_RESULTS_NUMBER, len(result))
 
     def testDateSearch(self):
-        TEST_DATE_FROM = dateutil.parser.parse("2015-09-10T23:32:17.814Z")
-        TEST_DATE_FROM_1 = dateutil.parser.parse("2015-09-11T23:32:16.814Z")
-        TEST_DATE_TO = dateutil.parser.parse("2015-09-11T23:32:17.814Z")
-        TEST_DATE_TO_1 = dateutil.parser.parse("2015-09-11T23:32:16.814Z")
+        TEST_DATE_FROM = str("2015-09-10T23:32:17.814000+00:00")
+        TEST_DATE_FROM_1 = str("2015-09-11T23:32:16.814000+00:00")
+        TEST_DATE_TO = str("2015-09-11T23:32:17.814000+00:00")
+        TEST_DATE_TO_1 = str("2015-09-11T23:32:16.814000+00:00")
         VALID_RESULTS_NUMBER_1 = 4
         VALID_RESULTS_NUMBER_2 = 3
         VALID_RESULTS_NUMBER_3 = 1
-        
-
         result_1 = list(findPoints(TEST_SERVICE, TEST_CHANNELS, TEST_NUMBER, None, \
-            None, None, None,  TEST_DATE_FROM, TEST_DATE_TO))
+            None, None, None,  str(TEST_DATE_FROM), TEST_DATE_TO))
         result_2 = list(findPoints(TEST_SERVICE, TEST_CHANNELS, TEST_NUMBER, None, \
             None, None, None, None, TEST_DATE_TO_1))
         result_3 = list(findPoints(TEST_SERVICE, TEST_CHANNELS, TEST_NUMBER, None, \

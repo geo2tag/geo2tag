@@ -7,6 +7,7 @@ from possible_exception import possibleException
 from db_model import addPoints, findPoints
 from bson.json_util import dumps
 
+
 class PointListResource(Resource):
     @possibleException
     def get(self, serviceName):
@@ -15,7 +16,6 @@ class PointListResource(Resource):
             params[NUMBER], params[GEOMETRY], params[ALTITUDE_FROM], \
             params[ALTITUDE_TO], params[SUBSTRING], params[DATE_FROM], \
             params[DATE_TO], params[OFFSET], params[RADIUS])        
-        
         return result
     
     @possibleException
