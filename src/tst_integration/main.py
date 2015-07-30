@@ -4,6 +4,7 @@ from test_tests_page import Test_tests_page
 from test_PointListGet import TestPointListGet
 from basic_integration_test import BasicIntegrationTest
 from test_get_all_plugins_with_status_resource import TestGetAllPluginsWithStatusResource
+from test_testplugin import TestTestPlugin
 from basic_integration_test import BasicIntegrationTest
 from test_status_request import TestStatusRequest
 from test_delete_service_name import TestServiceDeleteRequest
@@ -30,6 +31,7 @@ from test_debug_login_resource import TestDebugLoginResource
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicIntegrationTest.parametrize(TestGetAllPluginsWithStatusResource, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestTestPlugin, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListGet, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_tests_page, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestChannelGetRequest, param=host))

@@ -58,6 +58,8 @@ LAT = 'lat'
 ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 
+EARTH_RADIUS = 6371
+
 def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName) [LOG]
@@ -249,6 +251,7 @@ def getPointById(serviceName, pointId) :
 
 def addPoints(serviceName, pointsArray):
     db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    list_id = []
     for point in pointsArray:
         obj = {}
         obj[JSON] = point[JSON]
@@ -256,7 +259,10 @@ def addPoints(serviceName, pointsArray):
         obj[ALT] = point[ALT]
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
-        db.save(obj)
+        list_id.append(str(db.save(obj)))
+    return list_id
+
+
 
 def updatePoint(serviceName, pointId, changes):
     db = getDbObject(serviceName)
@@ -300,7 +306,7 @@ def applyGeometryCriterion(geometry, radius, criterion):
             # Filter as cirlce
             longitude = geometry[GEOJSON_COORDINATES][0] 
             latitude = geometry[GEOJSON_COORDINATES][1]
-            locationCriterion = {'$centerSphere': [[longitude, latitude], radius]}
+            locationCriterion = {'$centerSphere': [[longitude, latitude], radius/EARTH_RADIUS ]}
         criterion[LOCATION] = {'$geoWithin': locationCriterion}      
 
 # Substring is skipped
