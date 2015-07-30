@@ -15,7 +15,7 @@ CONCAT_PLUGIN_DIR = 'plugins/'
 MAIN_FILE = 'main.py'
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
-ERROR_DISR_TEXT = 'Error description: '
+ERROR_DISR_TEXT = 'error description: '
 LOG_USERID = 'system'
 
 def getPluginList():
