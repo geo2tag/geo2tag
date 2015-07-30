@@ -9,11 +9,14 @@ sys.path.append(PLUGINS_DIR_NAME)
 
 import imp
 from url_routines import getPluginUrl
+from log import writeInstanceLog
 
 CONCAT_PLUGIN_DIR = 'plugins/'
 MAIN_FILE = 'main.py'
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
+ERROR_DISR_TEXT = 'Error description: '
+LOG_USERID = 'system'
 
 def getPluginList():
     pluginsDirList = os.listdir(PLUGINS_DIR_NAME)
@@ -29,14 +32,14 @@ def enablePlugin(api, pluginName):
     fileName = joinpath(os.getcwd(), MAIN_FILE)
     sys.path.append(dirName)
     try:
-        module = imp.load_source(GET_PLUGIN_RESOURCES,  fileName)
+        module = imp.load_source(GET_PLUGIN_RESOURCES, fileName)
         pluginResourcesDict = module.getPluginResources()
         for pluginResource in pluginResourcesDict:
             print getPluginUrl(pluginResource, pluginName)
             api.add_resource(pluginResourcesDict[pluginResource], getPluginUrl(pluginResource, pluginName))
+        writeInstanceLog(LOG_USERID, 'Plugin ' + pluginName + ' successfully loaded')
     except Exception as e:
-        print EXCEPT_ERROR_TEXT + pluginName
-        print e
+        writeInstanceLog(LOG_USERID, EXCEPT_ERROR_TEXT + pluginName + ', ' + ERROR_DISR_TEXT + str(e))
 
 def getPluginState(pluginName):
     return True
