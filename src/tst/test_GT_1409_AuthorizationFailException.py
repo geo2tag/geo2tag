@@ -3,7 +3,7 @@ import sys
 sys.path.append('../')
 from authorization_error import AuthorizationError
 
-class TestAuthorizationError(TestCase):
-    def testAuthorizationError(self):
+class TestAuthorizationFail(TestCase):
+    def testAuthorizationFail(self):
         with self.assertRaises(AuthorizationError):
             raise AuthorizationError

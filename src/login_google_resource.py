@@ -26,7 +26,6 @@ google = oauth.remote_app('google',
     consumer_secret=getGoogleClientSecret())
 
 class LoginGoogleResource(Resource):
-    @possibleException
     def get(self):
         print "getGoogleRedirectUrl() {0}".format(getGoogleRedirectUrl())
         return google.authorize(callback=getGoogleRedirectUrl())
@@ -45,23 +44,20 @@ SUCCESS_MESSAGE = 'Success'
 
 @google_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
 @google.authorized_handler
+@possibleException
 def authorized(resp):
     try:
         access_token = resp['access_token']
     except TypeError:
         raise AuthorizationError
-
     headers = {'Authorization': 'OAuth '+access_token}
     request = Request('https://www.googleapis.com/oauth2/v1/userinfo',
                 None, headers)
     res = urlopen(request)
-    """try:
+    try:
         res = urlopen(request)
     except URLError, e:
-        if e.code == 401:
-        # Unauthorized - bad token
-           return 'Error1'
-        return res.read()"""
+        raise AuthorizationError
     _id = processGoogleData(res.read())
     logUserIn(_id) 
 
