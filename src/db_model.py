@@ -10,9 +10,7 @@ from bson.errors import InvalidId
 from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, GEOJSON_COORDINATES
-from datetime import datetime
-from calendar import timegm
-import dateutil.parser
+
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
