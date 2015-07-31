@@ -15,7 +15,6 @@ class PointListResource(Resource):
             params[NUMBER], params[GEOMETRY], params[ALTITUDE_FROM], \
             params[ALTITUDE_TO], params[SUBSTRING], params[DATE_FROM], \
             params[DATE_TO], params[OFFSET], params[RADIUS])        
-        
         return result
     
     @possibleException
