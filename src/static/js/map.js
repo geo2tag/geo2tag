@@ -1,15 +1,6 @@
 var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = null, 
     controls = null, positionMarker=null;
 
-function setupMap(){
-    var urlPar = getUrlVars();
-    if (urlPar['latitude'] != undefined && urlPar['longitude'] != undefined) {
-        latitude = urlPar['latitude'];
-        longitude = urlPar['longitude'];
-    }
-    map = createMap('map', latitude, longitude);
-}
-
 function fixMapSize(){
     var content = $("#map");
     var viewHeight = $(window).height() - content.offset().top;
@@ -21,13 +12,8 @@ function fixMapSize(){
 }
 
 $(document).ready(function (){
-    setupMap();
+    map = createMap('map', true);
     
     $(window).on('resize', fixMapSize());
-
-    $("[data-toggle='buttons'] .btn").each(function(i, el) {
-        var $button = $(el);
-        $button.addClass("active");
-    });
 
 });
