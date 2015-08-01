@@ -21,9 +21,11 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
-from plugins import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
-
+from possible_exception import possibleException
+from flask import request
+from url_routines import isPluginUrl
+from plugin_not_enabled_exception import PluginNotEnabledException
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj, code)
@@ -44,6 +46,15 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     return response
+
+@app.before_request
+@possibleException
+def before_request():
+    if isPluginUrl(request.url):
+        pluginUrlList = request.url.split('/')
+        pluginNameIndex = pluginUrlList.index('plugin') + 1
+        if getPluginState(pluginUrlList[pluginNameIndex]) == False:
+            raise PluginNotEnabledException
 
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
 api.add_resource(StatusResource, getPathWithPrefix('/status'))
@@ -82,7 +93,7 @@ def initApp(api):
 
 atexit.register(closeConnection)
 
-initApp(api)
+#initApp(api)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)
