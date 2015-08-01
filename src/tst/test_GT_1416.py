@@ -4,7 +4,7 @@ import os
 from flask import Flask
 from flask.ext.restful import Api
 sys.path.append('../')
-from plugins import enablePlugin
+from __import__ import enablePlugin
 
 class TestGt1416(unittest.TestCase):
     def testGt1416(self):
@@ -12,5 +12,5 @@ class TestGt1416(unittest.TestCase):
         api = Api(app)
         os.chdir('../')
         enablePlugin(api, 'testPlugin1')
-        os.chdir('../../tst')
+        os.chdir('tst')
         self.assertTrue('resource_gt_1416' in api.endpoints)

@@ -21,7 +21,7 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
-from plugins import getPluginList, getPluginState, enablePlugin
+from __import__ import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 
 def output_json(obj, code, headers=None):
