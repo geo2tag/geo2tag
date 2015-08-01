@@ -51,27 +51,32 @@ var channelToDelete = {
 };
 
 
-function testDeleteMethod(){
 QUnit.test('DELETE '+test_data_channel_resource.DELETE.url + test_data_channel_resource.DELETE.id, function( assert ) {
-    var done = assert.async();
-    
-    var deleteCallbackFail = function() {
-        assert.ok(false, 'ChannelResource delete failed' );
-        done();
-    };
-    var deleteCallbackSuccess = function() {
-        assert.ok(true, 'ChannelResource delete success' );
-        done();
-    };
-    console.log(test_data_channel_resource.DELETE.id);
-    $.delete(test_data_channel_resource.DELETE.url)
-        .fail(deleteCallbackFail).done(deleteCallbackSuccess);
-});
-}
-$.post(channelToDelete.POST.url,channelToDelete.POST.data)
-    .always(function(newObjectId){
+   var done = assert.async();
+   $.post(channelToDelete.POST.url,channelToDelete.POST.data)
+   .done(function(newObjectId){
         console.log(newObjectId);
-        test_data_channel_resource.DELETE.url += newObjectId["$oid"];
+        if(newObjectId != null)
+            test_data_channel_resource.DELETE.url += newObjectId["$oid"];
         console.log(test_data_channel_resource);
-        testDeleteMethod();
-    })
+       
+    var deleteCallbackFail = function() {
+           assert.ok(false, 'ChannelResource delete failed' );
+           done();
+       };
+       var deleteCallbackSuccess = function() {
+           assert.ok(true, 'ChannelResource delete success' );
+           done();
+       };
+       console.log(test_data_channel_resource.DELETE.id);
+       $.delete(test_data_channel_resource.DELETE.url)
+       .fail(deleteCallbackFail).done(deleteCallbackSuccess);
+    
+   }).fail(function(){
+          console.log("fail happened");
+          assert.ok(false, 'Post channel for delete failed' );
+          done();    
+   })
+
+});
+
