@@ -10,8 +10,6 @@ sys.path.append(PLUGINS_DIR_NAME)
 import imp
 from url_routines import getPluginUrl
 
-CONCAT_PLUGIN_DIR = 'plugins/'
-MAIN_FILE = 'main.py'
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
 
