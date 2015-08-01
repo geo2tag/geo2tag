@@ -24,16 +24,10 @@ def getPluginList():
     return pluginsList
 
 def enablePlugin(api, pluginName):
-    #dirName = CONCAT_PLUGIN_DIR + pluginName
-    #fileName = joinpath(os.getcwd(), MAIN_FILE)
-    #sys.path.append('../../' + dirName)
     loadMain = 'plugins.' + pluginName + '.main'
-    print os.getcwd(), '1111111111111111', loadMain
-    loadModule = __import__ (loadMain, globals(), locals(), ['getPluginInfo', 'getPluginResources'], -1)
+    loadModule = __import__ (loadMain, globals(), locals(), [GET_PLUGIN_RESOURCES], -1)
     try:
-        #module = imp.load_source(GET_PLUGIN_RESOURCES,  fileName)
         pluginResourcesDict = loadModule.getPluginResources()
-        #pluginResourcesDict = module.getPluginResources()
         for pluginResource in pluginResourcesDict:
             print getPluginUrl(pluginResource, pluginName)
             api.add_resource(pluginResourcesDict[pluginResource], getPluginUrl(pluginResource, pluginName))
