@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../../')
 from testResource_GT_1417 import Resource_GT_1417
 
 def getPluginResources():
