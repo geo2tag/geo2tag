@@ -1,11 +1,10 @@
 {% extends "base.html" %}
-{% block styles%}
+{% block styles %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css.1') }}" /> 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/L.Control.Zoomslider.css') }}" />
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/jquery-latest.min.js') }}"></script>  
 <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
 <script src="http://api-maps.yandex.ru/2.0/?load=package.map&lang=ru-RU" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='js/browser_type.js') }}"></script>
