@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from manage_plugins import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
@@ -62,6 +63,7 @@ api.add_resource(LoginResource, getPathWithPrefix('/login'))
 api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
+api.add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
 
 def initApp(api):
     import os
