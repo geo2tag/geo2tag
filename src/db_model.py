@@ -347,7 +347,7 @@ def getPluginState(pluginName):
     db = getDbObject()
     obj = db[PLUGINS].find_one({NAME: pluginName})
     if obj != None:
-        return obj
+        return obj[ENABLED]
     else:
         return False
 
