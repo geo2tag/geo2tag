@@ -29,5 +29,5 @@ class ManagePluginsResource(Resource):
         pluginsList = dict((key, request.args.getlist(key)) for key in request.args.keys())
         for plugin in pluginsList:
             setPluginState(plugin, pluginsList[plugin])
-            if pluginsList[plugin] == u'True' and isPluginEnabled(plugin, api) == False:
+            if pluginsList[plugin].lower() == u'true' and isPluginEnabled(plugin, api) == False:
                 enablePlugin(plugin, api)
