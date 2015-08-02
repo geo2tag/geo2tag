@@ -22,7 +22,7 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
-#from plugins import getPluginList, getPluginState, enablePlugin
+from __import__ import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 
 def output_json(obj, code, headers=None):
@@ -65,7 +65,7 @@ api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 api.add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
 
-'''def initApp(api):
+def initApp(api):
     import os
     homeDir = os.getcwd()
     if os.getcwd().find('/var/www') != -1:
@@ -80,11 +80,11 @@ api.add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
         if getPluginState(pluginName) is True:
             os.chdir(homeDir)
             enablePlugin(api, pluginName)
-    os.chdir(homeDir)'''
+    os.chdir(homeDir)
 
 atexit.register(closeConnection)
 
-#initApp(api)
+initApp(api)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)
