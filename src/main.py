@@ -21,11 +21,13 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
+from __import__ import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
+
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj, code)
@@ -84,6 +86,7 @@ def initApp(api):
         if os.getcwd().find('src/tst') != -1:
             os.chdir('..')
     homeDir = os.getcwd()
+    print homeDir, '--------------------------&&&&&&&&&&&&&&&&&&&'
     pluginList = getPluginList()
     for pluginName in pluginList:
         if getPluginState(pluginName) is True:
@@ -93,7 +96,7 @@ def initApp(api):
 
 atexit.register(closeConnection)
 
-#initApp(api)
+initApp(api)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)
