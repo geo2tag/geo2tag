@@ -2,10 +2,10 @@ import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/instance/get_all_plugins_with_status_resource'
+TEST_URL = '/instance/plugin'
 VALID_RESPONSE_CODE = 200
 
-class TestGetAllPluginsWithStatusResource(BasicIntegrationTest):
+class TestPluginListResource(BasicIntegrationTest):
     def testGetAllPluginsWithStatusResource(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseText = response.text
