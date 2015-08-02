@@ -340,3 +340,6 @@ def closeConnection():
     global MONGO_CLIENT
     if MONGO_CLIENT != None:
         MONGO_CLIENT.close()
+
+def setPluginState(pluginName, state):
+    pass

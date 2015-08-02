@@ -35,3 +35,6 @@ def enablePlugin(api, pluginName):
 
 def getPluginState(pluginName):
     return True
+
+def isPluginEnabled(pluginName, api):
+    return True
