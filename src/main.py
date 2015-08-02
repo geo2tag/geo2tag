@@ -86,7 +86,6 @@ def initApp(api):
         if os.getcwd().find('src/tst') != -1:
             os.chdir('..')
     homeDir = os.getcwd()
-    print homeDir, '--------------------------&&&&&&&&&&&&&&&&&&&'
     pluginList = getPluginList()
     for pluginName in pluginList:
         if getPluginState(pluginName) is True:
