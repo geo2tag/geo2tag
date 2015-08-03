@@ -11,7 +11,7 @@ class MapResource(Resource):
     	try:
 	    args = PointListResourceParser.parseGetParameters()
 	    args['serviceName'] = serviceName
-	    getparam = str(args)
+	    getparam = args
 	    return make_response(render_template('map.html',params = getparam))
 	except Exception as e:
 	    return make_response(render_template('map.html'))
