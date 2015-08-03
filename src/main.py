@@ -24,7 +24,8 @@ import atexit
 from plugin_routines import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 from plugin_list_resource import GetAllPluginsWithStatusResource
-from config_reader import defineInstancePrefix
+from config_reader import getInstancePrefix
+from flask import g
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -47,6 +48,11 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     return response
 
+
+@app.before_first_request
+def defineInstancePrefix():
+    g.instance_prefix = getInstancePrefix()
+
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
 api.add_resource(StatusResource, getPathWithPrefix('/status'))
 api.add_resource(ServiceListResource, getPathWithPrefix('/service'))
@@ -68,7 +74,6 @@ api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
 
 def initApp(api):
     import os
-    defineInstancePrefix()
     homeDir = os.getcwd()
     if os.getcwd().find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'

@@ -4,7 +4,7 @@
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
-<script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
+<script type="text/javascript">function getUrlWithPrefix(url) { return '/' + getInstancePrefix() + url; }</script>
 <script src="{{ url_for('static', filename='js/tests/put_delete_methods.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tests/login_resource_test.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tests/logout_resource_test.js') }}"></script>
