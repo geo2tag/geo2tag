@@ -28,7 +28,7 @@ QUnit.test( 'POST ' + channel_list_resource_tests.POST.url + JSON.stringify(chan
         assert.ok(false, 'POST failed' );
         done();
     };
-    var postCallbackSuccess = function() {
+    var postCallbackSuccess = function(data) {
         assert.ok(true, 'POST success' );
         done();
     };
