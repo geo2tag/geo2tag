@@ -1,6 +1,6 @@
 from flask import request
 from flask.ext.restful import Resource
-from plugins import getPluginList, getPluginState
+from plugin_routines import getPluginList, getPluginState
 
 class GetAllPluginsWithStatusResource(Resource):
     def get(self):
