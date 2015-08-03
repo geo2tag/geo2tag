@@ -47,7 +47,10 @@ def getDbName():
 
 def getInstancePrefix():
     return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
-   	
+
+def defineInstancePrefix():
+    g[OPTION_INSTANCEPREFIX] = getInstancePrefix()
+
 def getDebugUsers():
     str = getConfigParser().get(SECTION,OPTION_DEBUG_USERS)
     list = str.split(',')
