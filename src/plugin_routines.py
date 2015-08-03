@@ -4,6 +4,7 @@
 import sys
 import os
 from os.path import join as joinpath
+
 PLUGINS_DIR_NAME = 'plugins'
 sys.path.append(PLUGINS_DIR_NAME)
 
@@ -37,3 +38,10 @@ def enablePlugin(api, pluginName):
 
 def getPluginState(pluginName):
     return True
+
+def isPluginEnabled(pluginName, app):
+    url_map = getattr(app, 'url_map')
+    for rule in url_map.iter_rules():
+        if str(rule).find('/' + pluginName + '/') != -1:
+            return True
+    return False
