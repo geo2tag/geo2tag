@@ -40,3 +40,10 @@ def enablePlugin(api, pluginName):
 
 def getPluginState(pluginName):
     return True
+
+def isPluginEnabled(pluginName, app):
+    map_urls = getattr(app, 'url_map').converters['list']
+    print map_urls
+    for url in map_url:
+        print pluginName in url
+        print url
