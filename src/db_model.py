@@ -57,6 +57,8 @@ LON = 'lon'
 LAT = 'lat'
 ALT = 'alt'
 CHANNEL_ID = 'channel_id'
+PLUGINS = 'plugins'
+ENABLED = 'enabled'
 
 EARTH_RADIUS = 6371
 
@@ -340,3 +342,20 @@ def closeConnection():
     global MONGO_CLIENT
     if MONGO_CLIENT != None:
         MONGO_CLIENT.close()
+
+def getPluginState(pluginName):
+    db = getDbObject()
+    obj = db[PLUGINS].find_one({NAME: pluginName})
+    if obj != None:
+        return obj[ENABLED]
+    else:
+        return False
+
+def setPluginState(pluginName, state):
+    db = getDbObject()
+    obj = db[PLUGINS].find_one({NAME: pluginName})
+    if obj == None:
+        db[PLUGINS].save({NAME: pluginName, ENABLED: state})
+    else:
+        obj[ENABLED] = state
+        db[PLUGINS].save(obj)
