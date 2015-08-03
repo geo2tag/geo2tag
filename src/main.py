@@ -23,6 +23,7 @@ from db_model import closeConnection
 import atexit
 from plugins import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
+from plugin_list_resource import GetAllPluginsWithStatusResource
 
 
 API = None
@@ -69,6 +70,7 @@ getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
 getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
+getApi().add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
 
 def initApp(api):
     import os
