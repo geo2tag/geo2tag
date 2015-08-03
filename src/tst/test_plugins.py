@@ -6,10 +6,11 @@ from main import app
 from plugins import isPluginEnabled
 
 TEST_PLUGIN_NAME = 'test_plugin'
-
+TEST_PLUGIN_NAME_NOT_VALID = 'test_plugin_not_valid_name'
 
 class TestPlugins(unittest.TestCase):
     def testIsPluginEnabled(self):
-        print '-------------------------API'
-        isPluginEnabled(TEST_PLUGIN_NAME, app)
-        
+        RESULT = isPluginEnabled(TEST_PLUGIN_NAME, app)
+        self.assertTrue(RESULT is True)
+        RESULT = isPluginEnabled(TEST_PLUGIN_NAME_NOT_VALID, app)
+        self.assertTrue(RESULT is False)
