@@ -21,9 +21,11 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
-from plugins import getPluginList, getPluginState, enablePlugin
+from plugin_routines import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 from rout_map_resource import MapResource
+from plugin_list_resource import GetAllPluginsWithStatusResource
+
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -64,6 +66,8 @@ api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 api.add_resource(MapResource, getPathWithPrefix('/service/<string:serviceName>/map'))
+api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
+
 
 def initApp(api):
     import os

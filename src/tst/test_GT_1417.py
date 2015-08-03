@@ -5,7 +5,8 @@ from flask import Flask
 from flask.ext.restful import Api
 sys.path.append('../')
 from main import initApp
-from plugins import getPluginList
+from plugin_routines import getPluginList
+
 class TestGt1417(unittest.TestCase):
     def testGt1417(self):
         app = Flask(__name__)

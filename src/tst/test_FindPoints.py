@@ -26,8 +26,6 @@ class TestFindpoints(unittest.TestCase):
         VALID_RESULTS_NUMBER_1 = 4
         VALID_RESULTS_NUMBER_2 = 3
         VALID_RESULTS_NUMBER_3 = 1
-        
-
         result_1 = list(findPoints(TEST_SERVICE, TEST_CHANNELS, TEST_NUMBER, None, \
             None, None, None,  TEST_DATE_FROM, TEST_DATE_TO))
         result_2 = list(findPoints(TEST_SERVICE, TEST_CHANNELS, TEST_NUMBER, None, \
