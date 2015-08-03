@@ -203,7 +203,6 @@ def deleteChannelById(serviceName, channelId):
     db = getDbObject(serviceName)
     if isinstance(channelId, str) or isinstance(channelId, unicode):
         result = list(db[CHANNELS_COLLECTION].find({'_id': ObjectId(channelId)}))
-        print '111111111'
     else:
         result = list(db[CHANNELS_COLLECTION].find({'_id': channelId}))
     if len(result) > 0:
