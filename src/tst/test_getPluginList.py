@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 sys.path.append('../')
-from plugins import getPluginList
+from __import__ import getPluginList
 
 
 class TestGetPluginList(unittest.TestCase):
