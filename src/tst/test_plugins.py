@@ -18,8 +18,7 @@ api = Api(app)
 
 class TestPlugins(unittest.TestCase):
     def testIsPluginEnabled(self):
-        os.chdir('../')
-         
+        os.chdir('../')         
         enablePlugin(api, TEST_PLUGIN_NAME)
         os.chdir(TEST_PATH)
         RESULT = isPluginEnabled(TEST_PLUGIN_NAME, app)

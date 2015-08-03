@@ -28,7 +28,6 @@ def enablePlugin(api, pluginName):
     dirName = CONCAT_PLUGIN_DIR + pluginName
     os.chdir(dirName)
     fileName = joinpath(os.getcwd(), MAIN_FILE)
-    print os.getcwd()
     sys.path.append('../../' + dirName)
     try:
         module = imp.load_source(GET_PLUGIN_RESOURCES,  fileName)
