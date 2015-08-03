@@ -100,8 +100,8 @@ QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) 
             });
 
         }).fail(function(){
-          assert.ok(false, 'Post of ChannelTodelete failed' );
-          done();    
+            assert.ok(false, 'Post of pointTodelete failed' );
+            done();    
    });
 
    

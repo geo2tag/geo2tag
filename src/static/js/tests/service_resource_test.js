@@ -64,33 +64,34 @@ QUnit.test('DELETE' + test_data_service_resource.DELETE.url, function( assert ) 
     var done = assert.async();
 
 
-     $.post(serviceToDelete.url, serviceToDelete.data)
-        .done(function(){
+    $.post(serviceToDelete.url, serviceToDelete.data)
+    .done(function(){
 
-            var callbackFail = function() {
-        assert.ok( false, 'get failed' );
-        done();
-    };
+        var callbackFail = function() {
+            assert.ok( false, 'get failed' );
+            done();
+        };
 
-    var callbackOk = function() {
-        assert.ok( true, 'went ok' );
-        done();
-    };
+        var callbackOk = function() {
+            assert.ok( true, 'went ok' );
+            done();
+        };
 
-    $.delete = function( url ) {
-        return $.ajax({
-            type : 'DELETE',
-            url : url
-        });
-    };
+        $.delete = function( url ) {
+            return $.ajax({
+                type : 'DELETE',
+                url : url
+            });
+        };
 
-    $.delete( test_data_service_resource.DELETE.url )
+        $.delete( test_data_service_resource.DELETE.url )
         .fail( callbackFail )
-        .done( callbackOk )
+        .done( callbackOk );
 
-        }).fail(function(){
-          assert.ok(false, 'Post of serviceToDelete failed' );
-          done();    
-        });
+    })
+    .fail(function(){
+        assert.ok(false, 'Post of serviceToDelete failed' );
+        done();    
+    });
     
 });

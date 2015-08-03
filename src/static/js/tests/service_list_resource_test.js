@@ -45,7 +45,6 @@ QUnit.test( 'POST' + test_data_service_list_resource.POST.url + JSON.stringify(t
     var callbackOk = function() {
         $.delete( test_data_service_list_resource.POST.url +'/'+ test_data_service_list_resource.POST.data.name);
         assert.ok(true, 'went ok' );
-
         done();
     };
 
