@@ -19,10 +19,11 @@ from login_resource import LoginResource
 from url_utils import getPathWithPrefix
 from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
-from db_model import closeConnection
+from db_model import closeConnection, getPluginState
 import atexit
-from __import__ import getPluginList, getPluginState, enablePlugin
+from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
+from plugin_list_resource import GetAllPluginsWithStatusResource
 from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
@@ -75,6 +76,7 @@ api.add_resource(LoginResource, getPathWithPrefix('/login'))
 api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
+api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
 
 def initApp(api):
     import os

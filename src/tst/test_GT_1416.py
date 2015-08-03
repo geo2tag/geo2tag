@@ -4,7 +4,7 @@ import os
 from flask import Flask
 from flask.ext.restful import Api
 sys.path.append('../')
-from __import__ import enablePlugin
+from plugin_routines import enablePlugin
 
 class TestGt1416(unittest.TestCase):
     def testGt1416(self):

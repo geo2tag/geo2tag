@@ -57,8 +57,11 @@ LON = 'lon'
 LAT = 'lat'
 ALT = 'alt'
 CHANNEL_ID = 'channel_id'
+PLUGINS = 'plugins'
+ENABLED = 'enabled'
 
 EARTH_RADIUS = 6371
+
 
 def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now()
@@ -313,7 +316,6 @@ def applyGeometryCriterion(geometry, radius, criterion):
 def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=None, \
     altitude_to=None, substring=None, date_from=None, date_to=None, offset=None, \
     radius=1000):
-
     db = getDbObject(serviceName)
 
     # Converting types
@@ -325,14 +327,9 @@ def findPoints(serviceName, channel_ids, number, geometry=None, altitude_from=No
 
     applyGeometryCriterion(geometry, radius, criterion)
 
-    print "findPoints"
-    print criterion
-
     points = db[POINTS_COLLECTION].find(criterion).sort(DATE, pymongo.DESCENDING)
-
     if offset:
         points.skip(offset)    
-
     points.limit(number)
     return points
 
@@ -340,3 +337,20 @@ def closeConnection():
     global MONGO_CLIENT
     if MONGO_CLIENT != None:
         MONGO_CLIENT.close()
+
+def getPluginState(pluginName):
+    db = getDbObject()
+    obj = db[PLUGINS].find_one({NAME: pluginName})
+    if obj != None:
+        return obj[ENABLED]
+    else:
+        return False
+
+def setPluginState(pluginName, state):
+    db = getDbObject()
+    obj = db[PLUGINS].find_one({NAME: pluginName})
+    if obj == None:
+        db[PLUGINS].save({NAME: pluginName, ENABLED: state})
+    else:
+        obj[ENABLED] = state
+        db[PLUGINS].save(obj)

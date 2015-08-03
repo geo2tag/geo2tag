@@ -7,6 +7,8 @@ from url_utils import getPathWithPrefix
 from urllib2 import Request, urlopen, URLError
 from json import loads
 from user_routines import addUser, logUserIn
+from possible_exception import possibleException
+from authorization_error import AuthorizationError
 
 AUTHORIZED_URL = '/login/google/authorized' 
 oauth = OAuth()
@@ -23,12 +25,10 @@ google = oauth.remote_app('google',
     consumer_key=getGoogleClientID(),
     consumer_secret=getGoogleClientSecret())
 
-
 class LoginGoogleResource(Resource):
     def get(self):
         print "getGoogleRedirectUrl() {0}".format(getGoogleRedirectUrl())
         return google.authorize(callback=getGoogleRedirectUrl())
-
 
 
 def processGoogleData(data):
@@ -44,18 +44,20 @@ SUCCESS_MESSAGE = 'Success'
 
 @google_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
 @google.authorized_handler
+@possibleException
 def authorized(resp):
-    access_token = resp['access_token']
+    try:
+        access_token = resp['access_token']
+    except TypeError:
+        raise AuthorizationError
     headers = {'Authorization': 'OAuth '+access_token}
     request = Request('https://www.googleapis.com/oauth2/v1/userinfo',
                 None, headers)
+    res = urlopen(request)
     try:
         res = urlopen(request)
     except URLError, e:
-        if e.code == 401:
-        # Unauthorized - bad token
-           return 'Error1'
-        return res.read()
+        raise AuthorizationError
     _id = processGoogleData(res.read())
     logUserIn(_id) 
 
