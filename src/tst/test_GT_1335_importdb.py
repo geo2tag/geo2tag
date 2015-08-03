@@ -9,7 +9,7 @@ TEST_DB = 'master_db_template'
 PATH = 'python scripts/db/setupMasterDbTemplate.py ' + TEST_DB
 TEST_PATH = os.getcwd()
 
-os.chdir('../')
+os.chdir('../../')
 os.system(PATH)
 os.chdir(TEST_PATH)
 
