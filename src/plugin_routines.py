@@ -12,6 +12,8 @@ from url_routines import getPluginUrl
 
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
+PREFIX_LOAD_MAIN = 'plugins.'
+LOAD_MAIN_ENDING = '.main'
 
 def getPluginList():
     pluginsDirList = os.listdir(PLUGINS_DIR_NAME)
@@ -22,7 +24,7 @@ def getPluginList():
     return pluginsList
 
 def enablePlugin(api, pluginName):
-    loadMain = 'plugins.' + pluginName + '.main'
+    loadMain = PREFIX_LOAD_MAIN + pluginName + LOAD_MAIN_ENDING
     loadModule = __import__ (loadMain, globals(), locals(), [GET_PLUGIN_RESOURCES], -1)
     try:
         pluginResourcesDict = loadModule.getPluginResources()
