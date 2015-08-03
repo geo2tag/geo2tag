@@ -10,6 +10,7 @@ import sys
 sys.path.append('../')
 import log_resource
 from log_parsers import LogParser
+from date_utils import dateDeserialiser
 
 
 NUMBER = 'number'

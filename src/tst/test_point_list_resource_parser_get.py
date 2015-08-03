@@ -13,6 +13,7 @@ sys.path.append('../')
 import log_resource
 from point_list_resource_parser import PointListResourceParser
 import geo_json_type
+from date_utils import dateDeserialiser
 
 NUMBER = 'number'
 NUMBER_VALUE = 0
