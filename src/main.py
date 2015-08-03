@@ -21,7 +21,7 @@ from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection
 import atexit
-from plugins import getPluginList, getPluginState, enablePlugin
+from plugin_routines import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 from plugin_list_resource import GetAllPluginsWithStatusResource
 
