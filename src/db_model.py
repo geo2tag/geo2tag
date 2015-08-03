@@ -338,7 +338,6 @@ def closeConnection():
     if MONGO_CLIENT != None:
         MONGO_CLIENT.close()
 
-
 def getPluginState(pluginName):
     db = getDbObject()
     obj = db[PLUGINS].find_one({NAME: pluginName})
