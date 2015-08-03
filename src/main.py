@@ -23,6 +23,7 @@ from db_model import closeConnection
 import atexit
 from plugins import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
+from plugin_list_resource import GetAllPluginsWithStatusResource
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -62,6 +63,7 @@ api.add_resource(LoginResource, getPathWithPrefix('/login'))
 api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
+api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
 
 def initApp(api):
     import os
