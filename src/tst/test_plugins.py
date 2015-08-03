@@ -16,6 +16,7 @@ api = Api(app)
 
 class TestPlugins(unittest.TestCase):
     def testIsPluginEnabled(self):
+        print 'testIsPluginEnabled'
         enablePlugin(api, TEST_PLUGIN_NAME)
         RESULT = isPluginEnabled(TEST_PLUGIN_NAME, app)
         self.assertTrue(RESULT is True)
