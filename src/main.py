@@ -24,6 +24,9 @@ import atexit
 from plugins import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 
+
+API = None
+
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj, code)
