@@ -4,7 +4,6 @@
 import sys
 import os
 from os.path import join as joinpath
-from werkzeug.routing import BaseConverter
 
 PLUGINS_DIR_NAME = 'plugins'
 sys.path.append(PLUGINS_DIR_NAME)
@@ -16,13 +15,6 @@ CONCAT_PLUGIN_DIR = 'plugins/'
 MAIN_FILE = 'main.py'
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
-
-class ListConverter(BaseConverter):
-    def to_python(self, value):
-        return value.split(',')
-    def to_url(self, values):
-        return ','.join(BaseConverter.to_url(value)
-                        for value in values)
 
 def getPluginList():
     pluginsDirList = os.listdir(PLUGINS_DIR_NAME)
