@@ -4,7 +4,7 @@ import os
 sys.path.append('../')
 from db_model import getDbObject
 from main import app
-from plugins import isPluginEnabled, enablePlugin
+from plugin_routines import isPluginEnabled, enablePlugin
 from flask import Flask
 from flask.ext.restful import Resource, Api
 
