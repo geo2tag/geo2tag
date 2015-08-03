@@ -6,9 +6,6 @@ from flask.ext.restful import Api
 sys.path.append('../')
 from main import initApp
 from plugins import getPluginList
-
-TEST_PATH = os.getcwd()
-
 class TestGt1417(unittest.TestCase):
     def testGt1417(self):
         app = Flask(__name__)
@@ -17,4 +14,4 @@ class TestGt1417(unittest.TestCase):
         resources = api.endpoints
         self.assertTrue('resource_gt_1416' in resources)
         self.assertTrue('resource_gt_1417' in resources)
-        os.chdir(TEST_PATH)
+        os.chdir('tst')

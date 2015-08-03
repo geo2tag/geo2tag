@@ -4,12 +4,13 @@ import os
 sys.path.append('../')
 from plugins import getPluginList
 
-TEST_PATH = os.getcwd()
 
 class TestGetPluginList(unittest.TestCase):
     def testGetPluginList(self):
+        print 'testGetPluginList'
+        print  os.getcwd()        
         os.chdir('../')
         pluginsList = getPluginList()
         root, dirs, files = os.walk('plugins').next()
-        os.chdir(TEST_PATH)
+        os.chdir('tst')
         self.assertEquals(dirs, pluginsList)
