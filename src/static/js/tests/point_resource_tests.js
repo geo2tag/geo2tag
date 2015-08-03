@@ -16,7 +16,8 @@ var test_data_point_resource = {
     },
    'DELETE':{
 
-        url : '/instance/service/testservice/point/556721a521217f1bd2744202'
+        url : '/instance/service/testservice/point/',
+        id : ''
     }
 };
 
@@ -55,8 +56,10 @@ QUnit.test( 'POST ' + test_data_point_resource.POST.url + JSON.stringify(test_da
         done();
     };
     var postCallbackSuccess = function(data) {
+        test_data_point_resource.DELETE.id = data[0];
         assert.ok(true, data );
         done();
+
     };
     $.post(test_data_point_resource.POST.url,JSON.stringify([test_data_point_resource.POST.data]))
         .done(postCallbackSuccess).fail(postCallbackFail);
@@ -81,19 +84,27 @@ QUnit.test( 'GET ' + test_data_point_resource.FIND.url + JSON.stringify(test_dat
 
 QUnit.test( 'DELETE ' + test_data_point_resource.DELETE.url, function( assert ) {
     var done = assert.async();
-    
-    var deleteCallbackFail = function() {
-        assert.ok(false, 'Point resource delete failed' );
-        done();
-    };
-    var deleteCallbackSuccess = function() {
-        assert.ok(true, 'Point resource delete success' );
-        done();
-    };
-    $.delete(test_data_point_resource.DELETE.url)
-        .fail(deleteCallbackFail).done(deleteCallbackSuccess).error(function(a,b,c){
-assert.ok(false, c);
-});
+    $.post(test_data_point_resource.POST.url,JSON.stringify([test_data_point_resource.POST.data]))
+        .done(function(data){
+            var deleteCallbackFail = function() {
+            assert.ok(false, 'Point resource delete failed' );
+            done();
+            };
+            var deleteCallbackSuccess = function() {
+            assert.ok(true, 'Point resource delete success' );
+            done();
+            };
+            $.delete(test_data_point_resource.DELETE.url + data[0])
+            .fail(deleteCallbackFail).done(deleteCallbackSuccess).error(function(a,b,c){
+            assert.ok(false, c);
+            });
+
+        }).fail(function(){
+          assert.ok(false, 'Post of ChannelTodelete failed' );
+          done();    
+   });
+
+   
 });
 
 

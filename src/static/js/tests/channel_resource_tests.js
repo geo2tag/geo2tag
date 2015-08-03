@@ -45,7 +45,10 @@ QUnit.test('GET' + test_data_channel_resource.GET.url, function( assert ) {
 
 var channelToDelete = {
     'POST':{
-        data:{'name': 'chanelToDelete', 'json': "{'1': 2, '2': '4'}"},
+        data:{
+            'name': 'chanelToDelete'+Math.floor(Math.random()*1000), 
+            'json': "{'1': 2, '2': '4'}"
+        },
         url : getUrlWithPrefix('/service/testservice/channel')
     }
 };
@@ -55,10 +58,7 @@ QUnit.test('DELETE '+test_data_channel_resource.DELETE.url + test_data_channel_r
    var done = assert.async();
    $.post(channelToDelete.POST.url,channelToDelete.POST.data)
    .done(function(newObjectId){
-        console.log(newObjectId);
-        if(newObjectId != null)
-            test_data_channel_resource.DELETE.url += newObjectId["$oid"];
-        console.log(test_data_channel_resource);
+        test_data_channel_resource.DELETE.url += newObjectId["$oid"];
        
     var deleteCallbackFail = function() {
            assert.ok(false, 'ChannelResource delete failed' );
@@ -73,8 +73,7 @@ QUnit.test('DELETE '+test_data_channel_resource.DELETE.url + test_data_channel_r
        .fail(deleteCallbackFail).done(deleteCallbackSuccess);
     
    }).fail(function(){
-          console.log("fail happened");
-          assert.ok(false, 'Post channel for delete failed' );
+          assert.ok(false, 'Post of ChannelTodelete failed' );
           done();    
    })
 
