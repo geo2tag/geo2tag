@@ -1,5 +1,3 @@
-import sys
-sys.path.append('../../plugins/test_plugin/')
 from test_resource_2 import TestResource2
 from test_resource_1 import TestResource1
 def getPluginResources():

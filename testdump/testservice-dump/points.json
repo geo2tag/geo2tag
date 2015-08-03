@@ -1,4 +1,4 @@
-{ "_id" : { "$oid" : "55282f3b5c0dd1178d37f7a6" }, "date" : { "$date" : 1428707691703 }, "location" : { "type" : "Point", "coordinates" : [ 11, 2.3 ] }, "name" : "" }
+ "_id" : { "$oid" : "55282f3b5c0dd1178d37f7a6" }, "date" : { "$date" : 1428707691703 }, "location" : { "type" : "Point", "coordinates" : [ 11, 2.3 ] }, "name" : "" }
 { "_id" : { "$oid" : "55282f405c0dd1178d37f7a7" }, "date" : { "$date" : 1428707696350 }, "location" : { "type" : "Point", "coordinates" : [ 11, 2.4 ] }, "name" : "" }
 { "_id" : { "$oid" : "55282f4a5c0dd1178d37f7a8" }, "date" : { "$date" : 1428707706604 }, "location" : { "type" : "Point", "coordinates" : [ 1, 2.4 ] }, "name" : "" }
 { "_id" : { "$oid" : "556721a521217f1bd2744202" }, "date" : { "$date" : 1428703291702 }, "location" : { "type" : "Point", "coordinates" : [ 1, 1.1 ] }, "name" : "" }
