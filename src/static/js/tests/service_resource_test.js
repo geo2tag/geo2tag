@@ -4,8 +4,17 @@ var test_data_service_resource = {
         url : getUrlWithPrefix('/service/testservice'),
         data : {logSize : 10}
     },
-    'DELETE' : {url : getUrlWithPrefix('/service/testservice')}
+    'DELETE' : {url : getUrlWithPrefix('/service/serviceToDelete')}
 };
+
+var serviceToDelete = {
+        url : getUrlWithPrefix('/service'),
+        data : {
+            'name' : 'serviceToDelete',
+            'ownerId' : 'serviceListResourceTestOwnerId',
+            'logSize' : 10
+        }
+    }
 
 QUnit.test('GET' + test_data_service_resource.GET.url, function( assert ) {
     var done = assert.async();
@@ -54,24 +63,35 @@ QUnit.test('PUT' + test_data_service_resource.PUT.url + JSON.stringify(test_data
 QUnit.test('DELETE' + test_data_service_resource.DELETE.url, function( assert ) {
     var done = assert.async();
 
-    var callbackFail = function() {
-        assert.ok( false, 'get failed' );
-        done();
-    };
 
-    var callbackOk = function() {
-        assert.ok( true, 'went ok' );
-        done();
-    };
+    $.post(serviceToDelete.url, serviceToDelete.data)
+    .done(function(){
 
-    $.delete = function( url ) {
-        return $.ajax({
-            type : 'DELETE',
-            url : url
-        });
-    };
+        var callbackFail = function() {
+            assert.ok( false, 'get failed' );
+            done();
+        };
 
-    $.delete( test_data_service_resource.DELETE.url )
+        var callbackOk = function() {
+            assert.ok( true, 'went ok' );
+            done();
+        };
+
+        $.delete = function( url ) {
+            return $.ajax({
+                type : 'DELETE',
+                url : url
+            });
+        };
+
+        $.delete( test_data_service_resource.DELETE.url )
         .fail( callbackFail )
-        .done( callbackOk )
+        .done( callbackOk );
+
+    })
+    .fail(function(){
+        assert.ok(false, 'Post of serviceToDelete failed' );
+        done();    
+    });
+    
 });
