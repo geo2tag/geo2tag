@@ -11,6 +11,7 @@ COLLECTION_NAME_USERS = "users"
 FIRST_NAME = 'first_name'
 LAST_NAME = 'last_name'
 EMAIL = 'email'
+ANONYM_USER = 'anonym'
 
 def logUserIn(_id):
     session[USER_ID] = _id    
@@ -36,3 +37,9 @@ def addUser(_id, firstName, lastName, email):
         collectionUsers.insert({FIND_KEY_ID : _id, FIRST_NAME : firstName, LAST_NAME : lastName, EMAIL : email})
     finally:
         return _id
+
+def getUserId():
+    if USER_ID in session:
+        return session[USER_ID]
+    else:
+        return ANONYM_USER

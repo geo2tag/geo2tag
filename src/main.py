@@ -74,6 +74,7 @@ api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
 
+
 def initApp(api):
     import os
     homeDir = os.getcwd()
