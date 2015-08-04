@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from setuptools.command.egg_info import write_pkg_info
+from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
@@ -69,22 +70,21 @@ api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 api.add_resource(TestsResource, getPathWithPrefix('/tests'))
 api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
+api.add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
 
 
 def initApp(api):
     import os
     homeDir = os.getcwd()
-    if os.getcwd().find('/var/www') != -1:
+    if homeDir.find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'
         os.chdir(homeDir)        
     else:
-        if os.getcwd().find('src/tst') != -1:
+        if homeDir.find('src/tst') != -1:
             os.chdir('..')
-    homeDir = os.getcwd()
     pluginList = getPluginList()
     for pluginName in pluginList:
         if getPluginState(pluginName) is True:
-            os.chdir(homeDir)
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
