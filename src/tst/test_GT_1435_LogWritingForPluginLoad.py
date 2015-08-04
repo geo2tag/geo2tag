@@ -37,13 +37,11 @@ class TestLogWritingForPluginLoad(TestCase):
     def testLogWritingForPluginLoadDone(self):
         enablePlugin(api, PLUGIN_DONE_PLUGIN)
         last_log_document = db[COLLECTION_LOG].find().sort(ID, pymongo.DESCENDING).limit(1)
-        print last_log_document[0]
         self.assertNotEqual(last_log_document[0][FIELD_MESSAGE].find(MESSAGE_LOAD_DONE), -1)
         self.assertEqual(last_log_document[0][FIELD_USERID], LOG_USERID)
     def testLogWritingForPluginLoadFail(self):
         enablePlugin(api, PLUGIN_FAIL_PLUGIN)
         last_log_document = db[COLLECTION_LOG].find().sort(ID, pymongo.DESCENDING).limit(1)
-        print last_log_document[0]
         self.assertNotEqual(last_log_document[0][FIELD_MESSAGE].find(MESSAGE_LOAD_FAIL), -1)
         self.assertEqual(last_log_document[0][FIELD_USERID], LOG_USERID)
 
