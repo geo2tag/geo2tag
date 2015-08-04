@@ -49,7 +49,7 @@ def after_request(response):
     return response
 
 
-@app.before_first_request
+@app.before_request
 def defineInstancePrefix():
     g.instance_prefix = getInstancePrefix()
 

@@ -11,6 +11,7 @@ INSTACNE_PREFIX = 'instance'
 
 app = Flask(__name__)
 
+
 class TestDefineInstancePrefixInBaseTemplate(TestCase):
     def testDefineInstancePrefixInBaseTemplate(self):
         with app.test_request_context(TEST_URL):
