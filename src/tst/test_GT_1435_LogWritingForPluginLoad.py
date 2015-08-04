@@ -6,7 +6,7 @@ from flask import Flask
 from flask.ext.restful import Api
 import sys
 sys.path.append('../')
-from plugins import enablePlugin
+from plugin_routines import enablePlugin
 from db_model import getDbName, getDbObject
 from log import writeInstanceLog
 
