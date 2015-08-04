@@ -30,19 +30,26 @@ from flask import request
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
 
+
+API = None
+
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj, code)
     return make_response(json_util.dumps(obj), code)
+
+def getApi():
+    global API
+    if API == None:
+        API = Api(app)
+    return API
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
 app.register_blueprint(google_oauth)
 
 app.secret_key = urandom(32)
-api = Api(app)
-api.representations = DEFAULT_REPRESENTATIONS
-
+getApi().representations = DEFAULT_REPRESENTATIONS
 
 @app.after_request
 def after_request(response):
@@ -51,6 +58,12 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     return response
 
+getApi().add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
+getApi().add_resource(StatusResource, getPathWithPrefix('/status'))
+getApi().add_resource(ServiceListResource, getPathWithPrefix('/service'))
+getApi().add_resource(DebugInfoResource, getPathWithPrefix('/debug_info'))
+getApi().add_resource(LogResource, getPathWithPrefix('/service/<string:serviceName>/log'),
+                              getPathWithPrefix('/log'))
 @app.before_request
 @possibleException
 def before_request():
@@ -60,25 +73,19 @@ def before_request():
         if getPluginState(pluginUrlList[pluginNameIndex]) == False:
             raise PluginNotEnabledException
 
-api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
-api.add_resource(StatusResource, getPathWithPrefix('/status'))
-api.add_resource(ServiceListResource, getPathWithPrefix('/service'))
-api.add_resource(DebugInfoResource, getPathWithPrefix('/debug_info'))
-api.add_resource(LogResource, getPathWithPrefix('/service/<string:serviceName>/log'),
-                              getPathWithPrefix('/log'))
-api.add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel'))
-api.add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
+getApi().add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel'))
+getApi().add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
 
-api.add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
-api.add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
+getApi().add_resource(PointResource, getPathWithPrefix('/service/<string:serviceName>/point/<string:pointId>'))
+getApi().add_resource(PointListResource, getPathWithPrefix('/service/<string:serviceName>/point'))
 
-api.add_resource(LogoutResource, getPathWithPrefix('/logout'))
-api.add_resource(LoginResource, getPathWithPrefix('/login'))
-api.add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
-api.add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
-api.add_resource(TestsResource, getPathWithPrefix('/tests'))
-api.add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
-api.add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
+getApi().add_resource(LogoutResource, getPathWithPrefix('/logout'))
+getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
+getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
+getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
+getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
+getApi().add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
+getApi().add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
 
 def initApp(api):
     import os
@@ -97,7 +104,7 @@ def initApp(api):
 
 atexit.register(closeConnection)
 
-initApp(api)
+initApp(getApi())
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)
