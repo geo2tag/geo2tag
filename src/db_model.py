@@ -346,7 +346,13 @@ def getPluginState(pluginName):
     else:
         return False
 
-def setPluginState(pluginName, state):
+def setPluginState(pluginName, state):    
+    if type(state) is str or type(state) is unicode:
+        if state.lower() == 'true':
+            state = True
+        else:
+            state = False
+
     db = getDbObject()
     obj = db[PLUGINS].find_one({NAME: pluginName})
     if obj == None:

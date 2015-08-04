@@ -14,8 +14,8 @@ RETURN = '        args = parser.parse_args()\n\
 TAB = '    '
 DEF = 'def '
 GET_PATH_FUNC = "getPathWithPrefix('"
-MAIN_STR = "def initApp():\n"
-addResource = 'api.add_resource('
+MAIN_STR = "def initApp(api):\n"
+addResource = 'getApi().add_resource('
 MAIN_FILE = 'main.py'
 PARSER_ARGS = {}
 
