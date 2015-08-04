@@ -70,17 +70,15 @@ api.add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
 def initApp(api):
     import os
     homeDir = os.getcwd()
-    if os.getcwd().find('/var/www') != -1:
+    if homeDir.find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'
         os.chdir(homeDir)        
     else:
-        if os.getcwd().find('src/tst') != -1:
+        if homeDir.find('src/tst') != -1:
             os.chdir('..')
-    homeDir = os.getcwd()
     pluginList = getPluginList()
     for pluginName in pluginList:
         if getPluginState(pluginName) is True:
-            os.chdir(homeDir)
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
