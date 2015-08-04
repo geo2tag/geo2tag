@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from manage_plugins import ManagePluginsResource
+from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
