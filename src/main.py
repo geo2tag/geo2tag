@@ -25,6 +25,9 @@ import atexit
 from plugin_routines import getPluginList, getPluginState, enablePlugin
 from os.path import join as joinpath
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from user_routines import getUserId
+from flask import request
+from log import writeInstanceLog
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -42,14 +45,7 @@ api.representations = DEFAULT_REPRESENTATIONS
 
 @app.after_request
 def after_request(response):
-    from flask import request
-    from flask import session
-    from log import writeInstanceLog
-    USER_ID_FIELD = 'user_id'
-    USER_ID = None
-    writeInstanceLog(
-        'system' if USER_ID not in session else session[USER_ID_FIELD],
-        'Request path: ' + request.url + ', request data: ' + request.data)
+    writeInstanceLog(getUserId(), 'Request path: ' + request.url + ', request data: ' + request.data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
