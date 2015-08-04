@@ -6,7 +6,6 @@ from point_list_resource_parser import PointListResourceParser, \
 from possible_exception import possibleException
 from db_model import addPoints, findPoints
 from bson.json_util import dumps
-import log_resource
 from date_utils import dateDeserialiser
 
 class PointListResource(Resource):
@@ -15,8 +14,8 @@ class PointListResource(Resource):
         params = PointListResourceParser.parseGetParameters()
         result = findPoints ( serviceName, params[CHANNEL_IDS], \
             params[NUMBER], params[GEOMETRY], params[ALTITUDE_FROM], \
-            params[ALTITUDE_TO], params[SUBSTRING], log_resource.dateDeserialiser(params,DATE_FROM), \
-            log_resource.dateDeserialiser(params,DATE_TO), params[OFFSET], params[RADIUS])        
+            params[ALTITUDE_TO], params[SUBSTRING], dateDeserialiser(params,DATE_FROM), \
+            dateDeserialiser(params,DATE_TO), params[OFFSET], params[RADIUS])        
         return result
     
     @possibleException
