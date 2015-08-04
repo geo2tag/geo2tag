@@ -28,7 +28,7 @@ from test_point_list_resource_post import TestPointListPostRequest
 from test_GT_1386 import Test_GT_1386
 from test_debug_login_resource import TestDebugLoginResource
 from test_point_list_resource_get import TestPointListGet_ResponseText
-
+from test_GT_1486_AfterRequesWriteInstanceLog import TestAfterRequestWriteInstanceLog
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicIntegrationTest.parametrize(TestPluginListResource, param=host))
@@ -57,6 +57,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1386, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestDebugLoginResource, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListGet_ResponseText, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestAfterRequestWriteInstanceLog, param=host))
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 

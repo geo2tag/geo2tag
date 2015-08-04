@@ -45,7 +45,7 @@ api.representations = DEFAULT_REPRESENTATIONS
 
 @app.after_request
 def after_request(response):
-    writeInstanceLog(getUserId(), 'Request path: ' + request.url + ', request data: ' + request.data)
+    writeInstanceLog(getUserId(), 'Request url: ' + request.url + ', request data: ' + request.data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
