@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from setuptools.command.egg_info import write_pkg_info
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
@@ -41,6 +42,14 @@ api.representations = DEFAULT_REPRESENTATIONS
 
 @app.after_request
 def after_request(response):
+    from flask import request
+    from flask import session
+    from log import writeInstanceLog
+    USER_ID_FIELD = 'user_id'
+    USER_ID = None
+    writeInstanceLog(
+        'system' if USER_ID not in session else session[USER_ID_FIELD],
+        'Request path: ' + request.url + ', request data: ' + request.data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
