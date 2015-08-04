@@ -4,6 +4,7 @@
 import sys
 import os
 from os.path import join as joinpath
+
 PLUGINS_DIR_NAME = 'plugins'
 sys.path.append(PLUGINS_DIR_NAME)
 
@@ -11,12 +12,12 @@ import imp
 from url_routines import getPluginUrl
 from log import writeInstanceLog
 
-CONCAT_PLUGIN_DIR = 'plugins/'
-MAIN_FILE = 'main.py'
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '
 ERROR_DISR_TEXT = 'error description: '
 LOG_USERID = 'system'
+PREFIX_LOAD_MAIN = 'plugins.'
+LOAD_MAIN_ENDING = '.main'
 
 def getPluginList():
     pluginsDirList = os.listdir(PLUGINS_DIR_NAME)
@@ -27,13 +28,10 @@ def getPluginList():
     return pluginsList
 
 def enablePlugin(api, pluginName):
-    dirName = CONCAT_PLUGIN_DIR + pluginName
-    os.chdir(dirName)
-    fileName = joinpath(os.getcwd(), MAIN_FILE)
-    sys.path.append('../../' + dirName)
+    loadMain = PREFIX_LOAD_MAIN + pluginName + LOAD_MAIN_ENDING
+    loadModule = __import__ (loadMain, globals(), locals(), [GET_PLUGIN_RESOURCES], -1)
     try:
-        module = imp.load_source(GET_PLUGIN_RESOURCES, fileName)
-        pluginResourcesDict = module.getPluginResources()
+        pluginResourcesDict = loadModule.getPluginResources()
         for pluginResource in pluginResourcesDict:
             print getPluginUrl(pluginResource, pluginName)
             api.add_resource(pluginResourcesDict[pluginResource], getPluginUrl(pluginResource, pluginName))
@@ -43,3 +41,10 @@ def enablePlugin(api, pluginName):
 
 def getPluginState(pluginName):
     return True
+
+def isPluginEnabled(pluginName, app):
+    url_map = getattr(app, 'url_map')
+    for rule in url_map.iter_rules():
+        if str(rule).find('/' + pluginName + '/') != -1:
+            return True
+    return False

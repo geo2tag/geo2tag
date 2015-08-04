@@ -1,6 +1,7 @@
 { "_id" : { "$oid" : "55282f3b5c0dd1178d37f7a6" }, "date" : { "$date" : 1428707691703 }, "location" : { "type" : "Point", "coordinates" : [ 11, 2.3 ] }, "name" : "" }
 { "_id" : { "$oid" : "55282f405c0dd1178d37f7a7" }, "date" : { "$date" : 1428707696350 }, "location" : { "type" : "Point", "coordinates" : [ 11, 2.4 ] }, "name" : "" }
 { "_id" : { "$oid" : "55282f4a5c0dd1178d37f7a8" }, "date" : { "$date" : 1428707706604 }, "location" : { "type" : "Point", "coordinates" : [ 1, 2.4 ] }, "name" : "" }
+{ "_id" : { "$oid" : "556721a521217f1bd2744202" }, "date" : { "$date" : 1428703291702 }, "location" : { "type" : "Point", "coordinates" : [ 1, 1.1 ] }, "name" : "" }
 { "_id" : { "$oid" : "5528334b5c0dd1178d37f7a9" }, "date" : { "$date" : 1428708731758 }, "location" : { "type" : "Point", "coordinates" : [ 12, 2.4 ] }, "name" : "" }
 { "_id" : { "$oid" : "552833515c0dd1178d37f7aa" }, "date" : { "$date" : 1428708737813 }, "location" : { "type" : "Point", "coordinates" : [ 22, 2.4 ] }, "name" : "" }
 { "_id" : { "$oid" : "552833515c0dd1178d37f7bb" }, "date" : { "$date" : 1428708737814 }, "location" : { "type" : "Point", "coordinates" : [ 24, 4.4 ] }, "name" : "point_GT_1318" }
