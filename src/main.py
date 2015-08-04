@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
@@ -19,11 +20,15 @@ from login_resource import LoginResource
 from url_utils import getPathWithPrefix
 from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
-from db_model import closeConnection
+from db_model import closeConnection, getPluginState
 import atexit
-from plugin_routines import getPluginList, getPluginState, enablePlugin
+from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from possible_exception import possibleException
+from flask import request
+from url_routines import isPluginUrl
+from plugin_not_enabled_exception import PluginNotEnabledException
 
 
 API = None
@@ -59,6 +64,15 @@ getApi().add_resource(ServiceListResource, getPathWithPrefix('/service'))
 getApi().add_resource(DebugInfoResource, getPathWithPrefix('/debug_info'))
 getApi().add_resource(LogResource, getPathWithPrefix('/service/<string:serviceName>/log'),
                               getPathWithPrefix('/log'))
+@app.before_request
+@possibleException
+def before_request():
+    if isPluginUrl(request.url):
+        pluginUrlList = request.url.split('/')
+        pluginNameIndex = pluginUrlList.index('plugin') + 1
+        if getPluginState(pluginUrlList[pluginNameIndex]) == False:
+            raise PluginNotEnabledException
+
 getApi().add_resource(ChannelsListResource, getPathWithPrefix('/service/<string:serviceName>/channel'))
 getApi().add_resource(ChannelResource, getPathWithPrefix('/service/<string:serviceName>/channel/<string:channelId>'))
 
@@ -71,21 +85,20 @@ getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 getApi().add_resource(GetAllPluginsWithStatusResource, getPathWithPrefix('/plugin'))
+getApi().add_resource(ManagePluginsResource, getPathWithPrefix('/manage_plugins'))
 
 def initApp(api):
     import os
     homeDir = os.getcwd()
-    if os.getcwd().find('/var/www') != -1:
+    if homeDir.find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'
         os.chdir(homeDir)        
     else:
-        if os.getcwd().find('src/tst') != -1:
+        if homeDir.find('src/tst') != -1:
             os.chdir('..')
-    homeDir = os.getcwd()
     pluginList = getPluginList()
     for pluginName in pluginList:
         if getPluginState(pluginName) is True:
-            os.chdir(homeDir)
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
