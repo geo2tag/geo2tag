@@ -347,6 +347,10 @@ def getPluginState(pluginName):
         return False
 
 def setPluginState(pluginName, state):
+    if state.lower() == 'true':
+        state = True
+    else:
+        state = False
     db = getDbObject()
     obj = db[PLUGINS].find_one({NAME: pluginName})
     if obj == None:
