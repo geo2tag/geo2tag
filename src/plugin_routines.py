@@ -39,9 +39,6 @@ def enablePlugin(api, pluginName):
     except Exception as e:
         writeInstanceLog(LOG_USERID, EXCEPT_ERROR_TEXT + pluginName + ', ' + ERROR_DISR_TEXT + str(e) + ' ' + str(format_exc()))
 
-def getPluginState(pluginName):
-    return True
-
 def isPluginEnabled(pluginName, app):
     url_map = getattr(app, 'url_map')
     for rule in url_map.iter_rules():

@@ -20,11 +20,15 @@ from login_resource import LoginResource
 from url_utils import getPathWithPrefix
 from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
-from db_model import closeConnection
+from db_model import closeConnection, getPluginState
 import atexit
-from plugin_routines import getPluginList, getPluginState, enablePlugin
+from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from possible_exception import possibleException
+from flask import request
+from url_routines import isPluginUrl
+from plugin_not_enabled_exception import PluginNotEnabledException
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
@@ -46,6 +50,15 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     return response
+
+@app.before_request
+@possibleException
+def before_request():
+    if isPluginUrl(request.url):
+        pluginUrlList = request.url.split('/')
+        pluginNameIndex = pluginUrlList.index('plugin') + 1
+        if getPluginState(pluginUrlList[pluginNameIndex]) == False:
+            raise PluginNotEnabledException
 
 api.add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
 api.add_resource(StatusResource, getPathWithPrefix('/status'))
