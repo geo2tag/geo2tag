@@ -11,15 +11,14 @@ from db_model import getDbName, getDbObject
 from log import writeInstanceLog
 
 tstDir = os.getcwd()
-os.chdir('..')
-srcDir = os.getcwd()
+srcDir = tstDir + '/..'
 
 app = Flask(__name__)
 api = Api(app)
 
 db = getDbObject(getDbName())
 
-PLUGIN_DONE_PLUGIN = 'test_plugin_for_load_done_gt_1435'
+PLUGIN_DONE_PLUGIN = 'test_plugin'
 PLUGIN_FAIL_PLUGIN = 'test_plugin_for_load_fail_gt_1435'
 FIELD_USERID = 'user_id'
 LOG_USERID = 'system'
