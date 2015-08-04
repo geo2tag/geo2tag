@@ -3,7 +3,7 @@ import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/instance/manage_plugins?test_plugin=False&testPlugin1=False'
+TEST_URL = '/instance/manage_plugins?test_plugin=False&testPlugin1=True'
 TEST_URL2 = '/instance/manage_plugins?test_plugin_not_valid_name=True'
 VALID_TEXT = 'null'
 VALID_RESPONSE_CODE = 200
