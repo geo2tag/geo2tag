@@ -2,6 +2,7 @@ from flask_restful import reqparse
 import geo_json_type
 from flask import request
 from date_utils import dateDeserialiser
+from date_utils import datetime_from_iso8601
 
 CHANNEL_IDS = 'channel_ids'
 NUMBER = 'number'
