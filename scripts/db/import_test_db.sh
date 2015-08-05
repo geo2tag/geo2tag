@@ -1,4 +1,10 @@
 #!/bin/bash
 
-scripts/db/mongo.sh -l -H localhost:27017 geomongo
-scripts/db/mongo.sh -l -H localhost:27017 testservice
+dbs=(geomongo testservice)
+
+for db in ${dbs[*]}; do
+    scripts/db/mongo.sh -l -H localhost:27017 ${db}
+    if [ $? -gt 0 ]; then
+        echo 'Error occured while imorting database: '${db}'. Check database dump and try again'
+    fi
+done
