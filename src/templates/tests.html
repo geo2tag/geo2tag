@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block styles%}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/qunit-1.18.0.css') }}">
@@ -17,6 +18,7 @@
 <script src="{{ url_for('static', filename='js/tests/plugin_list_resource_test.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tests/global_instance_prefix_test.js') }}"></script>
 
+<script src="{{ url_for('static', filename='js/tests/test_manage_plugins.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
