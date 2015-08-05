@@ -8,8 +8,8 @@ import pytz
 
 import sys
 sys.path.append('../')
-import log_resource
 from log_parsers import LogParser
+from date_utils import dateDeserialiser
 
 
 NUMBER = 'number'
@@ -31,9 +31,9 @@ class TestParserLogResource(TestCase):
             args = LogParser.parseGetParameters()
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
             self.assertEquals(args[NUMBER], NUMBER_VALUE)
-            loadedDatetime_from = json.loads(args[DATE_FROM], object_hook = log_resource.dateDeserialiser(args,DATE_FROM))
+            loadedDatetime_from = json.loads(args[DATE_FROM], object_hook = dateDeserialiser(args,DATE_FROM))
             self.assertEquals(loadedDatetime_from, DATE_FROM_VALUE)
-            loadedDatetime_to = json.loads(args[DATE_TO], object_hook = log_resource.dateDeserialiser(args,DATE_TO))
+            loadedDatetime_to = json.loads(args[DATE_TO], object_hook = dateDeserialiser(args,DATE_TO))
             self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
 
         with app.test_request_context('/?'+INCORRECT_ARGS):

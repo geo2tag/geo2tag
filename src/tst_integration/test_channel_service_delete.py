@@ -17,7 +17,7 @@ NOT_VALID_RESPONSE_TEXT = "Channel does not exist"
 class ChannelResourceDelete(BasicIntegrationTest):
     def testChannelResourceDelete(self):
         db = getDbObject(TEST_SERVICE)
-        result = list(db['channels'].find({"name" : u"test_channel_GT-1290"}))
+        result = list(db['channels'].find({"name" : u"test_channel_GT-1290_delete"}))
         response = requests.delete(self.getUrl(TEST_URL))
         responseText = response.text
         responseCode = response.status_code

@@ -1,0 +1,3 @@
+{"_id" : { "$oid" : "55671e2b13293c504d515a35" }, "name": "test_plugin", "enabled": true }
+{"_id" : { "$oid" : "55671e2b13293c504d517a35" }, "name": "testPlugin1", "enabled": true }
+{"_id" : { "$oid" : "55671e2b13293c504d518a35" }, "name": "testPlugin2", "enabled": true }
