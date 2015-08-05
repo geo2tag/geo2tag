@@ -14,6 +14,7 @@ class TestRoutMap(BasicIntegrationTest):
         responseCode = response.status_code
         responseText = response.text
         self.assertEqual(VALID_RESPONSE_CODE,responseCode)
+        
     def testRoutMapRequestData(self):
         response = requests.get(self.getUrl(TEST_URL_DATA))
         responseCode = response.status_code

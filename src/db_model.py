@@ -206,7 +206,7 @@ def deleteChannelById(serviceName, channelId):
     else:
         result = list(db[CHANNELS_COLLECTION].find({'_id': channelId}))
     if len(result) > 0:
-        db[CHANNELS_COLLECTION].remove({'_id': channelId})
+        db[CHANNELS_COLLECTION].remove({'_id': ObjectId(channelId)})
     else:
         raise ChannelDoesNotExist()
 
@@ -346,7 +346,13 @@ def getPluginState(pluginName):
     else:
         return False
 
-def setPluginState(pluginName, state):
+def setPluginState(pluginName, state):    
+    if type(state) is str or type(state) is unicode:
+        if state.lower() == 'true':
+            state = True
+        else:
+            state = False
+
     db = getDbObject()
     obj = db[PLUGINS].find_one({NAME: pluginName})
     if obj == None:
