@@ -10,9 +10,9 @@ from geojson import MultiPoint
 
 import sys
 sys.path.append('../')
-import log_resource
 from point_list_resource_parser import PointListResourceParser
 import geo_json_type
+from date_utils import dateDeserialiser
 
 NUMBER = 'number'
 NUMBER_VALUE = 0
@@ -37,9 +37,9 @@ class TestParserPointListGetResource(TestCase):
             args = PointListResourceParser.parseGetParameters()
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
             self.assertEquals(args[NUMBER], NUMBER_VALUE)
-            loadedDatetime_from = json.loads(args[DATE_FROM], object_hook = log_resource.dateDeserialiser(args, args[DATE_FROM]))
+            loadedDatetime_from = json.loads(args[DATE_FROM], object_hook = dateDeserialiser(args, args[DATE_FROM]))
             self.assertEquals(loadedDatetime_from, DATE_FROM_VALUE)
-            loadedDatetime_to = json.loads(args[DATE_TO], object_hook = log_resource.dateDeserialiser(args, args[DATE_TO]))
+            loadedDatetime_to = json.loads(args[DATE_TO], object_hook = dateDeserialiser(args, args[DATE_TO]))
             self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
             geometryValue = geo_json_type.GeoJsonType(str(args.get(GEOMETRY)))
             self.assertEquals(GEOMETRY_VALUE_JSON, geometryValue)
