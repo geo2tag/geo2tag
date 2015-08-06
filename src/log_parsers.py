@@ -1,7 +1,8 @@
 from flask_restful import reqparse
 from datetime import datetime, date, time
 from calendar import timegm
-import date_utils, pymongo
+import date_utils,
+import pymongo
 import json
 import aniso8601
 import pytz
