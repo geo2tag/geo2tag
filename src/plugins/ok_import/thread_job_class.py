@@ -14,7 +14,7 @@ class ThreadJob():
         self.showImageUrl = showImageUrl
     
     def internalStart(self):
-        thread = threading.Thread(self.backgroundFunction(), args=(channelName, openDataUrl, showObjectUrl, showImageUrl, ))
+        thread = threading.Thread(self.backgroundFunction(), args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, ))
         thread.start()
 
     def internalStop(self):
