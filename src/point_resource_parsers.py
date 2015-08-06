@@ -6,7 +6,9 @@ ALT = 'alt'
 JSON = 'json'
 CHANNEL_ID = 'channel_id'
 
+
 class PointResourceParsers():
+
     @staticmethod
     def parsePutParameters():
         parser = reqparse.RequestParser()

@@ -7,7 +7,9 @@ POST_ARGS_LOG_SIZE = "logSize"
 POST_ARGS_OWNER_ID = "ownerId"
 DEFAULT_OWNER_ID = "STUB"
 
+
 class ServiceListParser():
+
     @staticmethod
     def parseGetParameters():
         parser = reqparse.RequestParser()
@@ -21,6 +23,7 @@ class ServiceListParser():
         parser = reqparse.RequestParser()
         parser.add_argument(POST_ARGS_NAME, type=str, required=True)
         parser.add_argument(POST_ARGS_LOG_SIZE, type=int, default=1048576)
-        parser.add_argument(POST_ARGS_OWNER_ID, type=str, default=DEFAULT_OWNER_ID)
+        parser.add_argument(POST_ARGS_OWNER_ID, type=str,
+                            default=DEFAULT_OWNER_ID)
         args = parser.parse_args()
         return args
