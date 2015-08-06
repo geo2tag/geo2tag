@@ -14,5 +14,5 @@ class ManagePluginsResource(Resource):
         for plugin in pluginsDict:
             setPluginState(plugin, pluginsDict[plugin])
             if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(plugin, app) == False:
-                enablePlugin(api, plugin)
+                enablePlugin(getApi, plugin)
         

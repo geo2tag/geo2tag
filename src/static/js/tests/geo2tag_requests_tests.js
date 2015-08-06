@@ -25,7 +25,7 @@ QUnit.test( 'Get points test',
     		assert.ok(false);
     		done();
     	};
-
     	var test = new Geo2TagRequests('test', 'test');
-    	test.getPoints('testservice', callbackSuccess, callbackFail, '556721a52a2e7febd2744201', 5);
+        var channel_ids_list = ['556721a52a2e7febd2744201','556721a52a2e7febd2744202'];
+    	test.getPoints('testservice', callbackSuccess, callbackFail, channel_ids_list, 5);
     }); 
