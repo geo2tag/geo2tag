@@ -5,6 +5,7 @@ from flask.ext.restful import Resource
 from flask_restful import reqparse
 from datetime import datetime
 from calendar import timegm
+from log_parsers import LogParser
 import pymongo
 import json
 import aniso8601
