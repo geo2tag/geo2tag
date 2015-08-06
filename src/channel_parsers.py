@@ -4,7 +4,9 @@ ARGS_NAME = 'name'
 ARGS_JSON = 'json'
 ARGS_ACL = 'acl'
 
+
 class ChannelResourceParser():
+
     @staticmethod
     def parsePutParameters():
         parser = reqparse.RequestParser()

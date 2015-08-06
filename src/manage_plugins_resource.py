@@ -9,10 +9,12 @@ class ManagePluginsResource(Resource):
     @possibleException
     def get(self):
         from main import app, getApi
-        pluginsDict = dict((key, request.args.get(key)) for key in request.args.keys())
+        pluginsDict = dict((key, request.args.get(key)) 
+                            for key in request.args.keys())
         for plugin in pluginsDict:
             setPluginState(plugin, pluginsDict[plugin])
-            if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(plugin, app) == False:
+            if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(
+                    plugin, app) == False:
                 enablePlugin(getApi(), plugin)
             else:
                 raise PluginDoesNotExistException(plugin)
