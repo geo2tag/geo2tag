@@ -6,7 +6,9 @@ ARGS_OFFSET = 'offset'
 ARGS_NAME = 'name'
 ARGS_JSON = 'json'
 
+
 class ChannelsListResourceParser():
+
     @staticmethod
     def parseGetParameters():
         parser = reqparse.RequestParser()
