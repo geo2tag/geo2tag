@@ -65,17 +65,13 @@ def after_request(response):
                          'GET, POST, PUT, DELETE')
     return response
 
-<<<<<<< HEAD
 
 @app.before_request
 def defineInstancePrefix():
     g.instance_prefix = getInstancePrefix()
 
-getApi().add_resource(ServiceResource, getPathWithPrefix('/service/<string:serviceName>'))
-=======
 getApi().add_resource(ServiceResource,
                       getPathWithPrefix('/service/<string:serviceName>'))
->>>>>>> dd7065fe407c8a2960f83a15821eb88ef1d4e847
 getApi().add_resource(StatusResource, getPathWithPrefix('/status'))
 getApi().add_resource(ServiceListResource, getPathWithPrefix('/service'))
 getApi().add_resource(DebugInfoResource, getPathWithPrefix('/debug_info'))

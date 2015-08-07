@@ -52,12 +52,7 @@ def getDbName():
 
 
 def getInstancePrefix():
-<<<<<<< HEAD
-    return getConfigParser().get(SECTION,OPTION_INSTANCEPREFIX)
-=======
     return getConfigParser().get(SECTION, OPTION_INSTANCEPREFIX)
-
->>>>>>> dd7065fe407c8a2960f83a15821eb88ef1d4e847
 
 def getDebugUsers():
     str = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
