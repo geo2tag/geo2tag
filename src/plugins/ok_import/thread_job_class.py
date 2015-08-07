@@ -1,9 +1,13 @@
 import threading
+import random
+import string
+from datetime import datetime
+
 class ThreadJob():
     
-    def __init__(backgroundFunction, channelName, openDataUrl, showObjectUrl, showImageUrl):
+    def __init__(self, backgroundFunction, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName):
         self.thread = None
-        self._id = generateId()
+        self._id = self.generateId()
         self.startTime = None
         self.done = False
         self.timeElapsed = None 
@@ -12,13 +16,15 @@ class ThreadJob():
         self.openDataUrl = openDataUrl
         self.showObjectUrl = showObjectUrl
         self.showImageUrl = showImageUrl
+        self.serviceName = serviceName
     
     def internalStart(self):
-        thread = threading.Thread(self.backgroundFunction(), args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, ))
+        thread = threading.Thread(target = self.backgroundFunction(), args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, self.serviceName, ))
+        self.thread = thread
         thread.start()
 
     def internalStop(self):
-        thread.join()
+        self.thread.join()
     
     def start(self):
         self.startTime = datetime.now()
@@ -27,16 +33,16 @@ class ThreadJob():
     def stop(self):
         self.internalStop()
         self.done = True
-        self.timeElapsed = self.startTime - datetime.now()
+        self.timeElapsed = datetime.now() - self.startTime
     
     
     def getTimeStatistics(self):
         if self.timeElapsed == None:
-            return self.startTime - datetime.now()
+            return datetime.now() - self.startTime
         return self.timeElapsed
     
     def describe(self):
-        print { '_id': self._id, 'time': self.getTimeStatistics().toString(), 'done': self.done, 'channelName': self.channelName, 'openDataUrl': self.openDataUrl, 'showObjectUrl', 'showImageUrl': self.showImageUrl}
+        return { '_id': self._id, 'time': str(self.getTimeStatistics()), 'done': self.done, 'channelName': self.channelName, 'openDataUrl': self.openDataUrl, 'showObjectUrl': self.showObjectUrl, 'showImageUrl': self.showImageUrl, 'serviceName': self.serviceName}
     
     @classmethod
     def generateId(cls):
