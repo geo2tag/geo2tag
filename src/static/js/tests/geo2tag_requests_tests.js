@@ -26,6 +26,6 @@ QUnit.test( 'Get points test',
     		done();
     	};
     	var test = new Geo2TagRequests('test', 'test');
-        var channel_ids_list = ['556721a52a2e7febd2744201','556721a52a2e7febd2744202'];
+        var channel_ids_list = ["556721a52a2e7febd2744201","556721a52a2e7febd2744202"];
     	test.getPoints('testservice', callbackSuccess, callbackFail, channel_ids_list, 5);
     }); 
