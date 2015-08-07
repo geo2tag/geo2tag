@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-from flask import Flask
-
-app = Flask(__name__)
-
 class OpenKareliaObjectToPointTranslator:
     def __init__(self, serverShowImageUrl, serverShowObjectUrl, objectRepresentation, version, importSource, channelId):
         self.serverShowImageUrl = serverShowImageUrl
@@ -26,10 +21,3 @@ class OpenKareliaObjectToPointTranslator:
         point = self.getPointJson()
         point['channelId'] = self.channelId
         return point
-
-o = OpenKareliaObjectToPointTranslator('image_url', 'object_url', {'name':'test'}, 'test_version', 'test_import', ['channelId1', 'channelId2'])
-obj = o.getPoint()
-print obj
-
-#if __name__ == '__main__':
-    #app.run()
