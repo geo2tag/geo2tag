@@ -5,10 +5,11 @@ serviceName = 'testservice'
 POINTS = 'points'
 class OpenDataToPointsLoader:
     pointsArray = []
-    def __init__(self, points):
+    def __init__(self, serviceName, points):
         self.pointsArray = points
+        self.serviceName = serviceName
 
     def loadPoints(self):
-        collection = getDbObject(serviceName)[POINTS]
+        collection = getDbObject(self.serviceName)[POINTS]
         for point in self.pointsArray:
             collection.save(point)
