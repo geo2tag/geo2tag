@@ -7,7 +7,3 @@ class OpenKareliaObjectsParser:
     def parse(self):
         obj = json.loads(self.data)
         return obj
-
-o = OpenKareliaObjectsParser('[{"name": "test1"}, {"name": "test2"}]')
-obj = o.parse()
-print obj[0]
