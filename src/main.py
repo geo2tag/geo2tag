@@ -55,7 +55,6 @@ app.register_blueprint(google_oauth)
 app.secret_key = urandom(32)
 getApi().representations = DEFAULT_REPRESENTATIONS
 
-
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
