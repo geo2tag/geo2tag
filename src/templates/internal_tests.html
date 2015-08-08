@@ -5,7 +5,8 @@
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
 <script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
-
+<script src="{{ url_for('static', filename='js/geo2tag.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/geo2tag_requests_tests.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>

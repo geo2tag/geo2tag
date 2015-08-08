@@ -4,8 +4,8 @@ function Geo2TagRequests(server, instance) {
 };
 Geo2TagRequests.prototype.getChannels = function(serviceName, callbacksuccess, callbackfail, substring, number, offset) {
     $.get(getUrlWithPrefix('/service/') + serviceName + '/channel', {'substring': substring, 'number': number, 'offset': offset})
-    .fail(function(jqXHR, textStatus, errorThrown){ callbackfail(jqXHR, textStatus, errorThrown) })
-    .done(callbacksuccess(data));
+    .fail(function(jqXHR, textStatus, errorThrown){ callbackfail(jqXHR, textStatus, errorThrown); })
+    .done(function(data){ callbacksuccess(data); });
 };
 
 Geo2TagRequests.prototype.getPoints = function(serviceName, callbacksuccess, callbackfail, channel_ids, number, geometry, altitude_from, altitude_to, substring, date_from, date_to, offset, radius) { 
@@ -16,5 +16,5 @@ Geo2TagRequests.prototype.getPoints = function(serviceName, callbacksuccess, cal
         traditional : true
     })
     .fail(function(jqXHR, textStatus, errorThrown){ callbackfail(jqXHR, textStatus, errorThrown) })
-    .done(callbacksuccess(data));
+    .done(function(data){ callbacksuccess(data); });
 };
