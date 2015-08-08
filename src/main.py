@@ -101,8 +101,10 @@ getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 
-getApi().add_resource(MapResource, getPathWithPrefix(
-    '/service/<string:serviceName>/map'))
+getApi().add_resource(
+    MapResource,
+    getPathWithPrefix(
+        '/service/<string:serviceName>/map'))
 getApi().add_resource(
     GetAllPluginsWithStatusResource,
     getPathWithPrefix('/plugin'))
