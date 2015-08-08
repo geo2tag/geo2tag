@@ -14,11 +14,17 @@ JSON = 'json'
 STUB = 'STUB'
 NAME = 'name'
 
+
 class ChannelsListResource(Resource):
+
     @possibleException
     def get(self, serviceName):
         parserResult = ChannelsListResourceParser.parseGetParameters()
-        return getChannelsList(serviceName, parserResult.get(SUBSTRING, None), parserResult.get(NUMBER, None), parserResult.get(OFFSET, None))
+        return getChannelsList(
+            serviceName, parserResult.get(
+                SUBSTRING, None), parserResult.get(
+                NUMBER, None), parserResult.get(
+                OFFSET, None))
 
     @possibleException
     def post(self, serviceName):
@@ -26,4 +32,7 @@ class ChannelsListResource(Resource):
         try:
             obj = getChannelByName(serviceName, listArgs.get(NAME, None))
         except ChannelDoesNotExist as e:
-            return addChannel(listArgs.get(NAME, None), listArgs.get(JSON, None), STUB, serviceName)
+            return addChannel(
+                listArgs.get(
+                    NAME, None), listArgs.get(
+                    JSON, None), STUB, serviceName)

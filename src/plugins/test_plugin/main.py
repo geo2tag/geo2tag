@@ -1,8 +1,7 @@
-from test_resource_1 import TestResource1
 from test_resource_2 import TestResource2
-
+from test_resource_1 import TestResource1
 def getPluginResources():
-    result = {'/res1': TestResource1, '/res2':TestResource2}    
+    result = {'res2':TestResource2, 'res1': TestResource1}
     return result
 
 def getPluginInfo():
