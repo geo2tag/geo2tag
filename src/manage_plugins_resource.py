@@ -15,7 +15,6 @@ class ManagePluginsResource(Resource):
         from main import app, getApi
         pluginsDict = dict((key, request.args.get(key))
                            for key in request.args.keys())
-        print pluginsDict
         for plugin in pluginsDict:
             setPluginState(plugin, pluginsDict[plugin])
             if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(
