@@ -2,7 +2,6 @@ class JobManager:
     jobs = {}
     @classmethod
     def startJob(cls, job):
-        job.start()
     	jobId = job.describe().get('_id', '')
         cls.jobs[jobId] = job
         return jobId
@@ -17,6 +16,7 @@ class JobManager:
 
     @classmethod
     def getJobs(cls):
+        result = []
         for job in cls.jobs:
-            cls.jobs[job].describe()
-        return cls.jobs
+            result.append(cls.jobs[jobId].describe())
+        return result

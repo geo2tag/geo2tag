@@ -8,7 +8,7 @@ class ThreadJob():
     def __init__(self, backgroundFunction, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName):
         self.thread = None
         self._id = self.generateId()
-        self.startTime = None
+        self.startTime = datetime.now()
         self.done = False
         self.timeElapsed = None 
         self.backgroundFunction = backgroundFunction

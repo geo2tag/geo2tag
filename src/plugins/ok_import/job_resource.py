@@ -10,7 +10,7 @@ class JobResource(Resource):
 
     @possibleException
     def get(self, serviceName):
-        return JobManager().getJobs()
+        return JobManager.getJobs()
 
     @possibleException
     def post(self, serviceName):
