@@ -1,5 +1,4 @@
 #!/bin/bash
-
 chown www-data:www-data /app -R
 
 source /etc/apache2/envvars
@@ -30,6 +29,7 @@ cp config/config.ini /var/www/geomongo
 cp -r src/static /var/www/geomongo/static/
 cp -r src/templates /var/www/geomongo/templates/
 cp config/geomongo.conf /etc/apache2/sites-available/ 
+cp -r src/plugins /var/www/geomongo/plugins/
 
 ./scripts/setup_pip_dependencies.sh
 
