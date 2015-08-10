@@ -4,5 +4,4 @@ class OpenKareliaObjectsLoader:
         self.loadUrl = loadUrl
 
     def load(self):
-    	print self.loadUrl, '1111111111111111111111111111111111111111'
         return requests.get(self.loadUrl).text
