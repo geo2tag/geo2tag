@@ -1,3 +1,4 @@
+from twisted.python.log import err
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo
@@ -42,6 +43,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 USER_ID = 'user_id'
 DATE = 'date'
 MESSAGE = 'message'
+ERROR_CODE = 'error_code'
 SERVICE = 'service'
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
@@ -64,12 +66,12 @@ ENABLED = 'enabled'
 EARTH_RADIUS = 6371
 
 
-def addLogEntry(dbName, userId, message, service='instance'):
+def addLogEntry(dbName, userId, message, error_code, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName)[LOG]
     if dbName == getDbName():
         collection.save({USER_ID: userId, DATE: currentDate,
-                         MESSAGE: message, SERVICE: service})
+                         MESSAGE: message, ERROR_CODE: error_code,  SERVICE: service})
     else:
         collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
 
