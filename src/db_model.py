@@ -76,7 +76,6 @@ def addLogEntry(dbName, userId, message, service='instance'):
 def addTag(tag):
     getDbObject()[TAGS].insert(tag)
 
-
 def addService(name, logSize, ownerld):
     db = getDbObject()
     try:
