@@ -25,8 +25,3 @@ class OpenKareliaObjectToPointTranslator:
         point['alt'] = 0
         point['date'] = datetime.now()
         return point
-
-obj = OpenKareliaObjectToPointTranslator('image_url', 'object_url', {'name': ['test_GT_1499'], 'latitude': 1, 'longitude': 2}, 'test_version', 
-                                               'test_import', 'channelId1')
-o = obj.getPoint()
-print o
