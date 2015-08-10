@@ -24,7 +24,7 @@ from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
-from rout_map_resource import MapResource
+from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
 from possible_exception import possibleException
 from flask import request
