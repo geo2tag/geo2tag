@@ -16,6 +16,7 @@ SERVICE_ALREADY_EXIST_MSG = "Service already exists"
 
 
 class ServiceListResource(Resource):
+
     @possibleException
     def get(self):
         args = ServiceListParser.parseGetParameters()
@@ -29,8 +30,10 @@ class ServiceListResource(Resource):
             offset = None
         serviceList = getServiceList(number, offset)
         return serviceList
+
     @possibleException
     def post(self):
         listAgrs = ServiceListParser.parsePostParameters()
-        result = addService(listAgrs.get(POST_ARGS_NAME), listAgrs.get(POST_ARGS_LOG_SIZE), listAgrs.get(POST_ARGS_OWNER_ID))
+        result = addService(listAgrs.get(POST_ARGS_NAME), listAgrs.get(
+            POST_ARGS_LOG_SIZE), listAgrs.get(POST_ARGS_OWNER_ID))
         return dumps(result, ensure_ascii=False).encode('utf8')
