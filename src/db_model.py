@@ -73,8 +73,10 @@ def addLogEntry(dbName, userId, message, service='instance'):
     else:
         collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
 
+
 def addTag(tag):
     getDbObject()[TAGS].insert(tag)
+
 
 def addService(name, logSize, ownerld):
     db = getDbObject()
