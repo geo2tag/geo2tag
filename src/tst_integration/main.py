@@ -27,9 +27,11 @@ from test_delete_point_by_id import TestPointResourceDelete
 from test_point_list_resource_post import TestPointListPostRequest
 from test_GT_1386 import Test_GT_1386
 from test_debug_login_resource import TestDebugLoginResource
+from test_get_rout_map import TestRoutMap
 from test_point_list_resource_get import TestPointListGet_ResponseText
 from test_GT_1443_before_request import Test_GT_1443_Request
 from test_GT_1442_manage_plugins import Test_GT_1442_managePlugins
+
 
 def main(host):
     suite = unittest.TestSuite()
@@ -58,6 +60,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListPostRequest, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1386, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestDebugLoginResource, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestRoutMap, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListGet_ResponseText, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1443_Request, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1442_managePlugins, param=host))
