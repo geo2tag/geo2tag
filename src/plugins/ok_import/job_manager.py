@@ -16,6 +16,7 @@ class JobManager:
 
     @classmethod
     def getJobs(cls):
+        result = []
         for job in cls.jobs:
-            cls.jobs[job].describe()
-        return cls.jobs
+            result.append(cls.jobs[job].describe())
+        return result

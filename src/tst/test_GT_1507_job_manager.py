@@ -28,5 +28,5 @@ class Test_GT_1507_class_job_manager(TestCase):
         self.assertEquals(type(manager.getJob(jobId)), type(threadJobObj))
         manager.stopJob(jobId)
         self.assertEquals(threadJobObj.done, True)
-        self.assertEquals(type(manager.getJobs()), dict)
+        self.assertEquals(type(manager.getJobs()), list)
         threadJobObj.stop()
