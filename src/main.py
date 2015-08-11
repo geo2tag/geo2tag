@@ -124,6 +124,7 @@ def initApp(api):
             os.chdir('..')
     pluginList = getPluginList()
     for pluginName in pluginList:
+        print 'Loading', pluginName
         if getPluginState(pluginName) is True:
             enablePlugin(api, pluginName)
     os.chdir(homeDir)

@@ -14,7 +14,12 @@ class JobResource(Resource):
     @possibleException
     def post(self, serviceName):
         job = OKImportParser.parsePostParameters()
-        thread = ThreadJob(f, job.get('channelName'), \
+        def stubFunction (channelName, openDataUrl, \
+                          showObjectUrl, showImageUrl, \
+                          serviceName):
+            pass
+
+        thread = ThreadJob(stubFunction, job.get('channelName'), \
                            job.get('openDataUrl'), \
                            job.get('showObjectUrl'), \
                            job.get('showImageUrl'), \
