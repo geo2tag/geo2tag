@@ -46,6 +46,7 @@ def addUser(_id, firstName, lastName, email):
     finally:
         return _id
 
+
 def getUserId():
     if USER_ID in session:
         return session[USER_ID]
