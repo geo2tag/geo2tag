@@ -29,7 +29,8 @@ from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
-
+from log import writeInstanceLog
+from user_routines import getUserId
 
 API = None
 
@@ -61,6 +62,9 @@ def after_request(response):
                          'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods',
                          'GET, POST, PUT, DELETE')
+    writeInstanceLog(getUserId(),
+                     'Status_code: ' + str(response.status_code) + ', '
+                     'response: ' + str(response.response)[:2000])
     return response
 
 getApi().add_resource(ServiceResource,

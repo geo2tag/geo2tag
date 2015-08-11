@@ -66,12 +66,12 @@ ENABLED = 'enabled'
 EARTH_RADIUS = 6371
 
 
-def addLogEntry(dbName, userId, message, error_code, service='instance'):
+def addLogEntry(dbName, userId, message, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName)[LOG]
     if dbName == getDbName():
         collection.save({USER_ID: userId, DATE: currentDate,
-                         MESSAGE: message, ERROR_CODE: error_code,  SERVICE: service})
+                         MESSAGE: message, SERVICE: service})
     else:
         collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
 
