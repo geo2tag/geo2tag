@@ -8,6 +8,5 @@ VALID_RESPONSE_CODE = 200
 class Test_internal_tests_page(BasicIntegrationTest):
     def test_internal_tests_page(self):
         response = requests.get(self.getUrl(TEST_URL))
-        responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
