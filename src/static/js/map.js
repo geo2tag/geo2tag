@@ -13,7 +13,7 @@ function fixMapSize(){
 
 $(document).ready(function (){
     map = createMap('map', true);
-    
+
     $(window).on('resize', fixMapSize());
 
 });
