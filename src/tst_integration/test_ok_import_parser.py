@@ -24,3 +24,5 @@ class Test_OKImportJob(BasicIntegrationTest):
         responseCode = response.status_code
         self.assertEquals(len(responseText), 12)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
+        response = requests.get(self.getUrl(TEST_URL))
+        self.assertEquals(responseText, '{}')
