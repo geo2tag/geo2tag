@@ -1,6 +1,6 @@
 from unittest import TestCase
 from  service_not_exist_exception import ServiceNotExistException
-from db_model import possibleException
+from possible_exception import possibleException
 import sys
 sys.path.append('../')
 

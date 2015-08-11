@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block styles %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css.1') }}" /> 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/L.Control.Zoomslider.css') }}" />
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+{% if params %}
+	var par = {{params|tojson}};
+{% endif %}
+</script>
+<script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+<script src="http://api-maps.yandex.ru/2.0/?load=package.map&lang=ru-RU" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/browser_type.js') }}"></script>
+<script src="{{ url_for('static', filename='js/leaflet.js.1') }}"></script>
+<script src="{{ url_for('static', filename='js/Google.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Yandex.js') }}"></script>
+<script src="{{ url_for('static', filename='js/L.Control.Zoomslider.js') }}"></script>
+<script src="{{ url_for('static', filename='js/modules.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cookie.js') }}"></script>
+<script src="{{ url_for('static', filename='js/yar-map-api.js') }}"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}
+{% block content %}
+
+<div style="width: auto; height: 500px; align: center" id="map" class="leaflet-container"></div>
+
+{% endblock %}
+

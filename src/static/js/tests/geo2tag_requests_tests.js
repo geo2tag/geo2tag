@@ -9,8 +9,8 @@ QUnit.test( 'Get channels test',
     	    assert.ok(false);
     	    done();
     	};
-        var test = new Geo2TagRequests('test', 'test');
-    	test.getChannels('testservice', callbackSuccess, callbackFail);
+        var testgetChannels = new Geo2TagRequests('test', 'test');
+    	testgetChannels.getChannels('testservice', callbackSuccess, callbackFail);
     }); 
 
 QUnit.test( 'Get points test',
@@ -24,7 +24,7 @@ QUnit.test( 'Get points test',
     	    assert.ok(false);
     	    done();
     	};
-    	var test = new Geo2TagRequests('test', 'test');
+    	var testgetPoints = new Geo2TagRequests('test', 'test');
         var channel_ids_list = ["556721a52a2e7febd2744201","556721a52a2e7febd2744202"];
-    	test.getPoints('testservice', callbackSuccess, callbackFail, channel_ids_list, 5);
+    	testgetPoints.getPoints('testservice', callbackSuccess, callbackFail, channel_ids_list, 5);
     }); 
