@@ -31,6 +31,7 @@ from test_get_rout_map import TestRoutMap
 from test_point_list_resource_get import TestPointListGet_ResponseText
 from test_GT_1443_before_request import Test_GT_1443_Request
 from test_GT_1442_manage_plugins import Test_GT_1442_managePlugins
+from test_ok_job_resource import Test_OKImportJob
 
 
 def main(host):
@@ -64,6 +65,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(TestPointListGet_ResponseText, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1443_Request, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1442_managePlugins, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(Test_OKImportJob, param=host))
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
