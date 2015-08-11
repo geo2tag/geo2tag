@@ -18,5 +18,5 @@ class JobManager:
     def getJobs(cls):
         result = []
         for job in cls.jobs:
-            result.append(cls.jobs[jobId].describe())
+            result.append(cls.jobs[job].describe())
         return result
