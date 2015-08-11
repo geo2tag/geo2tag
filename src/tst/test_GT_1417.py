@@ -14,7 +14,5 @@ class TestGt1417(unittest.TestCase):
         api = Api(app)
         initApp(api)
         resources = api.endpoints
-        print 'api.endpoints'
-        print resources
         self.assertTrue('resource_gt_1416' in resources)
         self.assertTrue('resource_gt_1417' in resources)
