@@ -19,7 +19,7 @@ class ManagePluginsResource(Resource):
             setPluginState(plugin, pluginsDict[plugin])
             if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(
                     plugin, app) == False:
-                root, dirs, files = os.walk('plugins').next()
+                root, dirs, files = os.walk("plugins").next()
                 if plugin not in dirs:
                     raise PluginDoesNotExistException(plugin)
                 else:
