@@ -28,7 +28,7 @@ curl http://geomongo/instance/status
 
 Repository with source code is at
 
-> https://bitbucket.org/osll/geomongo
+https://bitbucket.org/osll/geomongo
 
 To clone the source code repo you should use the next command:
 
