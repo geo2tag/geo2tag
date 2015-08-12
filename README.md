@@ -32,7 +32,7 @@ https://bitbucket.org/osll/geomongo
 
 To clone the source code repo you should use the next command:
 
-git clone git@bitbucket.org:osll/geomongo.git 
+>git clone git@bitbucket.org:osll/geomongo.git 
 
 
 ## How to prepare the environment ##
