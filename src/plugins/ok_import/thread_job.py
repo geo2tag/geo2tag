@@ -22,6 +22,8 @@ class ThreadJob():
         thread = threading.Thread(target = self.backgroundFunction, args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, self.serviceName, ))
         self.thread = thread
         thread.start()
+        if not thread.isAlive():
+            done = True
 
     def internalStop(self):
         self.thread.join()
