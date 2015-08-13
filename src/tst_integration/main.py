@@ -33,7 +33,7 @@ from test_GT_1443_before_request import Test_GT_1443_Request
 from test_GT_1442_manage_plugins import Test_GT_1442_managePlugins
 from test_internal_tests_page import Test_internal_tests_page
 from test_ok_job_resource import Test_OKImportJob
-
+from test_GT_1511 import Test_GT_1511
 
 def main(host):
     suite = unittest.TestSuite()
@@ -68,6 +68,7 @@ def main(host):
     suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1442_managePlugins, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_internal_tests_page, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(Test_OKImportJob, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(Test_GT_1511, param=host))
     returnCode = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(returnCode)
 
