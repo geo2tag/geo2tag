@@ -19,7 +19,7 @@ class ThreadJob():
         self.serviceName = serviceName
     
     def internalStart(self):
-        thread = threading.Thread(target = self.backgroundFunction, args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, self.serviceName, self.callBack, ))
+        thread = threading.Thread(target = self.backgroundFunction, args=(self, self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, self.serviceName, ))
         self.thread = thread
         thread.start()
 
@@ -50,4 +50,3 @@ class ThreadJob():
 
     def callBack(self):
         self.done = True
-        print 'done', self.done

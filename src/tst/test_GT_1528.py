@@ -15,16 +15,14 @@ showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
 from time import sleep
 
-def callBack():
-    pass
-
-def backgroundFunction(channelName = channelName, openDataUrl = openDataUrl, showObjectUrl = showObjectUrl, showImageUrl = showImageUrl, serviceName = serviceName, callBack = callBack):
-    callBack()
+def backgroundFunction(self, channelName = channelName, openDataUrl = openDataUrl, showObjectUrl = showObjectUrl, showImageUrl = showImageUrl, serviceName = serviceName):
+    self.callBack()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
 class Test_GT_1558(TestCase):
     def test_GT_1528(self):
         threadJobObj = ThreadJob(backgroundFunction, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName)
-        print threadJobObj.done, '***********'
+        self.assertFalse(threadJobObj.done)
         threadJobObj.internalStart()
-        print threadJobObj.done, '***********'
+        self.assertTrue(threadJobObj.done)
+
