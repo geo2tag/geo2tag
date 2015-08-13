@@ -90,7 +90,7 @@ def main():
                 if container_on_port is None:
                     collection.save({CONTAINER_NAME: args.name, CONTAINER_PORT: i})
                     start_container(args.name, i)
-                break
+                    break
         else:
             stop_container(args.name)
             start_container(args.name, container[CONTAINER_PORT])
