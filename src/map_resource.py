@@ -4,6 +4,8 @@ from flask_restful import reqparse
 from flask import render_template
 from flask import make_response
 
+
 class MapResource(Resource):
-    def get(self, serviceName = None):
+
+    def get(self, serviceName=None):
         return make_response(render_template('map.html'))

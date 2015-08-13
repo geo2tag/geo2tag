@@ -101,7 +101,7 @@ getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 getApi().add_resource(
-    MapResource, 
+    MapResource,
     getPathWithPrefix('/service/<string:serviceName>/map'))
 getApi().add_resource(
     GetAllPluginsWithStatusResource,
@@ -109,6 +109,7 @@ getApi().add_resource(
 getApi().add_resource(
     ManagePluginsResource,
     getPathWithPrefix('/manage_plugins'))
+
 
 def initApp(api):
     import os
