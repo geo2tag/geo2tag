@@ -56,8 +56,8 @@ def start_container(name, port):
 
 def stop_container(name):
     rc = manage_script(name, [MANAGE_CONTAINER, 'kill', name])
-    if rc != 0:
-        sys.exit(rc)
+   # if rc != 0:
+       # sys.exit(rc)
 
 
 def run_unit_tests(name):
