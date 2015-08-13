@@ -19,11 +19,9 @@ class ThreadJob():
         self.serviceName = serviceName
     
     def internalStart(self):
-        thread = threading.Thread(target = self.backgroundFunction, args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, self.serviceName, ))
+        thread = threading.Thread(target = self.backgroundFunction, args=(self.channelName, self.openDataUrl, self.showObjectUrl, self.showImageUrl, self.serviceName, self.callBack, ))
         self.thread = thread
         thread.start()
-        if not thread.isAlive():
-            done = True
 
     def internalStop(self):
         self.thread.join()
@@ -49,3 +47,7 @@ class ThreadJob():
     @classmethod
     def generateId(cls):
         return ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(12))
+
+    def callBack(self):
+        self.done = True
+        print 'done', self.done
