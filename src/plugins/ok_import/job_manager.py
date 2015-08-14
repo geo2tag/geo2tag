@@ -2,7 +2,7 @@ class JobManager:
     jobs = {}
     @classmethod
     def startJob(cls, job):
-    	jobId = job.describe().get('_id', '')
+        jobId = job.describe().get('_id', '')
         job.start()
         cls.jobs[jobId] = job
         return jobId
