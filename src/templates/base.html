@@ -10,6 +10,7 @@
     <body>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}" ></script>
         <script type="text/javascript">function getInstancePrefix() { return '{{ g.instance_prefix }}'; }</script>
+        <script type="text/javascript">function getUrlWithPrefix(url) { return '/'+getInstancePrefix() + url; }</script>
         <div class="container">
             {% block content %}{% endblock %}
             <div class="navbar-fixed-bottom row-fluid">
