@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 DB_SCRIPTS_PATH='scripts/db/';
 
 # Clean testdb

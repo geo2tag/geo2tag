@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block styles%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/qunit-1.18.0.css') }}">
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
+<script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
+<script src="{{ url_for('static', filename='js/geo2tag.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tests/geo2tag_requests_tests.js') }}"></script>
+{% endblock %}
+{% block content %}
+<header>
+    <h2>Integration tests</h2>
+</header>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+{% endblock %}
