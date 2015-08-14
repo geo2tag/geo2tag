@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 DB_SCRIPTS_PATH='scripts/db/';
 
 # Clean testdb
@@ -15,7 +15,7 @@ result=`python -m unittest discover -v 2>&1`
 exit_code=$?
 echo "$result" 
 
-testState=`echo "$result" | grep -iE "FAILED|Error|CRITICAL"`;
+testState=`echo "$result" | grep -iE "FAILED|Error|CRITICAL" || true` ;
 if [[ -n $testState  ]]
 then
         exit 1
