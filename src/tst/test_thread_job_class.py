@@ -13,8 +13,8 @@ showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
 
-def backgroundFunction(self, channelName = channelName, openDataUrl = openDataUrl, showObjectUrl = showObjectUrl, showImageUrl = showImageUrl, serviceName = serviceName):
-    self.callBack()
+def backgroundFunction(self, channelName = channelName, openDataUrl = openDataUrl, showObjectUrl = showObjectUrl, showImageUrl = showImageUrl, serviceName = serviceName, callBack = self.callBack):
+    callBack()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
 class Test_GT_1506_class_thread_job(TestCase):
