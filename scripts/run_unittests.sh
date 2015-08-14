@@ -1,12 +1,19 @@
 #!/bin/bash
-set -e
 DB_SCRIPTS_PATH='scripts/db/';
 
 # Clean testdb
 ./${DB_SCRIPTS_PATH}/drop_test_db.sh
+if [ $? -gt 0 ]; then
+    echo 'Error occured during drop_test_db.sh'
+    exit 1
+fi
 
 # Import testdb
 ./${DB_SCRIPTS_PATH}/import_test_db.sh
+if [ $? -gt 0 ]; then
+    echo 'Error occured during import_test_db.sh'
+    exit 1
+fi
 
 # Run tests
 
