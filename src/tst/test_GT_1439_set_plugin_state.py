@@ -12,7 +12,9 @@ TEST_NAME = 'test_1439_set'
 ENABLED = 'enabled'
 TEST_NEW_NAME = 'test_1439_set_new'
 
+
 class TestSetPluginState(unittest.TestCase):
+
     def testSetPluginState(self):
         db = getDbObject()
         db[PLUGINS].save({NAME: TEST_NAME, ENABLED: True})

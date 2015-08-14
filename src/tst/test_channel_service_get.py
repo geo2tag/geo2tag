@@ -13,13 +13,18 @@ SUBSTRING = 'substring'
 SUBSTRING_VALUE = 'test'
 OFFSET = 'offset'
 OFFSET_VALUE = 3
-CORRECT_ARGS = {NUMBER: NUMBER_VALUE, SUBSTRING: SUBSTRING_VALUE, OFFSET:OFFSET_VALUE}
+CORRECT_ARGS = {
+    NUMBER: NUMBER_VALUE,
+    SUBSTRING: SUBSTRING_VALUE,
+    OFFSET: OFFSET_VALUE}
 BAD_REQUEST = {SUBSTRING: None, NUMBER: None, OFFSET: None}
 URL = '/testservice/channel/'
 BAD_URL = '/testservice/channel/?substring=test&number=2&offset=3'
 app = Flask(__name__)
 
+
 class test_GT_1262ChannelServiceGet(TestCase):
+
     def test_GT_1262ChannelServiceGetFunc(self):
 
         with app.test_request_context(URL, method='GET'):

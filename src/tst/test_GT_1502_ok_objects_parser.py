@@ -10,7 +10,9 @@ TEST_JSON = '[{"name": "test1", "test": "test"}, {"name": "test2"}]'
 TEST_OBJ1 = {"name": "test1", "test": "test"}
 TEST_OBJ2 = {"name": "test2"}
 
+
 class TestOKObjectsParser(TestCase):
+
     def testOKObjectsParser(self):
         obj = OpenKareliaObjectsParser(TEST_JSON)
         test_obj = obj.parse()

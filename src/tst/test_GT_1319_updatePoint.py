@@ -15,7 +15,10 @@ NAME = 'name'
 TEST_ID = ObjectId('552833515c0dd1178d37f7cc')
 BAD_TEST_ID = ObjectId('111133515c0111178d37f711')
 TEST_DICT = {'name': 'test_1319'}
+
+
 class TestUpdatePoint(unittest.TestCase):
+
     def testUpdatePoint(self):
         collection = getDbObject(DB)[COLLECTION]
         with self.assertRaises(PointDoesNotExist) as e:

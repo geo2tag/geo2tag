@@ -23,9 +23,11 @@ INCORRECT_ARGS = {}
 
 app = Flask(__name__)
 
+
 class test_GT_1291_Channel_Parser(TestCase):
+
     def test_GT_1291_Channel_Parser(self):
-    	
+
         with app.test_request_context(URL, data=CORRECT_ARGS, method='PUT'):
             args = ChannelResourceParser.parsePutParameters()
             self.assertEqual(args[_NAME], NAME)

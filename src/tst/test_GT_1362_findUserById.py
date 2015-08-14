@@ -20,19 +20,24 @@ collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
 
 app = Flask(__name__)
 
+
 class TestFindUserById(TestCase):
+
     def setUp(self):
-        for i in range(10) :
+        for i in range(10):
             collectionUsers.insert(
                 {
-                    FIELD_USER_ID : USER_ID + "_" + str(i),
-                    "first_name":"string",
-                    "last_name":"string"
+                    FIELD_USER_ID: USER_ID + "_" + str(i),
+                    "first_name": "string",
+                    "last_name": "string"
                 }
             )
+
     def tearDown(self):
         collectionUsers.drop()
+
     def testFindUserById(self):
         with self.assertRaises(UserDoesNotExist) as e:
             findUserById(USER_ID)
-        self.assertTrue(findUserById(GOOD_USER_ID)[FIELD_USER_ID] == GOOD_USER_ID)
+        self.assertTrue(findUserById(GOOD_USER_ID)[
+                        FIELD_USER_ID] == GOOD_USER_ID)
