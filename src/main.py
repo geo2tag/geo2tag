@@ -32,7 +32,7 @@ from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
-
+from internal_tests_resource import InternalTestsResource
 
 API = None
 
@@ -117,6 +117,9 @@ getApi().add_resource(
 getApi().add_resource(
     ManagePluginsResource,
     getPathWithPrefix('/manage_plugins'))
+getApi().add_resource(
+    InternalTestsResource,
+    getPathWithPrefix('/internal_tests'))
 
 
 def initApp(api):
