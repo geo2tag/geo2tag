@@ -1,10 +1,7 @@
 from datetime import datetime
 
-
 class OpenKareliaObjectToPointTranslator:
-
-    def __init__(self, serverShowImageUrl, serverShowObjectUrl,
-                 objectRepresentation, version, importSource, channelId):
+    def __init__(self, serverShowImageUrl, serverShowObjectUrl, objectRepresentation, version, importSource, channelId):
         self.serverShowImageUrl = serverShowImageUrl
         self.serverShowObjectUrl = serverShowObjectUrl
         self.objectRepresentation = objectRepresentation
@@ -24,8 +21,15 @@ class OpenKareliaObjectToPointTranslator:
     def getPoint(self):
         point = {'json': self.getPointJson()}
         point['channelId'] = self.channelId
-        point['location'] = {"type": "Point", "coordinates": [
-            self.objectRepresentation['latitude'], self.objectRepresentation['longitude']]}
+        point['location'] = {"type" : "Point", "coordinates" : [self.objectRepresentation['latitude'],  self.objectRepresentation['longitude']]}
         point['alt'] = 0
         point['date'] = datetime.now()
         return point
+
+    def translateDate(self):
+        if self.objectRepresentation.get('year') != None:
+            return  datetime(int(self.objectRepresentation['year']), 1, 1, 0, 0)
+        elif self.objectRepresentation.get('century') != None:
+            return  datetime(int(self.objectRepresentation['century'])*100, 1, 1, 0, 0)
+        elif self.objectRepresentation.get('millenium') != None:
+            return datetime(int(self.objectRepresentation['millenium'])*1000, 1, 1, 0, 0)
