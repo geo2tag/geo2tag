@@ -4,6 +4,7 @@ from flask.ext.restful import Resource
 from job_manager import JobManager
 from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob
+from open_karelia_import import openKareliaImport
 
 class JobResource(Resource):
 
@@ -14,11 +15,8 @@ class JobResource(Resource):
     @possibleException
     def post(self, serviceName):
         job = OKImportParser.parsePostParameters()
-        def stubFunction (channelName, openDataUrl, \
-                          showObjectUrl, showImageUrl, \
-                          serviceName):
-            pass
-
+        job = ThreadJob(openKareliaImport, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName)
+        JobManager.createJob(job)
         thread = ThreadJob(stubFunction, job.get('channelName'), \
                            job.get('openDataUrl'), \
                            job.get('showObjectUrl'), \
