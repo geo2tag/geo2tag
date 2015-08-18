@@ -6,7 +6,9 @@ from flask.ext.restful import Api
 sys.path.append('../')
 from plugin_routines import enablePlugin
 
+
 class TestGt1416(unittest.TestCase):
+
     def testGt1416(self):
         app = Flask(__name__)
         api = Api(app)

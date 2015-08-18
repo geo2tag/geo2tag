@@ -15,7 +15,13 @@ showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
 from time import sleep
 
-def backgroundFunction(self, channelName = channelName, openDataUrl = openDataUrl, showObjectUrl = showObjectUrl, showImageUrl = showImageUrl, serviceName = serviceName):
+def backgroundFunction(
+		self, 
+		channelName = channelName, 
+		openDataUrl = openDataUrl, 
+		showObjectUrl = showObjectUrl, 
+		showImageUrl = showImageUrl, 
+		serviceName = serviceName):
     self.callBack()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 

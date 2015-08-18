@@ -13,12 +13,13 @@ VALID_RESPONSE_CODE_NOT_VALID_URL = 404
 
 
 class TestServiceDeleteRequest(BasicIntegrationTest):
+
     def testServiceDeleteRequest(self):
         response = requests.delete(self.getUrl(TEST_NOT_VALID_URL))
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE_NOT_VALID_URL)
         addService('testservice_1', 1, 1)
         response = requests.delete(self.getUrl(TEST_URL))
-        responseCode = response.status_code        
+        responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(self.getUrl(TEST_URL))

@@ -10,15 +10,14 @@ USERNAME = 'abcd'
 
 app = Flask(__name__)
 
+
 class test_GT_1347_parser(TestCase):
+
     def test_GT_1347_parser(self):
 
-        with app.test_request_context('?_id='+USERNAME):
+        with app.test_request_context('?_id=' + USERNAME):
             arr = parseId()
-            self.assertEqual(arr['_id'],USERNAME)
+            self.assertEqual(arr['_id'], USERNAME)
         with app.test_request_context():
             arr = parseId()
             self.assertEqual(arr['_id'], None)
-
-
-            

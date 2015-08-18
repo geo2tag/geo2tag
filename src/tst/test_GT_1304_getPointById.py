@@ -13,7 +13,9 @@ COLLECTION = "points"
 ID = "_id"
 NAME = 'name'
 
+
 class TestGetPointById(unittest.TestCase):
+
     def testGetPointById(self):
         db = getDbObject(DB)
         obj_id = db[COLLECTION].save({NAME: 'test_GT_1304'})

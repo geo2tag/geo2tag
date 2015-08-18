@@ -19,7 +19,9 @@ INCORRECT_ARGS = {}
 
 app = Flask(__name__)
 
+
 class test_GT_1281ChannelsListResourceParser(TestCase):
+
     def test_GT_1281ChannelsListResourceParserFunc(self):
 
         with app.test_request_context(URL, data=CORRECT_ARGS, method='POST'):

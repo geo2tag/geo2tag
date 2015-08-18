@@ -5,7 +5,7 @@ from basic_integration_test import BasicIntegrationTest
 
 sys.path.append("../")
 from db_model import removeService
-from  service_not_exist_exception import ServiceNotExistException
+from service_not_exist_exception import ServiceNotExistException
 
 TEST_URL = '/instance/service'
 VALID_NAME = 'test_servise_post'
@@ -16,14 +16,17 @@ VALID_RESPONSE_TEXT = {}
 EXIST_RESPONSE_TEXT = 'Service already exists'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
+
+
 class TestServiceListPostRequest(BasicIntegrationTest):
+
     def testServiceListPostRequest(self):
-        response = requests.post(self.getUrl(TEST_URL), data = DATA)
+        response = requests.post(self.getUrl(TEST_URL), data=DATA)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(2, responseText.find("$oid"))
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        response = requests.post(self.getUrl(TEST_URL), data = DATA2)
+        response = requests.post(self.getUrl(TEST_URL), data=DATA2)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, EXIST_RESPONSE_TEXT)

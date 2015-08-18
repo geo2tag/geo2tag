@@ -13,7 +13,10 @@ VALID_RESPONSE_TEXT = u'[{"json": {}, "_id": {"$oid": "556721a52a2e7febd2744204"
 NOT_VALID_RESPONSE_TEXT = u'{"message": "[offset]: invalid literal for int() with base 10: \'str\'"}'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
+
+
 class TestChannelServiceGetRequest(BasicIntegrationTest):
+
     def testChannelServiceGetRequest(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseText = response.text
