@@ -1,14 +1,14 @@
 var test_data_service_resource = {
-    'GET' : {url : getUrlWithPrefix('/service/testservice')},
+    'GET' : {url : '/' + getInstancePrefix() + '/service/testservice'},
     'PUT' : {
-        url : getUrlWithPrefix('/service/testservice'),
+        url : '/' + getInstancePrefix() + '/service/testservice',
         data : {logSize : 10}
     },
-    'DELETE' : {url : getUrlWithPrefix('/service/serviceToDelete')}
+    'DELETE' : {url : '/' + getInstancePrefix() + '/service/serviceToDelete'}
 };
 
 var serviceToDelete = {
-        url : getUrlWithPrefix('/service'),
+        url : '/' + getInstancePrefix() + '/service',
         data : {
             'name' : 'serviceToDelete',
             'ownerId' : 'serviceListResourceTestOwnerId',

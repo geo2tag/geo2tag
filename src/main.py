@@ -24,8 +24,10 @@ from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
-from rout_map_resource import MapResource
+from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from config_reader import getInstancePrefix
+from flask import g
 from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
@@ -64,6 +66,11 @@ def after_request(response):
                          'GET, POST, PUT, DELETE')
     return response
 
+
+@app.before_request
+def defineInstancePrefix():
+    g.instance_prefix = getInstancePrefix()
+
 getApi().add_resource(ServiceResource,
                       getPathWithPrefix('/service/<string:serviceName>'))
 getApi().add_resource(StatusResource, getPathWithPrefix('/status'))
@@ -101,10 +108,10 @@ getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 
+
 getApi().add_resource(
     MapResource,
-    getPathWithPrefix(
-        '/service/<string:serviceName>/map'))
+    getPathWithPrefix('/service/<string:serviceName>/map'))
 getApi().add_resource(
     GetAllPluginsWithStatusResource,
     getPathWithPrefix('/plugin'))

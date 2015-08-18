@@ -16,16 +16,19 @@ VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
 NOT_VALID_RESPONSE_TEXT = "Channel does not exist"
 
+
 class ChannelResourcePut(BasicIntegrationTest):
+
     def testChannelResourcePut(self):
         db = getDbObject(TEST_SERVICE)
-        result = list(db['channels'].find({"name" : u"test_channel_GT-1290_put"}))
-        response = requests.put(self.getUrl(TEST_URL), data = LIST_ARGS)
+        result = list(db['channels'].find(
+            {"name": u"test_channel_GT-1290_put"}))
+        response = requests.put(self.getUrl(TEST_URL), data=LIST_ARGS)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, VALID_RESPONSE_TEXT)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        response = requests.put(self.getUrl(BAD_TEST_URL), data = BAD_LIST_ARGS)
+        response = requests.put(self.getUrl(BAD_TEST_URL), data=BAD_LIST_ARGS)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, NOT_VALID_RESPONSE_TEXT)

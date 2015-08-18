@@ -1,21 +1,21 @@
-var test_data_login = { 'GET':{
-        url : '/' + getInstancePrefix() + '/login'
-    } ,
+var test_rout_map_resource = {
+    'GET' : {url : getUrlWithPrefix('/service/testservice/map')}
 };
-  
 
-QUnit.test( test_data_login.GET.url, function( assert ) {
-    var done = assert.async(); 
+QUnit.test('GET' + test_rout_map_resource.GET.url, function( assert ) {
+    var done = assert.async();
+
     var callbackFail = function() {
         assert.ok(false, 'get failed' );
         done();
     };
+
     var callbackOk = function() {
         assert.ok(true, 'went ok' );
         done();
     };
 
-    $.get(test_data_login.GET.url)
+    $.get(test_rout_map_resource.GET.url)
         .fail( callbackFail )
         .done( callbackOk )
 });
