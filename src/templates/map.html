@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block styles %}
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css.1') }}" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}" />
 <link rel="stylesheet" href="{{ url_for('static', filename='css/L.Control.Zoomslider.css') }}" />
 {% endblock %}
 {% block scripts %}
@@ -23,8 +23,5 @@
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}
 {% block content %}
-
 <div style="width: auto; height: 500px; align: center" id="map" class="leaflet-container"></div>
-
 {% endblock %}
-
