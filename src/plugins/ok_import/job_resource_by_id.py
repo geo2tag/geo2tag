@@ -9,8 +9,8 @@ class JobResourceById(Resource):
 
     @possibleException
     def get(self, serviceName, jobId):
-        return JobManager.getJob(job_id)
+        return JobManager.getJob(jobId)
 
     @possibleException
     def delete(self, serviceName, jobId):
-        return JobManager.stopJob(job_id)
+        return JobManager.stopJob(jobId)
