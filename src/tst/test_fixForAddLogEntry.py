@@ -24,6 +24,7 @@ db = getDbObject()
 
 
 class TestFixForAddLogEntry(unittest.TestCase):
+
     def testFixForAddLogEntry(self):
         addLogEntry(TEST_DB, TEST_USER_ID, TEST_MSG)
         objects = list(db[LOG].find())

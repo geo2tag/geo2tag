@@ -11,7 +11,9 @@ NOT_VALID_RESPONSE_TEXT = 'Plugin is not enabled'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 404
 
+
 class Test_GT_1443_Request(BasicIntegrationTest):
+
     def test_GT_1443_Request(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseText = response.text

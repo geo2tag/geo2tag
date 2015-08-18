@@ -8,6 +8,7 @@ import sys
 sys.path.append('../')
 from db_model import getChannelByName,getServiceIdByName
 
+
 class JobResource(Resource):
 
     @possibleException
@@ -26,10 +27,10 @@ class JobResource(Resource):
                           serviceName):
             pass
 
-        thread = ThreadJob(stubFunction, job.get('channelName'), \
-                           job.get('openDataUrl'), \
-                           job.get('showObjectUrl'), \
-                           job.get('showImageUrl'), \
+        thread = ThreadJob(stubFunction, job.get('channelName'),
+                           job.get('openDataUrl'),
+                           job.get('showObjectUrl'),
+                           job.get('showImageUrl'),
                            serviceName)
 
         return JobManager.startJob(thread)

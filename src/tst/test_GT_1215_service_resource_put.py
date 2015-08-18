@@ -18,7 +18,9 @@ INCORRECT_ARGS = {}
 
 app = Flask(__name__)
 
+
 class test_GT_1215ServiceResourcePut(TestCase):
+
     def test_GT_1215ServiceResourcePutFunc(self):
 
         with app.test_request_context('/testservice', data=CORRECT_ARGS, method='PUT'):

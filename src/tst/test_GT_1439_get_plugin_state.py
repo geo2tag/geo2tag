@@ -11,7 +11,9 @@ PLUGINS = 'plugins'
 TEST_NAME = 'test_1439_get'
 ENABLED = 'enabled'
 
+
 class TestGetPluginState(unittest.TestCase):
+
     def testGetPluginState(self):
         db = getDbObject()
         db[PLUGINS].save({NAME: TEST_NAME, ENABLED: True})

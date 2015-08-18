@@ -31,20 +31,24 @@ REQUEST_PARAM = "?user_id=" + TEST_ID
 app = Flask(__name__)
 app.secret_key = urandom(32)
 
+
 class TestUserRoutines(unittest.TestCase):
-    def testUserRoutins(self) :
-        #Emulating login session
-        with app.test_request_context(LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM) :
+
+    def testUserRoutins(self):
+        # Emulating login session
+        with app.test_request_context(LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM):
             logUserIn(request.args[USER_ID_FIELD])
-            self.assertTrue(session[USER_ID_FIELD]==TEST_ID)
-            #Testing writing in log
-            IS_USER_LOGIN = COLLECTION_LOG.find({USER_ID_FIELD : TEST_ID, MESSAGE : MSG_LOGIN}, None, 0, 1).sort("_id", pymongo.DESCENDING)
+            self.assertTrue(session[USER_ID_FIELD] == TEST_ID)
+            # Testing writing in log
+            IS_USER_LOGIN = COLLECTION_LOG.find(
+                {USER_ID_FIELD: TEST_ID, MESSAGE: MSG_LOGIN}, None, 0, 1).sort("_id", pymongo.DESCENDING)
             self.assertTrue(IS_USER_LOGIN.count() == 1)
             self.assertTrue(list(IS_USER_LOGIN)[0][MESSAGE] == MSG_LOGIN)
-            #Emulating logout session
+            # Emulating logout session
             logUserOut()
             self.assertTrue(USER_ID_FIELD not in session)
-            #Testing writing in log
-            IS_USER_LOGOUT = COLLECTION_LOG.find({USER_ID_FIELD : TEST_ID, MESSAGE : MSG_LOGOUT}, None, 0, 1).sort("_id", pymongo.DESCENDING)
+            # Testing writing in log
+            IS_USER_LOGOUT = COLLECTION_LOG.find(
+                {USER_ID_FIELD: TEST_ID, MESSAGE: MSG_LOGOUT}, None, 0, 1).sort("_id", pymongo.DESCENDING)
             self.assertTrue(IS_USER_LOGOUT.count() == 1)
             self.assertTrue(list(IS_USER_LOGOUT)[0][MESSAGE] == MSG_LOGOUT)

@@ -5,7 +5,9 @@ OPEN_DATA_URL = 'openDataUrl'
 SHOW_OBJECT_URL = 'showObjectUrl'
 SHOW_IMAGE_URL = 'showImageUrl'
 
+
 class OKImportParser():
+
     @staticmethod
     def parsePostParameters():
         parser = reqparse.RequestParser()

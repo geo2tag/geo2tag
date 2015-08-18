@@ -11,16 +11,17 @@ VALID_RESPONSE_TEXT_LEN = 3
 PARSE_LIST_PARAM = '"}}, {"'
 
 INVALID_PARAMS = '?number=100'
-INVALID_RESPONSE_CODE = 400 
+INVALID_RESPONSE_CODE = 400
 INVALID_RESPONSE_TEXT = '{"message": "[channel_ids]: Missing required parameter in the JSON body or the post body or the query string"}'
 
 
 class TestPointListGet_ResponseText(BasicIntegrationTest):
+
     def testValid(self):
         response = requests.get(self.getUrl(TEST_URL + VALID_PARAMS))
         responseText = response.text
         responseCode = response.status_code
-        len_l =  len(list(responseText.split(PARSE_LIST_PARAM)))
+        len_l = len(list(responseText.split(PARSE_LIST_PARAM)))
         self.assertEquals(VALID_RESPONSE_TEXT_LEN, len_l)
         self.assertEquals(VALID_RESPONSE_CODE, responseCode)
 

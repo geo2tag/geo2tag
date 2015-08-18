@@ -24,11 +24,13 @@ _ALT = 'alt'
 _JSON = 'json'
 _CHANNEL_ID = 'channel_id'
 CORRECT_ARGS = {_LAT: LAT, _JSON: JSON, _LON: LON, _ALT: ALT}
-INCORRECT_ARGS = {_LAT: True, _JSON: JSON, _ALT: [1,2,3]}
+INCORRECT_ARGS = {_LAT: True, _JSON: JSON, _ALT: [1, 2, 3]}
 
 app = Flask(__name__)
 
+
 class test_GT_1318_Point_Parser(TestCase):
+
     def test_GT_1318_Point_Parser(self):
 
         with app.test_request_context(BAD_URL, data=INCORRECT_ARGS, method='PUT'):
