@@ -1,10 +1,9 @@
 from datetime import datetime
-from open_karelia_object_to_point_translator import getPoint
+from db_model import getChannelByName
 
-def performImportActions(odLoaderClass, odParserClass, \
+def performImportActions(self, callback, odLoaderClass, odParserClass, \
     odToPointTranslatorClass, odToPointsLoaderClass, \
-    serviceName, channelName, openDataUrl, \
-    showObjectUrl, showImageUrl, serviceName):
+    channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName):
      
     # uncomment in case of https://geo2tag.atlassian.net/browse/GT-1505
     '''if issubclassof(odLoaderClass, AbstractOpenDataLoader):
@@ -16,7 +15,7 @@ def performImportActions(odLoaderClass, odParserClass, \
     if issubclassof(odToPointsLoaderClass, AbstractOpenDataToPointsLoader)
     '''
      
-    channelId = getChannelIdByName(channelName)
+    channelId = getChannelByName(serviceName, channelName)
     version = datetime.now()     
     loader = odLoaderClass(openDataUrl)
     openData = loader.load()
