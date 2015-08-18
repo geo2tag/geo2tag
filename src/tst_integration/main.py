@@ -33,6 +33,7 @@ from test_GT_1443_before_request import Test_GT_1443_Request
 from test_GT_1442_manage_plugins import Test_GT_1442_managePlugins
 from test_internal_tests_page import Test_internal_tests_page
 from test_ok_job_resource import Test_OKImportJob
+from test_okimport_service_channel_not_exist import Test_OKImportJob_not_exist
 
 
 def main(host):
@@ -147,6 +148,10 @@ def main(host):
     suite.addTest(
         BasicIntegrationTest.parametrize(
             Test_OKImportJob,
+            param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            Test_OKImportJob_not_exist,
             param=host))
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()

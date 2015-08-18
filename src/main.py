@@ -24,7 +24,7 @@ from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
-from rout_map_resource import MapResource
+from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
 from config_reader import getInstancePrefix
 from flask import g
@@ -108,10 +108,10 @@ getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 
+
 getApi().add_resource(
     MapResource,
-    getPathWithPrefix(
-        '/service/<string:serviceName>/map'))
+    getPathWithPrefix('/service/<string:serviceName>/map'))
 getApi().add_resource(
     GetAllPluginsWithStatusResource,
     getPathWithPrefix('/plugin'))
