@@ -30,6 +30,7 @@ class ThreadJob():
         thread = threading.Thread(
             target=self.backgroundFunction,
             args=(
+                self,
                 self.channelName,
                 self.openDataUrl,
                 self.showObjectUrl,
@@ -75,3 +76,6 @@ class ThreadJob():
                 string.ascii_uppercase +
                 string.ascii_lowercase +
                 string.digits) for x in range(12))
+
+    def callBack(self):
+        self.done = True
