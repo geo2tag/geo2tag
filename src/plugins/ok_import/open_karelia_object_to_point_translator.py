@@ -23,7 +23,7 @@ class OpenKareliaObjectToPointTranslator:
         point['channelId'] = self.channelId
         point['location'] = {"type" : "Point", "coordinates" : [self.objectRepresentation['latitude'],  self.objectRepresentation['longitude']]}
         point['alt'] = 0
-        point['date'] = datetime.now()
+        point['date'] = self.translateDate()
         return point
 
     def translateDate(self):
@@ -33,3 +33,4 @@ class OpenKareliaObjectToPointTranslator:
             return  datetime(int(self.objectRepresentation['century'])*100, 1, 1, 0, 0)
         elif self.objectRepresentation.get('millenium') != None:
             return datetime(int(self.objectRepresentation['millenium'])*1000, 1, 1, 0, 0)
+        return datetime.now()
