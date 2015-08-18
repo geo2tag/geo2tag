@@ -1,5 +1,6 @@
 class JobManager:
     jobs = {}
+
     @classmethod
     def startJob(cls, job):
         jobId = job.describe().get('_id', '')

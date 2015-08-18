@@ -6,6 +6,7 @@ from plugin_routines import getPluginList
 
 
 class TestGetPluginList(unittest.TestCase):
+
     def testGetPluginList(self):
         print 'Before testGetPluginList {0}'.format(os.getcwd())
         os.chdir('../')

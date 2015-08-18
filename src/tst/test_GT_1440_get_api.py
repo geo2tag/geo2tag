@@ -8,6 +8,7 @@ from main import getApi
 
 
 class TestGetApi(unittest.TestCase):
+
     def testGetApi(self):
         obj1 = getApi()
         obj2 = getApi()

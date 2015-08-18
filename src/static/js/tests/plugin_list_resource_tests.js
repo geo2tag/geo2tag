@@ -1,6 +1,6 @@
 var test_data_plugin_list_resource = {
     'GET':{
-        url : getUrlWithPrefix('/plugin')
+        url : '/' + getInstancePrefix() + '/plugin'
     }
 };
 
