@@ -47,7 +47,7 @@ TEST_SHOW_IMAGE_URL = 'test_show_image_url'
 
 class TestPerfomImportActions(unittest.TestCase):
     def testPerfomImportActions(self):
-        performImportActions(self, callBack, testOdLoaderClass, testOdParserClass, testOdToPointTranslatorClass, \
+        performImportActions(testOdLoaderClass, testOdParserClass, testOdToPointTranslatorClass, \
             odToPointsLoaderClass, TEST_CHANNEL_NAME, TEST_OPEN_DATA_URL, \
             TEST_SHOW_OBJECT_URL, TEST_SHOW_IMAGE_URL, TEST_SERVICE_NAME)
         

@@ -1,7 +1,7 @@
 from datetime import datetime
 from db_model import getChannelByName
 
-def performImportActions(self, callback, odLoaderClass, odParserClass, \
+def performImportActions(odLoaderClass, odParserClass, \
     odToPointTranslatorClass, odToPointsLoaderClass, \
     channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName):
      
