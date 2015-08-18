@@ -15,9 +15,11 @@ DATA = {
     DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
 }
 
+
 class Test_OKImportJob(BasicIntegrationTest):
+
     def test_OKImportJob(self):
-        response = requests.post(self.getUrl(TEST_URL), data = DATA)
+        response = requests.post(self.getUrl(TEST_URL), data=DATA)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(len(responseText), 12)
@@ -25,4 +27,4 @@ class Test_OKImportJob(BasicIntegrationTest):
         response = requests.get(self.getUrl(TEST_URL))
         responseList = json.loads(response.text)
         self.assertIsInstance(responseList, list)
-        self.assertNotEquals( len(responseList), 0)
+        self.assertNotEquals(len(responseList), 0)

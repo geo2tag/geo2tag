@@ -25,11 +25,13 @@ INCORRECT_DATA = {
 
 
 class TestOKImportParserPost(TestCase):
+
     def testOKImportParserPostDone(self):
         with app.test_request_context(data=DATA, method=METHOD):
             args = OKImportParser.parsePostParameters()
             for el in DATA_ARR:
                 self.assertEqual(args[el], TEST_VAL_PREFIX + el)
+
     def testOKImportParserPostFail(self):
         with app.test_request_context(data=INCORRECT_DATA, method=METHOD):
             with self.assertRaises(BadRequest):

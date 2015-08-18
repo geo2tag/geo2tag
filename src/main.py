@@ -26,6 +26,8 @@ from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
 from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from config_reader import getInstancePrefix
+from flask import g
 from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
@@ -63,6 +65,11 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods',
                          'GET, POST, PUT, DELETE')
     return response
+
+
+@app.before_request
+def defineInstancePrefix():
+    g.instance_prefix = getInstancePrefix()
 
 getApi().add_resource(ServiceResource,
                       getPathWithPrefix('/service/<string:serviceName>'))

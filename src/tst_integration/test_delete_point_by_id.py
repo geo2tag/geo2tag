@@ -16,7 +16,9 @@ VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
 NOT_VALID_RESPONSE_TEXT = "Point does not exist"
 
+
 class TestPointResourceDelete(BasicIntegrationTest):
+
     def testPointResourceDelete(self):
         db = getDbObject(TEST_SERVICE)
         obj_id = db[COLLECTION].save({NAME: NAME_TEST_OBJECT})

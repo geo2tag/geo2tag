@@ -9,6 +9,7 @@ import sys
 sys.path.append('../')
 from db_model import getChannelByName,getServiceIdByName
 
+
 class JobResource(Resource):
 
     @possibleException
@@ -24,7 +25,7 @@ class JobResource(Resource):
         getChannelByName(serviceName,chlName)
         job = ThreadJob(openKareliaImport, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName)
         JobManager.createJob(job)
-        thread = ThreadJob(stubFunction, job.get('channelName'), \
+        thread = ThreadJob(openKareliaImport, job.get('channelName'), \
                            job.get('openDataUrl'), \
                            job.get('showObjectUrl'), \
                            job.get('showImageUrl'), \
