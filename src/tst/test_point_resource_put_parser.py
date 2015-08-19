@@ -22,7 +22,7 @@ _LAT = 'lat'
 _LON = 'lon'
 _ALT = 'alt'
 _JSON = 'json'
-_CHANNEL_ID = u'канил_ид'
+_CHANNEL_ID = u'канал_ид'
 CORRECT_ARGS = {_LAT: LAT, _JSON: JSON, _LON: LON, _ALT: ALT}
 INCORRECT_ARGS = {_LAT: True, _JSON: JSON, _ALT: [1, 2, 3]}
 

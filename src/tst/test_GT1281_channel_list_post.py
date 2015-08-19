@@ -11,8 +11,8 @@ from json import dumps
 from channels_list_parsers import ChannelsListResourceParser
 
 URL = '/testservice/channel/'
-NAME = 'test_name'
-JSON = "{'1':2}"
+NAME = u'тестовое_имя'
+JSON = u"{'число1':число2}"
 
 CORRECT_ARGS = {'name': NAME, 'json': JSON}
 INCORRECT_ARGS = {}
