@@ -21,7 +21,7 @@ DATA = {
 }
 
 class Test_OKImportJob_not_exist(BasicIntegrationTest):
-    def test_OKImportJob_GET_POST_VALID_INVALID_SERVICE(self):
+    def test_AService_POST_VALID(self):
         #Srevice POST
         #VALID
         response = requests.post(self.getUrl(VALID_TEST_URL),data = json.dumps(DATA))
@@ -29,12 +29,16 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         self.assertNotEquals(responseText, 'None')
+
+    def test_BService_POST_INVALID(self):
         #INVALID
         response = requests.post(self.getUrl(INVALID_TEST_URL),data = json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
         self.assertEquals(responseText, INVALID_SERVICE_TEXT)
+
+    def test_CService_GET_VALID(self):
         #Service GET
         #VALID
         response = requests.get(self.getUrl(VALID_TEST_URL))
@@ -42,13 +46,16 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         self.assertNotEquals(responseText,'[]')
+
+    def test_DService_GET_INVALID(self):
         #INVALID
         response = requests.get(self.getUrl(INVALID_TEST_URL))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
         self.assertEquals(responseText, INVALID_SERVICE_TEXT)
-    def test_OKImportJob_POST_VALID_INVALID_CHANNEL(self):
+        
+    def test_FOKImportJob_POST_VALID_INVALID_CHANNEL(self):
         #Channel POST
         #INVALID
         DATA[PARAM_CHANNEL_NAME] = 'notchannel'
