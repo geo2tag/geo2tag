@@ -15,14 +15,14 @@ from point_does_not_exist import PointDoesNotExist
 URL = '/testservice/point/552833515c0dd1178d37f7bb/'
 BAD_URL = '/testservice/point/point_id/'
 LAT = 55.24
-JSON = "{'1': 'a', '2': 'b'}"
+JSON = u"{'а': 'б', 'в': 'г'}"
 ALT = 1.34
 LON = 3.54
 _LAT = 'lat'
 _LON = 'lon'
 _ALT = 'alt'
 _JSON = 'json'
-_CHANNEL_ID = 'channel_id'
+_CHANNEL_ID = u'канил_ид'
 CORRECT_ARGS = {_LAT: LAT, _JSON: JSON, _LON: LON, _ALT: ALT}
 INCORRECT_ARGS = {_LAT: True, _JSON: JSON, _ALT: [1, 2, 3]}
 

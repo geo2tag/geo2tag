@@ -6,7 +6,7 @@ from debug_login_resource import parseId
 from flask import Flask, request
 
 
-USERNAME = 'abcd'
+USERNAME = u'тест_юзер_ид'
 
 app = Flask(__name__)
 

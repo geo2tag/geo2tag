@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from unittest import TestCase
 from datetime import datetime, date, time
 from flask import Flask, request
@@ -23,7 +26,7 @@ DATE_FROM_VALUE = '1970-06-15T18:00:00'
 DATE_TO = 'date_to'
 DATE_TO_VALUE = '2015-06-15T17:00:00'
 CHANNEL_IDS = 'channel_ids'
-CHANNEL_IDS_VALUE = 'channel_ids_value'
+CHANNEL_IDS_VALUE = u'канал_ид'
 GEOMETRY = 'geometry'
 GEOMETRY_VALUE = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
 GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
