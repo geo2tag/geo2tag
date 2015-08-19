@@ -15,7 +15,7 @@ def performImportActions(odLoaderClass, odParserClass, \
     if issubclassof(odToPointsLoaderClass, AbstractOpenDataToPointsLoader)
     '''
      
-    channelId = getChannelByName(serviceName, channelName)
+    channelId = getChannelByName(serviceName, channelName)['_id']
     version = datetime.now()     
     loader = odLoaderClass(openDataUrl)
     openData = loader.load()

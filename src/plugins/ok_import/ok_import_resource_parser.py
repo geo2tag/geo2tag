@@ -13,7 +13,7 @@ class OKImportParser():
 
     @staticmethod
     def parsePostParameters():
-        args = loads(request.data)
+        args = loads(request.get_data())
         for key in MANDATORY_FIELDS_OK_PARSER:
             if key not in args:
                 raise ValueError('{0} parameter is missing'.format(key))

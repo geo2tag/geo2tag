@@ -1,10 +1,11 @@
 from unittest import TestCase
 from flask import request
+from flask import Flask
+from werkzeug.exceptions import BadRequest
+from json import dumps
 import sys
 sys.path.append('../plugins/ok_import')
 from ok_import_resource_parser import OKImportParser
-from flask import Flask
-from werkzeug.exceptions import BadRequest
 
 app = Flask(__name__)
 
@@ -27,12 +28,12 @@ INCORRECT_DATA = {
 class TestOKImportParserPost(TestCase):
 
     def testOKImportParserPostDone(self):
-        with app.test_request_context(data=DATA, method=METHOD):
+        with app.test_request_context(data=dumps(DATA), method=METHOD):
             args = OKImportParser.parsePostParameters()
             for el in DATA_ARR:
                 self.assertEqual(args[el], TEST_VAL_PREFIX + el)
 
     def testOKImportParserPostFail(self):
-        with app.test_request_context(data=INCORRECT_DATA, method=METHOD):
-            with self.assertRaises(BadRequest):
+        with app.test_request_context(data=dumps(INCORRECT_DATA), method=METHOD):
+            with self.assertRaises(ValueError):
                 args = OKImportParser.parsePostParameters()

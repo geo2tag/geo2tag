@@ -22,9 +22,9 @@ class OpenKareliaObjectToPointTranslator:
         obj = {}
         obj['name'] = self.objectRepresentation['name'][0]
         obj['image_url'] = self.serverShowImageUrl + \
-            self.objectRepresentation.get('images', [''])[0]
+            unicode(self.objectRepresentation.get('images', [u''])[0])
         obj['source_url'] = self.serverShowObjectUrl + \
-            objectRepresentation.get('_id')
+            unicode(self.objectRepresentation.get('_id'))
         obj['version'] = self.version
         obj['import_source'] = self.importSource
         return obj
@@ -42,10 +42,12 @@ class OpenKareliaObjectToPointTranslator:
         return point
 
     def translateDate(self):
-        if self.objectRepresentation.get('year') != None:
-            return  datetime(int(self.objectRepresentation['year']), 1, 1, 0, 0)
-        elif self.objectRepresentation.get('century') != None:
-            return  datetime(int(self.objectRepresentation['century'])*100, 1, 1, 0, 0)
-        elif self.objectRepresentation.get('millenium') != None:
-            return datetime(int(self.objectRepresentation['millenium'])*1000, 1, 1, 0, 0)
-        return datetime.now()
+        try:
+            if self.objectRepresentation.get('year') != None:
+                return  datetime(int(self.objectRepresentation['year']), 1, 1, 0, 0)
+            elif self.objectRepresentation.get('century') != None:
+                return  datetime(int(self.objectRepresentation['century'])*100, 1, 1, 0, 0)
+            elif self.objectRepresentation.get('millenium') != None:
+                return datetime(int(self.objectRepresentation['millenium'])*1000, 1, 1, 0, 0)
+        finally:
+            return datetime.now()
