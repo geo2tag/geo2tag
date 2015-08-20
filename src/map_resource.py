@@ -5,6 +5,9 @@ from flask import render_template
 from flask import make_response
 from base_exception import BaseException
 from point_list_resource_parser import PointListResourceParser
+from db_model import getAllChannelIds
+
+NUMBER = 1000
 
 
 class MapResource(Resource):
@@ -16,4 +19,13 @@ class MapResource(Resource):
             getparam = args
             return make_response(render_template('map.html', params=getparam))
         except Exception as e:
-            return make_response(render_template('map.html'))
+            getparam = getDefaultMapParams(serviceName, NUMBER)
+            return make_response(render_template('map.html', params=getparam))
+
+
+def getDefaultMapParams(serviceName, number):
+    res = {}
+    allchannelid = getAllChannelIds(serviceName)
+    res['channel_ids'] = allchannelid
+    res['serviceName'] = serviceName
+    return res

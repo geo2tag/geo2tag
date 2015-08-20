@@ -20,39 +20,48 @@ DATA = {
     DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
 }
 
+
 class Test_OKImportJob_not_exist(BasicIntegrationTest):
+
     def test_OKImportJob_GET_POST_VALID_INVALID_SERVICE(self):
-        #Srevice POST
-        #VALID
-        response = requests.post(self.getUrl(VALID_TEST_URL),data = json.dumps(DATA))
+        # Srevice POST
+        # VALID
+        response = requests.post(
+            self.getUrl(VALID_TEST_URL),
+            data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         self.assertNotEquals(responseText, 'None')
-        #INVALID
-        response = requests.post(self.getUrl(INVALID_TEST_URL),data = json.dumps(DATA))
+        # INVALID
+        response = requests.post(
+            self.getUrl(INVALID_TEST_URL),
+            data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
         self.assertEquals(responseText, INVALID_SERVICE_TEXT)
-        #Service GET
-        #VALID
+        # Service GET
+        # VALID
         response = requests.get(self.getUrl(VALID_TEST_URL))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        self.assertNotEquals(responseText,'[]')
-        #INVALID
+        self.assertNotEquals(responseText, '[]')
+        # INVALID
         response = requests.get(self.getUrl(INVALID_TEST_URL))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
         self.assertEquals(responseText, INVALID_SERVICE_TEXT)
+
     def test_OKImportJob_POST_VALID_INVALID_CHANNEL(self):
-        #Channel POST
-        #INVALID
+        # Channel POST
+        # INVALID
         DATA[PARAM_CHANNEL_NAME] = 'notchannel'
-        response = requests.post(self.getUrl(VALID_TEST_URL),data = json.dumps(DATA))
+        response = requests.post(
+            self.getUrl(VALID_TEST_URL),
+            data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
