@@ -11,7 +11,6 @@ NUMBER = 1000
 SERVICE_NAME = 'serviceName'
 CHANNEL_IDS = 'channel_ids'
 
-
 class MapResource(Resource):
 
     def get(self, serviceName=None):
@@ -26,10 +25,11 @@ class MapResource(Resource):
 
 
 def getDefaultMapParams(serviceName, number):
-    result = {}
+    res = {}
     allchannelid = getAllChannelIds(serviceName)
-    for i in range(number, len(allchannelid)):
-        allchannelid.pop()
-    result[CHANNEL_IDS] = allchannelid
-    result[SERVICE_NAME] = serviceName
-    return result
+    for id in allchannelid:
+    	if(id <= number):
+    		allchannelid.remove(id)
+    res[CHANNEL_IDS] = allchannelid
+    res[SERVICE_NAME] = serviceName
+    return res
