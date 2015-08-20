@@ -1,9 +1,9 @@
 import sys
+from job_list_resource import JobListResource
 from job_resource import JobResource
-from job_resource_by_id import JobResourceById
 
 def getPluginResources():
-    return {'service/<string:serviceName>/job': JobResource, 'service/<string:serviceName>/job/<string:jobId>': JobResourceById}
+    return {'service/<string:serviceName>/job': JobListResource, 'service/<string:serviceName>/job/<string:jobId>': JobResource}
 
 
 def getPluginInfo():
