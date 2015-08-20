@@ -8,14 +8,15 @@ from point_list_resource_parser import PointListResourceParser
 from db_model import getAllChannelIds
 
 NUMBER = 1000
-
+SERVICE_NAME = 'serviceName'
+CHANNEL_IDS = 'channel_ids'
 
 class MapResource(Resource):
 
     def get(self, serviceName=None):
         try:
             args = PointListResourceParser.parseGetParameters()
-            args['serviceName'] = serviceName
+            args[SERVICE_NAME] = serviceName
             getparam = args
             return make_response(render_template('map.html', params=getparam))
         except Exception as e:
@@ -26,6 +27,6 @@ class MapResource(Resource):
 def getDefaultMapParams(serviceName, number):
     res = {}
     allchannelid = getAllChannelIds(serviceName)
-    res['channel_ids'] = allchannelid
-    res['serviceName'] = serviceName
+    res[CHANNEL_IDS] = allchannelid
+    res[SERVICE_NAME] = serviceName
     return res

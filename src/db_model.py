@@ -417,5 +417,5 @@ def getAllChannelIds(serviceName):
     db = getDbObject(serviceName)
     obj = db[CHANNELS_COLLECTION].find()
     for res in obj:
-        allchannelid_array.append(str(res['_id']))
+        allchannelid_array.append(str(res[ID]))
     return allchannelid_array
