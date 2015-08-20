@@ -48,9 +48,9 @@ class ThreadJob():
         self.internalStart()
 
     def stop(self):
-        self.internalStop()
         self.done = True
         self.timeElapsed = datetime.now() - self.startTime
+        self.internalStop()
 
     def getTimeStatistics(self):
         if self.timeElapsed is None:
