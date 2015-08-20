@@ -19,7 +19,7 @@ DATA = {
 class Test_OKImportJob(BasicIntegrationTest):
 
     def test_OKImportJob(self):
-        response = requests.post(self.getUrl(TEST_URL), data=DATA)
+        response = requests.post(self.getUrl(TEST_URL), data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(len(responseText), 12)

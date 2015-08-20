@@ -13,7 +13,7 @@ TEST_OBJ = {
         'version': 'test_version',
         'image_url': 'image_url',
         'name': 'test_GT_1499',
-        'source_url': 'object_url'},
+        'source_url': 'object_url111'},
     'channelId': 'channelId',
     'location': {
         'type': 'Point',
@@ -31,6 +31,7 @@ class TestOKPointTranslator(TestCase):
             'object_url',
             {
                 'name': ['test_GT_1499'],
+                '_id': '111',
                 'latitude': 1,
                 'longitude': 2},
             'test_version',

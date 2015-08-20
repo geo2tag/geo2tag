@@ -24,13 +24,13 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
     def test_OKImportJob_GET_POST_VALID_INVALID_SERVICE(self):
         #Srevice POST
         #VALID
-        response = requests.post(self.getUrl(VALID_TEST_URL),data = DATA)
+        response = requests.post(self.getUrl(VALID_TEST_URL),data = json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         self.assertNotEquals(responseText, 'None')
         #INVALID
-        response = requests.post(self.getUrl(INVALID_TEST_URL),data = DATA)
+        response = requests.post(self.getUrl(INVALID_TEST_URL),data = json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
@@ -52,7 +52,7 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
         #Channel POST
         #INVALID
         DATA[PARAM_CHANNEL_NAME] = 'notchannel'
-        response = requests.post(self.getUrl(VALID_TEST_URL),data = DATA)
+        response = requests.post(self.getUrl(VALID_TEST_URL),data = json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)

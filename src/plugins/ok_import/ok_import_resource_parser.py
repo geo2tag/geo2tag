@@ -1,19 +1,23 @@
-from flask_restful import reqparse
+from flask_restful import request
+from json import loads
 
 CHANNEL_NAME = 'channelName'
 OPEN_DATA_URL = 'openDataUrl'
 SHOW_OBJECT_URL = 'showObjectUrl'
 SHOW_IMAGE_URL = 'showImageUrl'
 
+MANDATORY_FIELDS_OK_PARSER = [CHANNEL_NAME, OPEN_DATA_URL, \
+                              SHOW_OBJECT_URL, SHOW_IMAGE_URL]
 
 class OKImportParser():
 
     @staticmethod
     def parsePostParameters():
-        parser = reqparse.RequestParser()
-        parser.add_argument(CHANNEL_NAME, type=str, required=True)
-        parser.add_argument(OPEN_DATA_URL, type=str, required=True)
-        parser.add_argument(SHOW_OBJECT_URL, type=str, required=True)
-        parser.add_argument(SHOW_IMAGE_URL, type=str, required=True)
-        args = parser.parse_args()
+        args = loads(request.get_data())
+        for key in MANDATORY_FIELDS_OK_PARSER:
+            if key not in args:
+                raise ValueError('{0} parameter is missing'.format(key))
+            elif type(args[key]) is not unicode:
+                raise ValueError('{0} value is not unicode'.format(key)) 
+ 
         return args
