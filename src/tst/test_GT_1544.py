@@ -31,10 +31,7 @@ INCORRECT_DATA = {
 class TestOKImportParserPost(TestCase):
 
     def testOKImportParserPostDone(self):
-        with app.test_request_context(data=dumps(DATA), method=METHOD):
-            args = OKImportParser.parsePostParameters()
-            for el in DATA_ARR:
-                self.assertEqual(args[el], TEST_VAL_PREFIX + el)
-        job1 = JobManager.getJobs()
-        job2 = JobManager.getJobs()
-        self.assertEquals(job1[0].get('time'), job2[0].get('time'))
+        with app.test_request_context(data=dumps({"channelName":"test_GT_1286","openDataUrl":"http://mobile.openkarelia.org//get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964", "showObjectUrl":"", "showImageUrl":""}), method=METHOD):
+            job1 = JobManager.getJobs()
+            job2 = JobManager.getJobs()
+            self.assertEquals(job1[0].get('time'), job2[0].get('time'))
