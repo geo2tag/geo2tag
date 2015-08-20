@@ -1,7 +1,9 @@
 #!/bin/bash
 chown www-data:www-data /app -R
 
-exec mongod &
+#exec mongod &
+
+rm /var/lib/mongodb/mongod.lock
 service mongodb start
 
 source /etc/apache2/envvars
