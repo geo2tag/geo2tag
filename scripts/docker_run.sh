@@ -1,17 +1,14 @@
 #!/bin/bash
 chown www-data:www-data /app -R
 
+exec mongod &
+service mongodb start
+
 source /etc/apache2/envvars
-#service mongodb start
+
 #./scripts/local_deploy.sh
-#rm -rf /var/www/geomongo
 
-#mkdir /var/www/geomongo
-
-#cp src/* config/config.ini /var/www/geomongo
 cp config/geomongo.conf /etc/apache2/sites-available/
-
-#chown -R www-data:www-data /var/www/geomongo
 
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
@@ -49,5 +46,5 @@ chown -R www-data:www-data /var/www/geomongo
 
 a2ensite geomongo.conf
 tail -F /var/log/apache2/* & 
-exec mongod & 
+#exec mongod & 
 exec apache2 -D FOREGROUND
