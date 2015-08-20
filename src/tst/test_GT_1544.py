@@ -36,6 +36,5 @@ class TestOKImportParserPost(TestCase):
             for el in DATA_ARR:
                 self.assertEqual(args[el], TEST_VAL_PREFIX + el)
         job1 = JobManager.getJobs()
-        sleep(2)
         job2 = JobManager.getJobs()
         self.assertEquals(job1[0].get('time'), job2[0].get('time'))
