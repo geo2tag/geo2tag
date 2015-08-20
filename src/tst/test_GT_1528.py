@@ -22,7 +22,7 @@ def backgroundFunction(
 		showObjectUrl = showObjectUrl, 
 		showImageUrl = showImageUrl, 
 		serviceName = serviceName):
-    self.stop()
+    self.callBack()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
 class Test_GT_1558(TestCase):
