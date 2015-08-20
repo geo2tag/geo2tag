@@ -79,3 +79,4 @@ class ThreadJob():
 
     def callBack(self):
         self.done = True
+        self.timeElapsed = datetime.now() - self.startTime
