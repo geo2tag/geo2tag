@@ -16,10 +16,10 @@ elif [[ "$1" == "kill" ]]; then
   exit 0
  fi
 elif [[ "$1" == "tunit" ]]; then
- docker exec -t -i $2 /app/scripts/run_unittests.sh
+ docker exec $2 /app/scripts/run_unittests.sh
  exit $?
 elif [[ "$1" == "tint" ]]; then
- docker exec -t -i $2 /app/scripts/run_integration_tests.sh
+ docker exec $2 /app/scripts/run_integration_tests.sh
  exit $?
 else
  echo -e $"$0 [con] for containers list"
