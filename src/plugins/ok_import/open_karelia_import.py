@@ -8,5 +8,5 @@ def openKareliaImport(self, channelName, openDataUrl, showObjectUrl, showImageUr
     performImportActions(OpenKareliaObjectsLoader, OpenKareliaObjectsParser, \
         OpenKareliaObjectToPointTranslator, OpenKareliaDataToPointsLoader, channelName, \
         openDataUrl, showObjectUrl, showImageUrl, serviceName)
-    self.callBack()
+    self.stop()
 

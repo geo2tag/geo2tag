@@ -12,26 +12,33 @@ import json
 from time import sleep
 app = Flask(__name__)
 
-METHOD = 'POST'
-DATA_ARR = ['channelName', 'openDataUrl', 'showObjectUrl', 'showImageUrl']
-TEST_VAL_PREFIX = 'test_val_'
-DATA = {
-    DATA_ARR[0]: TEST_VAL_PREFIX + DATA_ARR[0],
-    DATA_ARR[1]: TEST_VAL_PREFIX + DATA_ARR[1],
-    DATA_ARR[2]: TEST_VAL_PREFIX + DATA_ARR[2],
-    DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
-}
-INCORRECT_DATA = {
-    DATA_ARR[0]: 123456,
-    DATA_ARR[1]: TEST_VAL_PREFIX + DATA_ARR[1],
-    DATA_ARR[3]: 123456
-}
+channelName = 'channelName'
+openDataUrl = 'openDataUrl'
+showImageUrl = 'showImageUrl'
+showObjectUrl = 'showObjectUrl'
+serviceName = 'serviceName'
 
+def backgroundFunction(
+        self,
+        channelName=channelName,
+        openDataUrl=openDataUrl,
+        showObjectUrl=showObjectUrl,
+        showImageUrl=showImageUrl,
+        serviceName=serviceName):
+    self.stop()
+    return []
 
-class TestOKImportParserPost(TestCase):
-
-    def testOKImportParserPostDone(self):
-        with app.test_request_context(data=dumps({"channelName":"test_GT_1286","openDataUrl":"http://mobile.openkarelia.org//get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964", "showObjectUrl":"", "showImageUrl":""}), method=METHOD):
-            job1 = JobManager.getJobs()
-            job2 = JobManager.getJobs()
-            self.assertEquals(job1[0].get('time'), job2[0].get('time'))
+class Test_GT_1544(TestCase):
+    def test_GT_1544(self):
+        threadJobObj = ThreadJob(
+            backgroundFunction,
+            channelName,
+            openDataUrl,
+            showObjectUrl,
+            showImageUrl,
+            serviceName)
+        threadJobObj.start()
+        time1 = threadJobObj.describe().get('time')
+        threadJobObj.thread.join(1.0)
+        time2 = threadJobObj.describe().get('time')
+        self.assertEquals(time1, time2)

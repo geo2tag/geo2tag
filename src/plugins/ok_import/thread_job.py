@@ -40,15 +40,11 @@ class ThreadJob():
         self.thread = thread
         thread.start()
 
-    def internalStop(self):
-        self.thread.join()
-
     def start(self):
         self.startTime = datetime.now()
         self.internalStart()
 
     def stop(self):
-        self.internalStop()
         self.done = True
         self.timeElapsed = datetime.now() - self.startTime
 
@@ -76,7 +72,3 @@ class ThreadJob():
                 string.ascii_uppercase +
                 string.ascii_lowercase +
                 string.digits) for x in range(12))
-
-    def callBack(self):
-        self.done = True
-        self.timeElapsed = datetime.now() - self.startTime
