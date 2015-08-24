@@ -44,7 +44,7 @@ def addUser(_id, firstName, lastName, email):
     finally:
         return _id
 
-        
+
 def getUserId():
     if USER_ID in session:
         writeInstanceLog(session[USER_ID], 'This authorized user.')
