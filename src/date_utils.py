@@ -1,7 +1,8 @@
 from datetime import datetime
 import json
 
-ISO_FORMAT_ERROR = 'Error: not iso8601 format. Example: 2005-08-09T18:31:42.201000'
+ISO_FORMAT_ERROR = 'Error: not iso8601 format\n ' \
+                   'Example: 2005-08-09T18:31:42.201000'
 DATE_FIELD = 'date'
 
 ISO8601_FMT_MILLS = '%Y-%m-%dT%H:%M:%S.%f'
