@@ -1,36 +1,31 @@
 from datetime import datetime
-from calendar import timegm
-import pymongo
 import json
-import aniso8601
-import pytz
 
-ISO8601_FMT = '%Y-%m-%dT%H:%M:%S'
+ISO_FORMAT_ERROR = 'Error: not iso8601 format. Example: 2005-08-09T18:31:42.201000'
+DATE_FIELD = 'date'
+
+ISO8601_FMT_MILLS = '%Y-%m-%dT%H:%M:%S.%f'
 
 
 def dateSerialiser(obj):
     if isinstance(obj, datetime):
-        return obj.isoformat()
-    raise TypeError("%r is not JSON serializable" % obj)
+        return '{0}{1}'.format(obj.isoformat(), '' if obj.microsecond > 0 else '.000000')
+    raise TypeError('Type is not datetime')
 
 
-def dateDeserialiser(dict, param_date):
+def dateDeserialiser(dict_with_date, param_date):
     try:
-        if param_date in dict and dict[param_date] != None:
-            obj = dict[param_date].replace("'", "").replace("\"", "")
-            return datetime.strptime(str(obj), ISO8601_FMT)
+        if param_date in dict_with_date and dict_with_date[param_date] is not None:
+            obj = dict_with_date[param_date].replace('\'', "").replace('"', '')
+            return datetime.strptime(obj, ISO8601_FMT_MILLS)
     except ValueError:
-        print "Non ISO8601 format"
+        print ISO_FORMAT_ERROR
         raise
     return None
 
 
 def datetime_from_iso8601(datetime_str):
-    try:
-        obj = datetime_str.replace("'", "").replace("\"", "")
-        return json.dumps(
-            aniso8601.parse_datetime(obj),
-            default=dateSerialiser)
-    except ValueError:
-        raise
-    return None
+    return json.dumps(
+        dateDeserialiser({DATE_FIELD: datetime_str}, DATE_FIELD),
+        default=dateSerialiser)
+
