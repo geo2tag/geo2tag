@@ -9,7 +9,9 @@ TEST_NOT_VALID_URL = '/instance/service/nameservicenotvalid'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_CODE_NOT_VALID_URL = 404
 
+
 class TestServiceGetRequest(BasicIntegrationTest):
+
     def testServiceGetRequest(self):
         response = requests.get(self.getUrl(TEST_NOT_VALID_URL))
         responseCode = response.status_code

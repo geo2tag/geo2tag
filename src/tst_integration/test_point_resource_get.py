@@ -10,7 +10,10 @@ VALID_RESPONSE_TEXT = '{"date": {"$date": 1428708737813}, "_id": {"$oid": "55283
 NOT_VALID_RESPONSE_TEXT = 'Point does not exist'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 404
+
+
 class TestPointGetRequest(BasicIntegrationTest):
+
     def testPointGetRequest(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseText = response.text

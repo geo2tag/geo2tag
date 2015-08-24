@@ -6,7 +6,9 @@ import sys
 sys.path.append('../')
 from channel_already_exists import ChannelAlreadyExists
 
+
 class TestChannelAlreadyExistsException(TestCase):
+
     def testChannelAlreadyExistsException(self):
         with self.assertRaises(ChannelAlreadyExists) as e:
-        	raise ChannelAlreadyExists()      	
+            raise ChannelAlreadyExists()

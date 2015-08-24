@@ -6,6 +6,7 @@ GEOJSON_POLYGON_TYPES = ['Polygon', 'MultiPolygon']
 GEOJSON_TYPE = 'type'
 GEOJSON_COORDINATES = 'coordinates'
 
+
 def GeoJsonType(obj):
     jsonObj = geojson.loads(obj)
     if (len(jsonObj.keys()) == 2) and \

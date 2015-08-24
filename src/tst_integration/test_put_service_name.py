@@ -14,14 +14,16 @@ EXIST_RESPONSE_TEXT = '{"message": "[logSize]: invalid literal for int() with ba
 VALID_RESPONSE_CODE = 200
 EXIST_RESPONSE_CODE = 400
 
+
 class TestServicePutRequest(BasicIntegrationTest):
+
     def testServicePutRequest(self):
-        response = requests.put(self.getUrl(TEST_URL), data = DATA)
+        response = requests.put(self.getUrl(TEST_URL), data=DATA)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, VALID_RESPONSE_TEXT)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        response = requests.put(self.getUrl(TEST_URL), data = DATA2)
+        response = requests.put(self.getUrl(TEST_URL), data=DATA2)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, EXIST_RESPONSE_TEXT)

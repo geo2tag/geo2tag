@@ -7,7 +7,9 @@ TEST_URL = '/instance/status'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = "OK"
 
+
 class TestStatusRequest(BasicIntegrationTest):
+
     def testStatusRequest(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseText = response.text

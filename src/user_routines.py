@@ -13,28 +13,34 @@ LAST_NAME = 'last_name'
 EMAIL = 'email'
 ANONYM_USER = 'anonym'
 
+
 def logUserIn(_id):
-    session[USER_ID] = _id    
+    session[USER_ID] = _id
     writeInstanceLog(session[USER_ID], 'login')
+
 
 def logUserOut():
     if USER_ID in session:
         SESSION_VALUE = session.pop(USER_ID)
         writeInstanceLog(SESSION_VALUE, 'logout')
 
-def findUserById(_id) :
+
+def findUserById(_id):
     collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
-    userById = collectionUsers.find_one({FIND_KEY_ID : _id})
-    if userById != None :
+    userById = collectionUsers.find_one({FIND_KEY_ID: _id})
+    if userById is not None:
         return userById
     raise UserDoesNotExist
+
 
 def addUser(_id, firstName, lastName, email):
     try:
         findUserById(_id)
     except UserDoesNotExist:
         collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
-        collectionUsers.insert({FIND_KEY_ID : _id, FIRST_NAME : firstName, LAST_NAME : lastName, EMAIL : email})
+        collectionUsers.insert(
+            {FIND_KEY_ID: _id, FIRST_NAME: firstName, LAST_NAME: lastName,
+             EMAIL: email})
     finally:
         return _id
 def getUserId():

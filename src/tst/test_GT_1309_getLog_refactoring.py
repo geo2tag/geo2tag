@@ -7,7 +7,7 @@ from datetime import datetime, date, time
 import sys
 sys.path.append('../')
 from db_model import getLog, getDbObject
-    
+
 DATE_TO = datetime(3000, 1, 1)
 DATE_FROM = datetime(2100, 1, 1)
 DATE_ISERT = datetime(2500, 1, 1)
@@ -23,14 +23,20 @@ USER_TESTSERVICE_ID_VALUE = "GT-1309-testservice"
 collection_geomongo = getDbObject(DB_GEOMONGO)[COLLECTION]
 collection_testservice = getDbObject(DB_TESTSERVICE)[COLLECTION]
 
-class TestGetLogRefactoring(TestCase) : 
-    def testForGeomongoDb(self) :
-        collection_geomongo.insert({ USER_ID : USER_GEOMONGO_ID_VALUE, "date" : DATE_ISERT })
-        log_data = list(getLog(DB_GEOMONGO, 0,0, DATE_FROM, DATE_TO))
+
+class TestGetLogRefactoring(TestCase):
+
+    def testForGeomongoDb(self):
+        collection_geomongo.insert(
+            {USER_ID: USER_GEOMONGO_ID_VALUE, "date": DATE_ISERT})
+        log_data = list(getLog(DB_GEOMONGO, 0, 0, DATE_FROM, DATE_TO))
         self.assertEqual(log_data[0][USER_ID], USER_GEOMONGO_ID_VALUE)
-    def testForTestserviceDb(self) :
-        collection_testservice.insert({ USER_ID : USER_TESTSERVICE_ID_VALUE, "date" : DATE_ISERT })
-        log_data = list(getLog(DB_TESTSERVICE, 0,0, DATE_FROM, DATE_TO))
+
+    def testForTestserviceDb(self):
+        collection_testservice.insert(
+            {USER_ID: USER_TESTSERVICE_ID_VALUE, "date": DATE_ISERT})
+        log_data = list(getLog(DB_TESTSERVICE, 0, 0, DATE_FROM, DATE_TO))
         self.assertEqual(log_data[0][USER_ID], USER_TESTSERVICE_ID_VALUE)
-    def testForNoneDb(self) :
-        self.assertEqual((getLog(FAKE_DB, 0,0, DATE_FROM, DATE_TO)), [])
+
+    def testForNoneDb(self):
+        self.assertEqual((getLog(FAKE_DB, 0, 0, DATE_FROM, DATE_TO)), [])

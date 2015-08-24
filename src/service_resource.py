@@ -2,8 +2,9 @@ from flask import request
 from flask.ext.restful import Resource
 from flask_restful import reqparse
 from config_reader import getHost, getPort, getDbName
-from db_model import getServiceIdByName, updateService, removeService, possibleException
-from  service_not_exist_exception import ServiceNotExistException
+from db_model import getServiceIdByName, updateService, removeService
+from possible_exception import possibleException
+from service_not_exist_exception import ServiceNotExistException
 from service_parsers import ServiceParser
 
 SRV_NAME_DISCR = 'Service description'
@@ -14,8 +15,10 @@ ARGS_NAME = "name"
 ARGS_LOG_SIZE = "logSize"
 ARGS_OWNER_ID = "ownerId"
 
+
 class ServiceResource(Resource):
-    @possibleException    
+
+    @possibleException
     def get(self, serviceName):
         getServiceResult = getServiceIdByName(serviceName)
         return getServiceResult
