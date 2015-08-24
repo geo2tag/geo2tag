@@ -129,7 +129,6 @@ getApi().add_resource(
     getPathWithPrefix('/internal_tests'))
 
 
-
 def initApp(api):
     import os
     homeDir = os.getcwd()
