@@ -21,12 +21,14 @@ collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
 
 app = Flask(__name__)
 
+
 class TestaddUserById(TestCase):
+
     def testaddUserById(self):
         collectionUsers.drop()
-        result_id = addUser(TEST_ID,TEST_FIRSTNAME,TEST_LASTNAME,TEST_EMAIL)
+        result_id = addUser(TEST_ID, TEST_FIRSTNAME, TEST_LASTNAME, TEST_EMAIL)
         print result_id
         self.assertEqual(TEST_ID, result_id)
-        result_id = addUser(TEST_ID,TEST_FIRSTNAME,TEST_LASTNAME,TEST_EMAIL)
+        result_id = addUser(TEST_ID, TEST_FIRSTNAME, TEST_LASTNAME, TEST_EMAIL)
         print result_id
         self.assertEqual(TEST_ID, result_id)

@@ -14,7 +14,9 @@ VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
 NOT_VALID_RESPONSE_TEXT = "Point does not exist"
 
+
 class PointResourcePut(BasicIntegrationTest):
+
     def testPointResourcePut(self):
         db = getDbObject(TEST_SERVICE)
         response = requests.put(self.getUrl(TEST_URL))

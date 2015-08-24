@@ -1,11 +1,11 @@
 var log_resource_test_data = { 'GET':{
-        url : getUrlWithPrefix('/log')
+        url : '/' + getInstancePrefix() + '/log'
     } 
 };
   
 var log_resource_serviceName_test_data = { 'GET':{
-        url : getUrlWithPrefix('/service/test_service_name/log')
-    } 
+        url : '/' + getInstancePrefix() + '/service/test_service_name/log'
+    }
 };
 
 var data = {

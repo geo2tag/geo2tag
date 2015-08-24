@@ -89,7 +89,11 @@ if $LOADING ; then
     for path in *.json; do
         collection=${path%.json}
         echo "Loading into $DB/$collection from $path"
-       mongoimport --upsert --host $HOST -d $DB -c $collection $path
+        mongoimport  --upsert --host $HOST -d $DB -c $collection $path --stopOnError
+        if [ $? -gt 0 ]; then
+            echo 'Error occured while imorting collection: '${collection}'.'
+            exit 1
+        fi
     done
 
     popd >/dev/null

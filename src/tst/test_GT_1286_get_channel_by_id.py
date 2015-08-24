@@ -13,7 +13,9 @@ COLLECTION = "channels"
 ID = "_id"
 NAME = 'name'
 
+
 class TestGetChannelById(unittest.TestCase):
+
     def testGetChannelById(self):
         db = getDbObject(DB)
         obj_id = db[COLLECTION].save({NAME: 'test_GT_1286'})

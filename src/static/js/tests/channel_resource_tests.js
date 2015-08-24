@@ -1,13 +1,13 @@
 var test_data_channel_resource = {
     'GET':{
-        url : getUrlWithPrefix('/service/testservice/channel/558807a47ec8ff5da755ee49')
+        url : '/' + getInstancePrefix() + '/service/testservice/channel/558807a47ec8ff5da755ee49'
     },
     'PUT':{
         data: {'name': 'test_channel_GT-1389_2'},
-        url : getUrlWithPrefix('/service/testservice/channel/558807a47ec8ff5da755ee49')
+        url : '/' + getInstancePrefix() + '/service/testservice/channel/558807a47ec8ff5da755ee49'
     },
     'DELETE':{
-        url : getUrlWithPrefix('/service/testservice/channel/'),
+        url : '/' + getInstancePrefix() + '/service/testservice/channel/',
         id: ''
     }
 };
@@ -49,7 +49,7 @@ var channelToDelete = {
             'name': 'chanelToDelete'+Math.floor(Math.random()*1000), 
             'json': "{'1': 2, '2': '4'}"
         },
-        url : getUrlWithPrefix('/service/testservice/channel')
+        url : '/' + getInstancePrefix() + '/service/testservice/channel'
     }
 };
 

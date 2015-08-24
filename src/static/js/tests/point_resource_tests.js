@@ -1,22 +1,22 @@
 var test_data_point_resource = {
     'GET':{
-        url : getUrlWithPrefix('/service/testservice/point/55282f3b5c0dd1178d37f7a6')
+        url : '/' + getInstancePrefix() + '/service/testservice/point/55282f3b5c0dd1178d37f7a6'
     },
     'PUT':{
         data: {'alt': 5},
-        url : getUrlWithPrefix('/service/testservice/point/55282f3b5c0dd1178d37f7a6')
+        url : '/' + getInstancePrefix() + '/service/testservice/point/55282f3b5c0dd1178d37f7a6'
     },
    'POST':{
         data:{'lat':1.1, 'lon':1.1,  'alt':1.1,  'json':{'a':'b'}, 'channel_id':'556721a521217f1bd2744202'},
-        url : '/instance/service/testservice/point'
+        url : '/' + getInstancePrefix() + '/service/testservice/point'
     },
     'FIND':{
         data:{'number':1,'channel_ids':'556721a521217f1bd2744202'},
-        url : '/instance/service/testservice/point'
+        url : '/' + getInstancePrefix() + '/service/testservice/point'
     },
    'DELETE':{
 
-        url : '/instance/service/testservice/point/',
+        url : '/' + getInstancePrefix() + '/service/testservice/point/',
         id : ''
     }
 };
