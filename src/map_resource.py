@@ -12,6 +12,7 @@ SERVICE_NAME = 'serviceName'
 CHANNEL_IDS = 'channel_ids'
 NUMBER = 'number'
 
+
 class MapResource(Resource):
 
     def get(self, serviceName=None):
