@@ -44,10 +44,13 @@ class OpenKareliaObjectToPointTranslator:
     def translateDate(self):
         try:
             if self.objectRepresentation.get('year') != None:
-                return  datetime(int(self.objectRepresentation['year']), 1, 1, 0, 0)
+                return datetime(
+                    int(self.objectRepresentation['year']), 1, 1, 0, 0)
             elif self.objectRepresentation.get('century') != None:
-                return  datetime(int(self.objectRepresentation['century'])*100, 1, 1, 0, 0)
+                return datetime(int(self.objectRepresentation[
+                                'century']) * 100, 1, 1, 0, 0)
             elif self.objectRepresentation.get('millenium') != None:
-                return datetime(int(self.objectRepresentation['millenium'])*1000, 1, 1, 0, 0)
+                return datetime(int(self.objectRepresentation[
+                                'millenium']) * 1000, 1, 1, 0, 0)
         finally:
             return datetime.now()
