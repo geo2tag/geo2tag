@@ -135,13 +135,13 @@ def run():
         required=True)
     parser.add_argument(
         '--m',
-        type=str,
+        type=unicode,
         help='enter methods of resourse class',
         required=True,
         nargs='+')
     parser.add_argument(
         '--url',
-        type=str,
+        type=unicode,
         help='enter url of resourse',
         required=True)
     args = parser.parse_args()
