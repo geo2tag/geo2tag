@@ -20,6 +20,7 @@ DATA = {
     DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
 }
 
+
 class Test_OKImportJob_not_exist(BasicIntegrationTest):
     def test_AService_POST_VALID(self):
         #Srevice POST
@@ -59,7 +60,9 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
         #Channel POST
         #INVALID
         DATA[PARAM_CHANNEL_NAME] = 'notchannel'
-        response = requests.post(self.getUrl(VALID_TEST_URL),data = json.dumps(DATA))
+        response = requests.post(
+            self.getUrl(VALID_TEST_URL),
+            data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
