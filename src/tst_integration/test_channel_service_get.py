@@ -21,7 +21,6 @@ class TestChannelServiceGetRequest(BasicIntegrationTest):
         response = requests.get(self.getUrl(TEST_URL))
         responseText = response.text
         responseCode = response.status_code
-        pr
         self.assertEquals(VALID_RESPONSE_TEXT, responseText)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(self.getUrl(TEST_URL2))
