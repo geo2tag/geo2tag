@@ -18,18 +18,18 @@ class MapResource(Resource):
         try:
             args = PointListResourceParser.parseGetParameters()
             args[SERVICE_NAME] = serviceName
-            getparam = args
-            return make_response(render_template('map.html', params=getparam))
+            get_param = args
+            return make_response(render_template('map.html', params=get_param))
         except Exception as e:
-            getparam = getDefaultMapParams(serviceName, NUMBER)
-            return make_response(render_template('map.html', params=getparam))
+            get_param = getDefaultMapParams(serviceName, NUMBER)
+            return make_response(render_template('map.html', params=get_param))
 
 
 def getDefaultMapParams(serviceName, number):
     result = {}
-    allchannelid = getAllChannelIds(serviceName)
-    for i in range(number, len(allchannelid)):
-        allchannelid.pop()
-    result[CHANNEL_IDS] = allchannelid
+    all_channel_ids = getAllChannelIds(serviceName)
+    for i in range(number, len(all_channel_ids)):
+        all_channel_ids.pop()
+    result[CHANNEL_IDS] = all_channel_ids
     result[SERVICE_NAME] = serviceName
     return result
