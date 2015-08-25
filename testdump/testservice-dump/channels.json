@@ -2,9 +2,9 @@
 { "_id" : { "$oid" : "556721a52a2e7febd2744201" }, "name" : "test_channel_1", "json" : {}, "owner_id" : "STUB" }
 { "_id" : { "$oid" : "556721a52a2e7febd2744202" }, "name" : "test_channel_2", "json" : {}, "owner_id" : "STUB" }
 { "_id" : { "$oid" : "556721a52a2e7febd2744203" }, "name" : "test_channel_5", "json" : {}, "owner_id" : "STUB" }
-{ "_id" : { "$oid" : "556721a52a2e7febd2744204" }, "name" : "test_channel_4", "json" : {}, "owner_id" : "STUB" }
 { "_id" : { "$oid" : "556721a52a2e7febd2744303" }, "name" : "test_channel_3", "json" : {}, "owner_id" : "STUB" }
-{ "_id" : { "$oid" : "558807a47ec8ff5da755ee47" }, "json" : {}, "name" : "test_channel_GT-1290_put", "owner_id" : "STUB" }
-{ "_id" : { "$oid" : "558807a47ec8ff5da755ee48" }, "json" : {}, "name" : "test_channel_GT-1290_delete", "owner_id" : "STUB" }
-{ "_id" : { "$oid" : "558807a47ec8ff5da755ee49" }, "json" : {}, "name" : "test_channel_GT-1389", "owner_id" : "STUB" }
+{ "_id" : { "$oid" : "556721a52a2e7febd2744204" }, "name" : "test_channel_4", "json" : {}, "owner_id" : "STUB" }
+{ "_id" : { "$oid" : "558807a47ec8ff5da755ee48" }, "json" : {  }, "name" : "test_channel_GT-1290_delete", "owner_id" : "STUB" }
+{ "_id" : { "$oid" : "558807a47ec8ff5da755ee47" }, "json" : {  }, "name" : "test_channel_GT-1290_put", "owner_id" : "STUB" }
+{ "_id" : { "$oid" : "558807a47ec8ff5da755ee49" }, "json" : {  }, "name" : "test_channel_GT-1389", "owner_id" : "STUB" }
 { "_id" : { "$oid" : "55dc620fbe9b3bf61be83f93" }, "name" : "ok_import_nearest_objects", "json" : {}, "owner_id" : "STUB" }
