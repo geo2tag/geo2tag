@@ -17,12 +17,12 @@ from time import sleep
 
 
 def backgroundFunction(
-		self, 
-		channelName = channelName, 
-		openDataUrl = openDataUrl, 
-		showObjectUrl = showObjectUrl, 
-		showImageUrl = showImageUrl, 
-		serviceName = serviceName):
+        self, 
+        channelName = channelName, 
+        openDataUrl = openDataUrl, 
+        showObjectUrl = showObjectUrl, 
+        showImageUrl = showImageUrl, 
+        serviceName = serviceName):
     self.stop()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
