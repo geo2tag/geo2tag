@@ -11,8 +11,8 @@ from json import dumps
 from channel_parsers import ChannelResourceParser
 
 URL = '/testservice/channel/channel_id/'
-NAME = 'test_name'
-JSON = "{'1':2}"
+NAME = u'тестовое_имя'
+JSON = u"{'число1':число2}"
 ACL = 10
 
 _NAME = 'name'

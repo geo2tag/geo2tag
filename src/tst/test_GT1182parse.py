@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from unittest import TestCase
 from datetime import datetime, date, time
 from flask import Flask, request
