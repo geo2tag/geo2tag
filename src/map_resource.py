@@ -7,10 +7,10 @@ from base_exception import BaseException
 from point_list_resource_parser import PointListResourceParser
 from db_model import getAllChannelIds
 
-NUMBER = 1000
+NUMBER_VALUE = 1000
 SERVICE_NAME = 'serviceName'
 CHANNEL_IDS = 'channel_ids'
-
+NUMBER = 'number'
 
 class MapResource(Resource):
 
@@ -18,18 +18,17 @@ class MapResource(Resource):
         try:
             args = PointListResourceParser.parseGetParameters()
             args[SERVICE_NAME] = serviceName
-            getparam = args
-            return make_response(render_template('map.html', params=getparam))
+            get_param = args
+            return make_response(render_template('map.html', params=get_param))
         except Exception as e:
-            getparam = getDefaultMapParams(serviceName, NUMBER)
-            return make_response(render_template('map.html', params=getparam))
+            get_param = getDefaultMapParams(serviceName)
+            return make_response(render_template('map.html', params=get_param))
 
 
-def getDefaultMapParams(serviceName, number):
+def getDefaultMapParams(serviceName):
     result = {}
-    allchannelid = getAllChannelIds(serviceName)
-    for i in range(number, len(allchannelid)):
-        allchannelid.pop()
-    result[CHANNEL_IDS] = allchannelid
+    all_channel_ids = getAllChannelIds(serviceName)
+    result[CHANNEL_IDS] = all_channel_ids
     result[SERVICE_NAME] = serviceName
+    result[NUMBER] = NUMBER_VALUE
     return result

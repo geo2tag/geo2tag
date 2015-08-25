@@ -12,7 +12,7 @@ class ChannelsListResourceParser():
     @staticmethod
     def parseGetParameters():
         parser = reqparse.RequestParser()
-        parser.add_argument(ARGS_SUBSTRING, type=str)
+        parser.add_argument(ARGS_SUBSTRING, type=unicode)
         parser.add_argument(ARGS_NUMBER, type=int)
         parser.add_argument(ARGS_OFFSET, type=int)
         args = parser.parse_args()
@@ -21,7 +21,7 @@ class ChannelsListResourceParser():
     @staticmethod
     def parsePostParameters():
         parser = reqparse.RequestParser()
-        parser.add_argument(ARGS_NAME, type=str, required=True)
-        parser.add_argument(ARGS_JSON, type=str, required=True)
+        parser.add_argument(ARGS_NAME, type=unicode, required=True)
+        parser.add_argument(ARGS_JSON, type=unicode, required=True)
         args = parser.parse_args()
         return args
