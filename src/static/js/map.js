@@ -13,6 +13,11 @@ function fixMapSize(){
 
 $(document).ready(function (){
     map = createMap('map', true);
+    var markers = new L.MarkerClusterGroup();
+    markers.addLayer(L.marker([59.57, 30.19]));
+    markers.addLayer(L.marker([59.82, 30.69]));
+    markers.addLayer(L.marker([59.22, 31.19]));
+    map.addLayer(markers);
     $(window).on('resize', fixMapSize());
     var path_marker = '../../../static/img';
     var COORDINATES = 'coordinates'
