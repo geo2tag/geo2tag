@@ -13,7 +13,29 @@ function fixMapSize(){
 
 $(document).ready(function (){
     map = createMap('map', true);
-
     $(window).on('resize', fixMapSize());
+    var path_marker = '../../../static/img';
+    var COORDINATES = 'coordinates'
+    var LOCATION = 'location'
+    var SERVICE_NAME ='serviceName'
+    var CHANNEL_IDS = 'channel_ids'
+    var mapIcon = L.icon({
+        iconUrl: path_marker + '/marker-icon.png',
+        shadowUrl: path_marker + '/marker-shadow.png',
 
+        popupAnchor:  [11, 0]
+    });
+    var callbackSuccess = function (data) {
+        var len = data.length;
+        for(var i = 0; i < len; i++ ){
+            var text = "<b>" + data[i]['_id']['$oid'] + "</b>";
+            L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).addTo(map)
+            .bindPopup(text).openPopup();
+        }
+    };
+    var callbackFail = function () {
+
+    };
+    var getPointForMap = new Geo2TagRequests('map', 'map');
+    getPointForMap.getPoints(par[SERVICE_NAME], callbackSuccess, callbackFail, par[CHANNEL_IDS], 1000);
 });

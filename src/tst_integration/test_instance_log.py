@@ -3,8 +3,8 @@ import requests
 from basic_integration_test import BasicIntegrationTest
 import json
 
-TEST_URL1 = "/instance/service/testservice/log?date_from='1983-01-22T08:00:00'"
-TEST_URL2 = "/instance/log?date_from='1983-01-22T08:00:00'"
+TEST_URL1 = "/instance/service/testservice/log?date_from='1983-01-22T08:00:00.000000'"
+TEST_URL2 = "/instance/log?date_from='1983-01-22T08:00:00.000000'"
 TEST_URL1_IV = "/instance/service/testservice/log?date_from='1111'"
 TEST_URL2_IV = "/instance/log?date_from='1111'"
 VALID_RESPONSE_CODE = 200
