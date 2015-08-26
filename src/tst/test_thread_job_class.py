@@ -13,6 +13,7 @@ showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
 
+
 def backgroundFunction(
         self,
         channelName=channelName,
@@ -20,7 +21,7 @@ def backgroundFunction(
         showObjectUrl=showObjectUrl,
         showImageUrl=showImageUrl,
         serviceName=serviceName):
-    self.callBack()
+    self.stop()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
 

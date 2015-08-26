@@ -19,8 +19,7 @@ RUN apt-get update && apt-get install -y \
 		mongodb \
 		curl \
 		git \
-		nano \
-		vim \
+		supervisor \
 		&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 #Create the MongoDB data directory
@@ -34,7 +33,10 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 ENV APACHE_RUN_DIR /var/run/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 
-RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
+#Supervisor config
+ENV SUPERVISOR_LOG_DIR /var/log/supervisor
+
+RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR $SUPERVISOR_LOG_DIR
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
@@ -43,16 +45,10 @@ EXPOSE 27017
 
 RUN mkdir /app
 
-#ADD src/ /app/src
-#ADD scripts/docker_run.sh /app
-#ADD config/ /app/config
-#RUN mkdir /app/scripts
-
 ADD scripts/req* /app/scripts/
 ADD scripts/setup_pip* /app/scripts/
 
 WORKDIR /app
-#RUN ["pip install -r requirements.txt"]
 RUN ["scripts/setup_pip_dependencies.sh"]
 
 CMD ["scripts/docker_run.sh"]

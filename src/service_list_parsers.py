@@ -21,9 +21,9 @@ class ServiceListParser():
     @staticmethod
     def parsePostParameters():
         parser = reqparse.RequestParser()
-        parser.add_argument(POST_ARGS_NAME, type=str, required=True)
+        parser.add_argument(POST_ARGS_NAME, type=unicode, required=True)
         parser.add_argument(POST_ARGS_LOG_SIZE, type=int, default=1048576)
-        parser.add_argument(POST_ARGS_OWNER_ID, type=str,
+        parser.add_argument(POST_ARGS_OWNER_ID, type=unicode,
                             default=DEFAULT_OWNER_ID)
         args = parser.parse_args()
         return args
