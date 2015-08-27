@@ -14,9 +14,11 @@ DATA = {
     DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
 }
 
+
 class Test_GT_1511(BasicIntegrationTest):
+
     def test_GT_1511(self):
-        response = requests.post(self.getUrl(TEST_URL), data = DATA)
+        response = requests.post(self.getUrl(TEST_URL), data=DATA)
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(len(responseText), 12)

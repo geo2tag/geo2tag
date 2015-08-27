@@ -37,6 +37,7 @@ from test_ok_job_resource import Test_OKImportJob
 from test_okimport_service_channel_not_exist import Test_OKImportJob_not_exist
 from test_GT_1511 import Test_GT_1511
 
+
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(

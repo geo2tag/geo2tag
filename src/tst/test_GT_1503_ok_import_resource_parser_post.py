@@ -35,5 +35,5 @@ class TestOKImportParserPost(TestCase):
 
     def testOKImportParserPostFail(self):
         with app.test_request_context(data=dumps(INCORRECT_DATA), method=METHOD):
-            with self.assertRaises(ValueError):
+            with self.assertRaises(BadRequest):
                 args = OKImportParser.parsePostParameters()

@@ -24,9 +24,9 @@ NAME = 'name'
 LOG_SIZE = 'logSize'
 OWNER_ID = 'ownerId'
 
-NAME_VALUE = 'nameval'
+NAME_VALUE = u'имя'
 LOG_SIZE_VALUE = 10
-OWNER_ID_VALUE = 'owneridval'
+OWNER_ID_VALUE = u'индификатор_владельца'
 
 DEFAULT_LOG_SIZE = 1048576
 DEFAULT_OWNER_ID = 'STUB'

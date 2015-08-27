@@ -5,6 +5,7 @@ from job_manager import JobManager
 from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob
 
+
 class JobResourceById(Resource):
 
     @possibleException
