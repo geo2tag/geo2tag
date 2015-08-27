@@ -1,19 +1,22 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from unittest import TestCase
+from flask import request
+from flask import Flask
+from werkzeug.exceptions import BadRequest
+from json import dumps
 import sys
-from db_model import getDbObject
-sys.path.append('../plugins/ok_import/')
+sys.path.append('../plugins/ok_import')
+from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob
 from job_manager import JobManager
-import datetime
+import json
+from time import sleep
+app = Flask(__name__)
+
 channelName = 'channelName'
 openDataUrl = 'openDataUrl'
 showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
-
 
 def backgroundFunction(
         self,
@@ -23,12 +26,10 @@ def backgroundFunction(
         showImageUrl=showImageUrl,
         serviceName=serviceName):
     self.stop()
-    return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
+    return []
 
-
-class Test_GT_1507_class_job_manager(TestCase):
-
-    def test_GT_1507_class_job_manager(self):
+class Test_GT_1544(TestCase):
+    def test_GT_1544(self):
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,
@@ -37,11 +38,7 @@ class Test_GT_1507_class_job_manager(TestCase):
             showImageUrl,
             serviceName)
         threadJobObj.start()
-        manager = JobManager()
-        jobId = manager.startJob(threadJobObj)
-        self.assertEquals(len(jobId), 12)
-        self.assertEquals(type(manager.getJob(jobId)), dict)
-        manager.stopJob(jobId)
-        self.assertEquals(threadJobObj.done, True)
-        self.assertEquals(type(manager.getJobs()), list)
-        threadJobObj.stop()
+        time1 = threadJobObj.describe().get('time')
+        threadJobObj.thread.join(1.0)
+        time2 = threadJobObj.describe().get('time')
+        self.assertEquals(time1, time2)
