@@ -8,7 +8,7 @@ ID = "_id"
 
 def parseId():
     parser = reqparse.RequestParser()
-    parser.add_argument(ID, type=str, default=None)
+    parser.add_argument(ID, type=unicode, default=None)
     args = parser.parse_args()
     return args
 
