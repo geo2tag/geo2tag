@@ -30,8 +30,8 @@ class TestJobsParser(unittest.TestCase):
 		self.assertEquals(parseJobs(JSON_TEST), JSON_RESULT)
 
 	def testAreAllJobsDone(self):
-		self.assertEquals(areAllJobsDone(JOBS_LIST1), True)
-		self.assertEquals(areAllJobsDone(JOBS_LIST2), False)
+		self.assertEquals(areAllJobsDone(JOBS_LIST1), False)
+		self.assertEquals(areAllJobsDone(JOBS_LIST2), True)
 
 	def testCreateJobStatistic(self):
 		self.assertEquals(createJobStatistic(JOB_STATISTIC_TEST), STATISTIC_RESULT)

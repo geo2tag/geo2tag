@@ -18,7 +18,6 @@ def parseJobs(jobsText):
     return json.loads(jobsText)
 
 def areAllJobsDone(jobsList):
-    print JOBS_LIST1, '***********'
     for job in jobsList:
         if job.get(DONE) == False:
             return False
