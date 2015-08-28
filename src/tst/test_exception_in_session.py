@@ -9,8 +9,9 @@ app.secret_key = urandom(32)
 
 ANONYM = 'anonym'
 
+
 class TestSession(TestCase):
 
-    def testSession_no_emulationg_session(self) :
-    	#No emulating session
-    	self.assertTrue(getUserId() == ANONYM)
+    def testSession_no_emulationg_session(self):
+        # No emulating session
+        self.assertTrue(getUserId() == ANONYM)
