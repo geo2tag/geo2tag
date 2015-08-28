@@ -98,7 +98,8 @@ def main():
             for i in range(int(ports_range[0]), int(ports_range[1]) + 1):
                 container_on_port = collection.find_one({CONTAINER_PORT: i})
                 if container_on_port is None:
-                    collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i})
+                    collection.save(
+                        {CONTAINER_NAME: container_start_name, CONTAINER_PORT: i})
                     start_container(container_start_name, i)
                     container_start_port = i
                     container_start_result = True
@@ -114,9 +115,14 @@ def main():
             sys.exit(1)
 
         # waiting for mongo
-        write_log(container_start_name, "Container "+container_start_name+" started on port %d" % container_start_port)
+        write_log(
+            container_start_name,
+            "Container " +
+            container_start_name +
+            " started on port %d" %
+            container_start_port)
         counter_start = 0
-        while 1:
+        while True:
             counter_start += 1
             if wait_mongo_start(container_start_name) == 0:
                 write_log(container_start_name, "Mongo start")

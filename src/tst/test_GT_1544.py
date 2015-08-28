@@ -18,6 +18,7 @@ showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
 
+
 def backgroundFunction(
         self,
         channelName=channelName,
@@ -28,7 +29,9 @@ def backgroundFunction(
     self.stop()
     return []
 
+
 class Test_GT_1544(TestCase):
+
     def test_GT_1544(self):
         threadJobObj = ThreadJob(
             backgroundFunction,
