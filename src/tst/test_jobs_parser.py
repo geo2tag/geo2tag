@@ -4,7 +4,7 @@ from datetime import datetime
 import requests
 sys.path.append('../performance/od_performance/')
 from jobs_parser import *
-URL = 'http://mobile.openkarelia.org//get_nearest_objects'
+URL = 'http://httpbin.org/status/200'
 JSON_TEST = '{"_id": {"$oid": "55671ae113293c504d515a33"}, "config": {"log_size": 1048576, "logSize": 10}, "name": "testservice", "owner_id": ""}'
 JSON_RESULT = {
     u'_id': {
@@ -95,7 +95,7 @@ STATISTIC_RESULT = {
 class TestJobsParser(unittest.TestCase):
 
     def testGetImportJobsText(self):
-        self.assertEquals(getImportJobsText(URL), requests.get(URL).text)
+        self.assertEquals(getImportJobsText(URL), '')
 
     def testParseJobs(self):
         self.assertEquals(parseJobs(JSON_TEST), JSON_RESULT)
