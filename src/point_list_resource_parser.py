@@ -39,8 +39,15 @@ class PointListResourceParser():
     def parsePostParameters():
         jsonData = request.get_json(force=True)
         print jsonData
-        args = validatePointsList(jsonData)
+        args = parseBcParanetr(validatePointsList(jsonData))
         return args
+
+def parseBcParanetr(json):
+    for obj in json:
+        if not ('bc' in obj.keys()):
+            obj['bc']=False
+    return json    
+
 
 
 def validatePointsList(json):
