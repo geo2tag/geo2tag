@@ -14,6 +14,7 @@ DATE_FROM = 'date_from'
 DATE_TO = 'date_to'
 OFFSET = 'offset'
 RADIUS = 'radius'
+BC = 'bc'
 
 
 class PointListResourceParser():
@@ -44,8 +45,8 @@ class PointListResourceParser():
 
 def parseBcParanetr(json):
     for obj in json:
-        if not ('bc' in obj.keys()):
-            obj['bc']=False
+        if not (BC in obj.keys()):
+            obj[BC]=False
     return json    
 
 
@@ -89,4 +90,6 @@ def validatePointsList(json):
                     obj['channel_id'],
                     unicode)):
                 raise ValueError("'channel_id' - Incorrect type")
+            if ('bc' in obj.keys() and not isinstance(obj['bc'], bool)):
+                raise ValueError("'bc' - Incorrect type")
     return json
