@@ -11,9 +11,9 @@ function getPointPopupHtml(point){
 		var description = point[JSON][DESCRIPTION] != null ? point[JSON][DESCRIPTION]: ' - ';
 		var source_url = point[JSON][SOURCE_URL] != null ? '<a href="' + point[JSON][SOURCE_URL] + '">' + point[JSON][SOURCE_URL] + '</a>' : ' - ';
 		var text_img = image_url;
-		var text_name = '<b>  Name:</b>' + name  + '<br>';
-		var text_description = '<b>  Description:</b>' + description + '<br>';
-		var text_source = '<b>  Source_url:</b>' + source_url + '<br>';
+		var text_name = '<b>  Name:</b>' + ' ' + name  + '<br>';
+		var text_description = '<b>  Description:</b>' + ' ' + description + '<br>';
+		var text_source = '<b>  Source_url:</b>' + ' ' + source_url + '<br>';
 		text = '<table><tr><td>' + text_img + '</td>' + '<td>' + text_name + text_description + text_source + '</td></tr></table>';
 	}else{
 		text = "<b>" + point['_id']['$oid'] + "</b>";
