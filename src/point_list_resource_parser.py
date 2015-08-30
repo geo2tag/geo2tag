@@ -43,12 +43,12 @@ class PointListResourceParser():
         args = parseBcParametr(validatePointsList(jsonData))
         return args
 
+
 def parseBcParametr(json):
     for obj in json:
         if not (BC in obj.keys()):
-            obj[BC]=False
-    return json    
-
+            obj[BC] = False
+    return json
 
 
 def validatePointsList(json):
