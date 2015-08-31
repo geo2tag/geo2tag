@@ -148,7 +148,7 @@ def main():
             sys.exit(1)
 
         os.putenv('CONTAINER', "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests")
-        #os.environ["CONTAINER"] = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
+        os.environ["CONTAINER"] = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
 
         write_log(container_start_name, os.environ["CONTAINER"])
 
