@@ -33,6 +33,8 @@ from flask import request
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
 from internal_tests_resource import InternalTestsResource
+from log import writeInstanceLog
+from user_routines import getUserId()
 
 API = None
 
@@ -64,6 +66,7 @@ def after_request(response):
                          'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods',
                          'GET, POST, PUT, DELETE')
+    writeInstanceLog(getUserId(), 'After request')
     return response
 
 
