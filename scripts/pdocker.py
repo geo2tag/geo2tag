@@ -105,13 +105,13 @@ def find_port_and_start(container_start_name, ports):
                 container_start_port = i
                 container_start_result = True
                 break
-        else:
-            stop_container(container_start_name)
-            start_container(container_start_name, container[CONTAINER_PORT])
-            container_start_port = container[CONTAINER_PORT]
-            container_start_result = True
+    else:
+        stop_container(container_start_name)
+        start_container(container_start_name, container[CONTAINER_PORT])
+        container_start_port = container[CONTAINER_PORT]
+        container_start_result = True
 
-    return container_start_result, container_start_port
+    return [container_start_result, container_start_port]
 
 
 def main():
@@ -138,7 +138,10 @@ def main():
         write_log(container_start_name,
                   "Container " + container_start_name + " started on port %d" % container_start_port)
 
+        write_log(container_start_name, "Run Unit tests")
         t_unit = run_unit_tests(container_start_name)
+
+        write_log(container_start_name, "Run int tests")
         t_int = run_int_tests(container_start_name)
 
         if t_int != 0 or t_unit != 0:
