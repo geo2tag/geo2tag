@@ -146,8 +146,12 @@ def main():
 
         if t_int != 0 or t_unit != 0:
             sys.exit(1)
-        os.environ["CONTAINER"] = "http://geomongo:"+str(container_start_port)
 
+        os.environ["CONTAINER"] = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
+
+        write_log(container_start_name, os.environ["CONTAINER"])
+        
+        write_log(container_start_name, "Done")
 
 if __name__ == "__main__":
     main()
