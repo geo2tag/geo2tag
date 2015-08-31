@@ -30,6 +30,7 @@ rm -rf /var/www/"$CATALOG"
 mkdir /var/www/"$CATALOG"
 
 cp src/*.py  /var/www/"$CATALOG"
+cp src/*.wsgi /var/www/"$CATALOG"
 if ! $FLAG_KEEP_CONFIG_INI
 then
     cp config/config.ini /var/www/"$CATALOG"
