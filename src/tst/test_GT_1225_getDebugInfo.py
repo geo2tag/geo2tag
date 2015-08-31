@@ -13,13 +13,16 @@ TEST_FILE_DATA = ('''{
 	'version': VERSION
 }''')
 
-def prepareDebugFile() :
-	file = open(RIGHT_FILE_NAME, "w+")
-	file.write(TEST_FILE_DATA)	
 
-class TestGetDebugInfo(TestCase) :
-	def testGetDebugInfo(self) :
-		#checking if data from file is correct
-		prepareDebugFile()
-		self.assertEqual(getDebugInfo(), TEST_FILE_DATA)
-		os.remove(RIGHT_FILE_NAME)
+def prepareDebugFile():
+    file = open(RIGHT_FILE_NAME, "w+")
+    file.write(TEST_FILE_DATA)
+
+
+class TestGetDebugInfo(TestCase):
+
+    def testGetDebugInfo(self):
+        # checking if data from file is correct
+        prepareDebugFile()
+        self.assertEqual(getDebugInfo(), TEST_FILE_DATA)
+        os.remove(RIGHT_FILE_NAME)

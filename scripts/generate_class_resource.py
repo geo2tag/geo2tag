@@ -19,6 +19,7 @@ addResource = 'getApi().add_resource('
 MAIN_FILE = 'main.py'
 PARSER_ARGS = {}
 
+
 def make_generator(args):
     className = checkFileName(args.name)
     IMPORT_RESOURCE = 'from ' + args.name + ' import ' + className + '\n'
@@ -40,7 +41,10 @@ def make_generator(args):
         newResource.write(TAB + '@possibleException\n')
         newResource.write(TAB + DEF + methods.lower() + '(self):\n')
         newResource.write(TAB + TAB + 'pass\n')
-        newResource.write(TAB + TAB + '#This method is empty. You can add code here\n')
+        newResource.write(
+            TAB +
+            TAB +
+            '#This method is empty. You can add code here\n')
         PARSER_ARGS[methods] = {}
 
     main = open(MAIN_FILE, 'r')
@@ -55,7 +59,13 @@ def make_generator(args):
         if MAIN_STR != string:
             mainWrite.write(string)
         else:
-            mainWrite.write(addResource + className + ', ' + GET_PATH_FUNC + args.url + "\'))\n")
+            mainWrite.write(
+                addResource +
+                className +
+                ', ' +
+                GET_PATH_FUNC +
+                args.url +
+                "\'))\n")
             mainWrite.write(MAIN_STR)
     print 'Resourse added successfully'
 
@@ -63,16 +73,24 @@ def make_generator(args):
     i = 0
     while flag:
         while i < len(args.m):
-            countArgs = int(input('Enter count of arguments by method ' + args.m[i] + ' '))
+            countArgs = int(
+                input(
+                    'Enter count of arguments by method ' +
+                    args.m[i] +
+                    ' '))
             j = 0
             while j < countArgs:
                 print 'Method ' + str(args.m[i]) + ' argument ' + str(j + 1)
                 argument = sys.stdin.readline()
                 argumentDict = argument.split(' ')
                 if argumentDict[1][0:-1] in TYPES:
-                    PARSER_ARGS[args.m[i]][argumentDict[0].lower()] = argumentDict[1][0:-1]
-                    j+=1
-            i+=1
+                    PARSER_ARGS[
+                        args.m[i]][
+                        argumentDict[0].lower()] = argumentDict[1][
+                        0:-
+                        1]
+                    j += 1
+            i += 1
         flag = False
 
     print PARSER_ARGS
@@ -84,28 +102,57 @@ def make_generator(args):
     i = 0
     for methods in args.m:
         newParser.write(TAB + STATIC)
-        newParser.write(TAB + DEF + 'parse' + methods[0].upper() + methods[1::].lower() + 'Parameters' + '():\n')
+        newParser.write(
+            TAB +
+            DEF +
+            'parse' +
+            methods[0].upper() +
+            methods[
+                1::].lower() +
+            'Parameters' +
+            '():\n')
         newParser.write(TAB + TAB + PARSER_TEMPLETE + '\n')
         for arg in PARSER_ARGS[methods]:
-            newParser.write(TAB + TAB + ADD_ARGUMENT + arg + ', type = ' + PARSER_ARGS[methods][arg] + ')\n')
+            newParser.write(
+                TAB +
+                TAB +
+                ADD_ARGUMENT +
+                arg +
+                ', type = ' +
+                PARSER_ARGS[methods][arg] +
+                ')\n')
         newParser.write(RETURN)
         newParser.write(TAB + TAB + '\n')
-        i+=1
+        i += 1
+
 
 def run():
     import argparse
     parser = argparse.ArgumentParser(description='Generate class resourse')
-    parser.add_argument('--name', help='enter name of resourse class', required=True)
-    parser.add_argument('--m', type = str, help='enter methods of resourse class', required=True, nargs = '+')
-    parser.add_argument('--url', type=str, help='enter url of resourse', required=True)
+    parser.add_argument(
+        '--name',
+        help='enter name of resourse class',
+        required=True)
+    parser.add_argument(
+        '--m',
+        type=unicode,
+        help='enter methods of resourse class',
+        required=True,
+        nargs='+')
+    parser.add_argument(
+        '--url',
+        type=unicode,
+        help='enter url of resourse',
+        required=True)
     args = parser.parse_args()
     make_generator(args)
+
 
 def checkFileName(FileName):
     i = FileName.find('_')
     FileName = FileName.capitalize()
     while i != -1:
-        FileName = FileName[0:i] + FileName[i+1:].capitalize()
+        FileName = FileName[0:i] + FileName[i + 1:].capitalize()
         i = FileName.find('_')
     return FileName
 

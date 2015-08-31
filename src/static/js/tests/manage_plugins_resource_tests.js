@@ -1,6 +1,6 @@
 var test_data_plugins_resource = {
     'GET':{
-        url : getUrlWithPrefix('/manage_plugins?test_plugin=True&testPlugin1=False')
+        url : '/' + getInstancePrefix() + '/manage_plugins?test_plugin=True&testPlugin1=False'
     }
 }
 QUnit.test( 'GET ' + test_data_plugins_resource.GET.url, function( assert ) {

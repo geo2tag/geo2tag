@@ -12,16 +12,33 @@ openDataUrl = 'openDataUrl'
 showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
-def backgroundFunction(channelName = channelName, openDataUrl = openDataUrl, showObjectUrl = showObjectUrl, showImageUrl = showImageUrl, serviceName = serviceName):
+
+
+def backgroundFunction(
+        self,
+        channelName=channelName,
+        openDataUrl=openDataUrl,
+        showObjectUrl=showObjectUrl,
+        showImageUrl=showImageUrl,
+        serviceName=serviceName):
+    self.stop()
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
+
 class Test_GT_1506_class_thread_job(TestCase):
+
     def test_GT_1506_class_thread_job(self):
-        threadJobObj = ThreadJob(backgroundFunction, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName)
+        threadJobObj = ThreadJob(
+            backgroundFunction,
+            channelName,
+            openDataUrl,
+            showObjectUrl,
+            showImageUrl,
+            serviceName)
         threadJobObj.start()
         threadJobObj.internalStart()
         threadJobObj.stop()
-        statistic =  threadJobObj.getTimeStatistics()
+        statistic = threadJobObj.getTimeStatistics()
         self.assertEquals(type(statistic), type(datetime.timedelta()))
         describe = threadJobObj.describe()
         self.assertEquals(len(describe.get('_id')), 12)

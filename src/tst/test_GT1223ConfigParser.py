@@ -1,6 +1,6 @@
 from unittest import TestCase
 from configparser import ConfigParser
-from configparser import  SafeConfigParser
+from configparser import SafeConfigParser
 import os
 import sys
 
@@ -15,11 +15,15 @@ INSTANCEPREFIX = 'instance'
 
 
 class TestConfingParser(TestCase):
+
     def testHost(self):
         self.assertEqual(HOST, config_reader.getHost())
+
     def testPort(self):
-    	self.assertEqual(PORT, config_reader.getPort())
+        self.assertEqual(PORT, config_reader.getPort())
+
     def testDbName(self):
-    	self.assertEqual(DBNAME, config_reader.getDbName())
+        self.assertEqual(DBNAME, config_reader.getDbName())
+
     def testInstancePrefix(self):
-    	self.assertEqual(INSTANCEPREFIX, config_reader.getInstancePrefix())
+        self.assertEqual(INSTANCEPREFIX, config_reader.getInstancePrefix())

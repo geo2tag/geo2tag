@@ -3,8 +3,11 @@ sys.path.append('../..')
 from db_model import getDbObject
 serviceName = 'testservice'
 POINTS = 'points'
+
+
 class OpenKareliaDataToPointsLoader:
     pointsArray = []
+
     def __init__(self, serviceName, points):
         self.pointsArray = points
         self.serviceName = serviceName

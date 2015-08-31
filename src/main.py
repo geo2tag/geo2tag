@@ -24,14 +24,17 @@ from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
-from rout_map_resource import MapResource
+from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from config_reader import getInstancePrefix
+from flask import g
 from possible_exception import possibleException
 from flask import request
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
 from log import writeInstanceLog
 from user_routines import getUserId
+from internal_tests_resource import InternalTestsResource
 
 API = None
 
@@ -67,6 +70,11 @@ def after_request(response):
                      'Status_code: ' + str(response.status_code) + ', '
                      'response: ' + str(response.response)[:2000])
     return response
+
+
+@app.before_request
+def defineInstancePrefix():
+    g.instance_prefix = getInstancePrefix()
 
 getApi().add_resource(ServiceResource,
                       getPathWithPrefix('/service/<string:serviceName>'))
@@ -105,16 +113,19 @@ getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 
+
 getApi().add_resource(
     MapResource,
-    getPathWithPrefix(
-        '/service/<string:serviceName>/map'))
+    getPathWithPrefix('/service/<string:serviceName>/map'))
 getApi().add_resource(
     GetAllPluginsWithStatusResource,
     getPathWithPrefix('/plugin'))
 getApi().add_resource(
     ManagePluginsResource,
     getPathWithPrefix('/manage_plugins'))
+getApi().add_resource(
+    InternalTestsResource,
+    getPathWithPrefix('/internal_tests'))
 
 
 def initApp(api):

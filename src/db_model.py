@@ -13,6 +13,7 @@ from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, \
     GEOJSON_COORDINATES
 
+
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
@@ -74,18 +75,6 @@ def addLogEntry(dbName, userId, message, service='instance'):
                          MESSAGE: message, SERVICE: service})
     else:
         collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
-
-
-def possibleException(func):
-    def funcPossibleException(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except BaseException as e:
-            if hasattr(e, 'getReturnObject'):
-                return e.getReturnObject()
-            else:
-                raise
-    return funcPossibleException
 
 
 def addTag(tag):
@@ -423,3 +412,12 @@ def setPluginState(pluginName, state):
     else:
         obj[ENABLED] = state
         db[PLUGINS].save(obj)
+
+
+def getAllChannelIds(serviceName):
+    all_channel_ids_array = []
+    db = getDbObject(serviceName)
+    obj = db[CHANNELS_COLLECTION].find()
+    for result in obj:
+        all_channel_ids_array.append(str(result[ID]))
+    return all_channel_ids_array

@@ -48,7 +48,7 @@ def addUser(_id, firstName, lastName, email):
 
 
 def getUserId():
-    if USER_ID in session:
+    try:
         return session[USER_ID]
-    else:
+    except Exception:
         return ANONYM_USER

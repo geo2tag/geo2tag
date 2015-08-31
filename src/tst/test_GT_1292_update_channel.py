@@ -12,7 +12,9 @@ COLLECTION = "channels"
 ID = "_id"
 NAME = 'name'
 
+
 class TestUpdateChannel(unittest.TestCase):
+
     def testUpdateChannel(self):
         collection = getDbObject(DB)[COLLECTION]
         obj_id = collection.save({NAME: 'test_GT_1292'})

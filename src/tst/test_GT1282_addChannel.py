@@ -18,9 +18,11 @@ ACl = 777
 
 db = getDbObject(SERVICE_NAME)
 
+
 class TestAddChannel(unittest.TestCase):
+
     def testAddChannel(self):
-    	result = addChannel(NAME, JSON, OWNER_ID, SERVICE_NAME)
-    	self.assertNotEqual(result, None)
-    	self.assertNotEquals(list(db['channels'].find({'_id': result})), [])
-    	db['channels'].remove({'_id': result})
+        result = addChannel(NAME, JSON, OWNER_ID, SERVICE_NAME)
+        self.assertNotEqual(result, None)
+        self.assertNotEquals(list(db['channels'].find({'_id': result})), [])
+        db['channels'].remove({'_id': result})
