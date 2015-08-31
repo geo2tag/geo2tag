@@ -66,7 +66,7 @@ def after_request(response):
                          'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods',
                          'GET, POST, PUT, DELETE')
-    writeInstanceLog(getUserId(), 'After request')
+    writeInstanceLog(getUserId, 'After request')
     return response
 
 
