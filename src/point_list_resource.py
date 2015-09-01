@@ -9,7 +9,8 @@ from bson.json_util import dumps
 from date_utils import dateDeserialiser
 
 # Custom error for BC dates flags
-BC_DATES_FLAGS_ERR_VAL = ': Missing required parameter in the JSON body or the post body or the query string'
+BC_DATES_FLAGS_ERR_VAL = ': Missing required parameter in the JSON body ' \
+                         'or the post body or the query string'
 BC_DATES_FLAGS_ERR_KEY = 'message'
 POINT_LIST_PARSER_ARGS_KEY = 'args'
 POINT_LIST_PARSER_ERRS_KEY = 'err'
