@@ -8,12 +8,28 @@ from db_model import addPoints, findPoints
 from bson.json_util import dumps
 from date_utils import dateDeserialiser
 
+# Custom error for BC dates flags
+BC_DATES_FLAGS_ERR_VAL = ': Missing required parameter in the JSON body or the post body or the query string'
+BC_DATES_FLAGS_ERR_KEY = 'message'
+POINT_LIST_PARSER_ARGS_KEY = 'args'
+POINT_LIST_PARSER_ERRS_KEY = 'err'
+
 
 class PointListResource(Resource):
 
     @possibleException
     def get(self, serviceName):
-        params = PointListResourceParser.parseGetParameters()
+        params_with_errs = PointListResourceParser.parseGetParameters()
+
+        # Generating error string for 'bc_from' and 'bc_to' parameters if error appeared
+        if len(params_with_errs[POINT_LIST_PARSER_ERRS_KEY]) > 0:
+            err_str = ""
+            for i in params_with_errs[POINT_LIST_PARSER_ERRS_KEY]:
+                    err_str += '[' + i + '] '
+            # GET request will return 'standard' error for bad parameters
+            return {BC_DATES_FLAGS_ERR_KEY: err_str + BC_DATES_FLAGS_ERR_VAL}, 400
+
+        params = params_with_errs[POINT_LIST_PARSER_ARGS_KEY]
         result = findPoints(
             serviceName,
             params[CHANNEL_IDS],

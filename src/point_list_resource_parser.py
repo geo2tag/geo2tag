@@ -1,4 +1,4 @@
-from flask_restful import reqparse
+from flask_restful import reqparse, inputs
 import geo_json_type
 from flask import request
 from date_utils import dateDeserialiser
@@ -16,6 +16,11 @@ DATE_TO = 'date_to'
 OFFSET = 'offset'
 RADIUS = 'radius'
 BC = 'bc'
+BC_FROM = 'bc_from'
+BC_TO = 'bc_to'
+
+BC_DATES_FLAG_CHECK_ARGS_KEY = 'args'
+BC_DATES_FLAG_CHECK_ERR_KEY = 'err'
 
 
 class PointListResourceParser():
@@ -34,8 +39,18 @@ class PointListResourceParser():
         parser.add_argument(DATE_TO, type=datetime_from_iso8601)
         parser.add_argument(OFFSET, type=int)
         parser.add_argument(RADIUS, type=float, default=1000)
+        parser.add_argument(BC_FROM, type=inputs.boolean)
+        parser.add_argument(BC_TO, type=inputs.boolean)
         args = parser.parse_args()
-        return args
+
+        # Generating dict with error array for 'bc_from' and 'bc_to' parameters if error appeared
+        res = {BC_DATES_FLAG_CHECK_ARGS_KEY: args, BC_DATES_FLAG_CHECK_ERR_KEY: []}
+        if args[DATE_FROM] is not None and args[BC_FROM] is None:
+            res[BC_DATES_FLAG_CHECK_ERR_KEY].append(BC_FROM)
+        if args[DATE_TO] is not None and args[BC_TO] is None:
+            res[BC_DATES_FLAG_CHECK_ERR_KEY].append(BC_TO)
+
+        return res
 
     @staticmethod
     def parsePostParameters():
