@@ -14,7 +14,7 @@ do
             ;;
         f) FLAG_KEEP_CONFIG_INI=true;
             ;;
-        *) echo "Неправильный параметр";
+        *) echo "the option is incorrect";
             exit 1
             ;;
         esac
