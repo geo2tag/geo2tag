@@ -1,5 +1,5 @@
 from flask import session
-
+from flask import request
 from config_reader import getDbName
 from db_model import getDbObject
 from log import writeInstanceLog
@@ -12,17 +12,19 @@ FIRST_NAME = 'first_name'
 LAST_NAME = 'last_name'
 EMAIL = 'email'
 ANONYM_USER = 'anonym'
+LOGIN = 'login'
+LOGOUT = 'logout'
 
 
 def logUserIn(_id):
     session[USER_ID] = _id
-    writeInstanceLog(session[USER_ID], 'login')
+    writeInstanceLog(session[USER_ID], LOGIN)
 
 
 def logUserOut():
     if USER_ID in session:
         SESSION_VALUE = session.pop(USER_ID)
-        writeInstanceLog(SESSION_VALUE, 'logout')
+        writeInstanceLog(SESSION_VALUE, LOGOUT)
 
 
 def findUserById(_id):
@@ -46,7 +48,7 @@ def addUser(_id, firstName, lastName, email):
 
 
 def getUserId():
-    if USER_ID in session:
+    try:
         return session[USER_ID]
-    else:
+    except Exception:
         return ANONYM_USER

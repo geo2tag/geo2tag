@@ -16,13 +16,15 @@ TEST_POINT1 = {
     'lon': 10,
     'alt': 1.1,
     'json': 'd',
-    'channel_id': '3'}
+    'channel_id': '3',
+    'bc': False}
 TEST_POINT2 = {
     'lat': 1.2,
     'lon': 20,
     'alt': 1.1,
     'json': 'a',
-    'channel_id': '5'}
+    'channel_id': '5',
+    'bc': False}
 
 
 class TestAddPoints(unittest.TestCase):
