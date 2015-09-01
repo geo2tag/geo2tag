@@ -1,3 +1,4 @@
+from twisted.python.log import err
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo
@@ -44,6 +45,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 USER_ID = 'user_id'
 DATE = 'date'
 MESSAGE = 'message'
+ERROR_CODE = 'error_code'
 SERVICE = 'service'
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
