@@ -31,7 +31,7 @@ class OpenKareliaObjectToPointTranslator:
 
     def getPoint(self):
         point = {'json': self.getPointJson()}
-        point['channelId'] = self.channelId
+        point['channel_id'] = self.channelId
         point['location'] = {
             "type": "Point",
             "coordinates": [
