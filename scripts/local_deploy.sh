@@ -59,6 +59,3 @@ chown -R www-data:www-data /var/www/"$CATALOG"
 a2ensite $CONFIG_FILE
 
 service apache2 restart
-
-
-
