@@ -18,7 +18,7 @@ class OKImportParser():
         for key in MANDATORY_FIELDS_OK_PARSER:
             if key not in args:
                 raise BadRequest('{0} parameter is missing'.format(key))
-            elif type(args[key]) is not unicode:
-                raise BadRequest('{0} value is not unicode'.format(key)) 
- 
+            elif not isinstance(args[key], unicode):
+                raise BadRequest('{0} value is not unicode'.format(key))
+
         return args
