@@ -13,8 +13,8 @@ COLLECTION_LOG_NAME = "log"
 TEST_ID = 'test_id'
 USER_ID = 'user_id'
 ANONYM = 'anonym'
-ANONYM_MESS = 'This is anonym user.'
-AUTH_MESS = 'This authorized user.'
+ANONYM_MESS = None
+AUTH_MESS = 'login'
 
 LOGOIN_REQUEST_CONTEXT = '/' + getInstancePrefix() + "/login"
 LOGOUT_REQUEST_CONTEXT = '/' + getInstancePrefix() + "/logout"
@@ -29,14 +29,14 @@ class TestUserIdLog(TestCase):
     	collection = db[COLLECTION_LOG_NAME]
         with app.test_request_context(LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM) :
         #Emulating login session
-            logUserIn(request.args[USER_ID])
             collection.drop()
+            logUserIn(request.args[USER_ID])
             res = getUserId()
             db_res = collection.find_one({USER_ID:TEST_ID})
             self.assertEqual(db_res[MESSAGE],AUTH_MESS)
         #Emulating logout session
-            logUserOut()
             collection.drop()
+            logUserOut()
             res = getUserId()
             db_res = collection.find_one({USER_ID:USER_ID})
-            self.assertEqual(db_res[MESSAGE],ANONYM_MESS)
+            self.assertEqual(db_res,ANONYM_MESS)
