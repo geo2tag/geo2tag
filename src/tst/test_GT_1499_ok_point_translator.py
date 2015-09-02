@@ -40,3 +40,4 @@ class TestOKPointTranslator(TestCase):
         test_obj = obj.getPoint()
         self.assertEquals(TEST_OBJ['json'], test_obj['json'])
         self.assertEquals(TEST_OBJ['location'], test_obj['location'])
+        self.assertEqual(test_obj['bc'], False)
