@@ -9,7 +9,7 @@ sys.path.append('../')
 from config_reader import getDbName, getInstancePrefix
 
 
-TEST_ID = 'test_id'
+TEST_ID = 'test_id11'
 USER_ID = 'user_id'
 ANONYM = 'anonym'
 
