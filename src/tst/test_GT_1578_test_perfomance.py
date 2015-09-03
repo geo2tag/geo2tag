@@ -9,9 +9,14 @@ VIEW_JOB_LINK = 'http://geomongo/instance/plugin/ok_import/service/testservice/j
 JOB_COUNT = 2
 TIMEOUT = 2
 
+
 class test_GT_1578testPerfomance(TestCase):
 
     def test_GT_1578testPerfomance(self):
-        ans = main(CREATE_JOB_LINK, JOB_DATA, VIEW_JOB_LINK, JOB_COUNT, TIMEOUT)
+        ans = main(
+            CREATE_JOB_LINK,
+            JOB_DATA,
+            VIEW_JOB_LINK,
+            JOB_COUNT,
+            TIMEOUT)
         self.assertEquals(0, ans)
-

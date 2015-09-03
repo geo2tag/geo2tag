@@ -4,7 +4,6 @@ from jobs_parser import *
 import time
 
 
-
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     for i in range(0, jobsCount):
         createImportJob(createJobLink, jobData)
@@ -17,7 +16,7 @@ def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     else:
         print createJobStatistic(jobsList)
         return 0
-    
+
 
 if __name__ == "__main__":
     import argparse
@@ -28,4 +27,9 @@ if __name__ == "__main__":
     parser.add_argument('-jobsCount', type=int, default=1)
     parser.add_argument('-timeout', type=int, default=60)
     args = parser.parse_args()
-    main(args.createJobLink, args.jobData, args.viewJobsLink, args.jobsCount, args.timeout)
+    main(
+        args.createJobLink,
+        args.jobData,
+        args.viewJobsLink,
+        args.jobsCount,
+        args.timeout)

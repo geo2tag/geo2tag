@@ -1,8 +1,14 @@
 def getImportJobsText(viewJobsLink):
-	return "sample_text"
+    return "sample_text"
+
+
 def parseJobs(jobsText):
-	return ["list", "list", "list"]
+    return ["list", "list", "list"]
+
+
 def areAllJobsDone(jobsList):
-	return True
+    return True
+
+
 def createJobStatistic(jobsList):
-	return "sample job statistics"
+    return "sample job statistics"
