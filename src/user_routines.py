@@ -16,7 +16,6 @@ LOGIN = 'login'
 LOGOUT = 'logout'
 
 
-
 def logUserIn(_id):
     session[USER_ID] = _id
     writeInstanceLog(session[USER_ID], LOGIN)
