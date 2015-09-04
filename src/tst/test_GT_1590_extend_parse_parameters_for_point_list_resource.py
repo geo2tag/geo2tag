@@ -32,7 +32,7 @@ app = Flask(__name__)
 
 class TestExtendPointListParserWithFlagsBC(TestCase):
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC(self):
-        with app.test_request_context('/', data=NO_BC_ERR_DATA):
+        with app.test_request_context('/?' + 'number=10&channel_ids=556721a52a2e7febd2744201'):
             print "HHHHHHHHHHHHHHHHHHHHHHHH"
             print PointListResourceParser.parseGetParameters()
             print "HHHHHHHHHHHHHHHHHHHHHHHH"
