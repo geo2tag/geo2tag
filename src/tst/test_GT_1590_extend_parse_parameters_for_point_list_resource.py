@@ -1,9 +1,8 @@
 from unittest import TestCase
-from flask import Flask, request
-import ast
+from flask import Flask
 import sys
 sys.path.append('../')
-from point_list_resource import PointListResource
+from point_list_resource_parser import PointListResourceParser
 
 NO_BC_ERR_DATA = {
     'number': '10',
@@ -18,32 +17,43 @@ NO_BC_TO_ERR_DATA['bc_from'] = 'true'
 NO_BC_FROM_ERR_DATA = NO_BC_ERR_DATA.copy()
 NO_BC_FROM_ERR_DATA['bc_to'] = 'true'
 
-BC_FROM = '[bc_from] '
-BC_TO = '[bc_to] '
+DATE_AND_BC_FLAGS = NO_BC_ERR_DATA.copy()
+DATE_AND_BC_FLAGS['bc_from'] = 'true'
+DATE_AND_BC_FLAGS['bc_to'] = 'true'
 
-ERR_MSG_KEY = 'message'
-ERR_MSG = ': Missing required parameter in the JSON body or the post body or the query string'
+BC_FROM = 'bc_from'
+BC_TO = 'bc_to'
 
-NO_BC_ERR_DATA_RESP_TEXT = {ERR_MSG_KEY: BC_FROM + BC_TO + ERR_MSG}
-NO_BC_TO_ERR_DATA_RESP_TEXT = {ERR_MSG_KEY: BC_TO + ERR_MSG}
-NO_BC_FROM_ERR_DATA_RESP_TEXT = {ERR_MSG_KEY: BC_FROM + ERR_MSG}
+BC_DATES_FLAG_CHECK_ARGS_KEY = 'args'
+BC_DATES_FLAG_CHECK_ERR_KEY = 'err'
 
 app = Flask(__name__)
 
 
 class TestExtendPointListParserWithFlagsBC(TestCase):
+    def testExtendPointListParserWithFlagsBC_DATES_NO_BC(self):
+        with app.test_request_context(data=NO_BC_ERR_DATA):
+            res = PointListResourceParser.parseGetParameters()
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], None)
+
+    def testExtendPointListParserWithFlagsBC_DATES_NO_BC_TO(self):
+        with app.test_request_context(data=NO_BC_TO_ERR_DATA):
+            res = PointListResourceParser.parseGetParameters()
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], True)
+
+    def testExtendPointListParserWithFlagsBC_DATES_NO_BC_FROM(self):
+        with app.test_request_context(data=NO_BC_FROM_ERR_DATA):
+            res = PointListResourceParser.parseGetParameters()
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], True)
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], None)
+
+    def testExtendPointListParserWithFlagsBC_DATES_BC_FROM_BC_TO(self):
+        with app.test_request_context(data=DATE_AND_BC_FLAGS):
+            res = PointListResourceParser.parseGetParameters()
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], True)
+            self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], True)
 
 
-   def testExtendPointListParserWithFlagsBC_DATES_NO_BC(self):
-       with app.test_request_context(data=NO_BC_ERR_DATA):
-           self.assertEqual(PointListResource().get('geomongo')[0], NO_BC_ERR_DATA_RESP_TEXT)
 
-
-   def testExtendPointListParserWithFlagsBC_DATES_NO_BC_TO(self):
-       with app.test_request_context('/', data=NO_BC_TO_ERR_DATA):
-           self.assertEqual(PointListResource().get('geomongo')[0], NO_BC_TO_ERR_DATA_RESP_TEXT)
-
-
-   def testExtendPointListParserWithFlagsBC_DATES_NO_BC_FROM(self):
-       with app.test_request_context('/', data=NO_BC_FROM_ERR_DATA):
-           self.assertEqual(PointListResource().get('geomongo')[0], NO_BC_FROM_ERR_DATA_RESP_TEXT)

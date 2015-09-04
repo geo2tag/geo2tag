@@ -40,19 +40,23 @@ NO_DATE_DATA_RESP_TEXT = '[{"channel_id": {"$oid": "556721a52a2e7febd2744201"}, 
 DATE_AND_BC_FLAGS_RESP_TEXT = NO_DATE_DATA_RESP_TEXT
 
 class TestExtendPointListParserWithFlagsBC(BasicIntegrationTest):
-    def testExtendPointListParserWithFlagsBC(self):
+    def testExtendPointListParserWithFlagsBC_DATES_NO_BC(self):
         r = requests.get(self.getUrl(URL), data=NO_BC_ERR_DATA)
         self.assertEqual(r.status_code, BAD_REQUEST)
         self.assertEqual(r.text, NO_BC_ERR_DATA_RESP_TEXT)
+    def testExtendPointListParserWithFlagsBC_DATES_NO_BC_TO(self):
         r = requests.get(self.getUrl(URL), data=NO_BC_TO_ERR_DATA)
         self.assertEqual(r.status_code, BAD_REQUEST)
         self.assertEqual(r.text, NO_BC_TO_ERR_DATA_RESP_TEXT)
+    def testExtendPointListParserWithFlagsBC_DATES_NO_BC_FROM(self):
         r = requests.get(self.getUrl(URL), data=NO_BC_FROM_ERR_DATA)
         self.assertEqual(r.status_code, BAD_REQUEST)
         self.assertEqual(r.text, NO_BC_FROM_ERR_DATA_RESP_TEXT)
+    def testExtendPointListParserWithFlagsBC_NO_DATES(self):
         r = requests.get(self.getUrl(URL), data=NO_DATE_DATA)
         self.assertEqual(r.status_code, OK)
         self.assertEqual(r.text, NO_DATE_DATA_RESP_TEXT)
+    def testExtendPointListParserWithFlagsBC_DATES_BC_FROM_BC_TO(self):
         r = requests.get(self.getUrl(URL), data=DATE_AND_BC_FLAGS)
         self.assertEqual(r.status_code, OK)
         self.assertEqual(r.text, DATE_AND_BC_FLAGS_RESP_TEXT)
