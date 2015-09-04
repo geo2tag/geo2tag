@@ -336,6 +336,18 @@ def applyFromToCriterion(field, value_from, value_to, criterion):
             fieldCriterion['$lte'] = value_to
         criterion[field] = fieldCriterion
 
+def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
+    fieldCriterion = {}
+    if date_from:
+        fieldCriterion['$gte'] = date_from
+        if bc_from:
+            criterion['bc'] = True
+    if date_from:
+        fieldCriterion['$lte'] = date_to
+        if bc_from:
+            criterion['bc'] = True
+    criterion[field] = fieldCriterion
+
 
 def applyGeometryCriterion(geometry, radius, criterion):
     if geometry:
@@ -365,7 +377,10 @@ def findPoints(
         date_from=None,
         date_to=None,
         offset=None,
-        radius=1000):
+        radius=1000,
+        bc_from=False,
+        bc_to = False
+        ):
     db = getDbObject(serviceName)
 
     # Converting types
@@ -382,6 +397,10 @@ def findPoints(
     if offset:
         points.skip(offset)
     points.limit(number)
+    print '1111111111111111111111111111'
+    applyDateCriterion(DATE, date_from, bc_from, date_to, bc_to, criterion)
+    print criterion
+    print '1111111111111111111111111111'
     return points
 
 

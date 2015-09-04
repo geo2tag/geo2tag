@@ -52,6 +52,17 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 TEST_DATE_TO,
                 None))
-        print result_1
+        result_2 = list(
+            findPoints(
+                TEST_SERVICE,
+                TEST_CHANNELS,
+                TEST_NUMBER,
+                None,
+                None,
+                None,
+                None,
+                TEST_DATE_FROM,
+                None,
+                True
+                ))
         print result_2
-        print result_3
