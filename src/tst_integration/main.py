@@ -37,7 +37,7 @@ from test_ok_job_resource import Test_OKImportJob
 from test_okimport_service_channel_not_exist import Test_OKImportJob_not_exist
 from test_GT_1511 import Test_GT_1511
 from test_bc_parametr_point_list_post import TestBcParametrPointListPost
-from test_GT_1590_extend_parse_parameeters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
+from test_GT_1590_extend_parse_parameters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
 
 def main(host):
     suite = unittest.TestSuite()
