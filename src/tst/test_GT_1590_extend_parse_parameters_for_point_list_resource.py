@@ -32,25 +32,25 @@ app = Flask(__name__)
 
 class TestExtendPointListParserWithFlagsBC(TestCase):
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC(self):
-        with app.test_request_context(data=NO_BC_ERR_DATA):
+        with app.test_request_context('/', data=NO_BC_ERR_DATA):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], None)
 
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC_TO(self):
-        with app.test_request_context(data=NO_BC_TO_ERR_DATA):
+        with app.test_request_context('/', data=NO_BC_TO_ERR_DATA):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], True)
 
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC_FROM(self):
-        with app.test_request_context(data=NO_BC_FROM_ERR_DATA):
+        with app.test_request_context('/', data=NO_BC_FROM_ERR_DATA):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], True)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], None)
 
     def testExtendPointListParserWithFlagsBC_DATES_BC_FROM_BC_TO(self):
-        with app.test_request_context(data=DATE_AND_BC_FLAGS):
+        with app.test_request_context('/', data=DATE_AND_BC_FLAGS):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], True)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], True)
