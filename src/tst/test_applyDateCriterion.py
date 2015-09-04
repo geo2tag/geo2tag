@@ -19,7 +19,7 @@ class TestApplydateCriterion(unittest.TestCase):
     def testApplydateCriterion2(self):
         TEST_DATE_FROM = dateutil.parser.parse("1000")
         TEST_DATE_TO = dateutil.parser.parse("1200")
-        result_1 = list(
+        '''result_1 = list(
             findPoints(
                 TEST_SERVICE,
                 TEST_CHANNELS,
@@ -51,7 +51,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 None,
                 TEST_DATE_TO,
-                None))
+                None))'''
         result_2 = list(
             findPoints(
                 TEST_SERVICE,
@@ -62,7 +62,12 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 None,
                 TEST_DATE_FROM,
+                TEST_DATE_TO,
                 None,
-                True
+                None,
+                True,
+                False
                 ))
+        print
+        print
         print result_2

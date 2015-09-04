@@ -338,15 +338,19 @@ def applyFromToCriterion(field, value_from, value_to, criterion):
 
 def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
     fieldCriterion = {}
+    partBefore = {}
+    partAfter = {}
     if date_from:
-        fieldCriterion['$gte'] = date_from
         if bc_from:
-            criterion['bc'] = True
-    if date_from:
-        fieldCriterion['$lte'] = date_to
-        if bc_from:
-            criterion['bc'] = True
-    criterion[field] = fieldCriterion
+            partBefore = {'$and': [{'$lte': date_from}, {'bc': True}]}
+        else:
+            partBefore = {'$and': [{'$gte': date_from}, {'bc': False}]}
+    if date_to:
+        if bc_to:
+            partAfter = {'$and': [{'$gte': date_to}, {'bc': True}]}
+        else:
+            partAfter = {'$and': [{'$lte': date_to}, {'bc': False}]}
+    criterion[field] = {'$in': [partBefore, partAfter]}
 
 
 def applyGeometryCriterion(geometry, radius, criterion):
@@ -391,16 +395,13 @@ def findPoints(
     applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
 
     applyGeometryCriterion(geometry, radius, criterion)
-
+    applyDateCriterion(DATE, date_from, bc_from, date_to, bc_to, criterion)
+    print criterion, '*****************'
     points = db[POINTS_COLLECTION].find(
         criterion).sort(DATE, pymongo.DESCENDING)
     if offset:
         points.skip(offset)
     points.limit(number)
-    print '1111111111111111111111111111'
-    applyDateCriterion(DATE, date_from, bc_from, date_to, bc_to, criterion)
-    print criterion
-    print '1111111111111111111111111111'
     return points
 
 
