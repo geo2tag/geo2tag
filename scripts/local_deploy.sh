@@ -3,14 +3,7 @@
 # use option -c <catalog_name> to change /geomongo catalog
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
-
-if [ -z "$1" ]
-then
-    CONFIG_FILE="geomongo.conf"
-else
-    CONFIG_FILE="$1"
-fi
-
+CONFIG_FILE=${1:-"geomongo.conf"}
 FLAG_KEEP_CONFIG_INI=false
 CATALOG='geomongo'
 
