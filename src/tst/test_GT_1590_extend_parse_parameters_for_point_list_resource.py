@@ -34,7 +34,7 @@ class TestExtendPointListParserWithFlagsBC(TestCase):
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC(self):
         with app.test_request_context('/', data=NO_BC_ERR_DATA):
             print "HHHHHHHHHHHHHHHHHHHHHHHH"
-            print request.url
+            print PointListResourceParser.parseGetParameters()
             print "HHHHHHHHHHHHHHHHHHHHHHHH"
             """res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
