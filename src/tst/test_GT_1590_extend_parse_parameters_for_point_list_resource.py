@@ -52,24 +52,27 @@ class TestExtendPointListParserWithFlagsBC(TestCase):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], None)
+            self.assertEqual(len(res[BC_DATES_FLAG_CHECK_ERR_KEY]), 2)
 
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC_TO(self):
         with app.test_request_context('/?' + NO_BC_TO_ERR_DATA_QS):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], None)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], True)
+            self.assertEqual(len(res[BC_DATES_FLAG_CHECK_ERR_KEY]), 1)
 
     def testExtendPointListParserWithFlagsBC_DATES_NO_BC_FROM(self):
         with app.test_request_context('/?' + NO_BC_FROM_ERR_DATA_QS):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], True)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], None)
+            self.assertEqual(len(res[BC_DATES_FLAG_CHECK_ERR_KEY]), 1)
 
     def testExtendPointListParserWithFlagsBC_DATES_BC_FROM_BC_TO(self):
         with app.test_request_context('/?' + DATE_AND_BC_FLAGS_QS):
             res = PointListResourceParser.parseGetParameters()
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_TO], True)
             self.assertEqual(res[BC_DATES_FLAG_CHECK_ARGS_KEY][BC_FROM], True)
-
+            self.assertEqual(len(res[BC_DATES_FLAG_CHECK_ERR_KEY]), 0)
 
 
