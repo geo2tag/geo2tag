@@ -21,6 +21,7 @@ MANAGE_CONTAINER = "scripts/docker_manage.sh"
 # keys
 CONTAINER_NAME = "name"
 CONTAINER_PORT = "port"
+CONTAINER_START = "start"
 
 
 def usage():
@@ -74,68 +75,79 @@ def wait_mongo_start(name):
     return child.returncode
 
 
+def mongo_start_waiter(name):
+    counter_start = 0
+    while 1:
+        counter_start += 1
+        if wait_mongo_start(name) == 0:
+            write_log(name, "Mongo start")
+            break
+        elif counter_start == 10:
+            write_log(name, "Container start fail")
+            sys.exit(1)
+        else:
+            write_log(name, "Waiting mongo")
+            sleep(3)
+
+
+def find_port_and_start(container_start_name, ports):
+    container_start_port = 0
+    container_start_result = False
+    collection = db[COLLECTION_NAME]
+    container = collection.find_one({CONTAINER_NAME: container_start_name})
+    # if container not found search for free port
+    if container is None:
+        ports_range = ports.split('-')
+        for i in range(int(ports_range[0]), int(ports_range[1]) + 1):
+            container_on_port = collection.find_one({CONTAINER_PORT: i})
+            if container_on_port is None:
+                collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i})
+                start_container(container_start_name, i)
+                container_start_port = i
+                container_start_result = True
+                break
+    else:
+        stop_container(container_start_name)
+        start_container(container_start_name, container[CONTAINER_PORT])
+        container_start_port = container[CONTAINER_PORT]
+        container_start_result = True
+
+    return [container_start_result, container_start_port]
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name')
     parser.add_argument('-p', '--ports')
+
+    parser.add_argument('-k', '--kill')
     args = parser.parse_args()
 
-    if (args.name or args.ports) is None:
+    if args.kill is not None:
+        aa=1
+        #Вытаскиваемвсе контейнеры которые от даты такой-то и убиваем их данные чистим
+    elif (args.name or args.ports) is None:
         usage()
     else:
-        container_start_result = False
-        container_start_port = 0
         container_start_name = args.name
-
+        
         file_name = "/tmp/" + container_start_name + LOG_NAME
         print file_name
 
-        collection = db[COLLECTION_NAME]
-        container = collection.find_one({CONTAINER_NAME: container_start_name})
-        # if container not found search for free port
-        if container is None:
-            ports_range = args.ports.split('-')
-            for i in range(int(ports_range[0]), int(ports_range[1]) + 1):
-                container_on_port = collection.find_one({CONTAINER_PORT: i})
-                if container_on_port is None:
-                    collection.save(
-                        {CONTAINER_NAME: container_start_name, CONTAINER_PORT: i})
-                    start_container(container_start_name, i)
-                    container_start_port = i
-                    container_start_result = True
-                    break
-        else:
-            stop_container(container_start_name)
-            start_container(container_start_name, container[CONTAINER_PORT])
-            container_start_port = container[CONTAINER_PORT]
-            container_start_result = True
-
+        container_start_result, container_start_port = find_port_and_start(args.name, args.ports)
         if not container_start_result:
             write_log(args.name, "Free port not found exit")
             sys.exit(1)
 
         # waiting for mongo
-        write_log(
-            container_start_name,
-            "Container " +
-            container_start_name +
-            " started on port %d" %
-            container_start_port)
-        counter_start = 0
-        while True:
-            counter_start += 1
-            if wait_mongo_start(container_start_name) == 0:
-                write_log(container_start_name, "Mongo start")
-                break
-            elif counter_start == 10:
-                write_log(container_start_name, "Container start fail")
-                sys.exit(1)
-            else:
-                write_log(container_start_name, "Waiting mongo")
-                sleep(3)
+        mongo_start_waiter(container_start_name)
+        write_log(container_start_name,
+                  "Container " + container_start_name + " started on port %d" % container_start_port)
 
-        # starting unit tests
+        write_log(container_start_name, "Run Unit tests")
         t_unit = run_unit_tests(container_start_name)
+
+        write_log(container_start_name, "Run int tests")
         t_int = run_int_tests(container_start_name)
 
         if t_int != 0 or t_unit != 0:
