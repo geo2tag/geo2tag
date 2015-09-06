@@ -5,6 +5,7 @@ from subprocess import Popen, PIPE
 import datetime
 import sys
 from time import sleep
+import time
 
 
 HOST = 'localhost'
@@ -22,6 +23,7 @@ MANAGE_CONTAINER = "scripts/docker_manage.sh"
 CONTAINER_NAME = "name"
 CONTAINER_PORT = "port"
 CONTAINER_START = "start"
+CONTAINER_ID = "_id"
 
 
 def usage():
@@ -101,12 +103,16 @@ def find_port_and_start(container_start_name, ports):
         for i in range(int(ports_range[0]), int(ports_range[1]) + 1):
             container_on_port = collection.find_one({CONTAINER_PORT: i})
             if container_on_port is None:
-                collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i})
+                collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i,
+                                 CONTAINER_START: int(round(time.time() * 1000))})
                 start_container(container_start_name, i)
                 container_start_port = i
                 container_start_result = True
                 break
     else:
+        container[CONTAINER_START] = int(round(time.time() * 1000))
+        collection.update({CONTAINER_ID: container[CONTAINER_ID]}, container, True)
+
         stop_container(container_start_name)
         start_container(container_start_name, container[CONTAINER_PORT])
         container_start_port = container[CONTAINER_PORT]
@@ -115,22 +121,34 @@ def find_port_and_start(container_start_name, ports):
     return [container_start_result, container_start_port]
 
 
+def kill_old_containers():
+    week_ago = int(round(time.time() * 1000)) - (168 * 60 * 60 * 1000)
+    collection = db[COLLECTION_NAME]
+    containers = collection.find({CONTAINER_START: {"$lte": week_ago}})
+    if containers is None:
+        return
+
+    for container in containers:
+        print container[CONTAINER_NAME] + " on port " + str(container[CONTAINER_PORT]) + " stop"
+        stop_container(container[CONTAINER_NAME])
+        collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name')
     parser.add_argument('-p', '--ports')
 
-    parser.add_argument('-k', '--kill')
+    parser.add_argument('-k', '--kill', action='store_true')
     args = parser.parse_args()
 
-    if args.kill is not None:
-        aa=1
-        #Вытаскиваемвсе контейнеры которые от даты такой-то и убиваем их данные чистим
+    if args.kill is not False:
+        kill_old_containers()
     elif (args.name or args.ports) is None:
         usage()
     else:
         container_start_name = args.name
-        
+
         file_name = "/tmp/" + container_start_name + LOG_NAME
         print file_name
 
