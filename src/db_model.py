@@ -340,17 +340,24 @@ def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
     fieldCriterion = {}
     partBefore = {}
     partAfter = {}
-    if date_from:
+    if date_from and bc_from and date_to and not(bc_to):
+        print ('-1                                                               1')
+        criterion['$or'] = [{'$and': [{'data': {'$lte': date_from}}, {'bc': True}]}, {'$and': [{'data': {'$lte': date_to}}, {'bc': False}]}]
+    '''if date_from:
         if bc_from:
-            partBefore = {'$and': [{'$lte': date_from}, {'bc': True}]}
+            fieldCriterion['$gte'] = date_from
+            criterion['bc'] = True
         else:
-            partBefore = {'$and': [{'$gte': date_from}, {'bc': False}]}
+            fieldCriterion['$gte'] = date_from
+            criterion['bc'] = False
     if date_to:
         if bc_to:
-            partAfter = {'$and': [{'$gte': date_to}, {'bc': True}]}
+            fieldCriterion['$lte'] = date_to
+            criterion['bc'] = True
         else:
-            partAfter = {'$and': [{'$lte': date_to}, {'bc': False}]}
-    criterion[field] = {'$in': [partBefore, partAfter]}
+            fieldCriterion['$lte'] = date_to
+            criterion['bc'] = False
+    criterion[field] = fieldCriterion'''
 
 
 def applyGeometryCriterion(geometry, radius, criterion):
@@ -391,12 +398,11 @@ def findPoints(
     channel_ids = [ObjectId(channel_id) for channel_id in channel_ids]
     criterion = {CHANNEL_ID: {'$in': channel_ids}}
 
-    applyFromToCriterion(DATE, date_from, date_to, criterion)
+    #applyFromToCriterion(DATE, date_from, date_to, criterion)
     applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
 
     applyGeometryCriterion(geometry, radius, criterion)
     applyDateCriterion(DATE, date_from, bc_from, date_to, bc_to, criterion)
-    print criterion, '*****************'
     points = db[POINTS_COLLECTION].find(
         criterion).sort(DATE, pymongo.DESCENDING)
     if offset:

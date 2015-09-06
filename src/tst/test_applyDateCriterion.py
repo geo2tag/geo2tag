@@ -17,8 +17,8 @@ TEST_NUMBER = 100
 class TestApplydateCriterion(unittest.TestCase):
 
     def testApplydateCriterion2(self):
-        TEST_DATE_FROM = dateutil.parser.parse("1000")
-        TEST_DATE_TO = dateutil.parser.parse("1200")
+        TEST_DATE_FROM = dateutil.parser.parse("1200")
+        TEST_DATE_TO = dateutil.parser.parse("1000")
         '''result_1 = list(
             findPoints(
                 TEST_SERVICE,
