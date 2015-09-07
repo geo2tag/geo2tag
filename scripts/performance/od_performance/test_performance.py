@@ -11,6 +11,7 @@ def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     time.sleep(timeout)
     jobsText = getImportJobsText(viewJobsLink)
     jobsList = parseJobs(jobsText)
+    print jobsList , '************************'
     if not areAllJobsDone(jobsList):
         print "No results by timeout"
         return 1
