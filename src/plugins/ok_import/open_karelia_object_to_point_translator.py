@@ -98,8 +98,3 @@ def date_name_to_datetime(names_dict, names_key):
             return datetime(int(names_dict[names_key]) * 1000, 1, 1, 0, 0)
     return None
 
-import requests
-import json
-r = requests.get("http://mobile.openkarelia.org/get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964")
-js_r = json.loads(r.text)[0]
-print OpenKareliaObjectToPointTranslator(None, None, js_r, None, None, None).translateDate()
