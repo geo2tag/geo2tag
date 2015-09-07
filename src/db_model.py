@@ -341,9 +341,9 @@ def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
     partBefore = {}
     partAfter = {}
     if date_from and bc_from and date_to and not(bc_to):
-        print ('-1                                                               1')
-        criterion['$or'] = [{'$and': [{'data': {'$lte': date_from}}, {'bc': True}]}, {'$and': [{'data': {'$lte': date_to}}, {'bc': False}]}]
-    '''if date_from:
+        print (date_from, date_to, bc_from, bc_to)
+        criterion['$or'] = [{'date': {'$lte': date_from}, 'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
+    '''if date_from
         if bc_from:
             fieldCriterion['$gte'] = date_from
             criterion['bc'] = True
@@ -407,6 +407,7 @@ def findPoints(
         criterion).sort(DATE, pymongo.DESCENDING)
     if offset:
         points.skip(offset)
+    print criterion
     points.limit(number)
     return points
 
