@@ -42,7 +42,7 @@ class TestUserRoutines(unittest.TestCase):
             # Testing writing in log
             IS_USER_LOGIN = COLLECTION_LOG.find(
                 {USER_ID_FIELD: TEST_ID, MESSAGE: MSG_LOGIN}, None, 0, 1).sort("_id", pymongo.DESCENDING)
-            self.assertTrue(IS_USER_LOGIN.count() == 1)
+            self.assertTrue(IS_USER_LOGIN.count() > 0)
             self.assertTrue(list(IS_USER_LOGIN)[0][MESSAGE] == MSG_LOGIN)
             # Emulating logout session
             logUserOut()
@@ -50,5 +50,5 @@ class TestUserRoutines(unittest.TestCase):
             # Testing writing in log
             IS_USER_LOGOUT = COLLECTION_LOG.find(
                 {USER_ID_FIELD: TEST_ID, MESSAGE: MSG_LOGOUT}, None, 0, 1).sort("_id", pymongo.DESCENDING)
-            self.assertTrue(IS_USER_LOGOUT.count() == 1)
+            self.assertTrue(IS_USER_LOGOUT.count() > 0)
             self.assertTrue(list(IS_USER_LOGOUT)[0][MESSAGE] == MSG_LOGOUT)
