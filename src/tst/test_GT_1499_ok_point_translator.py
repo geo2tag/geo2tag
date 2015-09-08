@@ -24,8 +24,7 @@ TEST_OBJ = {
 
 
 class TestOKPointTranslator(TestCase):
-
-    def testOKPointTranslator(self):
+    def setUp(self):
         obj = OpenKareliaObjectToPointTranslator(
             'image_url',
             'object_url',
@@ -37,6 +36,9 @@ class TestOKPointTranslator(TestCase):
             'test_version',
             'test_import',
             'channelId')
-        test_obj = obj.getPoint()
-        self.assertEquals(TEST_OBJ['json'], test_obj['json'])
-        self.assertEquals(TEST_OBJ['location'], test_obj['location'])
+        self.test_obj = obj.getPoint()
+    def testOKPointTranslator(self):
+        self.assertEquals(TEST_OBJ['json'], self.test_obj['json'])
+        self.assertEquals(TEST_OBJ['location'], self.test_obj['location'])
+    def testOkPointTranslatorBC(self):
+        self.assertEqual(self.test_obj['bc'], False)
