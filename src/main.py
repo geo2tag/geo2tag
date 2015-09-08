@@ -35,6 +35,8 @@ from plugin_not_enabled_exception import PluginNotEnabledException
 from log import writeInstanceLog
 from user_routines import getUserId
 from internal_tests_resource import InternalTestsResource
+from log import writeInstanceLog
+from user_routines import getUserId
 
 API = None
 
