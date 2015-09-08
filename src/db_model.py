@@ -338,26 +338,39 @@ def applyFromToCriterion(field, value_from, value_to, criterion):
 
 def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
     fieldCriterion = {}
-    partBefore = {}
-    partAfter = {}
     if date_from and bc_from and date_to and not(bc_to):
-        print (date_from, date_to, bc_from, bc_to)
         criterion['$or'] = [{'date': {'$lte': date_from}, 'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
-    '''if date_from
-        if bc_from:
-            fieldCriterion['$gte'] = date_from
-            criterion['bc'] = True
-        else:
-            fieldCriterion['$gte'] = date_from
-            criterion['bc'] = False
-    if date_to:
-        if bc_to:
-            fieldCriterion['$lte'] = date_to
-            criterion['bc'] = True
-        else:
-            fieldCriterion['$lte'] = date_to
-            criterion['bc'] = False
-    criterion[field] = fieldCriterion'''
+        return
+    if date_from and bc_from and date_to and bc_to:
+        fieldCriterion['$lte'] = date_from
+        fieldCriterion['$gte'] = date_to
+        criterion[field] = fieldCriterion
+        criterion['bc'] = True
+        return
+    if date_from and not(bc_from) and date_to and not(bc_to):
+        fieldCriterion['$gte'] = date_from
+        fieldCriterion['$lte'] = date_to
+        criterion[field] = fieldCriterion
+        criterion['bc'] = False
+        return
+    if date_from is None and date_to and not(bc_to):
+        criterion['$or'] = [{'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
+        return
+    if date_from and not(bc_from) and date_to is None:
+        fieldCriterion['$gte'] = date_from
+        criterion['bc'] = False
+        criterion[field] = fieldCriterion
+        return
+    if date_from is None and bc_to and date_to:
+        fieldCriterion['$gte'] = date_to
+        criterion['bc'] = True
+        criterion[field] = fieldCriterion
+        return
+    if date_from and bc_from and date_to is None:
+        print '******************9999999999999999999'
+        print date_from, bc_from, date_to, bc_to
+        criterion['$or'] = [{'bc': False}, {'date': {'$lte': date_from}, 'bc': True}]
+        return
 
 
 def applyGeometryCriterion(geometry, radius, criterion):
@@ -407,7 +420,6 @@ def findPoints(
         criterion).sort(DATE, pymongo.DESCENDING)
     if offset:
         points.skip(offset)
-    print criterion
     points.limit(number)
     return points
 
