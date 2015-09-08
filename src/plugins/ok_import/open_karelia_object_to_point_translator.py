@@ -39,6 +39,7 @@ class OpenKareliaObjectToPointTranslator:
                 float(self.objectRepresentation['longitude'])]}
         point['alt'] = 0
         point['date'] = self.translateDate()
+        point['bc'] = False
         return point
 
     def translateDate(self):
