@@ -336,10 +336,12 @@ def applyFromToCriterion(field, value_from, value_to, criterion):
             fieldCriterion['$lte'] = value_to
         criterion[field] = fieldCriterion
 
+
 def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
     fieldCriterion = {}
     if date_from and bc_from and date_to and not(bc_to):
-        criterion['$or'] = [{'date': {'$lte': date_from}, 'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
+        criterion['$or'] = [{'date': {'$lte': date_from}, 'bc': True}, {
+            'date': {'$lte': date_to}, 'bc': False}]
         return
     if date_from and bc_from and date_to and bc_to:
         fieldCriterion['$lte'] = date_from
@@ -354,7 +356,8 @@ def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
         criterion['bc'] = False
         return
     if date_from is None and date_to and not(bc_to):
-        criterion['$or'] = [{'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
+        criterion['$or'] = [
+            {'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
         return
     if date_from and not(bc_from) and date_to is None:
         fieldCriterion['$gte'] = date_from
@@ -367,9 +370,8 @@ def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
         criterion[field] = fieldCriterion
         return
     if date_from and bc_from and date_to is None:
-        print '******************9999999999999999999'
-        print date_from, bc_from, date_to, bc_to
-        criterion['$or'] = [{'bc': False}, {'date': {'$lte': date_from}, 'bc': True}]
+        criterion['$or'] = [
+            {'bc': False}, {'date': {'$lte': date_from}, 'bc': True}]
         return
 
 
@@ -403,15 +405,15 @@ def findPoints(
         offset=None,
         radius=1000,
         bc_from=False,
-        bc_to = False
-        ):
+        bc_to=False
+):
     db = getDbObject(serviceName)
 
     # Converting types
     channel_ids = [ObjectId(channel_id) for channel_id in channel_ids]
     criterion = {CHANNEL_ID: {'$in': channel_ids}}
 
-    #applyFromToCriterion(DATE, date_from, date_to, criterion)
+    # applyFromToCriterion(DATE, date_from, date_to, criterion)
     applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
 
     applyGeometryCriterion(geometry, radius, criterion)
