@@ -48,10 +48,9 @@ class OpenKareliaObjectToPointTranslator:
             point['bc'] = trans_date[1]
         else:
             point['date'] = trans_date[0]
-            point['json']['date_'] = trans_date[1]
+            point['json']['date'] = trans_date[1]
             point['bc'] = trans_date[2]
-            point['json']['bc_'] = trans_date[3]
-
+            point['json']['bc'] = trans_date[3]
         return point
 
     def translateDate(self):

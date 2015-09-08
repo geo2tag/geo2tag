@@ -11,7 +11,8 @@ TEST_DATA = [
         'name': ['test_GT_1499'],
         '_id': '111',
         'latitude': 1,
-        'longitude': 2},
+        'longitude': 2
+    },
     'test_version',
     'test_import',
     'channelId'
@@ -82,3 +83,10 @@ class TestModifyigDateTrnslationFromOK(TestCase):
         td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4], TEST_DATA[5]).getPoint()
         self.assertEqual(td['date'].replace(microsecond=0), datetime.now().replace(microsecond=0))
         self.assertEqual(td['bc'], False)
+        TEST_DATA[2]['year_start'] = 2000
+        TEST_DATA[2]['year_end'] = 3000
+        td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4], TEST_DATA[5]).getPoint()
+        self.assertEqual(td['date'], datetime(2000, 1, 1, 0, 0))
+        self.assertEqual(td['json']['date'], datetime(3000, 1, 1, 0, 0))
+        self.assertEqual(td['bc'], False)
+        self.assertEqual(td['json']['bc'], False)
