@@ -2,6 +2,7 @@ from flask_restful import reqparse
 import geo_json_type
 from flask import request
 from date_utils import dateDeserialiser
+from date_utils import dateDeserialiser
 from date_utils import datetime_from_iso8601
 
 CHANNEL_IDS = 'channel_ids'
@@ -14,6 +15,7 @@ DATE_FROM = 'date_from'
 DATE_TO = 'date_to'
 OFFSET = 'offset'
 RADIUS = 'radius'
+BC = 'bc'
 
 
 class PointListResourceParser():
@@ -39,8 +41,15 @@ class PointListResourceParser():
     def parsePostParameters():
         jsonData = request.get_json(force=True)
         print jsonData
-        args = validatePointsList(jsonData)
+        args = parseBcParametr(validatePointsList(jsonData))
         return args
+
+
+def parseBcParametr(json):
+    for obj in json:
+        if not (BC in obj.keys()):
+            obj[BC] = False
+    return json
 
 
 def validatePointsList(json):
@@ -82,4 +91,6 @@ def validatePointsList(json):
                     obj['channel_id'],
                     unicode)):
                 raise ValueError("'channel_id' - Incorrect type")
+            if ('bc' in obj.keys() and not isinstance(obj['bc'], bool)):
+                raise ValueError("'bc' - Incorrect type")
     return json

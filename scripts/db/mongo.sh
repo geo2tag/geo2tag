@@ -13,10 +13,12 @@ usage()
         -u      Mongo username
         -p      Mongo password
         -H      Mongo host string (ex. localhost:27017)
+        -d      Dump path
 EOF
 }
 
-while getopts "hlu:p:H:" opt; do
+dumpPath='testdump';
+while getopts "hlu:p:d:H:" opt; do
     MAXOPTIND=$OPTIND
 
     case $opt in
@@ -33,9 +35,15 @@ while getopts "hlu:p:H:" opt; do
         p)
             PASSWORD="$OPTARG"
             ;;
+        d)
+            dumpPath="$OPTARG"
+            ;;
         H)
             HOST="$OPTARG"
             ;;
+        
+
+			
         \?)
             echo "Invalid option $opt"
             exit 1
@@ -50,7 +58,6 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-dumpPath='testdump';
 DB="$1"
 path_="${dumpPath}/$DB-dump"
 if [ -z "$2" ]; then
@@ -79,6 +86,7 @@ echo "**** Database:  $DB"
 echo "**** Username:  $USERNAME"
 echo "**** Password:  $PASSWORD"
 echo "**** Loading:   $LOADING"
+echo "**** Dump path: $dumpPath"
 echo "*****************************************************************"
 
 if $LOADING ; then

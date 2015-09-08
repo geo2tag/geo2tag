@@ -8,6 +8,7 @@ from traceback import format_exc
 import imp
 from url_routines import getPluginUrl
 from log import writeInstanceLog
+from user_routines import getUserId
 
 PLUGINS_DIR_NAME = 'plugins'
 # sys.path.append(PLUGINS_DIR_NAME)
@@ -38,10 +39,10 @@ def enablePlugin(api, pluginName):
         for pluginResource in pluginResourcesDict:
             api.add_resource(pluginResourcesDict[pluginResource], getPluginUrl(
                 pluginResource, pluginName))
-        writeInstanceLog(LOG_USERID, 'Plugin ' +
+        writeInstanceLog(getUserId(), 'Plugin ' +
                          pluginName + ' successfully loaded')
     except Exception as e:
-        writeInstanceLog(LOG_USERID, EXCEPT_ERROR_TEXT +
+        writeInstanceLog(getUserId(), EXCEPT_ERROR_TEXT +
                          pluginName +
                          ', ' +
                          ERROR_DISR_TEXT +

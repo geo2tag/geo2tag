@@ -27,13 +27,12 @@ $(document).ready(function (){
     var mapIcon = L.icon({
         iconUrl: path_marker + '/marker-icon.png',
         shadowUrl: path_marker + '/marker-shadow.png',
-
         popupAnchor:  [11, 0]
     });
     var callbackSuccess = function (data) {
         var len = data.length;
         for(var i = 0; i < len; i++ ){
-            var text = "<b>" + data[i]['_id']['$oid'] + "</b>";
+            var text = getPointPopupHtml(data[i]);
             L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).addTo(map)
             .bindPopup(text).openPopup();
         }
