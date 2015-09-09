@@ -7,10 +7,8 @@ from bson.objectid import ObjectId
 
 TEST_SERVICE = 'testservice'
 
-#(112, 9, 18, 22, 13, 20) -58610224000000
-#(1063, 5, 19, 3, 33, 20) -28610224000000
 TEST_CHANNELS = [
-    ObjectId("556721a52a2e7febd2744203")]
+    ObjectId("556721a52a2e7febd2744206")]
 TEST_NUMBER = 100
 
 
