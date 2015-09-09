@@ -413,7 +413,7 @@ def findPoints(
     channel_ids = [ObjectId(channel_id) for channel_id in channel_ids]
     criterion = {CHANNEL_ID: {'$in': channel_ids}}
 
-    #applyFromToCriterion(DATE, date_from, date_to, criterion)
+    # applyFromToCriterion(DATE, date_from, date_to, criterion)
     applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
 
     applyGeometryCriterion(geometry, radius, criterion)
