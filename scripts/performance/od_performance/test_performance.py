@@ -10,7 +10,7 @@ def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
         for i in range(0, jobsCount):
             createImportJob(createJobLink, jobData)
     except ConnectionError:
-        print "Error connection to " +createJobLink
+        print "hey"
         return 1
     time.sleep(timeout)
     jobsText = getImportJobsText(viewJobsLink)
