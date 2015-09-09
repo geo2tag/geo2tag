@@ -2,12 +2,18 @@
 from jobs_creator import *
 from jobs_parser import *
 import time
+from requests.exceptions import ConnectionError
 
 
 
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
-    for i in range(0, jobsCount):
-        createImportJob(createJobLink, jobData)
+    try:
+        for i in range(0, jobsCount):
+            createImportJob(createJobLink, jobData)
+    except ConnectionError:
+        print "Connection to " +createJobLink+ " failed"
+        return 1
+
     time.sleep(timeout)
     jobsText = getImportJobsText(viewJobsLink)
     jobsList = parseJobs(jobsText)
