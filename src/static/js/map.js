@@ -13,11 +13,6 @@ function fixMapSize(){
 
 $(document).ready(function (){
     map = createMap('map', true);
-    var markers = new L.MarkerClusterGroup();
-    markers.addLayer(L.marker([59.57, 30.19]));
-    markers.addLayer(L.marker([59.82, 30.69]));
-    markers.addLayer(L.marker([59.22, 31.19]));
-    map.addLayer(markers);
     $(window).on('resize', fixMapSize());
     var path_marker = '../../../static/img';
     var COORDINATES = 'coordinates'
@@ -31,11 +26,12 @@ $(document).ready(function (){
     });
     var callbackSuccess = function (data) {
         var len = data.length;
+        var markers = new L.MarkerClusterGroup();
         for(var i = 0; i < len; i++ ){
             var text = getPointPopupHtml(data[i]);
-            L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).addTo(map)
-            .bindPopup(text).openPopup();
+            markers.addLayer(L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
         }
+        map.addLayer(markers);
     };
     var callbackFail = function () {
 
