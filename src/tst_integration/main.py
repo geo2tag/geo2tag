@@ -29,6 +29,7 @@ from test_GT_1386 import Test_GT_1386
 from test_debug_login_resource import TestDebugLoginResource
 from test_get_rout_map import TestRoutMap
 from test_point_list_resource_get import TestPointListGet_ResponseText
+from test_GT_1486_AfterRequesWriteInstanceLog import TestAfterRequestWriteInstanceLog
 from test_GT_1443_before_request import Test_GT_1443_Request
 from test_GT_1442_manage_plugins import Test_GT_1442_managePlugins
 from test_GT_1484_AfterRequestsStatusLogging import TestAfterRequestStatusLogging
@@ -127,6 +128,10 @@ def main(host):
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestPointListPostRequest,
+            param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestAfterRequestWriteInstanceLog,
             param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from setuptools.command.egg_info import write_pkg_info
 from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
@@ -26,6 +27,9 @@ from plugin_routines import getPluginList, enablePlugin
 from os.path import join as joinpath
 from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
+from user_routines import getUserId
+from flask import request
+from log import writeInstanceLog
 from config_reader import getInstancePrefix
 from flask import g
 from possible_exception import possibleException
@@ -63,6 +67,8 @@ getApi().representations = DEFAULT_REPRESENTATIONS
 
 @app.after_request
 def after_request(response):
+    writeInstanceLog(getUserId(), 'Request url: ' + request.url +
+                                  ', request data: ' + request.data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
                          'Content-Type, Authorization')
