@@ -40,20 +40,24 @@ class OpenKareliaObjectToPointTranslator:
         point['alt'] = 0
         # Date trnslation
         trans_date = self.translateDate()
-        if isinstance(trans_date, datetime):
-            point['date'] = trans_date
-            point['bc'] = False
-        elif len(trans_date) == 2:
-            point['date'] = trans_date[0]
-            point['bc'] = trans_date[1]
-        else:
-            point['date'] = trans_date[0]
-            point['json']['date'] = trans_date[1]
-            point['bc'] = trans_date[2]
-            point['json']['bc'] = trans_date[3]
+        print trans_date
+        add_precise_or_interval_to_point(trans_date, point)
         return point
 
     def translateDate(self):
+        # Return values are tuples:
+        # 1) Interval of dates and bc types of both dates
+        # 2) Precise date and bc type of date
+        # Examples:
+        # 1) Intervals:
+        #    datetime.datetime(1000, 1, 1, 0, 0),
+        #    datetime.datetime(2000, 1, 1, 0, 0),
+        #    False,
+        #    False
+        # 1) Precise date:
+        #    datetime.datetime(1000, 1, 1, 0, 0),
+        #    False
+
         # Checking for intervals
         intervals_names = [['year_start', 'year_end'], ['century_start', 'century_end'],
                            ['millenium_start', 'millenium_end']]
@@ -69,7 +73,7 @@ class OpenKareliaObjectToPointTranslator:
                 return date_name_to_datetime(self.objectRepresentation, intervals_names[i][0]), \
                     date_name_to_datetime(self.objectRepresentation, intervals_names[i][1]), \
                     bc['bc_start'], bc['bc_end']
-        # Checking for presice dates
+        # Checking for precise dates
         date_names = ['year', 'century', 'millenium']
         for i in date_names:
             datetime_from_date_name = date_name_to_datetime(self.objectRepresentation, i)
@@ -80,13 +84,28 @@ class OpenKareliaObjectToPointTranslator:
                 else:
                     bc = False
                 return datetime_from_date_name, bc
-        return datetime.now()
+        return datetime.now(), False
+
+
+# Defining date type to import from OK: precise date or interval
+# then date adds to point dictionary
+def add_precise_or_interval_to_point(precise_or_interval_list, point):
+    if len(precise_or_interval_list) == 2:
+        point['date'] = precise_or_interval_list[0]
+        point['bc'] = precise_or_interval_list[1]
+    else:
+        point['date'] = precise_or_interval_list[0]
+        point['json']['date'] = precise_or_interval_list[1]
+        point['bc'] = precise_or_interval_list[2]
+        point['json']['bc'] = precise_or_interval_list[3]
 
 
 def key_in_dict_and_defined(key, dictionary):
     return key in dictionary and dictionary[key] is not None
 
 
+# Date names translation to datetime format, for example year 1000 to
+# datetime.datetime(1000, 1, 1, 0, 0)
 def date_name_to_datetime(names_dict, names_key):
     if key_in_dict_and_defined(names_key,names_dict):
         if names_key == 'year' or names_key == 'year_start' or names_key == 'year_end':
