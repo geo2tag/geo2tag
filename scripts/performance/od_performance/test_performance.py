@@ -2,16 +2,20 @@
 from jobs_creator import *
 from jobs_parser import *
 import time
-
+from requests.exceptions import ConnectionError
 
 
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
-    for i in range(0, jobsCount):
-        createImportJob(createJobLink, jobData)
+    try:
+        for i in range(0, jobsCount):
+            createImportJob(createJobLink, jobData)
+    except ConnectionError:
+        print "Connection to" + createJobLink + " not works"
+        return 1
     time.sleep(timeout)
     jobsText = getImportJobsText(viewJobsLink)
     jobsList = parseJobs(jobsText)
-    if not areAllJobsDone(jobsList):
+    if not areAllJobsDone(jobsList) or len(jobsList) == 0:
         print "No results by timeout"
         return 1
     else:
