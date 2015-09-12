@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from subprocess import Popen, PIPE
 import datetime
 import sys
+import os
 from time import sleep
 
 
@@ -133,7 +134,6 @@ def main():
             write_log(args.name, "Free port not found exit")
             sys.exit(1)
 
-        # waiting for mongo
         mongo_start_waiter(container_start_name)
         write_log(container_start_name,
                   "Container " + container_start_name + " started on port %d" % container_start_port)
@@ -147,6 +147,14 @@ def main():
         if t_int != 0 or t_unit != 0:
             sys.exit(1)
 
+        containerEnv = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
+
+        f = open('propsfile','w')
+        f.write('CONTAINER='+containerEnv+'\n')
+        f.close()
+        write_log(container_start_name, containerEnv)
+
+        write_log(container_start_name, "Done")
 
 if __name__ == "__main__":
     main()
