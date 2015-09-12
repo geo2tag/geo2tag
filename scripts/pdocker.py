@@ -147,10 +147,12 @@ def main():
         if t_int != 0 or t_unit != 0:
             sys.exit(1)
 
-        os.putenv('CONTAINER', "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests")
-        os.environ["CONTAINER"] = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
+        containerEnv = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
 
-        write_log(container_start_name, os.environ["CONTAINER"])
+        f = open('propsfile','w')
+        f.write('CONTAINER='+containerEnv+'\n')
+        f.close()
+        write_log(container_start_name, containerEnv)
 
         write_log(container_start_name, "Done")
 
