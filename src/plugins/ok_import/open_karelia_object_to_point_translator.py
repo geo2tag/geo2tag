@@ -26,7 +26,7 @@ class OpenKareliaObjectToPointTranslator:
         obj = {}
         obj['name'] = self.objectRepresentation['name'][0]
         obj['image_url'] = self.serverShowImageUrl + \
-            unicode(self.objectRepresentation.get('images', [{'$oid':''}])[0]['$oid'])
+            unicode(self.objectRepresentation.get('images', [{'$oid': ''}])[0]['$oid'])
         obj['source_url'] = self.serverShowObjectUrl + \
             unicode(self.objectRepresentation.get('_id'))
         obj['version'] = self.version
