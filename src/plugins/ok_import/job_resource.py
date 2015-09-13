@@ -19,6 +19,7 @@ class JobResource(Resource):
     @possibleException
     def delete(self, serviceName, jobId):
         return JobManager.stopJob(jobId)
+
     def post(self, serviceName):
         job = OKImportParser.parsePostParameters()
         channelName = job.get('channelName')

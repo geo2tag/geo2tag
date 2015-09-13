@@ -1,4 +1,3 @@
-from twisted.python.log import err
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo

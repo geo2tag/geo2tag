@@ -7,10 +7,11 @@ sys.path.append('../')
 from point_list_resource_parser import parseBcParametr
 
 INARGS = [{'lat': 1.1, 'lon': 1.1, 'alt': 5, 'json': {}, 'channel_id': ''}]
-OUTARGS = [{'lat': 1.1, 'lon': 1.1, 'alt': 5, 'json': {}, 'channel_id': '', 'bc':False}]
+OUTARGS = [{'lat': 1.1, 'lon': 1.1, 'alt': 5,
+            'json': {}, 'channel_id': '', 'bc': False}]
 
 INARGS1 = [{'lat': 1, 'bc': True}]
-OUTARGS1 =[{'lat': 1, 'bc': True}]
+OUTARGS1 = [{'lat': 1, 'bc': True}]
 
 
 class TestValidatePointsList(unittest.TestCase):

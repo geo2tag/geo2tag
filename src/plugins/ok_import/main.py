@@ -4,7 +4,8 @@ from job_resource import JobResource
 
 
 def getPluginResources():
-    return {'service/<string:serviceName>/job': JobListResource, 'service/<string:serviceName>/job/<string:jobId>': JobResource}
+    return {'service/<string:serviceName>/job': JobListResource,
+            'service/<string:serviceName>/job/<string:jobId>': JobResource}
 
 
 def getPluginInfo():
