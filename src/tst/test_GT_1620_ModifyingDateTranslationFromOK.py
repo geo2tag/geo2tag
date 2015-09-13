@@ -6,6 +6,8 @@ from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTran
 from open_karelia_object_to_point_translator import date_name_to_datetime
 from open_karelia_object_to_point_translator import key_in_dict_and_defined
 from open_karelia_object_to_point_translator import add_precise_or_interval_to_point
+from open_karelia_object_to_point_translator import define_date_type
+from open_karelia_object_to_point_translator import DATE_TYPES
 
 TEST_DATA = [
     'image_url',
@@ -79,16 +81,6 @@ class TestModifyigDateTranslationFromOK(TestCase):
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
 
-    def testModifyigDateTranslationFromOK_RealRequestData(self):
-        import requests
-        import json
-        r = requests.get("http://mobile.openkarelia.org/get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964")
-        js_r = json.loads(r.text)[0]
-        self.assertEqual(
-            OpenKareliaObjectToPointTranslator(None, None, js_r, None, None, None).translateDate(),
-            (datetime(1900, 1, 1, 0, 0), datetime(1900, 1, 1, 0, 0), False, False)
-        )
-
     def testModifyigDateTrnaslationFromOK_GetPointFunc(self):
         TEST_DATA[2]['bc'] = True
         td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4], TEST_DATA[5]).getPoint()
@@ -136,5 +128,12 @@ class TestModifyigDateTranslationFromOK(TestCase):
         self.assertEqual(point['json']['date'], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(point['bc'], True)
         self.assertEqual(point['json']['bc'], True)
+    def testModifyigDateTrnaslationFromOK_DefineDateType(self):
+    	self.assertEqual(define_date_type({'year': 1000}), (DATE_TYPES[1], 0))
+    	self.assertEqual(define_date_type({'century': 10}), (DATE_TYPES[1], 1))
+    	self.assertEqual(define_date_type({'millenium': 1}), (DATE_TYPES[1], 2))
+    	self.assertEqual(define_date_type({'year_start': 1000, 'year_end': 2000}), (DATE_TYPES[0], 0))
+    	self.assertEqual(define_date_type({'century_start': 10, 'century_end': 20}), (DATE_TYPES[0], 1))
+    	self.assertEqual(define_date_type({'millenium_start': 1, 'millenium_end': 2}), (DATE_TYPES[0], 2))
 
 

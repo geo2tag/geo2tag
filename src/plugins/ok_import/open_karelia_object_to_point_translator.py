@@ -1,5 +1,9 @@
 from datetime import datetime
 
+INTERVAL_DATES_NAMES = (('year_start', 'year_end'), ('century_start', 'century_end'),
+                           ('millenium_start', 'millenium_end'))
+PRECISE_DATE_NAMES = ('year', 'century', 'millenium')
+DATE_TYPES = ('interval', 'precise')
 
 class OpenKareliaObjectToPointTranslator:
 
@@ -58,37 +62,45 @@ class OpenKareliaObjectToPointTranslator:
         #    datetime.datetime(1000, 1, 1, 0, 0),
         #    False
 
-        # Checking for intervals
-        intervals_names = [['year_start', 'year_end'], ['century_start', 'century_end'],
-                           ['millenium_start', 'millenium_end']]
-        for i in range(3):
-            if key_in_dict_and_defined(intervals_names[i][0], self.objectRepresentation) and \
-                    key_in_dict_and_defined(intervals_names[i][1], self.objectRepresentation):
-                bc = {'bc_start': None, 'bc_end': None}
-                for i_bc in bc.keys():
-                    if key_in_dict_and_defined(i_bc, self.objectRepresentation):
-                        bc[i_bc] = self.objectRepresentation[i_bc]
-                    else:
-                        bc[i_bc] = False
-                return date_name_to_datetime(self.objectRepresentation, intervals_names[i][0]), \
-                    date_name_to_datetime(self.objectRepresentation, intervals_names[i][1]), \
-                    bc['bc_start'], bc['bc_end']
-        # Checking for precise dates
-        date_names = ['year', 'century', 'millenium']
-        for i in date_names:
-            datetime_from_date_name = date_name_to_datetime(self.objectRepresentation, i)
-            if datetime_from_date_name is not None:
-                bc = None
-                if key_in_dict_and_defined('bc', self.objectRepresentation):
-                    bc = self.objectRepresentation['bc']
-                else:
-                    bc = False
-                return datetime_from_date_name, bc
-        return datetime.now(), False
+        date_type = define_date_type(self.objectRepresentation)
 
+        if date_type is None:
+            # if no full intervals and no precise dates
+            return datetime.now(), False  
+        elif date_type[0] == DATE_TYPES[0]:
+            # Checking for intervals
+            bc = {'bc_start': False, 'bc_end': False}
+            for i_bc in bc.keys():
+                if key_in_dict_and_defined(i_bc, self.objectRepresentation):
+                    bc[i_bc] = self.objectRepresentation[i_bc]
+            return date_name_to_datetime(self.objectRepresentation, INTERVAL_DATES_NAMES[date_type[1]][0]), \
+                date_name_to_datetime(self.objectRepresentation, INTERVAL_DATES_NAMES[date_type[1]][1]), \
+                bc['bc_start'], bc['bc_end']
+        elif date_type[0] == DATE_TYPES[1]:
+            # Checking for precise dates
+            datetime_from_date_name = date_name_to_datetime(self.objectRepresentation, PRECISE_DATE_NAMES[date_type[1]])
+            bc = False
+            if key_in_dict_and_defined('bc', self.objectRepresentation):
+                bc = self.objectRepresentation['bc']
+            return datetime_from_date_name, bc
 
-# Defining date type to import from OK: precise date or interval
-# then date adds to point dictionary
+# Defining date type to import from OK
+def define_date_type(objectRepresentation):
+    # Return values are tuples:
+    # 1) 'interval', INTERVAL_SCALE
+    # 2) 'precise', PRECISE_SCALE
+    # 3) Default value - None
+    # !) SCALE is: year*, century*, millenium*
+    for i in range(len(INTERVAL_DATES_NAMES)):
+        if key_in_dict_and_defined(INTERVAL_DATES_NAMES[i][0], objectRepresentation) and \
+                    key_in_dict_and_defined(INTERVAL_DATES_NAMES[i][1], objectRepresentation):
+            return DATE_TYPES[0], i
+    for i in range(len(PRECISE_DATE_NAMES)):
+        if key_in_dict_and_defined(PRECISE_DATE_NAMES[i], objectRepresentation):
+            return DATE_TYPES[1], i
+    return None
+
+# Adding dates to point dictionary
 def add_precise_or_interval_to_point(precise_or_interval_list, point):
     if len(precise_or_interval_list) == 2:
         point['date'] = precise_or_interval_list[0]
