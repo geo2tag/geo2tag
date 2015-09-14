@@ -1,5 +1,4 @@
 from flask import session
-from flask import request
 from config_reader import getDbName
 from db_model import getDbObject
 from log import writeInstanceLog

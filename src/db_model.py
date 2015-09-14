@@ -1,4 +1,3 @@
-from twisted.python.log import err
 from pymongo import MongoClient
 from config_reader import getHost, getPort, getDbName
 import pymongo
@@ -337,6 +336,44 @@ def applyFromToCriterion(field, value_from, value_to, criterion):
         criterion[field] = fieldCriterion
 
 
+def applyDateCriterion(field, date_from, bc_from, date_to, bc_to, criterion):
+    fieldCriterion = {}
+    if date_from and bc_from and date_to and not(bc_to):
+        criterion['$or'] = [{'date': {'$lte': date_from}, 'bc': True}, {
+            'date': {'$lte': date_to}, 'bc': False}]
+        return
+    if date_from and bc_from and date_to and bc_to:
+        fieldCriterion['$lte'] = date_from
+        fieldCriterion['$gte'] = date_to
+        criterion[field] = fieldCriterion
+        criterion['bc'] = True
+        return
+    if date_from and not(bc_from) and date_to and not(bc_to):
+        fieldCriterion['$gte'] = date_from
+        fieldCriterion['$lte'] = date_to
+        criterion[field] = fieldCriterion
+        criterion['bc'] = False
+        return
+    if date_from is None and date_to and not(bc_to):
+        criterion['$or'] = [
+            {'bc': True}, {'date': {'$lte': date_to}, 'bc': False}]
+        return
+    if date_from and not(bc_from) and date_to is None:
+        fieldCriterion['$gte'] = date_from
+        criterion['bc'] = False
+        criterion[field] = fieldCriterion
+        return
+    if date_from is None and bc_to and date_to:
+        fieldCriterion['$gte'] = date_to
+        criterion['bc'] = True
+        criterion[field] = fieldCriterion
+        return
+    if date_from and bc_from and date_to is None:
+        criterion['$or'] = [
+            {'bc': False}, {'date': {'$lte': date_from}, 'bc': True}]
+        return
+
+
 def applyGeometryCriterion(geometry, radius, criterion):
     if geometry:
         locationCriterion = {}
@@ -365,18 +402,21 @@ def findPoints(
         date_from=None,
         date_to=None,
         offset=None,
-        radius=1000):
+        radius=1000,
+        bc_from=False,
+        bc_to=False
+):
     db = getDbObject(serviceName)
 
     # Converting types
     channel_ids = [ObjectId(channel_id) for channel_id in channel_ids]
     criterion = {CHANNEL_ID: {'$in': channel_ids}}
 
-    applyFromToCriterion(DATE, date_from, date_to, criterion)
+    # applyFromToCriterion(DATE, date_from, date_to, criterion)
     applyFromToCriterion(ALT, altitude_from, altitude_to, criterion)
 
     applyGeometryCriterion(geometry, radius, criterion)
-
+    applyDateCriterion(DATE, date_from, bc_from, date_to, bc_to, criterion)
     points = db[POINTS_COLLECTION].find(
         criterion).sort(DATE, pymongo.DESCENDING)
     if offset:

@@ -26,11 +26,12 @@ $(document).ready(function (){
     });
     var callbackSuccess = function (data) {
         var len = data.length;
+        var markers = new L.MarkerClusterGroup();
         for(var i = 0; i < len; i++ ){
             var text = getPointPopupHtml(data[i]);
-            L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).addTo(map)
-            .bindPopup(text).openPopup();
+            markers.addLayer(L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
         }
+        map.addLayer(markers);
     };
     var callbackFail = function () {
 
