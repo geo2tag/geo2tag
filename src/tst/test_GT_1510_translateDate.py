@@ -15,16 +15,16 @@ class Test_GT_1510_translate_date(TestCase):
             'image_url', 'object_url', {
                 'year': '1249', 'century': 15, 'millenium': 2},
             'test_version', 'test_import', 'channelId')
-        self.assertEquals(type(obj.translateDate()), type(datetime.now()))
+        self.assertTrue(type(obj.translateDate()), tuple())
         obj = OpenKareliaObjectToPointTranslator(
             'image_url', 'object_url', {'century': 21, 'millenium': '2'},
             'test_version', 'test_import', 'channelId')
-        self.assertEquals(type(obj.translateDate()), type(datetime.now()))
+        self.assertEquals(type(obj.translateDate()), tuple)
         obj = OpenKareliaObjectToPointTranslator(
             'image_url', 'object_url', {'year': '1249'},
             'test_version', 'test_import', 'channelId')
-        self.assertEquals(type(obj.translateDate()), type(datetime.now()))
+        self.assertEquals(type(obj.translateDate()), tuple)
         obj = OpenKareliaObjectToPointTranslator(
             'image_url', 'object_url', {'millenium': '3'},
             'test_version', 'test_import', 'channelId')
-        self.assertEquals(type(obj.translateDate()), type(datetime.now()))
+        self.assertEquals(type(obj.translateDate()), tuple)
