@@ -25,6 +25,9 @@ GOOGLE_CLIENT_SECRET_KEY = 'rzGBHKuBfXdCcmg4Vwn7mVCR'
 GOOGLE_REDIRECT_URL = 'GOOGLE_REDIRECT_URL'
 GOOGLE_REDIRECT_URL_KEY = 'http://geomongo/instance/login/google/authorized'
 
+GEONAMES_SECTION = 'geocoding'
+GEONAMES_CLIENT_LOGIN = 'geonames_login'
+GEONAMES_LOGIN = 'test'
 
 def getConfigParser():
     config = SafeConfigParser({OPTION_HOST: HOST,
@@ -34,7 +37,8 @@ def getConfigParser():
                                OPTION_DEBUG_USERS: DEBUG_USERS,
                                GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID_KEY,
                                GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET_KEY,
-                               GOOGLE_REDIRECT_URL: GOOGLE_REDIRECT_URL_KEY})
+                               GOOGLE_REDIRECT_URL: GOOGLE_REDIRECT_URL_KEY,
+                               GEONAMES_CLIENT_LOGIN: GEONAMES_LOGIN})
     config.read(CONFIG_PATH)
     return config
 
@@ -71,3 +75,7 @@ def getGoogleClientSecret():
 
 def getGoogleRedirectUrl():
     return getConfigParser().get(GOOGLE_SECTION, GOOGLE_REDIRECT_URL)
+
+
+def getGeonamesLogin():
+    return getConfigParser().get(GEONAMES_SECTION, GEONAMES_CLIENT_LOGIN)       
