@@ -4,8 +4,8 @@ class OpenDataObjectAddressGetter():
     __metaclass__=ABCMeta
 
     @abstractmethod
-    def getAddress(obj):
+    def getAddress(self, obj):
         pass
 
-    def getAddressList(objList) :
-        return [getAddress(x) for x in objList]
+    def getAddressList(self, objList) :
+        return [self.getAddress(x) for x in objList]
