@@ -1,8 +1,7 @@
 import sys
 import unittest
 sys.path.append('../open_data_import')
-sys.path.append('../')
-from open_data_object_adress_getter import OpenDataObjectAddressGetter
+from open_data_object_address_getter import OpenDataObjectAddressGetter
 
 TEST_DATA = [1,2,3,4]
 
