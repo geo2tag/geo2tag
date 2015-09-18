@@ -19,7 +19,7 @@ GEONAMES = 'geonames'
 COUNTRY_ID = 'countryId'
 REQUET_ADDRESS_LIST = []
 RESPONSE_FOR_LIMIT_EXCEED = {"status": {"message": "test mess","value": "19"}}
-
+RESPONSE_FOR_OTHER_EXCEED = {"status": {"message": "test mess","value": "10"}}
 
 def callback_test(result):
     global RESPONSE_REQUEST_COORDINATES
@@ -58,3 +58,6 @@ class TestGeonamesRequestSender(unittest.TestCase):
         with self.assertRaises(GeocoderRequestLimitExceed) as e:
             GeonamesRequestSender.checkResponseForException(json.dumps(RESPONSE_FOR_LIMIT_EXCEED))
 
+    def test_exceed_other_data(self):
+        with self.assertRaises(GeocoderRequestOtherExceed) as e:
+            GeonamesRequestSender.checkResponseForException(json.dumps(RESPONSE_FOR_OTHER_EXCEED))

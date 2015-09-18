@@ -13,7 +13,7 @@ VALUE_EXCEPTION = 'value'
 ERROR_CODE_DAY_LIMIT = '18'
 ERROR_CODE_HOUR_LIMIT = '19'
 ERROR_CODE_WEEK_LIMIT = '20'
-
+ERROR_LIST_OTHER_EXCEED = [10,11,12,13,14,15,16,17,21,22,23]
 
 class GeonamesRequestSender():
 
@@ -53,7 +53,7 @@ class GeonamesRequestSender():
                 raise GeocoderRequestLimitExceed(ERROR_CODE_HOUR_LIMIT)
             if value_exception == ERROR_CODE_WEEK_LIMIT:                    
                 raise GeocoderRequestLimitExceed(ERROR_CODE_WEEK_LIMIT)
-            if int(value_exception) in range(10,17) and int(value_exception) in range(21,23):
+            if int(value_exception) in ERROR_LIST_OTHER_EXCEED:
                 raise GeocoderRequestOtherExceed(value_exception)
         else:
             return responseText
