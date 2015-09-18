@@ -6,7 +6,7 @@ from geocoder_request_other_exceed import GeocoderRequestOtherExceed
 
 SEARCH_JSON = 'searchJSON?'
 USERNAME = '&username='
-USERNAME_VALUE = 'demo1'
+USERNAME_VALUE = 'nikmel95@mail.ru'
 Q = 'q='
 STATUS_EXCEPTION = 'status'
 VALUE_EXCEPTION = 'value'
