@@ -105,7 +105,7 @@ def find_port_and_start(container_start_name, ports):
             container_on_port = collection.find_one({CONTAINER_PORT: i})
             if container_on_port is None:
                 collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i,
-                                 CONTAINER_START: int(round(time.time() * 1000))})
+                                 CONTAINER_START: int(round(time.time()))})
                 start_container(container_start_name, i)
                 container_start_port = i
                 container_start_result = True
