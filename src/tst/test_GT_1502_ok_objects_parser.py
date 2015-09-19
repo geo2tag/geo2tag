@@ -4,6 +4,8 @@
 from unittest import TestCase
 import sys
 sys.path.append('../plugins/ok_import/')
+sys.path.append('../open_data_import/')
+
 from open_karelia_objects_parser import OpenKareliaObjectsParser
 
 TEST_JSON = '[{"name": "test1", "test": "test"}, {"name": "test2"}]'

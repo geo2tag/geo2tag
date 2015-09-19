@@ -1,11 +1,9 @@
 import json
+import sys
+import os
+sys.path.append('../../open_data_import/')
+from open_data_objects_parser import OpenDataObjectsParser
 
 
-class OpenKareliaObjectsParser:
-
-    def __init__(self, data):
-        self.data = data
-
-    def parse(self):
-        obj = json.loads(self.data)
-        return obj
+class OpenKareliaObjectsParser(OpenDataObjectsParser):
+    pass
