@@ -170,7 +170,7 @@ def main():
     parser.add_argument('-p', '--ports')
 
     parser.add_argument('-k', '--kill', action='store_true')
-    parser.add_argument('-t', '--time')
+    parser.add_argument('-t', '--time', default='1w')
     args = parser.parse_args()
 
     if args.kill is not False:
