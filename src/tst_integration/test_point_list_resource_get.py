@@ -4,7 +4,7 @@ from basic_integration_test import BasicIntegrationTest
 
 TEST_URL = '/instance/service/testservice/point'
 
-VALID_PARAMS = '?number=100&channel_ids=556721a52a2e7febd2744202&channel_ids=556721a52a2e7febd2744201&date_from=2015-09-10T23:32:17.000000&date_to=2015-09-11T23:32:17.000000'
+VALID_PARAMS = '?number=100&channel_ids=556721a52a2e7febd2744202&channel_ids=556721a52a2e7febd2744201&date_from=2015-09-10T23:32:17.000000&date_to=2015-09-11T23:32:17.000000&bc_to=true&bc_from=true'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '[]'
 VALID_RESPONSE_TEXT_LEN = 3

@@ -22,7 +22,7 @@ class OpenKareliaObjectToPointTranslator:
         obj = {}
         obj['name'] = self.objectRepresentation['name'][0]
         obj['image_url'] = self.serverShowImageUrl + \
-            unicode(self.objectRepresentation.get('images', [u''])[0])
+            unicode(self.objectRepresentation.get('images', [{'$oid':''}])[0]['$oid'])
         obj['source_url'] = self.serverShowObjectUrl + \
             unicode(self.objectRepresentation.get('_id'))
         obj['version'] = self.version
@@ -31,7 +31,7 @@ class OpenKareliaObjectToPointTranslator:
 
     def getPoint(self):
         point = {'json': self.getPointJson()}
-        point['channelId'] = self.channelId
+        point['channel_id'] = self.channelId
         point['location'] = {
             "type": "Point",
             "coordinates": [
@@ -39,6 +39,7 @@ class OpenKareliaObjectToPointTranslator:
                 float(self.objectRepresentation['longitude'])]}
         point['alt'] = 0
         point['date'] = self.translateDate()
+        point['bc'] = False
         return point
 
     def translateDate(self):

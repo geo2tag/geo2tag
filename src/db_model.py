@@ -35,6 +35,7 @@ LOG_SIZE = 'log_size'
 OWNERID = 'owner_id'
 ID = '_id'
 LOG = 'log'
+BC = 'bc'
 # db initialisation
 MONGO_CLIENT = None  # MongoClient(getHost(), getPort())
 
@@ -43,6 +44,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 USER_ID = 'user_id'
 DATE = 'date'
 MESSAGE = 'message'
+ERROR_CODE = 'error_code'
 SERVICE = 'service'
 COLLECTION = 'services'
 CHANNELS_COLLECTION = 'channels'
@@ -295,6 +297,7 @@ def addPoints(serviceName, pointsArray):
         obj[ALT] = point[ALT]
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
+        obj[BC] = point[BC]
         list_id.append(str(db.save(obj)))
     return list_id
 
