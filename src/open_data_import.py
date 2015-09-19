@@ -44,6 +44,7 @@ def performImportActions(
     pointsLoader = odToPointsLoaderClass(serviceName, points)
     pointsLoader.loadPoints()
 
+
 class JobManager:
     jobs = {}
 
