@@ -11,9 +11,9 @@ TEST_OBJ = {
     'json': {
         'import_source': 'test_import',
         'version': 'test_version',
-        'image_url': 'image_url',
+        'image_url': u'image_url',
         'name': 'test_GT_1499',
-        'source_url': 'object_url111'},
+        'source_url': u'image_url111'},
     'channelId': 'channelId',
     'location': {
         'type': 'Point',
@@ -26,8 +26,7 @@ TEST_OBJ = {
 class TestOKPointTranslator(TestCase):
     def setUp(self):
         obj = OpenKareliaObjectToPointTranslator(
-            'image_url',
-            'object_url',
+            {'image_url': 'image_url', 'source_url': 'image_url111'},
             {
                 'name': ['test_GT_1499'],
                 '_id': '111',
