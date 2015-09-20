@@ -1,6 +1,5 @@
 from datetime import datetime
 import sys
-sys.path.append('../')
 sys.path.append('../../src/open_data_import')
 from open_data_object_to_point_translator import OpenDataToPointTranslator
 
