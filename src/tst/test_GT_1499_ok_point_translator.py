@@ -4,7 +4,7 @@
 from unittest import TestCase
 import sys
 import os
-print os.getcwd, '))))))))))))))))))))))))))))))))))))))))))'
+print os.getcwd(), '))))))))))))))))))))))))))))))))))))))))))'
 sys.path.append('../plugins/ok_import/')
 from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
 from datetime import datetime
