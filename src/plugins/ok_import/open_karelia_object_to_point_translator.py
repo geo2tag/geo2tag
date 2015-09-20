@@ -1,29 +1,29 @@
 from datetime import datetime
+import sys
+sys.path.append('./src/open_data_import')
+from open_data_object_to_point_translator import OpenDataToPointTranslator
 
-
-class OpenKareliaObjectToPointTranslator:
+class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
 
     def __init__(
-            self,
-            serverShowImageUrl,
-            serverShowObjectUrl,
+            self,importDataDict,
             objectRepresentation,
             version,
             importSource,
             channelId):
-        self.serverShowImageUrl = serverShowImageUrl
-        self.serverShowObjectUrl = serverShowObjectUrl
-        self.objectRepresentation = objectRepresentation
-        self.version = version
-        self.importSource = importSource
-        self.channelId = channelId
+        super().__init__(self,
+            importDataDict,
+            objectRepresentation,
+            version,
+            importSource,
+            channelId)
 
     def getPointJson(self):
         obj = {}
         obj['name'] = self.objectRepresentation['name'][0]
-        obj['image_url'] = self.serverShowImageUrl + \
+        obj['image_url'] = self.importDataDict['image_url'] + \
             unicode(self.objectRepresentation.get('images', [{'$oid': ''}])[0]['$oid'])
-        obj['source_url'] = self.serverShowObjectUrl + \
+        obj['source_url'] = self.importDataDict['source_url'] + \
             unicode(self.objectRepresentation.get('_id'))
         obj['version'] = self.version
         obj['import_source'] = self.importSource
