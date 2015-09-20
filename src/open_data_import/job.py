@@ -1,4 +1,3 @@
-import threading
 import random
 import string
 from datetime import datetime
@@ -53,6 +52,7 @@ class Job():
             'done': self.done,
             'channelName': self.channelName,
             'openDataUrl': self.openDataUrl,
+            'importDataDict':self.importDataDict,
             'serviceName': self.serviceName}
  
     @classmethod
