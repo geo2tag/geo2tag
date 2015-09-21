@@ -14,7 +14,6 @@ TEST_OBJ = {
     'channelId': 'channelId'
     }
 
-
 class TestOKPointTranslator(TestCase):
     def setUp(self):
         obj = OpenDataToPointTranslator(
@@ -32,5 +31,3 @@ class TestOKPointTranslator(TestCase):
     def testOKPointTranslator(self):
         self.assertEquals(TEST_OBJ['json'], self.test_obj['json'])
         self.assertEquals(TEST_OBJ['channelId'], self.test_obj['channelId'])
-    def testOkPointTranslatorBC(self):
-        self.assertEqual(self.test_obj['bc'], False)
