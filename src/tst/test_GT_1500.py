@@ -11,7 +11,6 @@ from datetime import datetime
 TEST_OBJ = {
     'json': {'version': 'test_version', 
         'import_source': 'test_import'},
-    'channelId': 'channelId'
     }
 
 class TestOKPointTranslator(TestCase):
@@ -27,7 +26,5 @@ class TestOKPointTranslator(TestCase):
             'test_import',
             'channelId')
         self.test_obj = obj.getPoint()
-        print self.test_obj, '***********************************'
     def testOKPointTranslator(self):
         self.assertEquals(TEST_OBJ['json'], self.test_obj['json'])
-        self.assertEquals(TEST_OBJ['channelId'], self.test_obj['channelId'])
