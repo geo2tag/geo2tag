@@ -4,6 +4,7 @@
 from unittest import TestCase
 import sys
 sys.path.append('../plugins/ok_import/')
+sys.path.append('../../open_data_import')
 from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
 from datetime import datetime
 

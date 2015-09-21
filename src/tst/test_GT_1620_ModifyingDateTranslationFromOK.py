@@ -2,6 +2,7 @@ from unittest import TestCase
 from datetime import datetime
 import sys
 sys.path.append('../plugins/ok_import/')
+sys.path.append('../../open_data_import')
 from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
 from open_karelia_object_to_point_translator import date_name_to_datetime
 from open_karelia_object_to_point_translator import key_in_dict_and_defined
