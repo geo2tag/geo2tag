@@ -1,6 +1,6 @@
 from datetime import datetime
 import sys
-sys.path.append('../../src/open_data_import')
+sys.path.append('../../open_data_import')
 from open_data_object_to_point_translator import OpenDataToPointTranslator
 
 INTERVAL_DATES_NAMES = (('year_start', 'year_end'), ('century_start', 'century_end'),
