@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 from flask import request
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
@@ -26,9 +27,12 @@ class GeonamesRequestSender():
             for address in addressStringList:
                 get_response = cls.requestSingleCoordinates(address)
                 callback_response.append(get_response)
+                addressStringList.pop(0)
             callback(callback_response)
         except GeocoderRequestLimitExceed:
             callback(callback_response)
+            time.sleep(60)
+            requestCoordinates(addressStringList, callback)
 
     @classmethod
     def requestSingleCoordinates(cls, address):
