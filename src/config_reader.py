@@ -80,4 +80,3 @@ def getGoogleRedirectUrl():
 
 def getGeonamesLogin():
     return getConfigParser().get(GEONAMES_SECTION, GEONAMES_CLIENT_LOGIN)
-    
