@@ -38,10 +38,6 @@ class TestGeocoderResponseParser(TestCase):
         DATA_JSON[TOTAL_RESULTS_COUNT] = 2
         res = GeocoderResponseParser.parseSingle(dumps(DATA_JSON))
         self.assertEqual(res, [5, 2])
-        DATA_JSON[GEONAMES] = [{LAT: 2}, {LNG: 4}]
-        DATA_JSON[TOTAL_RESULTS_COUNT] = 2
-        res = GeocoderResponseParser.parseSingle(dumps(DATA_JSON))
-        self.assertEqual(res, None)
 
     def testGeocoderResponseParser_parseList(self):
         res = GeocoderResponseParser.parseList([])

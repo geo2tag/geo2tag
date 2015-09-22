@@ -17,13 +17,10 @@ class GeocoderResponseParser():
         if field_in_dict_and_defined(TOTAL_RESULTS_COUNT, JSONconv) and JSONconv[TOTAL_RESULTS_COUNT] == 0:
             return None
         if field_in_dict_and_defined(GEONAMES, JSONconv):
-            for i in JSONconv[GEONAMES]:
-                if field_in_dict_and_defined(LNG, i) and field_in_dict_and_defined(LAT, i):
-                    resArr = [
-                        float(JSONconv[GEONAMES][0][LNG]),
-                        float(JSONconv[GEONAMES][0][LAT])
-                    ]
-                    break
+            resArr = [
+                float(JSONconv[GEONAMES][0][LNG]),
+                float(JSONconv[GEONAMES][0][LAT])
+            ]
         return resArr
 
     @classmethod
