@@ -85,11 +85,8 @@ JOB_STATISTIC_TEST = [
      "_id": "FaBKKA05Xvoc",
      "serviceName": "testservice"}, {"openDataUrl": "http://mobile.openkarelia.org//get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964", "showObjectUrl": "", "channelName": "test_GT_1286", "done": True, "time": "0:00:03.84523", "showImageUrl": "", "_id": "FaBKKA05Xvoc", "serviceName": "testservice"}
 ]
+STATISTIC_RESULT = {'average': {'value': '0:00:04.419559' }, 'min': {'value': '00:00:03.845230', 'job': JOB_STATISTIC_TEST }, 'max': {'value': '00:00:04.895279', 'job': JOB_STATISTIC_TEST }}
 
-STATISTIC_RESULT = {
-    'max': '00:00:04.895279',
-     'average': '0:00:04.419559',
-     'min': '00:00:03.845230'}
 
 
 class TestJobsParser(unittest.TestCase):
