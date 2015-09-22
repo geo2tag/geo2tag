@@ -12,7 +12,7 @@ import json
 TEST_SEARCH = 'asdasd'
 RESPONSE_TEST_SEARCH = 'http://api.geonames.org/searchJSON?q=' + TEST_SEARCH + '&username=nikmel95@mail.ru'
 TEST_ERROR_CODE = '10'
-RESPONSE_SINGLE = '{"totalResultsCount":1,"geonames":[{"countryId":"2510769","adminCode1":"58","countryName":"Spain","fclName":"spot, building, farm","countryCode":"ES","lng":"-8.65049","fcodeName":"hotel","toponymName":"Asdasd","fcl":"S","name":"Asdasd","fcode":"HTL","geonameId":10172468,"lat":"42.42865","adminName1":"Galicia","population":0}]}'
+RESPONSE_SINGLE =  {"totalResultsCount":1,"geonames":[{"countryId":"2510769","adminCode1":"58","countryName":"Spain","fclName":"spot, building, farm","countryCode":"ES","lng":"-8.65049","fcodeName":"hotel","toponymName":"Asdasd","fcl":"S","name":"Asdasd","fcode":"HTL","geonameId":10172468,"lat":"42.42865","adminName1":"Galicia","population":0}]}
 RESPONSE_SINGLE1 = '{"totalResultsCount":1,"geonames":[{"countryId":"2510769","adminCode1":"58","countryName":"Spain","fclName":"spot, building, farm","countryCode":"ES","lng":"-8.65049","fcodeName":"hotel","toponymName":"Asdasd","fcl":"S","name":"Asdasd","fcode":"HTL","geonameId":10172468,"lat":"42.42865","adminName1":"Galicia","population":0}]}'
 COUNTRY_ID_VAL = '2510769'
 GEONAMES = 'geonames'
@@ -41,7 +41,8 @@ class TestGeonamesRequestSender(unittest.TestCase):
 
     def test_requestSingleCoordinates(self):
     	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH)
-    	self.assertEqual(response,RESPONSE_SINGLE)
+        response = json.loads(response)
+    	self.assertEqual((response),RESPONSE_SINGLE)
 
     def test_requestSingleCoordinates_syntax(self):
     	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH)
