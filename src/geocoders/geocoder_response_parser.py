@@ -9,25 +9,32 @@ class GeocoderResponseParser():
 
     @classmethod
     def parseSingle(cls, text):
+        # in return:
+        # 1) None - if no lat or lng vars was found
+        # 2) [lat, lan]]
         JSONconv = loads(text)
-        resArr = list()
+        resArr = None
         if field_in_dict_and_defined(TOTAL_RESULTS_COUNT, JSONconv) and JSONconv[TOTAL_RESULTS_COUNT] == 0:
             return None
         if field_in_dict_and_defined(GEONAMES, JSONconv):
             for i in JSONconv[GEONAMES]:
-                if field_in_dict_and_defined(LAT, i) and field_in_dict_and_defined(LNG, i):
-                    resArr.append([float(i[LAT]), float(i[LNG])])
-        if len(resArr) == 0:
-            return None
+                if field_in_dict_and_defined(LNG, i) and field_in_dict_and_defined(LAT, i):
+                    resArr = [
+                        float(JSONconv[GEONAMES][0][LNG]),
+                        float(JSONconv[GEONAMES][0][LAT])
+                    ]
+                    break
         return resArr
 
     @classmethod
     def parseList(cls, textList):
-        JSONres = list()
+        # in return
+        # 1) None - if every response has no lat & lng
+        # 2) list of [lng, lat]
+        JSONres = []
         for i in textList:
             JSONsingle = cls.parseSingle(i)
-            if JSONsingle is not None:
-                JSONres += JSONsingle
+            JSONres.append(JSONsingle)
         if len(JSONres) == 0:
             return None
         return JSONres
