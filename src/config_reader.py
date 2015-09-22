@@ -29,6 +29,7 @@ GEONAMES_SECTION = 'geocoding'
 GEONAMES_CLIENT_LOGIN = 'geonames_login'
 GEONAMES_LOGIN = 'test'
 
+
 def getConfigParser():
     config = SafeConfigParser({OPTION_HOST: HOST,
                                OPTION_PORT: PORT,
@@ -78,4 +79,4 @@ def getGoogleRedirectUrl():
 
 
 def getGeonamesLogin():
-    return getConfigParser().get(GEONAMES_SECTION, GEONAMES_CLIENT_LOGIN)       
+    return getConfigParser().get(GEONAMES_SECTION, GEONAMES_CLIENT_LOGIN)
