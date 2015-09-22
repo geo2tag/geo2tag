@@ -26,6 +26,7 @@ class GeonamesRequestSender():
         try:
             for address in addressStringList:
                 get_response = cls.requestSingleCoordinates(address)
+                get_response = json.loads(get_response)
                 callback_response.append(get_response)
                 addressStringList.pop(0)
             callback(callback_response)
