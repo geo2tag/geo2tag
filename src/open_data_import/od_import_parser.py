@@ -3,20 +3,16 @@ from json import loads
 from werkzeug.exceptions import BadRequest
 CHANNEL_NAME = 'channelName'
 OPEN_DATA_URL = 'openDataUrl'
-SHOW_OBJECT_URL = 'showObjectUrl'
-SHOW_IMAGE_URL = 'showImageUrl'
-
-
 
 
 class OdImportParser():
 
     mandatoryFields = [CHANNEL_NAME, OPEN_DATA_URL]
 
-    @staticmethod
-    def parsePostParameters():
+    @classmethod
+    def parsePostParameters(cls):
         args = loads(request.get_data())
-        for key in mandatoryFields:
+        for key in cls.mandatoryFields:
             if key not in args:
                 raise BadRequest('{0} parameter is missing'.format(key))
             elif not isinstance(args[key], unicode):

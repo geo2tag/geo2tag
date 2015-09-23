@@ -22,6 +22,9 @@ class Test_OKImportJob(BasicIntegrationTest):
         response = requests.post(self.getUrl(TEST_URL), data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
+        print "\n\n\n\n\n"
+        print responseText
+        print "\n\n\n\n\n"
         self.assertEquals(len(responseText), 12)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(self.getUrl(TEST_URL))
