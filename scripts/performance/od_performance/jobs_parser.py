@@ -3,11 +3,15 @@ import json
 from datetime import datetime
 import time
 import string
+
+AVERAGE = 'average'
 DONE = 'done'
 VALUE = 'value'
 TIME = 'time'
-JOBS_LIST = {'average': {}, 'min': {}, 'max': {}}
-
+MIN = 'min'
+MAX = 'max'
+JOB = 'job'
+JOBS_LIST = {'average': {'value': {} }, 'min': {'value': {}, 'job': {} }, 'max': {'value': {}, 'job': {} }}
 
 def timeConvert(data):
     return string.zfill(str(data / 3600000000), 1) + ':' + string.zfill(str(data / 60000000), 2) + ':' + string.zfill(str(data / 1000000), 2) + '.' + str(data)[:6]
@@ -42,7 +46,9 @@ def createJobStatistic(jobsList):
             maxValue = timeObj
         if minValue > timeObj:
             minValue = timeObj
-    JOBS_LIST['average'] = timeConvert(summ / len(jobsList))
-    JOBS_LIST['min'] = minValue.strftime("%H:%M:%S.%f")
-    JOBS_LIST['max'] = maxValue.strftime("%H:%M:%S.%f")
+    JOBS_LIST[AVERAGE][VALUE] = timeConvert(summ / len(jobsList))
+    JOBS_LIST[MIN][VALUE] = minValue.strftime("%H:%M:%S.%f")
+    JOBS_LIST[MIN][JOB] = jobsList
+    JOBS_LIST[MAX][VALUE] = maxValue.strftime("%H:%M:%S.%f")
+    JOBS_LIST[MAX][JOB] = jobsList
     return JOBS_LIST
