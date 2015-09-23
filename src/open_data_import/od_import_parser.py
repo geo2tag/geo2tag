@@ -6,15 +6,17 @@ OPEN_DATA_URL = 'openDataUrl'
 SHOW_OBJECT_URL = 'showObjectUrl'
 SHOW_IMAGE_URL = 'showImageUrl'
 
-MANDATORY_FIELDS_OK_PARSER = [CHANNEL_NAME, OPEN_DATA_URL]
+
 
 
 class OdImportParser():
 
+    mandatoryFields = [CHANNEL_NAME, OPEN_DATA_URL]
+
     @staticmethod
     def parsePostParameters():
         args = loads(request.get_data())
-        for key in MANDATORY_FIELDS_OK_PARSER:
+        for key in mandatoryFields:
             if key not in args:
                 raise BadRequest('{0} parameter is missing'.format(key))
             elif not isinstance(args[key], unicode):
