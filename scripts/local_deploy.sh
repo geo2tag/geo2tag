@@ -38,6 +38,7 @@ fi
 cp -r src/static /var/www/"$CATALOG"/static/
 cp -r src/templates /var/www/"$CATALOG"/templates/
 cp -r src/plugins /var/www/"$CATALOG"/plugins/
+cp -r src/open_data_import /var/www/"$CATALOG"/open_data_import/
 cp config/"$CONFIG_FILE" /etc/apache2/sites-available/
 
 ./scripts/setup_pip_dependencies.sh
