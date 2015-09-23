@@ -6,6 +6,8 @@ import datetime
 import sys
 import os
 from time import sleep
+import time
+import re
 
 
 HOST = 'localhost'
@@ -22,6 +24,8 @@ MANAGE_CONTAINER = "scripts/docker_manage.sh"
 # keys
 CONTAINER_NAME = "name"
 CONTAINER_PORT = "port"
+CONTAINER_START = "start"
+CONTAINER_ID = "_id"
 
 
 def usage():
@@ -101,12 +105,16 @@ def find_port_and_start(container_start_name, ports):
         for i in range(int(ports_range[0]), int(ports_range[1]) + 1):
             container_on_port = collection.find_one({CONTAINER_PORT: i})
             if container_on_port is None:
-                collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i})
+                collection.save({CONTAINER_NAME: container_start_name, CONTAINER_PORT: i,
+                                 CONTAINER_START: int(round(time.time()))})
                 start_container(container_start_name, i)
                 container_start_port = i
                 container_start_result = True
                 break
     else:
+        container[CONTAINER_START] = int(round(time.time()))
+        collection.update({CONTAINER_ID: container[CONTAINER_ID]}, container, True)
+
         stop_container(container_start_name)
         start_container(container_start_name, container[CONTAINER_PORT])
         container_start_port = container[CONTAINER_PORT]
@@ -115,17 +123,67 @@ def find_port_and_start(container_start_name, ports):
     return [container_start_result, container_start_port]
 
 
+def kill_old_containers(kill_time=0):
+    time_pass = 0
+    if kill_time != 0:
+        time_pass = int(round(time.time())) - kill_time
+    else:
+        time_pass = int(round(time.time())) - (168 * 60 * 60)
+    collection = db[COLLECTION_NAME]
+    containers = collection.find({CONTAINER_START: {"$lte": time_pass}})
+    if containers is None:
+        return
+
+    for container in containers:
+        print container[CONTAINER_NAME] + " on port " + str(container[CONTAINER_PORT]) + " stop"
+        stop_container(container[CONTAINER_NAME])
+        collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
+
+
+def parse_string_time_to_timestamp(str):
+    p = re.compile(u'(\d+\w)')
+    time_list = re.findall(p, str)
+    result = 0
+    for time_unit in time_list:
+        s = time_unit[-1:]
+        t = int(time_unit[:-1])
+        if s == 'y':
+            result += t * 31556926  # second in year
+        elif s == 'M':
+            result += t * 2629743  # seconds in month
+        elif s == 'w':
+            result += t * (168 * 60 * 60)
+        elif s == 'd':
+            result += t * (24 * 60 * 60)
+        elif s == 'h':
+            result += t * (60 * 60)
+        elif s == 'm':
+            result += t * 60
+        elif s == 's':
+            result += t
+
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name')
     parser.add_argument('-p', '--ports')
+
+    parser.add_argument('-k', '--kill', action='store_true')
+    parser.add_argument('-t', '--time', default='1w')
     args = parser.parse_args()
 
-    if (args.name or args.ports) is None:
+    if args.kill is not False:
+        timestamp = 0
+        if args.time is not None:
+            timestamp = parse_string_time_to_timestamp(args.time)
+        kill_old_containers(timestamp)
+    elif (args.name or args.ports) is None:
         usage()
     else:
         container_start_name = args.name
-        
+
         file_name = "/tmp/" + container_start_name + LOG_NAME
         print file_name
 
