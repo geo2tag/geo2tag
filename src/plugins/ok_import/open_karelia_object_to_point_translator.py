@@ -1,33 +1,33 @@
 from datetime import datetime
+import sys
+sys.path.append('/var/www/geomongo/open_data_import')
+from open_data_object_to_point_translator import OpenDataToPointTranslator
 
 INTERVAL_DATES_NAMES = (('year_start', 'year_end'), ('century_start', 'century_end'),
                            ('millenium_start', 'millenium_end'))
 PRECISE_DATE_NAMES = ('year', 'century', 'millenium')
 DATE_TYPES = ('interval', 'precise')
 
-class OpenKareliaObjectToPointTranslator:
+class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
 
     def __init__(
-            self,
-            serverShowImageUrl,
-            serverShowObjectUrl,
+            self,importDataDict,
             objectRepresentation,
             version,
             importSource,
             channelId):
-        self.serverShowImageUrl = serverShowImageUrl
-        self.serverShowObjectUrl = serverShowObjectUrl
-        self.objectRepresentation = objectRepresentation
-        self.version = version
-        self.importSource = importSource
-        self.channelId = channelId
+        super(OpenKareliaObjectToPointTranslator, self).__init__(importDataDict,
+            objectRepresentation,
+            version,
+            importSource,
+            channelId)
 
     def getPointJson(self):
         obj = {}
         obj['name'] = self.objectRepresentation['name'][0]
-        obj['image_url'] = self.serverShowImageUrl + \
+        obj['image_url'] = self.importDataDict['image_url'] + \
             unicode(self.objectRepresentation.get('images', [{'$oid': ''}])[0]['$oid'])
-        obj['source_url'] = self.serverShowObjectUrl + \
+        obj['source_url'] = self.importDataDict['image_url'] + \
             unicode(self.objectRepresentation.get('_id'))
         obj['version'] = self.version
         obj['import_source'] = self.importSource
@@ -127,4 +127,3 @@ def date_name_to_datetime(names_dict, names_key):
         elif names_key == 'millenium' or names_key == 'millenium_start' or names_key == 'millenium_end':
             return datetime(int(names_dict[names_key]) * 1000, 1, 1, 0, 0)
     return None
-

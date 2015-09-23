@@ -1,7 +1,6 @@
 import sys
 sys.path.append('../..')
 from db_model import getDbObject
-serviceName = 'testservice'
 POINTS = 'points'
 
 
