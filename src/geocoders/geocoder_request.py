@@ -31,8 +31,7 @@ class GeonamesRequestSender():
             except GeocoderRequestLimitExceed as e:
                 callback(callback_response)
                 callback_response = []
-                time.sleep((e.lenght_to_period)*60)
-        callback(callback_response)          
+                time.sleep((e.lenght_to_period)*60)        
 
     @classmethod
     def requestSingleCoordinates(cls, address):
