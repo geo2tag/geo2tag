@@ -33,7 +33,7 @@ class TestGeonamesRequestSender(unittest.TestCase):
 
     def test_exceed_limit(self):
     	with self.assertRaises(GeocoderRequestLimitExceed) as e:
-            raise GeocoderRequestLimitExceed(TEST_ERROR_CODE)
+            raise GeocoderRequestLimitExceed(TEST_ERROR_CODE,1)
 
     def test_exceed_other(self):
     	with self.assertRaises(GeocoderRequestOtherExceed) as e:
@@ -54,6 +54,7 @@ class TestGeonamesRequestSender(unittest.TestCase):
         REQUET_ADDRESS_LIST.append(TEST_SEARCH)
     	GeonamesRequestSender.requestCoordinates(REQUET_ADDRESS_LIST,callback_test)
         self.assertEqual(RESPONSE_REQUEST_COORDINATES[0],RESPONSE_SINGLE1)
+        self.assertEqual(RESPONSE_REQUEST_COORDINATES[1],RESPONSE_SINGLE1)
 
     def test_exceed_limit_data(self):
         with self.assertRaises(GeocoderRequestLimitExceed) as e:
