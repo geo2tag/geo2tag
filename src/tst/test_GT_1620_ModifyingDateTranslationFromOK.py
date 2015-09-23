@@ -2,6 +2,7 @@ from unittest import TestCase
 from datetime import datetime
 import sys
 sys.path.append('../plugins/ok_import/')
+sys.path.append('../open_data_import')
 from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
 from open_karelia_object_to_point_translator import date_name_to_datetime
 from open_karelia_object_to_point_translator import key_in_dict_and_defined
@@ -10,8 +11,7 @@ from open_karelia_object_to_point_translator import define_date_type
 from open_karelia_object_to_point_translator import DATE_TYPES
 
 TEST_DATA = [
-    'image_url',
-    'object_url',
+    {'image_url': 'image_url', 'object_url': 'object_url'},
     {
         'name': ['test_GT_1620'],
         '_id': '111',
@@ -26,72 +26,72 @@ TEST_DATA = [
 
 class TestModifyigDateTranslationFromOK(TestCase):
     def testModifyigDateTranslationFromOK_JustDate(self):
-        td = OpenKareliaObjectToPointTranslator(None, None, {}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {}, None, None, None).translateDate()
         self.assertEqual(td[0].replace(microsecond=0), datetime.now().replace(microsecond=0))
         self.assertEqual(td[1], False)
 
     def testModifyigDateTranslationFromOK_PresiseDate(self):
-        td = OpenKareliaObjectToPointTranslator(None, None, {'year': 2000, 'bc': True}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'year': 2000, 'bc': True}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], True)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'century': 20}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'century': 20}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'millenium': 2}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'millenium': 2}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], False)
 
     def testModifyigDateTranslationFromOK_IntervalDates(self):
-        td = OpenKareliaObjectToPointTranslator(None, None, {'year_start': 2000, 'year_end': 3000}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'year_start': 2000, 'year_end': 3000}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'century_start': 20, 'century_end': 30}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'century_start': 20, 'century_end': 30}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'millenium_start': 2, 'millenium_end': 3}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'millenium_start': 2, 'millenium_end': 3}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
 
     def testModifyigDateTranslationFromOK_MixedDateTypes(self):
-        td = OpenKareliaObjectToPointTranslator(None, None, {'year': 1000, 'year_start': 2000, 'year_end': 3000}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'year': 1000, 'year_start': 2000, 'year_end': 3000}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'century': 20, 'year_end': 3000}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'century': 20, 'year_end': 3000}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td[1], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'millenium': 4, 'century': 20, 'year': 3000}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator( None, {'millenium': 4, 'century': 20, 'year': 3000}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(td[1], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'millenium_start': 2, 'millenium_end': 3, 'year_start': 4000, 'year_end': 5000, 'century_start': 60, 'century_end': 70}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'millenium_start': 2, 'millenium_end': 3, 'year_start': 4000, 'year_end': 5000, 'century_start': 60, 'century_end': 70}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(4000, 1, 1, 0, 0))
         self.assertEqual(td[1], datetime(5000, 1, 1, 0, 0))
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
-        td = OpenKareliaObjectToPointTranslator(None, None, {'millenium_start': 2, 'millenium_end': 3, 'century_start': 40, 'century_end': 50}, None, None, None).translateDate()
+        td = OpenKareliaObjectToPointTranslator(None, {'millenium_start': 2, 'millenium_end': 3, 'century_start': 40, 'century_end': 50}, None, None, None).translateDate()
         self.assertEqual(td[0], datetime(4000, 1, 1, 0, 0))
         self.assertEqual(td[1], datetime(5000, 1, 1, 0, 0))
         self.assertEqual(td[2], False)
         self.assertEqual(td[3], False)
 
     def testModifyigDateTrnaslationFromOK_GetPointFunc(self):
-        TEST_DATA[2]['bc'] = True
-        td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4], TEST_DATA[5]).getPoint()
+        TEST_DATA[1]['bc'] = True
+        td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4]).getPoint()
         self.assertEqual(td['date'].replace(microsecond=0), datetime.now().replace(microsecond=0))
         # Next line is assertation for False because date was not set
         self.assertEqual(td['bc'], False)
-        TEST_DATA[2]['year_start'] = 2000
-        TEST_DATA[2]['year_end'] = 3000
-        TEST_DATA[2]['bc_start'] = False
-        TEST_DATA[2]['bc_end'] = False
-        td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4], TEST_DATA[5]).getPoint()
+        TEST_DATA[1]['year_start'] = 2000
+        TEST_DATA[1]['year_end'] = 3000
+        TEST_DATA[1]['bc_start'] = False
+        TEST_DATA[1]['bc_end'] = False
+        td = OpenKareliaObjectToPointTranslator(TEST_DATA[0], TEST_DATA[1], TEST_DATA[2], TEST_DATA[3], TEST_DATA[4]).getPoint()
         self.assertEqual(td['date'], datetime(2000, 1, 1, 0, 0))
         self.assertEqual(td['json']['date'], datetime(3000, 1, 1, 0, 0))
         self.assertEqual(td['bc'], False)
