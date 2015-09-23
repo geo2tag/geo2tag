@@ -15,7 +15,7 @@ class testODOL(OpenDataObjectsParser):
 test_class = testODOL('test')
 
 
-class TestOKObjetcsLoaderRefactoring(TestCase):
+class TestOKObjetcsParserRefactoring(TestCase):
     def testOKObjetcsLoaderRefactoring_inheritance(self):
         self.assertNotEqual(re.search(INHERITANCE_OK_PATT, str(inspect.getmro(OpenKareliaObjectsParser))), None)
 
