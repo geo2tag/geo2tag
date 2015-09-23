@@ -1,7 +1,7 @@
 import threading
 import sys
 import os
-sys.path.append('../open_data_import/')
+sys.path.append('/var/www/geomongo/open_data_import')
 from job import Job
 
 showImageUrl = 'showImageUrl'

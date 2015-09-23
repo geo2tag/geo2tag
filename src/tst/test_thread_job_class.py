@@ -5,6 +5,7 @@ from unittest import TestCase
 import sys
 from db_model import getDbObject
 sys.path.append('../plugins/ok_import/')
+sys.path.append('../open_data_import')
 from thread_job import ThreadJob
 import datetime
 channelName = 'channelName'
