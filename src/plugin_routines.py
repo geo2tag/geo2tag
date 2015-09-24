@@ -39,7 +39,7 @@ def enablePlugin(api, pluginName):
         for pluginResource in pluginResourcesDict:
             api.add_resource(pluginResourcesDict[pluginResource], getPluginUrl(
                 pluginResource, pluginName))
-        print(getUserId(), 'Plugin ' +
+        writeInstanceLog(getUserId(), 'Plugin ' +
                          pluginName + ' successfully loaded')
     except Exception as e:
         writeInstanceLog(getUserId(), EXCEPT_ERROR_TEXT +
