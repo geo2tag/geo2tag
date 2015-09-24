@@ -12,8 +12,8 @@ import json
 TEST_SEARCH = 'asdasd'
 RESPONSE_TEST_SEARCH = 'http://api.geonames.org/searchJSON?q=' + TEST_SEARCH + '&username=nikmel95@mail.ru'
 TEST_ERROR_CODE = '10'
-RESPONSE_SINGLE = '{"totalResultsCount":1,"geonames":[{"countryId":"2510769","adminCode1":"58","countryName":"Spain","fclName":"spot, building, farm","countryCode":"ES","lng":"-8.65049","fcodeName":"hotel","toponymName":"Asdasd","fcl":"S","name":"Asdasd","fcode":"HTL","geonameId":10172468,"lat":"42.42865","adminName1":"Galicia","population":0}]}'
-RESPONSE_SINGLE1 = '{"totalResultsCount":1,"geonames":[{"adminCode1":"58","lng":"-8.65049","geonameId":10172468,"toponymName":"Asdasd","countryId":"2510769","fcl":"S","population":0,"countryCode":"ES","name":"Asdasd","fclName":"spot, building, farm","countryName":"Spain","fcodeName":"hotel","adminName1":"Galicia","lat":"42.42865","fcode":"HTL"}]}'
+RESPONSE_SINGLE =  {"totalResultsCount":1,"geonames":[{"countryId":"2510769","adminCode1":"58","countryName":"Spain","fclName":"spot, building, farm","countryCode":"ES","lng":"-8.65049","fcodeName":"hotel","toponymName":"Asdasd","fcl":"S","name":"Asdasd","fcode":"HTL","geonameId":10172468,"lat":"42.42865","adminName1":"Galicia","population":0}]}
+RESPONSE_SINGLE1 = {"totalResultsCount":1,"geonames":[{"adminCode1":"58","lng":"-8.65049","geonameId":10172468,"toponymName":"Asdasd","countryId":"2510769","fcl":"S","population":0,"countryCode":"ES","name":"Asdasd","fclName":"spot, building, farm","countryName":"Spain","fcodeName":"hotel","adminName1":"Galicia","lat":"42.42865","fcode":"HTL"}]}
 COUNTRY_ID_VAL = '2510769'
 GEONAMES = 'geonames'
 COUNTRY_ID = 'countryId'
@@ -33,7 +33,7 @@ class TestGeonamesRequestSender(unittest.TestCase):
 
     def test_exceed_limit(self):
     	with self.assertRaises(GeocoderRequestLimitExceed) as e:
-            raise GeocoderRequestLimitExceed(TEST_ERROR_CODE)
+            raise GeocoderRequestLimitExceed(TEST_ERROR_CODE,1)
 
     def test_exceed_other(self):
     	with self.assertRaises(GeocoderRequestOtherExceed) as e:
@@ -41,7 +41,8 @@ class TestGeonamesRequestSender(unittest.TestCase):
 
     def test_requestSingleCoordinates(self):
     	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH)
-    	#self.assertEqual(str(response),RESPONSE_SINGLE)
+        response = json.loads(response)
+    	self.assertEqual((response),RESPONSE_SINGLE)
 
     def test_requestSingleCoordinates_syntax(self):
     	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH)
@@ -52,7 +53,8 @@ class TestGeonamesRequestSender(unittest.TestCase):
     	REQUET_ADDRESS_LIST.append(TEST_SEARCH)
         REQUET_ADDRESS_LIST.append(TEST_SEARCH)
     	GeonamesRequestSender.requestCoordinates(REQUET_ADDRESS_LIST,callback_test)
-        #self.assertEqual(RESPONSE_REQUEST_COORDINATES[0],RESPONSE_SINGLE1)
+        self.assertEqual(RESPONSE_REQUEST_COORDINATES[0],RESPONSE_SINGLE1)
+        self.assertEqual(RESPONSE_REQUEST_COORDINATES[1],RESPONSE_SINGLE1)
 
     def test_exceed_limit_data(self):
         with self.assertRaises(GeocoderRequestLimitExceed) as e:
