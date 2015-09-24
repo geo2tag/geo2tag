@@ -173,14 +173,7 @@ def main(host):
         BasicIntegrationTest.parametrize(
             Test_OKImportJob_not_exist,
             param=host))
-    suite.addTest(
-        BasicIntegrationTest.parametrize(
-            TestBcParametrPointListPost,
-            param=host))
-    suite.addTest(
-        BasicIntegrationTest.parametrize(
-            TestExtendPointListParserWithFlagsBC,
-            param=host))
+
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()
     suite.addTest(BasicIntegrationTest.parametrize(

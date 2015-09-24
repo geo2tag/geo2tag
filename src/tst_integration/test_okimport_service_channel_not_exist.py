@@ -16,8 +16,7 @@ CHANNEL_NAME = 'testchannel'
 DATA = {
     DATA_ARR[0]: CHANNEL_NAME,
     DATA_ARR[1]: TEST_VAL_PREFIX + DATA_ARR[1],
-    DATA_ARR[2]: TEST_VAL_PREFIX + DATA_ARR[2],
-    DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
+    'importDataDict': {DATA_ARR[2]: TEST_VAL_PREFIX + DATA_ARR[2],DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]}
 }
 
 
@@ -26,6 +25,7 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
     def test_AService_POST_VALID(self):
         # Srevice POST
         # VALID
+
         response = requests.post(
             self.getUrl(VALID_TEST_URL),
             data=json.dumps(DATA))
