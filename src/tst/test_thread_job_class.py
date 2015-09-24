@@ -5,6 +5,7 @@ from unittest import TestCase
 import sys
 from db_model import getDbObject
 sys.path.append('../plugins/ok_import/')
+sys.path.append('../open_data_import')
 from thread_job import ThreadJob
 import datetime
 channelName = 'channelName'
@@ -12,6 +13,7 @@ openDataUrl = 'openDataUrl'
 showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
+IMPORTDATADICT = 'importDataDict'
 
 
 def backgroundFunction(
@@ -28,12 +30,12 @@ def backgroundFunction(
 class Test_GT_1506_class_thread_job(TestCase):
 
     def test_GT_1506_class_thread_job(self):
+        importDataDict_val = {showImageUrl:showImageUrl,showObjectUrl:showObjectUrl}
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,
             openDataUrl,
-            showObjectUrl,
-            showImageUrl,
+            importDataDict_val,
             serviceName)
         threadJobObj.start()
         threadJobObj.internalStart()
@@ -46,11 +48,11 @@ class Test_GT_1506_class_thread_job(TestCase):
         self.assertEquals(describe.get('done'), True)
         self.assertEquals(describe.get('channelName'), channelName)
         self.assertEquals(describe.get('openDataUrl'), openDataUrl)
-        self.assertEquals(describe.get('showImageUrl'), showImageUrl)
-        self.assertEquals(describe.get('showObjectUrl'), showObjectUrl)
+        self.assertEquals(describe[IMPORTDATADICT].get('showImageUrl'), showImageUrl)
+        self.assertEquals(describe[IMPORTDATADICT].get('showObjectUrl'), showObjectUrl)
         self.assertEquals(describe.get('serviceName'), serviceName)
         self.assertEquals(threadJobObj.channelName, channelName)
         self.assertEquals(threadJobObj.openDataUrl, openDataUrl)
-        self.assertEquals(threadJobObj.showImageUrl, showImageUrl)
-        self.assertEquals(threadJobObj.showObjectUrl, showObjectUrl)
+        self.assertEquals(threadJobObj.importDataDict.get('showImageUrl'), showImageUrl)
+        self.assertEquals(threadJobObj.importDataDict.get('showObjectUrl'), showObjectUrl)
         self.assertEquals(threadJobObj.serviceName, serviceName)

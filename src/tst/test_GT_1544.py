@@ -4,7 +4,8 @@ from flask import Flask
 from werkzeug.exceptions import BadRequest
 from json import dumps
 import sys
-sys.path.append('../plugins/ok_import')
+sys.path.append('../plugins/ok_import/')
+sys.path.append('../open_data_import')
 from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob
 from job_manager import JobManager
@@ -33,12 +34,12 @@ def backgroundFunction(
 class Test_GT_1544(TestCase):
 
     def test_GT_1544(self):
+        importDataDict = {showImageUrl:showImageUrl,showObjectUrl:showObjectUrl}
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,
             openDataUrl,
-            showObjectUrl,
-            showImageUrl,
+            importDataDict,
             serviceName)
         threadJobObj.start()
         while not threadJobObj.done:
