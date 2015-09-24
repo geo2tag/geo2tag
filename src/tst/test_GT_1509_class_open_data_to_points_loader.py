@@ -5,8 +5,8 @@ from unittest import TestCase
 import sys
 from bson.objectid import ObjectId
 from db_model import getDbObject
-sys.path.append('../plugins/ok_import/')
-from open_karelia_data_to_points_loader import OpenKareliaDataToPointsLoader
+sys.path.append('../open_data_import/')
+from open_data_to_points_loader import OpenDataToPointsLoader as OpenKareliaDataToPointsLoader
 POINTS = 'points'
 ID = '_id'
 TEST_SERVICE = 'testservice'
