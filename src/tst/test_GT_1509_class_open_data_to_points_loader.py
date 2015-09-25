@@ -6,7 +6,7 @@ import sys
 from bson.objectid import ObjectId
 from db_model import getDbObject
 sys.path.append('../open_data_import/')
-from open_data_to_points_loader import OpenDataToPointsLoader as OpenKareliaDataToPointsLoader
+from open_data_to_points_loader import OpenDataToPointsLoader
 POINTS = 'points'
 ID = '_id'
 TEST_SERVICE = 'testservice'
@@ -23,7 +23,7 @@ pointsList = [
 class Test_GT_1509_class_open_data_to_points_loader(TestCase):
 
     def test_GT_1509_class_open_data_to_points_loader(self):
-        dataObj = OpenKareliaDataToPointsLoader(TEST_SERVICE, pointsList)
+        dataObj = OpenDataToPointsLoader(TEST_SERVICE, pointsList)
         dataObj.loadPoints()
         collection = getDbObject(TEST_SERVICE)[POINTS]
         self.assertNotEquals(None, collection.find_one(
