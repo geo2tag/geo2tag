@@ -11,10 +11,10 @@ USERNAME_VALUE = 'nikmel95@mail.ru'
 Q = 'q='
 STATUS_EXCEPTION = 'status'
 VALUE_EXCEPTION = 'value'
-ERROR_CODE_DAY_LIMIT = '18'
-ERROR_CODE_HOUR_LIMIT = '19'
-ERROR_CODE_WEEK_LIMIT = '20'
-ERROR_LIST_OTHER_EXCEED = [10,11,12,13,14,15,16,17,21,22,23]
+DAY_ERROR_CODE = GeocoderRequestLimitExceed.ERROR_CODE_DAY_LIMIT
+HOUR_ERROR_CODE = GeocoderRequestLimitExceed.ERROR_CODE_HOUR_LIMIT
+WEEK_ERROR_CODE = GeocoderRequestLimitExceed.ERROR_CODE_WEEK_LIMIT
+OTHER_ERROR_CODE_LIST = GeocoderRequestOtherExceed.ERROR_LIST_OTHER_EXCEED
 
 class GeonamesRequestSender():
 
@@ -51,13 +51,13 @@ class GeonamesRequestSender():
         if STATUS_EXCEPTION in responseText:
             responseText = json.loads(responseText)
             value_exception = responseText[STATUS_EXCEPTION][VALUE_EXCEPTION]
-            if value_exception == ERROR_CODE_DAY_LIMIT:                    
-                raise GeocoderRequestLimitExceed(ERROR_CODE_DAY_LIMIT, 24)
-            if value_exception == ERROR_CODE_HOUR_LIMIT:                    
-                raise GeocoderRequestLimitExceed(ERROR_CODE_HOUR_LIMIT, 1)
-            if value_exception == ERROR_CODE_WEEK_LIMIT:                    
-                raise GeocoderRequestLimitExceed(ERROR_CODE_WEEK_LIMIT, 24*7)
-            if int(value_exception) in ERROR_LIST_OTHER_EXCEED:
-                raise GeocoderRequestOtherExceed(value_exception)
+            if value_exception == DAY_ERROR_CODE:                    
+                raise GeocoderRequestLimitExceed(DAY_ERROR_CODE)
+            if value_exception == HOUR_ERROR_CODE:                    
+                raise GeocoderRequestLimitExceed(HOUR_ERROR_CODE)
+            if value_exception == WEEK_ERROR_CODE:                    
+                raise GeocoderRequestLimitExceed(WEEK_ERROR_CODE)
+            if int(value_exception) in OTHER_ERROR_CODE_LIST:
+                raise GeocoderRequestOtherExceed(OTHER_ERROR_CODE_LIST)
         else:
             return responseText

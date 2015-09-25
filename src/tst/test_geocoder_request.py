@@ -33,7 +33,7 @@ class TestGeonamesRequestSender(unittest.TestCase):
 
     def test_exceed_limit(self):
     	with self.assertRaises(GeocoderRequestLimitExceed) as e:
-            raise GeocoderRequestLimitExceed(TEST_ERROR_CODE,1)
+            raise GeocoderRequestLimitExceed(TEST_ERROR_CODE)
 
     def test_exceed_other(self):
     	with self.assertRaises(GeocoderRequestOtherExceed) as e:
