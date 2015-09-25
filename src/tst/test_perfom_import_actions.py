@@ -1,7 +1,8 @@
 import unittest
 import sys
 sys.path.append('../plugins/ok_import/')
-from open_data_import import performImportActions
+sys.path.append('/var/www/geomongo/open_data_import')
+from perfom_import_actions import performImportActions
 from db_model import getDbObject
 
 
