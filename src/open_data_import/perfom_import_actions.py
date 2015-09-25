@@ -1,4 +1,4 @@
-rom datetime import datetime
+from datetime import datetime
 from db_model import getChannelByName
 
 
