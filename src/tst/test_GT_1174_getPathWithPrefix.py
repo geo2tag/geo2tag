@@ -1,6 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.append('../')
 from url_utils import getPathWithPrefix
 
 TEST_PATH = '/instance/status'

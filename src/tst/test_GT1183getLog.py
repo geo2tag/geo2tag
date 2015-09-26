@@ -3,9 +3,6 @@
 
 from unittest import TestCase
 from datetime import datetime, date, time
-
-import sys
-sys.path.append('../')
 from config_reader import getHost, getPort, getDbName
 from db_model import getLog, getDbObject
 
