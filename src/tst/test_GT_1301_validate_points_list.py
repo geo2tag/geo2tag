@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
 from pymongo import MongoClient
-sys.path.append('../')
 from bson.objectid import ObjectId
 from point_list_resource_parser import validatePointsList
 

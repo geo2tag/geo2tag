@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
 from bson.objectid import ObjectId
-sys.path.append('../')
 from db_model import getChannelsList
 
 TEST_SERVICE = 'testservice'

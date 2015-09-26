@@ -1,8 +1,12 @@
 #!/bin/bash
 MYPATH="$PWD"
-PATH1=":$PWD/geomongo"
-PATH2=":$PWD/geomongo/src"
-eval 'export PYTHONPATH="$PYTHONPATH$PATH1$PATH2"'
+PATH1="$PWD/geomongoscripts/performance/od_performance"
+PATH2="$PWD/geomongo/src"
+PATH3="$PWD/geomongo/src/plugins/ok_import"
+PATH3="$PWD/geomongo/src/open_data_import"
+PATH4="$PWD/geomongoscripts/performance/od_performance"
+PATH5="$PWD/geomongo/src/geocoders"
+eval 'export PYTHONPATH="$PYTHONPATH:$PATH1:$PATH2:PATH3:PATH4:PATH5"'
 echo "$PYTHONPATH"
 DB_SCRIPTS_PATH='scripts/db/';
 

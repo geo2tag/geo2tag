@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append('../plugins/ok_import/')
 from open_data_import import performImportActions
 from db_model import getDbObject
 
