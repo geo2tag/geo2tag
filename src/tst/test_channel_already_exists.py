@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
-sys.path.append('../')
 from channel_already_exists import ChannelAlreadyExists
 
 
