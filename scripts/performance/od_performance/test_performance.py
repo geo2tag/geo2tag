@@ -4,6 +4,14 @@ from jobs_parser import *
 import time
 from requests.exceptions import ConnectionError
 
+CREATE_JOB_LINK = '-createJobLink'
+JOB_DATA = '-jobData'
+VIEW_JOB_LINK = '-viewJobsLink'
+JOB_COUNT = '-jobsCount'
+TIMEOUT = '-timeout'
+DEFAULT_JOB_COUNT = 1
+DEFAULT_TiMEOUT = 60
+
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     try:
         for i in range(0, jobsCount):
@@ -25,11 +33,11 @@ def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('-createJobLink', type=str, required=True)
-    parser.add_argument('-jobData', type=str, required=True)
-    parser.add_argument('-viewJobsLink', type=str, required=True)
-    parser.add_argument('-jobsCount', type=int, default=1)
-    parser.add_argument('-timeout', type=int, default=60)
+    parser.add_argument(CREATE_JOB_LINK, type=str, required=True)
+    parser.add_argument(JOB_DATA, type=str, required=True)
+    parser.add_argument(VIEW_JOB_LINK, type=str, required=True)
+    parser.add_argument(JOB_COUNT, type=int, default=DEFAULT_JOB_COUNT)
+    parser.add_argument(TIMEOUT, type=int, default=DEFAULT_TiMEOUT)
     args = parser.parse_args()
     main(
         args.createJobLink,
