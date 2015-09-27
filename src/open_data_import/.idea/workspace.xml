@@ -21,10 +21,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="local_deploy.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="local_deploy.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../scripts/local_deploy.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28081122">
+            <state vertical-scroll-proportion="0.0">
               <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
@@ -35,7 +35,19 @@
         <entry file="file://$PROJECT_DIR$/../plugins/ok_import/job_resource.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_GT_1528.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../tst/test_GT_1528.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.14040561">
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -53,12 +65,12 @@
         <option value="$PROJECT_DIR$/../plugins/ok_import/open_karelia_import.py" />
         <option value="$PROJECT_DIR$/../tst/test_GT_1507_job_manager.py" />
         <option value="$PROJECT_DIR$/../tst/test_GT_1544.py" />
-        <option value="$PROJECT_DIR$/../tst/test_GT_1528.py" />
         <option value="$PROJECT_DIR$/../tst/test_perfom_import_actions.py" />
         <option value="$PROJECT_DIR$/../tst_integration/test_ok_job_resource.py" />
         <option value="/var/log/apache2/error.log" />
         <option value="$PROJECT_DIR$/../../scripts/local_deploy.sh" />
         <option value="$PROJECT_DIR$/../plugins/ok_import/job_resource.py" />
+        <option value="$PROJECT_DIR$/../tst/test_GT_1528.py" />
       </list>
     </option>
   </component>
@@ -184,13 +196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../tst/test_GT_1528.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../tst/test_perfom_import_actions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -259,18 +264,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../plugins/ok_import/job_resource.py">
+    <entry file="file://$PROJECT_DIR$/../../scripts/local_deploy.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../scripts/local_deploy.sh">
+    <entry file="file://$PROJECT_DIR$/../plugins/ok_import/job_resource.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28081122">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../tst/test_GT_1528.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14040561">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
           <folding />
         </state>
       </provider>

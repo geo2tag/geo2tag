@@ -6,7 +6,7 @@ import sys
 from db_model import getDbObject
 sys.path.append('../plugins/ok_import/')
 from thread_job import ThreadJob
-sys.path.append('../../open_data_import')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', '../', 'open_data_import/')))
 from job_manager import JobManager
 import datetime
 channelName = 'channelName'
