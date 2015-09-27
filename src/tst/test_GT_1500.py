@@ -5,28 +5,17 @@ from unittest import TestCase
 import sys
 sys.path.append('../plugins/ok_import/')
 sys.path.append('../open_data_import')
-from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
+from open_data_object_to_point_translator import OpenDataToPointTranslator
 from datetime import datetime
 
 TEST_OBJ = {
-    'json': {
-        'import_source': 'test_import',
-        'version': 'test_version',
-        'image_url': u'image_url',
-        'name': 'test_GT_1499',
-        'source_url': u'image_url111'},
-    'channelId': 'channelId',
-    'location': {
-        'type': 'Point',
-        'coordinates': [
-                1,
-                2]},
-    'alt': 0}
-
+    'json': {'version': 'test_version', 
+        'import_source': 'test_import'},
+    }
 
 class TestOKPointTranslator(TestCase):
     def setUp(self):
-        obj = OpenKareliaObjectToPointTranslator(
+        obj = OpenDataToPointTranslator(
             {'image_url': 'image_url', 'source_url': 'image_url111'},
             {
                 'name': ['test_GT_1499'],
@@ -39,6 +28,3 @@ class TestOKPointTranslator(TestCase):
         self.test_obj = obj.getPoint()
     def testOKPointTranslator(self):
         self.assertEquals(TEST_OBJ['json'], self.test_obj['json'])
-        self.assertEquals(TEST_OBJ['location'], self.test_obj['location'])
-    def testOkPointTranslatorBC(self):
-        self.assertEqual(self.test_obj['bc'], False)
