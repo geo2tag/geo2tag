@@ -22,6 +22,7 @@ class testODOLimpl(OpenDataObjectsParser):
 
 
 class TestOKObjetcsParserRefactoring(TestCase):
+
     def testOKObjetcsLoaderRefactoring_inheritance(self):
         self.assertIsNotNone(re.search(INHERITANCE_OK_PATT, str(inspect.getmro(OpenKareliaObjectsParser))))
 
