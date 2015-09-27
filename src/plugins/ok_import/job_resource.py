@@ -1,13 +1,15 @@
 from possible_exception import possibleException
 from flask_restful import reqparse
 from flask.ext.restful import Resource
-from open_data_import import JobManager
 from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob
 from open_karelia_import import openKareliaImport
 import sys
-sys.path.append('../')
+sys.path.append('../../')
 from db_model import getChannelByName, getServiceIdByName
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', '../', 'open_data_import/')))
+from job_manager import JobManager
 
 
 class JobResource(Resource):

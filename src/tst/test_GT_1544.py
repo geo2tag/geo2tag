@@ -7,7 +7,8 @@ import sys
 sys.path.append('../plugins/ok_import')
 from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob
-from open_data_import import JobManager
+sys.path.append('../open_data_import')
+from job_manager import JobManager
 import json
 from time import sleep
 app = Flask(__name__)
