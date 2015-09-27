@@ -2,7 +2,7 @@ import unittest
 import sys
 sys.path.append('../')
 sys.path.append('../plugins/ok_import/')
-sys.path.append('../open_data_import')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', 'open_data_import/')))
 from perform_import_actions import performImportActions
 from db_model import getDbObject
 
