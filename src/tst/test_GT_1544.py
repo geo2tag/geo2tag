@@ -4,6 +4,7 @@ from flask import Flask
 from werkzeug.exceptions import BadRequest
 from json import dumps
 import sys
+import os
 sys.path.append('../plugins/ok_import')
 from ok_import_resource_parser import OKImportParser
 from thread_job import ThreadJob

@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 sys.path.append('../')
 sys.path.append('../plugins/ok_import/')
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', 'open_data_import/')))

@@ -3,6 +3,7 @@
 
 from unittest import TestCase
 import sys
+import os
 from db_model import getDbObject
 sys.path.append('../plugins/ok_import/')
 from thread_job import ThreadJob
