@@ -4,9 +4,6 @@ import time
 from flask import request
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
-import sys
-sys.path.append('../')
-from config_reader import getGeonamesLogin
 
 SEARCH_JSON = 'searchJSON?'
 USERNAME = '&username='
