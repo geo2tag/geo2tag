@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
 from point_list_resource_parser import parseBcParametr
 
 INARGS = [{'lat': 1.1, 'lon': 1.1, 'alt': 5, 'json': {}, 'channel_id': ''}]

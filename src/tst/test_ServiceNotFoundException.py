@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
-
 from service_not_exist_exception import ServiceNotExistException
 
 

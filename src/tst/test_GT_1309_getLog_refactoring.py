@@ -3,9 +3,6 @@
 
 from unittest import TestCase
 from datetime import datetime, date, time
-
-import sys
-sys.path.append('../')
 from db_model import getLog, getDbObject
 
 DATE_TO = datetime(3000, 1, 1)
