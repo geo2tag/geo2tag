@@ -10,7 +10,7 @@ VIEW_JOB_LINK = '-viewJobsLink'
 JOB_COUNT = '-jobsCount'
 TIMEOUT = '-timeout'
 DEFAULT_JOB_COUNT = 1
-DEFAULT_TiMEOUT = 60
+DEFAULT_TIMEOUT = 60
 
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     try:
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     parser.add_argument(JOB_DATA, type=str, required=True)
     parser.add_argument(VIEW_JOB_LINK, type=str, required=True)
     parser.add_argument(JOB_COUNT, type=int, default=DEFAULT_JOB_COUNT)
-    parser.add_argument(TIMEOUT, type=int, default=DEFAULT_TiMEOUT)
+    parser.add_argument(TIMEOUT, type=int, default=DEFAULT_TIMEOUT)
     args = parser.parse_args()
     main(
         args.createJobLink,
