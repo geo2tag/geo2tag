@@ -4,10 +4,12 @@ import time
 from flask import request
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
+import sys
+sys.path.append('../')
+from config_reader import getGeonamesLogin
 
 SEARCH_JSON = 'searchJSON?'
 USERNAME = '&username='
-USERNAME_VALUE = 'nikmel95@mail.ru'
 Q = 'q='
 STATUS_EXCEPTION = 'status'
 VALUE_EXCEPTION = 'value'
@@ -21,11 +23,11 @@ class GeonamesRequestSender():
     REQUEST_URL = 'http://api.geonames.org/'
 
     @classmethod
-    def requestCoordinates(cls, addressStringList, callback):
+    def requestCoordinates(cls, addressStringList, geonmesLogin, callback):
         callback_response = []
         for address in addressStringList:
             try:
-                get_response = cls.requestSingleCoordinates(address)
+                get_response = cls.requestSingleCoordinates(address, geonmesLogin)
                 get_response = json.loads(get_response)
                 callback_response.append(get_response)
             except GeocoderRequestLimitExceed as e:
@@ -35,15 +37,15 @@ class GeonamesRequestSender():
         callback(callback_response)       
 
     @classmethod
-    def requestSingleCoordinates(cls, address):
-        response = requests.get(cls.createRequestUrl(address))
+    def requestSingleCoordinates(cls, address, geonmesLogin):
+        response = requests.get(cls.createRequestUrl(address, geonmesLogin))
         responseText = response.text
         response_single = cls.checkResponseForException(responseText)
         return response_single
 
     @classmethod
-    def createRequestUrl(cls, address):
-        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + USERNAME + USERNAME_VALUE
+    def createRequestUrl(cls, address, geonmesLogin):
+        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + USERNAME + geonmesLogin
         return url
 
     @classmethod

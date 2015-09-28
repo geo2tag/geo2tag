@@ -9,6 +9,8 @@ from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
 import json
 
+GEONAMES_LOGIN = 'nikmel95@mail.ru'
+
 TEST_SEARCH = 'asdasd'
 RESPONSE_TEST_SEARCH = 'http://api.geonames.org/searchJSON?q=' + TEST_SEARCH + '&username=nikmel95@mail.ru'
 TEST_ERROR_CODE = '10'
@@ -28,7 +30,7 @@ def callback_test(result):
 class TestGeonamesRequestSender(unittest.TestCase):
 
     def test_createRequestUrl(self):
-    	url = GeonamesRequestSender.createRequestUrl(TEST_SEARCH)
+    	url = GeonamesRequestSender.createRequestUrl(TEST_SEARCH, GEONAMES_LOGIN)
     	self.assertEqual(url,RESPONSE_TEST_SEARCH)
 
     def test_exceed_limit(self):
@@ -40,19 +42,19 @@ class TestGeonamesRequestSender(unittest.TestCase):
             raise GeocoderRequestOtherExceed(TEST_ERROR_CODE)
 
     def test_requestSingleCoordinates(self):
-    	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH)
+    	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH, GEONAMES_LOGIN)
         response = json.loads(response)
     	self.assertEqual((response),RESPONSE_SINGLE)
 
     def test_requestSingleCoordinates_syntax(self):
-    	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH)
+    	response = GeonamesRequestSender.requestSingleCoordinates(TEST_SEARCH, GEONAMES_LOGIN)
     	response = json.loads(response)
     	self.assertEqual(COUNTRY_ID_VAL,response[GEONAMES][0][COUNTRY_ID])
 
     def test_requestCoordinates(self):
     	REQUET_ADDRESS_LIST.append(TEST_SEARCH)
         REQUET_ADDRESS_LIST.append(TEST_SEARCH)
-    	GeonamesRequestSender.requestCoordinates(REQUET_ADDRESS_LIST,callback_test)
+    	GeonamesRequestSender.requestCoordinates(REQUET_ADDRESS_LIST, GEONAMES_LOGIN, callback_test)
         self.assertEqual(RESPONSE_REQUEST_COORDINATES[0],RESPONSE_SINGLE1)
         self.assertEqual(RESPONSE_REQUEST_COORDINATES[1],RESPONSE_SINGLE1)
 
