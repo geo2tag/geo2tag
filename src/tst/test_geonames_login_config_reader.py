@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append('../')
 from config_reader import getGeonamesLogin
 
 BEFORE_READ_VALUE = 'test'

@@ -4,8 +4,6 @@
 from unittest import TestCase
 from flask import Flask, request
 from werkzeug.exceptions import BadRequest
-import sys
-sys.path.append('../')
 import service_resource
 from json import dumps
 from channels_list_parsers import ChannelsListResourceParser

@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
-sys.path.append('../plugins/ok_import/')
-sys.path.append('../open_data_import')
 from open_data_object_to_point_translator import OpenDataToPointTranslator
 from datetime import datetime
 

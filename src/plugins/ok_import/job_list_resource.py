@@ -19,14 +19,13 @@ class JobListResource(Resource):
 
     @possibleException
     def post(self, serviceName):
-        job = OKImportParser.parsePostParameters()
-        channelName = job.get('channelName')
+        args = OKImportParser.parsePostParameters()
+        channelName = args.get('channelName')
         getServiceIdByName(serviceName)
         getChannelByName(serviceName, channelName)
-        thread = ThreadJob(openKareliaImport, job.get('channelName'),
-                           job.get('openDataUrl'),
-                           job.get('showObjectUrl'),
-                           job.get('showImageUrl'),
+        thread = ThreadJob(openKareliaImport, args.get('channelName'),
+                           args.get('openDataUrl'),
+                           args,
                            serviceName)
 
         return JobManager.startJob(thread)
