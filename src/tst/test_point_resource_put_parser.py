@@ -5,8 +5,6 @@ from unittest import TestCase
 from flask import Flask, request
 from werkzeug.exceptions import BadRequest
 import urllib2
-import sys
-sys.path.append('../')
 import service_resource
 from json import dumps
 from point_resource_parsers import PointResourceParsers

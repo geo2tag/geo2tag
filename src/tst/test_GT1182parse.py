@@ -8,9 +8,6 @@ from calendar import timegm
 import json
 import aniso8601
 import pytz
-
-import sys
-sys.path.append('../')
 from log_parsers import LogParser
 from date_utils import dateDeserialiser
 

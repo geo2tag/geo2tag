@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
 from db_model import getDbObject
-sys.path.append('../plugins/ok_import/')
 from thread_job import ThreadJob
 from job_manager import JobManager
 import datetime
@@ -30,12 +28,12 @@ def backgroundFunction(
 class Test_GT_1558(TestCase):
 
     def test_GT_1528(self):
+        importDataDict = {showImageUrl:showImageUrl,showObjectUrl:showObjectUrl}
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,
             openDataUrl,
-            showObjectUrl,
-            showImageUrl,
+            importDataDict,
             serviceName)
         self.assertFalse(threadJobObj.done)
         threadJobObj.internalStart()

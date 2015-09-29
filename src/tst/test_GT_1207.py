@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
 from bson.objectid import ObjectId
-sys.path.append('../')
 from service_not_exist_exception import ServiceNotExistException
 from db_model import getServiceIdByName, getDbObject
 TEST_ID = ObjectId("55671ae113293c504d515a33")

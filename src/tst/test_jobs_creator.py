@@ -1,7 +1,5 @@
 import unittest
-import sys
 import requests
-sys.path.append('../../scripts/performance/od_performance/')
 from jobs_creator import createImportJob
 TEST_URL = 'http://httpbin.org/status/200'
 TEST_DATA = '{}'

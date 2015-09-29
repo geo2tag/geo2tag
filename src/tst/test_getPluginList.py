@@ -1,7 +1,5 @@
 import unittest
-import sys
 import os
-sys.path.append('../')
 from plugin_routines import getPluginList
 
 

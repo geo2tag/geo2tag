@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append('../')
 from db_model import findPoints
 from bson.objectid import ObjectId
 
