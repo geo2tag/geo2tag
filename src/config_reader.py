@@ -98,7 +98,7 @@ def getFacebookClientSecret():
 
 
 def getFacebookRedirectUrl():
-    return getConfigParser().get(FACEBOOK_SECTION, FACEBOOK_REDIRECT_URL_KEY)
+    return getConfigParser().get(FACEBOOK_SECTION, FACEBOOK_REDIRECT_URL)
 
 
 def getGeonamesLogin():
