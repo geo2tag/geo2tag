@@ -3,9 +3,6 @@ from unittest import TestCase
 from os import urandom
 from flask import Flask, request, session
 from user_routines import logUserIn, logUserOut, getUserId
-
-import sys
-sys.path.append('../')
 from config_reader import getDbName, getInstancePrefix
 
 

@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append('../')
 from db_model import addLogEntry, getDbObject, getClientObject
 from config_reader import getDbName
 

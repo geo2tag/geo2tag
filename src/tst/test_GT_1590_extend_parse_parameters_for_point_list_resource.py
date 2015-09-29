@@ -1,7 +1,5 @@
 from unittest import TestCase
 from flask import Flask, request
-import sys
-sys.path.append('../')
 from point_list_resource_parser import PointListResourceParser
 
 

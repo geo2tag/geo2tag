@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
 from bson.objectid import ObjectId
-sys.path.append('../')
 from db_model import addChannel, getDbObject
 from config_reader import getHost, getPort
 

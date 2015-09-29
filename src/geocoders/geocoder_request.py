@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 from flask import request
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
@@ -21,14 +22,17 @@ class GeonamesRequestSender():
 
     @classmethod
     def requestCoordinates(cls, addressStringList, callback):
-        callback_response = [] 
-        try:
-            for address in addressStringList:
+        callback_response = []
+        for address in addressStringList:
+            try:
                 get_response = cls.requestSingleCoordinates(address)
+                get_response = json.loads(get_response)
                 callback_response.append(get_response)
-            callback(callback_response)
-        except GeocoderRequestLimitExceed:
-            callback(callback_response)
+            except GeocoderRequestLimitExceed as e:
+                callback(callback_response)
+                callback_response = []
+                time.sleep((e.lenght_to_period)*60)
+        callback(callback_response)       
 
     @classmethod
     def requestSingleCoordinates(cls, address):
@@ -42,17 +46,17 @@ class GeonamesRequestSender():
         url = cls.REQUEST_URL + SEARCH_JSON + Q + address + USERNAME + USERNAME_VALUE
         return url
 
-    @staticmethod
-    def checkResponseForException(responseText):
+    @classmethod
+    def checkResponseForException(cls, responseText):
         if STATUS_EXCEPTION in responseText:
             responseText = json.loads(responseText)
             value_exception = responseText[STATUS_EXCEPTION][VALUE_EXCEPTION]
             if value_exception == ERROR_CODE_DAY_LIMIT:                    
-                raise GeocoderRequestLimitExceed(ERROR_CODE_DAY_LIMIT)
+                raise GeocoderRequestLimitExceed(ERROR_CODE_DAY_LIMIT, 24)
             if value_exception == ERROR_CODE_HOUR_LIMIT:                    
-                raise GeocoderRequestLimitExceed(ERROR_CODE_HOUR_LIMIT)
+                raise GeocoderRequestLimitExceed(ERROR_CODE_HOUR_LIMIT, 1)
             if value_exception == ERROR_CODE_WEEK_LIMIT:                    
-                raise GeocoderRequestLimitExceed(ERROR_CODE_WEEK_LIMIT)
+                raise GeocoderRequestLimitExceed(ERROR_CODE_WEEK_LIMIT, 24*7)
             if int(value_exception) in ERROR_LIST_OTHER_EXCEED:
                 raise GeocoderRequestOtherExceed(value_exception)
         else:
