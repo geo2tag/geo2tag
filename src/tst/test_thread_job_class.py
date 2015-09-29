@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
 from db_model import getDbObject
-sys.path.append('../plugins/ok_import/')
-sys.path.append('../open_data_import')
 from thread_job import ThreadJob
 import datetime
 channelName = 'channelName'
@@ -48,8 +45,8 @@ class Test_GT_1506_class_thread_job(TestCase):
         self.assertEquals(describe.get('done'), True)
         self.assertEquals(describe.get('channelName'), channelName)
         self.assertEquals(describe.get('openDataUrl'), openDataUrl)
-        self.assertEquals(describe[IMPORTDATADICT].get('showImageUrl'), showImageUrl)
-        self.assertEquals(describe[IMPORTDATADICT].get('showObjectUrl'), showObjectUrl)
+        self.assertEquals(describe.get('showImageUrl'), showImageUrl)
+        self.assertEquals(describe.get('showObjectUrl'), showObjectUrl)
         self.assertEquals(describe.get('serviceName'), serviceName)
         self.assertEquals(threadJobObj.channelName, channelName)
         self.assertEquals(threadJobObj.openDataUrl, openDataUrl)

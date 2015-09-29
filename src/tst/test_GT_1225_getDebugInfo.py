@@ -1,7 +1,5 @@
 from unittest import TestCase
-import sys
 import os
-sys.path.append("../")
 from debug_info_resource import getDebugInfo
 
 

@@ -1,7 +1,5 @@
 import geojson
 from unittest import TestCase
-import sys
-sys.path.append('../')
 import geo_json_type
 TEST_POINT = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
 TEST_POINT_RESULT = {"coordinates": [-115.8, 37.2], "type": "Point"}

@@ -3,9 +3,6 @@
 
 from unittest import TestCase
 from flask import Flask, request
-
-import sys
-sys.path.append('../')
 import service_list_resource
 import service_resource
 from json import dumps
