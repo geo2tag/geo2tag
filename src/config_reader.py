@@ -31,7 +31,8 @@ FACEBOOK_CLIENT_SECRET = 'FACEBOOK_CLIENT_SECRET'
 FACEBOOK_CLIENT_ID_KEY = '680909982046496'
 FACEBOOK_CLIENT_SECRET_KEY = 'da9f40f5a3257a0da5dfb8d4e5fa0874'
 FACEBOOK_REDIRECT_URL = 'FACEBOOK_REDIRECT_URL'
-FACEBOOK_REDIRECT_URL_KEY = 'http://geomongo/instance/login/facebook/authorized'
+FACEBOOK_REDIRECT_URL_KEY = 'http://geomongo/instance/login/facebook/' \
+                            'authorized'
 
 GEONAMES_SECTION = 'geocoding'
 GEONAMES_CLIENT_LOGIN = 'geonames_login'
@@ -48,8 +49,10 @@ def getConfigParser():
                                GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET_KEY,
                                GOOGLE_REDIRECT_URL: GOOGLE_REDIRECT_URL_KEY,
                                FACEBOOK_CLIENT_ID: FACEBOOK_CLIENT_ID_KEY,
-                               FACEBOOK_CLIENT_SECRET: FACEBOOK_CLIENT_SECRET_KEY,
-                               FACEBOOK_REDIRECT_URL: FACEBOOK_REDIRECT_URL_KEY,
+                               FACEBOOK_CLIENT_SECRET:
+                                   FACEBOOK_CLIENT_SECRET_KEY,
+                               FACEBOOK_REDIRECT_URL:
+                                   FACEBOOK_REDIRECT_URL_KEY,
                                GEONAMES_CLIENT_LOGIN: GEONAMES_LOGIN})
     config.read(CONFIG_PATH)
     return config
