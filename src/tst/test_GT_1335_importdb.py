@@ -1,8 +1,6 @@
 from unittest import TestCase
 from pymongo import MongoClient
 import os
-import sys
-sys.path.append('../')
 import config_reader
 
 TEST_DB = 'master_db_template'

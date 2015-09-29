@@ -1,6 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.append('../../scripts/performance/od_performance')
 from test_performance import main
 
 CREATE_JOB_LINK = 'http://not_valid_link'

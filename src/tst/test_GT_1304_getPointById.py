@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
 from db_model import getPointById, getDbObject
 from point_does_not_exist import PointDoesNotExist
 from bson.objectid import ObjectId
