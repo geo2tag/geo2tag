@@ -31,6 +31,7 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
             data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
+        print "!!!!!test_AService_POST_VALID"+responseText
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         self.assertNotEquals(responseText, 'None')
 
