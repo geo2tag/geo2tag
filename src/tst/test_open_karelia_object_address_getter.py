@@ -1,7 +1,4 @@
-import sys
 import unittest
-sys.path.append('../plugins/ok_import')
-sys.path.append('../open_data_import')
 from open_karelia_object_address_getter import OpenKareliaObjectAddressGetter, SITE
 
 TEST_SITE = 'SITE'

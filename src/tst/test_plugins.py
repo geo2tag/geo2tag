@@ -1,7 +1,5 @@
 import unittest
-import sys
 import os
-sys.path.append('../')
 from db_model import getDbObject
 from main import app
 from plugin_routines import isPluginEnabled, enablePlugin
