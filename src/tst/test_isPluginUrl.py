@@ -1,6 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.append('../')
 from url_routines import isPluginUrl
 URL = 'http://geomongo/instance/plugin/test_plugin/res1'
 BAD_URL = 'http://geomongo/instance/my_plugin'

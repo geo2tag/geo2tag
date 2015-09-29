@@ -2,11 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
 from bson.objectid import ObjectId
 from db_model import getDbObject
-sys.path.append('../open_data_import/')
-from open_data_to_points_loader import OpenDataToPointsLoader
 POINTS = 'points'
 ID = '_id'
 TEST_SERVICE = 'testservice'

@@ -2,8 +2,6 @@ import pymongo
 from unittest import TestCase
 from os import urandom
 from flask import Flask, request, session
-import sys
-sys.path.append('../')
 from user_routines import logUserIn, logUserOut, getUserId
 from config_reader import getDbName, getInstancePrefix
 from db_model import getDbObject

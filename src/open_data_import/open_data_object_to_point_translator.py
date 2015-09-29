@@ -18,6 +18,7 @@ class OpenDataToPointTranslator(object):
         obj['version'] = self.version
         obj['import_source'] = self.importSource
         return obj
+
     #@should_be_extended_in_descendents
     def getPoint(self):
         point = {'json': self.getPointJson()}

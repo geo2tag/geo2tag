@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
-sys.path.append('../')
 from config_reader import getHost, getPort, getDbName
 from db_model import removeService, getServiceIdByName, getDbObject
 from service_not_exist_exception import ServiceNotExistException
