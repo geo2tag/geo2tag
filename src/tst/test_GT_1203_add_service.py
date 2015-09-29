@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
 from db_model import addService, getDbObject
 from service_already_exists_exception import ServiceAlreadyExistsException
 

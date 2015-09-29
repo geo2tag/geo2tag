@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append('../')
 from plugin_not_enabled_exception import PluginNotEnabledException
 
 

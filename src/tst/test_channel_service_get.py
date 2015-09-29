@@ -3,8 +3,6 @@
 
 from unittest import TestCase
 from flask import Flask, request
-import sys
-sys.path.append('../')
 from channels_list_parsers import ChannelsListResourceParser
 
 NUMBER = 'number'

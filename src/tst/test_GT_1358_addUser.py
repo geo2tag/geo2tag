@@ -1,9 +1,6 @@
 from flask import Flask
 from pymongo import MongoClient
 from unittest import TestCase
-
-import sys
-sys.path.append("../")
 from config_reader import getDbName
 from db_model import getDbObject, getHost, getPort
 from user_routines import findUserById, addUser
