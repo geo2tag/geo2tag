@@ -1,5 +1,5 @@
 import unittest
-from open_data_import import performImportActions
+from perform_import_actions import performImportActions
 from db_model import getDbObject
 
 
