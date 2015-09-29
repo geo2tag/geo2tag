@@ -15,9 +15,9 @@ RESPONSE_FOR_LIMIT_EXCEED_WEEK = {"status": {"message": "test mess","value": "20
 HOUR_PERIOD = 1
 DAY_PERIOD = 24
 WEEK_PERIOD = 7*24
-DAY_ERROR_MESSAGE = ['18', 'Limit exceeded request']
-HOUR_ERROR_MESSAGE = ['19', 'Limit exceeded request']
-WEEK_ERROR_MESSAGE = ['20', 'Limit exceeded request']
+DAY_ERROR_MESSAGE = ['18', 'Limit exceeded the number of requests per day']
+HOUR_ERROR_MESSAGE = ['19', 'Limit exceeded the number of requests per hour']
+WEEK_ERROR_MESSAGE = ['20', 'Limit exceeded the number of requests in a week']
 
 
 class TestGeonamesRequestSender_LimitExcept(unittest.TestCase):
