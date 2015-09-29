@@ -1,8 +1,6 @@
 from unittest import TestCase
 from flask import Flask
-import sys
 from flask import g
-sys.path.append('../')
 from url_utils import getPathWithPrefix
 from main import defineInstancePrefix
 

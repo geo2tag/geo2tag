@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
 from pymongo import MongoClient
-
-sys.path.append('../')
 from map_resource import getDefaultMapParams
 
 SERVICE_NAME = 'testservice'
