@@ -52,7 +52,6 @@ class Job():
             'done': self.done,
             'channelName': self.channelName,
             'openDataUrl': self.openDataUrl,
-            'importDataDict':self.importDataDict,
             'serviceName': self.serviceName}
  
     @classmethod
