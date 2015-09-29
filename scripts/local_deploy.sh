@@ -56,7 +56,6 @@ echo "{
 }" > $DEBUG_FILE
 
 chown -R www-data:www-data /var/www/"$CATALOG"
-sudo chmod 777 scripts/run_selenium_tests.sh 
 
 a2ensite $CONFIG_FILE
 
