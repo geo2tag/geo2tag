@@ -1,7 +1,8 @@
 from flask.ext.restful import Resource
 from flask_oauth import OAuth
-from flask import Blueprint, redirect, url_for, request, session
-from config_reader import getFacebookClientID, getFacebookClientSecret, getFacebookRedirectUrl
+from flask import Blueprint
+from config_reader import getFacebookClientID,\
+    getFacebookClientSecret, getFacebookRedirectUrl
 from url_utils import getPathWithPrefix
 from urllib2 import Request, urlopen, URLError
 from json import loads
@@ -46,7 +47,6 @@ def processFacebookData(data):
 
 
 SUCCESS_MESSAGE = 'Success'
-
 
 
 @facebook_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
