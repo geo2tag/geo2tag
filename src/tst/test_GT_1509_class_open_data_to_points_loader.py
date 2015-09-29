@@ -4,6 +4,7 @@
 from unittest import TestCase
 from bson.objectid import ObjectId
 from db_model import getDbObject
+from open_data_to_points_loader import OpenDataToPointsLoader
 POINTS = 'points'
 ID = '_id'
 TEST_SERVICE = 'testservice'
