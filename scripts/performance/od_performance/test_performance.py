@@ -29,7 +29,6 @@ def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
         print createJobStatistic(jobsList)
         return 0
 
-
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
