@@ -23,10 +23,9 @@ class testOdParserClass():
 
 class testOdToPointTranslatorClass():
 
-    def __init__(self, testShowImageUrl, testShowObjectUrl,
+    def __init__(self, testDict,
                  testObject, testVersion, testOpenDataUrl, testChannelId):
-        self.showImageUrl = testShowImageUrl
-        self.showObjectUrl = testShowObjectUrl
+        self.testDict = testDict
         self.object = testObject
         self.version = testVersion
         self.openDataUrl = testOpenDataUrl
@@ -54,7 +53,7 @@ TEST_CHANNEL_NAME = u'test_channel_1'
 TEST_OPEN_DATA_URL = 'test_open_data_url'
 TEST_SHOW_OBJECT_URL = 'test_show_object_url'
 TEST_SHOW_IMAGE_URL = 'test_show_image_url'
-
+TEST_DICT = {'showObjectUrl':TEST_SHOW_OBJECT_URL, 'showImageUrl':TEST_SHOW_IMAGE_URL}
 
 class TestPerfomImportActions(unittest.TestCase):
 
@@ -66,6 +65,5 @@ class TestPerfomImportActions(unittest.TestCase):
             odToPointsLoaderClass,
             TEST_CHANNEL_NAME,
             TEST_OPEN_DATA_URL,
-            TEST_SHOW_OBJECT_URL,
-            TEST_SHOW_IMAGE_URL,
+            TEST_DICT,
             TEST_SERVICE_NAME)
