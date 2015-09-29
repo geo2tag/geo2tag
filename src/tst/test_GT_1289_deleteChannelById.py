@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
 from db_model import deleteChannelById, getChannelsList, getDbObject
 from config_reader import getHost, getPort
 from channel_does_not_exist import ChannelDoesNotExist

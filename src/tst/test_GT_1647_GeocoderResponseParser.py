@@ -1,8 +1,6 @@
 from unittest import TestCase
 from json import dumps, loads
 import requests
-import sys
-sys.path.append("../geocoders")
 from geocoder_response_parser import GeocoderResponseParser, field_in_dict_and_defined
 from geocoder_response_parser import TOTAL_RESULTS_COUNT, GEONAMES, LAT, LNG
 

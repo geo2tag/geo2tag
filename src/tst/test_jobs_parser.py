@@ -1,8 +1,6 @@
 import unittest
-import sys
 from datetime import datetime
 import requests
-sys.path.append('../../scripts/performance/od_performance/')
 from jobs_parser import *
 URL = 'http://httpbin.org/status/200'
 JSON_TEST = '{"_id": {"$oid": "55671ae113293c504d515a33"}, "config": {"log_size": 1048576, "logSize": 10}, "name": "testservice", "owner_id": ""}'

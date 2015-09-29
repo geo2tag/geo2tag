@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
 from pymongo import MongoClient
-
-sys.path.append('../')
 from db_model import getAllChannelIds
 import config_reader
 

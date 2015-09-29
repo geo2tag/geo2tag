@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
-sys.path.append('../plugins/ok_import/')
 from open_karelia_objects_loader import OpenKareliaObjectsLoader
 
 
