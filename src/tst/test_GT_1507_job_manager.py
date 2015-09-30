@@ -5,7 +5,6 @@ from unittest import TestCase
 import sys
 import os
 from db_model import getDbObject
-sys.path.append('../plugins/ok_import/')
 from thread_job import ThreadJob
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', 'open_data_import/')))
 from job_manager import JobManager
@@ -31,12 +30,12 @@ def backgroundFunction(
 class Test_GT_1507_class_job_manager(TestCase):
 
     def test_GT_1507_class_job_manager(self):
+        importDataDict = {showImageUrl:showImageUrl,showObjectUrl:showObjectUrl}
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,
             openDataUrl,
-            showObjectUrl,
-            showImageUrl,
+            importDataDict,
             serviceName)
         threadJobObj.start()
         manager = JobManager()

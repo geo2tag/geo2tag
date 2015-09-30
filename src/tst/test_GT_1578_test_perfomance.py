@@ -1,6 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.append('../../scripts/performance/od_performance')
 from test_performance import main
 
 CREATE_JOB_LINK = 'http://not_valid_link'
@@ -8,12 +6,13 @@ JOB_DATA = '{"channelName":"testchannel","openDataUrl":"http://mobile.openkareli
 VIEW_JOB_LINK = 'http://geomongo/instance/plugin/ok_import/service/testservice/job'
 JOB_COUNT = 1
 TIMEOUT = 1
+TEST_ANS = 1
 
 
 class test_GT_1578testPerfomance(TestCase):
 
     def test_GT_1578testPerfomance(self):
         ans = main(CREATE_JOB_LINK, JOB_DATA, VIEW_JOB_LINK, JOB_COUNT, TIMEOUT)
-        self.assertEquals(1, ans)
+        self.assertEquals(TEST_ANS, ans)
 
 

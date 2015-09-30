@@ -1,9 +1,7 @@
 import unittest
-import sys
 import os
 from flask import Flask
 from flask.ext.restful import Api
-sys.path.append('../')
 from plugin_routines import enablePlugin
 
 

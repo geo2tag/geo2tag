@@ -10,8 +10,7 @@ def performImportActions(
         odToPointsLoaderClass,
         channelName,
         openDataUrl,
-        showObjectUrl,
-        showImageUrl,
+        importDataDict,
         serviceName):
 
     # uncomment in case of https://geo2tag.atlassian.net/browse/GT-1505
@@ -32,11 +31,10 @@ def performImportActions(
     objects = parser.parse()
     points = []
 
-    for object in objects:
+    for objectRepresentation in objects:
         translator = odToPointTranslatorClass(
-            showImageUrl,
-            showObjectUrl,
-            object,
+            importDataDict,
+            objectRepresentation,
             version,
             openDataUrl,
             channelId)

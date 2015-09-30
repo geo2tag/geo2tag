@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
 from db_model import updateChannel, getDbObject
 from channel_does_not_exist import ChannelDoesNotExist
 

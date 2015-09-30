@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import sys
-sys.path.append('../')
 from db_model import setPluginState, getDbObject
 
 NAME = 'name'
