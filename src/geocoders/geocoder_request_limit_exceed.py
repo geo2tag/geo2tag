@@ -25,4 +25,5 @@ class GeocoderRequestLimitExceed(BaseException):
             self.message_error = 'Limit exceeded the number of requests in a week'
 
     def getReturnObject(self):
-        return [self.limit_error_code,self.message_error]
+        ERROR = 'Error code:' + self.limit_error_code + ',Status:' + self.message_error
+        return ERROR 
