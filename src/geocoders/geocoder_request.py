@@ -57,6 +57,6 @@ class GeonamesRequestSender():
             if value_exception == WEEK_ERROR_CODE:                    
                 raise GeocoderRequestLimitExceed(WEEK_ERROR_CODE)
             if int(value_exception) in OTHER_ERROR_CODE_LIST:
-                raise GeocoderRequestOtherExceed(OTHER_ERROR_CODE_LIST)
+                raise GeocoderRequestOtherExceed(value_exception)
         else:
             return responseText
