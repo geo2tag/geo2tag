@@ -1,6 +1,4 @@
 import unittest
-import sys
-sys.path.append('../')
 from url_routines import *
 
 TEST_URL = 'test_url'

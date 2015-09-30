@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
-sys.path.append('../')
 from point_does_not_exist import PointDoesNotExist
 
 

@@ -1,8 +1,5 @@
 import unittest
 from datetime import datetime
-import sys
-
-sys.path.append('../')
 from db_model import addLogEntry, getDbObject
 from config_reader import getDbName
 

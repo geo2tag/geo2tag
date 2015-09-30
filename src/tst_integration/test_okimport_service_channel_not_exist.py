@@ -17,7 +17,7 @@ DATA = {
     DATA_ARR[0]: CHANNEL_NAME,
     DATA_ARR[1]: TEST_VAL_PREFIX + DATA_ARR[1],
     DATA_ARR[2]: TEST_VAL_PREFIX + DATA_ARR[2],
-    DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]
+    DATA_ARR[3]: TEST_VAL_PREFIX + DATA_ARR[3]    
 }
 
 
@@ -26,11 +26,14 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
     def test_AService_POST_VALID(self):
         # Srevice POST
         # VALID
+
         response = requests.post(
             self.getUrl(VALID_TEST_URL),
             data=json.dumps(DATA))
         responseText = response.text
         responseCode = response.status_code
+        print json.dumps(DATA)
+        print "!!!!!test_AService_POST_VALID"+responseText
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         self.assertNotEquals(responseText, 'None')
 

@@ -1,9 +1,6 @@
 from unittest import TestCase
 from service_not_exist_exception import ServiceNotExistException
 from possible_exception import possibleException
-import sys
-sys.path.append('../')
-
 TEST_VALID_EXCEPTION = ServiceNotExistException
 TEST_NOT_VALID_EXCEPTION = ArithmeticError
 TEST_VALID_TUPLE = ('Service not found', 404)

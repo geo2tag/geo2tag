@@ -10,9 +10,6 @@ import aniso8601
 import pytz
 from werkzeug.exceptions import BadRequest
 from geojson import MultiPoint
-
-import sys
-sys.path.append('../')
 from point_list_resource_parser import PointListResourceParser
 import geo_json_type
 from date_utils import dateDeserialiser

@@ -1,10 +1,10 @@
 import sys
-sys.path.append('../..')
+sys.path.append('../')
 from db_model import getDbObject
 POINTS = 'points'
 
 
-class OpenKareliaDataToPointsLoader:
+class OpenDataToPointsLoader:
     pointsArray = []
 
     def __init__(self, serviceName, points):
