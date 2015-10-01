@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+'''
 import unittest 
 import sys
 from geocoder_request import GeonamesRequestSender
@@ -49,3 +49,4 @@ class TestGeonamesRequestSender_LimitExcept(unittest.TestCase):
             GeonamesRequestSender.checkResponseForException(json.dumps(RESPONSE_FOR_OTHER_ERROR))
         except GeocoderRequestOtherExceed as e: 
             self.assertEqual(e.getReturnObject(),OTHER_ERROR_MESSAGE)
+'''
