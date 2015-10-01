@@ -31,6 +31,7 @@ class TestGeocodingJob(TestCase):
         self.assertTrue(gj.thread.is_alive())
         """gj.internalStop()
         self.assertFalse(gj.thread.is_alive())"""
+        time.sleep(5)
         resList = list(log.find().sort('_id', DESCENDING))
         self.assertTrue(TEST_DATA_FIELD in resList[0])
         self.assertEqual(
