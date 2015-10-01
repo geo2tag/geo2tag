@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
+
 import unittest 
 import sys
+sys.path.append('/var/www/geomongo/open_data_import')
 from geocoder_request import GeonamesRequestSender
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
@@ -49,4 +50,3 @@ class TestGeonamesRequestSender_LimitExcept(unittest.TestCase):
             GeonamesRequestSender.checkResponseForException(json.dumps(RESPONSE_FOR_OTHER_ERROR))
         except GeocoderRequestOtherExceed as e: 
             self.assertEqual(e.getReturnObject(),OTHER_ERROR_MESSAGE)
-'''
