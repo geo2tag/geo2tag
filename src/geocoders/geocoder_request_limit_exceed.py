@@ -1,7 +1,4 @@
-import sys
-sys.path.append('../')
 from base_exception import BaseException
-
 
 class GeocoderRequestLimitExceed(BaseException):
 
