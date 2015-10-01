@@ -43,9 +43,10 @@ class TestGeonamesRequestSender_LimitExcept(unittest.TestCase):
         except GeocoderRequestLimitExceed as e:	
 	    self.assertEqual(WEEK_PERIOD,e.lenght_to_period)
 	    self.assertEqual(e.getReturnObject(),WEEK_ERROR_MESSAGE)
-
+'''
     def test_exceed_other_error(self):
         try:
             GeonamesRequestSender.checkResponseForException(json.dumps(RESPONSE_FOR_OTHER_ERROR))
         except GeocoderRequestOtherExceed as e: 
-            pass
+            self.assertEqual(e.getReturnObject(),OTHER_ERROR_MESSAGE)
+'''
