@@ -1,6 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.append('../')
 from db_model import getServiceList, getDbObject
 from config_reader import getHost, getPort, getDbName
 SERVICES = 'services'

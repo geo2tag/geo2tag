@@ -6,9 +6,6 @@ from flask import Flask, request, session
 
 from db_model import getDbObject
 from user_routines import logUserIn, logUserOut
-
-import sys
-sys.path.append('../')
 from config_reader import getDbName, getInstancePrefix
 
 
