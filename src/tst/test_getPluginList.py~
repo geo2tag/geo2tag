@@ -1,4 +1,3 @@
-'''
 import unittest
 import os
 from plugin_routines import getPluginList
@@ -13,4 +12,3 @@ class TestGetPluginList(unittest.TestCase):
         root, dirs, files = os.walk('plugins').next()
         os.chdir('tst/')
         self.assertEquals(dirs, pluginsList)
-'''

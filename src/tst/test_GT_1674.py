@@ -3,7 +3,6 @@
 
 import unittest 
 import sys
-sys.path.append('/var/www/geomongo/open_data_import')
 from geocoder_request import GeonamesRequestSender
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
