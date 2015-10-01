@@ -1,6 +1,4 @@
 import os
-import sys
-sys.path.append('../')
 METHODS = ['post', 'get', 'put', 'delete']
 TYPES = ['bool', 'int', 'float', 'tuple', 'list', 'str', 'dict', 'set']
 INCLUDE_MODULE = 'from flask_restful import reqparse\n\

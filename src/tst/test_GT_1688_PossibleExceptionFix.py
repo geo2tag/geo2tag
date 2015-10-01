@@ -1,7 +1,4 @@
 from unittest import TestCase
-import sys
-sys.path.append('../')
-
 from base_exception import BaseException
 from possible_exception import possibleException
 
