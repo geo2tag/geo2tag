@@ -27,7 +27,7 @@ def backgroundFunction(
         showObjectUrl=showObjectUrl,
         showImageUrl=showImageUrl,
         serviceName=serviceName):
-    self.stop()
+    print 'I\'m a thread'
     return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
 
 
@@ -43,11 +43,12 @@ class Test_GT_1506_class_thread_job(TestCase):
             serviceName)
         threadJobObj.start()
         self.assertTrue(threadJobObj.thread.is_alive())
-        while not threadJobObj.done:
-            sleep(0.1)
-        while threadJobObj.thread.is_alive():
-            sleep(0.1)
+        threadJobObj.stop()
+        if threadJobObj.thread.is_alive():
+            while not threadJobObj.thread.is_alive():
+                sleep(0.1)
         self.assertFalse(threadJobObj.thread.is_alive())
+        self.assertTrue(threadJobObj.done)
         statistic = threadJobObj.getTimeStatistics()
         self.assertEquals(type(statistic), type(datetime.timedelta()))
         describe = threadJobObj.describe()
