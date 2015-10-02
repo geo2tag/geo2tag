@@ -38,3 +38,6 @@ class TestGeocodingJob(TestCase):
             res_list[0][TEST_DATA_FIELD],
             [CHANNEL_NAME, SERVICE_NAME]
         )
+        discr = gj.describe()
+        self.assertEqual(discr[CHANNEL_NAME], CHANNEL_NAME)
+        self.assertEqual(discr[SERVICE_NAME], SERVICE_NAME)
