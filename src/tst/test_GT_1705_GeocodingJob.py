@@ -1,14 +1,8 @@
 from unittest import TestCase
-
-"""import sys
-sys.path.append('../')
-sys.path.append('../plugins/geocoder/')"""
-
 from geocoding_job import GeocodingJob
 from db_model import getDbObject
 from pymongo import DESCENDING
 import time
-
 
 CHANNEL_NAME = 'channelName'
 SERVICE_NAME = 'serviceName'
@@ -29,15 +23,15 @@ class TestGeocodingJob(TestCase):
         gj.internalStart()
         self.assertIsNotNone(gj.thread)
         self.assertTrue(gj.thread.is_alive())
-        """gj.internalStop()
-        self.assertFalse(gj.thread.is_alive())"""
-        time.sleep(5)
+
+        time.sleep(1)
+
+        gj.internalStop()
+        self.assertFalse(gj.thread.is_alive())
+
         resList = list(log.find().sort('_id', DESCENDING))
         self.assertTrue(TEST_DATA_FIELD in resList[0])
         self.assertEqual(
             resList[0][TEST_DATA_FIELD],
             [CHANNEL_NAME, SERVICE_NAME]
         )
-
-
-

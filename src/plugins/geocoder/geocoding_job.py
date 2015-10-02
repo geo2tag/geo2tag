@@ -21,8 +21,8 @@ class GeocodingJob(Job):
         thread._stop = threading.Event()
         thread.start()
 
-    """def internalStop(self):
-        self.thread._stopevent.set()"""
+    def internalStop(self):
+        self.thread.join()
 
     def describe(self):
         ancestorResult = Job.describe(self)
