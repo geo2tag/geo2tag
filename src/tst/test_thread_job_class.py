@@ -2,9 +2,16 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
+
+"""import sys
+import os
+sys.path.append('../')
+sys.path.append('../plugins/ok_import/')"""
+
 from db_model import getDbObject
 from thread_job import ThreadJob
 import datetime
+from time import sleep
 channelName = 'channelName'
 openDataUrl = 'openDataUrl'
 showImageUrl = 'showImageUrl'
@@ -35,8 +42,12 @@ class Test_GT_1506_class_thread_job(TestCase):
             importDataDict_val,
             serviceName)
         threadJobObj.start()
-        threadJobObj.internalStart()
-        threadJobObj.stop()
+        self.assertTrue(threadJobObj.thread.is_alive())
+        while not threadJobObj.done:
+            sleep(0.1)
+        while threadJobObj.thread.is_alive():
+            sleep(0.1)
+        self.assertFalse(threadJobObj.thread.is_alive())
         statistic = threadJobObj.getTimeStatistics()
         self.assertEquals(type(statistic), type(datetime.timedelta()))
         describe = threadJobObj.describe()

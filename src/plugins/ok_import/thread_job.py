@@ -23,6 +23,9 @@ class ThreadJob(Job):
         self.thread = thread
         thread.start()
 
+    def internalStop(self):
+        self.thread.join()
+
     def describe(self):
         ancestorResult = Job.describe(self)
         ancestorResult[showImageUrl] = self.importDataDict.get(showImageUrl)
