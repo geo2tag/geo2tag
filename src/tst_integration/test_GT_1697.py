@@ -2,7 +2,7 @@ import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/login/facebook/authorized'
+TEST_URL = 'instance/login/facebook/authorized'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '"Success"'
 

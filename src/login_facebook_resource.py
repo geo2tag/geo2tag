@@ -1,9 +1,12 @@
 from flask.ext.restful import Resource
 from flask_oauth import OAuth
-from flask import Blueprint, request, session
+from flask import Blueprint
 from config_reader import getFacebookClientID,\
     getFacebookClientSecret, getFacebookRedirectUrl
 from url_utils import getPathWithPrefix
+from urllib2 import Request, urlopen, URLError
+from json import loads
+from user_routines import addUser, logUserIn
 from possible_exception import possibleException
 from authorization_error import AuthorizationError
 
