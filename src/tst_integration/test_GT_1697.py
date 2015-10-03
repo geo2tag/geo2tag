@@ -2,9 +2,9 @@ import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/instance/login/facebook'
+TEST_URL = '/login/facebook/authorized'
 VALID_RESPONSE_CODE = 200
-VALID_RESPONSE_TEXT = '"OK"'
+VALID_RESPONSE_TEXT = '"Success"'
 
 class TestGT1697(BasicIntegrationTest):
     def testGT1697(self):

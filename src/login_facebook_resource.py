@@ -1,12 +1,9 @@
 from flask.ext.restful import Resource
 from flask_oauth import OAuth
-from flask import Blueprint
+from flask import Blueprint, request, session
 from config_reader import getFacebookClientID,\
     getFacebookClientSecret, getFacebookRedirectUrl
 from url_utils import getPathWithPrefix
-from urllib2 import Request, urlopen, URLError
-from json import loads
-from user_routines import addUser, logUserIn
 from possible_exception import possibleException
 from authorization_error import AuthorizationError
 
@@ -33,39 +30,23 @@ class LoginFacebookResource(Resource):
         return facebook.authorize(callback=getFacebookRedirectUrl())
 
 
-def processFacebookData(data):
-    EMAIL = 'email'
-    _ID = 'id'
-    FIRST_NAME = 'given_name'
-    LAST_NAME = 'family_name'
-    userDict = loads(data)
-    return addUser(
-        userDict[_ID],
-        userDict[FIRST_NAME],
-        userDict[LAST_NAME],
-        userDict[EMAIL])
-
-
 SUCCESS_MESSAGE = 'Success'
 
 
 @facebook_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
 @facebook.authorized_handler
 @possibleException
-def authorized(resp):
-    try:
-        access_token = resp['access_token']
-    except TypeError:
-        raise AuthorizationError
-    headers = {'Authorization': 'OAuth ' + access_token}
-    request = Request('https://www.googleapis.com/oauth2/v1/userinfo',
-                      None, headers)
-    res = urlopen(request)
-    try:
-        res = urlopen(request)
-    except URLError as e:
-        raise AuthorizationError
-    _id = processFacebookData(res.read())
-    logUserIn(_id)
-
+def facebook_authorized(resp):
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    session['oauth_token'] = (resp['access_token'], '')
+    userID = facebook.get('/me')
     return SUCCESS_MESSAGE
+
+
+@facebook.tokengetter
+def get_facebook_oauth_token():
+    return session.get('oauth_token')
