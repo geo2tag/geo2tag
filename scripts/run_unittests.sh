@@ -1,4 +1,9 @@
 #!/bin/bash
+
+echo
+echo "==================== UNITTESTS ====================="
+echo
+
 MYPATH="$PWD"
 PATH1="$PWD/src"
 PATH2="$PWD/src/plugins/ok_import"
