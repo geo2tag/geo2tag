@@ -181,8 +181,8 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestExtendPointListParserWithFlagsBC,
             param=host))
-    suite.addTest(BasicIntegrationTest.parametrize(
-        Test_GT_1511, param=host))
+#    suite.addTest(BasicIntegrationTest.parametrize(
+#        Test_GT_1511, param=host))
 
 ###################################################
 # Place tests above this line ^^
