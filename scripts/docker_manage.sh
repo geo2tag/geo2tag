@@ -21,10 +21,14 @@ elif [[ "$1" == "tunit" ]]; then
 elif [[ "$1" == "tint" ]]; then
  docker exec -t $2 /app/scripts/run_integration_tests.sh
  exit $?
+elif [[ "$1" == "tsel" ]]; then
+ docker exec -t $2 /app/scripts/run_docker_selenium_tests.sh
+ exit $?
 else
  echo -e $"$0 [con] for containers list"
  echo -e $"$0 [kill %container_name%] stop container"
  echo -e $"$0 [tunit %container_name%] unit tests container"
  echo -e $"$0 [tint %container_name%] integration tests container"
+ echo -e $"$0 [tsel %container_name%] selenium tests container"
  exit 0
 fi
