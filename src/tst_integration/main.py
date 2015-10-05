@@ -167,14 +167,6 @@ def main(host):
             param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
-            Test_OKImportJob,
-            param=host))
-    suite.addTest(
-        BasicIntegrationTest.parametrize(
-            Test_OKImportJob_not_exist,
-            param=host))
-    suite.addTest(
-        BasicIntegrationTest.parametrize(
             TestBcParametrPointListPost,
             param=host))
     suite.addTest(
