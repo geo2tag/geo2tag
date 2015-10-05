@@ -68,6 +68,11 @@ def run_unit_tests(name):
     return rc_unit
 
 
+def run_selenium_tests(name):
+    rc_sel = manage_script(name, [MANAGE_CONTAINER, 'tsel', name])
+    return rc_sel
+
+
 def run_int_tests(name):
     rc_int = manage_script(name, [MANAGE_CONTAINER, 'tint', name])
     return rc_int
@@ -202,7 +207,10 @@ def main():
         write_log(container_start_name, "Run int tests")
         t_int = run_int_tests(container_start_name)
 
-        if t_int != 0 or t_unit != 0:
+        write_log(container_start_name, "Run sel tests")
+        t_sel = run_selenium_tests(container_start_name)
+
+        if t_int != 0 or t_unit != 0 or t_sel != 0:
             sys.exit(1)
 
         containerEnv = "http://"+os.environ["SERVER"]+":"+str(container_start_port)+"/instance/tests"
