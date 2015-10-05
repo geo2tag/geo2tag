@@ -1,4 +1,9 @@
 #!/bin/bash
+
+echo
+echo "==================== INTEGRATIONTESTS ====================="
+echo
+
 set -e
 DB_SCRIPTS_PATH='scripts/db/';
 

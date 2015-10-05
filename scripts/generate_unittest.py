@@ -1,7 +1,5 @@
 import os
-import sys
 import argparse
-sys.path.append('../')
 
 
 FILE_NAME = 'test_'

@@ -8,6 +8,7 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv 7F0CEB10
 RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
 # Add the application resources URL
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ $(lsb_release -sc) main universe" >> /etc/apt/sources.list
+RUN	echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y \ 
 		python \
@@ -20,6 +21,9 @@ RUN apt-get update && apt-get install -y \
 		curl \
 		git \
 		supervisor \
+		x11vnc \
+		xvfb \
+		firefox \
 		&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 #Create the MongoDB data directory
