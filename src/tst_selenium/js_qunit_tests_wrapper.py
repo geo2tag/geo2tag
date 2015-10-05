@@ -20,4 +20,6 @@ class JsQUnitTestsWrapper(BasicSeleniumTest):
             expected_conditions.text_to_be_present_in_element(
                 (By.ID, "qunit-testresult"), 'Tests completed in')
         )
-        res = self.driver.find_eleme
+        res = self.driver.find_element_by_class_name("container")
+    	self.checkTestResult(res)
+
