@@ -12,8 +12,14 @@ def main(host):
     suite.addTest(BasicSeleniumTest.parametrize(TestLoginResource, param=host))
     suite.addTest(BasicSeleniumTest.parametrize(TestInstaceTest, param=host))
     suite.addTest(BasicSeleniumTest.parametrize(TestInstaceInternalTest, param=host))
-    unittest.TextTestRunner(verbosity=2).run(suite)
 
+###################################################
+# Place tests above this line ^^
+###################################################
+    returnCode = not unittest.TextTestRunner(
+        verbosity=2).run(suite).wasSuccessful()
+
+    sys.exit(returnCode)
 
 if __name__ == '__main__':
     host = sys.argv[1]
