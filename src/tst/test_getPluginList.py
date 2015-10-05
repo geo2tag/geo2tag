@@ -12,3 +12,4 @@ class TestGetPluginList(unittest.TestCase):
         root, dirs, files = os.walk('plugins').next()
         os.chdir('tst/')
         self.assertEquals(dirs, pluginsList)
+
