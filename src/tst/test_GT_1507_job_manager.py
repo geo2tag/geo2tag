@@ -2,11 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-import sys
-import os
 from db_model import getDbObject
 from thread_job import ThreadJob
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', 'open_data_import/')))
 from job_manager import JobManager
 import datetime
 channelName = 'channelName'
