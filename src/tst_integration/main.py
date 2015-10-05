@@ -181,10 +181,14 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestExtendPointListParserWithFlagsBC,
             param=host))
+#    suite.addTest(BasicIntegrationTest.parametrize(
+#        Test_GT_1511, param=host))
+
+###################################################
+# Place tests above this line ^^
+###################################################
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()
-    suite.addTest(BasicIntegrationTest.parametrize(
-        Test_GT_1511, param=host))
 
     sys.exit(returnCode)
 
