@@ -1,7 +1,7 @@
 import random
 import string
 from datetime import datetime
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod
 
 class Job():
  

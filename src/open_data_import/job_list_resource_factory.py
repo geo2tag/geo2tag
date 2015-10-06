@@ -1,10 +1,10 @@
 import sys
 sys.path.append('/var/www/geomongo/plugins/ok_import')
 from possible_exception import possibleException
-from flask_restful import reqparse
 from flask.ext.restful import Resource
 from db_model import getChannelByName, getServiceIdByName
 from job_manager import JobManager
+
 def JobListResourceFactory(parserClass, jobClass, importFunction):
     class JobListResource(Resource):
  
