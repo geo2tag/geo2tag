@@ -2,12 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-
-import sys
-import os
-sys.path.append('../')
-sys.path.append('../plugins/ok_import/')
-
 from db_model import getDbObject
 from thread_job import ThreadJob
 import datetime
