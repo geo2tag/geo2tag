@@ -38,9 +38,8 @@ class Test_GT_1506_class_thread_job(TestCase):
         threadJobObj.start()
         self.assertTrue(threadJobObj.thread.is_alive())
         threadJobObj.stop()
-        if threadJobObj.thread.is_alive():
-            while not threadJobObj.thread.is_alive():
-                sleep(0.1)
+        while threadJobObj.thread.is_alive() is True:
+            sleep(0.1)
         self.assertFalse(threadJobObj.thread.is_alive())
         self.assertTrue(threadJobObj.done)
         statistic = threadJobObj.getTimeStatistics()
