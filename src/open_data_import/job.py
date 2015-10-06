@@ -35,8 +35,8 @@ class Job():
         self.internalStart()
  
     def stop(self):
-        self.done = True
         self.timeElapsed = datetime.now() - self.startTime
+        self.done = True
         self.internalStop()
  
     def getTimeStatistics(self):

@@ -4,27 +4,27 @@ import os
 sys.path.append('/var/www/geomongo/open_data_import')
 from job import Job
 
-showImageUrl = 'showImageUrl'
-showObjectUrl = 'showObjectUrl'
+OPEN_DATA_URL = 'openDataUrl'
 
-class ThreadJob(Job):
-    
+class GeocodingJob(Job):
+
     def internalStart(self):
         thread = threading.Thread(
             target=self.backgroundFunction,
             args=(
                 self,
                 self.channelName,
-                self.openDataUrl,
-                self.importDataDict.get(showImageUrl),
-                self.importDataDict.get(showObjectUrl),
-                self.serviceName,
-            ))
+                self.serviceName
+            )
+        )
         self.thread = thread
+        thread._stop = threading.Event()
         thread.start()
+
+    def internalStop(self):
+        self.thread.join()
 
     def describe(self):
         ancestorResult = Job.describe(self)
-        ancestorResult[showImageUrl] = self.importDataDict.get(showImageUrl)
-        ancestorResult[showObjectUrl] = self.importDataDict.get(showObjectUrl)
+        ancestorResult.pop(OPEN_DATA_URL)
         return ancestorResult
