@@ -1,4 +1,9 @@
 #!/bin/bash
+
+echo
+echo "==================== SELENIUMTESTS ====================="
+echo
+
 set -e
 DB_SCRIPTS_PATH='scripts/db/';
 

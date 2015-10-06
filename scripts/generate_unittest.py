@@ -1,5 +1,6 @@
 import os
 import argparse
+
 FILE_NAME = 'test_'
 INCLUDE_MODULE = 'import unittest\nfrom db_model import getDbObject\n\n'
 TAB = '    '

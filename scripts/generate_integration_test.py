@@ -1,5 +1,6 @@
 import os
 import argparse
+
 FILE_NAME = 'test_'
 INCLUDE_MODULE = "import unittest\nimport requests\nfrom basic_integration_test import BasicIntegrationTest\n\nTEST_URL = ''\nVALID_RESPONSE_CODE = 200\n\n"
 TAB = '    '
