@@ -3,10 +3,10 @@
 
 from unittest import TestCase
 
-"""import sys
+import sys
 import os
 sys.path.append('../')
-sys.path.append('../plugins/ok_import/')"""
+sys.path.append('../plugins/ok_import/')
 
 from db_model import getDbObject
 from thread_job import ThreadJob
@@ -27,8 +27,8 @@ def backgroundFunction(
         showObjectUrl=showObjectUrl,
         showImageUrl=showImageUrl,
         serviceName=serviceName):
-    print 'I\'m a thread'
-    return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
+    sleep(2)
+    return None
 
 
 class Test_GT_1506_class_thread_job(TestCase):
