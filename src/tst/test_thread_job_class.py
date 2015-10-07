@@ -5,6 +5,7 @@ from unittest import TestCase
 from db_model import getDbObject
 from thread_job import ThreadJob
 import datetime
+from time import sleep
 channelName = 'channelName'
 openDataUrl = 'openDataUrl'
 showImageUrl = 'showImageUrl'
@@ -20,8 +21,8 @@ def backgroundFunction(
         showObjectUrl=showObjectUrl,
         showImageUrl=showImageUrl,
         serviceName=serviceName):
-    self.stop()
-    return [channelName, openDataUrl, showImageUrl, showImageUrl, serviceName]
+    sleep(2)
+    return None
 
 
 class Test_GT_1506_class_thread_job(TestCase):
@@ -35,8 +36,12 @@ class Test_GT_1506_class_thread_job(TestCase):
             importDataDict_val,
             serviceName)
         threadJobObj.start()
-        threadJobObj.internalStart()
+        self.assertTrue(threadJobObj.thread.is_alive())
         threadJobObj.stop()
+        while threadJobObj.thread.is_alive() is True:
+            sleep(0.1)
+        self.assertFalse(threadJobObj.thread.is_alive())
+        self.assertTrue(threadJobObj.done)
         statistic = threadJobObj.getTimeStatistics()
         self.assertEquals(type(statistic), type(datetime.timedelta()))
         describe = threadJobObj.describe()
