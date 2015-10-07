@@ -23,4 +23,4 @@ def openKareliaImport(
         openDataUrl,
         importDataDict,
         serviceName)
-    self.stop()
+    return None

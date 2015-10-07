@@ -8,7 +8,9 @@ from basic_selenium_test import BasicSeleniumTest
 import requests
 import time
 
+
 class JsQUnitTestsWrapper(BasicSeleniumTest):
+
     def checkTestResult(self, testResult):
         self.assertNotEquals(testResult, None)
 
@@ -16,9 +18,8 @@ class JsQUnitTestsWrapper(BasicSeleniumTest):
         self.driver.get(pageRelativeUrl)
         element = WebDriverWait(self.driver, 10).until(
             expected_conditions.text_to_be_present_in_element(
-		        (By.ID, "qunit-testresult"),
-		        'Tests completed in'
-		    )
-    	)
+                (By.ID, "qunit-testresult"), 'Tests completed in')
+        )
         res = self.driver.find_element_by_class_name("container")
     	self.checkTestResult(res)
+
