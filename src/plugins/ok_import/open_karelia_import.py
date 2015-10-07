@@ -14,7 +14,6 @@ def openKareliaImport(
         showImageUrl,
         serviceName):
     importDataDict = {'showImageUrl': showImageUrl, 'showObjectUrl': showObjectUrl}
-    print showObjectUrl
     performImportActions(
         OpenKareliaObjectsLoader,
         OpenKareliaObjectsParser,

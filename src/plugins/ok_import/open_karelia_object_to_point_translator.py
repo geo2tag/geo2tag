@@ -56,7 +56,6 @@ class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
             point['json']['address'] = self.objectRepresentation['site']
         # Date trnslation
         trans_date = self.translateDate()
-        print trans_date
         add_precise_or_interval_to_point(trans_date, point)
         return point
 
