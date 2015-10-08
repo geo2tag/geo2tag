@@ -5,8 +5,6 @@ from test_PointListGet import TestPointListGet
 from test_plugin_list_resource import TestPluginListResource
 from test_testplugin import TestTestPlugin
 from basic_integration_test import BasicIntegrationTest
-from test_GT_1697 import TestGT1697
-from basic_integration_test import BasicIntegrationTest
 from test_status_request import TestStatusRequest
 from test_delete_service_name import TestServiceDeleteRequest
 from test_get_service_name import TestServiceGetRequest
