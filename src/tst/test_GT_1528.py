@@ -6,12 +6,13 @@ from db_model import getDbObject
 from thread_job import ThreadJob
 from job_manager import JobManager
 import datetime
+from time import sleep
+
 channelName = 'channelName'
 openDataUrl = 'openDataUrl'
 showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 serviceName = 'serviceName'
-from time import sleep
 
 
 def backgroundFunction(
