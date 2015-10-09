@@ -8,7 +8,7 @@ plugins = MongoClient()['geomongo']['plugins']
 
 
 class TestGeocodingJobListResource(BasicIntegrationTest):
-    def testGeocodingJob(self):
+    def testGeocodingJobListResource(self):
         r = requests.get(
             self.getUrl(
                 '/instance/plugin/geocoder/service/testservice/job'
