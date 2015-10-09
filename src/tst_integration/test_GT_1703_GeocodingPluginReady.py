@@ -3,10 +3,8 @@ import requests
 from basic_integration_test import BasicIntegrationTest
 import sys
 import json
-sys.path.append('../')
-from config_reader import getInstancePrefix
 
-TEST_URL = '/' + getInstancePrefix() + '/plugin'
+TEST_URL = '/instance/plugin'
 PLUGIN_NAME = 'geocoder'
 PLUGIN_ENABLED = True
 
