@@ -4,4 +4,6 @@ sys.path.append('../')
 sys.path.append('/var/www/geomongo/open_data_import')
 from job_list_resource_factory import JobListResourceFactory
 
-GeocodingJobListResource = JobListResourceFactory(None, GeocodingJob, None)
+
+class GeocodingJobListResource(JobListResourceFactory(None, GeocodingJob, None)):
+    pass

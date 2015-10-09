@@ -48,7 +48,7 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestGeocodingJob,
             param=host))
-    """suite.addTest(
+    suite.addTest(
         BasicIntegrationTest.parametrize(
             TestPluginListResource,
             param=host))
@@ -186,7 +186,7 @@ def main(host):
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestExtendPointListParserWithFlagsBC,
-            param=host))"""
+            param=host))
 #    suite.addTest(BasicIntegrationTest.parametrize(
 #        Test_GT_1511, param=host))
 
