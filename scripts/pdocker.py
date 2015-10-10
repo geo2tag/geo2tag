@@ -34,7 +34,7 @@ def usage():
 
 
 def write_log(name, log_str):
-    file_name = "/tmp/" + name + LOG_NAME
+    file_name = "/tmp/" + name.replace('/', '_') + LOG_NAME
     print log_str
     with open(file_name, 'ab') as log_file:
         log_file.write(log_str)
@@ -189,7 +189,7 @@ def main():
     else:
         container_start_name = args.name
 
-        file_name = "/tmp/" + container_start_name + LOG_NAME
+        file_name = "/tmp/" + container_start_name.replace('/', '_') + LOG_NAME
         print file_name
 
         container_start_result, container_start_port = find_port_and_start(args.name, args.ports)
