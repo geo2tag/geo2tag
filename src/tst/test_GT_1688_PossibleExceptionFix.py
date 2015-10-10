@@ -1,6 +1,5 @@
 from unittest import TestCase
 from base_geo2tag_exception import BaseGeo2TagException
-from base_exception import BaseException
 from possible_exception import possibleException
 
 TEST_DATA = 'test data'
