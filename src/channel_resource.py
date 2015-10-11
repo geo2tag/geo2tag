@@ -1,7 +1,7 @@
 from possible_exception import possibleException
 from flask.ext.restful import Resource
 from db_model import getChannelById, deleteChannelById
-from channel_parsers import *
+from channel_parsers import ChannelResourceParser
 from db_model import updateChannel
 
 
