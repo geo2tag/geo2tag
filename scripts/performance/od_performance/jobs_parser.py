@@ -32,7 +32,7 @@ def areAllJobsDone(jobsList):
 
 
 def createJobStatistic(jobsList):
-    minValue = summ = 0
+    summ = 0
     for i in range(len(jobsList)):
         jobTime = jobsList[i].get(TIME)
         timeObj = datetime.strptime(jobTime, "%H:%M:%S.%f")
