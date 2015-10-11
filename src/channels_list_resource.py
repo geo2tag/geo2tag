@@ -5,7 +5,6 @@ from channels_list_parsers import ChannelsListResourceParser
 from db_model import addChannel
 from db_model import getChannelsList, getChannelByName
 from channel_does_not_exist import ChannelDoesNotExist
-from channel_already_exists import ChannelAlreadyExists
 
 SUBSTRING = 'substring'
 NUMBER = 'number'
