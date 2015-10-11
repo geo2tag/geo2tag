@@ -1,5 +1,6 @@
 from base_geo2tag_exception import BaseGeo2TagException
 
+
 def possibleException(func):
     def funcPossibleException(*args, **kwargs):
         try:
