@@ -1,10 +1,8 @@
 from possible_exception import possibleException
-from flask_restful import reqparse
 from flask.ext.restful import Resource
 from db_model import addService, getServiceList
 from bson.json_util import dumps
 from service_list_parsers import ServiceListParser
-from service_already_exists_exception import ServiceAlreadyExistsException
 
 GET_ARGS_NUMBER = "number"
 GET_ARGS_OFFSET = "offset"

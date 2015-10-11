@@ -1,7 +1,6 @@
-from base_exception import BaseException
+from base_geo2tag_exception import BaseGeo2TagException
 
-
-class ChannelDoesNotExist(BaseException):
+class ChannelDoesNotExist(BaseGeo2TagException):
 
     def getReturnObject(self):
         ERROR = "Channel does not exist"

@@ -44,7 +44,6 @@ def manage_script(name, args):
     child = Popen(args, stdout=PIPE, stderr=PIPE)
     output = child.stdout.read()
     err = child.stderr.read()
-    streamdata = child.communicate()[0]
     rc = child.returncode
     if rc == 0:
         write_log(name, output)
@@ -60,7 +59,7 @@ def start_container(name, port):
 
 
 def stop_container(name):
-    rc = manage_script(name, [MANAGE_CONTAINER, 'kill', name])
+    manage_script(name, [MANAGE_CONTAINER, 'kill', name])
 
 
 def run_unit_tests(name):
@@ -80,7 +79,6 @@ def run_int_tests(name):
 
 def wait_mongo_start(name):
     child = Popen(['docker', 'exec', name, 'mongo'], stdout=PIPE, stderr=PIPE)
-    streamdata = child.communicate()[0]
     return child.returncode
 
 
@@ -145,9 +143,9 @@ def kill_old_containers(kill_time=0):
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
 
-def parse_string_time_to_timestamp(str):
+def parse_string_time_to_timestamp(parsing_str):
     p = re.compile(u'(\d+\w)')
-    time_list = re.findall(p, str)
+    time_list = re.findall(p, parsing_str)
     result = 0
     for time_unit in time_list:
         s = time_unit[-1:]
