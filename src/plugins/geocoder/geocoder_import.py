@@ -15,7 +15,7 @@ ID = '_id'
 PROC_BLOCK = 5000
 
 
-def GeocoderImport(self,  channelName, serviceName):
+def geocoderImport(self,  channelName, serviceName):
     # Checking for service existence
     getServiceIdByName(serviceName)
     # Getting channel id
@@ -63,5 +63,3 @@ def json_list_to_list_of_strings(json_list):
 
 def field_in_dict_and_defined(field, dictionary):
     return field in dictionary and dictionary[field] is not None
-
-#GeocoderImport(None, 'geocoder_plugin_test_channel', 'testservice')
