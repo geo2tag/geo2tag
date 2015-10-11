@@ -28,8 +28,8 @@ class ChannelsListResource(Resource):
     def post(self, serviceName):
         listArgs = ChannelsListResourceParser.parsePostParameters()
         try:
-            obj = getChannelByName(serviceName, listArgs.get(NAME, None))
-        except ChannelDoesNotExist as e:
+            getChannelByName(serviceName, listArgs.get(NAME, None))
+        except ChannelDoesNotExist:
             return addChannel(
                 listArgs.get(
                     NAME, None), listArgs.get(
