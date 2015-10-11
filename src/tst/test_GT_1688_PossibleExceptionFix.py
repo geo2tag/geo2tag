@@ -1,6 +1,5 @@
 from unittest import TestCase
 import sys
-sys.path.append('../')
 from base_geo2tag_exception import BaseGeo2TagException
 from possible_exception import possibleException
 
