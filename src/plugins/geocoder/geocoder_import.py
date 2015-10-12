@@ -1,9 +1,6 @@
 from json import dumps
-import sys
-sys.path.append('../../')
 from db_model import getServiceIdByName, getChannelByName, getDbObject
 from config_reader import getGeonamesLogin
-sys.path.append('../../geocoders/')
 from geocoder_request import GeonamesRequestSender
 from geocoder_response_parser import GeocoderResponseParser
 
