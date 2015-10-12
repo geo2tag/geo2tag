@@ -1,4 +1,3 @@
-import sys
 from base_exception import BaseException
 
 class GeocoderRequestLimitExceed(BaseException):
