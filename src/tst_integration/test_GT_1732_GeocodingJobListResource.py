@@ -1,10 +1,6 @@
-from pymongo import MongoClient
-import sys
 from basic_integration_test import BasicIntegrationTest
 import requests
 import json
-
-plugins = MongoClient()['geomongo']['plugins']
 
 
 class TestGeocodingJobListResource(BasicIntegrationTest):

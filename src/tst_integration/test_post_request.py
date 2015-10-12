@@ -1,9 +1,6 @@
-import sys
 import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-
-sys.path.append("../")
 from db_model import removeService
 from service_not_exist_exception import ServiceNotExistException
 

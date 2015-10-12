@@ -1,9 +1,6 @@
-import sys
 import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-
-sys.path.append("../")
 from db_model import removeService
 
 TEST_URL = '/instance/service/testservice'

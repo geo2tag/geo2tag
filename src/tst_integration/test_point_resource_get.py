@@ -1,8 +1,6 @@
 import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 
 TEST_URL = '/instance/service/testservice/point/552833515c0dd1178d37f7aa'
 BAD_TEST_URL = '/instance/service/testservice/point/112833515c0dd11711111111'
