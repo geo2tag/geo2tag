@@ -21,20 +21,22 @@ REQUEST_PARAM = "?user_id=" + TEST_ID
 app = Flask(__name__)
 app.secret_key = urandom(32)
 
+
 class TestUserIdLog(TestCase):
-    def testUserIdLog(self) :
-    	db = getDbObject()
-    	collection = db[COLLECTION_LOG_NAME]
-        with app.test_request_context(LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM) :
-        #Emulating login session
+
+    def testUserIdLog(self):
+        db = getDbObject()
+        collection = db[COLLECTION_LOG_NAME]
+        with app.test_request_context(LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM):
+            # Emulating login session
             collection.drop()
             logUserIn(request.args[USER_ID])
             res = getUserId()
-            db_res = collection.find_one({USER_ID:TEST_ID})
-            self.assertEqual(db_res[MESSAGE],AUTH_MESS)
-        #Emulating logout session
+            db_res = collection.find_one({USER_ID: TEST_ID})
+            self.assertEqual(db_res[MESSAGE], AUTH_MESS)
+        # Emulating logout session
             collection.drop()
             logUserOut()
             res = getUserId()
-            db_res = collection.find_one({USER_ID:USER_ID})
-            self.assertEqual(db_res,ANONYM_MESS)
+            db_res = collection.find_one({USER_ID: USER_ID})
+            self.assertEqual(db_res, ANONYM_MESS)

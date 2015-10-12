@@ -28,7 +28,9 @@ def backgroundFunction(
 class Test_GT_1506_class_thread_job(TestCase):
 
     def test_GT_1506_class_thread_job(self):
-        importDataDict_val = {showImageUrl:showImageUrl,showObjectUrl:showObjectUrl}
+        importDataDict_val = {
+            showImageUrl: showImageUrl,
+            showObjectUrl: showObjectUrl}
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,
@@ -55,6 +57,10 @@ class Test_GT_1506_class_thread_job(TestCase):
         self.assertEquals(describe.get('serviceName'), serviceName)
         self.assertEquals(threadJobObj.channelName, channelName)
         self.assertEquals(threadJobObj.openDataUrl, openDataUrl)
-        self.assertEquals(threadJobObj.importDataDict.get('showImageUrl'), showImageUrl)
-        self.assertEquals(threadJobObj.importDataDict.get('showObjectUrl'), showObjectUrl)
+        self.assertEquals(
+            threadJobObj.importDataDict.get('showImageUrl'),
+            showImageUrl)
+        self.assertEquals(
+            threadJobObj.importDataDict.get('showObjectUrl'),
+            showObjectUrl)
         self.assertEquals(threadJobObj.serviceName, serviceName)

@@ -53,7 +53,10 @@ TEST_CHANNEL_NAME = u'test_channel_1'
 TEST_OPEN_DATA_URL = 'test_open_data_url'
 TEST_SHOW_OBJECT_URL = 'test_show_object_url'
 TEST_SHOW_IMAGE_URL = 'test_show_image_url'
-TEST_DICT = {'showObjectUrl':TEST_SHOW_OBJECT_URL, 'showImageUrl':TEST_SHOW_IMAGE_URL}
+TEST_DICT = {
+    'showObjectUrl': TEST_SHOW_OBJECT_URL,
+    'showImageUrl': TEST_SHOW_IMAGE_URL}
+
 
 class TestPerfomImportActions(unittest.TestCase):
 

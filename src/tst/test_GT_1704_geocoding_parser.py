@@ -30,5 +30,3 @@ class TestGeocodingParser(TestCase):
         with app.test_request_context(data=dumps(INCORRECT_DATA), method=METHOD):
             with self.assertRaises(BadRequest):
                 args = GeocodingParser.parsePostParameters()
-
-    

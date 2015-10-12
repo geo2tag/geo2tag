@@ -5,6 +5,7 @@ from flask_restful import Resource
 sys.path.append('/var/www/geomongo/plugins/ok_import/')
 from job_manager import JobManager
 
+
 class JobResource(Resource):
 
     @possibleException

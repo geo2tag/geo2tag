@@ -40,6 +40,7 @@ from test_GT_1511 import Test_GT_1511
 from test_bc_parametr_point_list_post import TestBcParametrPointListPost
 from test_GT_1590_extend_parse_parameters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
 
+
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(
