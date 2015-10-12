@@ -1,8 +1,6 @@
 import requests
-import sys
 from datetime import datetime
 from basic_integration_test import BasicIntegrationTest
-sys.path.append('../')
 from url_routines import getInstancePrefix
 
 

@@ -11,7 +11,6 @@ from log import writeInstanceLog
 from user_routines import getUserId
 
 PLUGINS_DIR_NAME = 'plugins'
-# sys.path.append(PLUGINS_DIR_NAME)
 
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '

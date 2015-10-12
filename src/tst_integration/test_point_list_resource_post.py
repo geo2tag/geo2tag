@@ -4,8 +4,6 @@ import json
 from pymongo import MongoClient
 from flask import Flask, request
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 from db_model import addPoints, getDbObject
 from bson.objectid import ObjectId
 

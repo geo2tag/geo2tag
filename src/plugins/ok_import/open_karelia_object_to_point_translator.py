@@ -1,6 +1,4 @@
 from datetime import datetime
-import sys
-sys.path.append('/var/www/geomongo/open_data_import')
 from open_data_object_to_point_translator import OpenDataToPointTranslator
 
 INTERVAL_DATES_NAMES = (('year_start', 'year_end'), ('century_start', 'century_end'),
@@ -11,7 +9,8 @@ DATE_TYPES = ('interval', 'precise')
 class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
 
     def __init__(
-            self,importDataDict,
+            self,
+            importDataDict,
             objectRepresentation,
             version,
             importSource,
@@ -36,15 +35,25 @@ class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
     def getPoint(self):
         point = {'json': self.getPointJson()}
         point['channel_id'] = self.channelId
+        # Cheking for coords
+        tmpLat = 0
+        tmpLon = 0
+        if key_in_dict_and_defined('latitude', self.objectRepresentation) and \
+                key_in_dict_and_defined('latitude', self.objectRepresentation):
+            tmpLat = self.objectRepresentation['latitude']
+            tmpLon = self.objectRepresentation['longitude']
         point['location'] = {
             "type": "Point",
             "coordinates": [
-                float(self.objectRepresentation['latitude']),
-                float(self.objectRepresentation['longitude'])]}
+                float(tmpLat),
+                float(tmpLon)
+            ]
+        }
         point['alt'] = 0
+        if key_in_dict_and_defined('site', self.objectRepresentation):
+            point['json']['address'] = self.objectRepresentation['site']
         # Date trnslation
         trans_date = self.translateDate()
-        print trans_date
         add_precise_or_interval_to_point(trans_date, point)
         return point
 

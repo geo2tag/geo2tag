@@ -1,7 +1,6 @@
 import sys
 from base_exception import BaseException
 
-
 class GeocoderRequestLimitExceed(BaseException):
 
     ERROR_CODE_DAY_LIMIT = '18'
