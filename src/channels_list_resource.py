@@ -1,6 +1,7 @@
 from possible_exception import possibleException
 from flask_restful import reqparse
-from flask.ext.restful import Resource
+import flask_restful as restful
+from flask_restful import Resource
 from channels_list_parsers import ChannelsListResourceParser
 from db_model import addChannel
 from db_model import getChannelsList, getChannelByName
