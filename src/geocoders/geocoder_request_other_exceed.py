@@ -1,7 +1,6 @@
 import sys
 from base_exception import BaseException
 
-
 class GeocoderRequestOtherExceed(BaseException):
 
     ERROR_LIST_OTHER_EXCEED = [10, 11, 12, 13, 14, 15, 16, 17, 21, 22, 23]
