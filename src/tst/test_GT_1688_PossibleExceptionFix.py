@@ -1,5 +1,4 @@
 from unittest import TestCase
-
 from base_exception import BaseException
 from possible_exception import possibleException
 
