@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/var/www/geomongo/open_data_import')
 from job_resource import JobResource
 
 
