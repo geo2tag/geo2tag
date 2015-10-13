@@ -41,10 +41,16 @@ from test_okimport_service_channel_not_exist import Test_OKImportJob_not_exist
 from test_GT_1511 import Test_GT_1511
 from test_bc_parametr_point_list_post import TestBcParametrPointListPost
 from test_GT_1590_extend_parse_parameters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
+from test_GT_1732_GeocodingJobListResource import TestGeocodingJobListResource
+
 
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicIntegrationTest.parametrize(TestGeocodingPluginReady, param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestGeocodingJobListResource,
+            param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestPluginListResource,
