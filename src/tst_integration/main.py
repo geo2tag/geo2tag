@@ -73,10 +73,10 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestStatusRequest,
             param=host))
-    #suite.addTest(
-    #    BasicIntegrationTest.parametrize(
-    #        TestServiceDeleteRequest,
-    #        param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestServiceDeleteRequest,
+            param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestServicePutRequest,
