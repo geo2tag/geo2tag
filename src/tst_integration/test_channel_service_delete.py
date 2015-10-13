@@ -1,6 +1,9 @@
 import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
+import sys
+print '1------------'
+print sys.path
 from db_model import getChannelsList, getDbObject
 from config_reader import getHost, getPort, getDbName
 
