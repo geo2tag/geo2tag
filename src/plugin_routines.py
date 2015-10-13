@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import os
 from os.path import join as joinpath
 from traceback import format_exc
-import imp
 from url_routines import getPluginUrl
 from log import writeInstanceLog
 from user_routines import getUserId
