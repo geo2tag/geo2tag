@@ -1,5 +1,4 @@
 import requests
-from flask import Flask, request
 from basic_integration_test import BasicIntegrationTest
 
 
@@ -13,11 +12,9 @@ class TestRoutMap(BasicIntegrationTest):
     def testRoutMapRequestNoData(self):
         response = requests.get(self.getUrl(TEST_URL_NO_DATA))
         responseCode = response.status_code
-        responseText = response.text
         self.assertEqual(VALID_RESPONSE_CODE, responseCode)
 
     def testRoutMapRequestData(self):
         response = requests.get(self.getUrl(TEST_URL_DATA))
         responseCode = response.status_code
-        responseText = response.text
         self.assertEqual(VALID_RESPONSE_CODE, responseCode)

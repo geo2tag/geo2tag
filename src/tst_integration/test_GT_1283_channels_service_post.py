@@ -3,7 +3,6 @@ from basic_integration_test import BasicIntegrationTest
 import json
 from bson.objectid import ObjectId
 from db_model import getDbObject
-from config_reader import getHost, getPort
 TEST_URL = '/instance/service/testservice/channel'
 
 TEST_SERVICE = 'testservice'

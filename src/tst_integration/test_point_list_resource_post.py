@@ -1,10 +1,7 @@
 import requests
 import json
-from pymongo import MongoClient
-from flask import Flask, request
 from basic_integration_test import BasicIntegrationTest
-from db_model import addPoints, getDbObject
-from bson.objectid import ObjectId
+from db_model import  getDbObject
 
 DB = "testservice"
 COLLECTION = 'points'

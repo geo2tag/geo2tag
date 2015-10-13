@@ -1,7 +1,5 @@
 import requests
 from basic_integration_test import BasicIntegrationTest
-from flask import Flask, request
-from debug_login_resource import DebugLoginResource
 
 TEST_URL = '/instance/login/debug?_id=debug_user1'
 BAD_TEST_URL = '/instance/login/debug?_id=wrongUser'

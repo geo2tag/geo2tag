@@ -1,7 +1,5 @@
-import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-from db_model import removeService
 
 TEST_URL = '/instance/service/testservice'
 DATA = {'logSize': 10}

@@ -1,6 +1,5 @@
 import requests
 from basic_integration_test import BasicIntegrationTest
-from config_reader import getHost, getPort, getDbName
 from db_model import getDbObject
 
 TEST_SERVICE = 'testservice'
