@@ -1,7 +1,6 @@
 import unittest
 import requests
 import sys
-sys.path.append('../')
 from db_model import addService
 from basic_integration_test import BasicIntegrationTest
 
