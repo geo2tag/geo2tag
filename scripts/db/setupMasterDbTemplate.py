@@ -1,12 +1,7 @@
 import os
 import sys
-from configparser import ConfigParser
-import config_reader
 
-TEMPLATE_PATH = 'master_db_template/'
-
-
-def import_db(db_name, template_path):
+def import_db(db_name):
     str_forsh = 'scripts/db/mongo.sh -l -H localhost:27017 ' + db_name
     os.system(str_forsh)
 
@@ -18,6 +13,7 @@ def run():
         db_name = sys.argv[1]
     else:
         print "Error agrs!!!"
-    import_db(db_name, TEMPLATE_PATH)
+    import_db(db_name)
+
 if __name__ == '__main__':
     run()

@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 class BasicSeleniumTest(unittest.TestCase):
     """ TestCase classes that want to be parametrized should
