@@ -6,4 +6,5 @@ sys.path.append('../')
 sys.path.append('/var/www/geomongo/open_data_import')
 from job_list_resource_factory import JobListResourceFactory
 
-JobListResource = JobListResourceFactory(OKImportParser, ThreadJob, openKareliaImport)
+JobListResource = JobListResourceFactory(
+    OKImportParser, ThreadJob, openKareliaImport)

@@ -6,11 +6,13 @@ from open_data_object_to_point_translator import OpenDataToPointTranslator
 from datetime import datetime
 
 TEST_OBJ = {
-    'json': {'version': 'test_version', 
-        'import_source': 'test_import'},
-    }
+    'json': {'version': 'test_version',
+             'import_source': 'test_import'},
+}
+
 
 class TestOKPointTranslator(TestCase):
+
     def setUp(self):
         obj = OpenDataToPointTranslator(
             {'image_url': 'image_url', 'source_url': 'image_url111'},
@@ -23,5 +25,6 @@ class TestOKPointTranslator(TestCase):
             'test_import',
             'channelId')
         self.test_obj = obj.getPoint()
+
     def testOKPointTranslator(self):
         self.assertEquals(TEST_OBJ['json'], self.test_obj['json'])

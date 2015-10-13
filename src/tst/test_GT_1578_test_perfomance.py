@@ -12,7 +12,10 @@ TEST_ANS = 1
 class test_GT_1578testPerfomance(TestCase):
 
     def test_GT_1578testPerfomance(self):
-        ans = main(CREATE_JOB_LINK, JOB_DATA, VIEW_JOB_LINK, JOB_COUNT, TIMEOUT)
+        ans = main(
+            CREATE_JOB_LINK,
+            JOB_DATA,
+            VIEW_JOB_LINK,
+            JOB_COUNT,
+            TIMEOUT)
         self.assertEquals(TEST_ANS, ans)
-
-
