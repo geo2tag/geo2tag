@@ -61,9 +61,9 @@ def getInstancePrefix():
 
 
 def getDebugUsers():
-    str = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
-    list = str.split(',')
-    return list
+    str_list = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
+    list_users = str(str_list).split(',')
+    return list_users
 
 
 def getGoogleClientID():

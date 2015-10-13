@@ -1,6 +1,4 @@
 from datetime import datetime
-import sys
-sys.path.append('/var/www/geomongo/open_data_import')
 from open_data_object_to_point_translator import OpenDataToPointTranslator
 
 INTERVAL_DATES_NAMES = (

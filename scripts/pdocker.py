@@ -34,7 +34,7 @@ def usage():
 
 
 def write_log(name, log_str):
-    file_name = "/tmp/" + name + LOG_NAME
+    file_name = "/tmp/" + name.replace('/', '_') + LOG_NAME
     print log_str
     with open(file_name, 'ab') as log_file:
         log_file.write(log_str)
@@ -187,7 +187,9 @@ def main():
     elif (args.name or args.ports) is None:
         usage()
     else:
-        container_start_name = args.name
+        container_start_name = args.name.replace('/', '_')
+        if "origin_" not in container_start_name:
+            container_start_name = "origin_" + container_start_name
 
         file_name = "/tmp/" + container_start_name + LOG_NAME
         print file_name
@@ -195,7 +197,7 @@ def main():
         container_start_result, container_start_port = find_port_and_start(
             args.name, args.ports)
         if not container_start_result:
-            write_log(args.name, "Free port not found exit")
+            write_log(container_start_name, "Free port not found exit")
             sys.exit(1)
 
         mongo_start_waiter(container_start_name)
