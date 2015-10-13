@@ -1,14 +1,15 @@
 import sys
 import os
+os.path.abspath(os.path.join(os.path.dirname(_file_), '..', '..', 'open_data_import/')))
 from od_import_parser import OdImportParser, CHANNEL_NAME, OPEN_DATA_URL
 
-SHOW_OBJECT_URL = 'showObjectUrl'
-SHOW_IMAGE_URL = 'showImageUrl'
+SHOW_OBJECT_URL='showObjectUrl'
+SHOW_IMAGE_URL='showImageUrl'
 
 
 class OKImportParser(OdImportParser):
 
-    mandatoryFields = [
+    mandatoryFields=[
         CHANNEL_NAME,
         OPEN_DATA_URL,
         SHOW_OBJECT_URL,
