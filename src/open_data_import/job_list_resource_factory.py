@@ -1,5 +1,3 @@
-import sys
-sys.path.append('/var/www/geomongo/plugins/ok_import')
 from possible_exception import possibleException
 from flask.ext.restful import Resource
 from db_model import getChannelByName, getServiceIdByName
