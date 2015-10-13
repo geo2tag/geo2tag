@@ -1,6 +1,8 @@
 import unittest
 import requests
 import sys
+print '=====--------======--=-=-='
+print sys.path
 from db_model import addService
 from basic_integration_test import BasicIntegrationTest
 
