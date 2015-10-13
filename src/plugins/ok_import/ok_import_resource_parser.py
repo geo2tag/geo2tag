@@ -1,12 +1,8 @@
 import sys
 import os
-'''sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            '..',
-            '..',
-            'open_data_import/')))'''
+print '-------------------------'
+print sys.path
+print '-------------------------'
 from od_import_parser import OdImportParser, CHANNEL_NAME, OPEN_DATA_URL
 
 SHOW_OBJECT_URL = 'showObjectUrl'
