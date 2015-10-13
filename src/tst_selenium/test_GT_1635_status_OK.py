@@ -1,7 +1,3 @@
-import unittest
-import sys
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = '/instance/status'

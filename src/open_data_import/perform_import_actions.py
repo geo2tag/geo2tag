@@ -1,6 +1,4 @@
 from datetime import datetime
-import sys
-sys.path.append('../')
 from db_model import getChannelByName
 
 

@@ -26,5 +26,5 @@ def main(host):
     sys.exit(returnCode)
 
 if __name__ == '__main__':
-    host = sys.argv[1]
-    main(host)
+    host_arg = sys.argv[1]
+    main(host_arg)
