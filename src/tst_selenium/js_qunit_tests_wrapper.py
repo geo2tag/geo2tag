@@ -16,5 +16,4 @@ class JsQUnitTestsWrapper(BasicSeleniumTest):
                 (By.ID, "qunit-testresult"), 'Tests completed in')
         )
         res = self.driver.find_element_by_class_name("container")
-    	self.checkTestResult(res)
-
+        self.checkTestResult(res)

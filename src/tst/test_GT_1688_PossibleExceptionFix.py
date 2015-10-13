@@ -4,10 +4,11 @@ from possible_exception import possibleException
 
 TEST_DATA = 'test data'
 
+
 class testException(BaseGeo2TagException):
+
     def getReturnObject(self):
         return TEST_DATA
-
 
 
 @possibleException
@@ -16,8 +17,8 @@ def testFunc():
         return None
     raise testException()
 
+
 class TestPossibleExceptinoFix(TestCase):
+
     def testPossibleExceptinoFix(self):
         self.assertEqual(testFunc(), TEST_DATA)
-
-

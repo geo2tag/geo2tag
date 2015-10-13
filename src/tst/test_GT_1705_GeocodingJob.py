@@ -5,7 +5,6 @@ from pymongo import DESCENDING
 from time import sleep
 
 
-
 CHANNEL_NAME = 'channelName'
 SERVICE_NAME = 'serviceName'
 
@@ -21,6 +20,7 @@ gj = GeocodingJob(bcgFunc, 'channelName', None, None, 'serviceName')
 
 
 class TestGeocodingJob(TestCase):
+
     def testGeocodingJob(self):
         gj.start()
         self.assertIsNotNone(gj.thread)
