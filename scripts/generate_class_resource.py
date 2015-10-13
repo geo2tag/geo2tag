@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 METHODS = ['post', 'get', 'put', 'delete']
 TYPES = ['bool', 'int', 'float', 'tuple', 'list', 'str', 'dict', 'set']
 INCLUDE_MODULE = 'from flask_restful import reqparse\n\
@@ -127,7 +128,6 @@ def make_generator(args):
 
 
 def run():
-    import argparse
     parser = argparse.ArgumentParser(description='Generate class resourse')
     parser.add_argument(
         '--name',
