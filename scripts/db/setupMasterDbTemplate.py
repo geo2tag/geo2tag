@@ -1,5 +1,7 @@
 import os
 import sys
+import config_reader
+
 
 
 def import_db(db_name):

@@ -194,12 +194,8 @@ def main():
         file_name = "/tmp/" + container_start_name + LOG_NAME
         print file_name
 
-<<<<<<< HEAD
         container_start_result, container_start_port = find_port_and_start(
             args.name, args.ports)
-=======
-        container_start_result, container_start_port = find_port_and_start(container_start_name, args.ports)
->>>>>>> origin/master
         if not container_start_result:
             write_log(container_start_name, "Free port not found exit")
             sys.exit(1)
