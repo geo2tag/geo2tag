@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<h2>Geo2Tag instance administration</h2>
+		</div>
+		<div class="row admin-header">
+			<div class="col-xs-3">
+				<a href='/{{instance_prefix}}/admin/service'>Service managment</a>
+			</div>
+			<div class="col-xs-3">
+				<a href='/{{instance_prefix}}/admin/user'>User managment</a>
+			</div>
+			<div class="col-xs-3">
+				<a href='/{{instance_prefix}}/admin/plugin'>Plugin managment</a>
+			</div>
+			<div class="col-xs-3">
+				<a href='/{{instance_prefix}}/admin/log'>Instance logs</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

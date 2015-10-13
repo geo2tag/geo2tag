@@ -41,6 +41,7 @@ from user_routines import getUserId
 from internal_tests_resource import InternalTestsResource
 from log import writeInstanceLog
 from user_routines import getUserId
+from admin_resource import AdminResource
 
 API = None
 
@@ -134,6 +135,9 @@ getApi().add_resource(
 getApi().add_resource(
     InternalTestsResource,
     getPathWithPrefix('/internal_tests'))
+getApi().add_resource(
+    AdminResource,
+    getPathWithPrefix('/admin'))
 
 
 def initApp(api):
