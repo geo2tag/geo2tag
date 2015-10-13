@@ -1,5 +1,7 @@
 import sys
 from base_geo2tag_exception import BaseGeo2TagException
+
+
 class GeocoderRequestOtherExceed(BaseGeo2TagException):
     ERROR_LIST_OTHER_EXCEED = [10, 11, 12, 13, 14, 15, 16, 17, 21, 22, 23]
     other_error_code = 0

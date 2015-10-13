@@ -9,11 +9,11 @@ GEOJSON_COORDINATES = 'coordinates'
 
 def GeoJsonType(obj):
     jsonObj = geojson.loads(obj)
-    if (len(jsonObj.keys()) == 2) and \
-       (GEOJSON_COORDINATES in jsonObj.keys()) and \
-       (isinstance(jsonObj.get(GEOJSON_COORDINATES), list)):
+    if (len(dict(jsonObj).keys()) == 2) and \
+       (GEOJSON_COORDINATES in dict(jsonObj).keys()) and \
+       (isinstance(dict(jsonObj).get(GEOJSON_COORDINATES), list)):
 
-        if jsonObj.get(GEOJSON_TYPE) in GEOJSON_SUPPORTED_TYPES:
+        if dict(jsonObj).get(GEOJSON_TYPE) in GEOJSON_SUPPORTED_TYPES:
             return jsonObj
         else:
             raise ValueError

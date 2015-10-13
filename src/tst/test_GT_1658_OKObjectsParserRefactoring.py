@@ -5,8 +5,9 @@ from unittest import TestCase
 from open_karelia_objects_parser import OpenKareliaObjectsParser
 from open_data_objects_parser import OpenDataObjectsParser
 
-INHERITANCE_OK_PATT = re.compile("<class 'open_karelia_objects_parser.OpenKareliaObjectsParser'.*"
-                                 "class 'open_data_objects_parser.OpenDataObjectsParser'.*>")
+INHERITANCE_OK_PATT = re.compile(
+    "<class 'open_karelia_objects_parser.OpenKareliaObjectsParser'.*"
+    "class 'open_data_objects_parser.OpenDataObjectsParser'.*>")
 
 
 class testODOL(OpenDataObjectsParser):
@@ -14,6 +15,7 @@ class testODOL(OpenDataObjectsParser):
 
 
 class testODOLimpl(OpenDataObjectsParser):
+
     def parse(self):
         return self.data
 
@@ -21,7 +23,10 @@ class testODOLimpl(OpenDataObjectsParser):
 class TestOKObjetcsParserRefactoring(TestCase):
 
     def testOKObjetcsLoaderRefactoring_inheritance(self):
-        self.assertIsNotNone(re.search(INHERITANCE_OK_PATT, str(inspect.getmro(OpenKareliaObjectsParser))))
+        self.assertIsNotNone(
+            re.search(
+                INHERITANCE_OK_PATT, str(
+                    inspect.getmro(OpenKareliaObjectsParser))))
 
     def testOKObjetcsLoaderRefactoring_notInmlementedException(self):
         with self.assertRaises(TypeError):

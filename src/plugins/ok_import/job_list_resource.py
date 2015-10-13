@@ -4,4 +4,5 @@ from open_karelia_import import openKareliaImport
 import sys
 from job_list_resource_factory import JobListResourceFactory
 
-JobListResource = JobListResourceFactory(OKImportParser, ThreadJob, openKareliaImport)
+JobListResource = JobListResourceFactory(
+    OKImportParser, ThreadJob, openKareliaImport)
