@@ -1,6 +1,4 @@
-import unittest
 import requests
-import json
 from flask import Flask, request
 from basic_integration_test import BasicIntegrationTest
 
