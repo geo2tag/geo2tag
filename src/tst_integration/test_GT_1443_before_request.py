@@ -1,8 +1,5 @@
-import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 
 TEST_URL = '/instance/plugin/test_plugin/res1'
 BAD_TEST_URL = '/instance/plugin/nonexistant_plugin/resource'

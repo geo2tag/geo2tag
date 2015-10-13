@@ -1,8 +1,5 @@
-import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 from config_reader import getHost, getPort, getDbName
 from db_model import getDbObject
 
