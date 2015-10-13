@@ -1,7 +1,5 @@
 import requests
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 from db_model import getChannelsList, getDbObject
 from config_reader import getHost, getPort, getDbName
 

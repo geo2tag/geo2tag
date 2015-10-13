@@ -1,9 +1,7 @@
-import sys
 import requests
 from basic_integration_test import BasicIntegrationTest
 import json
 from bson.objectid import ObjectId
-sys.path.append('../')
 from db_model import getDbObject
 from config_reader import getHost, getPort
 TEST_URL = '/instance/service/testservice/channel'
