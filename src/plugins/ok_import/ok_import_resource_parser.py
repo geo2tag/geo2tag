@@ -3,7 +3,7 @@ import os
 sys.path.append(
     os.path.abspath(
         os.path.join(
-            os.path.dirname(_file_),
+            os.path.dirname(__file__),
             '..',
             '..',
             'open_data_import/')))
