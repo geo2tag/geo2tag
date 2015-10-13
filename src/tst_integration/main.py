@@ -3,6 +3,8 @@ import sys
 from test_tests_page import Test_tests_page
 from test_PointListGet import TestPointListGet
 from basic_integration_test import BasicIntegrationTest
+from test_GT_1703_GeocodingPluginReady import TestGeocodingPluginReady
+from basic_integration_test import BasicIntegrationTest
 from test_plugin_list_resource import TestPluginListResource
 from test_testplugin import TestTestPlugin
 from basic_integration_test import BasicIntegrationTest
@@ -39,9 +41,16 @@ from test_okimport_service_channel_not_exist import Test_OKImportJob_not_exist
 from test_GT_1511 import Test_GT_1511
 from test_bc_parametr_point_list_post import TestBcParametrPointListPost
 from test_GT_1590_extend_parse_parameters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
+from test_GT_1732_GeocodingJobListResource import TestGeocodingJobListResource
+
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(BasicIntegrationTest.parametrize(TestGeocodingPluginReady, param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestGeocodingJobListResource,
+            param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestPluginListResource,

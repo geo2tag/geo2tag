@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from datetime import datetime, date, time
+from datetime import datetime
 from db_model import getLog, getDbObject
 
 DATE_TO = datetime(3000, 1, 1)

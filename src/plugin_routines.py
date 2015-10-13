@@ -1,17 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import os
 from os.path import join as joinpath
 from traceback import format_exc
-import imp
 from url_routines import getPluginUrl
 from log import writeInstanceLog
 from user_routines import getUserId
 
 PLUGINS_DIR_NAME = 'plugins'
-# sys.path.append(PLUGINS_DIR_NAME)
 
 GET_PLUGIN_RESOURCES = 'getPluginResources'
 EXCEPT_ERROR_TEXT = 'Error occurred while loading the plugin '

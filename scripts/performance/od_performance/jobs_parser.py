@@ -1,7 +1,6 @@
 import requests
 import json
 from datetime import datetime
-import time
 import string
 
 AVERAGE = 'average'
@@ -33,7 +32,7 @@ def areAllJobsDone(jobsList):
 
 
 def createJobStatistic(jobsList):
-    minValue = maxMalue = averageValue = summ = 0
+    summ = 0
     for i in range(len(jobsList)):
         jobTime = jobsList[i].get(TIME)
         timeObj = datetime.strptime(jobTime, "%H:%M:%S.%f")

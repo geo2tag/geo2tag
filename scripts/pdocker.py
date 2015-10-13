@@ -34,7 +34,7 @@ def usage():
 
 
 def write_log(name, log_str):
-    file_name = "/tmp/" + name + LOG_NAME
+    file_name = "/tmp/" + name.replace('/', '_') + LOG_NAME
     print log_str
     with open(file_name, 'ab') as log_file:
         log_file.write(log_str)
@@ -44,7 +44,6 @@ def manage_script(name, args):
     child = Popen(args, stdout=PIPE, stderr=PIPE)
     output = child.stdout.read()
     err = child.stderr.read()
-    streamdata = child.communicate()[0]
     rc = child.returncode
     if rc == 0:
         write_log(name, output)
@@ -60,7 +59,7 @@ def start_container(name, port):
 
 
 def stop_container(name):
-    rc = manage_script(name, [MANAGE_CONTAINER, 'kill', name])
+    manage_script(name, [MANAGE_CONTAINER, 'kill', name])
 
 
 def run_unit_tests(name):
@@ -80,7 +79,6 @@ def run_int_tests(name):
 
 def wait_mongo_start(name):
     child = Popen(['docker', 'exec', name, 'mongo'], stdout=PIPE, stderr=PIPE)
-    streamdata = child.communicate()[0]
     return child.returncode
 
 
@@ -145,9 +143,9 @@ def kill_old_containers(kill_time=0):
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
 
-def parse_string_time_to_timestamp(str):
+def parse_string_time_to_timestamp(parsing_str):
     p = re.compile(u'(\d+\w)')
-    time_list = re.findall(p, str)
+    time_list = re.findall(p, parsing_str)
     result = 0
     for time_unit in time_list:
         s = time_unit[-1:]
@@ -187,14 +185,16 @@ def main():
     elif (args.name or args.ports) is None:
         usage()
     else:
-        container_start_name = args.name
+        container_start_name = args.name.replace('/', '_')
+        if "origin_" not in container_start_name:
+            container_start_name = "origin_" + container_start_name
 
         file_name = "/tmp/" + container_start_name + LOG_NAME
         print file_name
 
-        container_start_result, container_start_port = find_port_and_start(args.name, args.ports)
+        container_start_result, container_start_port = find_port_and_start(container_start_name, args.ports)
         if not container_start_result:
-            write_log(args.name, "Free port not found exit")
+            write_log(container_start_name, "Free port not found exit")
             sys.exit(1)
 
         mongo_start_waiter(container_start_name)
