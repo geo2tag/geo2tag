@@ -3,7 +3,8 @@ import pymongo
 import os
 from bson import objectid
 from flask import Flask
-from flask.ext.restful import Api
+import flask_restful as restful
+from flask_restful import Api
 from plugin_routines import enablePlugin
 from db_model import getDbName, getDbObject
 from log import writeInstanceLog
