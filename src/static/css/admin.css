@@ -1,3 +1,10 @@
-.admin-header > .col-xs-3 {
+.admin-header a {
 	text-align: center;
+	display: block;
+	margin: 5px 15px;
+	float: left;
+}
+
+.admin-header a:first-child {
+	margin-left: 0;
 }
