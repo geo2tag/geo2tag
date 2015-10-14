@@ -1,5 +1,5 @@
 class OpenDataToPointTranslator(object):
- 
+
     def __init__(
             self, importDataDict,
             objectRepresentation,
@@ -11,7 +11,7 @@ class OpenDataToPointTranslator(object):
         self.importSource = importSource
         self.channelId = channelId
         self.importDataDict = importDataDict
- 
+
     #@should_be_extended_in_descendents
     def getPointJson(self):
         obj = {}

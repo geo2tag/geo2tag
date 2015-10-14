@@ -3,6 +3,7 @@ from job import Job
 
 OPEN_DATA_URL = 'openDataUrl'
 
+
 class GeocodingJob(Job):
 
     def internalStart(self):

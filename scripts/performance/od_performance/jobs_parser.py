@@ -1,7 +1,6 @@
 import requests
 import json
 from datetime import datetime
-import time
 import string
 
 AVERAGE = 'average'
@@ -11,10 +10,18 @@ TIME = 'time'
 MIN = 'min'
 MAX = 'max'
 JOB = 'job'
-JOBS_LIST = {'average': {'value': {} }, 'min': {'value': {}, 'job': {} }, 'max': {'value': {}, 'job': {} }}
+JOBS_LIST = {
+    'average': {
+        'value': {}}, 'min': {
+            'value': {}, 'job': {}}, 'max': {
+                'value': {}, 'job': {}}}
+
 
 def timeConvert(data):
-    return string.zfill(str(data / 3600000000), 1) + ':' + string.zfill(str(data / 60000000), 2) + ':' + string.zfill(str(data / 1000000), 2) + '.' + str(data)[:6]
+    return string.zfill(str(data / 3600000000),
+                        1) + ':' + string.zfill(str(data / 60000000),
+                                                2) + ':' + string.zfill(str(data / 1000000),
+                                                                        2) + '.' + str(data)[:6]
 
 
 def getImportJobsText(viewJobsLink):
@@ -33,7 +40,7 @@ def areAllJobsDone(jobsList):
 
 
 def createJobStatistic(jobsList):
-    minValue = maxMalue = averageValue = summ = 0
+    summ = 0
     for i in range(len(jobsList)):
         jobTime = jobsList[i].get(TIME)
         timeObj = datetime.strptime(jobTime, "%H:%M:%S.%f")
