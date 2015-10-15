@@ -1,9 +1,7 @@
 import unittest
 import requests
-import sys
-sys.path.append('../')
-from db_model import addService
 from basic_integration_test import BasicIntegrationTest
+from db_model import addService
 
 TEST_URL = '/instance/service/testservice_1'
 TEST_NOT_VALID_URL = '/instance/service/nameservicenotvalid'
