@@ -50,7 +50,10 @@ def geocoderImport(self, channelName, serviceName):
         proc_step += PROC_BLOCK
         point_block = list(
             points_coll.find().skip(proc_step).limit(PROC_BLOCK))
-
+    # Task is done
+    self.done = True
+    # And thread is done too after return
+    return []
 
 def json_list_to_list_of_strings(json_list):
     list_of_strings = []

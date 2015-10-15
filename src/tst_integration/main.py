@@ -42,11 +42,11 @@ from test_GT_1511 import Test_GT_1511
 from test_bc_parametr_point_list_post import TestBcParametrPointListPost
 from test_GT_1590_extend_parse_parameters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
 from test_GT_1732_GeocodingJobListResource import TestGeocodingJobListResource
-
+from test_GT_1741_test_geocoder_import import TestGeocoderImport
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(
+    """suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocodingPluginReady,
             param=host))
@@ -194,7 +194,11 @@ def main(host):
             TestExtendPointListParserWithFlagsBC,
             param=host))
     suite.addTest(BasicIntegrationTest.parametrize(
-        Test_GT_1511, param=host))
+        Test_GT_1511, param=host))"""
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestGeocoderImport,
+            param=host))
 
 ###################################################
 # Place tests above this line ^^
