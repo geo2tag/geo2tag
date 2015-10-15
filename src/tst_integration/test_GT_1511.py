@@ -33,7 +33,7 @@ class Test_GT_1511(BasicIntegrationTest):
         dictJobDescription = json.loads(responseText)
         self.assertEquals(type(dictJobDescription), dict)
         for arg in DATA_ARR:
-            self.assertTrue(arg in dictJobDescription.keys())
+            self.assertTrue(arg in dict(dictJobDescription).keys())
         response = requests.delete(self.getUrl(TEST_URL2))
         responseText = response.text
         responseCode = response.status_code

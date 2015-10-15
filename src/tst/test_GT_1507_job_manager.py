@@ -27,7 +27,9 @@ def backgroundFunction(
 class Test_GT_1507_class_job_manager(TestCase):
 
     def test_GT_1507_class_job_manager(self):
-        importDataDict = {showImageUrl:showImageUrl,showObjectUrl:showObjectUrl}
+        importDataDict = {
+            showImageUrl: showImageUrl,
+            showObjectUrl: showObjectUrl}
         threadJobObj = ThreadJob(
             backgroundFunction,
             channelName,

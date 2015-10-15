@@ -17,14 +17,16 @@ DATA2 = {
 class TestSiteSaveImportFromOkPoint(TestCase):
 
     def testSiteSaveImportFromOkPoint1(self):
-        okotpt = OpenKareliaObjectToPointTranslator({'image_url': ''}, DATA1, None, None, None)
+        okotpt = OpenKareliaObjectToPointTranslator(
+            {'image_url': ''}, DATA1, None, None, None)
         p = okotpt.getPoint()
         self.assertEqual(p['json']['address'], 'site')
         self.assertEqual(p['location']['coordinates'][0], float(100))
         self.assertEqual(p['location']['coordinates'][1], float(200))
 
-    def testSiteSaveImportFromOkPoint2  (self):
-        okotpt = OpenKareliaObjectToPointTranslator({'image_url': ''}, DATA2, None, None, None)
+    def testSiteSaveImportFromOkPoint2(self):
+        okotpt = OpenKareliaObjectToPointTranslator(
+            {'image_url': ''}, DATA2, None, None, None)
         p = okotpt.getPoint()
         self.assertEqual(p['json']['address'], 'site')
         self.assertEqual(p['location']['coordinates'][0], float(0))
