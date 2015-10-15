@@ -4,10 +4,7 @@ from flask import Blueprint, session, request
 from config_reader import getFacebookClientID,\
     getFacebookClientSecret, getFacebookRedirectUrl
 from url_utils import getPathWithPrefix
-# from urllib2 import Request, urlopen, URLError
-# from user_routines import addUser, logUserIn
 from possible_exception import possibleException
-# from authorization_error import AuthorizationError
 
 
 AUTHORIZED_URL = '/login/facebook/authorized'
