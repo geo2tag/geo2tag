@@ -140,7 +140,8 @@ def kill_old_containers(kill_time=0):
         return
 
     for container in containers:
-        print container[CONTAINER_NAME] + " on port " + str(container[CONTAINER_PORT]) + " stop"
+        print container[CONTAINER_NAME] + " on port " + \
+            str(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
@@ -221,7 +222,8 @@ def main():
             sys.exit(1)
 
         containerEnv = "http://" + \
-            os.environ["SERVER"] + ":" + str(container_start_port) + "/instance/tests"
+            os.environ["SERVER"] + ":" + str(container_start_port) + \
+            "/instance/tests"
 
         f = open('propsfile', 'w')
         f.write('CONTAINER=' + containerEnv + '\n')

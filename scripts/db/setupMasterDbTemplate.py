@@ -3,7 +3,6 @@ import sys
 import config_reader
 
 
-
 def import_db(db_name):
     str_forsh = 'scripts/db/mongo.sh -l -H localhost:27017 ' + db_name
     os.system(str_forsh)
