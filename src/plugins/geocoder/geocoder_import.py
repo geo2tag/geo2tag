@@ -12,7 +12,7 @@ ID = '_id'
 PROC_BLOCK = 5000
 
 
-def geocoderImport(self,  channelName, serviceName):
+def geocoderImport(self, channelName, serviceName):
     # Checking for service existence
     getServiceIdByName(serviceName)
     # Getting channel id
@@ -27,7 +27,7 @@ def geocoderImport(self,  channelName, serviceName):
     proc_step = 0
     point_block = list(points_coll.find({
         CHANNEL_ID: channel_id,
-        JSON+'.'+ADDRESS: {"$exists": True}
+        JSON + '.' + ADDRESS: {"$exists": True}
     }).skip(proc_step).limit(PROC_BLOCK))
     while point_block:
         current_size = len(point_block)
@@ -48,7 +48,8 @@ def geocoderImport(self,  channelName, serviceName):
             )
         # Getting next slice of <= 5000 points
         proc_step += PROC_BLOCK
-        point_block = list(points_coll.find().skip(proc_step).limit(PROC_BLOCK))
+        point_block = list(
+            points_coll.find().skip(proc_step).limit(PROC_BLOCK))
 
 
 def json_list_to_list_of_strings(json_list):

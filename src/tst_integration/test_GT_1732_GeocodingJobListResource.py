@@ -4,6 +4,7 @@ import json
 
 
 class TestGeocodingJobListResource(BasicIntegrationTest):
+
     def testGeocodingJobListResource(self):
         r = requests.get(
             self.getUrl(
