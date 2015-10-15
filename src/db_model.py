@@ -191,9 +191,11 @@ def getChannelsList(serviceName, substring, number, offset):
         return db_getchannellist[CHANNELS_COLLECTION].find(
             {'name': {'$regex': substring}}).limit(number)
     elif offset is not None and number is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find().skip(offset).limit(number)
+        return db_getchannellist[
+            CHANNELS_COLLECTION].find().skip(offset).limit(number)
     elif substring is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find({'name': {'$regex': substring}})
+        return db_getchannellist[CHANNELS_COLLECTION].find(
+            {'name': {'$regex': substring}})
     elif number is not None:
         return db_getchannellist[CHANNELS_COLLECTION].find().limit(number)
     elif offset is not None:
@@ -203,7 +205,8 @@ def getChannelsList(serviceName, substring, number, offset):
 def getChannelById(serviceName, channelId):
     db_channelbyid = getDbObject(serviceName)
     if isinstance(channelId, str) or isinstance(channelId, unicode):
-        obj = db_channelbyid[CHANNELS_COLLECTION].find_one({'_id': ObjectId(channelId)})
+        obj = db_channelbyid[CHANNELS_COLLECTION].find_one(
+            {'_id': ObjectId(channelId)})
     else:
         obj = db_channelbyid[CHANNELS_COLLECTION].find_one({'_id': channelId})
     if obj is not None:
@@ -229,9 +232,11 @@ def deleteChannelById(serviceName, channelId):
         result = list(db_deletechannlebyid[CHANNELS_COLLECTION].find(
             {'_id': ObjectId(channelId)}))
     else:
-        result = list(db_deletechannlebyid[CHANNELS_COLLECTION].find({'_id': channelId}))
+        result = list(db_deletechannlebyid[
+                      CHANNELS_COLLECTION].find({'_id': channelId}))
     if len(result) > 0:
-        db_deletechannlebyid[CHANNELS_COLLECTION].remove({'_id': ObjectId(channelId)})
+        db_deletechannlebyid[CHANNELS_COLLECTION].remove(
+            {'_id': ObjectId(channelId)})
     else:
         raise ChannelDoesNotExist()
 
@@ -246,7 +251,8 @@ def addChannel(name, json, owner_id, serviceName):
 def updateChannel(serviceName, channelId, name, json, acl):
     db_updatechannel = getDbObject(serviceName)
     try:
-        obj = db_updatechannel[CHANNELS_COLLECTION].find_one({ID: ObjectId(channelId)})
+        obj = db_updatechannel[CHANNELS_COLLECTION].find_one(
+            {ID: ObjectId(channelId)})
     except:
         raise ChannelDoesNotExist()
     if obj is None:
@@ -262,7 +268,8 @@ def updateChannel(serviceName, channelId, name, json, acl):
 
 def getChannelByName(serviceName, channelName):
     db_getchannelbyname = getDbObject(serviceName)
-    obj = db_getchannelbyname[CHANNELS_COLLECTION].find_one({NAME: channelName})
+    obj = db_getchannelbyname[
+        CHANNELS_COLLECTION].find_one({NAME: channelName})
     if obj is not None:
         return obj
     raise ChannelDoesNotExist()
@@ -270,7 +277,8 @@ def getChannelByName(serviceName, channelName):
 
 def deletePointById(serviceName, pointId):
     db_deletepointbyid = getDbObject(serviceName)
-    obj = db_deletepointbyid[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    obj = db_deletepointbyid[POINTS_COLLECTION].find_one(
+        {ID: ObjectId(pointId)})
     if obj is not None:
         db_deletepointbyid[POINTS_COLLECTION].remove({ID: ObjectId(pointId)})
     else:
@@ -304,7 +312,8 @@ def addPoints(serviceName, pointsArray):
 def updatePoint(serviceName, pointId, changes):
     db_updatepoint = getDbObject(serviceName)
     try:
-        obj = db_updatepoint[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+        obj = db_updatepoint[POINTS_COLLECTION].find_one(
+            {ID: ObjectId(pointId)})
     except:
         raise PointDoesNotExist()
     if obj is None:
@@ -321,8 +330,10 @@ def addServiceDb(dbName):
     db_addservicedb = getDbObject(dbName)
     pymongo.GEOSPHERE = '2dsphere'
     pymongo.DESCENDING = -1
-    db_addservicedb[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
-    db_addservicedb[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
+    db_addservicedb[COLLECTION_POINTS_NAME].ensure_index(
+        [("location", pymongo.GEOSPHERE)])
+    db_addservicedb[COLLECTION_POINTS_NAME].create_index(
+        [("date", pymongo.DESCENDING)])
 
 
 def applyFromToCriterion(field, value_from, value_to, criterion):
