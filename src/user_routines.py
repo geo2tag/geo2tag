@@ -35,6 +35,7 @@ def findUserById(_id):
 
 
 def addUser(_id, firstName, lastName, email):
+    return_id = _id
     try:
         findUserById(_id)
     except UserDoesNotExist:
@@ -43,8 +44,8 @@ def addUser(_id, firstName, lastName, email):
             {FIND_KEY_ID: _id, FIRST_NAME: firstName, LAST_NAME: lastName,
              EMAIL: email})
     finally:
-        return _id
-
+        return_id = _id
+    return return_id
 
 def getUserId():
     try:

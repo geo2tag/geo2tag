@@ -1,4 +1,4 @@
-from configparser import ConfigParser, SafeConfigParser
+from configparser import SafeConfigParser
 
 import os
 CONFIG_PATH = os.path.dirname(os.path.realpath(__file__)) + '/config.ini'
@@ -61,9 +61,9 @@ def getInstancePrefix():
 
 
 def getDebugUsers():
-    str = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
-    list = str.split(',')
-    return list
+    str_users = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
+    list_users = str_users.split(',')
+    return list_users
 
 
 def getGoogleClientID():

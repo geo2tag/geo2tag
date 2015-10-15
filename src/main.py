@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from setuptools.command.egg_info import write_pkg_info
 from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
-from flask import Flask, current_app
-from flask.ext.restful import Resource, Api
+from flask import Flask
+from flask.ext.restful import Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
@@ -24,7 +23,6 @@ from login_google_resource import LoginGoogleResource, google_oauth
 from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
-from os.path import join as joinpath
 from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
 from user_routines import getUserId

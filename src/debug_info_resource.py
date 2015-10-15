@@ -6,9 +6,9 @@ DEBUG_FILE_PATH = os.path.dirname(os.path.realpath(__file__)) + "/DEBUG"
 
 
 def getDebugInfo():
-    file = open(DEBUG_FILE_PATH, 'r')
+    file_defuginfo = open(DEBUG_FILE_PATH, 'r')
     print DEBUG_FILE_PATH
-    listFileData = file.readlines()
+    listFileData = file_defuginfo.readlines()
     return ''.join(listFileData)
 
 

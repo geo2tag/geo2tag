@@ -1,16 +1,8 @@
 from db_model import getLog
 from config_reader import getDbName
-from flask import request
 from flask.ext.restful import Resource
-from flask_restful import reqparse
-from datetime import datetime
-from calendar import timegm
 from log_parsers import LogParser
-import pymongo
-import json
-import aniso8601
-import pytz
-from date_utils import dateSerialiser, dateDeserialiser, datetime_from_iso8601
+from date_utils import dateDeserialiser
 
 
 NUMBER = 'number'
