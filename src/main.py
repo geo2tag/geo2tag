@@ -4,7 +4,8 @@ from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
-from flask.ext.restful import Resource, Api
+import flask_restful as restful
+from flask_restful import Resource, Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource

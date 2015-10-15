@@ -1,4 +1,5 @@
-from flask.ext.restful import Resource
+import flask_restful as restful
+from flask_restful import Resource
 from plugin_routines import getPluginList
 from db_model import getPluginState
 

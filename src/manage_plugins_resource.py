@@ -1,5 +1,6 @@
 from flask_restful import reqparse
-from flask.ext.restful import Resource
+import flask_restful as restful
+from flask_restful import Resource
 from possible_exception import possibleException
 from flask import request
 from db_model import setPluginState

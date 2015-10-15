@@ -1,7 +1,9 @@
 from job_resource import JobResource
 from geocoding_job_list_resource import GeocodingJobListResource
 
+
 class GeocodingJobResource(JobResource):
+
     def derivedMethodStub(self):
         pass
 
@@ -13,4 +15,3 @@ def getPluginResources():
 
 def getPluginInfo():
     return 'Plugin that imports data from Open Karelia'
-

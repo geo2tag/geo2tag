@@ -1,7 +1,8 @@
 import unittest
 import os
 from flask import Flask
-from flask.ext.restful import Api
+import flask_restful as restful
+from flask_restful import Api
 from main import initApp
 from plugin_routines import getPluginList
 
