@@ -139,6 +139,7 @@ getApi().add_resource(
     AdminLogResource,
     getPathWithPrefix('/admin/log'))
 
+
 def initApp(api):
     import os
     homeDir = os.getcwd()
