@@ -3,7 +3,12 @@
 echo
 echo "==================== INTEGRATIONTESTS ====================="
 echo
-
+MYPATH="$PWD"
+PATH1="$PWD/src"
+PATH2="$PWD/src/plugins/ok_import"
+PATH3="$PWD/src/open_data_import"
+PATH4="$PWD/src/geocoders"
+PATH5="$PWD/src/plugins/geocoder"
 set -e
 DB_SCRIPTS_PATH='scripts/db/';
 
