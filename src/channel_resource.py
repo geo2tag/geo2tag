@@ -1,5 +1,4 @@
 from possible_exception import possibleException
-import flask_restful as restful
 from flask_restful import Resource
 from db_model import getChannelById, deleteChannelById
 from db_model import updateChannel
