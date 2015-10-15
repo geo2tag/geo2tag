@@ -7,6 +7,13 @@ CONFIG_FILE=${1:-"geomongo.conf"}
 FLAG_KEEP_CONFIG_INI=false
 CATALOG='geomongo'
 
+PATH1="/var/www/geomongo"
+PATH2="/var/www/geomongo/plugins/ok_import"
+PATH3="/var/www/geomongo/open_data_import"
+PATH4="/var/www/geomongo/plugins/geocoder"
+eval 'export PYTHONPATH="$PYTHONPATH$PATH1:$PATH2:$PATH3:$PATH4"'
+echo "$PYTHONPATH"
+
 while getopts ":c:f" opt ;
 do
     case $opt in
