@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import unittest
+>>>>>>> abf1ef8c3dd9db76347a06d4d591073b1c019adb
 import requests
 from basic_integration_test import BasicIntegrationTest
 
