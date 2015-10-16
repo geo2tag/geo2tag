@@ -3,7 +3,9 @@ from datetime import datetime
 import requests
 from jobs_parser import *
 URL = 'http://httpbin.org/status/200'
-JSON_TEST = '{"_id": {"$oid": "55671ae113293c504d515a33"}, "config": {"log_size": 1048576, "logSize": 10}, "name": "testservice", "owner_id": ""}'
+JSON_TEST = '{"_id": {"$oid": "55671ae113293c504d515a33"}, ' \
+            '"config": {"log_size": 1048576, "logSize": 10},' \
+            ' "name": "testservice", "owner_id": ""}'
 JSON_RESULT = {
     u'_id': {
         u'$oid': u'55671ae113293c504d515a33'},
@@ -65,30 +67,35 @@ JOBS_LIST2 = [
      'serviceName': 'serviceName'}
 ]
 
-JOB_STATISTIC_TEST = [{"openDataUrl": "http://mobile.openkarelia.org//get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964",
-                       "showObjectUrl": "",
-                       "channelName": "test_GT_1286",
-                       "done": True,
-                       "time": "0:00:03.846279",
-                       "showImageUrl": "",
-                       "_id": "FaBKKA05Xvoc",
-                       "serviceName": "testservice"},
-                      {"openDataUrl": "http://mobile.openkarelia.org//get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964",
-                       "showObjectUrl": "",
-                       "channelName": "test_GT_1286",
-                       "done": True,
-                       "time": "0:00:04.895279",
-                       "showImageUrl": "",
-                       "_id": "FaBKKA05Xvoc",
-                       "serviceName": "testservice"},
-                      {"openDataUrl": "http://mobile.openkarelia.org//get_nearest_objects?latitude=61.787458487564&longitude=34.362810647964",
-                       "showObjectUrl": "",
-                       "channelName": "test_GT_1286",
-                       "done": True,
-                       "time": "0:00:03.84523",
-                       "showImageUrl": "",
-                       "_id": "FaBKKA05Xvoc",
-                       "serviceName": "testservice"}]
+JOB_STATISTIC_TEST = \
+    [{"openDataUrl": "http://mobile.openkarelia.org//get_nearest_objects?"
+        "latitude=61.787458487564&longitude=34.362810647964",
+        "showObjectUrl": "",
+        "channelName": "test_GT_1286",
+        "done": True,
+        "time": "0:00:03.846279",
+        "showImageUrl": "",
+        "_id": "FaBKKA05Xvoc",
+        "serviceName": "testservice"},
+        {"openDataUrl": "http://mobile.openkarelia.org//get_nearest_objects?"
+            "latitude=61.787458487564&longitude=34.362810647964",
+            "showObjectUrl": "",
+            "channelName": "test_GT_1286",
+            "done": True,
+            "time": "0:00:04.895279",
+            "showImageUrl": "",
+            "_id": "FaBKKA05Xvoc",
+            "serviceName": "testservice"},
+        {"openDataUrl":
+            "http://mobile.openkarelia.org//get_nearest_objects?"
+            "latitude=61.787458487564&longitude=34.362810647964",
+            "showObjectUrl": "",
+            "channelName": "test_GT_1286",
+            "done": True,
+            "time": "0:00:03.84523",
+            "showImageUrl": "",
+            "_id": "FaBKKA05Xvoc",
+            "serviceName": "testservice"}]
 STATISTIC_RESULT = {
     'average': {
         'value': '0:00:04.419559'}, 'min': {

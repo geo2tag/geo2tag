@@ -1,5 +1,6 @@
 from unittest import TestCase
-from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
+from open_karelia_object_to_point_translator import \
+    OpenKareliaObjectToPointTranslator
 
 DATA1 = {
     'name': ['name'],

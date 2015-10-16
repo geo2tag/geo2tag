@@ -51,13 +51,15 @@ class TestParserServiceList(TestCase):
             self.assertIsNone(args.get(NUMBER))
 
     def testPostParser(self):
-        with app.test_request_context('/', data=CORRECT_FORM, method='POST'):
+        with app.test_request_context('/', data=CORRECT_FORM,
+                                      method='POST'):
             args = ServiceListParser.parsePostParameters()
             self.assertEquals(args[NAME], NAME_VALUE)
             self.assertEquals(args[LOG_SIZE], LOG_SIZE_VALUE)
             self.assertEquals(args[OWNER_ID], OWNER_ID_VALUE)
 
-        with app.test_request_context('/', data=SEMIFILLED_FORM, method='POST'):
+        with app.test_request_context('/', data=SEMIFILLED_FORM,
+                                      method='POST'):
             args = ServiceListParser.parsePostParameters()
             self.assertEquals(args[NAME], NAME_VALUE)
             self.assertEquals(args[LOG_SIZE], DEFAULT_LOG_SIZE)
