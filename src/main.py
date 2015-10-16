@@ -4,7 +4,8 @@ from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask, current_app
-from flask.ext.restful import Resource, Api
+import flask_restful as restful
+from flask_restful import Resource, Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
@@ -41,7 +42,7 @@ from user_routines import getUserId
 from internal_tests_resource import InternalTestsResource
 from log import writeInstanceLog
 from user_routines import getUserId
-
+from admin_log_resource import AdminLogResource
 API = None
 
 
@@ -134,6 +135,9 @@ getApi().add_resource(
 getApi().add_resource(
     InternalTestsResource,
     getPathWithPrefix('/internal_tests'))
+getApi().add_resource(
+    AdminLogResource,
+    getPathWithPrefix('/admin/log'))
 
 
 def initApp(api):

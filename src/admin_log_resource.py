@@ -1,13 +1,12 @@
-import flask_restful as restful
-from flask_restful import Resource
+from flask.ext.restful import Resource
 from flask import render_template
 from flask import make_response
 
 
-class LoginResource(Resource):
+class AdminLogResource(Resource):
 
     def get(self):
         return make_response(
             render_template(
-                'login.html',
+                'log.html',
                 instance_prefix='instance'))

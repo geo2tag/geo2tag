@@ -1,0 +1,17 @@
+#log-form > .row{
+	padding: 10px;
+}
+
+#log-form input {
+	width: 100px;
+	float: left;
+	margin: 0 15px;
+}
+
+#log-form input[name="search-substring"] {
+	width: 80%;
+}
+
+.pagination {
+	text-align: center;
+}
