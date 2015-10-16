@@ -45,8 +45,8 @@ API = None
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
-        return make_response(obj, code)
-    return make_response(json_util.dumps(obj), code)
+        return make_response(obj, code, headers)
+    return make_response(json_util.dumps(obj), code, headers)
 
 
 def getApi():
