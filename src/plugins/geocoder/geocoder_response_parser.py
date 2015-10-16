@@ -14,7 +14,8 @@ class GeocoderResponseParser():
         # 2) [lat, lan]]
         JSONconv = loads(text)
         resArr = None
-        if field_in_dict_and_defined(TOTAL_RESULTS_COUNT, JSONconv) and JSONconv[
+        if field_in_dict_and_defined(TOTAL_RESULTS_COUNT, JSONconv)\
+                and JSONconv[
                 TOTAL_RESULTS_COUNT] == 0:
             return None
         if field_in_dict_and_defined(GEONAMES, JSONconv):

@@ -33,5 +33,6 @@ class GeocoderRequestOtherExceed(BaseGeo2TagException):
             self.message_error = 'Service not implemented'
 
     def getReturnObject(self):
-        ERROR = 'Error code:' + self.other_error_code + ',Status:' + self.message_error
+        ERROR = 'Error code:' + self.other_error_code + \
+            ',Status:' + self.message_error
         return ERROR

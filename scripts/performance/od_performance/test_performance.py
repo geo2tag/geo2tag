@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from jobs_creator import createImportJob
-from jobs_parser import createJobStatistic, parseJobs, getImportJobsText, areAllJobsDone
+from jobs_parser import createJobStatistic, parseJobs, \
+    getImportJobsText, areAllJobsDone
 import time
 from requests.exceptions import ConnectionError
 
