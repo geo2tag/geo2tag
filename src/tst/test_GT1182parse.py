@@ -18,7 +18,8 @@ DATE_TO_VALUE = '2015-06-15T17:00:00.000000'
 
 
 CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + str(OFFSET_VALUE) + \
-    '&' + DATE_FROM + '=' + str(DATE_FROM_VALUE) + '&' + DATE_TO + '=' + str(DATE_TO_VALUE)
+    '&' + DATE_FROM + '=' + str(DATE_FROM_VALUE) + \
+    '&' + DATE_TO + '=' + str(DATE_TO_VALUE)
 INCORRECT_ARGS = 'incorect='
 app = Flask(__name__)
 

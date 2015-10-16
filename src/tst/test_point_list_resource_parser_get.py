@@ -36,7 +36,8 @@ GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
 
 CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + str(OFFSET_VALUE) + '&' + DATE_FROM + '=' + str(
     DATE_FROM_VALUE) + '&' + DATE_TO + '=' + str(DATE_TO_VALUE) + '&' + BC_FROM + '=' + BC_FROM_VALUE + '&' + BC_TO + \
-    '=' + BC_TO_VALUE + '&' + CHANNEL_IDS + '=' + CHANNEL_IDS_VALUE + '&' + GEOMETRY + '=' + GEOMETRY_VALUE
+    '=' + BC_TO_VALUE + '&' + CHANNEL_IDS + '=' + \
+    CHANNEL_IDS_VALUE + '&' + GEOMETRY + '=' + GEOMETRY_VALUE
 INCORRECT_ARGS = 'incorect='
 app = Flask(__name__)
 
