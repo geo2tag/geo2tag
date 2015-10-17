@@ -20,31 +20,21 @@ TEST_DATA_AFTER = [
     [0, 0],
     [30.31413, 59.93863]
 ]
-OLD_GEONAMES_LOGIN = getGeonamesLogin()
-NEW_GEONAMES_LOGIN = r'geo2tag'
-config = RawConfigParser()
-config.read(r'../../config/config.ini')
 db = getDbObject(SERVICE_NAME)
 points = db['points']
+
 
 class test:
     def __init__(self):
         self.done = False
 
+
 class TestGeocoderImportBackFunc(TestCase):
 
     def setUp(self):
-        config['geocoding']['geonames_login'] = NEW_GEONAMES_LOGIN
-        with open(r'../config.ini', 'wb') as configfile:
-            config.write(configfile)
         self.data_before = list(points.find({'channel_id': CHANNEL_ID}))
         self.addresses_before = [point['location'][
             'coordinates'] for point in self.data_before]
-
-    def tearDown(self):
-        config['geocoding']['geonames_login'] = OLD_GEONAMES_LOGIN
-        with open(r'../config.ini', 'wb') as configfile:
-            config.write(configfile)
 
     def testGeocoderImportBackFunc(self):
         for point in self.addresses_before:
