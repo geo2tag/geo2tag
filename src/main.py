@@ -1,3 +1,4 @@
+from user_find_resource import UserFindResource
 # -*- coding: utf-8 -*-
 from setuptools.command.egg_info import write_pkg_info
 from manage_plugins_resource import ManagePluginsResource
@@ -140,6 +141,7 @@ getApi().add_resource(
     getPathWithPrefix('/admin/log'))
 
 
+getApi().add_resource(UserFindResource, getPathWithPrefix('instance/user/'))
 def initApp(api):
     import os
     homeDir = os.getcwd()
