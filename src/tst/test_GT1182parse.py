@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from datetime import datetime, date, time
-from flask import Flask, request
-from calendar import timegm
+from flask import Flask
 import json
-import aniso8601
-import pytz
 from log_parsers import LogParser
 from date_utils import dateDeserialiser
 
@@ -22,8 +17,10 @@ DATE_TO = 'date_to'
 DATE_TO_VALUE = '2015-06-15T17:00:00.000000'
 
 
-CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + str(OFFSET_VALUE) + \
-    '&' + DATE_FROM + '=' + str(DATE_FROM_VALUE) + '&' + DATE_TO + '=' + str(DATE_TO_VALUE)
+CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + \
+    '&' + OFFSET + '=' + str(OFFSET_VALUE) + \
+    '&' + DATE_FROM + '=' + str(DATE_FROM_VALUE) + \
+    '&' + DATE_TO + '=' + str(DATE_TO_VALUE)
 INCORRECT_ARGS = 'incorect='
 app = Flask(__name__)
 

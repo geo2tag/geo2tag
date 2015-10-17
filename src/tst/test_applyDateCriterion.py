@@ -30,7 +30,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 True,
                 False
-                ))
+            ))
         result_2 = list(
             findPoints(
                 TEST_SERVICE,
@@ -46,7 +46,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 True,
                 True
-                ))
+            ))
         result_3 = list(
             findPoints(
                 TEST_SERVICE,
@@ -62,7 +62,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 False,
                 False
-                ))
+            ))
         result_4 = list(
             findPoints(
                 TEST_SERVICE,
@@ -74,7 +74,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 None,
                 TEST_DATE_TO
-                ))
+            ))
         result_5 = list(
             findPoints(
                 TEST_SERVICE,
@@ -86,7 +86,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 TEST_DATE_TO,
                 None
-                ))
+            ))
         result_6 = list(
             findPoints(
                 TEST_SERVICE,
@@ -102,7 +102,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 None,
                 True
-                ))
+            ))
         result_7 = list(
             findPoints(
                 TEST_SERVICE,
@@ -117,7 +117,7 @@ class TestApplydateCriterion(unittest.TestCase):
                 None,
                 None,
                 True
-                ))
+            ))
         self.assertEquals(len(result_1), 3)
         self.assertEquals(len(result_2), 1)
         self.assertEquals(len(result_3), 1)

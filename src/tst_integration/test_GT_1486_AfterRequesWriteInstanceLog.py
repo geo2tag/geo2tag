@@ -1,8 +1,6 @@
 import requests
-import sys
 from datetime import datetime
 from basic_integration_test import BasicIntegrationTest
-sys.path.append('../')
 from url_routines import getInstancePrefix
 
 
@@ -11,7 +9,9 @@ URL_INSTANCE_LOG = '/' + getInstancePrefix() + '/log'
 MESSAGE_FIELD = 'message'
 VALID_MESSAGE = 'Request url: http://geomongo/instance/status, request data: '
 
+
 class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
+
     def testAfterRequestWriteInstanceLog(self):
         datetime_from = datetime.now()
         requests.get(self.getUrl(URL_STATUS))
@@ -22,6 +22,9 @@ class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
                              'offset': 0,
                              'date_from': str(datetime_from.isoformat()),
                              'date_to': str(datetime_to.isoformat())
-                         })
+        })
         import ast
-        self.assertEqual(ast.literal_eval(r.text)[0][MESSAGE_FIELD], VALID_MESSAGE)
+        self.assertEqual(
+            ast.literal_eval(
+                r.text)[0][MESSAGE_FIELD],
+            VALID_MESSAGE)

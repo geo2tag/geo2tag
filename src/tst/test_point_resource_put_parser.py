@@ -31,7 +31,11 @@ class test_GT_1318_Point_Parser(TestCase):
 
     def test_GT_1318_Point_Parser(self):
 
-        with app.test_request_context(BAD_URL, data=INCORRECT_ARGS, method='PUT'):
+        with app.test_request_context(
+                BAD_URL,
+                data=INCORRECT_ARGS,
+                method='PUT'
+        ):
             with self.assertRaises(BadRequest):
                 args = PointResourceParsers.parsePutParameters()
 

@@ -1,10 +1,7 @@
-from flask import request
-from flask.ext.restful import Resource
-from flask_restful import reqparse
-from config_reader import getHost, getPort, getDbName
+import flask_restful as restful
+from flask_restful import Resource
 from db_model import getServiceIdByName, updateService, removeService
 from possible_exception import possibleException
-from service_not_exist_exception import ServiceNotExistException
 from service_parsers import ServiceParser
 
 SRV_NAME_DISCR = 'Service description'

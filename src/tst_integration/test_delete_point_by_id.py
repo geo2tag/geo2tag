@@ -1,8 +1,6 @@
 import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 from db_model import getDbObject
 
 TEST_SERVICE = 'testservice'

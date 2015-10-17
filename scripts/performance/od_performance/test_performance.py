@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from jobs_creator import *
-from jobs_parser import *
+from jobs_creator import createImportJob
+from jobs_parser import createJobStatistic, parseJobs, \
+    getImportJobsText, areAllJobsDone
 import time
 from requests.exceptions import ConnectionError
 
@@ -12,9 +13,10 @@ TIMEOUT = '-timeout'
 DEFAULT_JOB_COUNT = 1
 DEFAULT_TIMEOUT = 60
 
+
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     try:
-        for i in range(0, jobsCount):
+        for _ in range(0, jobsCount):
             createImportJob(createJobLink, jobData)
     except ConnectionError:
         print "Connection to" + createJobLink + " not works"

@@ -4,8 +4,6 @@ import json
 from pymongo import MongoClient
 from flask import Flask, request
 from basic_integration_test import BasicIntegrationTest
-import sys
-sys.path.append('../')
 from db_model import addPoints, getDbObject
 from bson.objectid import ObjectId
 
@@ -28,7 +26,13 @@ class TestPointListPostRequest(BasicIntegrationTest):
     def testPointListPostRequest(self):
         db = getDbObject(DB)
         response = requests.post(self.getUrl(TEST_URL), data=json.dumps(
-            [{LAT: 1.1, LON: 1.1, ALT: 1.1, JSON: {'a': 'b'}, CHANNEL_ID: 'channel_id_value'}]))
+            [{
+                LAT: 1.1,
+                LON: 1.1,
+                ALT: 1.1,
+                JSON: {'a': 'b'},
+                CHANNEL_ID: 'channel_id_value'
+            }]))
         responseCode = response.status_code
         responseText = response.text
         obj1 = db[COLLECTION].find_one({CHANNEL_ID: CHANNEL_IDS_VALUE})

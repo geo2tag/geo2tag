@@ -33,7 +33,7 @@ class GeonamesRequestSender():
                 callback(callback_response)
                 callback_response = []
                 time.sleep((e.lenght_to_period) * 60)
-        callback(callback_response)
+        return callback(callback_response)
 
     @classmethod
     def requestSingleCoordinates(cls, address, geonmesLogin):
@@ -44,7 +44,8 @@ class GeonamesRequestSender():
 
     @classmethod
     def createRequestUrl(cls, address, geonmesLogin):
-        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + USERNAME + geonmesLogin
+        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + \
+            USERNAME + geonmesLogin
         return url
 
     @classmethod

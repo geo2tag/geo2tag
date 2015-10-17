@@ -1,5 +1,5 @@
-from flask_restful import reqparse
-from flask.ext.restful import Resource
+import flask_restful as restful
+from flask_restful import Resource
 from flask import render_template
 from flask import make_response
 

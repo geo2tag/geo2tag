@@ -14,5 +14,5 @@ class TestKareliaObjectsImageUrl(unittest.TestCase):
 
     def testKareliaObjectsImageUrl(self):
         result = list(findPoints(TEST_SERVICE, TEST_CHANNEL, TEST_NUMBER))
-        for i in result:    
-            self.assertEquals( HTTP_KEYWORD_TO_TEST in i[JSON][IMAGE_URL], True)
+        for i in result:
+            self.assertEquals(HTTP_KEYWORD_TO_TEST in i[JSON][IMAGE_URL], True)

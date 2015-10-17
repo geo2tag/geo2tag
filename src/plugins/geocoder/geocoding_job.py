@@ -1,10 +1,8 @@
 import threading
-import sys
-import os
-sys.path.append('/var/www/geomongo/open_data_import')
 from job import Job
 
 OPEN_DATA_URL = 'openDataUrl'
+
 
 class GeocodingJob(Job):
 

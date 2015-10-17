@@ -3,7 +3,8 @@ import pymongo
 import os
 from bson import objectid
 from flask import Flask
-from flask.ext.restful import Api
+import flask_restful as restful
+from flask_restful import Api
 from plugin_routines import enablePlugin
 from db_model import getDbName, getDbObject
 from log import writeInstanceLog
@@ -24,8 +25,10 @@ FIELD_MESSAGE = 'message'
 ID = '_id'
 ANONYM_USER = 'anonym'
 
-MESSAGE_LOAD_DONE = 'Plugin ' + PLUGIN_DONE_PLUGIN + ' successfully loaded'
-MESSAGE_LOAD_FAIL = 'Error occurred while loading the plugin ' + PLUGIN_FAIL_PLUGIN
+MESSAGE_LOAD_DONE = 'Plugin ' + PLUGIN_DONE_PLUGIN + \
+                    ' successfully loaded'
+MESSAGE_LOAD_FAIL = 'Error occurred while loading the plugin ' + \
+                    PLUGIN_FAIL_PLUGIN
 
 
 class TestLogWritingForPluginLoad(TestCase):
