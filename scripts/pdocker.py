@@ -44,7 +44,7 @@ def manage_script(name, args):
     child = Popen(args, stdout=PIPE, stderr=PIPE)
     output = child.stdout.read()
     err = child.stderr.read()
-    streamdata = child.communicate()[0]
+    child.communicate()
     rc = child.returncode
     if rc == 0:
         write_log(name, output)
@@ -82,7 +82,7 @@ def run_int_tests(name):
 
 def wait_mongo_start(name):
     child = Popen(['docker', 'exec', name, 'mongo'], stdout=PIPE, stderr=PIPE)
-    streamdata = child.communicate()[0]
+    child.communicate()
     return child.returncode
 
 
