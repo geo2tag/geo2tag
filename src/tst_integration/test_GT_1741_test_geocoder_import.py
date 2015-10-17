@@ -7,7 +7,8 @@ import time
 
 GET_POST_JOB_URL = 'instance/plugin/geocoder/service/testservice/job'
 POST_IMPORT_DATA = {'channelName': 'geocoder_plugin_test_channel'}
-GET_POINTS_URL = 'instance/service/testservice/point?number=1000&channel_ids=556721a52a2e7febd2744307'
+GET_POINTS_URL = 'instance/service/testservice/point?number=' \
+                 '1000&channel_ids=556721a52a2e7febd2744307'
 DATA_FILE = 'geocoding_data_test_after_import.txt'
 DONE = 'done'
 
