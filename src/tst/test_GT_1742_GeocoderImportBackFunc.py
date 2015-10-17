@@ -27,6 +27,9 @@ config.read(r'../../config/config.ini')
 db = getDbObject(SERVICE_NAME)
 points = db['points']
 
+class test:
+    def __init__(self):
+        self.done = False
 
 class TestGeocoderImportBackFunc(TestCase):
 
@@ -46,7 +49,8 @@ class TestGeocoderImportBackFunc(TestCase):
     def testGeocoderImportBackFunc(self):
         for point in self.addresses_before:
             self.assertEqual(point, [0, 0])
-        geocoderImport(None, CHANNEL_NAME, SERVICE_NAME)
+        t = test()
+        geocoderImport(t, CHANNEL_NAME, SERVICE_NAME)
         data_after = list(points.find({'channel_id': CHANNEL_ID}))
         addresses = [point['location']['coordinates'] for point in data_after]
         for i in range(len(TEST_DATA_AFTER)):

@@ -55,6 +55,7 @@ def geocoderImport(self, channelName, serviceName):
     # And thread is done too after return
     return []
 
+
 def json_list_to_list_of_strings(json_list):
     list_of_strings = []
     for json in json_list:

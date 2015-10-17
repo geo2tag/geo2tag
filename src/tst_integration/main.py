@@ -46,7 +46,7 @@ from test_GT_1741_test_geocoder_import import TestGeocoderImport
 
 def main(host):
     suite = unittest.TestSuite()
-    """suite.addTest(
+    suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocodingPluginReady,
             param=host))
@@ -194,7 +194,7 @@ def main(host):
             TestExtendPointListParserWithFlagsBC,
             param=host))
     suite.addTest(BasicIntegrationTest.parametrize(
-        Test_GT_1511, param=host))"""
+        Test_GT_1511, param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocoderImport,
