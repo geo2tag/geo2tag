@@ -34,6 +34,3 @@ class TestGt1764UnitResourceParser(TestCase):
             self.assertIsNone(args.get(LOGIN))
             self.assertIsNone(args.get(OFFSET))
             self.assertIsNone(args.get(NUMBER))
-
-
-
