@@ -139,9 +139,10 @@ getApi().add_resource(
 getApi().add_resource(
     AdminLogResource,
     getPathWithPrefix('/admin/log'))
+getApi().add_resource(
+    UserFindResource,
+    getPathWithPrefix('instance/user/<string:user_id>'))
 
-
-getApi().add_resource(UserFindResource, getPathWithPrefix('instance/user/'))
 def initApp(api):
     import os
     homeDir = os.getcwd()

@@ -1,9 +1,11 @@
-from flask_restful import reqparse
 from flask.ext.restful import Resource
 from possible_exception import possibleException
+from user_routines import findUserById
+
+USER_ID = 'user_id'
 
 class UserFindResource(Resource):
+
     @possibleException
     def get(self):
-        pass
-        #This method is empty. You can add code here
+        return findUserById(USER_ID)
