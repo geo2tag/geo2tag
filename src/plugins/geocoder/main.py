@@ -10,7 +10,8 @@ class GeocodingJobResource(JobResource):
 
 def getPluginResources():
     return {'service/<string:serviceName>/job': GeocodingJobListResource,
-            'service/<string:serviceName>/job/<string:jobId>': GeocodingJobResource}
+            'service/<string:serviceName>/job/<string:jobId>':
+                GeocodingJobResource}
 
 
 def getPluginInfo():

@@ -13,7 +13,7 @@ class OdImportParser():
     @classmethod
     def parsePostParameters(cls):
         print "-----parsePostParameters"
-        print os.getcwd() 
+        print os.getcwd()
         args = loads(request.get_data())
         for key in cls.mandatoryFields:
             if key not in args:

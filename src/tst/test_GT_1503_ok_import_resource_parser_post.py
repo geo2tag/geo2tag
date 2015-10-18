@@ -32,6 +32,8 @@ class TestOKImportParserPost(TestCase):
                 self.assertEqual(args[el], TEST_VAL_PREFIX + el)
 
     def testOKImportParserPostFail(self):
-        with app.test_request_context(data=dumps(INCORRECT_DATA), method=METHOD):
+        with app.test_request_context(
+                data=dumps(INCORRECT_DATA),
+                method=METHOD):
             with self.assertRaises(BadRequest):
                 args = OKImportParser.parsePostParameters()

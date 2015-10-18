@@ -2,7 +2,10 @@ import os
 import argparse
 
 FILE_NAME = 'test_'
-INCLUDE_MODULE = "import unittest\nimport requests\nfrom basic_integration_test import BasicIntegrationTest\n\nTEST_URL = ''\nVALID_RESPONSE_CODE = 200\n\n"
+INCLUDE_MODULE = "import unittest\nimport requests\nfrom" \
+                 " basic_integration_test" \
+                 " import BasicIntegrationTest\n\nTEST_URL = " \
+                 "''\nVALID_RESPONSE_CODE = 200\n\n"
 TAB = '    '
 MAIN_FILE = 'main.py'
 MAIN_STRING = 'from basic_integration_test import BasicIntegrationTest\n'
@@ -71,8 +74,8 @@ def checkFileName(FileName):
     i = FileName.find('_')
     FileName = FileName[0].capitalize() + FileName[1:]
     while i != -1:
-        FileName = FileName[0:i] + FileName[i +
-                                            1].capitalize() + FileName[i + 2:]
+        FileName = FileName[0:i] + \
+            FileName[i + 1].capitalize() + FileName[i + 2:]
         i = FileName.find('_')
     return FileName
 
