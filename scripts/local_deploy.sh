@@ -9,6 +9,7 @@ CONFIG_FILE=${1:-"geomongo.conf"}
 FLAG_KEEP_CONFIG_INI=false
 CATALOG='geomongo'
 CONFIG_INI_FILE='config/config.ini'
+CONFIG_INI_FILE_FINAL='config.ini'
 
 while getopts ":c:d:f" opt ;
 do
@@ -18,7 +19,6 @@ do
         f) FLAG_KEEP_CONFIG_INI=true;
             ;;
         d) CONFIG_INI_FILE=$OPTARG;
-            echo "$CONFIG_INI_FILE"
             ;;
         *) echo "the option is incorrect";
             exit 1
@@ -39,7 +39,7 @@ cp src/*.py  /var/www/"$CATALOG"
 cp src/*.wsgi /var/www/"$CATALOG"
 if ! $FLAG_KEEP_CONFIG_INI
 then
-    cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"
+    cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"/"$CONFIG_INI_FILE_FINAL"
 fi
 cp -r src/static /var/www/"$CATALOG"/static/
 cp -r src/templates /var/www/"$CATALOG"/templates/
