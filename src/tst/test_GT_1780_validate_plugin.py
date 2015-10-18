@@ -38,3 +38,4 @@ class TestValidatePlugin(TestCase):
         data = os.popen(PY_SCRIPT + NAME_FOLDER_TEST).read()
         self.assertEqual(data, STR_PEP8_ERROR)
         shutil.rmtree('src/plugins/' + NAME_FOLDER_TEST)
+        os.chdir('src/tst')
