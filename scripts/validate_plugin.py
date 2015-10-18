@@ -7,10 +7,12 @@ PATH_PLUGIN_DIR = 'src/plugins/'
 TAIL_PEP8 = '/*.py'
 FORMAT = ' --format='
 DEFAULT = 'default'
-PYLINT_CHECK_FUNCTIONS = "pylint --disable=all --enable=invalid-name   --function-rgx='(?:(getPluginResources|getPluginInfo))$' --reports=n "
+PYLINT_CHECK_FUNCTIONS = "pylint --disable=all --enable=C0103  \
+    --function-rgx='(([a-z]*)|(getPluginResources)|(getPluginInfo))$' --reports=n "
 PYLINT_CHECK_FILE = "pylint --disable=all --enable=F0001  --reports=n "
 MAIN = '/main.py'
 INIT = '/__init__.py'
+
 
 def make_reqpep8(name_plugin, type_format):
     num_error = 0
@@ -23,19 +25,24 @@ def make_reqpep8(name_plugin, type_format):
     print 'Error code: ' + str(num_error)
     return num_error
 
+
 def checker_pylint(name_plugin):
-    STR_PYLINT_FILE_MAIN = PYLINT_CHECK_FILE + PATH_PLUGIN_DIR + str(name_plugin) + MAIN
-    STR_PYLINT_FILE_INIT = PYLINT_CHECK_FILE + PATH_PLUGIN_DIR + str(name_plugin) + INIT
-    STR_PYLINT_FUNCTIONS_FIND = PYLINT_CHECK_FUNCTIONS + PATH_PLUGIN_DIR + str(name_plugin) + MAIN
+    STR_PYLINT_FILE_MAIN = PYLINT_CHECK_FILE + \
+        PATH_PLUGIN_DIR + str(name_plugin) + MAIN
+    STR_PYLINT_FILE_INIT = PYLINT_CHECK_FILE + \
+        PATH_PLUGIN_DIR + str(name_plugin) + INIT
+    STR_PYLINT_FUNCTIONS_FIND = PYLINT_CHECK_FUNCTIONS + \
+        PATH_PLUGIN_DIR + str(name_plugin) + MAIN
     data = os.popen(STR_PYLINT_FILE_INIT).read()
     if len(data) != 0:
         print data
     data = os.popen(STR_PYLINT_FILE_MAIN).read()
-    if len(data) > 0:
+    if len(data) == 0:
         print data
         data = os.popen(STR_PYLINT_FUNCTIONS_FIND).read()
         if len(data) != 0:
             print data
+
 
 def run():
 
