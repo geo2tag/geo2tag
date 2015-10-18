@@ -25,8 +25,10 @@ FIELD_MESSAGE = 'message'
 ID = '_id'
 ANONYM_USER = 'anonym'
 
-MESSAGE_LOAD_DONE = 'Plugin ' + PLUGIN_DONE_PLUGIN + ' successfully loaded'
-MESSAGE_LOAD_FAIL = 'Error occurred while loading the plugin ' + PLUGIN_FAIL_PLUGIN
+MESSAGE_LOAD_DONE = 'Plugin ' + PLUGIN_DONE_PLUGIN + \
+                    ' successfully loaded'
+MESSAGE_LOAD_FAIL = 'Error occurred while loading the plugin ' + \
+                    PLUGIN_FAIL_PLUGIN
 
 
 class TestLogWritingForPluginLoad(TestCase):
