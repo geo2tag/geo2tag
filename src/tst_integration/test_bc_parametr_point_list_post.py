@@ -1,4 +1,3 @@
-import unittest
 import requests
 import json
 from basic_integration_test import BasicIntegrationTest
