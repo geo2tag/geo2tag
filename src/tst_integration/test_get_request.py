@@ -6,7 +6,8 @@ TEST_URL = '/instance/service'
 VALID_RESPONSE_CODE = 200
 VALID_RESPONSE_TEXT = '[]'
 NOT_VALID_RESPONSE_CODE = 400
-BAD_RESULT = '{"message": "[offset]: invalid literal for int() with base 10: \'string\'"}'
+BAD_RESULT = '{"message": "[offset]: invalid literal for int() ' \
+             'with base 10: \'string\'"}'
 
 TEST_NAME = 'name_service_test_get'
 TEST_OBJ = {"name": TEST_NAME, "offset": 12}
@@ -20,8 +21,9 @@ class TestServiceListGetRequest(BasicIntegrationTest):
 
     def testServiceListGetRequest(self):
         db = getDbObject()
-        db[COLLECTION].save(TEST_OBJ)
-        response = requests.get(self.getUrl(TEST_URL), params=TEST_PARAMETERS)
+        obj_id = db[COLLECTION].save(TEST_OBJ)
+        response = requests.get(self.getUrl(TEST_URL),
+                                params=TEST_PARAMETERS)
         removeService(TEST_NAME)
         responseText = response.text
         responseCode = response.status_code

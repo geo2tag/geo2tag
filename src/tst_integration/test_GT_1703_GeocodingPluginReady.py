@@ -14,3 +14,4 @@ class TestGeocodingPluginReady(BasicIntegrationTest):
         responseText = response.text
         responseText = json.loads(responseText)
         self.assertEqual(responseText[PLUGIN_NAME], PLUGIN_ENABLED)
+

@@ -1,14 +1,23 @@
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = '/instance/service/testservice/channel?substring=test_channel_&number=2&offset=3'
-TEST_URL2 = '/instance/service/testservice/channel?substring=test_channel_&number=3&offset=str'
+TEST_URL = '/instance/service/testservice/channel?' \
+           'substring=test_channel_&number=2&offset=3'
+TEST_URL2 = '/instance/service/testservice/channel?' \
+            'substring=test_channel_&number=3&offset=str'
 VALID_NAME = 'test_servise_post'
 EXIST_NAME = 'testservice'
 DATA = {'name': VALID_NAME}
 DATA2 = {'name': EXIST_NAME}
-VALID_RESPONSE_TEXT = u'[{"json": {}, "_id": {"$oid": "556721a52a2e7febd2744205"}, "name": "test_channel_5", "owner_id": "STUB"}, {"json": {}, "_id": {"$oid": "556721a52a2e7febd2744303"}, "name": "test_channel_3", "owner_id": "STUB"}]'
-NOT_VALID_RESPONSE_TEXT = u'{"message": "[offset]: invalid literal for int() with base 10: \'str\'"}'
+VALID_RESPONSE_TEXT = \
+    u'[{"json": {}, ' \
+    u'"_id": {"$oid": "556721a52a2e7febd2744205"},' \
+    u' "name": "test_channel_5", "owner_id": "STUB"},' \
+    u' {"json": {}, "_id": {"$oid": "556721a52a2e7febd2744303"},' \
+    u' "name": "test_channel_3", "owner_id": "STUB"}]'
+NOT_VALID_RESPONSE_TEXT = \
+    u'{"message": "[offset]: invalid literal for' \
+    u' int() with base 10: \'str\'"}'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
 

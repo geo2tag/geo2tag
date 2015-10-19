@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
 from db_model import closeConnection, getClientObject
-getClientObject()
 from db_model import MONGO_CLIENT
+from unittest import TestCase
+getClientObject()
 
 
 class test_GT_1404Close_MongoClient(TestCase):

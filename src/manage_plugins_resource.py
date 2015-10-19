@@ -1,6 +1,4 @@
-from flask_restful import reqparse
-import flask_restful as restful
-from flask_restful import Resource
+from flask.ext.restful import Resource
 from possible_exception import possibleException
 from flask import request
 from db_model import setPluginState
@@ -20,7 +18,7 @@ class ManagePluginsResource(Resource):
             setPluginState(plugin, pluginsDict[plugin])
             if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(
                     plugin, app) == False:
-                root, dirs, files = os.walk("plugins").next()
+                dirs = os.walk("plugins").next()
                 if plugin not in dirs:
                     raise PluginDoesNotExistException(plugin)
                 else:

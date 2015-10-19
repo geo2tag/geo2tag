@@ -9,16 +9,16 @@ CHANNEL_NAME = 'geocoder_plugin_test_channel'
 SERVICE_NAME = 'testservice'
 CHANNEL_ID = ObjectId("556721a52a2e7febd2744307")
 TEST_DATA_AFTER = [
-    [37.61556, 55.75222],
-    [34.37167, 53.25209],
-    [49.66007, 58.59665],
-    [34.34691, 61.78491],
+    [37.61556,  55.75222],
+    [34.37167,  53.25209],
+    [49.66007,  58.59665],
+    [34.34691,  61.78491],
     [0, 0],
     [0, 0],
     [0, 0],
     [0, 0],
     [0, 0],
-    [30.31413, 59.93863]
+    [30.31413,  59.93863]
 ]
 OLD_GEONAMES_LOGIN = getGeonamesLogin()
 NEW_GEONAMES_LOGIN = r'geo2tag'
@@ -29,14 +29,12 @@ points = db['points']
 
 
 class TestGeocoderImportBackFunc(TestCase):
-
     def setUp(self):
         config['geocoding']['geonames_login'] = NEW_GEONAMES_LOGIN
         with open(r'../config.ini', 'wb') as configfile:
             config.write(configfile)
         self.data_before = list(points.find({'channel_id': CHANNEL_ID}))
-        self.addresses_before = [point['location'][
-            'coordinates'] for point in self.data_before]
+        self.addresses_before = [point['location']['coordinates'] for point in self.data_before]
 
     def tearDown(self):
         config['geocoding']['geonames_login'] = OLD_GEONAMES_LOGIN
