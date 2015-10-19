@@ -30,7 +30,7 @@ class TestValidatePlugin(TestCase):
         file_test = open(NAME_FILE, 'w+')
         i = 0
         while i < 100:
-            file_test.write('a')
+            file_test.write('s')
             i = i + 1
         file_test.write('\n')
         file_test.close()
