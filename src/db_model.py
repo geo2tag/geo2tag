@@ -6,7 +6,6 @@ from service_not_exist_exception import ServiceNotExistException
 from service_already_exists_exception import ServiceAlreadyExistsException
 from pymongo import Connection
 from bson.objectid import ObjectId
-from bson.errors import InvalidId
 from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, \
@@ -82,12 +81,12 @@ def addTag(tag):
 
 
 def addService(name, logSize, ownerld):
-    db = getDbObject()
+    db_addservice = getDbObject()
     try:
-        obj = getServiceIdByName(name)
+        getServiceIdByName(name)
         raise ServiceAlreadyExistsException()
-    except ServiceNotExistException as e:
-        obj_id = db[COLLECTION].save(
+    except ServiceNotExistException:
+        obj_id = db_addservice[COLLECTION].save(
             {NAME: name, CONFIG: {LOG_SIZE: logSize}, OWNERID: ownerld})
         if obj_id is None:
             return None
@@ -96,8 +95,8 @@ def addService(name, logSize, ownerld):
 
 
 def getLog(dbName, number, offset, dateFrom, dateTo):
-    db = getDbObject(dbName)
-    collection = db[COLLECTION_LOG_NAME]
+    db_getlog = getDbObject(dbName)
+    collection = db_getlog[COLLECTION_LOG_NAME]
     if collection.count() == 0:
         return []
     number = 0 if (number is None or number < 0) else number
@@ -158,55 +157,58 @@ def removeService(name):
         db[COLLECTION].remove({ID: obj['_id']})
         connection = Connection()
         connection.drop_database(name)
-    except ServiceNotExistException as e:
+    except ServiceNotExistException:
         raise
 
 
-def getServiceById(id):
-    obj = getDbObject()[COLLECTION].find_one({ID: id})
+def getServiceById(id_service):
+    obj = getDbObject()[COLLECTION].find_one({ID: id_service})
     if obj is not None:
         return obj
     raise ServiceNotExistException()
 
 
 def getServiceList(number, offset):
-    db = getDbObject()
+    db_getservicelist = getDbObject()
     if number is None:
-        number = db[COLLECTION].count()
+        number = db_getservicelist[COLLECTION].count()
     if offset is None:
         offset = 0
-    result = list(db[COLLECTION].find().sort(
+    result = list(db_getservicelist[COLLECTION].find().sort(
         NAME, 1).skip(offset).limit(number))
     return result
 
 
 def getChannelsList(serviceName, substring, number, offset):
-    db = getDbObject(serviceName)
+    db_getchannellist = getDbObject(serviceName)
     if substring is not None and number is not None and offset is not None:
-        return db[CHANNELS_COLLECTION].find(
+        return db_getchannellist[CHANNELS_COLLECTION].find(
             {'name': {'$regex': substring}}).skip(offset).limit(number)
     elif substring is not None and offset is not None:
-        return db[CHANNELS_COLLECTION].find(
+        return db_getchannellist[CHANNELS_COLLECTION].find(
             {'name': {'$regex': substring}}).skip(offset)
     elif substring is not None and number is not None:
-        return db[CHANNELS_COLLECTION].find(
+        return db_getchannellist[CHANNELS_COLLECTION].find(
             {'name': {'$regex': substring}}).limit(number)
     elif offset is not None and number is not None:
-        return db[CHANNELS_COLLECTION].find().skip(offset).limit(number)
+        return db_getchannellist[
+            CHANNELS_COLLECTION].find().skip(offset).limit(number)
     elif substring is not None:
-        return db[CHANNELS_COLLECTION].find({'name': {'$regex': substring}})
+        return db_getchannellist[CHANNELS_COLLECTION].find(
+            {'name': {'$regex': substring}})
     elif number is not None:
-        return db[CHANNELS_COLLECTION].find().limit(number)
+        return db_getchannellist[CHANNELS_COLLECTION].find().limit(number)
     elif offset is not None:
-        return db[CHANNELS_COLLECTION].find().skip(offset)
+        return db_getchannellist[CHANNELS_COLLECTION].find().skip(offset)
 
 
 def getChannelById(serviceName, channelId):
-    db = getDbObject(serviceName)
+    db_channelbyid = getDbObject(serviceName)
     if isinstance(channelId, str) or isinstance(channelId, unicode):
-        obj = db[CHANNELS_COLLECTION].find_one({'_id': ObjectId(channelId)})
+        obj = db_channelbyid[CHANNELS_COLLECTION].find_one(
+            {'_id': ObjectId(channelId)})
     else:
-        obj = db[CHANNELS_COLLECTION].find_one({'_id': channelId})
+        obj = db_channelbyid[CHANNELS_COLLECTION].find_one({'_id': channelId})
     if obj is not None:
         return obj
     raise ChannelDoesNotExist()
@@ -225,29 +227,32 @@ def getClientObject():
 
 
 def deleteChannelById(serviceName, channelId):
-    db = getDbObject(serviceName)
+    db_deletechannlebyid = getDbObject(serviceName)
     if isinstance(channelId, str) or isinstance(channelId, unicode):
-        result = list(db[CHANNELS_COLLECTION].find(
+        result = list(db_deletechannlebyid[CHANNELS_COLLECTION].find(
             {'_id': ObjectId(channelId)}))
     else:
-        result = list(db[CHANNELS_COLLECTION].find({'_id': channelId}))
+        result = list(db_deletechannlebyid[
+                      CHANNELS_COLLECTION].find({'_id': channelId}))
     if len(result) > 0:
-        db[CHANNELS_COLLECTION].remove({'_id': ObjectId(channelId)})
+        db_deletechannlebyid[CHANNELS_COLLECTION].remove(
+            {'_id': ObjectId(channelId)})
     else:
         raise ChannelDoesNotExist()
 
 
 def addChannel(name, json, owner_id, serviceName):
-    db = getDbObject(serviceName)
-    return db[CHANNELS_COLLECTION].insert(
+    db_addchannel = getDbObject(serviceName)
+    return db_addchannel[CHANNELS_COLLECTION].insert(
         {NAME: name, JSON: json, OWNERID: owner_id, OWNER_GROUP: 'STUB',
          ACL: 777})
 
 
 def updateChannel(serviceName, channelId, name, json, acl):
-    db = getDbObject(serviceName)
+    db_updatechannel = getDbObject(serviceName)
     try:
-        obj = db[CHANNELS_COLLECTION].find_one({ID: ObjectId(channelId)})
+        obj = db_updatechannel[CHANNELS_COLLECTION].find_one(
+            {ID: ObjectId(channelId)})
     except:
         raise ChannelDoesNotExist()
     if obj is None:
@@ -258,22 +263,24 @@ def updateChannel(serviceName, channelId, name, json, acl):
             obj['json'] = json
         if acl is not None:
             obj['acl'] = acl
-        db[CHANNELS_COLLECTION].save(obj)
+        db_updatechannel[CHANNELS_COLLECTION].save(obj)
 
 
 def getChannelByName(serviceName, channelName):
-    db = getDbObject(serviceName)
-    obj = db[CHANNELS_COLLECTION].find_one({NAME: channelName})
+    db_getchannelbyname = getDbObject(serviceName)
+    obj = db_getchannelbyname[
+        CHANNELS_COLLECTION].find_one({NAME: channelName})
     if obj is not None:
         return obj
     raise ChannelDoesNotExist()
 
 
 def deletePointById(serviceName, pointId):
-    db = getDbObject(serviceName)
-    obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+    db_deletepointbyid = getDbObject(serviceName)
+    obj = db_deletepointbyid[POINTS_COLLECTION].find_one(
+        {ID: ObjectId(pointId)})
     if obj is not None:
-        db[POINTS_COLLECTION].remove({ID: ObjectId(pointId)})
+        db_deletepointbyid[POINTS_COLLECTION].remove({ID: ObjectId(pointId)})
     else:
         raise PointDoesNotExist()
 
@@ -288,7 +295,7 @@ def getPointById(serviceName, pointId):
 
 
 def addPoints(serviceName, pointsArray):
-    db = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
+    db_addpoint = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
     list_id = []
     for point in pointsArray:
         obj = {}
@@ -298,14 +305,15 @@ def addPoints(serviceName, pointsArray):
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
         obj[BC] = point[BC]
-        list_id.append(str(db.save(obj)))
+        list_id.append(str(db_addpoint.save(obj)))
     return list_id
 
 
 def updatePoint(serviceName, pointId, changes):
-    db = getDbObject(serviceName)
+    db_updatepoint = getDbObject(serviceName)
     try:
-        obj = db[POINTS_COLLECTION].find_one({ID: ObjectId(pointId)})
+        obj = db_updatepoint[POINTS_COLLECTION].find_one(
+            {ID: ObjectId(pointId)})
     except:
         raise PointDoesNotExist()
     if obj is None:
@@ -314,16 +322,18 @@ def updatePoint(serviceName, pointId, changes):
         for key in changes.keys():
             if key in obj.keys():
                 obj[key] = changes[key]
-        db[POINTS_COLLECTION].save(obj)
+        db_updatepoint[POINTS_COLLECTION].save(obj)
     print obj
 
 
 def addServiceDb(dbName):
-    db = getDbObject(dbName)
+    db_addservicedb = getDbObject(dbName)
     pymongo.GEOSPHERE = '2dsphere'
     pymongo.DESCENDING = -1
-    db[COLLECTION_POINTS_NAME].ensure_index([("location", pymongo.GEOSPHERE)])
-    db[COLLECTION_POINTS_NAME].create_index([("date", pymongo.DESCENDING)])
+    db_addservicedb[COLLECTION_POINTS_NAME].ensure_index(
+        [("location", pymongo.GEOSPHERE)])
+    db_addservicedb[COLLECTION_POINTS_NAME].create_index(
+        [("date", pymongo.DESCENDING)])
 
 
 def applyFromToCriterion(field, value_from, value_to, criterion):
@@ -398,7 +408,7 @@ def findPoints(
         geometry=None,
         altitude_from=None,
         altitude_to=None,
-        substring=None,
+        _=None,
         date_from=None,
         date_to=None,
         offset=None,
@@ -406,7 +416,7 @@ def findPoints(
         bc_from=False,
         bc_to=False
 ):
-    db = getDbObject(serviceName)
+    db_findepoint = getDbObject(serviceName)
 
     # Converting types
     channel_ids = [ObjectId(channel_id) for channel_id in channel_ids]
@@ -417,7 +427,7 @@ def findPoints(
 
     applyGeometryCriterion(geometry, radius, criterion)
     applyDateCriterion(DATE, date_from, bc_from, date_to, bc_to, criterion)
-    points = db[POINTS_COLLECTION].find(
+    points = db_findepoint[POINTS_COLLECTION].find(
         criterion).sort(DATE, pymongo.DESCENDING)
     if offset:
         points.skip(offset)
@@ -426,14 +436,13 @@ def findPoints(
 
 
 def closeConnection():
-    global MONGO_CLIENT
     if MONGO_CLIENT is not None:
         MONGO_CLIENT.close()
 
 
 def getPluginState(pluginName):
-    db = getDbObject()
-    obj = db[PLUGINS].find_one({NAME: pluginName})
+    db_getpluginstate = getDbObject()
+    obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
     if obj is not None:
         return obj[ENABLED]
     else:
@@ -447,19 +456,19 @@ def setPluginState(pluginName, state):
         else:
             state = False
 
-    db = getDbObject()
-    obj = db[PLUGINS].find_one({NAME: pluginName})
+    db_setplugin = getDbObject()
+    obj = db_setplugin[PLUGINS].find_one({NAME: pluginName})
     if obj is None:
-        db[PLUGINS].save({NAME: pluginName, ENABLED: state})
+        db_setplugin[PLUGINS].save({NAME: pluginName, ENABLED: state})
     else:
         obj[ENABLED] = state
-        db[PLUGINS].save(obj)
+        db_setplugin[PLUGINS].save(obj)
 
 
 def getAllChannelIds(serviceName):
     all_channel_ids_array = []
-    db = getDbObject(serviceName)
-    obj = db[CHANNELS_COLLECTION].find()
+    db_getallchanelids = getDbObject(serviceName)
+    obj = db_getallchanelids[CHANNELS_COLLECTION].find()
     for result in obj:
         all_channel_ids_array.append(str(result[ID]))
     return all_channel_ids_array
