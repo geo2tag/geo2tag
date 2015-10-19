@@ -1,6 +1,7 @@
 import os
 import sys
-import subprocess
+import argparse
+
 
 PEP8 = 'pep8 '
 PATH_PLUGIN_DIR = 'src/plugins/'
@@ -18,20 +19,13 @@ def make_reqpep8(name_plugin, type_format):
         print data
         num_error = 1
     print 'Error code: ' + str(num_error)
-    return num_error
-
+    sys.exit(str(num_error))
 
 def run():
-
-    if len(sys.argv) == 1:
-        print 'No argument: plugin name.'
-
-    if len(sys.argv) == 2:
-        name_plugin = sys.argv[1]
-        make_reqpep8(name_plugin, DEFAULT)
-    if len(sys.argv) == 3:
-        name_plugin = sys.argv[1]
-        type_format = sys.argv[2]
-        make_reqpep8(name_plugin, type_format)
+    parser = argparse.ArgumentParser(description='Validate plugins')
+    parser.add_argument('name', help='Name plugin')
+    parser.add_argument('type_format',nargs='?',default=DEFAULT, type=str, help='Type format')
+    args = parser.parse_args()
+    make_reqpep8(args.name, args.type_format)
 if __name__ == '__main__':
     run()
