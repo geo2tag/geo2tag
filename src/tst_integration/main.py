@@ -220,5 +220,4 @@ def main(host):
 
 
 if __name__ == '__main__':
-    host = sys.argv[1]
-    main(host)
+    main(sys.argv[1])
