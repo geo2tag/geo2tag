@@ -22,7 +22,7 @@ class TestValidatePlugin(TestCase):
         data = os.popen(PY_SCRIPT + NAME_PLUGIN).read()
         self.assertEqual(RESULT_PEP8, data)
         os.chdir('src/tst')
-    
+
     def testValidatePlugin_MakePlugin(self):
         os.chdir('../plugins/')
         os.mkdir(NAME_FOLDER_TEST)
