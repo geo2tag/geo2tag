@@ -21,7 +21,7 @@ class TestServiceListGetRequest(BasicIntegrationTest):
 
     def testServiceListGetRequest(self):
         db = getDbObject()
-        obj_id = db[COLLECTION].save(TEST_OBJ)
+        db[COLLECTION].save(TEST_OBJ)
         response = requests.get(self.getUrl(TEST_URL),
                                 params=TEST_PARAMETERS)
         removeService(TEST_NAME)

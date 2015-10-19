@@ -12,7 +12,7 @@ ID = '_id'
 PROC_BLOCK = 5000
 
 
-def geocoderImport(self, channelName, serviceName):
+def geocoderImport(_, channelName, serviceName):
     # Checking for service existence
     getServiceIdByName(serviceName)
     # Getting channel id

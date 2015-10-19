@@ -7,7 +7,7 @@ from open_data_to_points_loader import OpenDataToPointsLoader
 
 
 def openKareliaImport(
-        self,
+        _,
         channelName,
         openDataUrl,
         showObjectUrl,
