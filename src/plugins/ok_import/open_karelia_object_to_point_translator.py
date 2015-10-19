@@ -1,5 +1,6 @@
 from datetime import datetime
-from open_data_object_to_point_translator import OpenDataToPointTranslator
+from open_data_object_to_point_translator import \
+    OpenDataToPointTranslator
 
 INTERVAL_DATES_NAMES = (
     ('year_start',
@@ -12,7 +13,8 @@ PRECISE_DATE_NAMES = ('year', 'century', 'millenium')
 DATE_TYPES = ('interval', 'precise')
 
 
-class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
+class OpenKareliaObjectToPointTranslator(
+        OpenDataToPointTranslator):
 
     def __init__(
             self,
@@ -34,7 +36,8 @@ class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
         obj = {}
         obj['name'] = self.objectRepresentation['name'][0]
         obj['image_url'] = self.importDataDict['image_url'] + \
-            unicode(self.objectRepresentation.get('images', [{'$oid': ''}])[0]['$oid'])
+            unicode(self.objectRepresentation.get('images',
+                                                  [{'$oid': ''}])[0]['$oid'])
         obj['source_url'] = self.importDataDict['image_url'] + \
             unicode(self.objectRepresentation.get('_id'))
         obj['version'] = self.version
@@ -47,8 +50,10 @@ class OpenKareliaObjectToPointTranslator(OpenDataToPointTranslator):
         # Cheking for coords
         tmpLat = 0
         tmpLon = 0
-        if key_in_dict_and_defined('latitude', self.objectRepresentation) and \
-                key_in_dict_and_defined('latitude', self.objectRepresentation):
+        if key_in_dict_and_defined(
+                'latitude', self.objectRepresentation) and \
+                key_in_dict_and_defined(
+                    'latitude', self.objectRepresentation):
             tmpLat = self.objectRepresentation['latitude']
             tmpLon = self.objectRepresentation['longitude']
         point['location'] = {
@@ -150,10 +155,16 @@ def key_in_dict_and_defined(key, dictionary):
 # datetime.datetime(1000, 1, 1, 0, 0)
 def date_name_to_datetime(names_dict, names_key):
     if key_in_dict_and_defined(names_key, names_dict):
-        if names_key == 'year' or names_key == 'year_start' or names_key == 'year_end':
+        if names_key == 'year' or \
+            names_key == 'year_start' or \
+                names_key == 'year_end':
             return datetime(int(names_dict[names_key]), 1, 1, 0, 0)
-        elif names_key == 'century' or names_key == 'century_start' or names_key == 'century_end':
+        elif names_key == 'century' or \
+            names_key == 'century_start' or \
+                names_key == 'century_end':
             return datetime(int(names_dict[names_key]) * 100, 1, 1, 0, 0)
-        elif names_key == 'millenium' or names_key == 'millenium_start' or names_key == 'millenium_end':
+        elif names_key == 'millenium' or \
+            names_key == 'millenium_start' or \
+                names_key == 'millenium_end':
             return datetime(int(names_dict[names_key]) * 1000, 1, 1, 0, 0)
     return None
