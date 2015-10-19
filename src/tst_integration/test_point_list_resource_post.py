@@ -1,7 +1,7 @@
 import requests
 import json
 from basic_integration_test import BasicIntegrationTest
-from db_model import  getDbObject
+from db_model import getDbObject
 import ast
 DB = "testservice"
 COLLECTION = 'points'
