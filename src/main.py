@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from setuptools.command.egg_info import write_pkg_info
 from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
-from flask import Flask, current_app
-import flask_restful as restful
-from flask_restful import Resource, Api
+from flask import Flask
+from flask.ext.restful import Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
@@ -22,10 +20,10 @@ from login_resource import LoginResource
 from url_utils import getPathWithPrefix
 from debug_login_resource import DebugLoginResource
 from login_google_resource import LoginGoogleResource, google_oauth
+from login_facebook_resource import LoginFacebookResource, facebook_oauth
 from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
-from os.path import join as joinpath
 from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
 from user_routines import getUserId
@@ -48,8 +46,8 @@ API = None
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
-        return make_response(obj, code)
-    return make_response(json_util.dumps(obj), code)
+        return make_response(obj, code, headers)
+    return make_response(json_util.dumps(obj), code, headers)
 
 
 def getApi():
@@ -61,6 +59,7 @@ def getApi():
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 app = Flask(__name__)
 app.register_blueprint(google_oauth)
+app.register_blueprint(facebook_oauth)
 
 app.secret_key = urandom(32)
 getApi().representations = DEFAULT_REPRESENTATIONS
@@ -119,6 +118,8 @@ getApi().add_resource(PointListResource, getPathWithPrefix(
 getApi().add_resource(LogoutResource, getPathWithPrefix('/logout'))
 getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
 getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
+getApi().add_resource(LoginFacebookResource,
+                      getPathWithPrefix('/login/facebook'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 
