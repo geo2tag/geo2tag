@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from setuptools.command.egg_info import write_pkg_info
 from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
-from flask import Flask, current_app
-import flask_restful as restful
-from flask_restful import Resource, Api
+from flask import Flask
+from flask.ext.restful import Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
@@ -26,7 +24,6 @@ from login_facebook_resource import LoginFacebookResource, facebook_oauth
 from db_model import closeConnection, getPluginState
 import atexit
 from plugin_routines import getPluginList, enablePlugin
-from os.path import join as joinpath
 from map_resource import MapResource
 from plugin_list_resource import GetAllPluginsWithStatusResource
 from user_routines import getUserId
@@ -49,8 +46,8 @@ API = None
 
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
-        return make_response(obj, code)
-    return make_response(json_util.dumps(obj), code)
+        return make_response(obj, code, headers)
+    return make_response(json_util.dumps(obj), code, headers)
 
 
 def getApi():

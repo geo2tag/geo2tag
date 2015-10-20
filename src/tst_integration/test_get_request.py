@@ -1,9 +1,6 @@
-import unittest
 import requests
-import pymongo
 from basic_integration_test import BasicIntegrationTest
-from db_model import addService, removeService, getDbObject
-from config_reader import getHost, getPort, getDbName
+from db_model import removeService, getDbObject
 
 TEST_URL = '/instance/service'
 VALID_RESPONSE_CODE = 200
