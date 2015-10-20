@@ -142,7 +142,8 @@ getApi().add_resource(
     getPathWithPrefix('/admin/log'))
 getApi().add_resource(
     UserFindResource,
-    getPathWithPrefix('instance/user/<string:user_id>'))
+    getPathWithPrefix('/user/<string:user_id>'))
+
 
 def initApp(api):
     import os
