@@ -1,5 +1,5 @@
 from flask_restful import reqparse
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from config_reader import getDebugUsers
 from user_routines import logUserIn
 

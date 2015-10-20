@@ -28,7 +28,8 @@ BC_FROM = '[bc_from] '
 BC_TO = '[bc_to] '
 
 ERR_MSG_KEY = '{"message": "'
-ERR_MSG = ': Missing required parameter in the JSON body or the post body or the query string"}'
+ERR_MSG = ': Missing required parameter in the JSON body ' \
+          'or the post body or the query string"}'
 
 BAD_REQUEST = 400
 OK = 200
@@ -36,7 +37,21 @@ OK = 200
 NO_BC_ERR_DATA_RESP_TEXT = ERR_MSG_KEY + BC_FROM + BC_TO + ERR_MSG
 NO_BC_TO_ERR_DATA_RESP_TEXT = ERR_MSG_KEY + BC_TO + ERR_MSG
 NO_BC_FROM_ERR_DATA_RESP_TEXT = ERR_MSG_KEY + BC_FROM + ERR_MSG
-NO_DATE_DATA_RESP_TEXT = '[{"bc": false, "channel_id": {"$oid": "556721a52a2e7febd2744201"}, "json": {"image_url": "http://www.dunbartutoring.com/wp-content/themes/thesis/rotator/sample-1.jpg", "description": "testGT-1332"}, "location": {"type": "Point", "coordinates": [1, 1]}, "date": {"$date": 1441927937814}, "alt": 1, "_id": {"$oid": "55a624c09bf770b58a355f07"}}, {"bc": false, "channel_id": {"$oid": "556721a52a2e7febd2744201"}, "json": {"image_url": "https://www.drupal.org/files/hr10_sample_image_02_original.jpg", "description": "testGT-1332"}, "location": {"type": "Point", "coordinates": [1, 1]}, "date": {"$date": 1441927937814}, "alt": 2, "_id": {"$oid": "55a624c69bf770b58a355f08"}}]'
+NO_DATE_DATA_RESP_TEXT = \
+    '[{"bc": false, ' \
+    '"channel_id": {"$oid": "556721a52a2e7febd2744201"},' \
+    ' "json": {"image_url": "http://www.dunbartutoring.com/' \
+    'wp-content/themes/thesis/rotator/sample-1.jpg", ' \
+    '"description": "testGT-1332"},' \
+    ' "location": {"type": "Point", "coordinates": [1, 1]}, ' \
+    '"date": {"$date": 1441927937814}, "alt": 1, ' \
+    '"_id": {"$oid": "55a624c09bf770b58a355f07"}},' \
+    ' {"bc": false, "channel_id": {"$oid": "556721a52a2e7febd2744201"}, ' \
+    '"json": {"image_url": ' \
+    '"https://www.drupal.org/files/hr10_sample_image_02_original.jpg",' \
+    ' "description": "testGT-1332"}, "location": {"type": "Point",' \
+    ' "coordinates": [1, 1]}, "date": {"$date": 1441927937814},' \
+    ' "alt": 2, "_id": {"$oid": "55a624c69bf770b58a355f08"}}]'
 DATE_AND_BC_FLAGS_RESP_TEXT = NO_DATE_DATA_RESP_TEXT
 
 

@@ -31,23 +31,34 @@ from test_GT_1386 import Test_GT_1386
 from test_debug_login_resource import TestDebugLoginResource
 from test_get_rout_map import TestRoutMap
 from test_point_list_resource_get import TestPointListGet_ResponseText
-from test_GT_1486_AfterRequesWriteInstanceLog import TestAfterRequestWriteInstanceLog
+from test_GT_1486_AfterRequesWriteInstanceLog import \
+    TestAfterRequestWriteInstanceLog
 from test_GT_1443_before_request import Test_GT_1443_Request
 from test_GT_1442_manage_plugins import Test_GT_1442_managePlugins
-from test_GT_1484_AfterRequestsStatusLogging import TestAfterRequestStatusLogging
+from test_GT_1484_AfterRequestsStatusLogging import \
+    TestAfterRequestStatusLogging
 from test_internal_tests_page import Test_internal_tests_page
 from test_ok_job_resource import Test_OKImportJob
-from test_okimport_service_channel_not_exist import Test_OKImportJob_not_exist
+from test_okimport_service_channel_not_exist import \
+    Test_OKImportJob_not_exist
 from test_GT_1511 import Test_GT_1511
 from test_bc_parametr_point_list_post import TestBcParametrPointListPost
-from test_GT_1590_extend_parse_parameters_for_point_list_resource import TestExtendPointListParserWithFlagsBC
+from test_GT_1590_extend_parse_parameters_for_point_list_resource\
+    import TestExtendPointListParserWithFlagsBC
+from test_GT_1697 import TestGT1697
+from test_GT_1590_extend_parse_parameters_for_point_list_resource import \
+    TestExtendPointListParserWithFlagsBC
 from test_GT_1732_GeocodingJobListResource import TestGeocodingJobListResource
-
+from test_GT_1741_test_geocoder_import import TestGeocoderImport
 
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(BasicIntegrationTest.parametrize(TestGeocodingPluginReady, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(TestGT1697, param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestGeocodingPluginReady,
+            param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocodingJobListResource,
@@ -56,7 +67,10 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestPluginListResource,
             param=host))
-    suite.addTest(BasicIntegrationTest.parametrize(TestTestPlugin, param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestTestPlugin,
+            param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestPointListGet,
@@ -101,8 +115,10 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestServiceNameGetRequest,
             param=host))
-    suite.addTest(BasicIntegrationTest.parametrize(
-        TestChannelServicePostRequest, param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestChannelServicePostRequest,
+            param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             ChannelResourceDelete,
@@ -189,10 +205,19 @@ def main(host):
             param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
+            TestGT1697, param=host
+        )
+    )
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
             TestExtendPointListParserWithFlagsBC,
             param=host))
     suite.addTest(BasicIntegrationTest.parametrize(
         Test_GT_1511, param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestGeocoderImport,
+            param=host))
 
 ###################################################
 # Place tests above this line ^^
@@ -204,5 +229,4 @@ def main(host):
 
 
 if __name__ == '__main__':
-    host = sys.argv[1]
-    main(host)
+    main(sys.argv[1])

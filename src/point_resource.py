@@ -1,5 +1,5 @@
 from possible_exception import possibleException
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from db_model import deletePointById, getPointById, updatePoint
 from point_resource_parsers import PointResourceParsers
 

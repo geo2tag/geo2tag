@@ -1,4 +1,4 @@
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from db_model import getServiceIdByName, updateService, removeService
 from possible_exception import possibleException
 from service_parsers import ServiceParser
