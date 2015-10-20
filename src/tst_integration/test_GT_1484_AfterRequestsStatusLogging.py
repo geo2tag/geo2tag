@@ -18,6 +18,6 @@ MESSAGE = 'Status_code: 200, response: [\'OK\']'
 class TestAfterRequestStatusLogging(BasicIntegrationTest):
 
     def testAfterRequestStatusLogging(self):
-        r = requests.get(self.getUrl(URL))
+        requests.get(self.getUrl(URL))
         last_doc = log.find().sort(ID, DESCENDING).limit(1)
         self.assertEqual(list(last_doc)[0][MESSAGE_FIELD], MESSAGE)
