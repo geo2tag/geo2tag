@@ -3,7 +3,7 @@ from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
 from flask import Flask
-from flask.ext.restful import Api
+from flask_restful import Api
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
