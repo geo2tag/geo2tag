@@ -1,11 +1,9 @@
 import unittest
 import os
-from db_model import getDbObject
 from main import app
 from plugin_routines import isPluginEnabled, enablePlugin
 from flask import Flask
-import flask_restful as restful
-from flask_restful import Resource, Api
+from flask_restful import Api
 
 TEST_PLUGIN_NAME = 'test_plugin'
 TEST_PLUGIN_NAME_NOT_VALID = 'test_plugin_not_valid_name'

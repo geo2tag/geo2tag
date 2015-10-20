@@ -8,5 +8,5 @@ from channel_already_exists import ChannelAlreadyExists
 class TestChannelAlreadyExistsException(TestCase):
 
     def testChannelAlreadyExistsException(self):
-        with self.assertRaises(ChannelAlreadyExists) as e:
+        with self.assertRaises(ChannelAlreadyExists):
             raise ChannelAlreadyExists()

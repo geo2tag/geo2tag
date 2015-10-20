@@ -2,9 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from bson.objectid import ObjectId
 from db_model import addChannel, getDbObject
-from config_reader import getHost, getPort
 
 TEST_SERVICE = 'testservice'
 NAME = 'test_name'

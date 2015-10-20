@@ -1,10 +1,8 @@
 from flask import Flask
-from pymongo import MongoClient
 from unittest import TestCase
 from config_reader import getDbName
-from db_model import getDbObject, getHost, getPort
-from user_routines import findUserById, addUser
-from user_does_not_exist import UserDoesNotExist
+from db_model import getDbObject
+from user_routines import addUser
 
 COLLECTION_NAME_USERS = "users"
 

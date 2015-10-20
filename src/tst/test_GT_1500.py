@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 from open_data_object_to_point_translator import OpenDataToPointTranslator
-from datetime import datetime
 
 TEST_OBJ = {
     'json': {'version': 'test_version',

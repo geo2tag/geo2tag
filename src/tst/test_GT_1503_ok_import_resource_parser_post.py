@@ -1,5 +1,4 @@
 from unittest import TestCase
-from flask import request
 from flask import Flask
 from werkzeug.exceptions import BadRequest
 from json import dumps
@@ -36,4 +35,4 @@ class TestOKImportParserPost(TestCase):
                 data=dumps(INCORRECT_DATA),
                 method=METHOD):
             with self.assertRaises(BadRequest):
-                args = OKImportParser.parsePostParameters()
+                OKImportParser.parsePostParameters()

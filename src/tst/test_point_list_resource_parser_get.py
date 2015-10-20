@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from datetime import datetime, date, time
-from flask import Flask, request
-from calendar import timegm
+from flask import Flask
 import json
-import aniso8601
-import pytz
 from werkzeug.exceptions import BadRequest
-from geojson import MultiPoint
 from point_list_resource_parser import PointListResourceParser
 import geo_json_type
 from date_utils import dateDeserialiser

@@ -1,6 +1,4 @@
 import unittest
-from datetime import datetime
-import requests
 from jobs_parser import *
 URL = 'http://httpbin.org/status/200'
 JSON_TEST = '{"_id": {"$oid": "55671ae113293c504d515a33"}, ' \

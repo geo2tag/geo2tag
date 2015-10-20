@@ -1,5 +1,5 @@
 import unittest
-from url_routines import *
+from url_routines import getPluginUrl
 
 TEST_URL = 'test_url'
 TEST_PLUGIN = 'test_plugin'
