@@ -119,7 +119,8 @@ getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
 getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
-getApi().add_resource(AdminServiceListResource, getPathWithPrefix('/admin/service'))
+getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
+    '/admin/service'))
 
 
 getApi().add_resource(

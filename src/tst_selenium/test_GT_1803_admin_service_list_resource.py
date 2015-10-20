@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions 
+from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = 'instance/admin/service'
 H2 = "Services"
+
 
 class TestAdminServiceListResource(BasicSeleniumTest):
 
@@ -16,7 +17,7 @@ class TestAdminServiceListResource(BasicSeleniumTest):
                 (By.TAG_NAME, "body"))
         )
         res = self.driver.find_element_by_tag_name("h2")
-        self.assertEqual(res.text,H2)
+        self.assertEqual(res.text, H2)
         res = self.driver.find_element_by_tag_name("body")
         self.assertNotEquals(res, None)
         res = self.driver.find_element_by_tag_name("head")
