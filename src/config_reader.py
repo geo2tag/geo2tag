@@ -62,7 +62,7 @@ def getInstancePrefix():
 
 def getDebugUsers():
     str_users = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
-    list_users = str_users.split(',')
+    list_users = str(str_users).split(',')
     return list_users
 
 
