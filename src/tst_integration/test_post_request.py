@@ -1,8 +1,6 @@
-import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
 from db_model import removeService
-from service_not_exist_exception import ServiceNotExistException
 
 TEST_URL = '/instance/service'
 VALID_NAME = 'test_servise_post'
