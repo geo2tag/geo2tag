@@ -1,4 +1,4 @@
-from configparser import ConfigParser, SafeConfigParser
+from configparser import SafeConfigParser
 
 import os
 CONFIG_PATH = os.path.dirname(os.path.realpath(__file__)) + '/config.ini'
@@ -61,8 +61,8 @@ def getInstancePrefix():
 
 
 def getDebugUsers():
-    str_list = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
-    list_users = str(str_list).split(',')
+    str_users = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
+    list_users = str_users.split(',')
     return list_users
 
 
