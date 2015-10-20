@@ -1,4 +1,3 @@
-from UserListResourceParser import Userlistresourceparser
 # -*- coding: utf-8 -*-
 from setuptools.command.egg_info import write_pkg_info
 from manage_plugins_resource import ManagePluginsResource
@@ -121,7 +120,6 @@ getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
 getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
-getApi().add_resource(Userlistresourceparser, getPathWithPrefix('instance/user'))
 
 getApi().add_resource(
     MapResource,

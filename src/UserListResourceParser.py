@@ -1,4 +1,3 @@
-from flask.ext.restful import Resource
 from flask_restful import reqparse
 
 
@@ -7,7 +6,7 @@ GET_ARGS_OFFSET = 'offset'
 GET_ARGS_LOGIN = 'login'
 
 
-class Userlistresourceparser(Resource):
+class Userlistresourceparser():
 
     @staticmethod
     def parseGetParameters():
