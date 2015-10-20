@@ -8,5 +8,4 @@ class AdminLogResource(Resource):
     def get(self):
         return make_response(
             render_template(
-                'log.html',
-                instance_prefix='instance'))
+                'log.html'))
