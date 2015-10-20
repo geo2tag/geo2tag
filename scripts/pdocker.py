@@ -44,10 +44,13 @@ def manage_script(name, args):
     child = Popen(args, stdout=PIPE, stderr=PIPE)
     output = child.stdout.read()
     err = child.stderr.read()
+    child.communicate()
     rc = child.returncode
     if rc == 0:
         write_log(name, output)
     else:
+        if err == '' and output != '':
+            write_log(name, output)
         write_log(name, err)
     return rc
 
@@ -79,6 +82,7 @@ def run_int_tests(name):
 
 def wait_mongo_start(name):
     child = Popen(['docker', 'exec', name, 'mongo'], stdout=PIPE, stderr=PIPE)
+    child.communicate()
     return child.returncode
 
 
@@ -140,7 +144,8 @@ def kill_old_containers(kill_time=0):
         return
 
     for container in containers:
-        print container[CONTAINER_NAME] + " on port " + str(container[CONTAINER_PORT]) + " stop"
+        print container[CONTAINER_NAME] + " on port " + \
+            str(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
@@ -195,7 +200,7 @@ def main():
         print file_name
 
         container_start_result, container_start_port = find_port_and_start(
-            args.name, args.ports)
+            container_start_name, args.ports)
         if not container_start_result:
             write_log(container_start_name, "Free port not found exit")
             sys.exit(1)
@@ -221,7 +226,8 @@ def main():
             sys.exit(1)
 
         containerEnv = "http://" + \
-            os.environ["SERVER"] + ":" + str(container_start_port) + "/instance/tests"
+            os.environ["SERVER"] + ":" + str(container_start_port) + \
+            "/instance/tests"
 
         f = open('propsfile', 'w')
         f.write('CONTAINER=' + containerEnv + '\n')

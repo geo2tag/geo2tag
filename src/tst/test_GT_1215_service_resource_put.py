@@ -21,10 +21,12 @@ class test_GT_1215ServiceResourcePut(TestCase):
 
     def test_GT_1215ServiceResourcePutFunc(self):
 
-        with app.test_request_context('/testservice', data=CORRECT_ARGS, method='PUT'):
+        with app.test_request_context('/testservice', data=CORRECT_ARGS,
+                                      method='PUT'):
             args = ServiceParser.parsePutParameters()
             self.assertEquals(args[LOG_SIZE], LOG_SIZE_VALUE)
 
-        with app.test_request_context('/testservice', data=INCORRECT_ARGS, method='PUT'):
+        with app.test_request_context('/testservice', data=INCORRECT_ARGS,
+                                      method='PUT'):
             with self.assertRaises(BadRequest):
                 args = ServiceParser.parsePutParameters()

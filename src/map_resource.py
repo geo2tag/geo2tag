@@ -1,4 +1,4 @@
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from flask import render_template
 from flask import make_response
 from point_list_resource_parser import PointListResourceParser

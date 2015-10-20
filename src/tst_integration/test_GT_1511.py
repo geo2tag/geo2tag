@@ -1,4 +1,3 @@
-import unittest
 import requests
 import json
 from basic_integration_test import BasicIntegrationTest
@@ -24,7 +23,8 @@ class Test_GT_1511(BasicIntegrationTest):
         responseCode = response.status_code
         self.assertEquals(len(responseText), 12)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        TEST_URL2 = 'instance/plugin/ok_import/service/testservice/job/' + responseText
+        TEST_URL2 = 'instance/plugin/ok_import/service/testservice/job/' + \
+                    responseText
         response = requests.get(self.getUrl(TEST_URL2))
         responseText = response.text
         responseCode = response.status_code
