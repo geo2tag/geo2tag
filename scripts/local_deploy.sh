@@ -4,7 +4,6 @@
 # use option -d <config_ini_file_name> to using new config ini file instead config/config.ini
 # use option -e <config_file_name> to using new config file instead config/geomongo.conf
 
-
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
 CONFIG_FILE="geomongo.conf"
@@ -15,17 +14,12 @@ CONFIG_INI_FILE_FINAL='config.ini'
 
 while getopts ":c:d:e:f" opt ;
 do
-echo '1'
     case $opt in
         c) CATALOG=$OPTARG;
-           echo '2'
-           echo $OPTARG;
             ;;
         f) FLAG_KEEP_CONFIG_INI=true;
             ;;
         d) CONFIG_INI_FILE=$OPTARG;
-           echo '3'
-           echo $OPTARG;
             ;;
         e) CONFIG_FILE=$OPTARG;
             ;;
