@@ -41,6 +41,7 @@ from internal_tests_resource import InternalTestsResource
 from log import writeInstanceLog
 from user_routines import getUserId
 from admin_log_resource import AdminLogResource
+from admin_service_list_resource import AdminServiceListResource
 API = None
 
 
@@ -122,7 +123,8 @@ getApi().add_resource(LoginFacebookResource,
                       getPathWithPrefix('/login/facebook'))
 getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
-
+getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
+    '/admin/service'))
 
 getApi().add_resource(
     MapResource,
