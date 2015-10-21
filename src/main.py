@@ -126,7 +126,6 @@ getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
     '/admin/service'))
 
-
 getApi().add_resource(
     MapResource,
     getPathWithPrefix('/service/<string:serviceName>/map'))
