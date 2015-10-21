@@ -42,6 +42,7 @@ from log import writeInstanceLog
 from user_routines import getUserId
 from admin_log_resource import AdminLogResource
 from admin_service_list_resource import AdminServiceListResource
+from admin_service_resource import AdminServiceResource
 API = None
 
 
@@ -125,6 +126,8 @@ getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
     '/admin/service'))
+getApi().add_resource(AdminServiceResource, getPathWithPrefix(
+    '/admin/service/<service_id>'))
 
 getApi().add_resource(
     MapResource,

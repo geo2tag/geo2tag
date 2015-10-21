@@ -7,6 +7,8 @@ from test_instance_tests import TestInstaceTest
 from test_instance_internal_tests import TestInstaceInternalTest
 from test_GT_1803_admin_service_list_resource import \
     TestAdminServiceListResource
+from test_GT_1804_admin_service_resource import \
+    TestAdminServiceResource
 
 
 def main(host):
@@ -21,6 +23,10 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminServiceListResource,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestAdminServiceResource,
             param=host))
 
 ###################################################
