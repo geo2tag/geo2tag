@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 import os
-import sys
 import shutil
 
 NAME_PLUGIN = 'geocoder'

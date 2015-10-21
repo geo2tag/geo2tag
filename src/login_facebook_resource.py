@@ -1,4 +1,4 @@
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from flask_oauth import OAuth
 from flask import Blueprint, session, request
 from config_reader import getFacebookClientID,\

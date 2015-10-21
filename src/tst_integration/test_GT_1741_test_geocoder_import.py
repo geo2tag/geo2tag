@@ -1,8 +1,6 @@
-from config_reader import getGeonamesLogin
 from basic_integration_test import BasicIntegrationTest
 import json
 import requests
-from configparser import RawConfigParser
 import time
 
 GET_POST_JOB_URL = 'instance/plugin/geocoder/service/testservice/job'

@@ -1,7 +1,5 @@
-from configparser import RawConfigParser
 from bson import ObjectId
 from db_model import getDbObject
-from config_reader import getGeonamesLogin
 from geocoder_import import geocoderImport
 from unittest import TestCase
 

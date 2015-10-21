@@ -1,5 +1,4 @@
 import unittest
-from jobs_creator import createImportJob
 TEST_URL = 'http://httpbin.org/status/200'
 TEST_DATA = '{}'
 
