@@ -42,7 +42,6 @@ cp src/*.py  /var/www/"$CATALOG"
 cp src/*.wsgi /var/www/"$CATALOG"
 if ! $FLAG_KEEP_CONFIG_INI
 then
-    echo  "$CONFIG_INI_FILE"
     cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"/"$CONFIG_INI_FILE_FINAL"
 fi
 cp -r src/static /var/www/"$CATALOG"/static/
