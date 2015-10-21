@@ -1,24 +1,33 @@
 #!/bin/bash
 # use option -f without arguments to keep config.ini file
 # use option -c <catalog_name> to change /geomongo catalog
-# use option -d <config_file_name> to using new config file instead config/config.ini
+# use option -d <config_ini_file_name> to using new config ini file instead config/config.ini
+# use option -e <config_file_name> to using new config file instead config/geomongo.conf
+
 
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
-CONFIG_FILE=${1:-"geomongo.conf"}
+CONFIG_FILE="geomongo.conf"
 FLAG_KEEP_CONFIG_INI=false
 CATALOG='geomongo'
 CONFIG_INI_FILE='config/config.ini'
 CONFIG_INI_FILE_FINAL='config.ini'
 
-while getopts ":c:d:f" opt ;
+while getopts ":c:d:e:f" opt ;
 do
+echo '1'
     case $opt in
         c) CATALOG=$OPTARG;
+           echo '2'
+           echo $OPTARG;
             ;;
         f) FLAG_KEEP_CONFIG_INI=true;
             ;;
         d) CONFIG_INI_FILE=$OPTARG;
+           echo '3'
+           echo $OPTARG;
+            ;;
+        e) CONFIG_FILE=$OPTARG;
             ;;
         *) echo "the option is incorrect";
             exit 1
@@ -39,6 +48,7 @@ cp src/*.py  /var/www/"$CATALOG"
 cp src/*.wsgi /var/www/"$CATALOG"
 if ! $FLAG_KEEP_CONFIG_INI
 then
+    echo  "$CONFIG_INI_FILE"
     cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"/"$CONFIG_INI_FILE_FINAL"
 fi
 cp -r src/static /var/www/"$CATALOG"/static/
