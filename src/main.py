@@ -34,53 +34,53 @@ def addResources():
     getApi().add_resource(ChannelsListResource, getPathWithPrefix(
         '/service/<string:serviceName>/channel'))
     getApi().add_resource(ChannelResource, getPathWithPrefix(
-    '/service/<string:serviceName>/channel/<string:channelId>'))
+        '/service/<string:serviceName>/channel/<string:channelId>'))
     getApi().add_resource(PointResource, getPathWithPrefix(
-    '/service/<string:serviceName>/point/<string:pointId>'))
+        '/service/<string:serviceName>/point/<string:pointId>'))
     getApi().add_resource(PointListResource, getPathWithPrefix(
-    '/service/<string:serviceName>/point'))
+        '/service/<string:serviceName>/point'))
     getApi().add_resource(LogoutResource, getPathWithPrefix('/logout'))
     getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
     getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
     getApi().add_resource(LoginFacebookResource,
-                      getPathWithPrefix('/login/facebook'))
+                          getPathWithPrefix('/login/facebook'))
     getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
     getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
     getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
-    '/admin/service'))
+        '/admin/service'))
     getApi().add_resource(AdminServiceResource, getPathWithPrefix(
-    '/admin/service/<service_id>'))
+        '/admin/service/<service_id>'))
     getApi().add_resource(
-    MapResource,
-    getPathWithPrefix('/service/<string:serviceName>/map'))
+        MapResource,
+        getPathWithPrefix('/service/<string:serviceName>/map'))
     getApi().add_resource(
-    GetAllPluginsWithStatusResource,
-    getPathWithPrefix('/plugin'))
+        GetAllPluginsWithStatusResource,
+        getPathWithPrefix('/plugin'))
     getApi().add_resource(
-    ManagePluginsResource,
-    getPathWithPrefix('/manage_plugins'))
+        ManagePluginsResource,
+        getPathWithPrefix('/manage_plugins'))
     getApi().add_resource(
-    InternalTestsResource,
-    getPathWithPrefix('/internal_tests'))
+        InternalTestsResource,
+        getPathWithPrefix('/internal_tests'))
     getApi().add_resource(
-    AdminLogResource,
-    getPathWithPrefix('/admin/log'))
+        AdminLogResource,
+        getPathWithPrefix('/admin/log'))
     getApi().add_resource(
-    ServiceResource,
-    getPathWithPrefix('/service/<string:serviceName>'))
+        ServiceResource,
+        getPathWithPrefix('/service/<string:serviceName>'))
     getApi().add_resource(
-    StatusResource,
-    getPathWithPrefix('/status'))
+        StatusResource,
+        getPathWithPrefix('/status'))
     getApi().add_resource(
-    ServiceListResource,
-    getPathWithPrefix('/service'))
+        ServiceListResource,
+        getPathWithPrefix('/service'))
     getApi().add_resource(
-    DebugInfoResource,
-    getPathWithPrefix('/debug_info'))
+        DebugInfoResource,
+        getPathWithPrefix('/debug_info'))
     getApi().add_resource(
-    LogResource,
-    getPathWithPrefix('/service/<string:serviceName>/log'),
-    getPathWithPrefix('/log'))
+        LogResource,
+        getPathWithPrefix('/service/<string:serviceName>/log'),
+        getPathWithPrefix('/log'))
 
     atexit.register(closeConnection)
 
