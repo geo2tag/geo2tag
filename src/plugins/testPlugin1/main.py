@@ -1,4 +1,3 @@
-import sys
 from testResource_GT_1416 import Resource_GT_1416
 
 

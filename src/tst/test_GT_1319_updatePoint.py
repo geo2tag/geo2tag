@@ -19,7 +19,7 @@ class TestUpdatePoint(unittest.TestCase):
 
     def testUpdatePoint(self):
         collection = getDbObject(DB)[COLLECTION]
-        with self.assertRaises(PointDoesNotExist) as e:
+        with self.assertRaises(PointDoesNotExist):
             updatePoint(DB, BAD_TEST_ID, TEST_DICT)
         obj = collection.find_one({ID: TEST_ID})
         updatePoint(DB, TEST_ID, TEST_DICT)

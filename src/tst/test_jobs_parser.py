@@ -1,7 +1,7 @@
 import unittest
-from datetime import datetime
-import requests
-from jobs_parser import *
+from jobs_parser import areAllJobsDone, createJobStatistic, \
+    getImportJobsText, parseJobs
+
 URL = 'http://httpbin.org/status/200'
 JSON_TEST = '{"_id": {"$oid": "55671ae113293c504d515a33"}, ' \
             '"config": {"log_size": 1048576, "logSize": 10},' \

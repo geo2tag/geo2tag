@@ -22,7 +22,7 @@ class test_getServiceById(unittest.TestCase):
             testObject1 = getServiceById(TEST_ID)
             print('Test object with getServiceById: ' + str(obj))
             print 'testObject1' + str(testObject1)
-        except ServiceNotExistException as e:
+        except ServiceNotExistException:
             self.assertTrue(False)
         with self.assertRaises(ServiceNotExistException):
             testObject2 = getServiceById(BAD_TEST_ID)

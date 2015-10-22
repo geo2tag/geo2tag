@@ -1,8 +1,7 @@
 from flask import Flask
-from pymongo import MongoClient
 from unittest import TestCase
 from config_reader import getDbName
-from db_model import getDbObject, getHost, getPort
+from db_model import getDbObject
 from user_routines import findUserById
 from user_does_not_exist import UserDoesNotExist
 
@@ -34,7 +33,7 @@ class TestFindUserById(TestCase):
         collectionUsers.drop()
 
     def testFindUserById(self):
-        with self.assertRaises(UserDoesNotExist) as e:
+        with self.assertRaises(UserDoesNotExist):
             findUserById(USER_ID)
         self.assertTrue(findUserById(GOOD_USER_ID)[
                         FIELD_USER_ID] == GOOD_USER_ID)

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from datetime import datetime, date, time
-from config_reader import getHost, getPort, getDbName
+from datetime import datetime
 from db_model import getLog, getDbObject
 
 DB = "geomongo"

@@ -1,5 +1,3 @@
-from flask_restful import reqparse
-import flask_restful as restful
 from flask_restful import Resource
 
 
