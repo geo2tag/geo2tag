@@ -25,6 +25,7 @@ app.secret_key = urandom(32)
 def getApp():
     return app
 
+
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj, code, headers)
