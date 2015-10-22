@@ -17,7 +17,7 @@ class ManagePluginsResource(Resource):
         for plugin in pluginsDict:
             setPluginState(plugin, pluginsDict[plugin])
             if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(
-                    plugin, getApp) == False:
+                    plugin, getApp()) == False:
                 dirs = os.walk("plugins").next()
                 if plugin not in dirs:
                     raise PluginDoesNotExistException(plugin)
