@@ -6,11 +6,13 @@ from test_GT_1340_login_resurce import TestLoginResource
 from test_instance_tests import TestInstaceTest
 from test_instance_internal_tests import TestInstaceInternalTest
 from test_admin_page import  TestAdminResource
+from test_GT_1776_admin_template import TestGT1776AdminTemplate
 
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(BasicSeleniumTest.parametrize(TestStatusOK, param=host))
+    suite.addTest(BasicSeleniumTest.parametrize(TestGT1776AdminTemplate, param=host))
+    """suite.addTest(BasicSeleniumTest.parametrize(TestStatusOK, param=host))
     suite.addTest(BasicSeleniumTest.parametrize(TestLoginResource, param=host))
     suite.addTest(BasicSeleniumTest.parametrize(TestInstaceTest, param=host))
     suite.addTest(
@@ -20,7 +22,7 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminResource,
-            param=host))
+            param=host))"""
 
 ###################################################
 # Place tests above this line ^^
