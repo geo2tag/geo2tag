@@ -12,7 +12,7 @@ from test_GT_1776_admin_template import TestGT1776AdminTemplate
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicSeleniumTest.parametrize(TestGT1776AdminTemplate, param=host))
-    """suite.addTest(BasicSeleniumTest.parametrize(TestStatusOK, param=host))
+    suite.addTest(BasicSeleniumTest.parametrize(TestStatusOK, param=host))
     suite.addTest(BasicSeleniumTest.parametrize(TestLoginResource, param=host))
     suite.addTest(BasicSeleniumTest.parametrize(TestInstaceTest, param=host))
     suite.addTest(
@@ -22,7 +22,7 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminResource,
-            param=host))"""
+            param=host))
 
 ###################################################
 # Place tests above this line ^^
