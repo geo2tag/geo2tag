@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = 'instance/admin/service/test_id'
-H2 = "Services"
+H2 = "Service"
 
 
 class TestAdminServiceResource(BasicSeleniumTest):
