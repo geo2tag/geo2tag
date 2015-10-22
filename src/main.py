@@ -28,25 +28,6 @@ from admin_service_resource import AdminServiceResource
 
 API = None
 
-
-def output_json(obj, code, headers=None):
-    if isinstance(obj, str) == True:
-        return make_response(obj, code, headers)
-    return make_response(json_util.dumps(obj), code, headers)
-
-
-def getApi():
-    global API
-    if API is None:
-        API = Api(app)
-    return API
-
-DEFAULT_REPRESENTATIONS = {'application/json': output_json}
-app = Flask(__name__)
-app.register_blueprint(google_oauth)
-app.register_blueprint(facebook_oauth)
->>>>>> > origin / master
-
 getApi().representations = DEFAULT_REPRESENTATIONS
 
 getApi().add_resource(ChannelsListResource, getPathWithPrefix(
