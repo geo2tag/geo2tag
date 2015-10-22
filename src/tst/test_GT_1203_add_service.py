@@ -14,7 +14,7 @@ class TestAddService(unittest.TestCase):
 
     def testAddService(self):
         collection = getDbObject(DB)[COLLECTION]
-        with self.assertRaises(ServiceAlreadyExistsException) as e:
+        with self.assertRaises(ServiceAlreadyExistsException):
             obj = addService("testservice", 1, ' ')
         obj_id = addService("test_GT_1203", 1, ' ')
         obj = collection.find_one({ID: obj_id})

@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 from debug_login_resource import parseId
-from flask import Flask, request
+from flask import Flask
 
 
 USERNAME = u'тест_юзер_ид'

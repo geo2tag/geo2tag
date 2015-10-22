@@ -1,9 +1,8 @@
-import pymongo
 from unittest import TestCase
 from os import urandom
-from flask import Flask, request, session
+from flask import Flask, request
 from user_routines import logUserIn, logUserOut, getUserId
-from config_reader import getDbName, getInstancePrefix
+from config_reader import getInstancePrefix
 
 
 TEST_ID = 'test_id11'

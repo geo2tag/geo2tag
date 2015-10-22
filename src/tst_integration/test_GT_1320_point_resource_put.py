@@ -1,8 +1,5 @@
-import unittest
 import requests
 from basic_integration_test import BasicIntegrationTest
-from db_model import getChannelsList, getDbObject
-from config_reader import getHost, getPort, getDbName
 
 TEST_SERVICE = 'testservice'
 TEST_URL = '/instance/service/testservice/point/552833515c0dd1178d37f7bb'
@@ -16,7 +13,6 @@ NOT_VALID_RESPONSE_TEXT = "Point does not exist"
 class PointResourcePut(BasicIntegrationTest):
 
     def testPointResourcePut(self):
-        db = getDbObject(TEST_SERVICE)
         response = requests.put(self.getUrl(TEST_URL))
         responseText = response.text
         responseCode = response.status_code

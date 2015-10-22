@@ -7,8 +7,8 @@ from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
 import json
 
+RESPONSE_REQUEST_COORDINATES = []
 GEONAMES_LOGIN = 'nikmel95@mail.ru'
-
 TEST_SEARCH = 'asdasd'
 RESPONSE_TEST_SEARCH = 'http://api.geonames.org/searchJSON?q=' + \
     TEST_SEARCH + '&username=nikmel95@mail.ru'
@@ -43,7 +43,7 @@ RESPONSE_SINGLE1 = {"totalResultsCount": 1,
                                   "countryName": "Spain",
                                   "fcodeName": "hotel",
                                   "adminName1": "Galicia",
-                                  "lat": "42.42865",
+                                  "lat"	: "42.42865",
                                   "fcode": "HTL"}]}
 COUNTRY_ID_VAL = '2510769'
 GEONAMES = 'geonames'

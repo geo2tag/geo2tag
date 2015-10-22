@@ -3,7 +3,6 @@
 
 import unittest
 from db_model import addPoints, getDbObject
-from bson.objectid import ObjectId
 
 DB = "testservice"
 COLLECTION = "points"

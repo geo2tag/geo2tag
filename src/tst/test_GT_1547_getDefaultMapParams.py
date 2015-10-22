@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from pymongo import MongoClient
 from map_resource import getDefaultMapParams
 
 SERVICE_NAME = 'testservice'

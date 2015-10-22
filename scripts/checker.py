@@ -9,7 +9,7 @@ def transform(cls):
 
     check = 0
     if NAME_DEF_GET_PLUGIN_RESOURCE not in cls.locals \
-            and NAME_DEF_GET_PLUGIN_INFO not in cls.locals:
+            or NAME_DEF_GET_PLUGIN_INFO not in cls.locals:
         print '======= Module: ' + cls.name + ' ======='
     if NAME_DEF_GET_PLUGIN_RESOURCE not in cls.locals:
         print 'No required function ' + NAME_DEF_GET_PLUGIN_RESOURCE
