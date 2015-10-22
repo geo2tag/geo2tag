@@ -20,7 +20,8 @@ def backgroundFunction(
         showObjectUrl=TEST_showObjectUrl,
         showImageUrl=TEST_showImageUrl,
         serviceName=TEST_serviceName):
-    print self, channelName, openDataUrl, showObjectUrl, showImageUrl, serviceName
+    print self, channelName, openDataUrl, showObjectUrl, showImageUrl, \
+        serviceName
     sleep(2)
     return None
 

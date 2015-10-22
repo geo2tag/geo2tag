@@ -19,7 +19,8 @@ def backgroundFunction(
         showImageUrl=TEST_showImageUrl,
         serviceName=TEST_serviceName):
     self.stop()
-    print channelName, openDataUrl, showObjectUrl, showImageUrl, showImageUrl, serviceName
+    print channelName, openDataUrl, showObjectUrl, showImageUrl, showImageUrl, \
+        serviceName
     return []
 
 
