@@ -1,6 +1,5 @@
 import unittest
 from perform_import_actions import performImportActions
-from db_model import getDbObject
 
 
 class testOdLoaderClass():

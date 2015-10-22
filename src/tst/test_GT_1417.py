@@ -1,9 +1,7 @@
 import unittest
-import os
 from flask import Flask
-from flask.ext.restful import Api
-from main import initApp
-from plugin_routines import getPluginList
+from flask_restful import Api
+from rest_api_routines import initApp
 
 
 class TestGt1417(unittest.TestCase):

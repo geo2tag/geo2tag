@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 from datetime import datetime
-from config_reader import getHost, getPort, getDbName
 from db_model import updateService, getDbObject
 
 SERVICES = "services"
@@ -31,7 +30,10 @@ services_collection = db[SERVICES]
 
 
 def prepareDbRemoveSubDoc():
-    """removing sub-document called 'config' from service called 'testservice_1'"""
+    """
+    removing sub-document called 'config'
+    from service called 'testservice_1'
+    """
     services_collection.update(
         {"name": TEST_SERVICE + "1"},
         {"$unset": {CONFIG: ""}},
@@ -44,7 +46,10 @@ class TestUpdateService(TestCase):
     def setUp(self):
         """making unique services"""
         services_collection.insert({
-            "config": {LOG_PATH: NOT_TESTED_LOG_PATH, LOG_SIZE: NOT_TESTED_LOG_SIZE},
+            "config": {
+                LOG_PATH: NOT_TESTED_LOG_PATH,
+                LOG_SIZE: NOT_TESTED_LOG_SIZE
+            },
             "name": (TEST_SERVICE + "1"),
             "owner_id": ""
         })
@@ -58,7 +63,8 @@ class TestUpdateService(TestCase):
 
     def testUpdateServiceAddPathAndSize(self):
         prepareDbRemoveSubDoc()
-        # checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
+        # checking if in sub-document of service called
+        # 'testservice_1' field 'config' doesn't exist
         # and creating 'config' with 'path' and 'size' in it
         changed_service = None
         for doc in updateService(
@@ -75,7 +81,8 @@ class TestUpdateService(TestCase):
 
     def testUpdateServiceAddOnlyPath(self):
         prepareDbRemoveSubDoc()
-        # checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
+        # checking if in sub-document of service called
+        #  'testservice_1' field 'config' doesn't exist
         # and creating 'config' with only 'path' in it
         changed_service = None
         for doc in updateService(TEST_SERVICE + "1", testConfigDictForPath):
@@ -88,7 +95,8 @@ class TestUpdateService(TestCase):
 
     def testUpdateServiceAddOnlySize(self):
         prepareDbRemoveSubDoc()
-        # checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
+        # checking if in sub-document of service called
+        # 'testservice_1' field 'config' doesn't exist
         # and creating 'config' with only 'size' in it
         changed_service = None
         for doc in updateService(TEST_SERVICE + "1", testConfigDictForSize):
@@ -101,7 +109,8 @@ class TestUpdateService(TestCase):
 
     def testUpdateServiceAddNothing(self):
         prepareDbRemoveSubDoc()
-        # checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
+        # checking if in sub-document of service called
+        # 'testservice_1' field 'config' doesn't exist
         # and creating 'config' with only 'size' in it but it's not going to
         # happend, dict to get changes is empty
         changed_service = None
@@ -113,7 +122,8 @@ class TestUpdateService(TestCase):
 
     def testUpdateServiceAddPathSizeAndDate(self):
         prepareDbRemoveSubDoc()
-        # checking if in sub-document of service called 'testservice_1' field 'config' doesn't exist
+        # checking if in sub-document of service called
+        # 'testservice_1' field 'config' doesn't exist
         # and creating 'config' with 'path' and 'size' in it
         changed_service = None
         for doc in updateService(

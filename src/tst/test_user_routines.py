@@ -1,12 +1,10 @@
 import pymongo
 import unittest
-from flask import session
 from os import urandom
 from flask import Flask, request, session
-
 from db_model import getDbObject
 from user_routines import logUserIn, logUserOut
-from config_reader import getDbName, getInstancePrefix
+from config_reader import getInstancePrefix
 
 
 NAME_DB = "geomongo"
@@ -33,12 +31,16 @@ class TestUserRoutines(unittest.TestCase):
 
     def testUserRoutins(self):
         # Emulating login session
-        with app.test_request_context(LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM):
+        with app.test_request_context(
+                LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM):
             logUserIn(request.args[USER_ID_FIELD])
             self.assertTrue(session[USER_ID_FIELD] == TEST_ID)
             # Testing writing in log
             IS_USER_LOGIN = COLLECTION_LOG.find(
-                {USER_ID_FIELD: TEST_ID, MESSAGE: MSG_LOGIN}, None, 0, 1).sort("_id", pymongo.DESCENDING)
+                {
+                    USER_ID_FIELD: TEST_ID,
+                    MESSAGE: MSG_LOGIN}, None, 0, 1
+            ).sort("_id", pymongo.DESCENDING)
             self.assertTrue(IS_USER_LOGIN.count() > 0)
             self.assertTrue(list(IS_USER_LOGIN)[0][MESSAGE] == MSG_LOGIN)
             # Emulating logout session
@@ -46,6 +48,9 @@ class TestUserRoutines(unittest.TestCase):
             self.assertTrue(USER_ID_FIELD not in session)
             # Testing writing in log
             IS_USER_LOGOUT = COLLECTION_LOG.find(
-                {USER_ID_FIELD: TEST_ID, MESSAGE: MSG_LOGOUT}, None, 0, 1).sort("_id", pymongo.DESCENDING)
+                {
+                    USER_ID_FIELD: TEST_ID,
+                    MESSAGE: MSG_LOGOUT}, None, 0, 1
+            ).sort("_id", pymongo.DESCENDING)
             self.assertTrue(IS_USER_LOGOUT.count() > 0)
             self.assertTrue(list(IS_USER_LOGOUT)[0][MESSAGE] == MSG_LOGOUT)

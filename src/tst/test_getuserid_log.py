@@ -1,9 +1,8 @@
-import pymongo
 from unittest import TestCase
 from os import urandom
-from flask import Flask, request, session
+from flask import Flask, request
 from user_routines import logUserIn, logUserOut, getUserId
-from config_reader import getDbName, getInstancePrefix
+from config_reader import getInstancePrefix
 from db_model import getDbObject
 
 MESSAGE = 'message'
@@ -31,12 +30,12 @@ class TestUserIdLog(TestCase):
             # Emulating login session
             collection.drop()
             logUserIn(request.args[USER_ID])
-            res = getUserId()
+            getUserId()
             db_res = collection.find_one({USER_ID: TEST_ID})
             self.assertEqual(db_res[MESSAGE], AUTH_MESS)
         # Emulating logout session
             collection.drop()
             logUserOut()
-            res = getUserId()
+            getUserId()
             db_res = collection.find_one({USER_ID: USER_ID})
             self.assertEqual(db_res, ANONYM_MESS)

@@ -1,7 +1,6 @@
 import requests
 import json
 import time
-from flask import request
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
 
@@ -44,7 +43,8 @@ class GeonamesRequestSender():
 
     @classmethod
     def createRequestUrl(cls, address, geonmesLogin):
-        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + USERNAME + geonmesLogin
+        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + \
+            USERNAME + geonmesLogin
         return url
 
     @classmethod

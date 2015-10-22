@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 import unittest
-import sys
 from geocoder_request import GeonamesRequestSender
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
@@ -24,10 +22,14 @@ RESPONSE_FOR_OTHER_ERROR = {"status": {"message": "test mess", "value": "13"}}
 HOUR_PERIOD = 1
 DAY_PERIOD = 24
 WEEK_PERIOD = 7 * 24
-DAY_ERROR_MESSAGE = 'Error code:18,Status:Limit exceeded the number of requests per day'
-HOUR_ERROR_MESSAGE = 'Error code:19,Status:Limit exceeded the number of requests per hour'
-WEEK_ERROR_MESSAGE = 'Error code:20,Status:Limit exceeded the number of requests in a week'
-OTHER_ERROR_MESSAGE = 'Error code:13,Status:Database timeout'
+DAY_ERROR_MESSAGE = \
+    'Error code:18,Status:Limit exceeded the number of requests per day'
+HOUR_ERROR_MESSAGE = \
+    'Error code:19,Status:Limit exceeded the number of requests per hour'
+WEEK_ERROR_MESSAGE = \
+    'Error code:20,Status:Limit exceeded the number of requests in a week'
+OTHER_ERROR_MESSAGE = \
+    'Error code:13,Status:Database timeout'
 
 
 class TestGeonamesRequestSender_LimitExcept(unittest.TestCase):

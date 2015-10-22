@@ -1,9 +1,8 @@
-from flask_restful import reqparse
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from config_reader import getGoogleClientID, getGoogleClientSecret, \
     getGoogleRedirectUrl
 from flask_oauth import OAuth
-from flask import Blueprint, session
+from flask import Blueprint
 from url_utils import getPathWithPrefix
 from urllib2 import Request, urlopen, URLError
 from json import loads
@@ -67,7 +66,7 @@ def authorized(resp):
     res = urlopen(request)
     try:
         res = urlopen(request)
-    except URLError as e:
+    except URLError:
         raise AuthorizationError
     _id = processGoogleData(res.read())
     logUserIn(_id)

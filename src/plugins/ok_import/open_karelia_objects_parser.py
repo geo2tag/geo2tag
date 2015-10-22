@@ -1,5 +1,4 @@
 import json
-import os
 from open_data_objects_parser import OpenDataObjectsParser
 
 

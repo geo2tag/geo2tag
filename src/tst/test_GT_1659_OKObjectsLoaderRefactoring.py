@@ -1,5 +1,4 @@
 import inspect
-import json
 import re
 from unittest import TestCase
 from open_karelia_objects_loader import OpenKareliaObjectsLoader

@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from datetime import datetime, date, time
-from flask import Flask, request
-from calendar import timegm
+from flask import Flask
 import json
-import aniso8601
-import pytz
 from werkzeug.exceptions import BadRequest
-from geojson import MultiPoint
 from point_list_resource_parser import PointListResourceParser
 import geo_json_type
 from date_utils import dateDeserialiser
@@ -34,9 +28,14 @@ GEOMETRY = 'geometry'
 GEOMETRY_VALUE = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
 GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
 
-CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + str(OFFSET_VALUE) + '&' + DATE_FROM + '=' + str(
-    DATE_FROM_VALUE) + '&' + DATE_TO + '=' + str(DATE_TO_VALUE) + '&' + BC_FROM + '=' + BC_FROM_VALUE + '&' + BC_TO + \
-    '=' + BC_TO_VALUE + '&' + CHANNEL_IDS + '=' + CHANNEL_IDS_VALUE + '&' + GEOMETRY + '=' + GEOMETRY_VALUE
+
+CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + \
+    str(OFFSET_VALUE) + '&' + DATE_FROM + '=' + \
+    str(DATE_FROM_VALUE) + '&' + \
+    DATE_TO + '=' + str(DATE_TO_VALUE) + '&' + \
+    BC_FROM + '=' + BC_FROM_VALUE + \
+    '&' + BC_TO + '=' + BC_TO_VALUE + '&' + CHANNEL_IDS + '=' + \
+    CHANNEL_IDS_VALUE + '&' + GEOMETRY + '=' + GEOMETRY_VALUE
 INCORRECT_ARGS = 'incorect='
 app = Flask(__name__)
 
@@ -44,7 +43,8 @@ app = Flask(__name__)
 class TestParserPointListGetResource(TestCase):
 
     def testParserPointListGetResource(self):
-        with app.test_request_context('/instance/service/testservice/point/?' + CORRECT_ARGS):
+        with app.test_request_context(
+                '/instance/service/testservice/point/?' + CORRECT_ARGS):
             args_with_errs = PointListResourceParser.parseGetParameters()
             args = args_with_errs[POINT_LIST_PARSER_ARGS_KEY]
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
@@ -60,6 +60,7 @@ class TestParserPointListGetResource(TestCase):
             geometryValue = geo_json_type.GeoJsonType(str(args.get(GEOMETRY)))
             self.assertEquals(GEOMETRY_VALUE_JSON, geometryValue)
 
-        with app.test_request_context('/instance/service/testservice/point/?' + INCORRECT_ARGS):
+        with app.test_request_context(
+                '/instance/service/testservice/point/?' + INCORRECT_ARGS):
             with self.assertRaises(BadRequest):
                 args = PointListResourceParser.parseGetParameters()
