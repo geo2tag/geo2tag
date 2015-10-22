@@ -28,62 +28,63 @@ from admin_service_resource import AdminServiceResource
 
 API = None
 
-getApi().representations = DEFAULT_REPRESENTATIONS
 
-getApi().add_resource(ChannelsListResource, getPathWithPrefix(
-    '/service/<string:serviceName>/channel'))
-getApi().add_resource(ChannelResource, getPathWithPrefix(
+def addResources():
+    getApi().representations = DEFAULT_REPRESENTATIONS
+    getApi().add_resource(ChannelsListResource, getPathWithPrefix(
+        '/service/<string:serviceName>/channel'))
+    getApi().add_resource(ChannelResource, getPathWithPrefix(
     '/service/<string:serviceName>/channel/<string:channelId>'))
-getApi().add_resource(PointResource, getPathWithPrefix(
+    getApi().add_resource(PointResource, getPathWithPrefix(
     '/service/<string:serviceName>/point/<string:pointId>'))
-getApi().add_resource(PointListResource, getPathWithPrefix(
+    getApi().add_resource(PointListResource, getPathWithPrefix(
     '/service/<string:serviceName>/point'))
-getApi().add_resource(LogoutResource, getPathWithPrefix('/logout'))
-getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
-getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
-getApi().add_resource(LoginFacebookResource,
+    getApi().add_resource(LogoutResource, getPathWithPrefix('/logout'))
+    getApi().add_resource(LoginResource, getPathWithPrefix('/login'))
+    getApi().add_resource(LoginGoogleResource, getPathWithPrefix('/login/google'))
+    getApi().add_resource(LoginFacebookResource,
                       getPathWithPrefix('/login/facebook'))
-getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
-getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
-getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
+    getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
+    getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
+    getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
     '/admin/service'))
-getApi().add_resource(AdminServiceResource, getPathWithPrefix(
+    getApi().add_resource(AdminServiceResource, getPathWithPrefix(
     '/admin/service/<service_id>'))
-getApi().add_resource(
+    getApi().add_resource(
     MapResource,
     getPathWithPrefix('/service/<string:serviceName>/map'))
-getApi().add_resource(
+    getApi().add_resource(
     GetAllPluginsWithStatusResource,
     getPathWithPrefix('/plugin'))
-getApi().add_resource(
+    getApi().add_resource(
     ManagePluginsResource,
     getPathWithPrefix('/manage_plugins'))
-getApi().add_resource(
+    getApi().add_resource(
     InternalTestsResource,
     getPathWithPrefix('/internal_tests'))
-getApi().add_resource(
+    getApi().add_resource(
     AdminLogResource,
     getPathWithPrefix('/admin/log'))
-getApi().add_resource(
+    getApi().add_resource(
     ServiceResource,
     getPathWithPrefix('/service/<string:serviceName>'))
-getApi().add_resource(
+    getApi().add_resource(
     StatusResource,
     getPathWithPrefix('/status'))
-getApi().add_resource(
+    getApi().add_resource(
     ServiceListResource,
     getPathWithPrefix('/service'))
-getApi().add_resource(
+    getApi().add_resource(
     DebugInfoResource,
     getPathWithPrefix('/debug_info'))
-getApi().add_resource(
+    getApi().add_resource(
     LogResource,
     getPathWithPrefix('/service/<string:serviceName>/log'),
     getPathWithPrefix('/log'))
 
-atexit.register(closeConnection)
+    atexit.register(closeConnection)
 
-initApp(getApi())
+    initApp(getApi())
 
 if __name__ == '__main__':
     getApp.run(host="0.0.0.0", port=5001, debug=True)
