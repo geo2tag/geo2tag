@@ -21,7 +21,7 @@ class TestValidatePlugin_PYLINT(TestCase):
         data = os.popen(PY_SCRIPT + GOOD_NAME_PLUGIN).read()
         self.assertEqual(RES_GOOD_PLUGIN, data)
         os.chdir('src/tst')
-    
+
     def testValidatePlugin_FAIL_1(self):
         os.chdir('../..')
         data = os.popen(PY_SCRIPT + FAIL_NAME_PLUGIN_1).read()
