@@ -1,7 +1,7 @@
 import unittest
 from flask import Flask
 from flask_restful import Api
-from main import initApp
+from rest_api_routines import initApp
 
 
 class TestGt1417(unittest.TestCase):

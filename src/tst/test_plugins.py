@@ -1,6 +1,5 @@
 import unittest
 import os
-from main import app
 from plugin_routines import isPluginEnabled, enablePlugin
 from flask import Flask
 from flask_restful import Api
