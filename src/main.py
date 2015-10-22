@@ -24,6 +24,28 @@ from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from debug_info_resource import DebugInfoResource
+from admin_service_resource import AdminServiceResource
+
+API = None
+
+
+def output_json(obj, code, headers=None):
+    if isinstance(obj, str) == True:
+        return make_response(obj, code, headers)
+    return make_response(json_util.dumps(obj), code, headers)
+
+
+def getApi():
+    global API
+    if API is None:
+        API = Api(app)
+    return API
+
+DEFAULT_REPRESENTATIONS = {'application/json': output_json}
+app = Flask(__name__)
+app.register_blueprint(google_oauth)
+app.register_blueprint(facebook_oauth)
+>>>>>> > origin / master
 
 getApi().representations = DEFAULT_REPRESENTATIONS
 
@@ -44,6 +66,8 @@ getApi().add_resource(DebugLoginResource, getPathWithPrefix('/login/debug'))
 getApi().add_resource(TestsResource, getPathWithPrefix('/tests'))
 getApi().add_resource(AdminServiceListResource, getPathWithPrefix(
     '/admin/service'))
+getApi().add_resource(AdminServiceResource, getPathWithPrefix(
+    '/admin/service/<service_id>'))
 getApi().add_resource(
     MapResource,
     getPathWithPrefix('/service/<string:serviceName>/map'))
@@ -63,13 +87,13 @@ getApi().add_resource(
     ServiceResource,
     getPathWithPrefix('/service/<string:serviceName>'))
 getApi().add_resource(
-    StatusResource, 
+    StatusResource,
     getPathWithPrefix('/status'))
 getApi().add_resource(
-    ServiceListResource, 
+    ServiceListResource,
     getPathWithPrefix('/service'))
 getApi().add_resource(
-    DebugInfoResource, 
+    DebugInfoResource,
     getPathWithPrefix('/debug_info'))
 getApi().add_resource(
     LogResource,

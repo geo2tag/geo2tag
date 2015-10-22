@@ -21,6 +21,7 @@ app.register_blueprint(google_oauth)
 app.register_blueprint(facebook_oauth)
 app.secret_key = urandom(32)
 
+
 def output_json(obj, code, headers=None):
     if isinstance(obj, str) == True:
         return make_response(obj, code, headers)
@@ -28,15 +29,18 @@ def output_json(obj, code, headers=None):
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 
+
 def getApi():
     global API
     if API is None:
         API = Api(app)
     return API
 
+
 def getApp():
     global app
-    return app    
+    return app
+
 
 def initApp(api):
     homeDir = os.getcwd()
@@ -77,7 +81,7 @@ def after_request(response):
                      'response: ' + str(response.response)[:2000])
     return response
 
+
 @app.before_request
 def defineInstancePrefix():
     g.instance_prefix = getInstancePrefix()
-

@@ -7,6 +7,7 @@ VALID_RESPONSE_CODE = 200
 
 
 class TestGT1697(BasicIntegrationTest):
+
     def testGT1697(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseCode = response.status_code

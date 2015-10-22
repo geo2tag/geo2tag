@@ -12,6 +12,7 @@ DONE = 'done'
 
 
 class TestGeocoderImport(BasicIntegrationTest):
+
     def testGeocoderImport(self):
         jobId = requests.post(
             self.getUrl(GET_POST_JOB_URL),

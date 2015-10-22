@@ -23,6 +23,7 @@ points = db['points']
 
 
 class test:
+
     def __init__(self):
         self.done = False
 
