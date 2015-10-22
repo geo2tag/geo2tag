@@ -7,7 +7,6 @@ NAME_DEF_GET_PLUGIN_INFO = 'getPluginInfo'
 
 def transform(cls):
 
-    check = 0
     if NAME_DEF_GET_PLUGIN_RESOURCE not in cls.locals \
             or NAME_DEF_GET_PLUGIN_INFO not in cls.locals:
         print '======= Module: ' + cls.name + ' ======='
@@ -18,7 +17,7 @@ def transform(cls):
         print 'No required function ' + NAME_DEF_GET_PLUGIN_INFO
 
 
-def register(linter):
+def register(_):
     pass
 
 MANAGER.register_transform(scoped_nodes.Module, transform)
