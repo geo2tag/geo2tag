@@ -5,7 +5,7 @@ from flask import make_response
 
 class AdminServiceResource(Resource):
 
-    def get(self, service_id):
+    def get(self, _):
         return make_response(
             render_template(
                 'service.html'))

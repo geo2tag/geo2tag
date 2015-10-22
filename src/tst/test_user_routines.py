@@ -1,6 +1,5 @@
 import pymongo
 import unittest
-from flask import session
 from os import urandom
 from flask import Flask, request, session
 from db_model import getDbObject
