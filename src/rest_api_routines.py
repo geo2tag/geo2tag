@@ -16,7 +16,15 @@ from user_routines import getUserId
 from config_reader import getInstancePrefix
 
 API = None
-app = None
+app = Flask(__name__)
+app.register_blueprint(google_oauth)
+app.register_blueprint(facebook_oauth)
+app.secret_key = urandom(32)
+
+def output_json(obj, code, headers=None):
+    if isinstance(obj, str) == True:
+        return make_response(obj, code, headers)
+    return make_response(json_util.dumps(obj), code, headers)
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
 
@@ -28,11 +36,6 @@ def getApi():
 
 def getApp():
     global app
-    if app is None:
-        app = Flask(__name__)
-        app.register_blueprint(google_oauth)
-        app.register_blueprint(facebook_oauth)
-        app.secret_key = urandom(32)
     return app    
 
 def initApp(api):
@@ -49,10 +52,6 @@ def initApp(api):
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
-def output_json(obj, code, headers=None):
-    if isinstance(obj, str) == True:
-        return make_response(obj, code, headers)
-    return make_response(json_util.dumps(obj), code, headers)
 
 @app.before_request
 @possibleException
@@ -62,7 +61,6 @@ def before_request():
         pluginNameIndex = pluginUrlList.index('plugin') + 1
         if getPluginState(pluginUrlList[pluginNameIndex]) == False:
             raise PluginNotEnabledException
-
 
 
 @app.after_request
