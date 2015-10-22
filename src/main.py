@@ -18,7 +18,7 @@ from plugin_list_resource import GetAllPluginsWithStatusResource
 from internal_tests_resource import InternalTestsResource
 from admin_log_resource import AdminLogResource
 from admin_service_list_resource import AdminServiceListResource
-from init_app import getApi, getApp, initApp, DEFAULT_REPRESENTATIONS
+from rest_api_routines import getApi, getApp, initApp, DEFAULT_REPRESENTATIONS
 from log_resource import LogResource
 from service_resource import ServiceResource
 from service_list_resource import ServiceListResource
