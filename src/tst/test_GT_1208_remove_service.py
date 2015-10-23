@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from config_reader import getHost, getPort, getDbName
 from db_model import removeService, getServiceIdByName, getDbObject
 from service_not_exist_exception import ServiceNotExistException
 
@@ -17,5 +16,5 @@ class TestRemoveService(TestCase):
     def testRemoveService(self):
         db[COLLECTION].save({NAME: TEST_OBJECT})
         removeService(TEST_OBJECT)
-        with self.assertRaises(ServiceNotExistException) as e:
+        with self.assertRaises(ServiceNotExistException):
             getServiceIdByName(TEST_OBJECT)

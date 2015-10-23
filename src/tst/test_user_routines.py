@@ -1,12 +1,10 @@
 import pymongo
 import unittest
-from flask import session
 from os import urandom
 from flask import Flask, request, session
-
 from db_model import getDbObject
 from user_routines import logUserIn, logUserOut
-from config_reader import getDbName, getInstancePrefix
+from config_reader import getInstancePrefix
 
 
 NAME_DB = "geomongo"

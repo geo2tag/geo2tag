@@ -1,6 +1,6 @@
 from db_model import getLog
 from config_reader import getDbName
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from log_parsers import LogParser
 from date_utils import dateDeserialiser
 

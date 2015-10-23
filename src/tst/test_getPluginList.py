@@ -9,6 +9,6 @@ class TestGetPluginList(unittest.TestCase):
         print 'Before testGetPluginList {0}'.format(os.getcwd())
         os.chdir('../')
         pluginsList = getPluginList()
-        root, dirs, files = os.walk('plugins').next()
+        _, dirs, _ = os.walk('plugins').next()
         os.chdir('tst/')
         self.assertEquals(dirs, pluginsList)

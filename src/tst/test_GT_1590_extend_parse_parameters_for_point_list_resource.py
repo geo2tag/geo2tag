@@ -1,5 +1,5 @@
 from unittest import TestCase
-from flask import Flask, request
+from flask import Flask
 from point_list_resource_parser import PointListResourceParser
 
 

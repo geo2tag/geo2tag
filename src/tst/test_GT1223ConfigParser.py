@@ -1,7 +1,4 @@
 from unittest import TestCase
-from configparser import ConfigParser
-from configparser import SafeConfigParser
-import os
 import config_reader
 
 

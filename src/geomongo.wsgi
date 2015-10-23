@@ -4,4 +4,8 @@ import logging
 # set all errors output to stderr
 logging.basicConfig(stream=sys.stderr)
 
-from main import app as application
+from main import addResources
+from rest_api_routines import getApp
+
+addResources()
+application = getApp()

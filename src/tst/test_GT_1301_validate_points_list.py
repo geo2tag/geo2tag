@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from pymongo import MongoClient
-from bson.objectid import ObjectId
 from point_list_resource_parser import validatePointsList
 
 TEST_ARGS = [{'lat': 1.1, 'lon': 1.1, 'alt': 5, 'json': {}, 'channel_id': ''}]
@@ -22,7 +20,7 @@ class TestValidatePointsList(unittest.TestCase):
         self.assertEqual(args, TEST_ARGS)
         args = validatePointsList(TEST_ARGS2)
         self.assertEqual(args, TEST_ARGS2)
-        with self.assertRaises(ValueError) as e:
+        with self.assertRaises(ValueError):
             args = validatePointsList(INCORRECT_ARGS1)
-        with self.assertRaises(ValueError) as e:
+        with self.assertRaises(ValueError):
             args = validatePointsList(INCORRECT_ARGS2)

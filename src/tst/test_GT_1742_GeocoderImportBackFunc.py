@@ -1,7 +1,5 @@
-from configparser import RawConfigParser
 from bson import ObjectId
-from db_model import getServiceIdByName, getChannelByName, getDbObject
-from config_reader import getGeonamesLogin
+from db_model import getDbObject
 from geocoder_import import geocoderImport
 from unittest import TestCase
 
@@ -25,6 +23,7 @@ points = db['points']
 
 
 class test:
+
     def __init__(self):
         self.done = False
 

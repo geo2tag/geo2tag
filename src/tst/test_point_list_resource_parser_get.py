@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from datetime import datetime, date, time
-from flask import Flask, request
-from calendar import timegm
+from flask import Flask
 import json
-import aniso8601
-import pytz
 from werkzeug.exceptions import BadRequest
-from geojson import MultiPoint
 from point_list_resource_parser import PointListResourceParser
 import geo_json_type
 from date_utils import dateDeserialiser
@@ -33,6 +27,7 @@ CHANNEL_IDS_VALUE = u'канал_ид'
 GEOMETRY = 'geometry'
 GEOMETRY_VALUE = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
 GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
+
 
 CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + \
     str(OFFSET_VALUE) + '&' + DATE_FROM + '=' + \
