@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import argparse
-import sys
 
 TEMPLATE_CONF = 'config/template.conf'
 SAVE_FOLDER = 'config/'
@@ -25,5 +24,4 @@ if __name__ == "__main__":
     parser.add_argument('-f', '--folder', default='/var/www/geomongo')
     parser.add_argument('-e', '--error', default='error')
     args = parser.parse_args()
-
     generate(args.name, args.folder, args.output, args.error)
