@@ -1,5 +1,6 @@
 from basic_selenium_test import BasicSeleniumTest
 
+
 class TestAdminResource(BasicSeleniumTest):
 
     def testAdminResource(self):
