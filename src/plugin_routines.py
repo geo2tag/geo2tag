@@ -20,6 +20,8 @@ CONFIG = "config.ini"
 dbName = "geomongo"
 PLUGINS = "plugins"
 CONFIGURABLE = "configurable"
+
+
 def getPluginList():
     pluginsDirList = os.listdir(PLUGINS_DIR_NAME)
     pluginsList = []
@@ -70,12 +72,14 @@ def addConfigurablePlugin(pluginName, existConfig):
     collection.save(obj)
     return True
 
+
 def existConfigPlugin(pluginName):
     existConfig = CONFIG in os.listdir(PLUGINS_DIR_NAME + "/" + pluginName)
     if not(existConfig):
         return False
     if addConfigurablePlugin(pluginName, existConfig):
         return True
+
 
 def checkConfigPlugin(pluginName):
     if existConfigPlugin(pluginName):
