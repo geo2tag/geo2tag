@@ -25,6 +25,7 @@ from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from debug_info_resource import DebugInfoResource
 from admin_service_resource import AdminServiceResource
+from plugin_config_resource import PluginConfigResource
 
 API = None
 
@@ -83,6 +84,9 @@ def addResources():
         LogResource,
         getPathWithPrefix('/service/<string:serviceName>/log'),
         getPathWithPrefix('/log'))
+    getApi().add_resource(
+        PluginConfigResource,
+        getPathWithPrefix('/plugin_config/<string:pluginName>'))
 
     atexit.register(closeConnection)
 
