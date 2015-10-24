@@ -75,9 +75,9 @@ def addLogEntry(dbName, userId, message, level, service='instance'):
                          MESSAGE: message, LEVEL: level, SERVICE: service})
     else:
         collection.save({
-            USER_ID: userId, 
-            DATE: currentDate, 
-            MESSAGE: message, 
+            USER_ID: userId,
+            DATE: currentDate,
+            MESSAGE: message,
             LEVEL: level
         })
 

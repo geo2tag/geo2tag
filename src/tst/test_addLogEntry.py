@@ -39,10 +39,10 @@ class TestAddLogEntry(unittest.TestCase):
         self.assertTrue(TEST_SERVICE_FIELD not in obj)
         client.drop_database(TEST_DB)
         addLogEntry(
-            TEST_DB_MASTER, 
+            TEST_DB_MASTER,
             TEST_USER_ID,
             TEST_MSG,
-            LOG_LVL_INFO, 
+            LOG_LVL_INFO,
             TEST_SERVICE
         )
         objects = list(db_master[LOG].find({TEST_USER_ID_FIELD: TEST_USER_ID}))
