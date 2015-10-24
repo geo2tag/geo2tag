@@ -16,7 +16,7 @@ class TestUpdateChannel(unittest.TestCase):
     def testUpdateChannel(self):
         collection = getDbObject(DB)[COLLECTION]
         obj_id = collection.save({NAME: 'test_GT_1292'})
-        with self.assertRaises(ChannelDoesNotExist) as e:
+        with self.assertRaises(ChannelDoesNotExist):
             updateChannel('testservice', '111', 'test', None, None)
         updateChannel('testservice', obj_id, 'test', 1, 2)
         obj = collection.find_one({ID: obj_id})

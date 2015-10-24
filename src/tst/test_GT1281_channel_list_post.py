@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from flask import Flask, request
+from flask import Flask
 from werkzeug.exceptions import BadRequest
-import service_resource
-from json import dumps
 from channels_list_parsers import ChannelsListResourceParser
 
 URL = '/testservice/channel/'

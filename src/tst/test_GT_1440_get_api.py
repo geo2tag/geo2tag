@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from main import getApi
+from rest_api_routines import getApi
 
 
 class TestGetApi(unittest.TestCase):

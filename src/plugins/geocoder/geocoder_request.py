@@ -1,7 +1,6 @@
 import requests
 import json
 import time
-from flask import request
 from geocoder_request_limit_exceed import GeocoderRequestLimitExceed
 from geocoder_request_other_exceed import GeocoderRequestOtherExceed
 

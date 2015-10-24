@@ -2,7 +2,7 @@ from unittest import TestCase
 from flask import Flask
 from flask import g
 from url_utils import getPathWithPrefix
-from main import defineInstancePrefix
+from rest_api_routines import defineInstancePrefix
 
 TEST_URL = getPathWithPrefix('/login')
 INSTACNE_PREFIX = 'instance'

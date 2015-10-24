@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from flask import Flask, request
+from flask import Flask
 from channels_list_parsers import ChannelsListResourceParser
 
 NUMBER = 'number'

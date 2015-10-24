@@ -14,8 +14,8 @@ TEST_FILE_DATA = ('''{
 
 
 def prepareDebugFile():
-    file = open(RIGHT_FILE_NAME, "w+")
-    file.write(TEST_FILE_DATA)
+    prepare_gebug_file = open(RIGHT_FILE_NAME, "w+")
+    prepare_gebug_file.write(TEST_FILE_DATA)
 
 
 class TestGetDebugInfo(TestCase):

@@ -16,7 +16,6 @@ class GeocodingJob(Job):
             )
         )
         self.thread = thread
-        thread._stop = threading.Event()
         thread.start()
 
     def internalStop(self):
