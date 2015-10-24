@@ -6,6 +6,8 @@ from os.path import join as joinpath
 from traceback import format_exc
 from url_routines import getPluginUrl
 from log import writeInstanceLog
+from log import LOG_LVL_INFO
+from log import LOG_LVL_ERROR
 from user_routines import getUserId
 
 PLUGINS_DIR_NAME = 'plugins'
@@ -37,7 +39,8 @@ def enablePlugin(api, pluginName):
             api.add_resource(pluginResourcesDict[pluginResource], getPluginUrl(
                 pluginResource, pluginName))
         writeInstanceLog(getUserId(), 'Plugin ' +
-                         pluginName + ' successfully loaded')
+                         pluginName + ' successfully loaded', 
+                         LOG_LVL_INFO)
     except Exception as e:
         writeInstanceLog(getUserId(), EXCEPT_ERROR_TEXT +
                          pluginName +
@@ -45,7 +48,8 @@ def enablePlugin(api, pluginName):
                          ERROR_DISR_TEXT +
                          str(e) +
                          ' ' +
-                         str(format_exc()))
+                         str(format_exc()),
+                         LOG_LVL_ERROR)
 
 
 def isPluginEnabled(pluginName, app):

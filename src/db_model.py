@@ -43,6 +43,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 USER_ID = 'user_id'
 DATE = 'date'
 MESSAGE = 'message'
+LEVEL = 'level'
 ERROR_CODE = 'error_code'
 SERVICE = 'service'
 COLLECTION = 'services'
@@ -66,14 +67,14 @@ ENABLED = 'enabled'
 EARTH_RADIUS = 6371
 
 
-def addLogEntry(dbName, userId, message, service='instance'):
+def addLogEntry(dbName, userId, message, level, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName)[LOG]
     if dbName == getDbName():
         collection.save({USER_ID: userId, DATE: currentDate,
-                         MESSAGE: message, SERVICE: service})
+                         MESSAGE: message, LEVEL: level, SERVICE: service})
     else:
-        collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
+        collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message, LEVEL: level})
 
 
 def addTag(tag):
