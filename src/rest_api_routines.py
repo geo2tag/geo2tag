@@ -70,7 +70,7 @@ def before_request():
 @app.after_request
 def after_request(response):
     writeInstanceLog(getUserId(), 'Request url: ' + request.url +
-                                  ', request data: ' + request.data, 
+                                  ', request data: ' + request.data,
                                   LOG_LVL_INFO)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
@@ -79,7 +79,7 @@ def after_request(response):
                          'GET, POST, PUT, DELETE')
     writeInstanceLog(getUserId(),
                      'Status_code: ' + str(response.status_code) + ', '
-                     'response: ' + str(response.response)[:2000], 
+                     'response: ' + str(response.response)[:2000],
                      LOG_LVL_INFO)
     return response
 
