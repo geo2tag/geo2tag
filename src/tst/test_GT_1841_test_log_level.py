@@ -1,5 +1,4 @@
-from db_model import addLogEntry, getDbObject, getClientObject
-from config_reader import getDbName
+from db_model import getDbObject
 from log import writeInstanceLog
 from log import writeServiceLog
 from log import LOG_LVL_INFO
