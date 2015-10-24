@@ -19,7 +19,7 @@ ADMIN_HEADER_ENTRIES = [
 
 class TestGT1776AdminTemplate(BasicSeleniumTest):
     def setUp(self):
-        self.driver = webdriver.Firefox()  # Chrome()
+        self.driver = webdriver.Firefox()
         for i in ADMIN_HEADER_ENTRIES:
             i[0] = unicode(self.getUrl(ADMIN_URL) + i[0])
 
