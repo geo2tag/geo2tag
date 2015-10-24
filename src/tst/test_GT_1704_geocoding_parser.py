@@ -27,8 +27,8 @@ class TestGeocodingParser(TestCase):
                 self.assertEqual(args[el], TEST_VAL_PREFIX + el)
 
     def testGecodingParserPostFail(self):
-        with app.test_request_context(data=dumps(INCORRECT_DATA), method=METHOD):
+        with app.test_request_context(
+                data=dumps(INCORRECT_DATA),
+                method=METHOD):
             with self.assertRaises(BadRequest):
                 args = GeocodingParser.parsePostParameters()
-
-    

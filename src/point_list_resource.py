@@ -1,4 +1,5 @@
-from flask.ext.restful import Resource
+import flask_restful as restful
+from flask_restful import Resource
 from point_list_resource_parser import PointListResourceParser, \
     CHANNEL_IDS, NUMBER, GEOMETRY, ALTITUDE_FROM, ALTITUDE_TO,  \
     SUBSTRING, DATE_FROM, DATE_TO, OFFSET, RADIUS

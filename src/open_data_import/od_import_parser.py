@@ -1,3 +1,4 @@
+import os
 from flask_restful import request
 from json import loads
 from werkzeug.exceptions import BadRequest
@@ -11,6 +12,8 @@ class OdImportParser():
 
     @classmethod
     def parsePostParameters(cls):
+        print "-----parsePostParameters"
+        print os.getcwd()
         args = loads(request.get_data())
         for key in cls.mandatoryFields:
             if key not in args:

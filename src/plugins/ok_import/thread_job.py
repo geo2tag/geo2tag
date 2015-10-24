@@ -4,8 +4,9 @@ from job import Job
 showImageUrl = 'showImageUrl'
 showObjectUrl = 'showObjectUrl'
 
+
 class ThreadJob(Job):
-    
+
     def internalStart(self):
         thread = threading.Thread(
             target=self.backgroundFunction,

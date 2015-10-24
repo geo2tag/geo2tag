@@ -44,7 +44,8 @@ class GeonamesRequestSender():
 
     @classmethod
     def createRequestUrl(cls, address, geonmesLogin):
-        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + USERNAME + geonmesLogin
+        url = cls.REQUEST_URL + SEARCH_JSON + Q + address + \
+            USERNAME + geonmesLogin
         return url
 
     @classmethod

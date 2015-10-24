@@ -1,5 +1,6 @@
+import flask_restful as restful
 from flask_restful import reqparse
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from config_reader import getGoogleClientID, getGoogleClientSecret, \
     getGoogleRedirectUrl
 from flask_oauth import OAuth

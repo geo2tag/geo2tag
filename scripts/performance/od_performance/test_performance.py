@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from jobs_creator import createImportJob
-from jobs_parser import createJobStatistic, parseJobs, getImportJobsText, areAllJobsDone
+from jobs_parser import createJobStatistic, parseJobs, \
+    getImportJobsText, areAllJobsDone
 import time
 from requests.exceptions import ConnectionError
 
@@ -11,6 +12,7 @@ JOB_COUNT = '-jobsCount'
 TIMEOUT = '-timeout'
 DEFAULT_JOB_COUNT = 1
 DEFAULT_TIMEOUT = 60
+
 
 def main(createJobLink, jobData, viewJobsLink, jobsCount, timeout):
     try:

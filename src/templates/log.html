@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h2>Geo2Tag instance log</h2>
+        </div>
+        <div class="row">
+            <form id="log-form">
+                <div class="row">
+                        <input type="text" name="date-begin" class="form-control" placeholder="Date begin">
+                        <input type="text" name="date-end" class="form-control" placeholder="Date end">
+                        <input type="text" name="number" class="form-control" placeholder="Number">
+                        <input type="text" name="offset" class="form-control" placeholder="Offset">
+                        <input type="text" name="user-name" class="form-control" placeholder="User name">
+                        <input type="text" name="service-name" class="form-control" placeholder="Service name">
+                </div>
+                <div class="row">
+                    <input type="text" name="search-substring" class="form-control" placeholder="Substring">
+                    <input type="submit" class="btn btn-block" value="Search">
+                </div>
+            </form>
+        </div>
+        <div class="row log-info">
+
+        </div>
+        <div class="row ">
+            <div class="pagination">
+                <ul>
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+

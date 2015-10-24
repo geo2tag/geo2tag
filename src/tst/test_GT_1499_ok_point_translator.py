@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from open_karelia_object_to_point_translator import OpenKareliaObjectToPointTranslator
+from open_karelia_object_to_point_translator import \
+    OpenKareliaObjectToPointTranslator
 from datetime import datetime
 
 TEST_OBJ = {
@@ -22,6 +23,7 @@ TEST_OBJ = {
 
 
 class TestOKPointTranslator(TestCase):
+
     def setUp(self):
         obj = OpenKareliaObjectToPointTranslator(
             {'image_url': 'image_url', 'source_url': 'image_url111'},
@@ -34,8 +36,10 @@ class TestOKPointTranslator(TestCase):
             'test_import',
             'channelId')
         self.test_obj = obj.getPoint()
+
     def testOKPointTranslator(self):
         self.assertEquals(TEST_OBJ['json'], self.test_obj['json'])
         self.assertEquals(TEST_OBJ['location'], self.test_obj['location'])
+
     def testOkPointTranslatorBC(self):
         self.assertEqual(self.test_obj['bc'], False)
