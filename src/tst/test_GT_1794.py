@@ -1,7 +1,10 @@
 import unittest
 from plugin_routines import addConfigurablePlugin, existConfigPlugin, checkConfigPlugin
 import os
+
+
 class TestConfigPlugin(unittest.TestCase):
+
     def testAddConfigurablePlugin(self):
         self.assertTrue(addConfigurablePlugin("testPlugin1", True))
         self.assertFalse(addConfigurablePlugin("testPlugin", False))
@@ -13,7 +16,7 @@ class TestConfigPlugin(unittest.TestCase):
         os.chdir('tst')
 
     def testCheckConfigPlugin(self):
-    	os.chdir('../')
-    	self.assertTrue(checkConfigPlugin("testPlugin1"), True)
+        os.chdir('../')
+        self.assertTrue(checkConfigPlugin("testPlugin1"), True)
         self.assertFalse(checkConfigPlugin("testPlugin2"), False)
         os.chdir('tst')
