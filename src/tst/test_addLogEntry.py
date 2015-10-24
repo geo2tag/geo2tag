@@ -46,7 +46,9 @@ class TestAddLogEntry(unittest.TestCase):
             TEST_LOG_LEVEL_CRITICAL,
             TEST_SERVICE
         )
-        obj = list(db_master[LOG].find().sort('_id', pymongo.DESCENDING).limit(1))[0]
+        obj = list(
+            db_master[LOG].find().sort('_id', pymongo.DESCENDING).limit(1)
+        )[0]
         self.assertEqual(obj[TEST_MSG_FIELD], TEST_MSG)
         self.assertTrue(TEST_SERVICE_FIELD in obj)
         self.assertEqual(obj[TEST_SERVICE_FIELD], TEST_SERVICE)

@@ -54,7 +54,7 @@ class TestLogLvl(unittest.TestCase):
         writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG, LOG_LVL_ERROR)
         obj = list(tslog.find().sort('_id', DESCENDING).limit(1))[0]
         self.assertEqual(obj[TEST_LEVEL_FIELD], LOG_LVL_ERROR)
-        writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG, 
+        writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG,
                         LOG_LVL_CRITICAL)
         obj = list(tslog.find().sort('_id', DESCENDING).limit(1))[0]
         self.assertEqual(obj[TEST_LEVEL_FIELD], LOG_LVL_CRITICAL)
