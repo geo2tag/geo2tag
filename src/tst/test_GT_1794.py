@@ -1,6 +1,7 @@
 import unittest
-from plugin_routines import addConfigurablePlugin, existConfigPlugin, \
-checkConfigPlugin
+from plugin_routines import addConfigurablePlugin, \
+    existConfigPlugin, \
+    checkConfigPlugin
 import os
 
 
