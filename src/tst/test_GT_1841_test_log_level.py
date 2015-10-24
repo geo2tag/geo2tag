@@ -27,6 +27,7 @@ LOG = 'log'
 glog = getDbObject()[LOG]
 tslog = getDbObject('testservice')[LOG]
 
+
 class TestLogLvl(unittest.TestCase):
 
     def testLogLvlIstanceLog(self):
@@ -42,13 +43,12 @@ class TestLogLvl(unittest.TestCase):
         writeInstanceLog(TEST_USER_ID, TEST_MSG, LOG_LVL_CRITICAL)
         obj = list(glog.find().sort('_id', DESCENDING).limit(1))[0]
         self.assertEqual(obj[TEST_LEVEL_FIELD], LOG_LVL_CRITICAL)
-    
+
     def testLogLvlServiceLog(self):
         writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG, LOG_LVL_INFO)
         obj = list(tslog.find().sort('_id', DESCENDING).limit(1))[0]
         self.assertEqual(obj[TEST_LEVEL_FIELD], LOG_LVL_INFO)
-        writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG, 
-            LOG_LVL_WARNING)
+        writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG, LOG_LVL_WARNING)
         obj = list(tslog.find().sort('_id', DESCENDING).limit(1))[0]
         self.assertEqual(obj[TEST_LEVEL_FIELD], LOG_LVL_WARNING)
         writeServiceLog(TEST_SERVICE, TEST_USER_ID, TEST_MSG, LOG_LVL_ERROR)
