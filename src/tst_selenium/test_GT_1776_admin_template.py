@@ -1,7 +1,7 @@
 from basic_selenium_test import BasicSeleniumTest
 from selenium import webdriver
 import requests
-import json
+
 ADMIN_URL = 'instance/admin'
 DEBUG_INFO_URL = 'instance/debug_info'
 ADMIN_HEADER = '.admin-header *'
