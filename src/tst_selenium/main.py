@@ -16,7 +16,7 @@ from test_GT_1804_admin_service_resource import \
 def main(host):
     suite = unittest.TestSuite()
     suite.addTest(BasicSeleniumTest.parametrize(
-        TestGT1776AdminTemplate, 
+        TestGT1776AdminTemplate,
         param=host)
     )
     suite.addTest(BasicSeleniumTest.parametrize(TestStatusOK, param=host))
