@@ -52,7 +52,7 @@ def initApp(api):
     pluginList = getPluginList()
     for pluginName in pluginList:
         if getPluginState(pluginName) is True and \
-            checkConfigPlugin(pluginName) is True:
+                checkConfigPlugin(pluginName) is True:
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
