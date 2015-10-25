@@ -32,7 +32,8 @@ class TestPointListPostRequest(BasicIntegrationTest):
         responseCode = response.status_code
         responseText = response.text
         obj1 = db[COLLECTION].find_one({CHANNEL_ID: CHANNEL_IDS_VALUE})
-        self.assertEquals([unicode(obj1['_id'])], ast.literal_eval(responseText))
+        self.assertEquals([unicode(obj1['_id'])],
+                          ast.literal_eval(responseText))
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.post(self.getUrl(TEST_URL), data=json.dumps(
             [{LAT: '1.1', LON: 1.1, ALT: 1.1, JSON: [], CHANNEL_ID:''}]))

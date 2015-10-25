@@ -57,7 +57,8 @@ class TestParserPointListGetResource(TestCase):
                 args[DATE_TO], object_hook=dateDeserialiser(
                     args, args[DATE_TO]))
             self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
-            geometryValue = geo_json_type.GeoJsonType(unicode(args.get(GEOMETRY)))
+            geometryValue = geo_json_type.GeoJsonType(
+                unicode(args.get(GEOMETRY)))
             self.assertEquals(GEOMETRY_VALUE_JSON, geometryValue)
 
         with app.test_request_context(

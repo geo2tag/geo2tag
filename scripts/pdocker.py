@@ -56,7 +56,8 @@ def manage_script(name, args):
 
 
 def start_container(name, port):
-    rc = manage_script(name, [CREATE_CONTAINER, '-p', unicode(port), '-n', name])
+    rc = manage_script(
+        name, [CREATE_CONTAINER, '-p', unicode(port), '-n', name])
     if rc != 0:
         sys.exit(rc)
 

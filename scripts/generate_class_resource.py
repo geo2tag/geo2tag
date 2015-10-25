@@ -84,7 +84,8 @@ def make_generator(args):
                     ' '))
             j = 0
             while j < countArgs:
-                print 'Method ' + unicode(args.m[i]) + ' argument ' + unicode(j + 1)
+                print 'Method ' + unicode(args.m[i]) + \
+                    ' argument ' + unicode(j + 1)
                 argument = sys.stdin.readline()
                 argumentDict = argument.split(' ')
                 if argumentDict[1][0:-1] in TYPES:
