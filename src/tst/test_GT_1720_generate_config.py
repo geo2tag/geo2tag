@@ -21,4 +21,3 @@ class TestGenerateConfig(unittest.TestCase):
         res = os.path.exists(SAVE_FOLDER + FILE_NAME + '.conf')
         os.chdir('src/tst/')
         self.assertEqual(True, res)
-
