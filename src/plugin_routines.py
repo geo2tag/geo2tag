@@ -7,7 +7,7 @@ from traceback import format_exc
 from url_routines import getPluginUrl
 from log import writeInstanceLog
 from user_routines import getUserId
-
+from db_model import getDbObject
 PLUGINS_DIR_NAME = 'plugins'
 
 GET_PLUGIN_RESOURCES = 'getPluginResources'
@@ -16,6 +16,10 @@ ERROR_DISR_TEXT = 'error description: '
 LOG_USERID = 'system'
 PREFIX_LOAD_MAIN = 'plugins.'
 LOAD_MAIN_ENDING = '.main'
+CONFIG = "config.ini"
+dbName = "geomongo"
+PLUGINS = "plugins"
+CONFIGURABLE = "configurable"
 
 
 def getPluginList():
@@ -53,4 +57,31 @@ def isPluginEnabled(pluginName, app):
     for rule in url_map.iter_rules():
         if str(rule).find('/' + pluginName + '/') != -1:
             return True
+    return False
+
+
+def addConfigurablePlugin(pluginName, existConfig):
+    collection = getDbObject(dbName)[PLUGINS]
+    obj = collection.find_one({"name": pluginName})
+    if obj is None:
+        return False
+    if existConfig:
+        obj[CONFIGURABLE] = True
+    else:
+        obj[CONFIGURABLE] = False
+    collection.save(obj)
+    return True
+
+
+def existConfigPlugin(pluginName):
+    existConfig = CONFIG in os.listdir(PLUGINS_DIR_NAME + "/" + pluginName)
+    if not(existConfig):
+        return False
+    if addConfigurablePlugin(pluginName, existConfig):
+        return True
+
+
+def checkConfigPlugin(pluginName):
+    if existConfigPlugin(pluginName):
+        return True
     return False
