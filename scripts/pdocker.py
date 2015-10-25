@@ -56,7 +56,7 @@ def manage_script(name, args):
 
 
 def start_container(name, port):
-    rc = manage_script(name, [CREATE_CONTAINER, '-p', str(port), '-n', name])
+    rc = manage_script(name, [CREATE_CONTAINER, '-p', unicode(port), '-n', name])
     if rc != 0:
         sys.exit(rc)
 
@@ -145,7 +145,7 @@ def kill_old_containers(kill_time=0):
 
     for container in containers:
         print container[CONTAINER_NAME] + " on port " + \
-            str(container[CONTAINER_PORT]) + " stop"
+            unicode(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
@@ -226,7 +226,7 @@ def main():
             sys.exit(1)
 
         containerEnv = "http://" + \
-            os.environ["SERVER"] + ":" + str(container_start_port) + \
+            os.environ["SERVER"] + ":" + unicode(container_start_port) + \
             "/instance/tests"
 
         f = open('propsfile', 'w')

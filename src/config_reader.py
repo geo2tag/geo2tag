@@ -85,7 +85,7 @@ def getGoogleClientID():
 
 
 def getGoogleClientSecret():
-    return str(getConfigParser().get(GOOGLE_SECTION, GOOGLE_CLIENT_SECRET))
+    return unicode(getConfigParser().get(GOOGLE_SECTION, GOOGLE_CLIENT_SECRET))
 
 
 def getGoogleRedirectUrl():

@@ -29,10 +29,10 @@ GEOMETRY_VALUE = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
 GEOMETRY_VALUE_JSON = {"coordinates": [-115.8, 37.2], "type": "Point"}
 
 
-CORRECT_ARGS = NUMBER + '=' + str(NUMBER_VALUE) + '&' + OFFSET + '=' + \
-    str(OFFSET_VALUE) + '&' + DATE_FROM + '=' + \
-    str(DATE_FROM_VALUE) + '&' + \
-    DATE_TO + '=' + str(DATE_TO_VALUE) + '&' + \
+CORRECT_ARGS = NUMBER + '=' + unicode(NUMBER_VALUE) + '&' + OFFSET + '=' + \
+    unicode(OFFSET_VALUE) + '&' + DATE_FROM + '=' + \
+    unicode(DATE_FROM_VALUE) + '&' + \
+    DATE_TO + '=' + unicode(DATE_TO_VALUE) + '&' + \
     BC_FROM + '=' + BC_FROM_VALUE + \
     '&' + BC_TO + '=' + BC_TO_VALUE + '&' + CHANNEL_IDS + '=' + \
     CHANNEL_IDS_VALUE + '&' + GEOMETRY + '=' + GEOMETRY_VALUE
@@ -57,7 +57,7 @@ class TestParserPointListGetResource(TestCase):
                 args[DATE_TO], object_hook=dateDeserialiser(
                     args, args[DATE_TO]))
             self.assertEquals(loadedDatetime_to, DATE_TO_VALUE)
-            geometryValue = geo_json_type.GeoJsonType(str(args.get(GEOMETRY)))
+            geometryValue = geo_json_type.GeoJsonType(unicode(args.get(GEOMETRY)))
             self.assertEquals(GEOMETRY_VALUE_JSON, geometryValue)
 
         with app.test_request_context(

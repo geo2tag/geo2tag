@@ -43,14 +43,14 @@ def enablePlugin(api, pluginName):
                          pluginName +
                          ', ' +
                          ERROR_DISR_TEXT +
-                         str(e) +
+                         unicode(e) +
                          ' ' +
-                         str(format_exc()))
+                         unicode(format_exc()))
 
 
 def isPluginEnabled(pluginName, app):
     url_map = getattr(app, 'url_map')
     for rule in url_map.iter_rules():
-        if str(rule).find('/' + pluginName + '/') != -1:
+        if unicode(rule).find('/' + pluginName + '/') != -1:
             return True
     return False

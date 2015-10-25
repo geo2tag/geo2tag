@@ -32,7 +32,7 @@ def make_generator(args):
         return
     for method in args.m:
         if method.lower() not in METHODS:
-            print 'method ' + method + 'not in ' + str(METHODS)
+            print 'method ' + method + 'not in ' + unicode(METHODS)
             return
 
     fileName = args.name + '.py'
@@ -84,7 +84,7 @@ def make_generator(args):
                     ' '))
             j = 0
             while j < countArgs:
-                print 'Method ' + str(args.m[i]) + ' argument ' + str(j + 1)
+                print 'Method ' + unicode(args.m[i]) + ' argument ' + unicode(j + 1)
                 argument = sys.stdin.readline()
                 argumentDict = argument.split(' ')
                 if argumentDict[1][0:-1] in TYPES:

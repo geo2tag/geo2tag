@@ -19,7 +19,7 @@ class TestPointResourceDelete(BasicIntegrationTest):
     def testPointResourceDelete(self):
         db = getDbObject(TEST_SERVICE)
         obj_id = db[COLLECTION].save({NAME: NAME_TEST_OBJECT})
-        response = requests.delete(self.getUrl(TEST_URL + str(obj_id)))
+        response = requests.delete(self.getUrl(TEST_URL + unicode(obj_id)))
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, VALID_RESPONSE_TEXT)
