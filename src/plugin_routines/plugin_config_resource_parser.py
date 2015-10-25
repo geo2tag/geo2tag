@@ -3,6 +3,7 @@ from json import loads
 
 JSON = 'JSON'
 
+
 class PluginConfigResourceParser():
 
     @staticmethod
