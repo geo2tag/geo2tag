@@ -10,7 +10,6 @@ from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, \
     GEOJSON_COORDINATES
-from flask import session
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -472,4 +471,3 @@ def getAllChannelIds(serviceName):
     for result in obj:
         all_channel_ids_array.append(str(result[ID]))
     return all_channel_ids_array
-
