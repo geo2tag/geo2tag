@@ -8,7 +8,7 @@ TEST_PLUGIN_NAME = 'geocoder'
 TEST_TEXT_REQ = '{"geo": {"geoname": "g"}, "main": {"host": \
 "localhost", "db_name": "test", "port": "111"}, "geocoding": \
 {"geonames_login": "geo2tag"}}'
-TEST_TEXT_REQ_1 = '{"geo": {"geoname": "g"}, "main": {"host": \
+TEST_TEXT_REQ1 = '{"geo": {"geoname": "g"}, "main": {"host": \
 "localhost", "db_name": "test", "port": "111"}, "geocoding": \
 {"geonames_login": "geo2tag"}, "section1": {"param1": "value1"}}'
 DATA = {'section1': {'param1': 'value1'}}
@@ -30,4 +30,4 @@ class TestPluginConfigResource(BasicIntegrationTest):
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(self.getUrl(TEST_URL + TEST_PLUGIN_NAME))
         responseText = response.text
-        self.assertEquals(responseText, TEST_TEXT_REQ_1)
+        self.assertEquals(responseText, TEST_TEXT_REQ1)
