@@ -6,7 +6,7 @@ import os
 import shutil
 
 NAME_PLUGIN = 'geocoder'
-PY_SCRIPT = 'python ./scripts/validate_plugin.py '
+PY_SCRIPT = 'python ./scripts/validate_plugin.py -name_plugin '
 RESULT_PEP8 = 'Error code: 0\n'
 NAME_FOLDER_TEST = 'test_for_GT_1780'
 NAME_FILE = 'test.py'
@@ -23,7 +23,7 @@ class TestValidatePlugin(TestCase):
         os.chdir('src/tst')
 
     def testValidatePlugin_MakePlugin(self):
-        os.chdir('../plugins/')
+        os.chdir('src/plugins/')
         os.mkdir(NAME_FOLDER_TEST)
         os.chdir(NAME_FOLDER_TEST)
         file_test = open(NAME_FILE, 'w+')
