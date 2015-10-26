@@ -13,7 +13,7 @@ TEST_DATA_FIELD = 'test_data_GT_1705'
 log = getDbObject('testservice')['log']
 
 
-def bcgFunc(self, channelName, serviceName):
+def bcgFunc(_, channelName, serviceName):
     log.insert({'test_data_GT_1705': [channelName, serviceName]})
 
 gj = GeocodingJob(bcgFunc, 'channelName', None, None, 'serviceName')

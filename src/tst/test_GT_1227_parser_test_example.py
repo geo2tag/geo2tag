@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from flask import Flask, request
-import service_list_resource
-import service_resource
-from json import dumps
+from flask import Flask
 from service_list_parsers import ServiceListParser
 
 NUMBER = 'number'

@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from config_reader import getHost, getPort
 from db_model import addServiceDb, getDbObject
 DB_NAME = 'testservice'
 COLLECTION_POINTS_NAME = 'points'

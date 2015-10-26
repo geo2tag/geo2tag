@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from unittest import TestCase
-from flask import Flask, request
+from flask import Flask
 from werkzeug.exceptions import BadRequest
-import urllib2
-import service_resource
-from json import dumps
 from point_resource_parsers import PointResourceParsers
-from point_does_not_exist import PointDoesNotExist
 
 URL = '/testservice/point/552833515c0dd1178d37f7bb/'
 BAD_URL = '/testservice/point/point_id/'

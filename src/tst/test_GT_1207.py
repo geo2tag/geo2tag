@@ -16,8 +16,8 @@ class test_getServiceIdByName(unittest.TestCase):
         obj = collection.find_one({"_id": TEST_ID})
         print('Test object: ' + str(obj))
         try:
-            testObject = getServiceIdByName('testservice')
-        except ServiceNotExistException as e:
+            getServiceIdByName('testservice')
+        except ServiceNotExistException:
             self.assertTrue(False)
         with self.assertRaises(ServiceNotExistException):
-            testObject = getServiceIdByName('OlchikovTestService')
+            getServiceIdByName('OlchikovTestService')

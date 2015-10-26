@@ -1,7 +1,7 @@
 from unittest import TestCase
 from os import urandom
-from flask import Flask, request, session
-from user_routines import logUserIn, logUserOut, getUserId
+from flask import Flask
+from user_routines import getUserId
 
 
 app = Flask(__name__)

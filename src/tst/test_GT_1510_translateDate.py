@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from datetime import datetime
 from open_karelia_object_to_point_translator import\
     OpenKareliaObjectToPointTranslator
 

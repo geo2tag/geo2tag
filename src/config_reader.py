@@ -75,7 +75,7 @@ def getInstancePrefix():
 
 
 def getDebugUsers():
-    str_users = getConfigParser().get(SECTION, OPTION_DEBUG_USERS)
+    str_users = unicode(getConfigParser().get(SECTION, OPTION_DEBUG_USERS))
     list_users = str_users.split(',')
     return list_users
 

@@ -1,4 +1,3 @@
-import geojson
 from unittest import TestCase
 import geo_json_type
 TEST_POINT = '{"coordinates": [-115.8, 37.2], "type": "Point"}'
