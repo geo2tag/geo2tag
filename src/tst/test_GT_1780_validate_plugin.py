@@ -23,7 +23,7 @@ class TestValidatePlugin(TestCase):
         os.chdir('src/tst')
 
     def testValidatePlugin_MakePlugin(self):
-        os.chdir('src/plugins/')
+        os.chdir('plugins/')
         os.mkdir(NAME_FOLDER_TEST)
         os.chdir(NAME_FOLDER_TEST)
         file_test = open(NAME_FILE, 'w+')
