@@ -25,6 +25,8 @@ from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from debug_info_resource import DebugInfoResource
 from admin_service_resource import AdminServiceResource
+from user_list_resource import UserListResource
+
 
 API = None
 
@@ -83,10 +85,15 @@ def addResources():
         LogResource,
         getPathWithPrefix('/service/<string:serviceName>/log'),
         getPathWithPrefix('/log'))
+    getApi().add_resource(
+        UserListResource,
+        getPathWithPrefix('/user')
+    )
 
     atexit.register(closeConnection)
 
     initApp(getApi())
 
 if __name__ == '__main__':
-    getApp.run(host="0.0.0.0", port=5001, debug=True)
+    addResources()
+    getApp().run(host="0.0.0.0", port=5001, debug=True)
