@@ -39,10 +39,10 @@ TEST_NAME = 'test_catalog_for_config'
 class TestPluginConfigReader(unittest.TestCase):
 
     def testPluginConfigReader(self):
-        PATH = os.path.dirname(os.path.realpath(__file__)) + \
-            '/../plugins/' + TEST_NAME + '/config.ini'
+        pluginConfigReader = PluginConfigReader(TEST_NAME)
+        PATH = pluginConfigReader.file_path
         os.remove(PATH)
-        file = open(TEST_NAME, 'w')
+        open(TEST_NAME, 'w')
         pluginConfigReader = PluginConfigReader(TEST_NAME)
         pluginConfigReader.setConfigContent(TEST_RESULT)
         conf = pluginConfigReader.getConfigContent()
