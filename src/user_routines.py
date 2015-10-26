@@ -12,6 +12,7 @@ FIRST_NAME = 'first_name'
 LAST_NAME = 'last_name'
 EMAIL = 'email'
 ANONYM_USER = 'anonym'
+ANONYM = 'Anonym'
 LOGIN = 'login'
 LOGOUT = 'logout'
 
@@ -56,3 +57,13 @@ def getUserId():
         return session[USER_ID]
     except Exception:
         return ANONYM_USER
+
+
+def getUser():
+    if USER_LOGIN in session:
+        user = session[USER_LOGIN]
+    elif USER_ID in session:
+        user = session[USER_ID]
+    else:
+        user = ANONYM
+    return user
