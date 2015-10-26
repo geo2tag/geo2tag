@@ -28,7 +28,7 @@ def logUserOut():
 
 def findUserById(_id):
     collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
-    userById = collectionUsers.find({FIND_KEY_ID: _id})
+    userById = collectionUsers.find_one({FIND_KEY_ID: _id})
     if userById is not None:
         return userById
     raise UserDoesNotExist
