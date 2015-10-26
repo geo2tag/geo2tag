@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from plugin_routines import getPluginList
-from db_model import getPluginState
+from db_model import getPluginInfo
 
 
 class GetAllPluginsWithStatusResource(Resource):
