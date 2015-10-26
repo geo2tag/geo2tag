@@ -24,9 +24,6 @@ POINTS_FIND_AND_KEY = "_id"
 COLLECTION_SERVICES_NAME = "services"
 COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
 
-# DB
-MASTERDB = 'MasterDB'
-
 # Collections
 TAGS = 'tags'
 COLLECTION = 'services'
@@ -444,10 +441,14 @@ def closeConnection():
 
 
 def getPluginInfo(pluginName):
-    db_getpluginstate = getDbObject(MASTERDB)
+    db_getpluginstate = getDbObject()
     obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
     if obj is not None:
-        plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: obj[CONFIGURABLE]}
+        if CONFIGURABLE in obj:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE:
+                            obj[CONFIGURABLE]}
+        else:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
         return plugin_state
     else:
         return False

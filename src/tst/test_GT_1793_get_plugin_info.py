@@ -4,10 +4,9 @@ from db_model import getPluginInfo, getDbObject
 
 TEST_PLUGIN_NAME = 'test_plugin_name_gt_1793'
 TEST_VALID_RESULT_FALSE = False
-TEST_MASTER_DB = 'MasterDB'
 TEST_PLUGINS_COLLECTION = 'plugins'
 TEST_VALUE = True
-db = getDbObject(TEST_MASTER_DB)
+db = getDbObject()
 NAME = 'name'
 ENABLED = 'enabled'
 CONFIGURABLE = 'configurable'

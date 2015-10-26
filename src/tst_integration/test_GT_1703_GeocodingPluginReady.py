@@ -4,7 +4,7 @@ import json
 
 TEST_URL = '/instance/plugin'
 PLUGIN_NAME = 'geocoder'
-PLUGIN_ENABLED = False
+PLUGIN_ENABLED = {u'enabled': True, u'configurable': True}
 
 
 class TestGeocodingPluginReady(BasicIntegrationTest):
