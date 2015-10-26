@@ -21,7 +21,6 @@ def make_reqpep8(name_plugin, type_format):
     print 'Error code: ' + str(num_error)
     sys.exit(str(num_error))
 
-
 def run():
     parser = argparse.ArgumentParser(description='Validate plugins')
     parser.add_argument('-name', help='Name plugin')
