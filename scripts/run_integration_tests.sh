@@ -10,6 +10,7 @@ PATH2="$PWD/src/plugins/ok_import"
 PATH3="$PWD/src/open_data_import"
 PATH4="$PWD/src/geocoders"
 PATH5="$PWD/src/plugins/geocoder"
+PATH6="$PWD/src/plugin_routines1"
 eval 'export PYTHONPATH="$PYTHONPATH$PATH1:$PATH2:$PATH3:$PATH4:$PATH5:$PATH6"'
 echo "$PYTHONPATH"
 
