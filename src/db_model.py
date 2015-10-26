@@ -447,8 +447,6 @@ def getPluginInfo(pluginName):
     db_getpluginstate = getDbObject(MASTERDB)
     obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
     if obj is not None:
-        print '==========!!!!======!!+!+!+!+'
-        print obj
         plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: obj[CONFIGURABLE]}
         return plugin_state
     else:
