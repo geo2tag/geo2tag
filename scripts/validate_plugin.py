@@ -24,8 +24,8 @@ def make_reqpep8(name_plugin, type_format):
 
 def run():
     parser = argparse.ArgumentParser(description='Validate plugins')
-    parser.add_argument('name', help='Name plugin')
-    parser.add_argument('type_format', nargs='?',
+    parser.add_argument('-name', help='Name plugin')
+    parser.add_argument('-type_format', nargs='?',
                         default=DEFAULT, type=str, help='Type format')
     args = parser.parse_args()
     make_reqpep8(args.name, args.type_format)
