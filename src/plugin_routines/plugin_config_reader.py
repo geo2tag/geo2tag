@@ -6,7 +6,7 @@ class PluginConfigReader:
 
     def __init__(self, pluginName):
         self.file_path = os.path.dirname(os.path.realpath(__file__)) + \
-            '/config.ini'
+            '/../plugins/' + pluginName + '/config.ini'
         self.plugin_name = pluginName
 
     # Return content of the config.ini in a form of a dictionary
