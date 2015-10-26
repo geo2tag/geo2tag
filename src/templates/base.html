@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Geomongo</title>
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
@@ -14,7 +15,17 @@
         <script type="text/javascript">function getInstancePrefix() { return '{{ g.instance_prefix }}'; }</script>
         <script type="text/javascript">function getUrlWithPrefix(url) { return '/'+getInstancePrefix() + url; }</script>
         <div class="container">
-            {% block content %}{% endblock %}
+            <div>
+                    <span>Geo2Tag</span>
+                    {% if user == 'Anonym' %}
+                        <span class='right'>Hello, Anonym | <a href="/{{instance_prefix}}/login" type="button">Login</a></span>
+                    {% else %}
+                        <span class='right'>Hello, {{ user }} | 
+                        <a href="/{{instance_prefix}}/logout" type="button">Logout</a></span>
+                    {% endif %}
+            </div>
+            {% block content %}
+            {% endblock %}
             <div class="navbar-fixed-bottom row-fluid">
                 <div>Powered by Geo2tag - <a href="http://geo2tag.com">geo2tag.com</a></div>
             </div>
