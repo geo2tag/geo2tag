@@ -9,5 +9,5 @@ class GetAllPluginsWithStatusResource(Resource):
         list_plugins = getPluginList()
         result = {}
         for plugin in list_plugins:
-            result.update({plugin: getPluginState(plugin)})
+            result.update({plugin: getPluginInfo(plugin)})
         return result
