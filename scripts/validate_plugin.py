@@ -14,22 +14,21 @@ PYLINT_CHECK_FILE = "pylint --disable=all --enable=F0001  --reports=n "
 MAIN = '/main.py'
 INIT = '/__init__.py'
 PYTHONPATH = 'PYTHONPATH='
-num_error = 0
 TEXT_GOOD = 'No config file found, using default configuration\n'
 
 
 def make_reqpep8(name_plugin, type_format):
-    global num_error
+    num_error = 0
     str_pep8 = PEP8 + PATH_PLUGIN_DIR + \
         str(name_plugin) + TAIL_PEP8 + FORMAT + type_format
     data = os.popen(str_pep8).read()
     if len(data) > 0:
         print data
         num_error = 1
+    return num_error
 
 
-def checker_pylint(name_plugin):
-    global num_error
+def checker_pylint(name_plugin, num_error):
     STR_PYLINT_FILE_MAIN = PYLINT_CHECK_FILE + \
         PATH_PLUGIN_DIR + str(name_plugin) + MAIN
     STR_PYLINT_FILE_INIT = PYLINT_CHECK_FILE + \
@@ -50,6 +49,9 @@ def checker_pylint(name_plugin):
         num_error = 1
         print data_main
 
+    print 'Error code: ' + str(num_error)
+    sys.exit(str(num_error))
+
 
 def run():
     parser = argparse.ArgumentParser(description='Validate plugins')
@@ -57,9 +59,8 @@ def run():
     parser.add_argument('type_format', nargs='?',
                         default=DEFAULT, type=str, help='Type format')
     args = parser.parse_args()
-    make_reqpep8(args.name, args.type_format)
-    checker_pylint(args.name)
-    print 'Error code: ' + str(num_error)
-    sys.exit(str(num_error))
+    num_error = make_reqpep8(args.name, args.type_format)
+    checker_pylint(args.name, num_error)
+
 if __name__ == '__main__':
     run()
