@@ -2,6 +2,7 @@ from flask import session
 from config_reader import getDbName
 from db_model import getDbObject
 from log import writeInstanceLog
+from log import LOG_LVL_INFO
 from user_does_not_exist import UserDoesNotExist
 
 USER_ID = 'user_id'
@@ -17,13 +18,13 @@ LOGOUT = 'logout'
 
 def logUserIn(_id):
     session[USER_ID] = _id
-    writeInstanceLog(session[USER_ID], LOGIN)
+    writeInstanceLog(session[USER_ID], LOGIN, LOG_LVL_INFO)
 
 
 def logUserOut():
     if USER_ID in session:
         SESSION_VALUE = session.pop(USER_ID)
-        writeInstanceLog(SESSION_VALUE, LOGOUT)
+        writeInstanceLog(SESSION_VALUE, LOGOUT, LOG_LVL_INFO)
 
 
 def findUserById(_id):

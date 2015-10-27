@@ -11,6 +11,7 @@ from flask_restful import Api
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
 from log import writeInstanceLog
+from log import LOG_LVL_INFO
 from user_routines import getUserId
 from config_reader import getInstancePrefix
 
@@ -69,7 +70,8 @@ def before_request():
 @app.after_request
 def after_request(response):
     writeInstanceLog(getUserId(), 'Request url: ' + request.url +
-                                  ', request data: ' + request.data)
+                                  ', request data: ' + request.data,
+                                  LOG_LVL_INFO)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
                          'Content-Type, Authorization')
@@ -77,7 +79,8 @@ def after_request(response):
                          'GET, POST, PUT, DELETE')
     writeInstanceLog(getUserId(),
                      'Status_code: ' + str(response.status_code) + ', '
-                     'response: ' + str(response.response)[:2000])
+                     'response: ' + str(response.response)[:2000],
+                     LOG_LVL_INFO)
     return response
 
 
