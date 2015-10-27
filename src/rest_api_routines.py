@@ -6,7 +6,7 @@ from login_facebook_resource import facebook_oauth
 from flask import make_response, request, g, Flask
 from db_model import getPluginState
 from possible_exception import possibleException
-from plugin_routines import getPluginList, enablePlugin
+from plugin_routines import getPluginList, enablePlugin, checkConfigPlugin
 from flask_restful import Api
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
@@ -52,7 +52,8 @@ def initApp(api):
             os.chdir('..')
     pluginList = getPluginList()
     for pluginName in pluginList:
-        if getPluginState(pluginName) is True:
+        if getPluginState(pluginName) is True and \
+                checkConfigPlugin(pluginName) is True:
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
