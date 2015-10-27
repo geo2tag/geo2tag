@@ -9,4 +9,4 @@ Flask-OAuth==0.12
 python-dateutil==1.5
 pylint==1.4.4
 selenium
-astoid
+astoid==1.4.0
