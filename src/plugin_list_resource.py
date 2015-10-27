@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from plugin_routines import getPluginList
-from db_model import getPluginState
+from db_model import getPluginInfo
 
 
 class GetAllPluginsWithStatusResource(Resource):
@@ -9,5 +9,5 @@ class GetAllPluginsWithStatusResource(Resource):
         list_plugins = getPluginList()
         result = {}
         for plugin in list_plugins:
-            result.update({plugin: getPluginState(plugin)})
+            result.update({plugin: getPluginInfo(plugin)})
         return result
