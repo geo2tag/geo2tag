@@ -26,4 +26,4 @@ class TestPluginConfigResource(BasicIntegrationTest):
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(self.getUrl(TEST_URL + TEST_PLUGIN_NAME))
         responseText = response.text
-        self.assertEquals(responseText,TEST_TEXT_REQ_1)
+        self.assertEquals(responseText, TEST_TEXT_REQ_1)

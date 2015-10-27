@@ -4,6 +4,7 @@ from plugin_config_resource_parser import PluginConfigResourceParser
 from plugin_config_reader import PluginConfigReader
 from plugin_routines import getPluginList
 
+
 class PluginConfigResource(Resource):
 
     @possibleException
@@ -20,6 +21,7 @@ class PluginConfigResource(Resource):
             PluginConfigReader(pluginName).setConfigContent(args)
         else:
             return 'No plugin config'
+
 
 def checkConfigPlugin(pluginName):
     if pluginName in getPluginList():
