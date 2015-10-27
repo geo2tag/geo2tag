@@ -24,7 +24,6 @@ POINTS_FIND_AND_KEY = "_id"
 COLLECTION_SERVICES_NAME = "services"
 COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
 
-
 # Collections
 TAGS = 'tags'
 COLLECTION = 'services'
@@ -62,6 +61,7 @@ ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 PLUGINS = 'plugins'
 ENABLED = 'enabled'
+CONFIGURABLE = 'configurable'
 
 EARTH_RADIUS = 6371
 
@@ -438,6 +438,20 @@ def findPoints(
 def closeConnection():
     if MONGO_CLIENT is not None:
         MONGO_CLIENT.close()
+
+
+def getPluginInfo(pluginName):
+    db_getpluginstate = getDbObject()
+    obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
+    if obj is not None:
+        if CONFIGURABLE in obj:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE:
+                            obj[CONFIGURABLE]}
+        else:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
+        return plugin_state
+    else:
+        return False
 
 
 def getPluginState(pluginName):
