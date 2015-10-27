@@ -24,7 +24,6 @@ POINTS_FIND_AND_KEY = "_id"
 COLLECTION_SERVICES_NAME = "services"
 COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
 
-
 # Collections
 TAGS = 'tags'
 COLLECTION = 'services'
@@ -43,6 +42,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 USER_ID = 'user_id'
 DATE = 'date'
 MESSAGE = 'message'
+LEVEL = 'level'
 ERROR_CODE = 'error_code'
 SERVICE = 'service'
 COLLECTION = 'services'
@@ -62,18 +62,24 @@ ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 PLUGINS = 'plugins'
 ENABLED = 'enabled'
+CONFIGURABLE = 'configurable'
 
 EARTH_RADIUS = 6371
 
 
-def addLogEntry(dbName, userId, message, service='instance'):
+def addLogEntry(dbName, userId, message, level, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName)[LOG]
     if dbName == getDbName():
         collection.save({USER_ID: userId, DATE: currentDate,
-                         MESSAGE: message, SERVICE: service})
+                         MESSAGE: message, LEVEL: level, SERVICE: service})
     else:
-        collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
+        collection.save({
+            USER_ID: userId,
+            DATE: currentDate,
+            MESSAGE: message,
+            LEVEL: level
+        })
 
 
 def addTag(tag):
@@ -438,6 +444,20 @@ def findPoints(
 def closeConnection():
     if MONGO_CLIENT is not None:
         MONGO_CLIENT.close()
+
+
+def getPluginInfo(pluginName):
+    db_getpluginstate = getDbObject()
+    obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
+    if obj is not None:
+        if CONFIGURABLE in obj:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE:
+                            obj[CONFIGURABLE]}
+        else:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
+        return plugin_state
+    else:
+        return False
 
 
 def getPluginState(pluginName):
