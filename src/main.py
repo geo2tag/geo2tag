@@ -26,6 +26,7 @@ from status_resource import StatusResource
 from debug_info_resource import DebugInfoResource
 from admin_service_resource import AdminServiceResource
 from user_list_resource import UserListResource
+from admin_resource import AdminResource
 
 
 API = None
@@ -66,6 +67,9 @@ def addResources():
     getApi().add_resource(
         InternalTestsResource,
         getPathWithPrefix('/internal_tests'))
+    getApi().add_resource(
+        AdminResource,
+        getPathWithPrefix('/admin'))
     getApi().add_resource(
         AdminLogResource,
         getPathWithPrefix('/admin/log'))

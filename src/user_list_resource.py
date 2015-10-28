@@ -5,8 +5,12 @@ from UserListResourceParser import Userlistresourceparser
 from user_routines import findUserById
 
 
+GET_ARGS_LOGIN = "login"
+
+
 class UserListResource(Resource):
     @possibleException
     def get(self):
-        getUserResult = Userlistresourceparser()
-        return findUserById(getUserResult)
+        args = Userlistresourceparser.parseGetParameters()
+        login = args[GET_ARGS_LOGIN]
+        return findUserById(login)
