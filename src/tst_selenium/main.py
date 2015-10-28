@@ -5,6 +5,8 @@ from test_GT_1635_status_OK import TestStatusOK
 from test_GT_1340_login_resurce import TestLoginResource
 from test_instance_tests import TestInstaceTest
 from test_instance_internal_tests import TestInstaceInternalTest
+from test_admin_page import TestAdminResource
+from test_GT_1776_admin_template import TestGT1776AdminTemplate
 from test_GT_1803_admin_service_list_resource import \
     TestAdminServiceListResource
 from test_GT_1804_admin_service_resource import \
@@ -13,12 +15,23 @@ from test_GT_1804_admin_service_resource import \
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(BasicSeleniumTest.parametrize(
+        TestGT1776AdminTemplate,
+        param=host)
+    )
     suite.addTest(BasicSeleniumTest.parametrize(TestStatusOK, param=host))
-    suite.addTest(BasicSeleniumTest.parametrize(TestLoginResource, param=host))
+    suite.addTest(BasicSeleniumTest.parametrize(
+        TestLoginResource,
+        param=host)
+    )
     suite.addTest(BasicSeleniumTest.parametrize(TestInstaceTest, param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestInstaceInternalTest,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestAdminResource,
             param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
