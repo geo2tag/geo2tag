@@ -10,7 +10,7 @@ NUMBER_VALUE = 0
 OFFSET = 'offset'
 OFFSET_VALUE = 0
 CORRECT_ARGS = NUMBER + '=' + \
-    str(NUMBER_VALUE) + '&' + OFFSET + '=' + str(OFFSET_VALUE)
+    unicode(NUMBER_VALUE) + '&' + OFFSET + '=' + unicode(OFFSET_VALUE)
 INCORRECT_ARGS = 'incorrect_key='
 
 

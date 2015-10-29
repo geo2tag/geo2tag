@@ -14,7 +14,7 @@ class test_getServiceIdByName(unittest.TestCase):
     def test_getServiceIdByName_func(self):
         collection = getDbObject(TEST_DB)["services"]
         obj = collection.find_one({"_id": TEST_ID})
-        print('Test object: ' + str(obj))
+        print('Test object: ' + unicode(obj))
         try:
             getServiceIdByName('testservice')
         except ServiceNotExistException:

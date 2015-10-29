@@ -78,8 +78,8 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods',
                          'GET, POST, PUT, DELETE')
     writeInstanceLog(getUserId(),
-                     'Status_code: ' + str(response.status_code) + ', '
-                     'response: ' + str(response.response)[:2000],
+                     'Status_code: ' + unicode(response.status_code) + ', '
+                     'response: ' + unicode(response.response)[:2000],
                      LOG_LVL_INFO)
     return response
 

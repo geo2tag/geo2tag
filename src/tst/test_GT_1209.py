@@ -16,14 +16,14 @@ class test_getServiceById(unittest.TestCase):
     def test_getServiceById_func(self):
         collection = getDbObject(TEST_DB)["services"]
         obj = collection.find_one({"_id": TEST_ID})
-        print('Test object: ' + str(obj))
+        print('Test object: ' + unicode(obj))
         testObject1 = {}
         try:
             testObject1 = getServiceById(TEST_ID)
-            print('Test object with getServiceById: ' + str(obj))
-            print 'testObject1' + str(testObject1)
+            print('Test object with getServiceById: ' + unicode(obj))
+            print 'testObject1' + unicode(testObject1)
         except ServiceNotExistException:
             self.assertTrue(False)
         with self.assertRaises(ServiceNotExistException):
             testObject2 = getServiceById(BAD_TEST_ID)
-            print 'testObject2' + str(testObject2)
+            print 'testObject2' + unicode(testObject2)
