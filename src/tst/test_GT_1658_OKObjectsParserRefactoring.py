@@ -24,7 +24,7 @@ class TestOKObjetcsParserRefactoring(TestCase):
     def testOKObjetcsLoaderRefactoring_inheritance(self):
         self.assertIsNotNone(
             re.search(
-                INHERITANCE_OK_PATT, str(
+                INHERITANCE_OK_PATT, unicode(
                     inspect.getmro(OpenKareliaObjectsParser))))
 
     def testOKObjetcsLoaderRefactoring_notInmlementedException(self):

@@ -10,7 +10,7 @@ class TestJobListResourceFactory(TestCase):
     def testobListResourceFactory(self):
         self.assertEquals(
             "<class 'job_list_resource_factory.JobListResource'>",
-            str(
+            unicode(
                 JobListResourceFactory(
                     OKImportParser,
                     ThreadJob,
