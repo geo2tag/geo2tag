@@ -17,9 +17,9 @@ class TestChannelGetRequest(BasicIntegrationTest):
         db = getDbObject(TEST_SERVICE)
         obj_id = db[CHANNELS_COLLECTION].save(
             {'name': 'test_get_channel_by_id'})
-        response = requests.get(self.getUrl(TEST_URL + '/' + str(obj_id)))
+        response = requests.get(self.getUrl(TEST_URL + '/' + unicode(obj_id)))
         VALID_RESPONSE_TEXT = '{"_id": {"$oid": "' + \
-            str(obj_id) + '"}, "name": "test_get_channel_by_id"}'
+            unicode(obj_id) + '"}, "name": "test_get_channel_by_id"}'
         responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseText, VALID_RESPONSE_TEXT)
