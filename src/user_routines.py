@@ -58,12 +58,3 @@ def getUserId():
     except Exception:
         return ANONYM_USER
 
-
-def getUser():
-    if USER_LOGIN in session:
-        user = session[USER_LOGIN]
-    elif USER_ID in session:
-        user = session[USER_ID]
-    else:
-        user = ANONYM
-    return user
