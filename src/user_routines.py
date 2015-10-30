@@ -58,4 +58,3 @@ def getUserId():
         return session[USER_ID]
     except Exception:
         return ANONYM_USER
-
