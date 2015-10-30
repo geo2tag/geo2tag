@@ -20,8 +20,8 @@ class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
                          params={
                              'number': 0,
                              'offset': 0,
-                             'date_from': str(datetime_from.isoformat()),
-                             'date_to': str(datetime_to.isoformat())
+                             'date_from': unicode(datetime_from.isoformat()),
+                             'date_to': unicode(datetime_to.isoformat())
         })
         import ast
         self.assertEqual(

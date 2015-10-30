@@ -48,6 +48,7 @@ from test_GT_1590_extend_parse_parameters_for_point_list_resource\
 from test_GT_1697 import TestGT1697
 from test_GT_1732_GeocodingJobListResource import TestGeocodingJobListResource
 from test_GT_1741_test_geocoder_import import TestGeocoderImport
+from test_plugin_config_resource import TestPluginConfigResource
 
 
 def main(host):
@@ -211,6 +212,11 @@ def main(host):
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGT1697, param=host
+        )
+    )
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestPluginConfigResource, param=host
         )
     )
     suite.addTest(

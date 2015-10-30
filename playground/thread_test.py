@@ -4,7 +4,7 @@ import time
 
 def in_thread(self, _):
     for i in range(1, 5):
-        print 'sec' + str(i)
+        print 'sec' + unicode(i)
         time.sleep(1)
     self.thread.join()
 

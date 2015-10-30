@@ -27,6 +27,7 @@ from debug_info_resource import DebugInfoResource
 from admin_service_resource import AdminServiceResource
 from user_find_resource import UserFindResource
 from admin_resource import AdminResource
+from plugin_config_resource import PluginConfigResource
 
 
 API = None
@@ -92,6 +93,10 @@ def addResources():
     getApi().add_resource(
         UserFindResource,
         getPathWithPrefix('/user/<string:user_id>'))
+    getApi().add_resource(
+        PluginConfigResource,
+        getPathWithPrefix('/plugin_config/<string:pluginName>'))
+
     atexit.register(closeConnection)
 
     initApp(getApi())
