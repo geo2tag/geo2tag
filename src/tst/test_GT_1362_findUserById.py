@@ -23,7 +23,7 @@ class TestFindUserById(TestCase):
         for i in range(10):
             collectionUsers.insert(
                 {
-                    FIELD_USER_ID: USER_ID + "_" + str(i),
+                    FIELD_USER_ID: USER_ID + "_" + unicode(i),
                     "first_name": "string",
                     "last_name": "string"
                 }

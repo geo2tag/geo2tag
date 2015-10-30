@@ -18,10 +18,10 @@ JOBS_LIST = {
 
 
 def timeConvert(data):
-    return string.zfill(str(data / 3600000000), 1) + \
-        ':' + string.zfill(str(data / 60000000), 2) + \
-        ':' + string.zfill(str(data / 1000000), 2) + \
-        '.' + str(data)[:6]
+    return string.zfill(unicode(data / 3600000000), 1) + \
+        ':' + string.zfill(unicode(data / 60000000), 2) + \
+        ':' + string.zfill(unicode(data / 1000000), 2) + \
+        '.' + unicode(data)[:6]
 
 
 def getImportJobsText(viewJobsLink):
