@@ -49,7 +49,7 @@ class Job():
     def describe(self):
         return {
             '_id': self._id,
-            'time': str(
+            'time': unicode(
                 self.getTimeStatistics()),
             'done': self.done,
             'channelName': self.channelName,

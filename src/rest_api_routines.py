@@ -6,11 +6,12 @@ from login_facebook_resource import facebook_oauth
 from flask import make_response, request, g, Flask
 from db_model import getPluginState
 from possible_exception import possibleException
-from plugin_routines import getPluginList, enablePlugin
+from plugin_routines import getPluginList, enablePlugin, checkConfigPlugin
 from flask_restful import Api
 from url_routines import isPluginUrl
 from plugin_not_enabled_exception import PluginNotEnabledException
 from log import writeInstanceLog
+from log import LOG_LVL_INFO
 from user_routines import getUserId
 from config_reader import getInstancePrefix
 
@@ -51,7 +52,8 @@ def initApp(api):
             os.chdir('..')
     pluginList = getPluginList()
     for pluginName in pluginList:
-        if getPluginState(pluginName) is True:
+        if getPluginState(pluginName) is True and \
+                checkConfigPlugin(pluginName) is True:
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
 
@@ -69,15 +71,17 @@ def before_request():
 @app.after_request
 def after_request(response):
     writeInstanceLog(getUserId(), 'Request url: ' + request.url +
-                                  ', request data: ' + request.data)
+                                  ', request data: ' + request.data,
+                                  LOG_LVL_INFO)
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers',
                          'Content-Type, Authorization')
     response.headers.add('Access-Control-Allow-Methods',
                          'GET, POST, PUT, DELETE')
     writeInstanceLog(getUserId(),
-                     'Status_code: ' + str(response.status_code) + ', '
-                     'response: ' + str(response.response)[:2000])
+                     'Status_code: ' + unicode(response.status_code) + ', '
+                     'response: ' + unicode(response.response)[:2000],
+                     LOG_LVL_INFO)
     return response
 
 

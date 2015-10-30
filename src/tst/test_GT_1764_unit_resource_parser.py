@@ -13,8 +13,8 @@ OFFSET_VALUE = 0
 LOGIN = 'login'
 LOGIN_VALUE = ''
 CORRECT_ARGS = NUMBER + '=' + \
-    str(NUMBER_VALUE) + '&' + OFFSET + '=' + str(OFFSET_VALUE) + \
-    '&' + LOGIN + '=' + str(LOGIN_VALUE)
+    unicode(NUMBER_VALUE) + '&' + OFFSET + '=' + unicode(OFFSET_VALUE) + \
+    '&' + LOGIN + '=' + unicode(LOGIN_VALUE)
 INCORRECT_ARGS = 'incorrect_key='
 
 app = Flask(__name__)
