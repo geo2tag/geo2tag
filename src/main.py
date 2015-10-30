@@ -1,3 +1,5 @@
+from res import Res
+from res import Res
 # -*- coding: utf-8 -*-
 from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
@@ -96,7 +98,8 @@ def addResources():
     getApi().add_resource(
         PluginConfigResource,
         getPathWithPrefix('/plugin_config/<string:pluginName>'))
-
+    
+    #end of the list of imported resources
     atexit.register(closeConnection)
 
     initApp(getApi())
