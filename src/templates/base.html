@@ -16,13 +16,14 @@
         <script type="text/javascript">function getUrlWithPrefix(url) { return '/'+getInstancePrefix() + url; }</script>
         <div class="container">
             <div>
-                    <span>Geo2Tag</span>
-                    {% if user == 'Anonym' %}
-                        <span class='right'>Hello, Anonym | <a href="/{{instance_prefix}}/login" type="button">Login</a></span>
-                    {% else %}
-                        <span class='right'>Hello, {{ user }} | 
-                        <a href="/{{instance_prefix}}/logout" type="button">Logout</a></span>
-                    {% endif %}
+                <span>Geo2Tag</span><span class='right'>
+                {% if 'user_login' in session %}
+                    Hello, {{ session['user_login'] }} | <a href="/{{g.instance_prefix}}/logout" type="button">Logout</a></span>
+                {% elif 'user_id' in session %}
+                    Hello, {{ session['user_id'] }} | <a href="/{{g.instance_prefix}}/logout" type="button">Logout</a></span>
+                {% else %}
+                    Hello, Anonym | <a href="/{{instance_prefix}}/login" type="button">Login</a></span>
+                {% endif %}
             </div>
             {% block content %}
             {% endblock %}
