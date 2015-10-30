@@ -20,7 +20,7 @@ TEXT_GOOD = 'No config file found, using default configuration\n'
 def make_reqpep8(name_plugin, type_format):
     num_error = 0
     str_pep8 = PEP8 + PATH_PLUGIN_DIR + \
-        unicode(name_plugin) + TAIL_PEP8 + FORMAT + type_format
+        str(name_plugin) + TAIL_PEP8 + FORMAT + type_format
     data = os.popen(str_pep8).read()
     if len(data) > 0:
         print data
