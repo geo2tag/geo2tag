@@ -12,5 +12,5 @@ class TestJobRefactoring(TestCase):
     def testJobRefactoring_inheritance(self):
         self.assertNotEqual(
             re.search(
-                INHERITANCE_JOB_PATT, str(
+                INHERITANCE_JOB_PATT, unicode(
                     inspect.getmro(ThreadJob))), None)
