@@ -13,7 +13,7 @@ PATH5="$PWD/src/geocoders"
 PATH6="$PWD/src/plugins/geocoder"
 PATH7="$PWD/src/plugin_routines"
 PATH8="$PWD/scripts"
-eval 'export PYTHONPATH="$PYTHONPATH$PATH1:$PATH2:$PATH3:$PATH4:$PATH5:$PATH6:$PATH7$PATH8"'
+eval 'export PYTHONPATH="$PYTHONPATH$PATH1:$PATH2:$PATH3:$PATH4:$PATH5:$PATH6:$PATH7:$PATH8"'
 echo "$PYTHONPATH"
 DB_SCRIPTS_PATH='scripts/db/';
 
