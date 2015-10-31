@@ -17,7 +17,7 @@ class TestGenerateConfig(unittest.TestCase):
         os.chdir('../../')
         # create config
         generate(SERVER_NAME, FOLDER, FILE_NAME, ERROR)
-        # check for creation
+        # check for file exists
         res = os.path.exists(SAVE_FOLDER + FILE_NAME + '.conf')
         os.chdir('src/tst/')
         self.assertEqual(True, res)
