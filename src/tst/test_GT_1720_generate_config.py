@@ -15,9 +15,9 @@ ERROR = "error"
 class TestGenerateConfig(unittest.TestCase):
     def testGenerate(self):
         os.chdir('../../')
-        # создаю конфиг
+        # create config
         generate(SERVER_NAME, FOLDER, FILE_NAME, ERROR)
-        # проверяю создался ли он
+        # check for creation
         res = os.path.exists(SAVE_FOLDER + FILE_NAME + '.conf')
         os.chdir('src/tst/')
         self.assertEqual(True, res)
