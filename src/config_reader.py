@@ -75,7 +75,7 @@ def getInstancePrefix():
 
 
 def getDebugUsers():
-    str_users = str(getConfigParser().get(SECTION, OPTION_DEBUG_USERS))
+    str_users = unicode(getConfigParser().get(SECTION, OPTION_DEBUG_USERS))
     list_users = str_users.split(',')
     return list_users
 
@@ -85,7 +85,7 @@ def getGoogleClientID():
 
 
 def getGoogleClientSecret():
-    return str(getConfigParser().get(GOOGLE_SECTION, GOOGLE_CLIENT_SECRET))
+    return unicode(getConfigParser().get(GOOGLE_SECTION, GOOGLE_CLIENT_SECRET))
 
 
 def getGoogleRedirectUrl():

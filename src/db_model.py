@@ -24,7 +24,6 @@ POINTS_FIND_AND_KEY = "_id"
 COLLECTION_SERVICES_NAME = "services"
 COLLECTION_SERVICES_EL_CONFIG_NAME = "config"
 
-
 # Collections
 TAGS = 'tags'
 COLLECTION = 'services'
@@ -43,6 +42,7 @@ db = MongoClient(getHost(), getPort())[getDbName()]
 USER_ID = 'user_id'
 DATE = 'date'
 MESSAGE = 'message'
+LEVEL = 'level'
 ERROR_CODE = 'error_code'
 SERVICE = 'service'
 COLLECTION = 'services'
@@ -62,18 +62,24 @@ ALT = 'alt'
 CHANNEL_ID = 'channel_id'
 PLUGINS = 'plugins'
 ENABLED = 'enabled'
+CONFIGURABLE = 'configurable'
 
 EARTH_RADIUS = 6371
 
 
-def addLogEntry(dbName, userId, message, service='instance'):
+def addLogEntry(dbName, userId, message, level, service='instance'):
     currentDate = datetime.now()
     collection = getDbObject(dbName)[LOG]
     if dbName == getDbName():
         collection.save({USER_ID: userId, DATE: currentDate,
-                         MESSAGE: message, SERVICE: service})
+                         MESSAGE: message, LEVEL: level, SERVICE: service})
     else:
-        collection.save({USER_ID: userId, DATE: currentDate, MESSAGE: message})
+        collection.save({
+            USER_ID: userId,
+            DATE: currentDate,
+            MESSAGE: message,
+            LEVEL: level
+        })
 
 
 def addTag(tag):
@@ -129,7 +135,7 @@ def getLog(dbName, number, offset, dateFrom, dateTo):
 def updateService(name, config):
     services_collection = db[COLLECTION_SERVICES_NAME]
     for el in config:
-        tmp_el_to_set = COLLECTION_SERVICES_EL_CONFIG_NAME + '.' + str(el)
+        tmp_el_to_set = COLLECTION_SERVICES_EL_CONFIG_NAME + '.' + unicode(el)
         services_collection.update(
             {"name": name},
             # changes will affect on service's sub-document called 'config'
@@ -288,7 +294,7 @@ def deletePointById(serviceName, pointId):
 def getPointById(serviceName, pointId):
     pointsCollection = getDbObject(serviceName)[COLLECTION_POINTS_NAME]
     point = pointsCollection.find_one(
-        {POINTS_FIND_AND_KEY: ObjectId(str(pointId))})
+        {POINTS_FIND_AND_KEY: ObjectId(unicode(pointId))})
     if point is not None:
         return point
     raise PointDoesNotExist()
@@ -305,7 +311,7 @@ def addPoints(serviceName, pointsArray):
         obj[CHANNEL_ID] = point[CHANNEL_ID]
         obj[DATE] = datetime.now()
         obj[BC] = point[BC]
-        list_id.append(str(db_addpoint.save(obj)))
+        list_id.append(unicode(db_addpoint.save(obj)))
     return list_id
 
 
@@ -440,6 +446,20 @@ def closeConnection():
         MONGO_CLIENT.close()
 
 
+def getPluginInfo(pluginName):
+    db_getpluginstate = getDbObject()
+    obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
+    if obj is not None:
+        if CONFIGURABLE in obj:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE:
+                            obj[CONFIGURABLE]}
+        else:
+            plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
+        return plugin_state
+    else:
+        return False
+
+
 def getPluginState(pluginName):
     db_getpluginstate = getDbObject()
     obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
@@ -470,5 +490,5 @@ def getAllChannelIds(serviceName):
     db_getallchanelids = getDbObject(serviceName)
     obj = db_getallchanelids[CHANNELS_COLLECTION].find()
     for result in obj:
-        all_channel_ids_array.append(str(result[ID]))
+        all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
