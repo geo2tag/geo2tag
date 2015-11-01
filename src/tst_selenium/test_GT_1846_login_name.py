@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
-import requests
+
 
 TEST_URL = '/instance/login'
 URL_LOGIN = 'instance/login/debug?_id=debug_user1'
