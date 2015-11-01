@@ -32,8 +32,8 @@ def geocoderImport(self, channelName, serviceName):
         CHANNEL_ID: channel_id,
         JSON + '.' + ADDRESS: {"$exists": True}
     }).skip(proc_step).limit(PROC_BLOCK))
-    login = PluginConfigReader(PLUGIN_NAME).getConfigContent()\
-    [SECTION_GEOCODING][GEONAMES_LOGIN]
+    login = PluginConfigReader(PLUGIN_NAME).getConfigContent()[
+        SECTION_GEOCODING][GEONAMES_LOGIN]
     while point_block:
         current_size = len(point_block)
         addresses = [point[JSON][ADDRESS] for point in point_block]
