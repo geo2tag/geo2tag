@@ -1,6 +1,5 @@
 from unittest import TestCase
 from plugin_not_configurable import PluginIsNotConfigurable
-from plugin_config_reader import PluginConfigReader
 from plugin_routines import checkConfigPlugin
 
 TEST_PLUG = 'noplugasdfg'

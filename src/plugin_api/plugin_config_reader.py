@@ -1,5 +1,4 @@
 from configparser import RawConfigParser
-from plugin_not_configurable import PluginIsNotConfigurable
 import os
 
 
