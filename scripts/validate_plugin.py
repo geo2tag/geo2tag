@@ -1,7 +1,7 @@
 import os
 import sys
 import argparse
-
+import subprocess
 
 PEP8 = 'pep8 '
 PATH_PLUGIN_DIR = 'src/plugins/'
@@ -14,11 +14,11 @@ def make_reqpep8(name_plugin, type_format):
     num_error = 0
     str_pep8 = PEP8 + PATH_PLUGIN_DIR + \
         str(name_plugin) + TAIL_PEP8 + FORMAT + type_format
-    data = os.popen(str_pep8).read()
-    if len(data) > 0:
-        print data
+    process = subprocess.Popen(str_pep8, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    stdout,stderr = process.communicate()
+    if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
-    print 'Error code: ' + str(num_error)
+    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
     sys.exit(str(num_error))
 
 
