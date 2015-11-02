@@ -43,7 +43,7 @@ def addUser(_id, firstName, lastName, email):
         collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
         collectionUsers.insert(
             {FIND_KEY_ID: _id, FIRST_NAME: firstName, LAST_NAME: lastName,
-             EMAIL: email})
+             EMAIL: email, LOGIN: email[0:email.find("@")]})
     finally:
         return_id = _id
     return return_id
