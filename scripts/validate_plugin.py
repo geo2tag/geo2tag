@@ -23,7 +23,11 @@ def make_reqpep8(name_plugin, type_format):
     global num_error
     str_pep8 = PEP8 + PATH_PLUGIN_DIR + \
         unicode(name_plugin) + TAIL_PEP8 + FORMAT + type_format
-    process = subprocess.Popen(str_pep8, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+    process = subprocess.Popen(str_pep8,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        stdin=subprocess.PIPE)
     stdout,stderr = process.communicate()
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
@@ -39,14 +43,25 @@ def checker_pylint(name_plugin):
         PATH_PLUGIN_DIR + str(name_plugin) + INIT
     STR_PYLINT_FUNCTIONS_FIND = PYTHONPATH + sys.path[0] + \
         PYLINT_CHECK_FUNCTIONS + PATH_PLUGIN_DIR + str(name_plugin) + MAIN
-    data_init = os.popen(STR_PYLINT_FILE_INIT).read()
-    if len(data_init) != 0:
+    data_init = subprocess.Popen(str_pep8,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        stdin=subprocess.PIPE)
+    stdout,stderr = process.communicate()
+    if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
-        print data_init
-    data_main = os.popen(STR_PYLINT_FILE_MAIN).read()
-    if len(data_main) == 0:
+    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
+    data_main = subprocess.Popen(str_pep8,
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        stdin=subprocess.PIPE)
+    stdout,stderr = process.communicate()
+    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
+    if len(stdout) == 0 and len(stderr) == 0:
         data_pylint_main = os.popen(STR_PYLINT_FUNCTIONS_FIND).read()
-        if len(data_pylint_main) != 0:
+        if len(stdout) > 0 or len(stderr) > 0:
             num_error = 1
             print data_pylint_main
     else:
