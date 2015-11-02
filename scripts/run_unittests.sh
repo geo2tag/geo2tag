@@ -11,7 +11,8 @@ PATH3="$PWD/src/open_data_import"
 PATH4="$PWD/scripts/performance/od_performance"
 PATH5="$PWD/src/geocoders"
 PATH6="$PWD/src/plugins/geocoder"
-eval 'export PYTHONPATH="$PYTHONPATH$PATH1:$PATH2:$PATH3:$PATH4:$PATH5:$PATH6"'
+PATH7="$PWD/src/plugin_api"
+eval 'export PYTHONPATH="$PYTHONPATH$PATH1:$PATH2:$PATH3:$PATH4:$PATH5:$PATH6:$PATH7"'
 echo "$PYTHONPATH"
 DB_SCRIPTS_PATH='scripts/db/';
 
