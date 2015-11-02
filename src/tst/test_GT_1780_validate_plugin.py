@@ -19,8 +19,10 @@ class TestValidatePlugin(TestCase):
 
     def testValidatePlugin_DEFAULT(self):
         os.chdir('../..')
-        process = subprocess.Popen(PY_SCRIPT + NAME_PLUGIN, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-        stdout,stderr = process.communicate()
+        process = subprocess.Popen(
+            PY_SCRIPT + NAME_PLUGIN, shell=True, stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        stdout, stderr = process.communicate()
         self.assertEqual("stdout=''\nstderr=''\n", stdout)
         self.assertEqual('0\n', stderr)
         os.chdir('src/tst')
@@ -37,8 +39,10 @@ class TestValidatePlugin(TestCase):
         file_test.write('\n')
         file_test.close()
         os.chdir('../../..')
-        process = subprocess.Popen(PY_SCRIPT + NAME_FOLDER_TEST, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-        stdout,stderr = process.communicate()
+        process = subprocess.Popen(
+            PY_SCRIPT + NAME_FOLDER_TEST, shell=True, stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        stdout, stderr = process.communicate()
         self.assertEqual(STR_PEP8_ERROR, stdout)
         self.assertEqual('1\n', stderr)
         shutil.rmtree('src/plugins/' + NAME_FOLDER_TEST)
