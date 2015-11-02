@@ -20,8 +20,11 @@ class TestValidatePlugin(TestCase):
     def testValidatePlugin_DEFAULT(self):
         os.chdir('../..')
         process = subprocess.Popen(
-            PY_SCRIPT + NAME_PLUGIN, shell=True, stdout=subprocess.PIPE,
-                                   stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            PY_SCRIPT + NAME_PLUGIN,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.PIPE)
         stdout, stderr = process.communicate()
         self.assertEqual("stdout=''\nstderr=''\n", stdout)
         self.assertEqual('0\n', stderr)
@@ -40,8 +43,11 @@ class TestValidatePlugin(TestCase):
         file_test.close()
         os.chdir('../../..')
         process = subprocess.Popen(
-            PY_SCRIPT + NAME_FOLDER_TEST, shell=True, stdout=subprocess.PIPE,
-                                  stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            PY_SCRIPT + NAME_FOLDER_TEST,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.PIPE)
         stdout, stderr = process.communicate()
         self.assertEqual(STR_PEP8_ERROR, stdout)
         self.assertEqual('1\n', stderr)
