@@ -1,1 +1,1 @@
-find /tmp -name 'tmp*' -mtime +7 -exec sudo rm -r {} \;
+find /tmp -mtime +7 -name 'tmp*' -exec rm -r {} \;
