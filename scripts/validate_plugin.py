@@ -48,7 +48,7 @@ def checker_pylint(name_plugin):
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         stdin=subprocess.PIPE)
-    stdout,stderr = process.communicate()
+    stdout, stderr = process.communicate()
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
     print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
@@ -57,7 +57,7 @@ def checker_pylint(name_plugin):
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         stdin=subprocess.PIPE)
-    stdout,stderr = process.communicate()
+    stdout, stderr = process.communicate()
     print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
     if len(stdout) == 0 and len(stderr) == 0:
         data_pylint_main = os.popen(STR_PYLINT_FUNCTIONS_FIND).read()
