@@ -23,7 +23,7 @@
                 {% elif 'user_id' in session %}
                     Hello, {{ session['user_id'] }} | <a href="/{{g.instance_prefix}}/logout" type="button">Logout</a></span>
                 {% else %}
-                    Hello, Anonym | <a href="/{{instance_prefix}}/login" type="button">Login</a></span>
+                    Hello, Anonym | <a href="/{{g.instance_prefix}}/login" type="button">Login</a></span>
                 {% endif %}
             </div>
             {% block content %}
