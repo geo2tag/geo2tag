@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 from flask_restful import Resource
-from flask import render_template
-from flask import make_response
+from flask import render_template, make_response
 
 
 class LoginResource(Resource):

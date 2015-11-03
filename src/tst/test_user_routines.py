@@ -15,13 +15,15 @@ MESSAGE = 'message'
 MSG_LOGIN = 'login'
 MSG_LOGOUT = 'logout'
 TEST_ID = 'test_id'
+TEST_LOGIN = 'test_login'
 
 USER_ID_FIELD = 'user_id'
+USER_LOGIN_FIELD = 'user_login'
 MSG_FIELD = 'message'
 
 LOGOIN_REQUEST_CONTEXT = '/' + getInstancePrefix() + "/login"
 LOGOUT_REQUEST_CONTEXT = '/' + getInstancePrefix() + "/logout"
-REQUEST_PARAM = "?user_id=" + TEST_ID
+REQUEST_PARAM = "?user_id=" + TEST_ID + '&user_login=' + TEST_LOGIN
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -33,8 +35,11 @@ class TestUserRoutines(unittest.TestCase):
         # Emulating login session
         with app.test_request_context(
                 LOGOIN_REQUEST_CONTEXT + REQUEST_PARAM):
-            logUserIn(request.args[USER_ID_FIELD])
+            logUserIn(
+                request.args[USER_ID_FIELD],
+                request.args[USER_LOGIN_FIELD])
             self.assertTrue(session[USER_ID_FIELD] == TEST_ID)
+            self.assertTrue(session[USER_LOGIN_FIELD] == TEST_LOGIN)
             # Testing writing in log
             IS_USER_LOGIN = COLLECTION_LOG.find(
                 {
