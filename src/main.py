@@ -25,8 +25,10 @@ from service_list_resource import ServiceListResource
 from status_resource import StatusResource
 from debug_info_resource import DebugInfoResource
 from admin_service_resource import AdminServiceResource
+from user_find_resource import UserFindResource
 from admin_resource import AdminResource
 from plugin_config_resource import PluginConfigResource
+
 
 API = None
 
@@ -89,6 +91,9 @@ def addResources():
         getPathWithPrefix('/service/<string:serviceName>/log'),
         getPathWithPrefix('/log'))
     getApi().add_resource(
+        UserFindResource,
+        getPathWithPrefix('/user/<string:user_id>'))
+    getApi().add_resource(
         PluginConfigResource,
         getPathWithPrefix('/plugin_config/<string:pluginName>'))
 
@@ -97,4 +102,5 @@ def addResources():
     initApp(getApi())
 
 if __name__ == '__main__':
-    getApp.run(host="0.0.0.0", port=5001, debug=True)
+    addResources()
+    getApp().run(host="0.0.0.0", port=5001, debug=True)
