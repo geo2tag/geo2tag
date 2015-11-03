@@ -66,8 +66,6 @@ def checker_pylint(name_plugin, num_error):
         num_error = 1
         print data_main
     return num_error
-    print 'Error code: ' + str(num_error)
-    sys.exit(str(num_error))
 
 
 def run():
