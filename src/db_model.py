@@ -455,8 +455,7 @@ def getPluginInfo(pluginName):
         else:
             plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
         return plugin_state
-    else:
-        return False
+    return False
 
 
 def getPluginState(pluginName):
