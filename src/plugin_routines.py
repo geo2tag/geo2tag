@@ -79,17 +79,17 @@ def addConfigurablePlugin(pluginName, existConfig):
 
 
 def existConfigPlugin(pluginName):
-    try:
-        existConfig = CONFIG in os.listdir(PLUGINS_DIR_NAME + "/" + pluginName)
-        if not(existConfig):
-            return False
-        if addConfigurablePlugin(pluginName, existConfig):
-            return True
-    except Exception:
-        raise PluginIsNotConfigurable()
+    existConfig = CONFIG in os.listdir(PLUGINS_DIR_NAME + "/" + pluginName)
+    if not(existConfig):
+        return False
+    if addConfigurablePlugin(pluginName, existConfig):
+        return True
 
 
 def checkConfigPlugin(pluginName):
-    if existConfigPlugin(pluginName):
-        return True
-    return False
+    try:
+        if existConfigPlugin(pluginName):
+            return True
+        return False
+    except Exception:
+        raise PluginIsNotConfigurable()
