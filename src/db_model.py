@@ -11,7 +11,6 @@ from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, \
     GEOJSON_COORDINATES
 
-
 # getLog constants
 COLLECTION_LOG_NAME = "log"
 FIND_AND_SORT_KEY = "date"
