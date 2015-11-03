@@ -31,7 +31,7 @@ def make_reqpep8(name_plugin, type_format):
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
     print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
-    sys.exit(unicode(num_error))
+    return num_error
 
 
 def checker_pylint(name_plugin, num_error):
