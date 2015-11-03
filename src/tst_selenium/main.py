@@ -11,6 +11,8 @@ from test_GT_1803_admin_service_list_resource import \
     TestAdminServiceListResource
 from test_GT_1804_admin_service_resource import \
     TestAdminServiceResource
+from test_GT_1846_login_name import \
+    TestAutorizedUser
 
 
 def main(host):
@@ -40,6 +42,10 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminServiceResource,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestAutorizedUser,
             param=host))
 
 #
