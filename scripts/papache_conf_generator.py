@@ -8,11 +8,12 @@ SERVER_NAME = '%server_name%'
 SERVER_FOLDER = '%geomongo_path%'
 SERVER_ERROR_LOG = '%error_log%'
 
+
 def generate(site_name, site_folder, file_name, error_log):
     with open(TEMPLATE_CONF, 'r') as conf_file:
         template = conf_file.read()
 
-    template = template\
+    template = template \
         .replace(SERVER_NAME, site_name) \
         .replace(SERVER_FOLDER, site_folder) \
         .replace(SERVER_ERROR_LOG, error_log)
