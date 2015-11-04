@@ -6,9 +6,9 @@ import os
 from papache_conf_generator import generate
 
 SAVE_FOLDER = 'config/'
-FILE_NAME = 'test'
+FILE_NAME = 'test.conf'
 SERVER_NAME = 'testServerName'
-FOLDER = '/var/www/geomongo'
+FOLDER = 'geomongo'
 ERROR = "error"
 
 
@@ -18,6 +18,6 @@ class TestGenerateConfig(unittest.TestCase):
         # create config
         generate(SERVER_NAME, FOLDER, FILE_NAME, ERROR)
         # check for file exists
-        res = os.path.exists(SAVE_FOLDER + FILE_NAME + '.conf')
+        res = os.path.exists(SAVE_FOLDER + FILE_NAME)
         os.chdir('src/tst/')
         self.assertEqual(True, res)
