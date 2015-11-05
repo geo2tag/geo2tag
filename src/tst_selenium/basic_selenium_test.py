@@ -29,7 +29,7 @@ class BasicSeleniumTest(unittest.TestCase):
 
     def getDriver(_):
         return BasicSeleniumTest.driver
-   
+ 
     @classmethod
     def closeDriver(cls):
         cls.driver.close()

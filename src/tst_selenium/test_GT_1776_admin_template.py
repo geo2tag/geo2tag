@@ -23,7 +23,6 @@ class TestGT1776AdminTemplate(BasicSeleniumTest):
         for i in ADMIN_HEADER_ENTRIES:
             i[0] = unicode(self.getUrl(ADMIN_URL) + i[0])
 
-
     def testGT1776AdminTemplateAdminHeaders(self):
         self.getDriver().implicitly_wait(5)
         self.getDriver().get(self.getUrl(ADMIN_URL))
