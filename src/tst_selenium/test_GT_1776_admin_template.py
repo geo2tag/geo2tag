@@ -1,5 +1,4 @@
 from basic_selenium_test import BasicSeleniumTest
-from selenium import webdriver
 import requests
 
 ADMIN_URL = 'instance/admin'
