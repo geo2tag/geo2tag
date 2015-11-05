@@ -20,7 +20,6 @@ LOG_USERID = 'system'
 PREFIX_LOAD_MAIN = 'plugins.'
 LOAD_MAIN_ENDING = '.main'
 CONFIG = "config.ini"
-dbName = "geomongo"
 PLUGINS = "plugins"
 CONFIGURABLE = "configurable"
 
@@ -66,7 +65,7 @@ def isPluginEnabled(pluginName, app):
 
 
 def addConfigurablePlugin(pluginName, existConfig):
-    collection = getDbObject(dbName)[PLUGINS]
+    collection = getDbObject()[PLUGINS]
     obj = collection.find_one({"name": pluginName})
     if obj is None:
         return False
