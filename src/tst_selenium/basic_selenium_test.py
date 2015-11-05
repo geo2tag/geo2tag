@@ -27,13 +27,12 @@ class BasicSeleniumTest(unittest.TestCase):
     def getUrl(self, relativePath):
         return self.param + relativePath
 
-    @classmethod        
-    def getDriver(cls):
-        return cls.driver
+    def getDriver(_):
+        return BasicSeleniumTest.driver
    
     @classmethod
     def closeDriver(cls):
-        cls.getDriver().close()
+        cls.driver.close()
 
 #    def setUp(self):
 #        self.driver = webdriver.Firefox()  # Chrome()

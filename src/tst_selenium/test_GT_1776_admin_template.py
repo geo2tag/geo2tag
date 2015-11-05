@@ -25,20 +25,20 @@ class TestGT1776AdminTemplate(BasicSeleniumTest):
 
 
     def testGT1776AdminTemplateAdminHeaders(self):
-        BasicSeleniumTest.getDriver().implicitly_wait(5)
-        BasicSeleniumTest.getDriver().get(self.getUrl(ADMIN_URL))
-        self.assertTrue(GEOMONGO in BasicSeleniumTest.getDriver().title)
-        for i in BasicSeleniumTest.getDriver().find_elements_by_css_selector(ADMIN_HEADER):
+        self.getDriver().implicitly_wait(5)
+        self.getDriver().get(self.getUrl(ADMIN_URL))
+        self.assertTrue(GEOMONGO in self.getDriver().title)
+        for i in self.getDriver().find_elements_by_css_selector(ADMIN_HEADER):
             self.assertIn(
                 [i.get_attribute(HREF), i.get_attribute(INNER_HTML)],
                 ADMIN_HEADER_ENTRIES
             )
 
     def testGT1776AdminTemplateDebuginfo(self):
-        BasicSeleniumTest.getDriver().implicitly_wait(5)
-        BasicSeleniumTest.getDriver().get(self.getUrl(ADMIN_URL))
-        self.assertTrue(GEOMONGO in BasicSeleniumTest.getDriver().title)
-        debug_info = BasicSeleniumTest.getDriver().\
+        self.getDriver().implicitly_wait(5)
+        self.getDriver().get(self.getUrl(ADMIN_URL))
+        self.assertTrue(GEOMONGO in self.getDriver().title)
+        debug_info = self.getDriver().\
             find_element_by_css_selector(DEBUG_INFO).\
             get_attribute(INNER_HTML)
         r = requests.get(self.getUrl(DEBUG_INFO_URL))
