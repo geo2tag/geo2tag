@@ -88,3 +88,8 @@ def after_request(response):
 @app.before_request
 def defineInstancePrefix():
     g.instance_prefix = getInstancePrefix()
+
+
+@app.before_request
+def createWebCacheInvalidator():
+    g.cache_invalidator = urandom(32)
