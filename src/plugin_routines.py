@@ -10,6 +10,7 @@ from log import LOG_LVL_INFO
 from log import LOG_LVL_ERROR
 from user_routines import getUserId
 from db_model import getDbObject
+from plugin_not_configurable import PluginIsNotConfigurable
 PLUGINS_DIR_NAME = 'plugins'
 
 GET_PLUGIN_RESOURCES = 'getPluginResources'
@@ -85,6 +86,9 @@ def existConfigPlugin(pluginName):
 
 
 def checkConfigPlugin(pluginName):
-    if existConfigPlugin(pluginName):
-        return True
-    return False
+    try:
+        if existConfigPlugin(pluginName):
+            return True
+        return False
+    except Exception:
+        raise PluginIsNotConfigurable()
