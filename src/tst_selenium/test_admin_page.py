@@ -5,7 +5,7 @@ class TestAdminResource(BasicSeleniumTest):
 
     def testAdminResource(self):
         URL = self.getUrl('/instance/admin')
-        self.driver.get(URL)
-        self.driver.implicitly_wait(30)
-        obj = self.driver.find_element_by_css_selector(".admin-header")
+        self.getDriver().get(URL)
+        self.getDriver().implicitly_wait(30)
+        obj = self.getDriver().find_element_by_css_selector(".admin-header")
         self.assertNotEquals(obj, None)
