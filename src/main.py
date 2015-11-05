@@ -97,6 +97,8 @@ def addResources():
         PluginConfigResource,
         getPathWithPrefix('/plugin_config/<string:pluginName>'))
 
+    # end of the list of imported resources
+
     atexit.register(closeConnection)
 
     initApp(getApi())
