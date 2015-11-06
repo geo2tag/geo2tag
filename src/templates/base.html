@@ -10,9 +10,11 @@
         <script src="{{ url_for('static', filename='js/jquery-latest.min.js') }}" ></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}" ></script>
         <script type="text/javascript">function getInstancePrefix() { return '{{ g.instance_prefix }}'; }</script>
+        <script type="text/javascript">function getStaticUrl() { return '?{{ g.cache_invalidator }}'; }</script>
         <script type="text/javascript">function getUrlWithPrefix(url) { return '/'+getInstancePrefix() + url; }</script>
     </head>
     <body>
+        <script type="text/javascript">console.log(getInstancePrefix());</script>
         <div class="container">
             <div>
                 <span>Geo2Tag</span><span class='right'>

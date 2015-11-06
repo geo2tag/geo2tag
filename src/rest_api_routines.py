@@ -43,6 +43,9 @@ def getApi():
 
 
 def initApp(api):
+    with app.app_context():
+        defineInstancePrefix()
+        createWebCacheInvalidator()
     homeDir = os.getcwd()
     if homeDir.find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'
@@ -56,9 +59,6 @@ def initApp(api):
                 checkConfigPlugin(pluginName) is True:
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
-    with app.app_context():
-        defineInstancePrefix()
-        createWebCacheInvalidator()
 
 
 @app.before_request
