@@ -62,4 +62,4 @@ class TestValidatePlugin(TestCase):
         self.assertEqual(STR_PEP8_ERROR, stdout)
         self.assertEqual('1\n', stderr)
         shutil.rmtree('src/plugins/' + NAME_FOLDER_TEST)
-        os.chdir('src/tst')
+        os.chdir("src/tst")
