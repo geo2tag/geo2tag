@@ -56,6 +56,9 @@ def initApp(api):
                 checkConfigPlugin(pluginName) is True:
             enablePlugin(api, pluginName)
     os.chdir(homeDir)
+    with app.app_context():
+        defineInstancePrefix()
+        createWebCacheInvalidator()
 
 
 @app.before_request
@@ -85,11 +88,9 @@ def after_request(response):
     return response
 
 
-@app.before_request
 def defineInstancePrefix():
     g.instance_prefix = getInstancePrefix()
 
 
-@app.before_request
 def createWebCacheInvalidator():
     g.cache_invalidator = urandom(32)
