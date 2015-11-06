@@ -33,6 +33,7 @@ class LoginFacebookResource(Resource):
 
 SUCCESS_MESSAGE = 'Success'
 
+
 def saveUserData(userDict):
     EMAIL = 'email'
     _ID = 'id'
@@ -45,6 +46,7 @@ def saveUserData(userDict):
         userDict["name"][0:space],
         userDict["name"][space+2::],
         userDict[EMAIL])
+
 
 @facebook_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
 @facebook.authorized_handler
