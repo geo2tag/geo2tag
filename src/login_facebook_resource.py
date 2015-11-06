@@ -5,6 +5,8 @@ from config_reader import getFacebookClientID,\
     getFacebookClientSecret, getFacebookRedirectUrl
 from url_utils import getPathWithPrefix
 from possible_exception import possibleException
+from json import loads
+from user_routines import addUser, logUserIn
 
 
 AUTHORIZED_URL = '/login/facebook/authorized'
@@ -31,6 +33,18 @@ class LoginFacebookResource(Resource):
 
 SUCCESS_MESSAGE = 'Success'
 
+def saveUserData(userDict):
+    EMAIL = 'email'
+    _ID = 'id'
+    FIRST_NAME = 'given_name'
+    LAST_NAME = 'family_name'
+    space = userDict["name"].find(" ")
+    userDict["name"][0:space]
+    return addUser(
+        userDict[_ID],
+        userDict["name"][0:space],
+        userDict["name"][space+2::],
+        userDict[EMAIL])
 
 @facebook_oauth.route(getPathWithPrefix(AUTHORIZED_URL))
 @facebook.authorized_handler
@@ -42,7 +56,10 @@ def facebook_authorized(resp):
             request.args['error_description']
         )
     session['oauth_token'] = (resp['access_token'], '')
-    # userID = facebook.get('/me')
+    responce = facebook.get('/me?fields=name,email').data
+    ID = saveUserData(responce)
+    print ID
+    logUserIn(ID)
     return SUCCESS_MESSAGE
 
 
