@@ -5,7 +5,6 @@ from config_reader import getFacebookClientID,\
     getFacebookClientSecret, getFacebookRedirectUrl
 from url_utils import getPathWithPrefix
 from possible_exception import possibleException
-from json import loads
 from user_routines import addUser, logUserIn
 
 
@@ -37,10 +36,7 @@ SUCCESS_MESSAGE = 'Success'
 def saveUserData(userDict):
     EMAIL = 'email'
     _ID = 'id'
-    FIRST_NAME = 'given_name'
-    LAST_NAME = 'family_name'
     space = userDict["name"].find(" ")
-    userDict["name"][0:space]
     return addUser(
         userDict[_ID],
         userDict["name"][0:space],
@@ -60,7 +56,6 @@ def facebook_authorized(resp):
     session['oauth_token'] = (resp['access_token'], '')
     responce = facebook.get('/me?fields=name,email').data
     ID = saveUserData(responce)
-    print ID
     logUserIn(ID)
     return SUCCESS_MESSAGE
 
