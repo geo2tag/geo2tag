@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = 'instance/login'
+RES = '?cache_inx'
 
 
 class TestCacheInvalidator(BasicSeleniumTest):
@@ -12,7 +13,7 @@ class TestCacheInvalidator(BasicSeleniumTest):
         self.getDriver().get(self.getUrl(TEST_URL))
         WebDriverWait(self.getDriver(), 10).until(
             expected_conditions.presence_of_element_located(
-                (By.TAG_NAME, "body"))
+                (By.TAG_NAME, "head"))
         )
-        res = self.getDriver().execute_script("getInstancePrefix")
-        print res
+        res = self.getDriver().execute_script("return getStaticUrl();")
+        self.assertEqual(res, RES)

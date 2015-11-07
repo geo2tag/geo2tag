@@ -16,7 +16,7 @@ from user_routines import getUserId
 from config_reader import getInstancePrefix
 
 API = None
-
+CACHE = 'cache_inx'
 app = Flask(__name__)
 app.register_blueprint(google_oauth)
 app.register_blueprint(facebook_oauth)
@@ -43,9 +43,6 @@ def getApi():
 
 
 def initApp(api):
-    with app.app_context():
-        defineInstancePrefix()
-        createWebCacheInvalidator()
     homeDir = os.getcwd()
     if homeDir.find('/var/www') != -1:
         homeDir = '/var/www/geomongo/'
@@ -88,9 +85,11 @@ def after_request(response):
     return response
 
 
+@app.before_request
 def defineInstancePrefix():
     g.instance_prefix = getInstancePrefix()
 
 
+@app.before_request
 def createWebCacheInvalidator():
-    g.cache_invalidator = urandom(32)
+    g.cache_invalidator = CACHE
