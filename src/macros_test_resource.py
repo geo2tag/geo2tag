@@ -8,4 +8,4 @@ class MacrosTestsResource(Resource):
     def get(self):
         return make_response(
             render_template(
-                'macros_test.html')
+                'macros_test.html'))
