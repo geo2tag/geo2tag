@@ -1,3 +1,9 @@
-#log-form input[name="search-substring"] {
+input[name="search-substring"], input[name="search-substring-submit"] {
 	width: 80%;
+	float: left;
+	margin: 0 15px;
+}
+
+input[name="search-substring-submit"] {
+	width: 100px !important;
 }

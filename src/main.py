@@ -28,6 +28,7 @@ from admin_service_resource import AdminServiceResource
 from user_find_resource import UserFindResource
 from admin_resource import AdminResource
 from plugin_config_resource import PluginConfigResource
+from macros_test_resource import MacrosTestsResource
 
 
 API = None
@@ -96,6 +97,9 @@ def addResources():
     getApi().add_resource(
         PluginConfigResource,
         getPathWithPrefix('/plugin_config/<string:pluginName>'))
+    getApi().add_resource(
+        MacrosTestsResource,
+        getPathWithPrefix('/macros_tests'))
 
     # end of the list of imported resources
 

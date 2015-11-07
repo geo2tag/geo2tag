@@ -13,6 +13,7 @@ from test_GT_1804_admin_service_resource import \
     TestAdminServiceResource
 from test_GT_1846_login_name import \
     TestAutorizedUser
+from search_macros_test import TestMacrosSearchTest
 
 
 def main(host):
@@ -47,7 +48,11 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestAutorizedUser,
             param=host))
-
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestMacrosSearchTest,
+            param=host))
+    
 ###################################################
 # Place tests above this line ^^
 ###################################################
