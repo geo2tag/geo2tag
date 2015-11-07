@@ -76,6 +76,7 @@ def run():
     args = parser.parse_args()
     num_error = make_reqpep8(args.name, args.type_format)
     checker_pylint(args.name, num_error)
-
+    sys.exit(num_error)
+    
 if __name__ == '__main__':
     run()

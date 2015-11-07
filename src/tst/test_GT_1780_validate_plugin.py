@@ -30,9 +30,8 @@ class TestValidatePlugin(TestCase):
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE)
         stdout, stderr = process.communicate()
-        self.assertEqual("stdout=''\nstderr=''\n", stdout)
-        self.assertEqual('0\n', stderr)
         os.chdir('src/tst')
+        self.assertEquals(0, process.poll())
 
     def testValidatePlugin_MakePlugin(self):
         os.chdir('../plugins/')
@@ -59,7 +58,6 @@ class TestValidatePlugin(TestCase):
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE)
         stdout, stderr = process.communicate()
-        self.assertEqual(STR_PEP8_ERROR, stdout)
-        self.assertEqual('1\n', stderr)
+        self.assertEqual(1, process.wait())
         shutil.rmtree('src/plugins/' + NAME_FOLDER_TEST)
         os.chdir("src/tst")
