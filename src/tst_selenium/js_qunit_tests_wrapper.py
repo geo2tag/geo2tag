@@ -10,10 +10,10 @@ class JsQUnitTestsWrapper(BasicSeleniumTest):
         self.assertNotEquals(testResult, None)
 
     def checkTestPage(self, pageRelativeUrl):
-        self.driver.get(pageRelativeUrl)
-        WebDriverWait(self.driver, 10).until(
+        self.getDriver().get(pageRelativeUrl)
+        WebDriverWait(self.getDriver(), 10).until(
             expected_conditions.text_to_be_present_in_element(
                 (By.ID, "qunit-testresult"), 'Tests completed in')
         )
-        res = self.driver.find_element_by_class_name("container")
+        res = self.getDriver().find_element_by_class_name("container")
         self.checkTestResult(res)

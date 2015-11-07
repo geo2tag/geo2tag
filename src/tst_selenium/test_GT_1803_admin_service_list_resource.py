@@ -11,14 +11,14 @@ class TestAdminServiceListResource(BasicSeleniumTest):
 
     def testcheckAdminResource(self):
         URL = self.getUrl(TEST_URL)
-        self.driver.get(URL)
-        WebDriverWait(self.driver, 10).until(
+        self.getDriver().get(URL)
+        WebDriverWait(self.getDriver(), 10).until(
             expected_conditions.presence_of_element_located(
                 (By.TAG_NAME, "body"))
         )
-        res = self.driver.find_element_by_tag_name("h2")
+        res = self.getDriver().find_element_by_tag_name("h2")
         self.assertEqual(res.text, H2)
-        res = self.driver.find_element_by_tag_name("body")
+        res = self.getDriver().find_element_by_tag_name("body")
         self.assertNotEquals(res, None)
-        res = self.driver.find_element_by_tag_name("head")
+        res = self.getDriver().find_element_by_tag_name("head")
         self.assertNotEquals(res, None)
