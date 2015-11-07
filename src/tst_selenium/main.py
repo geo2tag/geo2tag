@@ -52,10 +52,10 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestMacrosSearchTest,
             param=host))
-    
-###################################################
+
+#
 # Place tests above this line ^^
-###################################################
+#
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()
 
