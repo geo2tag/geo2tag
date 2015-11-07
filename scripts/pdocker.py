@@ -235,7 +235,8 @@ def main():
             sys.exit(1)
 
         containerEnv = "http://" + \
-                       os.environ["SERVER"] + ":" + unicode(container_start_port) + \
+                       os.environ["SERVER"] + ":" \
+                       + unicode(container_start_port) + \
                        "/instance/tests"
 
         f = open('propsfile', 'w')
