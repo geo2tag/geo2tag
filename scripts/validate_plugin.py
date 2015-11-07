@@ -78,6 +78,6 @@ def run():
     checker_pylint(args.name, num_error)
     sys.exit(num_error)
 
-    
+
 if __name__ == '__main__':
     run()
