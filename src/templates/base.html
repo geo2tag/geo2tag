@@ -3,12 +3,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Geomongo</title>
-        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
+        {% from "macros/getstaticurl.html" import getStaticUrl with context %}     
+        <link href="{{ getStaticUrl('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ getStaticUrl('css/main.css') }}" rel="stylesheet">
+        <link href="{{ getStaticUrl('css/admin.css') }}" rel="stylesheet">
          {% block styles %}{% endblock %}
-        <script src="{{ url_for('static', filename='js/jquery-latest.min.js') }}" ></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}" ></script>
+        <script src="{{ getStaticUrl('js/jquery-latest.min.js') }}" ></script>
+        <script src="{{ getStaticUrl('js/bootstrap.min.js')}}" ></script>
         <script type="text/javascript">function getInstancePrefix() { return '{{ g.instance_prefix }}'; }</script>
         <script type="text/javascript">function getStaticUrl() { return '?{{ g.cache_invalidator }}'; }</script>
         <script type="text/javascript">function getUrlWithPrefix(url) { return '/'+getInstancePrefix() + url; }</script>
