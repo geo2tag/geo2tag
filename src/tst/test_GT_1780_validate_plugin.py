@@ -29,7 +29,6 @@ class TestValidatePlugin(TestCase):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE)
-        stdout, stderr = process.communicate()
         os.chdir('src/tst')
         self.assertEquals(0, process.poll())
 
@@ -57,7 +56,6 @@ class TestValidatePlugin(TestCase):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE)
-        stdout, stderr = process.communicate()
-        self.assertEqual(1, process.wait())
+        self.assertEqual(1, process.poll())
         shutil.rmtree('src/plugins/' + NAME_FOLDER_TEST)
         os.chdir("src/tst")
