@@ -3,16 +3,20 @@
 # use option -c <catalog_name> to change /geomongo catalog
 # use option -d <config_ini_file_name> to using new config ini file instead config/config.ini
 # use option -e <config_file_name> to using new config file instead config/geomongo.conf
+# use option -el <error_log_name> to using new apache error log name
+# use option -s <server_name> to set server name
 
+CATALOG='geomongo'
+ERROR_LOG_NAME='error'
+SERVER_NAME='geomongo'
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
 CONFIG_FILE="geomongo.conf"
 FLAG_KEEP_CONFIG_INI=false
-CATALOG='geomongo'
 CONFIG_INI_FILE='config/config.ini'
 CONFIG_INI_FILE_FINAL='config.ini'
 
-while getopts ":c:d:e:f" opt ;
+while getopts ":c:d:e:f:ef:s:" opt ;
 do
     case $opt in
         c) CATALOG=$OPTARG;
@@ -23,16 +27,22 @@ do
             ;;
         e) CONFIG_FILE=$OPTARG;
             ;;
+        ef) ERROR_LOG_NAME=$OPTARG;
+            ;;
+        s) SERVER_NAME=$OPTARG;
+            ;;
         *) echo "the option is incorrect";
             exit 1
             ;;
         esac
 done
-
 if ! grep -Fxq "$HOSTS_STRING" /etc/hosts
 then
 	echo "$HOSTS_STRING" >> /etc/hosts
 fi
+
+#generate config for apache
+./scripts/papache_conf_generator.py -n "$SERVER_NAME" -o "$CONFIG_FILE" -f "$CATALOG" -e "$ERROR_LOG_NAME"
 
 rm -rf /var/www/"$CATALOG"
 

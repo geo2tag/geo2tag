@@ -54,6 +54,7 @@ def main(host):
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()
 
+    BasicSeleniumTest.closeDriver()
     sys.exit(returnCode)
 
 if __name__ == '__main__':
