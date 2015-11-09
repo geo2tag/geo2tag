@@ -6,6 +6,7 @@ TEST_NOT_VALID_URL = '/instance/user?number=1&offset=0'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
 
+
 class TestUserListResource(BasicIntegrationTest):
 
     def testUserListResource(self):
