@@ -151,7 +151,7 @@ def kill_old_containers(kill_time=0):
 
     for container in containers:
         print container[CONTAINER_NAME] + " on port " + \
-              unicode(container[CONTAINER_PORT]) + " stop"
+            unicode(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
