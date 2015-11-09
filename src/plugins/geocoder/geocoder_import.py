@@ -1,6 +1,6 @@
 from json import dumps
 from db_model import getServiceIdByName, getChannelByName, getDbObject
-from config_reader import getGeonamesLogin
+from plugin_config_reader import PluginConfigReader
 from geocoder_request import GeonamesRequestSender
 from geocoder_response_parser import GeocoderResponseParser
 
@@ -9,6 +9,9 @@ CHANNEL_ID = 'channel_id'
 JSON = 'json'
 ADDRESS = 'address'
 ID = '_id'
+PLUGIN_NAME = 'geocoder'
+SECTION_GEOCODING = 'geocoding'
+GEONAMES_LOGIN = 'geonames_login'
 PROC_BLOCK = 5000
 
 
@@ -29,13 +32,15 @@ def geocoderImport(self, channelName, serviceName):
         CHANNEL_ID: channel_id,
         JSON + '.' + ADDRESS: {"$exists": True}
     }).skip(proc_step).limit(PROC_BLOCK))
+    login = PluginConfigReader(PLUGIN_NAME).getConfigContent()[
+        SECTION_GEOCODING][GEONAMES_LOGIN]
     while point_block:
         current_size = len(point_block)
         addresses = [point[JSON][ADDRESS] for point in point_block]
         ids = [point[ID] for point in point_block]
         string_addresses = greqv.requestCoordinates(
             addresses,
-            getGeonamesLogin(),
+            login,
             json_list_to_list_of_strings)
         json_coords = gpars.parseList(string_addresses)
         for i in range(0, current_size):

@@ -24,6 +24,9 @@ elif [[ "$1" == "tint" ]]; then
 elif [[ "$1" == "tsel" ]]; then
  docker exec -t $2 /app/scripts/run_docker_selenium_tests.sh
  exit $?
+elif [[ "$1" == "clear" ]]; then
+ docker exec -t $2 chmod 777 -R src/*
+ exit $?
 else
  echo -e $"$0 [con] for containers list"
  echo -e $"$0 [kill %container_name%] stop container"

@@ -11,6 +11,8 @@ from test_GT_1803_admin_service_list_resource import \
     TestAdminServiceListResource
 from test_GT_1804_admin_service_resource import \
     TestAdminServiceResource
+from test_GT_1846_login_name import \
+    TestAutorizedUser
 
 
 def main(host):
@@ -41,6 +43,10 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestAdminServiceResource,
             param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestAutorizedUser,
+            param=host))
 
 ###################################################
 # Place tests above this line ^^
@@ -48,6 +54,7 @@ def main(host):
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()
 
+    BasicSeleniumTest.closeDriver()
     sys.exit(returnCode)
 
 if __name__ == '__main__':
