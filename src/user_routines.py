@@ -61,5 +61,5 @@ def getUserId():
 
 
 def findUsers(number, offset, loginSubstring):
-    print str(number), str(offset), loginSubstring # for pylint
+    print str(number), str(offset), loginSubstring  # for pylint
     return []

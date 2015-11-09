@@ -31,7 +31,6 @@ from admin_resource import AdminResource
 from plugin_config_resource import PluginConfigResource
 
 
-
 API = None
 
 

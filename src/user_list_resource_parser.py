@@ -11,8 +11,11 @@ class UserListResourceParser():
     @staticmethod
     def parseGetParameters():
         parser = reqparse.RequestParser()
-        parser.add_argument(GET_ARGS_NUMBER, type=int, default=None)
-        parser.add_argument(GET_ARGS_OFFSET, type=int, default=None)
-        parser.add_argument(GET_ARGS_LOGIN, type=str, default=None)
+        parser.add_argument(GET_ARGS_NUMBER, type=int, default=None,
+                            required=True)
+        parser.add_argument(GET_ARGS_OFFSET, type=int, default=None,
+                            required=True)
+        parser.add_argument(GET_ARGS_LOGIN, type=str, default=None,
+                            required=True)
         args = parser.parse_args()
         return args
