@@ -146,7 +146,7 @@ def kill_old_containers(kill_time=0):
 
     for container in containers:
         print container[CONTAINER_NAME] + " on port " + \
-            unicode(container[CONTAINER_PORT]) + " stop"
+              unicode(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
@@ -210,16 +210,18 @@ def main(name, ports):
     if t_int != 0 or t_unit != 0 or t_sel != 0:
         sys.exit(1)
 
-    containerEnv = "http://" + \
-        os.environ["SERVER"] + ":" + unicode(container_start_port) + \
-        "/instance/tests"
+    container_env = "http://" + \
+                    os.environ["SERVER"] + ":" \
+                    + unicode(container_start_port) + \
+                    "/instance/tests"
 
     f = open('propsfile', 'w')
-    f.write('CONTAINER=' + containerEnv + '\n')
+    f.write('CONTAINER=' + container_env + '\n')
     f.close()
-    write_log(container_start_name, containerEnv)
+    write_log(container_start_name, container_env)
 
     write_log(container_start_name, "Done")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
