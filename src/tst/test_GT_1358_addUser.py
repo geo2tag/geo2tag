@@ -22,7 +22,17 @@ class TestaddUserById(TestCase):
 
     def testaddUserById(self):
         collectionUsers.drop()
-        result_id = addUser(TEST_ID, TEST_FIRSTNAME, TEST_LASTNAME, TEST_EMAIL, TEST_LOGIN)
+        result_id = addUser(
+            TEST_ID,
+            TEST_FIRSTNAME,
+            TEST_LASTNAME,
+            TEST_EMAIL,
+            TEST_LOGIN)
         self.assertEqual(TEST_ID, result_id)
-        result_id = addUser(TEST_ID, TEST_FIRSTNAME, TEST_LASTNAME, TEST_EMAIL, TEST_LOGIN)
+        result_id = addUser(
+            TEST_ID,
+            TEST_FIRSTNAME,
+            TEST_LASTNAME,
+            TEST_EMAIL,
+            TEST_LOGIN)
         self.assertEqual(TEST_ID, result_id)
