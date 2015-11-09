@@ -16,27 +16,27 @@ TEXT_USER = 'Geo2Tag\nHello, debug_user1 \
 class TestAutorizedUser(BasicSeleniumTest):
 
     def testNoAutorizedUser(self):
-        self.driver.get(self.getUrl(URL_LOGOUT))
-        self.driver.get(self.getUrl(TEST_URL))
-        WebDriverWait(self.driver, 10).until(
+        self.getDriver().get(self.getUrl(URL_LOGOUT))
+        self.getDriver().get(self.getUrl(TEST_URL))
+        WebDriverWait(self.getDriver(), 10).until(
             expected_conditions.presence_of_element_located(
                 (By.TAG_NAME, "body"))
         )
-        res = self.driver.find_element_by_class_name("container")
+        res = self.getDriver().find_element_by_class_name("container")
         self.assertEqual(res.text, TEXT_ANONYMUS)
 
     def testAutorizedUser(self):
 
-        self.driver.get(self.getUrl(URL_LOGIN))
-        WebDriverWait(self.driver, 10).until(
+        self.getDriver().get(self.getUrl(URL_LOGIN))
+        WebDriverWait(self.getDriver(), 10).until(
             expected_conditions.presence_of_element_located(
                 (By.TAG_NAME, "head"))
         )
 
-        self.driver.get(self.getUrl(TEST_URL))
-        WebDriverWait(self.driver, 10).until(
+        self.getDriver().get(self.getUrl(TEST_URL))
+        WebDriverWait(self.getDriver(), 10).until(
             expected_conditions.presence_of_element_located(
                 (By.TAG_NAME, "body"))
         )
-        res = self.driver.find_element_by_class_name("container")
+        res = self.getDriver().find_element_by_class_name("container")
         self.assertEqual(res.text, TEXT_USER)

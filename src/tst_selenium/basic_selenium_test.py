@@ -3,9 +3,11 @@ from selenium import webdriver
 
 
 class BasicSeleniumTest(unittest.TestCase):
+
     """ TestCase classes that want to be parametrized should
         inherit from this class.
     """
+    driver = webdriver.Firefox()
 
     def __init__(self, methodName='runTest', param=None):
         super(BasicSeleniumTest, self).__init__(methodName)
@@ -26,8 +28,15 @@ class BasicSeleniumTest(unittest.TestCase):
     def getUrl(self, relativePath):
         return self.param + relativePath
 
-    def setUp(self):
-        self.driver = webdriver.Firefox()  # Chrome()
+    def getDriver(_):
+        return BasicSeleniumTest.driver
 
-    def tearDown(self):
-        self.driver.close()
+    @classmethod
+    def closeDriver(cls):
+        cls.driver.close()
+
+#    def setUp(self):
+#        self.driver = webdriver.Firefox()  # Chrome()
+
+#    def tearDown(self):
+#        self.driver.close()

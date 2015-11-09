@@ -58,3 +58,11 @@ def getUserId():
         return session[USER_ID]
     except Exception:
         return ANONYM_USER
+
+
+def findUsers(number, offset, loginSubstring):
+    collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
+    result = list(collectionUsers.find(
+        {LOGIN: {'$regex': ".*" + loginSubstring + ".*"}}).skip(
+            offset).limit(number))
+    return result
