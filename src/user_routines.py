@@ -58,3 +58,8 @@ def getUserId():
         return session[USER_ID]
     except Exception:
         return ANONYM_USER
+
+
+def findUsers(number, offset, loginSubstring):
+    print str(number), str(offset), loginSubstring # for pylint
+    return []
