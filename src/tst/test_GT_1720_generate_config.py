@@ -13,6 +13,7 @@ ERROR = "error"
 
 
 class TestGenerateConfig(unittest.TestCase):
+
     def testGenerate(self):
         os.chdir('../../')
         # create config
