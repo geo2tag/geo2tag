@@ -5,6 +5,7 @@ from test_PointListGet import TestPointListGet
 from test_GT_1703_GeocodingPluginReady import TestGeocodingPluginReady
 from test_GT_1766_find_user_in_DB import TestGT1766FindUserInDB
 from basic_integration_test import BasicIntegrationTest
+from test_user_list_resource import TestUserListResource
 from test_plugin_list_resource import TestPluginListResource
 from test_testplugin import TestTestPlugin
 from test_status_request import TestStatusRequest
@@ -48,10 +49,15 @@ from test_GT_1697 import TestGT1697
 from test_GT_1732_GeocodingJobListResource import TestGeocodingJobListResource
 from test_GT_1741_test_geocoder_import import TestGeocoderImport
 from test_plugin_config_resource import TestPluginConfigResource
+from test_GT_1792_check_config_geocoder import \
+    TestPluginConfigGeocoder
 
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestUserListResource, param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGT1766FindUserInDB,
@@ -224,6 +230,8 @@ def main(host):
             param=host))
     suite.addTest(BasicIntegrationTest.parametrize(
         Test_GT_1511, param=host))
+    suite.addTest(BasicIntegrationTest.parametrize(
+        TestPluginConfigGeocoder, param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocoderImport,

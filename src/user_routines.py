@@ -6,18 +6,22 @@ from log import LOG_LVL_INFO
 from user_does_not_exist import UserDoesNotExist
 
 USER_ID = 'user_id'
+USER_LOGIN = 'user_login'
 FIND_KEY_ID = "_id"
 COLLECTION_NAME_USERS = "users"
 FIRST_NAME = 'first_name'
 LAST_NAME = 'last_name'
 EMAIL = 'email'
 ANONYM_USER = 'anonym'
+ANONYM = 'Anonym'
 LOGIN = 'login'
 LOGOUT = 'logout'
 
 
-def logUserIn(_id):
+def logUserIn(_id, user_login=None):
     session[USER_ID] = _id
+    if user_login is not None:
+        session[USER_LOGIN] = user_login
     writeInstanceLog(session[USER_ID], LOGIN, LOG_LVL_INFO)
 
 
@@ -54,3 +58,11 @@ def getUserId():
         return session[USER_ID]
     except Exception:
         return ANONYM_USER
+
+
+def findUsers(number, offset, loginSubstring):
+    collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
+    result = list(collectionUsers.find(
+        {LOGIN: {'$regex': ".*" + loginSubstring + ".*"}}).skip(
+            offset).limit(number))
+    return result
