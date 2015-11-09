@@ -81,6 +81,11 @@ def run_int_tests(name):
     return rc_int
 
 
+def clear_all(name):
+    rc_int = manage_script(name, [MANAGE_CONTAINER, 'clear', name])
+    return rc_int
+
+
 def wait_mongo_start(name):
     child = Popen(['docker', 'exec', name, 'mongo'], stdout=PIPE, stderr=PIPE)
     child.communicate()
@@ -146,7 +151,7 @@ def kill_old_containers(kill_time=0):
 
     for container in containers:
         print container[CONTAINER_NAME] + " on port " + \
-            unicode(container[CONTAINER_PORT]) + " stop"
+              unicode(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
@@ -223,12 +228,16 @@ def main():
         write_log(container_start_name, "Run sel tests")
         t_sel = run_selenium_tests(container_start_name)
 
+        write_log(container_start_name, "Clear")
+        clear_all(container_start_name)
+
         if t_int != 0 or t_unit != 0 or t_sel != 0:
             sys.exit(1)
 
         containerEnv = "http://" + \
-            os.environ["SERVER"] + ":" + unicode(container_start_port) + \
-            "/instance/tests"
+                       os.environ["SERVER"] + ":" \
+                       + unicode(container_start_port) + \
+                       "/instance/tests"
 
         f = open('propsfile', 'w')
         f.write('CONTAINER=' + containerEnv + '\n')
@@ -236,6 +245,7 @@ def main():
         write_log(container_start_name, containerEnv)
 
         write_log(container_start_name, "Done")
+
 
 if __name__ == "__main__":
     main()
