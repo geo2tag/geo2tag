@@ -230,15 +230,15 @@ if __name__ == "__main__":
 
     parser.add_argument('-k', '--kill', action='store_true')
     parser.add_argument('-t', '--time', default='1w')
-    args = parser.parse_args()
+    parsed_args = parser.parse_args()
 
-    if args.kill is not False:
+    if parsed_args.kill is not False:
         timestamp = 0
-        if args.time is not None:
-            timestamp = parse_string_time_to_timestamp(args.time)
+        if parsed_args.time is not None:
+            timestamp = parse_string_time_to_timestamp(parsed_args.time)
         kill_old_containers(timestamp)
-    elif (args.name or args.ports) is None:
+    elif (parsed_args.name or parsed_args.ports) is None:
         usage()
     else:
-        main(args.name, args.ports)
+        main(parsed_args.name, parsed_args.ports)
     sys.exit(0)
