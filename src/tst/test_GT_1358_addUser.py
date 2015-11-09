@@ -29,10 +29,9 @@ class TestaddUserById(TestCase):
             TEST_EMAIL,
             TEST_LOGIN)
         self.assertEqual(TEST_ID, result_id)
-        result_id = addUser(
-            TEST_ID,
-            TEST_FIRSTNAME,
-            TEST_LASTNAME,
-            TEST_EMAIL,
-            TEST_LOGIN)
-        self.assertEqual(TEST_ID, result_id)
+        user = collectionUsers.find_one({'_id': result_id})
+        self.assertEqual(TEST_ID, user.get('_id'))
+        self.assertEqual(TEST_LOGIN, user.get('login'))
+        self.assertEqual(TEST_EMAIL, user.get('email'))
+        self.assertEqual(TEST_LASTNAME, user.get('last_name'))
+        self.assertEqual(TEST_FIRSTNAME, user.get('first_name'))
