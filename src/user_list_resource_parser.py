@@ -13,6 +13,6 @@ class UserListResourceParser():
         parser = reqparse.RequestParser()
         parser.add_argument(GET_ARGS_NUMBER, type=int, required=True)
         parser.add_argument(GET_ARGS_OFFSET, type=int, required=True)
-        parser.add_argument(GET_ARGS_LOGIN, type=str, required=True)
+        parser.add_argument(GET_ARGS_LOGIN, type=unicode, required=True)
         args = parser.parse_args()
         return args
