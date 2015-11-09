@@ -61,5 +61,8 @@ def getUserId():
 
 
 def findUsers(number, offset, loginSubstring):
-    print str(number), str(offset), loginSubstring  # for pylint
-    return []
+    collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
+    result = list(collectionUsers.find(
+        {LOGIN: {'$regex': ".*" + loginSubstring + ".*"}}).skip(
+            offset).limit(number))
+    return result
