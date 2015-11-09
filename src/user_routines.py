@@ -39,7 +39,7 @@ def findUserById(_id):
     raise UserDoesNotExist
 
 
-def addUser(_id, firstName, lastName, email):
+def addUser(_id, firstName, lastName, email, login):
     return_id = _id
     try:
         findUserById(_id)
@@ -47,7 +47,7 @@ def addUser(_id, firstName, lastName, email):
         collectionUsers = getDbObject(getDbName())[COLLECTION_NAME_USERS]
         collectionUsers.insert(
             {FIND_KEY_ID: _id, FIRST_NAME: firstName, LAST_NAME: lastName,
-             EMAIL: email, LOGIN: email[0:email.find("@")]})
+             EMAIL: email, LOGIN: login})
     finally:
         return_id = _id
     return return_id
