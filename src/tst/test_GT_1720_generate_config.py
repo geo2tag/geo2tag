@@ -12,6 +12,7 @@ FOLDER = 'geomongo'
 ERROR = "error"
 PORT = 80
 
+
 class TestGenerateConfig(unittest.TestCase):
 
     def testGenerate(self):
