@@ -54,8 +54,10 @@ def main(host):
             TestCacheInvalidator,
             param=host))
 ###################################################
+
+#
 # Place tests above this line ^^
-###################################################
+#
     returnCode = not unittest.TextTestRunner(
         verbosity=2).run(suite).wasSuccessful()
 

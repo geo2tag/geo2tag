@@ -1,6 +1,7 @@
 import os
 from bson import json_util
 from os import urandom
+from base64 import b64encode
 from login_google_resource import google_oauth
 from login_facebook_resource import facebook_oauth
 from flask import make_response, request, g, Flask
@@ -16,7 +17,7 @@ from user_routines import getUserId
 from config_reader import getInstancePrefix
 
 API = None
-CACHE = 'cache_inx'
+CACHE_INVALIDATOR = b64encode(urandom(32)).decode('utf8')
 app = Flask(__name__)
 app.register_blueprint(google_oauth)
 app.register_blueprint(facebook_oauth)
@@ -92,4 +93,4 @@ def defineInstancePrefix():
 
 @app.before_request
 def createWebCacheInvalidator():
-    g.cache_invalidator = CACHE
+    g.cache_invalidator = CACHE_INVALIDATOR

@@ -3,6 +3,7 @@ from selenium import webdriver
 
 
 class BasicSeleniumTest(unittest.TestCase):
+
     """ TestCase classes that want to be parametrized should
         inherit from this class.
     """
