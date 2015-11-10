@@ -3,7 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Geomongo</title>
-        {% from "macros/getstaticurl.html" import getStaticUrl with context %}     
+        {% from "macros/get_static_url.html" import getStaticUrl with context %}     
+        {% from "macros/get_url_with_prefix.html" import getUrlWithPrefix with context %}     
         <link href="{{ getStaticUrl('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ getStaticUrl('css/main.css') }}" rel="stylesheet">
         <link href="{{ getStaticUrl('css/admin.css') }}" rel="stylesheet">
@@ -19,11 +20,11 @@
             <div>
                 <span>Geo2Tag</span><span class='right'>
                 {% if 'user_login' in session %}
-                    Hello, {{ session['user_login'] }} | <a href="/{{g.instance_prefix}}/logout" type="button">Logout</a></span>
+                    Hello, {{ session['user_login'] }} | <a href="{{ getUrlWithPrefix('/logout') }}" type="button">Logout</a></span>
                 {% elif 'user_id' in session %}
-                    Hello, {{ session['user_id'] }} | <a href="/{{g.instance_prefix}}/logout" type="button">Logout</a></span>
+                    Hello, {{ session['user_id'] }} | <a href="{{ getUrlWithPrefix('/logout') }}" type="button">Logout</a></span>
                 {% else %}
-                    Hello, Anonym | <a href="/{{g.instance_prefix}}/login" type="button">Login</a></span>
+                    Hello, Anonym | <a href="{{ getUrlWithPrefix('/login') }}" type="button">Login</a></span>
                 {% endif %}
             </div>
             {% block content %}
