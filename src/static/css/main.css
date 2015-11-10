@@ -1,9 +1,12 @@
 .google_authorized{
-	height: 35px;
+    height: 35px;
 }
 .facebook_authorized{
     height: 35px;
 }
 .right{
     float: right;
+}
+.width-container{
+    width: 98%;
 }
