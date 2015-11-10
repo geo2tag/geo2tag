@@ -1,8 +1,9 @@
 #!/bin/bash
 echo "Before cleaning /tmp/"
 df -h
+echo "Removed files"
+find /tmp -type f  -name 'tmp*' -mtime +7 -print 
 LIST=`find /tmp -mtime +7 -print0 -name 'tmp*' -exec rm -fr "{}" \;`
-echo ${LIST} | sed -e 's/\/tmp\/tmp/\n\/tmp\/tmp/g'
-echo "`echo $LIST | grep -o '/tmp/tmp/' | wc -w` files where deleted"
+echo "`find /tmp -type f  -name 'tmp*' -mtime +7 -print | wc -l` files where deleted"
 echo "Disk space statistics after old files removing"
 df -h
