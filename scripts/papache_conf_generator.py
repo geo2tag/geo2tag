@@ -12,6 +12,7 @@ PRE_DERECTIVES = '%pre_derectives%'
 
 DEFAULT_PORT = 80
 
+
 def generate(site_name, site_folder, file_name, error_log, port):
     with open(TEMPLATE_CONF, 'r') as conf_file:
         template = conf_file.read()
@@ -20,16 +21,14 @@ def generate(site_name, site_folder, file_name, error_log, port):
         .replace(SERVER_NAME, site_name) \
         .replace(SERVER_FOLDER, site_folder) \
         .replace(SERVER_ERROR_LOG, error_log) \
-        .replace(SERVER_PORT, unicode(port)) 
-
+        .replace(SERVER_PORT, unicode(port))
 
     pre_derectives = ''
     if port != DEFAULT_PORT:
-        pre_derectives = 'Listen {}'.format(port)   
+        pre_derectives = 'Listen {}'.format(port)
 
     template = template \
         .replace(PRE_DERECTIVES, pre_derectives)
-       
 
     with open(SAVE_FOLDER + file_name, 'w') as res_file:
         res_file.write(template)
