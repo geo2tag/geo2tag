@@ -7,6 +7,7 @@ RESULT_LENGTH = 49
 BASE_URL = 'url'
 SCRIPT = "return getStaticUrl('" + BASE_URL + "');"
 
+
 class TestCacheInvalidator(BasicSeleniumTest):
 
     def testCacheInvalidator(self):
@@ -16,6 +17,6 @@ class TestCacheInvalidator(BasicSeleniumTest):
                 (By.TAG_NAME, "head"))
         )
         result = self.getDriver().execute_script(SCRIPT)
-        
+
         self.assertEqual(len(result), RESULT_LENGTH)
-        self.assertEqual(result[0:len(BASE_URL)], BASE_URL) 
+        self.assertEqual(result[0:len(BASE_URL)], BASE_URL)
