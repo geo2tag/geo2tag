@@ -4,27 +4,34 @@
 from unittest import TestCase
 import os
 import shutil
+import subprocess
 
 NAME_PLUGIN = 'geocoder'
-PY_SCRIPT = 'python ./scripts/validate_plugin.py '
+PY_SCRIPT = 'python ./scripts/validate_plugin.py -name '
 RESULT_PEP8 = 'Error code: 0\n'
 NAME_FOLDER_TEST = 'test_for_GT_1780'
 NAME_FILE = 'test.py'
+STR_PEP8_ERROR = "stdout='src/plugins/test_for_GT_1780/test.py:1:80: E501 \
+line too long (100 > 79 characters)\n'\nstderr=''\n"
 NAME_INIT_FILE = '__init__.py'
 NAME_MAIN = 'main.py'
 NAME_DEF_GET_PLUGIN_RESOURCE = 'def getPluginResources():\n    pass'
 NAME_DEF_GET_PLUGIN_INFO = 'def getPluginInfo():\n    pass'
-STR_PEP8_ERROR = 'src/plugins/test_for_GT_1780/test.py:1:80: \
-E501 line too long (100 > 79 characters)\n\nError code: 1\n'
 
 
 class TestValidatePlugin(TestCase):
 
     def testValidatePlugin_DEFAULT(self):
         os.chdir('../..')
-        data = os.popen(PY_SCRIPT + NAME_PLUGIN).read()
-        self.assertEqual(RESULT_PEP8, data)
+        process = subprocess.Popen(
+            PY_SCRIPT + NAME_PLUGIN,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.PIPE)
+        print process.communicate()
         os.chdir('src/tst')
+        self.assertEquals(0, process.poll())
 
     def testValidatePlugin_MakePlugin(self):
         os.chdir('../plugins/')
@@ -44,7 +51,13 @@ class TestValidatePlugin(TestCase):
         file_test.write('\n')
         file_test.close()
         os.chdir('../../..')
-        data = os.popen(PY_SCRIPT + NAME_FOLDER_TEST).read()
-        self.assertEqual(data, STR_PEP8_ERROR)
+        process = subprocess.Popen(
+            PY_SCRIPT + NAME_FOLDER_TEST,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.PIPE)
+        print process.communicate()
+        self.assertEqual(1, process.wait())
         shutil.rmtree('src/plugins/' + NAME_FOLDER_TEST)
-        os.chdir('src/tst')
+        os.chdir("src/tst")
