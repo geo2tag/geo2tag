@@ -13,6 +13,8 @@ from test_GT_1804_admin_service_resource import \
     TestAdminServiceResource
 from test_GT_1846_login_name import \
     TestAutorizedUser
+from test_GT_1873_g_cache_invalidator import \
+    TestCacheInvalidator
 
 
 def main(host):
@@ -47,6 +49,11 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestAutorizedUser,
             param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestCacheInvalidator,
+            param=host))
+###################################################
 
 #
 # Place tests above this line ^^
