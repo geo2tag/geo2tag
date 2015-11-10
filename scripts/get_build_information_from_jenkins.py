@@ -10,6 +10,8 @@ def main():
     args = parser.parse_args()
     server = jenkins.Jenkins(
         'jenkins.osll.ru', username='tatyana.berlenko', password='qwerty')
+    version = server.get_version()
+    print version
     inf = server.get_job_info('geo2tag-test')['lastCompletedBuild']['status']
     print inf
 
