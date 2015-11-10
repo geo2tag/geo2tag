@@ -9,7 +9,8 @@ def main():
     parser.add_argument(
         '--branch',
         required=True)
-    #args = parser.parse_args()
+    args = parser.parse_args()
+    print args
     server = jenkins.Jenkins(
         'http://jenkins.osll.ru',
         username='tatyana.berlenko',
