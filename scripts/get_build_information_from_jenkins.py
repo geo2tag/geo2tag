@@ -3,6 +3,7 @@ import argparse
 
 JOB = 'geo2tag-test'
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -10,7 +11,9 @@ def main():
         required=True)
     args = parser.parse_args()
     server = jenkins.Jenkins(
-        'http://jenkins.osll.ru', username='tatyana.berlenko', password='qwerty')
+        'http://jenkins.osll.ru',
+        username='tatyana.berlenko',
+        password='qwerty')
     inf = server.get_job_info(JOB)['lastCompletedBuild']
     print inf
     output = server.build_job(JOB)
