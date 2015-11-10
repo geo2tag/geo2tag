@@ -14,7 +14,7 @@ def main():
     inf = server.get_job_info(JOB)['lastCompletedBuild']
     print inf
     output = server.build_job(JOB)
-    build_info = server.get_build_info(JOB, next_build_number)
+    build_info = server.get_build_info(JOB, inf)
     print build_info
 
 if __name__ == '__main__':
