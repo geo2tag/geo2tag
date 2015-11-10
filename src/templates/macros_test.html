@@ -4,8 +4,10 @@
 <link href="{{ url_for('static', filename='css/macros/search.css') }}" rel="stylesheet">
 {% endblock %}
 {% block scripts %}
+<link href="{{ getStaticUrl('js/macros/search.js') }}" rel="stylesheet">
 <script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
 <script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
+<script src="{{ getStaticUrl('js/tests/test_macros_search.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
