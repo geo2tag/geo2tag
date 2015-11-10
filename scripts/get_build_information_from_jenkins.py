@@ -9,7 +9,7 @@ def main():
     parser.add_argument(
         '--branch',
         required=True)
-    args = parser.parse_args()
+    #args = parser.parse_args()
     server = jenkins.Jenkins(
         'http://jenkins.osll.ru',
         username='tatyana.berlenko',
@@ -17,6 +17,7 @@ def main():
     inf = server.get_job_info(JOB)['lastCompletedBuild']
     print inf
     output = server.build_job(JOB)
+    print output
     build_info = server.get_build_info(JOB, inf)
     print build_info
 
