@@ -3,6 +3,10 @@ import argparse
 from jira import JIRA
 
 JOB = 'geo2tag-test'
+JIRA_PROJECT = 'geo2tag.atlassian.net'
+options = {
+    'server': JIRA_PROJECT
+}
 
 # for search branch number
 ACTIONS = u'actions'
@@ -53,8 +57,13 @@ def main():
                 else:
                     print 'This task', args.branch, \
                         'is unsuccessfully completed'
+                    return_task(branch)
                 break
 
+def return_task(branch):
+    jira = JIRA(basic_auth=('berlenko', 'qwerty')) 
+    issue = jira.issue(branch)
+    comment = jira.add_comment(branch, 'test')
 
 if __name__ == '__main__':
     main()
