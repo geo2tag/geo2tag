@@ -15,12 +15,11 @@ def main():
         'http://jenkins.osll.ru',
         username='tatyana.berlenko',
         password='qwerty')
-    inf = server.get_job_info(JOB)['lastCompletedBuild']
-    print inf
-    output = server.build_job(JOB)
-    print output
-    build_info = server.get_build_info(JOB, inf)
-    print build_info
+    inf_1 = server.get_build_info('geo2tag-test', 2281)
+    inf_2 = server.get_build_info('geo2tag-test', 2280)
+    print inf_1
+    print '--------'
+    print inf_2
 
 if __name__ == '__main__':
     main()
