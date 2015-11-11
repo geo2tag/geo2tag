@@ -2,7 +2,7 @@ import jenkins
 import argparse
 
 JOB = 'geo2tag-test'
-
+LAST_BUILD_REVISION = u'lastBuiltRevision'
 
 def main():
     parser = argparse.ArgumentParser()
@@ -17,9 +17,10 @@ def main():
         password='qwerty')
     inf_1 = server.get_build_info('geo2tag-test', 2281)
     inf_2 = server.get_build_info('geo2tag-test', 2280)
-    print inf_1
+    
+    print inf_1[u'lastBuiltRevision']
     print '--------'
-    print inf_2
+    print inf_2[u'lastBuiltRevision']
 
 if __name__ == '__main__':
     main()
