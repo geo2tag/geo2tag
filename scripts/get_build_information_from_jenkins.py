@@ -3,6 +3,10 @@ import argparse
 from jira import JIRA
 
 JOB = 'geo2tag-test'
+JENKINS_URL = 'http://jenkins.osll.ru'
+JENKINS_USERNAME = 'tatyana.berlenko'
+JIRA_USERNAME = 'berlenko'
+PASSWORD = 'qwerty'
 JIRA_PROJECT = 'https://geo2tag.atlassian.net'
 options = {
     'server': JIRA_PROJECT
@@ -13,26 +17,26 @@ ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
 NAME = u'name'
 BRANCH = u'branch'
-NUM_2 = 2
-NUM_3 = 3
+
 RESULT = u'result'
 SUCCESS = u'SUCCESS'
 FIXED = u'FIXED'
 ARG_BRANCH = '--branch'
+NUMBER = 'number'
+LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
-
-def main():
+def find_unsuccessfull_build_for_branch():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         ARG_BRANCH,
         required=True)
     args = parser.parse_args()
     server = jenkins.Jenkins(
-        'http://jenkins.osll.ru',
-        username='tatyana.berlenko',
-        password='qwerty')
+        JENKINS_URL,
+        username=JENKINS_USERNAME,
+        password=PASSWORD)
     last_build_number = server.get_job_info(
-        JOB)['lastCompletedBuild']['number']
+        JOB)[LAST_COMPLETED_BUILD][NUMBER]
     print last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
@@ -45,7 +49,7 @@ def main():
                 print 'branch number for', i, 'build not found'
                 continue
         else:
-            print 'error in', i, 'build'
+            print 'branch number for', i, 'build not found'
             continue
         index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME].find('/') + 1
@@ -63,11 +67,10 @@ def main():
 
 
 def return_task(branch):
-    jira = JIRA(options, basic_auth=('berlenko', 'qwerty'))
+    jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = jira.issue(branch)
-    transitions = jira.transitions(issue)
     jira.transition_issue(issue, u'Reopened')
-    comment = jira.add_comment(branch, 'This task is unsuccessfully completed')
+    jira.add_comment(branch, 'Autotest fail')
 
 if __name__ == '__main__':
     return_task("GT-1693")
