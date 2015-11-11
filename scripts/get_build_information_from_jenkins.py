@@ -32,7 +32,7 @@ def main():
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
         if LAST_BUILD_REVISION not in inf[ACTIONS][NUM_2]:
-            if LAST_BUILD_REVISION in inf[ACTIONS][NUM_3]:
+            if len(inf[ACTIONS]) == 8:
                 number = NUM_3
             else:
                 print len(inf[ACTIONS])
