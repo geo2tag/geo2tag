@@ -48,7 +48,7 @@ def main():
                     print 'This task', args.branch, 'is unsuccessfully completed'
                 break
             else:
-                print 'This task', args.branch, 'not found''''
+                print 'This task', args.branch, 'not found'''
 
 
 if __name__ == '__main__':
