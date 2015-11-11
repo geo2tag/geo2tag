@@ -24,8 +24,10 @@ def main():
         print i, c
 
     print '--------'
-    print inf_2[u'actions']
-    print len(inf_2[u'actions'])
+
+    for i, c in enumerate(inf_2[u'actions']):
+        print i, c
+
 
 if __name__ == '__main__':
     main()
