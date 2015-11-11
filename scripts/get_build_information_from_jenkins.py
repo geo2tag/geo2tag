@@ -35,16 +35,18 @@ def main():
             print inf[ACTIONS]
             print '-------'
         else:
-            if args.branch == inf[ACTIONS][NUMBER][
-                    LAST_BUILD_REVISION][BRANCH][0][NAME]:
+            index_branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
+                BRANCH][0][NAME].find('/')
+            branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
+                BRANCH][0][NAME][index_branch:]
+            print branch
+            if args.branch == branch:
                 if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
                     print 'This task', args.branch, 'is successfully completed'
                 else:
                     print 'This task', args.branch, 'is unsuccessfully completed'
                 break
             else:
-                print inf[ACTIONS][NUMBER][
-                    LAST_BUILD_REVISION][BRANCH][0][NAME]
                 print 'This task', args.branch, 'not found'
 
 
