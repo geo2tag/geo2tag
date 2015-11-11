@@ -74,4 +74,4 @@ def return_task(branch):
     jira.add_comment(branch, 'Autotest fail')
 
 if __name__ == '__main__':
-    return_task("GT-1693")
+    find_unsuccessfull_build_for_branch()
