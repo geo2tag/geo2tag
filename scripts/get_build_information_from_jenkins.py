@@ -63,7 +63,9 @@ def main():
 def return_task(branch):
     jira = JIRA(options, basic_auth=('berlenko', 'qwerty'))
     issue = jira.issue(branch)
-    comment = jira.add_comment(branch, 'test')
+    for component in issue.fields.components:
+        print component
+    #comment = jira.add_comment(branch, 'This task is unsuccessfully completed')
 
 if __name__ == '__main__':
-    return_task('GT-1693')
+    return_task("GT-1693")
