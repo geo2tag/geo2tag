@@ -26,7 +26,8 @@ def main():
         password='qwerty')
     last_build_number = server.get_job_info(
         JOB)['lastCompletedBuild']['number']
-    for i in range(last_build_number, 0):
+    print last_build_number
+    for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
         if args.branch == inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][NAME]:
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
