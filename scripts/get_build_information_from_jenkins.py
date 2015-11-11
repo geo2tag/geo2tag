@@ -30,7 +30,9 @@ def main():
     print last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
+        print inf[ACTIONS]
         print inf[ACTIONS][NUMBER]
+        print inf[ACTIONS][NUMBER][LAST_BUILD_REVISION]
         print inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][BRANCH]
         if args.branch == inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][BRANCH][NAME]:
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
