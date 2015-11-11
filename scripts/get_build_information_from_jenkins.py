@@ -32,9 +32,10 @@ def main():
         inf = server.get_build_info(JOB, i)
         if LAST_BUILD_REVISION not in inf[ACTIONS][NUMBER]:
             print '-------'
+            print len(inf[ACTIONS])
             print inf[ACTIONS]
             print '-------'
-        else:
+        '''else:
             index_branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
                 BRANCH][0][NAME].find('/') + 1
             branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
@@ -47,7 +48,7 @@ def main():
                     print 'This task', args.branch, 'is unsuccessfully completed'
                 break
             else:
-                print 'This task', args.branch, 'not found'
+                print 'This task', args.branch, 'not found''''
 
 
 if __name__ == '__main__':
