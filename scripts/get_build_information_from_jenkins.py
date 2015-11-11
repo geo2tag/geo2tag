@@ -3,7 +3,7 @@ import argparse
 from jira import JIRA
 
 JOB = 'geo2tag-test'
-JIRA_PROJECT = 'http://geo2tag.atlassian.net'
+JIRA_PROJECT = 'https://geo2tag.atlassian.net'
 options = {
     'server': JIRA_PROJECT
 }
