@@ -18,9 +18,9 @@ def main():
     inf_1 = server.get_build_info('geo2tag-test', 2281)
     inf_2 = server.get_build_info('geo2tag-test', 2280)
     
-    print inf_1[u'actions'].keys()
+    print inf_1[u'actions']
     print '--------'
-    print inf_2[u'actions'].keys()
+    print inf_2[u'actions']
 
 if __name__ == '__main__':
     main()
