@@ -32,7 +32,11 @@ def main():
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
         if LAST_BUILD_REVISION not in inf[ACTIONS][NUM_2]:
-            number = NUM_3
+            if LAST_BUILD_REVISION in inf[ACTIONS][NUM_3]:
+                number = NUM_3
+            else:
+                print len(inf[ACTIONS])
+                print inf[ACTIONS]
         else:
             number = NUM_2
         index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
