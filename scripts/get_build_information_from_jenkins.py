@@ -20,6 +20,7 @@ SUCCESS = u'SUCCESS'
 FIXED = u'FIXED'
 ARG_BRANCH = '--branch'
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -49,16 +50,17 @@ def main():
         index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME].find('/') + 1
         branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
-            BRANCH][0][NAME][index_branch:index_branch+7]
+            BRANCH][0][NAME][index_branch:index_branch + 7]
         print branch
         if args.branch == branch:
-                if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
-                    print 'This task', args.branch, 'is successfully completed'
-                else:
-                    print 'This task', args.branch, \
-                        'is unsuccessfully completed'
-                    return_task(branch)
-                break
+            if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
+                print 'This task', args.branch, 'is successfully completed'
+            else:
+                print 'This task', args.branch, \
+                    'is unsuccessfully completed'
+                return_task(branch)
+            break
+
 
 def return_task(branch):
     jira = JIRA(options, basic_auth=('berlenko', 'qwerty'))
