@@ -19,15 +19,10 @@ def main():
     inf_2 = server.get_build_info('geo2tag-test', 2280)
        
     print len(inf_1[u'actions'])
-
-    for i, c in enumerate(inf_1[u'actions']):
-        print i, c
+    print inf_1[u'actions'][2]
 
     print '--------'
-
-    for i, c in enumerate(inf_2[u'actions']):
-        print i, c
-
+    print inf_2[u'actions'][2]
 
 if __name__ == '__main__':
     main()
