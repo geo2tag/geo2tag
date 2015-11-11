@@ -8,10 +8,6 @@
 	margin: 0 15px;
 }
 
-#log-form input[name="search-substring"] {
-	width: 80%;
-}
-
 .pagination {
 	text-align: center;
 }

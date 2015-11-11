@@ -15,6 +15,7 @@ from test_GT_1846_login_name import \
     TestAutorizedUser
 from test_GT_1873_g_cache_invalidator import \
     TestCacheInvalidator
+from search_macros_test import TestMacrosSearchTest
 
 
 def main(host):
@@ -52,6 +53,10 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestCacheInvalidator,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestMacrosSearchTest,
             param=host))
 ###################################################
 

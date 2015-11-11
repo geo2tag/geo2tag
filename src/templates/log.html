@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block styles %}
 <link href="{{ getStaticUrl('css/log.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/macros/search.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -17,27 +18,23 @@
                         <input type="text" name="user-name" class="form-control" placeholder="User name">
                         <input type="text" name="service-name" class="form-control" placeholder="Service name">
                 </div>
-                <div class="row">
-                    <input type="text" name="search-substring" class="form-control" placeholder="Substring">
-                    <input type="submit" class="btn btn-block" value="Search">
-                </div>
+                {% from "macros/search.html" import search with context %}
+                {{search('search', 'Substring', 'Search')}}
             </form>
         </div>
         <div class="row log-info">
 
         </div>
-        <div class="row ">
-            <div class="pagination">
-                <ul>
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
+        <div class="row" style="text-align: center">
+            <ul class="pagination">
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">»</a></li>
+            </ul>
         </div>
     </div>
 {% endblock %}
