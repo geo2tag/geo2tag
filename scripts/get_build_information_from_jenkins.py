@@ -30,13 +30,15 @@ def main():
         JOB)['lastCompletedBuild']['number']
     print last_build_number
     for i in range(last_build_number, 0, -1):
+        
         inf = server.get_build_info(JOB, i)
         if LAST_BUILD_REVISION not in inf[ACTIONS][NUM_2]:
             if len(inf[ACTIONS]) == 8:
                 number = NUM_3
             else:
-                print len(inf[ACTIONS])
+                print i, len(inf[ACTIONS])
                 print inf[ACTIONS]
+                continue
         else:
             number = NUM_2
         index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
