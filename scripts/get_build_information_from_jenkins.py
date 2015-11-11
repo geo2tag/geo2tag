@@ -25,6 +25,7 @@ ARG_BRANCH = '--branch'
 NUMBER = 'number'
 LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
+
 def find_unsuccessfull_build_for_branch():
     parser = argparse.ArgumentParser()
     parser.add_argument(
