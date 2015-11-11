@@ -8,13 +8,10 @@ NAME = u'name'
 BRANCH = u'branch'
 NUM_2 = 2
 NUM_3 = 3
-
 RESULT = u'result'
 SUCCESS = u'SUCCESS'
 FIXED = u'FIXED'
 ARG_BRANCH = '--branch'
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -25,8 +22,7 @@ def main():
         'http://jenkins.osll.ru',
         username='tatyana.berlenko',
         password='qwerty')
-    last_build_number = server.get_job_info(
-        JOB)['lastCompletedBuild']['number']
+    last_build_number = server.get_job_info(JOB)['lastCompletedBuild']['number']
     print last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
