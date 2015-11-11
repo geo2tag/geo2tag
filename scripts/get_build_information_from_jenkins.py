@@ -36,7 +36,7 @@ def main():
             print '-------'
         else:
             index_branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
-                BRANCH][0][NAME].find('/')
+                BRANCH][0][NAME].find('/') + 1
             branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
                 BRANCH][0][NAME][index_branch:]
             print branch
