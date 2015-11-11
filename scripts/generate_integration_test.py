@@ -39,7 +39,6 @@ def generateIntegrationTest(args):
     mainFile = open(MAIN_FILE, 'w')
     for string in mainStrings:
         if MAIN_STRING == string:
-            mainFile.write(string)
             mainFile.write(
                 'from ' +
                 FILE_NAME +
