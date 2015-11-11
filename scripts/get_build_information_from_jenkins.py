@@ -7,6 +7,7 @@ JOB = 'geo2tag-test'
 ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
 NAME = u'name'
+BRANCH = u'branch'
 NUMBER = 2
 
 RESULT = u'result'
@@ -29,7 +30,8 @@ def main():
     print last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
-        if args.branch == inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][NAME]:
+        print inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][BRANCH]
+        if args.branch == inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][BRANCH][NAME]:
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
                 print 'This task', args.branch, 'is successfully completed'
             else:
