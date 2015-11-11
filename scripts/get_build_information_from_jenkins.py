@@ -61,9 +61,10 @@ def main():
                 break
 
 def return_task(branch):
+    jira = JIRA(options)
     jira = JIRA(basic_auth=('berlenko', 'qwerty')) 
     issue = jira.issue(branch)
     comment = jira.add_comment(branch, 'test')
 
 if __name__ == '__main__':
-    main()
+    return_task('GT-1693')
