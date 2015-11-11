@@ -30,13 +30,18 @@ def main():
     print last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
-       
-        if args.branch == inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][BRANCH][0][NAME]:
-            if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
-                print 'This task', args.branch, 'is successfully completed'
-            else:
-                print 'This task', args.branch, 'is unsuccessfully completed'
-            break
+        if LAST_BUILD_REVISION not in inf[ACTIONS][NUMBER]:
+            print '-------'
+            print inf[ACTIONS][NUMBER]
+            print '-------'
+        else:
+            if args.branch == inf[ACTIONS][NUMBER][
+                    LAST_BUILD_REVISION][BRANCH][0][NAME]:
+                if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
+                    print 'This task', args.branch, 'is successfully completed'
+                else:
+                    print 'This task', args.branch, 'is unsuccessfully completed'
+                break
         else:
             print 'This task', args.branch, 'not found'
 
