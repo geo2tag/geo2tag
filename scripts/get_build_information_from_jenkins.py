@@ -14,12 +14,13 @@ NUM_3 = 3
 RESULT = u'result'
 SUCCESS = u'SUCCESS'
 FIXED = u'FIXED'
+ARG_BRANCH = '--branch'
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--branch',
+        ARG_BRANCH,
         required=True)
     args = parser.parse_args()
     server = jenkins.Jenkins(
@@ -30,30 +31,29 @@ def main():
         JOB)['lastCompletedBuild']['number']
     print last_build_number
     for i in range(last_build_number, 0, -1):
-        
         inf = server.get_build_info(JOB, i)
-        if LAST_BUILD_REVISION not in inf[ACTIONS][NUM_2]:
-            if len(inf[ACTIONS]) == 8:
-                number = NUM_3
+        if len(inf[ACTIONS]) == 7 or len(inf[ACTIONS]) == 8:
+            if LAST_BUILD_REVISION in inf[ACTIONS][2]:
+                number = 2
+            elif LAST_BUILD_REVISION in inf[ACTIONS][3]:
+                number = 3
             else:
-                print i, len(inf[ACTIONS])
-                print inf[ACTIONS]
+                print 'branch number for', i, 'build not found'
                 continue
         else:
-            number = NUM_2
+            print i, 'build is not completed'
+            continue
         index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME].find('/') + 1
         branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME][index_branch:]
-        print branch
-        '''if args.branch == branch:
+        if args.branch == branch:
                 if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
                     print 'This task', args.branch, 'is successfully completed'
                 else:
-                    print 'This task', args.branch, 'is unsuccessfully completed'
+                    print 'This task', args.branch, \
+                        'is unsuccessfully completed'
                 break
-            else:
-                print 'This task', args.branch, 'not found'''
 
 
 if __name__ == '__main__':
