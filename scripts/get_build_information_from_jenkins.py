@@ -1,8 +1,6 @@
 import jenkins
 import argparse
-
 JOB = 'geo2tag-test'
-
 # for search branch number
 ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
