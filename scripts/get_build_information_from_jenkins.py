@@ -18,8 +18,11 @@ def main():
     inf_1 = server.get_build_info('geo2tag-test', 2281)
     inf_2 = server.get_build_info('geo2tag-test', 2280)
        
-    print inf_1[u'actions']
     print len(inf_1[u'actions'])
+
+    for i, c in enumerate(inf_1[u'actions']):
+        print i, c
+
     print '--------'
     print inf_2[u'actions']
     print len(inf_2[u'actions'])
