@@ -46,7 +46,8 @@ def processGoogleData(data):
         userDict[_ID],
         userDict[FIRST_NAME],
         userDict[LAST_NAME],
-        userDict[EMAIL])
+        userDict[EMAIL],
+        userDict[EMAIL][0:userDict[EMAIL].find("@")])
 
 
 SUCCESS_MESSAGE = 'Success'
