@@ -64,7 +64,7 @@ def return_task(branch):
     jira = JIRA(options, basic_auth=('berlenko', 'qwerty'))
     issue = jira.issue(branch)
     transitions = jira.transitions(issue)
-    jira.transition_issue(issue, 'To Do', comment='This task is unsuccessfully completed')
+    jira.transition_issue(issue, u'Reopened', comment='This task is unsuccessfully completed')
     #comment = jira.add_comment(branch, 'This task is unsuccessfully completed')
 
 if __name__ == '__main__':
