@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block styles%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/service.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/service.css') }}">
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/service.js') }}"></script>
+<script src="{{ getStaticUrl('js/service.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
