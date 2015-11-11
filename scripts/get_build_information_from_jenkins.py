@@ -8,7 +8,8 @@ ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
 NAME = u'name'
 BRANCH = u'branch'
-NUMBER = 2
+NUM_2 = 2
+NUM_3 = 3
 
 RESULT = u'result'
 SUCCESS = u'SUCCESS'
@@ -30,18 +31,16 @@ def main():
     print last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
-        if LAST_BUILD_REVISION not in inf[ACTIONS][NUMBER]:
-            print '-------'
-            print len(inf[ACTIONS])
-            print inf[ACTIONS]
-            print '-------'
-        '''else:
-            index_branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
-                BRANCH][0][NAME].find('/') + 1
-            branch = inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][
-                BRANCH][0][NAME][index_branch:]
-            print branch
-            if args.branch == branch:
+        if LAST_BUILD_REVISION not in inf[ACTIONS][NUM_2]:
+            number = NUM_3
+        else:
+            number = NUM_2
+        index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
+            BRANCH][0][NAME].find('/') + 1
+        branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
+            BRANCH][0][NAME][index_branch:]
+        print branch
+        '''if args.branch == branch:
                 if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
                     print 'This task', args.branch, 'is successfully completed'
                 else:
