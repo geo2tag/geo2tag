@@ -19,10 +19,10 @@ def main():
     inf_2 = server.get_build_info('geo2tag-test', 2280)
        
     print len(inf_1[u'actions'])
-    print inf_1[u'actions'][2]
+    print inf_1[u'actions'][2][LAST_BUILD_REVISION]
 
     print '--------'
-    print inf_2[u'actions'][2]
+    print inf_2[u'actions'][2][LAST_BUILD_REVISION]
 
 if __name__ == '__main__':
     main()
