@@ -2,7 +2,17 @@ import jenkins
 import argparse
 
 JOB = 'geo2tag-test'
+
+# for search branch number
+ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
+NAME = u'name'
+NUMBER = 2
+
+RESULT = u'result'
+SUCCESS = u'SUCCESS'
+FIXED = u'FIXED'
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -10,19 +20,23 @@ def main():
         '--branch',
         required=True)
     args = parser.parse_args()
-    print args
     server = jenkins.Jenkins(
         'http://jenkins.osll.ru',
         username='tatyana.berlenko',
         password='qwerty')
-    inf_1 = server.get_build_info('geo2tag-test', 2281)
-    inf_2 = server.get_build_info('geo2tag-test', 2280)
-       
-    print len(inf_1[u'actions'])
-    print inf_1[u'actions'][2][LAST_BUILD_REVISION]
+    last_build_number = server.get_job_info(
+        JOB)['lastCompletedBuild']['number']
+    for i in range(last_build_number, 0):
+        inf = server.get_build_info(JOB, i)
+        if args.branch == inf[ACTIONS][NUMBER][LAST_BUILD_REVISION][NAME]:
+            if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
+                print 'This task', args.branch, 'is successfully completed'
+            else:
+                print 'This task', args.branch, 'is unsuccessfully completed'
+            break
+        else:
+            print 'This task', args.branch, 'not found'
 
-    print '--------'
-    print inf_2[u'actions'][2][LAST_BUILD_REVISION]
 
 if __name__ == '__main__':
     main()
