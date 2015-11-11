@@ -63,8 +63,8 @@ def main():
 def return_task(branch):
     jira = JIRA(options, basic_auth=('berlenko', 'qwerty'))
     issue = jira.issue(branch)
-    for component in issue.fields.components:
-        print component
+    transitions = jira.transitions(issue)
+    print transitions
     #comment = jira.add_comment(branch, 'This task is unsuccessfully completed')
 
 if __name__ == '__main__':
