@@ -4,9 +4,9 @@ from jira import JIRA
 
 JOB = 'geo2tag-test'
 JENKINS_URL = 'http://jenkins.osll.ru'
-JENKINS_USERNAME = 'tatyana.berlenko'
-JIRA_USERNAME = 'berlenko'
-PASSWORD = 'qwerty'
+JENKINS_USERNAME = 'test.user'
+JIRA_USERNAME = 'jira.test.user.geomongo'
+PASSWORD = 'iJwF4aLg5FLQXP3a'
 JIRA_PROJECT = 'https://geo2tag.atlassian.net'
 options = {
     'server': JIRA_PROJECT
