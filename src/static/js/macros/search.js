@@ -1,6 +1,6 @@
 function Search(macroId) {
     this.macroId = macroId;
-    this.jqueryObject = $('input_'+macroId);
+    this.jqueryObject = $('#input_'+macroId);
 }
   
 Search.prototype.setValue = function (value){
@@ -16,5 +16,5 @@ Search.prototype.clear = function (){
 }
 
 Search.prototype.change = function (callBack){
-    this.jqueryObject.change(callBack());
+    this.jqueryObject.change(callBack);
 }
