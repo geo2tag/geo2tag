@@ -2,6 +2,7 @@
 {% block styles %}
 <link href="{{ getStaticUrl('css/log.css') }}" rel="stylesheet">
 <link href="{{ getStaticUrl('css/macros/search.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -23,19 +24,9 @@
             </form>
         </div>
         <div class="row log-info">
-
         </div>
-        <div class="row" style="text-align: center">
-            <ul class="pagination">
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-            </ul>
-        </div>
+            {% from "macros/pagination.html" import pagination with context %}
+            {{pagination('pagintaion_block')}}
     </div>
 {% endblock %}
 
