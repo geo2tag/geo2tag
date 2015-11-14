@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block styles%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/qunit-1.18.0.css') }}">
+<link href="{{ url_for('static', filename='css/macros/search.css') }}" rel="stylesheet">
+{% endblock %}
+{% block scripts %}
+<script src="{{ getStaticUrl('js/macros/search.js') }}"></script>
+<script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
+<script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
+<script src="{{ getStaticUrl('js/tests/test_macros_search.js') }}"></script>
+{% endblock %}
+{% block content %}
+<header>
+    <h2>Macros tests</h2>
+</header>
+{% from "macros/search.html" import search with context %}
+{{search('search', 'Substring', 'Search')}}		
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+{% endblock %}
