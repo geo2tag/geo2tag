@@ -1,26 +1,18 @@
 {% extends "base.html" %}
 {% block styles%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/qunit-1.18.0.css') }}">
-<link href="{{ url_for('static', filename='css/macros/search.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
 {% endblock %}
 {% block scripts %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
-<script src="{{ getStaticUrl('js/macros/search.js') }}"></script>
-<script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
+<script src="{{ getStaticUrl('js/autocomplete_input_example.js') }}"></script>
 
-<script src="{{ url_for('static', filename='js/qunit-1.18.0.js') }}"></script>
 <script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
-<script src="{{ getStaticUrl('js/tests/test_macros_search.js') }}"></script>
-<script src="{{ getStaticUrl('js/tests/test_macros_autocomplete_input.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
-    <h2>Macros tests</h2>
+    <h2>Autocomplete tests</h2>
 </header>
-{% from "macros/search.html" import search with context %}
-{{search('search', 'Substring', 'Search')}}	
 {% from "macros/autocomplete_input.html" import AutocompleteInput with context %}
 {{AutocompleteInput('test')}}	
 <div id="qunit"></div>
