@@ -241,7 +241,7 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestServiceSearchBySubstr,
             param=host))
-    
+
 ###################################################
 # Place tests above this line ^^
 ###################################################
