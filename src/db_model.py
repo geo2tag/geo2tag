@@ -241,7 +241,7 @@ def deleteChannelById(serviceName, channelId):
             {'_id': ObjectId(channelId)}))
     else:
         result = list(db_deletechannlebyid[
-            CHANNELS_COLLECTION].find({'_id': channelId}))
+                      CHANNELS_COLLECTION].find({'_id': channelId}))
     if len(result) > 0:
         db_deletechannlebyid[CHANNELS_COLLECTION].remove(
             {'_id': ObjectId(channelId)})
