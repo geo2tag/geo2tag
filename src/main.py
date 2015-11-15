@@ -30,7 +30,6 @@ from user_list_resource import UserListResource
 from admin_resource import AdminResource
 from plugin_config_resource import PluginConfigResource
 from macros_test_resource import MacrosTestsResource
-from autocomplete_example import AutoCompleteExample
 
 API = None
 
@@ -39,8 +38,6 @@ def addResources():
     getApi().representations = DEFAULT_REPRESENTATIONS
     getApi().add_resource(ChannelsListResource, getPathWithPrefix(
         '/service/<string:serviceName>/channel'))
-    getApi().add_resource(AutoCompleteExample, getPathWithPrefix(
-        '/autocomplete_example'))
     getApi().add_resource(ChannelResource, getPathWithPrefix(
         '/service/<string:serviceName>/channel/<string:channelId>'))
     getApi().add_resource(PointResource, getPathWithPrefix(
