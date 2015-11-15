@@ -2,7 +2,7 @@ import os
 import argparse
 
 FILE_NAME = 'test_'
-INCLUDE_MODULE = "import unittest\nimport requests\nfrom" \
+INCLUDE_MODULE = "import requests\nfrom" \
                  " basic_integration_test" \
                  " import BasicIntegrationTest\n\nTEST_URL = " \
                  "''\nVALID_RESPONSE_CODE = 200\n\n"
@@ -39,7 +39,6 @@ def generateIntegrationTest(args):
     mainFile = open(MAIN_FILE, 'w')
     for string in mainStrings:
         if MAIN_STRING == string:
-            mainFile.write(string)
             mainFile.write(
                 'from ' +
                 FILE_NAME +
