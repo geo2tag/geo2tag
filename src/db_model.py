@@ -173,13 +173,13 @@ def getServiceById(id_service):
     raise ServiceNotExistException()
 
 
-def getServiceList(number, offset, serviceSubstr = None):
+def getServiceList(number, offset, serviceSubstr=None):
     db_getservicelist = getDbObject()
     if number is None:
         number = db_getservicelist[COLLECTION].count()
     if offset is None:
         offset = 0
-    if serviceSubstr != None:
+    if serviceSubstr is not None:
         return list(db_getservicelist[COLLECTION].find(
             {'name': {'$regex': serviceSubstr}}).sort(NAME, 1).skip(
             offset).limit(number))
