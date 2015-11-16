@@ -9,7 +9,7 @@ QUnit.test('search macros test', function( assert ) {
     assert.equal(search.getValue(), '');
     function myChange() {
         assert.equal(true, true);
+        done();
     }
     search.change(myChange());
-    done();
 });
