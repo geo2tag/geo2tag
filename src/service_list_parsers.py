@@ -6,6 +6,7 @@ POST_ARGS_NAME = "name"
 POST_ARGS_LOG_SIZE = "logSize"
 POST_ARGS_OWNER_ID = "ownerId"
 DEFAULT_OWNER_ID = "STUB"
+GET_ARGS_SUBSTR = "substring"
 
 
 class ServiceListParser():
@@ -15,6 +16,7 @@ class ServiceListParser():
         parser = reqparse.RequestParser()
         parser.add_argument(GET_ARGS_NUMBER, type=int, default=None)
         parser.add_argument(GET_ARGS_OFFSET, type=int, default=None)
+        parser.add_argument(GET_ARGS_SUBSTR, type=str, default=None)
         args = parser.parse_args()
         return args
 
