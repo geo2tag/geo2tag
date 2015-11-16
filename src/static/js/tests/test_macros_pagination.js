@@ -1,5 +1,4 @@
 QUnit.test('pagination macros test', function( assert ) {
-    var done = assert.async();
     var active_ul = 'p2';
     var set_active = 'p5';
     var unf = undefined;
@@ -9,5 +8,4 @@ QUnit.test('pagination macros test', function( assert ) {
     assert.equal(unf,pagination.getActiveUlId());
     pagination.setActiveUl(set_active);
     assert.equal(set_active,pagination.getActiveUlId());
-    done();
 });
