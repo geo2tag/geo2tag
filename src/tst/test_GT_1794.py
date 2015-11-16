@@ -13,12 +13,12 @@ class TestConfigPlugin(unittest.TestCase):
 
     def testExistConfigPlugin(self):
         os.chdir('../')
-        self.assertTrue(existConfigPlugin("testPlugin1"), True)
+        self.assertTrue(existConfigPlugin("testPlugin1"))
         self.assertFalse(existConfigPlugin("testPlugin2"))
         os.chdir('tst')
 
     def testCheckConfigPlugin(self):
         os.chdir('../')
-        self.assertTrue(checkConfigPlugin("testPlugin1"), True)
-        self.assertFalse(checkConfigPlugin("testPlugin2"), False)
+        self.assertTrue(checkConfigPlugin("testPlugin1"))
+        self.assertFalse(checkConfigPlugin("testPlugin2"))
         os.chdir('tst')
