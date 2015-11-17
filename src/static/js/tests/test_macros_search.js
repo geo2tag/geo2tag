@@ -11,5 +11,5 @@ QUnit.test('search macros test', function( assert ) {
         assert.equal(true, true);
         done();
     }
-    search.change(myChange());
+    search.change(myChange);
 });
