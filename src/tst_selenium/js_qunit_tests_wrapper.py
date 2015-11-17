@@ -21,4 +21,4 @@ class JsQUnitTestsWrapper(BasicSeleniumTest):
         self.checkTestResult(res)
         failed_number_element = driver.find_element_by_class_name("failed")
         failed_number = failed_number_element.get_attribute("innerHTML")
-        self.assertEquals(int(failed_number),0)
+        self.assertEquals(int(failed_number), 0)
