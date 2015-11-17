@@ -3,8 +3,7 @@ function AutocompliteInput(macroId,externalValue,internalValue) {
     this.inputobject = $('#autocomplite_'+macroId);
     this.countView = 3;
     this.url_request = 'http://geomongo/instance/user';
-    this.externalValue = externalValue;
-    this.internalValue = internalValue;
+    this.setInternalValue(internalValue);
     this.setExternalValue(externalValue);    
 }
 AutocompliteInput.prototype.setExternalValue = function(externalValue){
@@ -32,12 +31,12 @@ AutocompliteInput.prototype.makeAutocompliteToRequest = function(){
     }
     $( this.inputobject ).autocomplete({source: list,
         select:function(e, ui) {
-            this.externalValue = ui.item.label;
-            this.internalValue = ui.item.value;
+            //this.externalValue = ui.item.label;
+            //this.internalValue = ui.item.value;
             e.preventDefault();
             $(this).val(ui.item.label);
         }
-    });   
+    });
     var name = this.getExternalValue(); 
     var req_url = this.url_request + '?login=' + name + '&number=' + this.countView + '&offset=0'
     $.get( req_url, function( data ) {
