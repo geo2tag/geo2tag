@@ -2,9 +2,11 @@
 {% block styles%}
 <link rel="stylesheet" href="{{ getStaticUrl('css/qunit-1.18.0.css') }}">
 <link rel="stylesheet" href="{{ getStaticUrl('css/macros/search.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/macros/pagination.css') }}">
 {% endblock %}
 {% block scripts %}
 <script src="{{ getStaticUrl('js/macros/search.js') }}"></script>
+<script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
 <script src="{{ getStaticUrl('js/qunit-1.18.0.js') }}"></script>
 <script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
 <script src="{{ getStaticUrl('js/tests/test_macros_search.js') }}"></script>
