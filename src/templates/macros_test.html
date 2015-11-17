@@ -7,6 +7,7 @@
 <script src="{{ getStaticUrl('js/macros/search.js') }}"></script>
 <script src="{{ getStaticUrl('js/qunit-1.18.0.js') }}"></script>
 <script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
+<script type="text/javascript">config.testTimeout = 5;</script>
 <script src="{{ getStaticUrl('js/tests/test_macros_search.js') }}"></script>
 {% endblock %}
 {% block content %}
