@@ -15,7 +15,7 @@ from test_GT_1846_login_name import \
     TestAutorizedUser
 from test_GT_1873_g_cache_invalidator import \
     TestCacheInvalidator
-from macros_test import TestMacroses
+from macros_tests import TestMacroses
 
 
 def main(host):
