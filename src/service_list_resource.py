@@ -27,10 +27,7 @@ class ServiceListResource(Resource):
             offset = args[GET_ARGS_OFFSET]
         else:
             offset = None
-        if GET_ARGS_SUBSTR in args:
-            substring = args[GET_ARGS_SUBSTR]
-        else:
-            substring = None
+        substring = args[GET_ARGS_SUBSTR]
         serviceList = getServiceList(number, offset, substring)
         return serviceList
 

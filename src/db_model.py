@@ -173,7 +173,7 @@ def getServiceById(id_service):
     raise ServiceNotExistException()
 
 
-def getServiceList(number, offset, serviceSubstr=None):
+def getServiceList(number, offset, serviceSubstr):
     db_getservicelist = getDbObject()
     if number is None:
         number = db_getservicelist[COLLECTION].count()
@@ -342,6 +342,8 @@ def addServiceDb(dbName):
         [("location", pymongo.GEOSPHERE)])
     db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("date", pymongo.DESCENDING)])
+    db_addservicedb[COLLECTION_SERVICES_NAME].create_index(
+        [("name", pymongo.GEOSPHERE)])
 
 
 def applyFromToCriterion(field, value_from, value_to, criterion):
