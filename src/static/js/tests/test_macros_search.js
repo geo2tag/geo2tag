@@ -1,4 +1,5 @@
 QUnit.test('search macros test', function( assert ) {
+    assert.expect( 4 );
     var done = assert.async(); 
     var searchId = 'search', value = 'new value', changeValue = 'change value';
     var search = new Search('search');
