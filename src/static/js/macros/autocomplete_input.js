@@ -20,26 +20,27 @@ AutocompliteInput.prototype.getInternalValue = function(){
 	return this.internalValue;
 }
 AutocompliteInput.prototype.makeAutocompliteToRequest = function(){
-    
-    var data = [{ "_id" : "ZzKPM5GJQ1", "login" : "test_user", "first_name" : "", "last_name" : "" },{ "_id" : "ZzKPM5GJQ2", "login" : "test_user1", "first_name" : "", "last_name" : "" }];
-    var list = [];
-    for(var i = 0;i<data.length;i++){
-        list.push({
-            label:data[i]['login'],
-            value:data[i]['_id']
-        });
-    }
-    $( this.inputobject ).autocomplete({source: list,
-        select:function(e, ui) {
-            //this.externalValue = ui.item.label;
-            //this.internalValue = ui.item.value;
-            e.preventDefault();
-            $(this).val(ui.item.label);
-        }
-    });
+    var fn = this.makeAutocompliteToRequest;
     var name = this.getExternalValue(); 
     var req_url = this.url_request + '?login=' + name + '&number=' + this.countView + '&offset=0'
-    $.get( req_url, function( data ) {
-        
-    });  
+    $( this.inputobject).autocomplete({source: function(request, response) {
+        $.get( req_url, function( data ) {
+            var list = [];
+            for(var i = 0;i<data.length;i++){
+                list.push({
+                    label:data[i]['login'],
+                    value:data[i]['_id']
+                });
+            }
+            response(list);  
+            
+        });
+    },
+    select:function(e, ui) {
+        //this.externalValue = ui.item.label;
+        fn.internalValue = 1;
+        e.preventDefault();
+        $(this).val(ui.item.label);
+    }}); 
+
 }
