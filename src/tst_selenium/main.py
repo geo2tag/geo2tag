@@ -15,6 +15,7 @@ from test_GT_1846_login_name import \
     TestAutorizedUser
 from test_GT_1873_g_cache_invalidator import \
     TestCacheInvalidator
+from test_GT_1906 import TestAdminServiceTemplete
 from macros_tests import TestMacroses
 
 
@@ -56,8 +57,13 @@ def main(host):
             param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
+            TestAdminServiceTemplete,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
             TestMacroses,
             param=host))
+
 ###################################################
 
 #
