@@ -15,12 +15,16 @@ QUnit.test('date_search macros test', function( assert ) {
     assert.equal(date_search.getValueDateBegin(), '');
     assert.equal(date_search.getValueDateEnd(), '');
 
-    function myChange() {
+    function myChangeDateBegin() {
         assert.equal(true, true);
         done();
     }
-    date_search.changeDateBegin(myChange);
+    function myChangeDateEnd() {
+        assert.equal(true, true);
+        done();
+    }
+    date_search.changeDateBegin(myChangeDateBegin);
     date_search.jqueryObjectDateBegin.val('value').trigger('change');
-    date_search.changeDateEnd(myChange);
+    date_search.changeDateEnd(myChangeDateEnd);
     date_search.jqueryObjectDateEnd.val('value').trigger('change');
 });
