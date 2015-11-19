@@ -343,7 +343,7 @@ def addServiceDb(dbName):
     db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("date", pymongo.DESCENDING)])
     db_addservicedb[COLLECTION_SERVICES_NAME].create_index(
-        [("name", pymongo.GEOSPHERE)])
+        [("name", pymongo.ASCENDING)])
 
 
 def applyFromToCriterion(field, value_from, value_to, criterion):
