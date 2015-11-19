@@ -1,20 +1,38 @@
-function Date_search(macroId) {
+function dateSearch(macroId) {
     this.macroId = macroId;
-    this.jqueryObject = $('#input_'+macroId);
+    this.jqueryObjectDateBegin = $('#date-begin_' + macroId);
+    this.jqueryObjectDateEnd = $('#date-end_' + macroId);
 }
   
-Date_search.prototype.setValue = function (value){
-    this.jqueryObject.val(value);   
-}
-  
-Date_search.prototype.getValue = function (value){
-    return this.jqueryObject.val();
-}
-  
-Search.prototype.clear = function (){
-    this.setValue('');
+dateSearch.prototype.setValueDateBegin = function (value){
+    this.jqueryObjectDateBegin.val(value);   
 }
 
-Search.prototype.change = function (callBack){
-    this.jqueryObject.change(callBack);
+dateSearch.prototype.getValueDateBegin = function (value){
+    return this.jqueryObjectBegin.val();
 }
+  
+dateSearch.prototype.setValueDateEnd = function (value){
+    this.jqueryObjectDateEnd.val(value);
+}
+
+dateSearch.prototype.getValueDateEnd = function (value){
+    return this.jqueryObjectDateEnd.val();
+}
+
+dateSearch.prototype.clearDateBegin = function (){
+    this.setValueDateBegin('');
+}
+
+dateSearch.prototype.clearDateEnd = function (){
+    this.setValueDateEnd('');
+}
+
+dateSearch.prototype.changeDateBegin = function (callBack){
+    this.jqueryObjectDateBegin.change(callBack);
+}
+
+dateSearch.prototype.changeDateEnd = function (callBack){
+    this.jqueryObjectDateEnd.change(callBack);
+}
+
