@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block styles %}
 <link href="{{ getStaticUrl('css/log.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/macros/date_search.css') }}" rel="stylesheet">
 <link href="{{ getStaticUrl('css/macros/search.css') }}" rel="stylesheet">
 <link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
 {% endblock %}
@@ -11,9 +12,9 @@
         </div>
         <div class="row">
             <form id="log-form">
+                {% from "macros/date_search.html" import date_search with context %}
+                {{date_search('date_search', True)}}
                 <div class="row">
-                        <input type="text" name="date-begin" class="form-control" placeholder="Date begin">
-                        <input type="text" name="date-end" class="form-control" placeholder="Date end">
                         <input type="text" name="number" class="form-control" placeholder="Number">
                         <input type="text" name="offset" class="form-control" placeholder="Offset">
                         <input type="text" name="user-name" class="form-control" placeholder="User name">
