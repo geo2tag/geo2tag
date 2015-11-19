@@ -9,7 +9,7 @@ dateSearch.prototype.setValueDateBegin = function (value){
 }
 
 dateSearch.prototype.getValueDateBegin = function (value){
-    return this.jqueryObjectBegin.val();
+    return this.jqueryObjectDateBegin.val();
 }
   
 dateSearch.prototype.setValueDateEnd = function (value){

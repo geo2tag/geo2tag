@@ -12,7 +12,8 @@ QUnit.test('date_search macros test', function( assert ) {
     
     date_search.clearDateBegin()
     date_search.clearDateEnd()
-    assert.equal(date_search.getValue(), '');
+    assert.equal(date_search.getValueDateBegin(), '');
+    assert.equal(date_search.getValueDateEnd(), '');
 
     function myChange() {
         assert.equal(true, true);
@@ -20,4 +21,6 @@ QUnit.test('date_search macros test', function( assert ) {
     }
     date_search.changeDateBegin(myChange);
     date_search.jqueryObjectDateBegin.val('value').trigger('change');
+    date_search.changeDateEnd(myChange);
+    date_search.jqueryObjectDateEnd.val('value').trigger('change');
 });
