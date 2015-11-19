@@ -6,14 +6,14 @@ function saveServiceChange(service_id) {
         crossDomain: true,
         success: function(json, status) {
             console.log("save service success" );
-            alert('');
             spinner.stop(target);
+            printBootstrapAlert();
         },
         error: function (jqXHR, textStatus, errorThrown){
             console.log("save service result: " + textStatus);
             console.log(errorThrown);
-            alert('')
             spinner.stop(target);
+            printBootstrapAlert();
         }
     }); 
 }
@@ -24,4 +24,10 @@ function addSaveServiceHandler(){
     });
 
 }
+function printBootstrapAlert(status){
+    result = '<div class="alert alert-"' + status + '>'
+    result += '<strong>' + status +'</strong>'
+    result += '</div>'
+}
+
 
