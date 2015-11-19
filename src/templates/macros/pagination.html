@@ -1,0 +1,13 @@
+{% macro pagination(macroId) %}
+	<div class="row" name="pagination-block">
+        <ul class="pagination" id="{{macroId}}">
+            <li><a href="#">«</a></li>
+            <li id="p1"><a href="#">1</a></li>
+            <li class="active" id="p2"><a href="#">2</a></li>
+            <li id="p3"><a href="#">3</a></li>
+            <li id="p4"><a href="#">4</a></li>
+            <li id="p5"><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+    </div>
+{% endmacro %}

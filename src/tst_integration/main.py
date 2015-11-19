@@ -51,6 +51,7 @@ from test_GT_1741_test_geocoder_import import TestGeocoderImport
 from test_plugin_config_resource import TestPluginConfigResource
 from test_GT_1792_check_config_geocoder import \
     TestPluginConfigGeocoder
+from test_GT_1858_service_substr import TestServiceSearchBySubstr
 
 
 def main(host):
@@ -235,6 +236,10 @@ def main(host):
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocoderImport,
+            param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestServiceSearchBySubstr,
             param=host))
 
 ###################################################
