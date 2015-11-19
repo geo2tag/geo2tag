@@ -19,12 +19,6 @@ QUnit.test('date_search macros test', function( assert ) {
         assert.equal(true, true);
         done();
     }
-    function myChangeDateEnd() {
-        assert.equal(true, true);
-        done();
-    }
     date_search.changeDateBegin(myChangeDateBegin);
     date_search.jqueryObjectDateBegin.val('value').trigger('change');
-    date_search.changeDateEnd(myChangeDateEnd);
-    date_search.jqueryObjectDateEnd.val('value').trigger('change');
 });
