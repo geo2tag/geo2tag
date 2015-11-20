@@ -19,7 +19,7 @@ from test_GT_1906 import TestAdminServiceTemplete
 from macros_tests import TestMacroses
 from test_GT_1913_check_spinjs_and_alert_for_service_page import \
     TestCheckSpinjsAndAlertForServicePage
-    
+
 
 def main(host):
     suite = unittest.TestSuite()
