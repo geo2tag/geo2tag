@@ -4,12 +4,13 @@
 {% endblock %}
 {% block scripts %}
 <script src="{{ getStaticUrl('js/service.js') }}"></script>
+<script src="{{ getStaticUrl('js/spin.min.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
     <h2>Service < name ></h2>
 </header>
-    <div class="row">
+    <div class="row" id="main_div_service_page_id">
         <div class="col-xs-6">
         	<a href="#">
         		<h2>Parameters</h2>
@@ -42,6 +43,7 @@
         </div>
         <div class="col-xs-2">
     		<button type="button" class="btn btn-primary" id="save_service_btn" onclick='saveServiceChange()'>Save</button>
+                <div id ="spin"></div>
         </div>
         <div class="col-xs-2">
         	<button type="button" class="btn btn-danger">Cancel</button>
