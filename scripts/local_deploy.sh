@@ -78,6 +78,8 @@ echo "{
 'version' : '$VERSION'
 }" > $DEBUG_FILE
 
+scripts/db/setupMasterDbTemplate.py  --config ${CONFIG_INI_FILE}
+
 chown -R www-data:www-data /var/www/"$CATALOG"
 
 a2ensite $CONFIG_FILE
