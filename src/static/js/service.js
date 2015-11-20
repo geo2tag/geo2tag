@@ -2,23 +2,31 @@ $(document).ready(function (){
     addSaveServiceHandler();
 });
 
+function getDataFromPage(){
+    data = {'logSize' : $('#logsize_id').val()}
+    return data;
+}
+
+
 function saveServiceChange(service_id) {
+     page_data = getDataFromPage();
+     console.log(service_id)
      $.ajax({
-        type: "GET",
-        url: "/instance/admin/service" + service_id,
+        type: "PUT",
+        url: "/instance/service/" + service_id,
         timeout: 150000,
         crossDomain: true,
+        data: page_data,
         success: function(json, status) {
             console.log("save service success" );
-            alert('this alert must be deleted')
+            alert('this alert must be deleted');
             spinner.stop(target);
-            console.log(json);
-            printBootstrapAlert(status, status, 'json');
+            printBootstrapAlert(status,'Saving is finished successfully');
         },
-        error: function (jqXHR, textStatus, errorThrown){
+        error: function (request, textStatus, errorThrown){
             console.log("save service result: " + textStatus);
-            console.log(errorThrown);
-            printBootstrapAlert('danger', textStatus, '');
+            msg = 'Saving is finished unsuccessfully ' + textStatus + ': ' + request.status;
+            printBootstrapAlert('danger', msg);
         }
     }); 
 }
@@ -30,7 +38,7 @@ function addSaveServiceHandler(){
     });
 }
 
-function printBootstrapAlert(class_alert, status, msg){
+function printBootstrapAlert(class_alert, msg){
     result = '<div class="alert alert-' + class_alert + '">';
     result += '<strong>' + status + ' ' + msg + '</strong>';
     result += '</div>';

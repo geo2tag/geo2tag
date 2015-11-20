@@ -16,7 +16,7 @@
         		<h2>Parameters</h2>
         	</a>
         	<p>Logsize</p>
-        	<input type="text" placeholder="Logsize">
+        	<input type="text" placeholder="Logsize" id='logsize_id'>
         	<p>Ownership</p>
         	<select>
     			<option>111</option>
@@ -42,7 +42,7 @@
         <div class="col-xs-4">
         </div>
         <div class="col-xs-2">
-    		<button type="button" class="btn btn-primary" id="save_service_btn" onclick='saveServiceChange()'>Save</button>
+    		<button type="button" class="btn btn-primary" id="save_service_btn" onclick='saveServiceChange("{{service_id}}")'>Save</button>
                 <div id ="spin"></div>
         </div>
         <div class="col-xs-2">
