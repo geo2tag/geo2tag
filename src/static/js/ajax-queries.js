@@ -5,14 +5,12 @@ $(document).ready(function(){
 	   url: "/instance/service/testservice/channel?number=2000",
 	   success: function(channels){
 	     console.log(channels);
-	     countChannels = channels.length;
 		 $.each(channels, function(index){
 	        var channelId = this._id.$oid;
 	        $.ajax({
 			   type: "GET",
 			   url: "/instance/service/testservice/point?number=2000&channel_ids=" + channelId,
 			   success: function(points){
-			     console.log(points.length, index, channels.length);
 			     countPoints += points.length;
 			     if (index == channels.length - 1) {
 					return updateCounts();
