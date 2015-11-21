@@ -1,5 +1,4 @@
 import unittest
-import os
 from pdocker import parse_string_time_to_timestamp
 from pdocker import manage_script
 from pdocker import write_log
