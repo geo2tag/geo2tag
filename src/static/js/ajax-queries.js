@@ -4,7 +4,7 @@ $(document).ready(function(){
 	   type: "GET",
 	   url: "/instance/service/testservice/channel?number=2000",
 	   success: function(channels){
-	     console.log(channels);
+	     countChannels = channels.length;
 		 $.each(channels, function(index){
 	        var channelId = this._id.$oid;
 	        $.ajax({
