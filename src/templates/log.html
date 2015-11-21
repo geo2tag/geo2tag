@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block styles %}
-<link href="{{ url_for('static', filename='css/log.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/log.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/macros/date_search.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/macros/search.css') }}" rel="stylesheet">
+<link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -9,36 +12,22 @@
         </div>
         <div class="row">
             <form id="log-form">
+                {% from "macros/date_search.html" import date_search with context %}
+                {{date_search('date_search', True)}}
                 <div class="row">
-                        <input type="text" name="date-begin" class="form-control" placeholder="Date begin">
-                        <input type="text" name="date-end" class="form-control" placeholder="Date end">
                         <input type="text" name="number" class="form-control" placeholder="Number">
                         <input type="text" name="offset" class="form-control" placeholder="Offset">
                         <input type="text" name="user-name" class="form-control" placeholder="User name">
                         <input type="text" name="service-name" class="form-control" placeholder="Service name">
                 </div>
-                <div class="row">
-                    <input type="text" name="search-substring" class="form-control" placeholder="Substring">
-                    <input type="submit" class="btn btn-block" value="Search">
-                </div>
+                {% from "macros/search.html" import search with context %}
+                {{search('search', 'Substring', 'Search')}}
             </form>
         </div>
         <div class="row log-info">
-
         </div>
-        <div class="row ">
-            <div class="pagination">
-                <ul>
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
-        </div>
+            {% from "macros/pagination.html" import pagination with context %}
+            {{pagination('pagintaion_block')}}
     </div>
 {% endblock %}
 

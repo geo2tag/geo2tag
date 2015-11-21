@@ -1,7 +1,11 @@
 #!/bin/bash
+
+AGE=${1:-7}
+
 echo "Before cleaning /tmp/"
 df -h
-LIST=`find /tmp -mtime +7 -print0 -name 'tmp*' -exec rm -fr "{}" \;`
-echo "`echo $LIST | grep -o '/tmp/' | wc -w` files where deleted"
+echo "Removed files"
+echo "`find /tmp -type f  -name 'tmp*' -mtime +$AGE -print | wc -l` files where deleted"
+LIST=`find /tmp -mtime +$AGE -print0 -name 'tmp*' -exec rm -fr "{}" \;`
 echo "Disk space statistics after old files removing"
 df -h

@@ -10,6 +10,7 @@ POST_ARGS_NAME = "name"
 POST_ARGS_LOG_SIZE = "logSize"
 POST_ARGS_OWNER_ID = "ownerId"
 DEFAULT_OWNER_ID = 'STUB'
+GET_ARGS_SUBSTR = "substring"
 SERVICE_ALREADY_EXIST_MSG = "Service already exists"
 
 
@@ -26,7 +27,8 @@ class ServiceListResource(Resource):
             offset = args[GET_ARGS_OFFSET]
         else:
             offset = None
-        serviceList = getServiceList(number, offset)
+        substring = args[GET_ARGS_SUBSTR]
+        serviceList = getServiceList(number, offset, substring)
         return serviceList
 
     @possibleException

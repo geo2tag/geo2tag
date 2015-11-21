@@ -1,12 +1,52 @@
 {% extends "base.html" %}
 {% block styles%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/service.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/service.css') }}">
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/service.js') }}"></script>
+<script src="{{ getStaticUrl('js/service.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
-    <h2>Service</h2>
+    <h2>Service < name ></h2>
 </header>
+    <div class="row">
+        <div class="col-xs-6">
+        	<a href="#">
+        		<h2>Parameters</h2>
+        	</a>
+        	<p>Logsize</p>
+        	<input type="text" placeholder="Logsize">
+        	<p>Ownership</p>
+        	<select>
+    			<option>111</option>
+    			<option>222</option>
+        	</select>
+        </div>
+        <div class="col-xs-6">
+        	<a href="#">
+        		<h2>Statistic</h2>
+        	</a>
+        	<a href="#">
+        		<h4>Channels N</h4>
+        	</a>
+        	<a href="#">
+        		<h4>Points M</h4>
+        	</a>
+        	<a href="#">
+        		<h4>Logs</h4>
+        	</a>
+        </div>
+    </div>
+    <div class="row buttons-service">
+        <div class="col-xs-4">
+        </div>
+        <div class="col-xs-2">
+    		<button type="button" class="btn btn-primary">Save</button>
+        </div>
+        <div class="col-xs-2">
+        	<button type="button" class="btn btn-danger">Cancel</button>
+        </div>
+        <div class="col-xs-4">
+        </div>
+    </div>
 {% endblock %}
