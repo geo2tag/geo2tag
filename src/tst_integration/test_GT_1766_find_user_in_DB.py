@@ -8,6 +8,7 @@ NOT_VALID_RESPONSE_TEXT = 'User does not exist'
 
 
 class TestGT1766FindUserInDB(BasicIntegrationTest):
+
     def testGT1766FindUserInDB(self):
         response = requests.get(self.getUrl(TEST_URL))
         responseCode = response.status_code

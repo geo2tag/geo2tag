@@ -146,7 +146,7 @@ def kill_old_containers(kill_time=0):
 
     for container in containers:
         print container[CONTAINER_NAME] + " on port " + \
-            unicode(container[CONTAINER_PORT]) + " stop"
+              unicode(container[CONTAINER_PORT]) + " stop"
         stop_container(container[CONTAINER_NAME])
         collection.remove({CONTAINER_ID: container[CONTAINER_ID]})
 
@@ -210,16 +210,18 @@ def main(name, ports):
     if t_int != 0 or t_unit != 0 or t_sel != 0:
         sys.exit(1)
 
-    containerEnv = "http://" + \
-        os.environ["SERVER"] + ":" + unicode(container_start_port) + \
-        "/instance/tests"
+    container_env = "http://" + \
+                    os.environ["SERVER"] + ":" \
+                    + unicode(container_start_port) + \
+                    "/instance/tests"
 
     f = open('propsfile', 'w')
-    f.write('CONTAINER=' + containerEnv + '\n')
+    f.write('CONTAINER=' + container_env + '\n')
     f.close()
-    write_log(container_start_name, containerEnv)
+    write_log(container_start_name, container_env)
 
     write_log(container_start_name, "Done")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -228,15 +230,15 @@ if __name__ == "__main__":
 
     parser.add_argument('-k', '--kill', action='store_true')
     parser.add_argument('-t', '--time', default='1w')
-    args = parser.parse_args()
+    parsed_args = parser.parse_args()
 
-    if args.kill is not False:
+    if parsed_args.kill is not False:
         timestamp = 0
-        if args.time is not None:
-            timestamp = parse_string_time_to_timestamp(args.time)
+        if parsed_args.time is not None:
+            timestamp = parse_string_time_to_timestamp(parsed_args.time)
         kill_old_containers(timestamp)
-    elif (args.name or args.ports) is None:
+    elif (parsed_args.name or parsed_args.ports) is None:
         usage()
     else:
-        main(args.name, args.ports)
+        main(parsed_args.name, parsed_args.ports)
     sys.exit(0)
