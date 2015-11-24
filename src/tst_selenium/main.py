@@ -15,7 +15,10 @@ from test_GT_1846_login_name import \
     TestAutorizedUser
 from test_GT_1873_g_cache_invalidator import \
     TestCacheInvalidator
-from search_macros_test import TestMacrosSearchTest
+from test_GT_1906 import TestAdminServiceTemplete
+from macros_tests import TestMacroses
+from test_GT_1913_check_spinjs_and_alert_for_service_page import \
+    TestCheckSpinjsAndAlertForServicePage
 
 
 def main(host):
@@ -56,8 +59,17 @@ def main(host):
             param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
-            TestMacrosSearchTest,
+            TestAdminServiceTemplete,
             param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestMacroses,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestCheckSpinjsAndAlertForServicePage,
+            param=host))
+
 ###################################################
 
 #

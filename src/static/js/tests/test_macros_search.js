@@ -8,9 +8,10 @@ QUnit.test('search macros test', function( assert ) {
     search.clear();
     assert.equal(search.getValue(), '');
     function myChange() {
-        search.setValue(changeValue);
+        assert.equal(true, true);
+        done();
     }
     search.change(myChange);
-    //assert.equal(search.getValue(), changeValue);
-    done();
+
+    search.jqueryObject.val('value').trigger('change');
 });
