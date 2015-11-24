@@ -33,10 +33,13 @@
 </header>
 {% from "macros/search.html" import search with context %}
 {{search('search', 'Substring', 'Search')}}	
+
 {% from "macros/autocomplete_input.html" import AutocompleteInput with context %}
-{{AutocompleteInput('test')}}	
+{{AutocompleteInput('test', 'Enter login')}}	
+
 {% from "macros/date_search.html" import date_search with context %}
 {{date_search('date_search', True)}}
+
 {% from "macros/pagination.html" import pagination with context %}
 {{pagination('pagintaion_block')}}
 <div id="qunit"></div>

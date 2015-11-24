@@ -1,48 +1,61 @@
-
-function AutocompliteInput(macroId,externalValue,internalValue) {
+function AutocompliteInput(macroId, url, externalValueKey, internalValueKey, selectListener) {
     this.macroId = macroId;
-    this.inputobject = $('#autocomplite_'+macroId);
+    this.jQueryObject = $('#autocomplite_'+macroId);
     this.countView = 3;
-    this.url_request = 'http://geomongo/instance/user';
-    this.setInternalValue(internalValue);
-    this.setExternalValue(externalValue);    
+    this.url = url; //'http://geomongo/instance/user?login=';
+    this.externalValueKey = externalValueKey;
+    this.internalValueKey = internalValueKey;
+    this.selectListener = selectListener;
+    this.setupAutocomplite();
 }
+
 AutocompliteInput.prototype.setExternalValue = function(externalValue){
-	this.inputobject.val(externalValue);
+    this.jQueryObject.val(externalValue);
     this.externalValue = externalValue;
 }
+
 AutocompliteInput.prototype.getExternalValue = function(){
-	return this.inputobject.val();
+    return this.jQueryObject.val();
 }
+
 AutocompliteInput.prototype.setInternalValue = function(internalValue){
-	this.internalValue = internalValue;
+    this.internalValue = internalValue;
 }
+
 AutocompliteInput.prototype.getInternalValue = function(){
-	return this.internalValue;
+    return this.internalValue;
 }
-AutocompliteInput.prototype.makeAutocompliteToRequest = function(){
-    var fn = this;
+
+// Creates url for request of entities
+AutocompliteInput.prototype.buildUrl = function (){
     var name = this.getExternalValue(); 
-    var req_url = this.url_request + '?login=' + name + '&number=' + this.countView + '&offset=0'
-    $( this.inputobject).autocomplete({
+    return this.url + name + '&number=' + this.countView + '&offset=0';
+}
+
+AutocompliteInput.prototype.setupAutocomplite = function(){
+    var fn = this;
+    $( this.jQueryObject).autocomplete({
         source: function(request, response) {
-            $.get( req_url, function( data ) {
+            $.get( fn.buildUrl(), function( data ) {
                 var list = [];
                 for(var i = 0;i<data.length;i++){
                     list.push({
-                        label:data[i]['login'],
-                        value:data[i]['_id']
+                        label:data[i][fn.externalValueKey],
+                        value:data[i][fn.internalValueKey]
                     });
                 }
                 response(list);  
                 
             });
         },
-        select:function(e, ui) {
+        select: function(e, ui) {
             //this.externalValue = ui.item.label;
-            fn.internalValue = 1;
+            console.log( ui.item);
+            fn.internalValue = ui.item.label;
+            console.log(fn.internalValue);
             e.preventDefault();
-            $(this).val(ui.item.label);
+            fn.selectListener(ui);
+            //$(this).val(ui.item.label);
         }
     }); 
 }
