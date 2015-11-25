@@ -1,11 +1,12 @@
 QUnit.test('search autocompliteinput test', function( assert ) {
     var done = assert.async();
-    var validUrl = '/instance/user?login=test&number=3&offset=0';
     var testLogin = 'test_user';
     var testId = 'ZzKPM5GJQ1';
+    var validUrl = '/instance/user?login='+testLogin+'&number=3&offset=0';
+    console.log('validUrl: '+validUrl);
 
        // Called when menu is selected
-    var selectListener = function( ui ) {
+    var selectListener = function( e, ui ) {
            console.log('select');
            assert.equal(validUrl, testObject.buildUrl());
            assert.equal(testLogin, testObject.getExternalValue());

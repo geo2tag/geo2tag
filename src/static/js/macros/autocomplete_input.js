@@ -1,3 +1,11 @@
+/*
+  macroId - macros unique identifier
+  url - url for retriving objects list. Note that @SUBSTRING@&number=3&offset=0  will be added to it
+  externalValueKey - key for displayed value in the input field (e.g. user_login)
+  internalValueKey - key for actual needed data (e.g. user_id)
+  selectListener - function (e, ui) for additional processing of onselect event for autocomplite 
+
+*/
 function AutocompliteInput(macroId, url, externalValueKey, internalValueKey, selectListener) {
     this.macroId = macroId;
     this.jQueryObject = $('#autocomplite_'+macroId);
@@ -49,13 +57,13 @@ AutocompliteInput.prototype.setupAutocomplite = function(){
             });
         },
         select: function(e, ui) {
-            //this.externalValue = ui.item.label;
             console.log( ui.item);
-            fn.internalValue = ui.item.label;
+            fn.setExternalValue(ui.item.label);
+            fn.internalValue = ui.item.value;
             console.log(fn.internalValue);
             e.preventDefault();
-            fn.selectListener(ui);
-            //$(this).val(ui.item.label);
+            if (fn.selectListener !== undefined)
+                fn.selectListener(e, ui);
         }
     }); 
 }
