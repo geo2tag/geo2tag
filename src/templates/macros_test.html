@@ -1,19 +1,33 @@
 {% extends "base.html" %}
 {% block styles%}
+<!-- Lib's css -->
+
 <link rel="stylesheet" href="{{ getStaticUrl('css/qunit-1.18.0.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/jquery-ui.css') }}">
+
+<!-- Macros css -->
 <link rel="stylesheet" href="{{ getStaticUrl('css/macros/search.css') }}">
 <link rel="stylesheet" href="{{ getStaticUrl('css/macros/date_search.css') }}">
 <link rel="stylesheet" href="{{ getStaticUrl('css/macros/pagination.css') }}">
 {% endblock %}
 {% block scripts %}
+<!-- Libs -->
+<script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
+<script src="{{ getStaticUrl('js/qunit-1.18.0.js') }}"></script>
+
+<!-- Macroses -->
 <script src="{{ getStaticUrl('js/macros/search.js') }}"></script>
+<script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
 <script src="{{ getStaticUrl('js/macros/date_search.js') }}"></script>
 <script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
-<script src="{{ getStaticUrl('js/qunit-1.18.0.js') }}"></script>
-<script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
+<script src="{{ getStaticUrl('js/macros/integer_input.js') }}"></script>
+
+<!-- Tests -->
+<script src="{{ getStaticUrl('js/tests/test_macros_autocomplete_input.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/test_macros_search.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/test_macros_date_search.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/test_macros_pagination.js') }}"></script>
+<script src="{{ getStaticUrl('js/tests/test_macros_integer_input.js') }}"></script>
 {% endblock %}
 {% block content %}
 <header>
@@ -21,10 +35,20 @@
 </header>
 {% from "macros/search.html" import search with context %}
 {{search('search', 'Substring', 'Search')}}	
+
+{% from "macros/autocomplete_input.html" import AutocompleteInput with context %}
+{{AutocompleteInput('test', 'Enter login')}}	
+
 {% from "macros/date_search.html" import date_search with context %}
 {{date_search('date_search', True)}}
+
 {% from "macros/pagination.html" import pagination with context %}
 {{pagination('pagintaion_block')}}
+
+{% from "macros/integer_input.html" import IntegerInput with context %}
+{{ IntegerInput('integer_input', 'Test integer input', 0, 15)}}
+
+
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>
 

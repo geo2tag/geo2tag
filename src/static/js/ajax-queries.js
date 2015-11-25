@@ -1,5 +1,4 @@
-$(document).ready(function(){
-	var countChannels = 0, countPoints = 0;
+function queryChannelsAndPoints(callBack, countChannels, countPoints){
 	$.ajax({
 	   type: "GET",
 	   url: "/instance/service/testservice/channel?number=2000",
@@ -13,15 +12,20 @@ $(document).ready(function(){
 			   success: function(points){
 			     countPoints += points.length;
 			     if (index == channels.length - 1) {
-					return updateCounts();
+					return callBack(countPoints, countChannels);
 			     }
 			    }
 			});
 	     });
 	   }
 	 });
-	function updateCounts(){
-		$('.channels-count').text(countChannels);
-		$('.points-count').text(countPoints);
-	}
+}
+function updateCounts(countPoints, countChannels){
+	$('.channels-count').text(countChannels);
+	$('.points-count').text(countPoints);
+}
+
+$(document).ready(function(){
+	var countChannels = 0, countPoints = 0;
+	queryChannelsAndPoints(updateCounts, countChannels, countPoints);
 });
