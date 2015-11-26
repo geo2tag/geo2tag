@@ -1,52 +1,63 @@
 {% extends "base.html" %}
 {% block styles%}
+<!-- Lib's css -->
 <link rel="stylesheet" href="{{ getStaticUrl('css/service.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/jquery-ui.css') }}">
+
+<!-- Macros css -->
+
+
 {% endblock %}
 {% block scripts %}
-<script src="{{ getStaticUrl('js/service.js') }}"></script>
+<!-- Libs -->
+<script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
 <script src="{{ getStaticUrl('js/spin.min.js') }}"></script>
+
+<!-- Scripts -->
+<script src="{{ getStaticUrl('js/service.js') }}"></script>
+
+<!-- Macroses -->
+<script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
+<script src="{{ getStaticUrl('js/macros/integer_input.js') }}"></script>
+
 {% endblock %}
 {% block content %}
 <header>
-    <h2>Service < name ></h2>
+    <h2>Service {{service_id}} </h2>
 </header>
     <div class="row" id="main_div_service_page_id">
         <div class="col-xs-6">
-        	<a href="#">
-        		<h2>Parameters</h2>
-        	</a>
-        	<p>Logsize</p>
-        	<input type="text" placeholder="Logsize" id='logsize_id'>
-        	<p>Ownership</p>
-        	<select>
-    			<option>111</option>
-    			<option>222</option>
-        	</select>
+            <h2>Parameters</h2>
+            <!--<p>Logsize</p>
+            <input type="text" placeholder="Logsize" id='logsize_id'>-->
+            {% from "macros/integer_input.html" import IntegerInput with context %}
+            {{ IntegerInput('log_size', 'Log size (mb)', 'Log size (mb)', 0, 1000) }} 
+            <!--<p>Ownership</p>
+            <select>
+                <option>111</option>
+                <option>222</option>
+            </select>-->
+            {% from "macros/autocomplete_input.html" import AutocompleteInput with context %}
+            {{ AutocompleteInput('owner_id', 'Owner login', 'Start typing to select user') }}
         </div>
         <div class="col-xs-6">
-        	<a href="#">
-        		<h2>Statistic</h2>
-        	</a>
-        	<a href="#">
-        		<h4>Channels N</h4>
-        	</a>
-        	<a href="#">
-        		<h4>Points M</h4>
-        	</a>
-        	<a href="#">
-        		<h4>Logs</h4>
-        	</a>
+            <h2>Statistic</h2>
+            <h4>Channels N</h4>
+            <h4>Points M</h4>
+            <a href="#">
+                <h4>Logs</h4>
+            </a>
         </div>
     </div>
     <div class="row buttons-service">
         <div class="col-xs-4">
         </div>
         <div class="col-xs-2">
-    		<button type="button" class="btn btn-primary" id="save_service_btn" onclick='saveServiceChange("{{service_id}}")'>Save</button>
+            <button type="button" class="btn btn-primary" id="save_service_btn" onclick='saveServiceChange("{{service_id}}")'>Save</button>
                 <div id ="spin"></div>
         </div>
         <div class="col-xs-2">
-        	<button type="button" class="btn btn-danger">Cancel</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
         </div>
         <div class="col-xs-4">
         </div>

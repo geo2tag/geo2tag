@@ -1,6 +1,6 @@
-{% macro IntegerInput(macroId, label, minValue, maxValue) %}
+{% macro IntegerInput(macroId, label, placeholder, minValue, maxValue) %}
     <div class="form-group">
         <label for="integer_input_{{ macroId }}">{{ label }}</label>
-        <input type="text" id="integer_input_{{ macroId }}" class="form-control bfh-number" data-min="{{minValue}}" data-max="{{maxValue}}" data-wrap="true">
+        <input type="text" id="integer_input_{{ macroId }}" class="form-control bfh-number" data-min="{{minValue}}" data-max="{{maxValue}}" data-wrap="true" placeholder="{{placeholder}}">
     </div>
 {% endmacro %}

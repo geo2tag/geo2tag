@@ -1,9 +1,18 @@
+var ownerInput = null;
+var logSizeInput = null;
+
 $(document).ready(function (){
     addSaveServiceHandler();
+    initUi();
 });
 
+function initUi(){
+    ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
+    logSizeInput = new IntegerInput('log_size');
+}
+
 function getDataFromPage(){
-    data = {'logSize' : $('#logsize_id').val()}
+    data = {'logSize' : logSizeInput.getValue()}
     return data;
 }
 
