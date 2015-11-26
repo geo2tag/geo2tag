@@ -1,9 +1,10 @@
-{% macro AutocompleteInput(macroId, placeholder) %}
+{% macro AutocompleteInput(macroId, label, placeholder) %}
     <!-- Require 
 	src/static/css/jquery-ui.css
 	src/static/js/jquery-ui.min.js
     -->
-    <div class="row">
+    <div class="form-group">
+        <label for="autocomplite_{{ macroId }}">{{ label }}</label>
         <input type="text" name="autocomplite-substring" id="autocomplite_{{macroId}}" class="form-control" placeholder="{{placeholder}}">
     </div>
 {% endmacro %}

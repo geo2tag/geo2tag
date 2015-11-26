@@ -37,7 +37,7 @@
 {{search('search', 'Substring', 'Search')}}	
 
 {% from "macros/autocomplete_input.html" import AutocompleteInput with context %}
-{{AutocompleteInput('test', 'Enter login')}}	
+{{AutocompleteInput('test', 'User', 'Enter login')}}	
 
 {% from "macros/date_search.html" import date_search with context %}
 {{date_search('date_search', True)}}
@@ -46,7 +46,7 @@
 {{pagination('pagintaion_block')}}
 
 {% from "macros/integer_input.html" import IntegerInput with context %}
-{{ IntegerInput('integer_input', 'Test integer input', 0, 15)}}
+{{ IntegerInput('integer_input', 'Test integer input', 'Test integer input', 0, 15)}}
 
 
 <div id="qunit"></div>
