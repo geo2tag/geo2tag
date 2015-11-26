@@ -4,7 +4,8 @@ from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = 'instance/admin/service/test_id'
-
+INTEGER_INPUT = 'integer_input_log_size'
+AUTOCOMPLITE_INPUT = 'autocomplite_owner_id'
 
 class TestAdminServiceMacrses(BasicSeleniumTest):
 
@@ -15,7 +16,7 @@ class TestAdminServiceMacrses(BasicSeleniumTest):
             expected_conditions.presence_of_element_located(
                 (By.TAG_NAME, "body"))
         )
-        res = self.getDriver().find_element_by_tag_name("integer_input_log_size")
+        res = self.getDriver().find_element_by_tag_name(INTEGER_INPUT)
         self.assertNotEquals(res, None)
-        res = self.getDriver().find_element_by_tag_name("autocomplite_owner_id")
+        res = self.getDriver().find_element_by_tag_name(AUTOCOMPLITE_INPUT)
         self.assertNotEquals(res, None)
