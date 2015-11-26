@@ -21,7 +21,7 @@ from macros_tests import TestMacroses
 from test_GT_1913_check_spinjs_and_alert_for_service_page import \
     TestCheckSpinjsAndAlertForServicePage
 from test_GT_1918_service_page_macroses import \
-    TestAdminServiceMacrses
+    TestAdminServiceMacroses
 
 
 def main(host):
@@ -72,7 +72,10 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestCheckSpinjsAndAlertForServicePage,
             param=host))
-
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestAdminServiceMacroses,
+            param=host))
 ###################################################
 
 #

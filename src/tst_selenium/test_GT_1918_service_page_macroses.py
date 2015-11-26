@@ -8,7 +8,7 @@ INTEGER_INPUT = 'integer_input_log_size'
 AUTOCOMPLITE_INPUT = 'autocomplite_owner_id'
 
 
-class TestAdminServiceMacrses(BasicSeleniumTest):
+class TestAdminServiceMacroses(BasicSeleniumTest):
 
     def testAdminServiceMacroses(self):
         URL = self.getUrl(TEST_URL)
