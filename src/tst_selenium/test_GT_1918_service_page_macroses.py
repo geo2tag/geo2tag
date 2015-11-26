@@ -7,6 +7,7 @@ TEST_URL = 'instance/admin/service/test_id'
 INTEGER_INPUT = 'integer_input_log_size'
 AUTOCOMPLITE_INPUT = 'autocomplite_owner_id'
 
+
 class TestAdminServiceMacrses(BasicSeleniumTest):
 
     def testAdminServiceMacroses(self):
