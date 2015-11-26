@@ -2,7 +2,7 @@ from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = '/instance/admin/service/test_id'
 TEST_BTN_SAVE_ID = 'save_service_btn'
-TEST_LOG_SIZE_ID = 'logsize_id'
+TEST_LOG_SIZE_ID = 'integer_input_log_size'
 TEST_DATA = 0
 TEST_NOT_VALID_DATA = 'test_string'
 TEST_ALERT_CLASS = 'alert-success'
