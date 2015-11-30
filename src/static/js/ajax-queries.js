@@ -27,5 +27,5 @@ function updateCounts(countPoints, countChannels){
 
 $(document).ready(function(){
     var countChannels = 0, countPoints = 0;
-    queryChannelsAndPoints(updateCounts, countChannels, countPoints);
+    queryChannelsAndPoints(updateCounts, countChannels, countPoints, 'testservice');
 });
