@@ -6,7 +6,36 @@ $(document).ready(function (){
     initUi();
 });
 
+function checkNewService(){
+    service_name = getServiceName();
+    $.ajax({
+        type: "GET",
+        url: getUrlWithPrefix("/service"),
+        timeout: 150000,
+        async: false,
+        crossDomain: true,
+        success: function(json, status) {
+            var service_list = json;
+            var key = 'name';
+            flag = true;
+            for(var i = 0; i < service_list.length; i++){
+                if(service_list[i][key] == service_name){
+                    flag = false;
+                    break;
+                }
+            }           
+        },
+        error: function (request, textStatus, errorThrown){
+                   console.log("get service list result: " + textStatus);
+        }
+    });
+    return flag;
+}
 function initUi(){
+    var flag = checkNewService();
+    if(flag){
+        $('#service_h2_id').prepend('<h2>New</h2>');        
+    }
     ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
     logSizeInput = new IntegerInput('log_size');
 }
