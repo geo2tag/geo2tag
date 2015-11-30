@@ -15,6 +15,7 @@
 
 <!-- Scripts -->
 <script src="{{ getStaticUrl('js/service.js') }}"></script>
+<script src="{{ getStaticUrl('js/ajax-queries.js') }}"></script>
 
 <!-- Macroses -->
 <script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
@@ -41,12 +42,19 @@
             {{ AutocompleteInput('owner_id', 'Owner login', 'Start typing to select user') }}
         </div>
         <div class="col-xs-6">
-            <h2>Statistic</h2>
-            <h4>Channels N</h4>
-            <h4>Points M</h4>
-            <a href="#">
-                <h4>Logs</h4>
-            </a>
+        	<a href="#">
+        		<h2>Statistic</h2>
+        	</a>
+        	<a href="#">
+        		<h4>Channels <span class="channels-count">0</span></h4>
+        	</a>
+        	<a href="#">
+        		<h4>Points <span class="points-count">0</span></h4>
+        	</a>
+        	<a href="#">
+        		<h4>Logs</h4>
+        	</a>
+>>>>>>> 36734b36635f4c1971029b31181f83a3fb536a8d
         </div>
     </div>
     <div class="row buttons-service">
