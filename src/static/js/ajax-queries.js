@@ -1,7 +1,7 @@
-function queryChannelsAndPoints(callBack, countChannels, countPoints){
+function queryChannelsAndPoints(callBack, countChannels, countPoints, serviceName){
     $.ajax({
        type: "GET",
-       url: "/instance/service/testservice/channel?number=2000",
+       url: getUrlWithPrefix('/service/') + serviceName + "/channel?number=2000",
        success: function(channels){
          countChannels = channels.length;
          $.each(channels, function(index){

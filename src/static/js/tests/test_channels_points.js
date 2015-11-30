@@ -6,5 +6,5 @@ QUnit.test('test channels points ', function( assert ) {
       done();
     }
     var countPoints = 0, countChannels = 0;
-    queryChannelsAndPoints(callBack, countChannels, countPoints);
+    queryChannelsAndPoints(callBack, countChannels, countPoints, 'testservice');
 });
