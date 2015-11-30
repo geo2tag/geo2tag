@@ -53,6 +53,7 @@ function getValuesForServicePage(service_name){
             var service_inf = json;
             var key = 'config';
             log_size = service_inf[key]['logSize'];
+            console.log(log_size)
             owner_id = service_inf['owner_id'];
         },
         error: function (request, textStatus, errorThrown){
@@ -66,25 +67,22 @@ function initUi(){
     var service_name = getServiceName();    
     var flag = checkNewService(service_name);
     if(!flag)
-        var values = getValuesForServicePage(service_name);
-    if(flag)
-        window.flagAddContent = 0;
-    else 
-        window.flagAddContent = 2;
-    console.log(window.flagAddContent)
+        values = getValuesForServicePage(service_name);
+    window.flagAddContent = flag;
     ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
     logSizeInput = new IntegerInput('log_size');
 }
 
 function setLogSizeOwnerId(){
-    console.log(window.flagAddContent)
-    if(window.flagAddContent == 0)
-        $('#service_h2_id').prepend('<h2 class="inline">New s</h2>');
-    else if(flagAddContent == 2){
-        $('#service_h2_id').prepend('<h2 class="inline">S</h2>');
-        $('#integer_input_log_size').val(values['log_size']);
-        $('#autocomplite_owner_id').val(values['owner_id']);
-        window.flagAddContent = window.flagAddContent++;
+    var service_name = getServiceName();
+    $('#service_h2_id').html("");
+    if(window.flagAddContent){
+        $('#service_h2_id').html('<h2 class="inline">New service ' + service_name + '</h2>');
+    }
+    else{
+        $('#service_h2_id').html('<h2 class="inline">Service ' + service_name + '</h2>');
+        $('#integer_input_log_size').val(window.values['log_size']);
+        $('#autocomplite_owner_id').val(window.values['owner_id']);
     }
 }
 
