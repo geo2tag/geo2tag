@@ -2,7 +2,7 @@ from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = '/instance/status'
 TEST_XPATH = 'xhtml:html/xhtml:body/xhtml:pre'
-VALID_STATUS = 'OK'
+VALID_STATUS = 'OK111'
 
 
 class TestStatusOK(BasicSeleniumTest):
