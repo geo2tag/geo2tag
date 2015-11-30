@@ -1,4 +1,4 @@
-#bc_date_search{
+#bc_begin_date_search, #bc_end_date_search{
     width: 20px;
     max-width: 20px;
 }
