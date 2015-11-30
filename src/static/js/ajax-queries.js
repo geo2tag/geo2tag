@@ -25,15 +25,6 @@ function updateCounts(countPoints, countChannels){
     $('.points-count').text(countPoints);
 }
 
-function getServiceName(){
-    var url_service = location.href;
-    var service_str_const = 'service/';
-    var length_service_str_const = service_str_const.length;
-    var service_str_index = url_service.indexOf(service_str_const);
-    var result = url_service.substring(service_str_index + length_service_str_const);
-    return result;
-}
-
 $(document).ready(function(){
     var countChannels = 0, countPoints = 0;
     queryChannelsAndPoints(updateCounts, countChannels, countPoints, getServiceName());

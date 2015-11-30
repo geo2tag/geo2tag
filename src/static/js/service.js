@@ -1,13 +1,23 @@
 var ownerInput = null;
 var logSizeInput = null;
+var flagAddContent;
 
-$(document).ready(function (){
+
+$(document).ready(function(){
     addSaveServiceHandler();
-    initUi();
+    setLogSizeOwnerId();
 });
 
-function checkNewService(){
-    service_name = getServiceName();
+function getServiceName(){
+    var url_service = location.href;
+    var service_str_const = 'service/';
+    var length_service_str_const = service_str_const.length;
+    var service_str_index = url_service.indexOf(service_str_const);
+    var result = url_service.substring(service_str_index + length_service_str_const);
+    return result;
+}
+
+function checkNewService(service_name){
     $.ajax({
         type: "GET",
         url: getUrlWithPrefix("/service"),
@@ -31,13 +41,51 @@ function checkNewService(){
     });
     return flag;
 }
+
+function getValuesForServicePage(service_name){
+    $.ajax({
+        type: "GET",
+        url: getUrlWithPrefix("/service/" + service_name),
+        timeout: 150000,
+        async: false,
+        crossDomain: true,
+        success: function(json, status) {
+            var service_inf = json;
+            var key = 'config';
+            log_size = service_inf[key]['logSize'];
+            owner_id = service_inf['owner_id'];
+        },
+        error: function (request, textStatus, errorThrown){
+                   console.log("get service information result: " + textStatus);
+        }
+    });
+    return {'log_size': log_size, 'owner_id': owner_id};    
+}
+
 function initUi(){
-    var flag = checkNewService();
-    if(flag){
-        $('#service_h2_id').prepend('<h2>New</h2>');        
-    }
+    var service_name = getServiceName();    
+    var flag = checkNewService(service_name);
+    if(!flag)
+        var values = getValuesForServicePage(service_name);
+    if(flag)
+        window.flagAddContent = 0;
+    else 
+        window.flagAddContent = 2;
+    console.log(window.flagAddContent)
     ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
     logSizeInput = new IntegerInput('log_size');
+}
+
+function setLogSizeOwnerId(){
+    console.log(window.flagAddContent)
+    if(window.flagAddContent == 0)
+        $('#service_h2_id').prepend('<h2 class="inline">New s</h2>');
+    else if(flagAddContent == 2){
+        $('#service_h2_id').prepend('<h2 class="inline">S</h2>');
+        $('#integer_input_log_size').val(values['log_size']);
+        $('#autocomplite_owner_id').val(values['owner_id']);
+        window.flagAddContent = window.flagAddContent++;
+    }
 }
 
 function getDataFromPage(){
