@@ -5,6 +5,7 @@ var flagAddContent;
 
 $(document).ready(function(){
     addSaveServiceHandler();
+    initUi();
     setLogSizeOwnerId();
 });
 
@@ -64,14 +65,18 @@ function getValuesForServicePage(service_name){
 }
 
 function initUi(){
-    var service_name = getServiceName();    
+    ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
+    logSizeInput = new IntegerInput('log_size');
+}
+
+function initValuesForServicePage(){
+    var service_name = getServiceName();
     var flag = checkNewService(service_name);
     if(!flag)
         values = getValuesForServicePage(service_name);
     window.flagAddContent = flag;
-    ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
-    logSizeInput = new IntegerInput('log_size');
 }
+
 
 function setLogSizeOwnerId(){
     var service_name = getServiceName();
