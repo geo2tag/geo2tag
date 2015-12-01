@@ -8,7 +8,7 @@ function queryChannelsAndPoints(callBack, countChannels, countPoints, serviceNam
             var channelId = this._id.$oid;
             $.ajax({
                type: "GET",
-               url: "/instance/service/testservice/point?number=2000&channel_ids=" + channelId,
+               url: getUrlWithPrefix("/service/) + serviceName + "/point?number=2000&channel_ids=" + channelId,
                success: function(points){
                  countPoints += points.length;
                  if (index == channels.length - 1) {
