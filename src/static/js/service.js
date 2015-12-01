@@ -4,6 +4,8 @@ var flagAddContent;
 
 
 $(document).ready(function(){
+    initValuesForServicePage()
+
     addSaveServiceHandler();
     initUi();
     setLogSizeOwnerId();
@@ -53,7 +55,7 @@ function getValuesForServicePage(service_name){
             owner_id = service_inf['owner_id'];
         },
         error: function (request, textStatus, errorThrown){
-                   console.log("get service information result: " + textStatus);
+            console.log("get service information result: " + textStatus);
         }
     });
     return {'log_size': log_size, 'owner_id': owner_id};    
