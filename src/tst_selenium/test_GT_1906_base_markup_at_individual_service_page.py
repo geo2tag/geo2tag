@@ -6,9 +6,9 @@ from basic_selenium_test import BasicSeleniumTest
 TEST_URL = 'instance/admin/service/test_id'
 
 
-class TestAdminServiceResource(BasicSeleniumTest):
+class TestAdminServiceTemplete(BasicSeleniumTest):
 
-    def testcheckAdminResource(self):
+    def testAdminServiceTemplete(self):
         URL = self.getUrl(TEST_URL)
         self.getDriver().get(URL)
         WebDriverWait(self.getDriver(), 10).until(
@@ -20,4 +20,10 @@ class TestAdminServiceResource(BasicSeleniumTest):
         res = self.getDriver().find_element_by_tag_name("body")
         self.assertNotEquals(res, None)
         res = self.getDriver().find_element_by_tag_name("head")
+        self.assertNotEquals(res, None)
+        res = self.getDriver().find_element_by_tag_name("input")
+        self.assertNotEquals(res, None)
+        res = self.getDriver().find_elements_by_css_selector(".btn-primary")
+        self.assertNotEquals(res, None)
+        res = self.getDriver().find_elements_by_css_selector(".btn-danger")
         self.assertNotEquals(res, None)

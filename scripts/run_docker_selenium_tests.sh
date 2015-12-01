@@ -10,5 +10,7 @@ export DISPLAY
 
 echo -e "Run tests"
 ./scripts/run_selenium_tests.sh
+rcode=$?
 echo -e "Stop xvfb"
 kill $(pgrep -f xvfb)
+exit ${rcode}
