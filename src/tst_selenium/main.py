@@ -80,7 +80,7 @@ def main(host):
             param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
-    TestCheckDisplayDataServicePage,
+            TestCheckDisplayDataServicePage,
             param=host))
 
 ###################################################
