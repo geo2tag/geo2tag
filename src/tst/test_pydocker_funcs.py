@@ -6,6 +6,7 @@ from pdocker import LOG_NAME
 
 
 class TestPdockerFunc(unittest.TestCase):
+
     def testParseStringTimeToTimestamp(self):
         res = parse_string_time_to_timestamp("1w")
         # seconds in one week
