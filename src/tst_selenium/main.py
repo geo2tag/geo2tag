@@ -28,7 +28,7 @@ from test_GT_1985_check_display_data_service_page import \
 
 def main(host):
     suite = unittest.TestSuite()
-    '''suite.addTest(BasicSeleniumTest.parametrize(
+    suite.addTest(BasicSeleniumTest.parametrize(
         TestGT1776AdminTemplate,
         param=host)
     )
@@ -65,7 +65,7 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminServiceTemplete,
-            param=host))'''
+            param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestMacroses,
