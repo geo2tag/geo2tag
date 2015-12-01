@@ -21,23 +21,18 @@ function getServiceName(){
 function checkNewService(service_name){
     $.ajax({
         type: "GET",
-        url: getUrlWithPrefix("/service"),
+        url: getUrlWithPrefix("/service/") + service_name,
         timeout: 150000,
-        async: false,
         crossDomain: true,
+        async: false,
         success: function(json, status) {
-            var service_list = json;
-            var key = 'name';
-            flag = true;
-            for(var i = 0; i < service_list.length; i++){
-                if(service_list[i][key] == service_name){
-                    flag = false;
-                    break;
-                }
-            }           
+                   flag = false;
         },
         error: function (request, textStatus, errorThrown){
-                   console.log("get service list result: " + textStatus);
+                   if(errorThrown == 'NOT FOUND')
+                       flag = true;
+                   else
+                       console.log('error check new server')
         }
     });
     return flag;
@@ -68,6 +63,7 @@ function initUi(){
     ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
     logSizeInput = new IntegerInput('log_size');
 }
+
 
 function initValuesForServicePage(){
     var service_name = getServiceName();
