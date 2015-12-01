@@ -10,10 +10,7 @@
         <link href="{{ getStaticUrl('css/admin.css') }}" rel="stylesheet">
          {% block styles %}{% endblock %}
         <script src="{{ getStaticUrl('js/jquery-latest.min.js') }}" ></script>
-        <script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
         <script src="{{ getStaticUrl('js/bootstrap.min.js')}}" ></script>
-        <script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
-        <script src="{{ getStaticUrl('js/macros/integer_input.js') }}"></script>
         <script src="{{ getStaticUrl('js/service.js')}}" ></script>
         <script type="text/javascript">function getInstancePrefix() { return '{{ g.instance_prefix }}'; }</script>
         <script type="text/javascript">function getStaticUrl(url) { return url+'?{{ g.cache_invalidator }}'; }</script>
