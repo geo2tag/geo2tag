@@ -60,7 +60,6 @@ function getValuesForServicePage(service_name){
 }
 
 function initUi(){
-    initValuesForServicePage();
     ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
     logSizeInput = new IntegerInput('log_size');
 }
