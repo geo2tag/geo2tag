@@ -500,8 +500,8 @@ def getAllChannelIds(serviceName):
 
 
 def deleteMetadataById(serviceName, _id):
-    db_service_name = getDbObject(serviceName)[METADATA].find_one({ID: _id})
+    collection = getDbObject(serviceName)[METADATA]
     try:
-        db_service_name[METADATA].remove({ID: _id})
+        collection.remove({ID: _id})
     except:
         MetadataDoesNotExistException()
