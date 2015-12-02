@@ -14,14 +14,6 @@ dateSearch.prototype.getValueDateBegin = function (value){
     return this.jqueryObjectDateBegin.val();
 }
 
-dateSearch.prototype.setValueBCBegin = function (value){
-    this.jqueryObjectBCBegin.attr("checked", value)
-}
-
-dateSearch.prototype.getValueBCBegin = function (value){
-    return this.jqueryObjectDateBegin.attr("checked");
-}
-  
 dateSearch.prototype.setValueDateEnd = function (value){
     this.jqueryObjectDateEnd.val(value);
 }
@@ -30,12 +22,31 @@ dateSearch.prototype.getValueDateEnd = function (value){
     return this.jqueryObjectDateEnd.val();
 }
 
-dateSearch.prototype.setValueDateEnd = function (value){
-    this.jqueryObjectDateEnd.attr("checked", value);
+dateSearch.prototype.setValueBCBegin = function (value){
+    if(value == false)
+        this.jqueryObjectBCBegin.removeAttr("checked")
+    else
+        this.jqueryObjectBCBegin.attr("checked", "checked")
 }
 
-dateSearch.prototype.getValueDateEnd = function (value){
-    return this.jqueryObjectDateEnd.attr("checked");
+dateSearch.prototype.getValueBCBegin = function (){
+    if(this.jqueryObjectBCBegin.attr("checked") == "checked")
+        return true;
+    return false;
+}
+  
+dateSearch.prototype.setValueBCEnd = function (value){
+    if(value == false)
+        this.jqueryObjectBCEnd.removeAttr("checked")
+    else
+        this.jqueryObjectBCEnd.attr("checked", "checked")
+}
+
+dateSearch.prototype.getValueBCEnd = function (){
+    console.log(this.jqueryObjectBCEnd.attr("checked"))
+    if(this.jqueryObjectBCEnd.attr("checked") == "checked")
+        return true;
+    return false;
 }
 
 dateSearch.prototype.clearDateBegin = function (){
@@ -47,11 +58,11 @@ dateSearch.prototype.clearDateEnd = function (){
 }
 
 dateSearch.prototype.clearBCBegin = function (){
-    this.setValueBCBegin('');
+    this.setValueBCBegin(false);
 }
 
 dateSearch.prototype.clearBCEnd = function (){
-    this.setValueBCEnd('');
+    this.setValueBCEnd(false);
 }
 
 dateSearch.prototype.changeDateBegin = function (callBack){
