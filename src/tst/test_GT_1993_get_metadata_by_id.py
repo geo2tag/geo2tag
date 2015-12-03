@@ -12,9 +12,9 @@ TEST_COLLECTION = 'metadata'
 TEST_DATA = {'_id': TEST_ID, 'a': '1', 'b': '2'}
 
 
-class test_getServiceById(unittest.TestCase):
+class testGetMetadataById(unittest.TestCase):
 
-    def test_getServiceById_func(self):
+    def testGetMetadataById(self):
         collection = getDbObject(TEST_DB)[TEST_COLLECTION]
         collection.insert(TEST_DATA)
         obj = collection.find_one({"_id": TEST_ID})
