@@ -35,6 +35,7 @@ ID = '_id'
 LOG = 'log'
 BC = 'bc'
 METADATA = 'metadata'
+
 # db initialisation
 MONGO_CLIENT = None  # MongoClient(getHost(), getPort())
 
@@ -498,10 +499,15 @@ def getAllChannelIds(serviceName):
         all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
 
-
 def deleteMetadataById(serviceName, _id):
     collection = getDbObject(serviceName)[METADATA]
     try:
         collection.remove({ID: _id})
     except:
         MetadataDoesNotExistException()
+
+def getMetadataById(serviceName, _id):
+    obj = getDbObject(serviceName)[METADATA].find_one({ID: _id})
+    if obj is not None:
+        return obj
+    raise MetadataDoesNotExistException()
