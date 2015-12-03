@@ -18,6 +18,6 @@ class PointResourceParsers():
         parser.add_argument(ALT, type=float)
         parser.add_argument(JSON, type=unicode)
         parser.add_argument(CHANNEL_ID, type=unicode)
-        parser.add_argument(BC, type=boolean)
+        parser.add_argument(BC, type=bool)
         args = parser.parse_args()
         return args
