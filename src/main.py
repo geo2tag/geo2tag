@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from metadata_list_resource import MetadataListResource
+from metadata import Metadata
 from manage_plugins_resource import ManagePluginsResource
 from tests_resource import TestsResource
 from point_resource import PointResource
@@ -103,6 +105,14 @@ def addResources():
     getApi().add_resource(
         MacrosTestsResource,
         getPathWithPrefix('/macros_tests'))
+    getApi().add_resource(
+        Metadata,
+        getPathWithPrefix(
+            'service/<string:service_name>/metadata/<string:metadataId>'))
+    getApi().add_resource(
+        MetadataListResource,
+        getPathWithPrefix(
+            'service/<string:serviceName>/metadata'))
 
     # end of the list of imported resources
 

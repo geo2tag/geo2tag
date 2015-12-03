@@ -33,6 +33,7 @@ OWNERID = 'owner_id'
 ID = '_id'
 LOG = 'log'
 BC = 'bc'
+METADATA = 'metadata'
 # db initialisation
 MONGO_CLIENT = None  # MongoClient(getHost(), getPort())
 
