@@ -495,3 +495,13 @@ def getAllChannelIds(serviceName):
     for result in obj:
         all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
+
+
+def setMetadata(serviceName, data, _id):
+    db_set_metadata = getDbObject(serviceName)
+    obj = db_set_metadata[METADATA].find_one({ID: _id})
+    if obj is None:
+        db_set_metadata[METADATA].save({ID: _id, JSON: data})
+    else:
+        obj[JSON] = data
+        db_set_metadata[METADATA].save(obj)
