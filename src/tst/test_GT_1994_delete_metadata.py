@@ -4,7 +4,6 @@
 import unittest
 from bson.objectid import ObjectId
 from db_model import deleteMetadataById, getDbObject
-from metadata_does_not_exist_exception import MetadataDoesNotExistException
 
 TEST_ID = ObjectId("55671111132931504d515222")
 TEST_DB = "testservice"
