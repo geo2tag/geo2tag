@@ -508,6 +508,13 @@ def setMetadata(serviceName, data, _id):
         obj[JSON] = data
         db_set_metadata[METADATA].save(obj)
 
+def deleteMetadataById(serviceName, _id):
+    collection = getDbObject(serviceName)[METADATA]
+    try:
+        collection.remove({ID: _id})
+    except:
+        MetadataDoesNotExistException()
+
 def getMetadataById(serviceName, _id):
     obj = getDbObject(serviceName)[METADATA].find_one({ID: _id})
     if obj is not None:
