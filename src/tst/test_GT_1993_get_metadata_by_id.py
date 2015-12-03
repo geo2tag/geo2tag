@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 import unittest
 from bson.objectid import ObjectId
 from metadata_does_not_exist_exception import MetadataDoesNotExistException
