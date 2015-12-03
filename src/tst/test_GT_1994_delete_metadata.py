@@ -12,9 +12,9 @@ ID = "_id"
 TEST_DATA = {'_id': TEST_ID, 'a': '1', 'b': '2'}
 
 
-class TestDeletePointById(unittest.TestCase):
+class TestDeleteMetadataById(unittest.TestCase):
 
-    def testDeletePointById(self):
+    def testDeleteMetadataById(self):
         collection = getDbObject(TEST_DB)[TEST_COLLECTION]
         collection.insert(TEST_DATA)
         deleteMetadataById(TEST_DB, TEST_ID)
