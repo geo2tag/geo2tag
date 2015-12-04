@@ -502,7 +502,7 @@ def getAllChannelIds(serviceName):
 
 def setMetadata(serviceName, data, _id):
     db_set_metadata = getDbObject(serviceName)
-    obj = db_set_metadata[METADATA].find_one({ID: ObjectId(unicode(pointId))})
+    obj = db_set_metadata[METADATA].find_one({ID: ObjectId(unicode(_id))})
     if obj is None:
         db_set_metadata[METADATA].save(
             {ID: ObjectId(unicode(_id)), JSON: data})
