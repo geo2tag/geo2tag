@@ -17,7 +17,7 @@ class MetadataResource(Resource):
     @possibleException
     def put(self, serviceName, metadata_id):
         listArgs = MetadataResourceParser.parsePutParameters()
-        setMetadata(serviceName, listArgs.get(JSON), metadata_id) 
+        setMetadata(serviceName, listArgs.get(JSON), metadata_id)
 
     @possibleException
     def delete(self, serviceName, metadata_id):

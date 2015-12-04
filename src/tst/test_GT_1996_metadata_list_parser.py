@@ -42,10 +42,12 @@ class TestParserMetadataListResource(TestCase):
                 self.assertIsNone(args.get(JSON))
 
     def testPostParserMetadataListResource(self):
-        with app.test_request_context(URL, data=CORRECT_POST_ARGS, method='POST'):
+        with app.test_request_context(URL,
+                                      data=CORRECT_POST_ARGS, method='POST'):
             args = MetadataListResourceParser.parsePostParameters()
             self.assertEquals(args[JSON], JSON_VALUE)
 
-        with app.test_request_context(URL, data=INCORRECT_POST_ARGS, method='POST'):
+        with app.test_request_context(URL,
+                                      data=INCORRECT_POST_ARGS, method='POST'):
             with self.assertRaises(BadRequest):
                 args = MetadataListResourceParser.parsePostParameters()
