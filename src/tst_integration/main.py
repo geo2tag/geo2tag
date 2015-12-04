@@ -4,6 +4,7 @@ from test_tests_page import Test_tests_page
 from test_PointListGet import TestPointListGet
 from test_GT_1703_GeocodingPluginReady import TestGeocodingPluginReady
 from test_GT_1766_find_user_in_DB import TestGT1766FindUserInDB
+from test_metadata_resource import TestMetadataResource
 from basic_integration_test import BasicIntegrationTest
 from test_user_list_resource import TestUserListResource
 from test_plugin_list_resource import TestPluginListResource
@@ -56,6 +57,9 @@ from test_GT_1858_service_substr import TestServiceSearchBySubstr
 
 def main(host):
     suite = unittest.TestSuite()
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestMetadataResource, param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestUserListResource, param=host))
