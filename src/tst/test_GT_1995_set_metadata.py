@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import unittest
 from bson.objectid import ObjectId
-from metadata_does_not_exist_exception import MetadataDoesNotExistException
 from db_model import setMetadata, getDbObject
 
 TEST_ID = ObjectId("55671ae113293c504d515a33")
