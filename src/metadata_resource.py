@@ -1,5 +1,4 @@
-from flask_restful import reqparse
-from flask.ext.restful import Resource
+from flask_restful import Resource
 from possible_exception import possibleException
 from db_model import getMetadataById, setMetadata, deleteMetadataById
 from metadata_resource_parser import MetadataParser
@@ -16,7 +15,7 @@ class MetadataResource(Resource):
 
     @possibleException
     def put(self, serviceName, metadata_id):
-        listArgs = MetadataResourceParser.parsePutParameters()
+        listArgs = MetadataParser.parsePutParameters()
         setMetadata(serviceName, listArgs.get(JSON), metadata_id)
 
     @possibleException
