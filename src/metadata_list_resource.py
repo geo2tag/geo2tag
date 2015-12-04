@@ -7,7 +7,8 @@ class MetadataListResource(Resource):
 
     @possibleException
     def get(self):
-        pass
+        list_args = parseGetParameters()
+        
 
     @possibleException
     def post(self):
