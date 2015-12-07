@@ -33,6 +33,9 @@ def find_unsuccessfull_build_for_branch(branch):
     print "Last Build Number: ", last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
+        print '----------------'
+        print inf[ACTIONS]
+        print '----------------'
         if len(inf[ACTIONS]) == 7 or len(inf[ACTIONS]) == 8:
             if LAST_BUILD_REVISION in inf[ACTIONS][2]:
                 number = 2
