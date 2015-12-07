@@ -195,7 +195,7 @@ def create_container_env_var(container_start_port):
 
 def write_env_var(variable, value):
 
-    f = open('propsfile', 'w')
+    f = open('propsfile', 'aw')
     f.write(variable + '=' + value + '\n')
     f.close()
 
