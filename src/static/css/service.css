@@ -1,6 +1,11 @@
+.inline {
+    display: inline;
+}
+
 .buttons-service {
     text-align: center;
 }
+
 #spin {
     position:fixed;
     top:50%;
