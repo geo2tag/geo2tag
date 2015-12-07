@@ -175,6 +175,15 @@ def parse_string_time_to_timestamp(parsing_str):
 
     return result
 
+def write_conainer_env_var(container_start_port):
+    container_env = "http://" + \
+                    os.environ["SERVER"] + ":" \
+                    + unicode(container_start_port) + \
+                    "/instance/tests"
+
+    f = open('propsfile', 'w')
+    f.write('CONTAINER=' + container_env + '\n')
+    f.close()
 
 def main(name, ports):
     container_start_name = name.replace('/', '_')
@@ -207,17 +216,11 @@ def main(name, ports):
     write_log(container_start_name, "Run sel tests")
     t_sel = run_selenium_tests(container_start_name)
 
+    write_conainer_env_var(container_start_port)
+
     if t_int != 0 or t_unit != 0 or t_sel != 0:
         sys.exit(1)
 
-    container_env = "http://" + \
-                    os.environ["SERVER"] + ":" \
-                    + unicode(container_start_port) + \
-                    "/instance/tests"
-
-    f = open('propsfile', 'w')
-    f.write('CONTAINER=' + container_env + '\n')
-    f.close()
     write_log(container_start_name, container_env)
 
     write_log(container_start_name, "Done")
