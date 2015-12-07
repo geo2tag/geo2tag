@@ -29,6 +29,7 @@ from user_find_resource import UserFindResource
 from user_list_resource import UserListResource
 from admin_resource import AdminResource
 from macros_test_resource import MacrosTestsResource
+from metadata_resource import MetadataResource
 from plugin_config_resource import PluginConfigResource
 
 API = None
@@ -103,7 +104,10 @@ def addResources():
     getApi().add_resource(
         MacrosTestsResource,
         getPathWithPrefix('/macros_tests'))
-
+    getApi().add_resource(
+        MetadataResource,
+        getPathWithPrefix(
+            '/service/<string:serviceName>/metadata/<string:metadata_id>'))
     # end of the list of imported resources
 
     atexit.register(closeConnection)
