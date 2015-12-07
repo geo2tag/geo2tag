@@ -26,19 +26,11 @@ NUMBER = 'number'
 LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
 
-def find_unsuccessfull_build_for_branch():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        ARG_BRANCH,
-        required=True)
-    args = parser.parse_args()
-    server = jenkins.Jenkins(
-        JENKINS_URL,
-        username=JENKINS_USERNAME,
-        password=PASSWORD)
+def find_unsuccessfull_build_for_branch(branch):
+    server = get_jenkins_server()
     last_build_number = server.get_job_info(
         JOB)[LAST_COMPLETED_BUILD][NUMBER]
-    print last_build_number
+    print "Last Build Number: ", last_build_number
     for i in range(last_build_number, 0, -1):
         inf = server.get_build_info(JOB, i)
         if len(inf[ACTIONS]) == 7 or len(inf[ACTIONS]) == 8:
@@ -54,24 +46,38 @@ def find_unsuccessfull_build_for_branch():
             continue
         index_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME].find('/') + 1
-        branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
+        found_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME][index_branch:index_branch + 7]
-        print branch
-        if args.branch == branch:
+        if found_branch == branch:
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
-                print 'This task', args.branch, 'is successfully completed'
+                print 'This task', branch, 'is successfully completed'
             else:
-                print 'This task', args.branch, \
-                    'is unsuccessfully completed'
-                return_task(branch)
+                print 'This task', branch, 'is unsuccessfully completed'
+                reopened_task(branch)
             break
 
-
-def return_task(branch):
+def reopened_task(branch):
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = jira.issue(branch)
     jira.transition_issue(issue, u'Reopened')
     jira.add_comment(branch, 'Autotest fail')
 
+def get_branch_number():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        ARG_BRANCH,
+        required=True)
+    args = parser.parse_args()
+    return args.branch
+
+def get_jenkins_server():
+    server = jenkins.Jenkins(
+        JENKINS_URL,
+        username=JENKINS_USERNAME,
+        password=PASSWORD)
+    return server
+
+
 if __name__ == '__main__':
-    find_unsuccessfull_build_for_branch()
+    branch = get_branch_number()
+    find_unsuccessfull_build_for_branch(branch)
