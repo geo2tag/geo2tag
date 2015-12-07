@@ -37,7 +37,10 @@ def find_unsuccessfull_build_for_branch(branch):
         print len(inf[ACTIONS])
         print inf[ACTIONS]
         print '----------------'
-        if len(inf[ACTIONS]) == 7 or len(inf[ACTIONS]) == 8:
+        if len(
+            inf[ACTIONS]) == 7 or len(
+            inf[ACTIONS]) == 8 or len(
+                inf[ACTIONS]) == 6:
             if LAST_BUILD_REVISION in inf[ACTIONS][2]:
                 number = 2
             elif LAST_BUILD_REVISION in inf[ACTIONS][3]:
@@ -60,11 +63,13 @@ def find_unsuccessfull_build_for_branch(branch):
                 reopened_task(branch)
             break
 
+
 def reopened_task(branch):
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = jira.issue(branch)
     jira.transition_issue(issue, u'Reopened')
     jira.add_comment(branch, 'Autotest fail')
+
 
 def get_branch_number():
     parser = argparse.ArgumentParser()
@@ -73,6 +78,7 @@ def get_branch_number():
         required=True)
     args = parser.parse_args()
     return args.branch
+
 
 def get_jenkins_server():
     server = jenkins.Jenkins(
