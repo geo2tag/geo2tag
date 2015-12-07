@@ -1,14 +1,92 @@
 var ownerInput = null;
 var logSizeInput = null;
+var flagAddContent;
 
-$(document).ready(function (){
+
+$(document).ready(function(){
+    initValuesForServicePage()
+
     addSaveServiceHandler();
     initUi();
+    setLogSizeOwnerId();
 });
+
+function getServiceName(){
+    var url_service = location.href;
+    var service_str_const = 'service/';
+    var length_service_str_const = service_str_const.length;
+    var service_str_index = url_service.indexOf(service_str_const);
+    var result = url_service.substring(service_str_index + length_service_str_const);
+    return result;
+}
+
+function checkNewService(service_name){
+    $.ajax({
+        type: "GET",
+        url: getUrlWithPrefix("/service/") + service_name,
+        timeout: 150000,
+        crossDomain: true,
+        async: false,
+        success: function(json, status) {
+                   flag = false;
+        },
+        error: function (request, textStatus, errorThrown){
+                   if(errorThrown == 'NOT FOUND')
+                       flag = true;
+                   else
+                       console.log('error check new server')
+        }
+    });
+    return flag;
+}
+
+function getValuesForServicePage(service_name){
+    $.ajax({
+        type: "GET",
+        url: getUrlWithPrefix("/service/" + service_name),
+        timeout: 150000,
+        async: false,
+        crossDomain: true,
+        success: function(json, status) {
+            var service_inf = json;
+            var key = 'config';
+            log_size = service_inf[key]['logSize'];
+            console.log(log_size)
+            owner_id = service_inf['owner_id'];
+        },
+        error: function (request, textStatus, errorThrown){
+            console.log("get service information result: " + textStatus);
+        }
+    });
+    return {'log_size': log_size, 'owner_id': owner_id};    
+}
 
 function initUi(){
     ownerInput = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
     logSizeInput = new IntegerInput('log_size');
+}
+
+
+function initValuesForServicePage(){
+    var service_name = getServiceName();
+    var flag = checkNewService(service_name);
+    if(!flag)
+        values = getValuesForServicePage(service_name);
+    window.flagAddContent = flag;
+}
+
+
+function setLogSizeOwnerId(){
+    var service_name = getServiceName();
+    $('#service_h2_id').html("");
+    if(window.flagAddContent){
+        $('#service_h2_id').html('<h2 class="inline">New service ' + service_name + '</h2>');
+    }
+    else{
+        $('#service_h2_id').html('<h2 class="inline">Service ' + service_name + '</h2>');
+        $('#integer_input_log_size').val(window.values['log_size']);
+        $('#autocomplite_owner_id').val(window.values['owner_id']);
+    }
 }
 
 function getDataFromPage(){

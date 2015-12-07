@@ -10,6 +10,7 @@ from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, \
     GEOJSON_COORDINATES
+from metadata_does_not_exist_exception import MetadataDoesNotExistException
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -33,6 +34,8 @@ OWNERID = 'owner_id'
 ID = '_id'
 LOG = 'log'
 BC = 'bc'
+METADATA = 'metadata'
+
 # db initialisation
 MONGO_CLIENT = None  # MongoClient(getHost(), getPort())
 
@@ -495,3 +498,28 @@ def getAllChannelIds(serviceName):
     for result in obj:
         all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
+
+
+def setMetadata(serviceName, data, _id):
+    db_set_metadata = getDbObject(serviceName)
+    obj = db_set_metadata[METADATA].find_one({ID: _id})
+    if obj is None:
+        db_set_metadata[METADATA].save({ID: _id, JSON: data})
+    else:
+        obj[JSON] = data
+        db_set_metadata[METADATA].save(obj)
+
+
+def deleteMetadataById(serviceName, _id):
+    collection = getDbObject(serviceName)[METADATA]
+    try:
+        collection.remove({ID: _id})
+    except:
+        MetadataDoesNotExistException()
+
+
+def getMetadataById(serviceName, _id):
+    obj = getDbObject(serviceName)[METADATA].find_one({ID: _id})
+    if obj is not None:
+        return obj
+    raise MetadataDoesNotExistException()

@@ -22,6 +22,8 @@ from test_GT_1913_check_spinjs_and_alert_for_service_page import \
     TestCheckSpinjsAndAlertForServicePage
 from test_GT_1918_service_page_macroses import \
     TestAdminServiceMacroses
+from test_GT_1985_check_display_data_service_page import \
+    TestCheckDisplayDataServicePage
 
 
 def main(host):
@@ -76,6 +78,11 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestAdminServiceMacroses,
             param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestCheckDisplayDataServicePage,
+            param=host))
+
 ###################################################
 
 #
