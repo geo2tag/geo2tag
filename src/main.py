@@ -28,8 +28,8 @@ from admin_service_resource import AdminServiceResource
 from user_find_resource import UserFindResource
 from user_list_resource import UserListResource
 from admin_resource import AdminResource
-from plugin_config_resource import PluginConfigResource
 from macros_test_resource import MacrosTestsResource
+from plugin_config_resource import PluginConfigResource
 
 API = None
 
