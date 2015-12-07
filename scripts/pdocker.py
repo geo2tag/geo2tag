@@ -247,7 +247,7 @@ def main(name, ports):
                       build_test_fail_message(t_int, t_unit, t_sel))
         sys.exit(1)
 
-    write_log(container_start_name, container_env)
+    write_log(container_start_name, container_value)
 
     write_log(container_start_name, "Done")
     write_env_var(FAIL_REASON, SUCCESS_MSG)
