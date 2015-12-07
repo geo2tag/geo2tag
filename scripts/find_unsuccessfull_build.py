@@ -78,5 +78,4 @@ def get_jenkins_server():
 
 
 if __name__ == '__main__':
-    branch = get_branch_number()
-    find_unsuccessfull_build_for_branch(branch)
+    find_unsuccessfull_build_for_branch(get_branch_number())
