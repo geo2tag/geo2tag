@@ -27,6 +27,15 @@ CONTAINER_PORT = "port"
 CONTAINER_START = "start"
 CONTAINER_ID = "_id"
 
+# env variables
+CONTAINER_ENV = "CONTAINER"
+FAIL_REASON = "FAIL_REASON"
+
+# fail reasons
+SUCCESS_MSG = "SUCCESS"
+TESTS_FAILED_MSG = "tests failed ( unit {}, integration {}, selenium {})"
+NO_PORTS_MSG = "Free port not found exit"
+
 
 def usage():
     print "-n [container name] -p [ports range]"
@@ -175,15 +184,27 @@ def parse_string_time_to_timestamp(parsing_str):
 
     return result
 
-def write_conainer_env_var(container_start_port):
+
+def create_container_env_var(container_start_port):
     container_env = "http://" + \
                     os.environ["SERVER"] + ":" \
                     + unicode(container_start_port) + \
                     "/instance/tests"
+    return container_env
+
+
+def write_env_var(variable, value):
 
     f = open('propsfile', 'w')
-    f.write('CONTAINER=' + container_env + '\n')
+    f.write(variable + '=' + value + '\n')
     f.close()
+
+
+def build_test_fail_message(t_int, t_unit, t_sel):
+    result = TESTS_FAILED_MSG.format(
+        t_unit != 0, t_int != 0, t_sel != 0)
+    return result
+
 
 def main(name, ports):
     container_start_name = name.replace('/', '_')
@@ -196,7 +217,8 @@ def main(name, ports):
     container_start_result, container_start_port = find_port_and_start(
         container_start_name, ports)
     if not container_start_result:
-        write_log(container_start_name, "Free port not found exit")
+        write_log(container_start_name, NO_PORTS_MSG)
+        write_env_var(FAIL_REASON, NO_PORTS_MSG)
         sys.exit(1)
 
     mongo_start_waiter(container_start_name)
@@ -216,15 +238,19 @@ def main(name, ports):
     write_log(container_start_name, "Run sel tests")
     t_sel = run_selenium_tests(container_start_name)
 
-    write_conainer_env_var(container_start_port)
+    container_value = create_container_env_var(container_start_port)
+
+    write_env_var(CONTAINER_ENV, container_value)
 
     if t_int != 0 or t_unit != 0 or t_sel != 0:
+        write_env_var(FAIL_REASON,
+                      build_test_fail_message(t_int, t_unit, t_sel))
         sys.exit(1)
 
     write_log(container_start_name, container_env)
 
     write_log(container_start_name, "Done")
-
+    write_env_var(FAIL_REASON, SUCCESS_MSG)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
