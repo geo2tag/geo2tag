@@ -513,10 +513,8 @@ def setMetadata(serviceName, data, _id):
 
 def deleteMetadataById(serviceName, _id):
     collection = getDbObject(serviceName)[METADATA]
-    try:
-        collection.remove({ID: ObjectId(unicode(_id))})
-    except:
-        MetadataDoesNotExistException()
+    getMetadataById(serviceName, _id)
+    collection.remove({ID: ObjectId(unicode(_id))})
 
 
 def getMetadataById(serviceName, _id):
