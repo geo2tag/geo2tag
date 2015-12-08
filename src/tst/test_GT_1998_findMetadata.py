@@ -18,5 +18,6 @@ class TestFindMetadata(TestCase):
 
         result = findMetadata(TEST_SERVICE, TEST_NUMBER,
                               TEST_OFFSET, TEST_QUERY)
+        result = list(result)
         self.assertEquals(len(result), VALID_LENGTH)
         self.assertEquals(result[0]['_id'], VALID_ID)
