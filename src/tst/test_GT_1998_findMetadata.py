@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 class TestFindMetadata(TestCase):
 
     def testMetadata(self):
-        TEST_QUERY = {'dict.dict2.0': 1}
+        TEST_QUERY = {'json.dict.dict2.0': 1}
         TEST_NUMBER = 1
         TEST_OFFSET = 0
         TEST_SERVICE = 'testservice'
