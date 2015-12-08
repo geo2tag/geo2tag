@@ -12,6 +12,7 @@ class TestFindMetadata(TestCase):
         TEST_QUERY = {'dict.dict2.0': 1}
         TEST_NUMBER = 1
         TEST_OFFSET = 0
+        TEST_SERVICE = 'testservice'
         VALID_LENGTH = 1
         VALID_ID = ObjectId('552833515404411781370723')
 
