@@ -523,3 +523,13 @@ def getMetadataById(serviceName, _id):
     if obj is not None:
         return obj
     raise MetadataDoesNotExistException()
+
+def findMetadata(serviceName, number, offset, queryPairs):
+    collection = getDbObject(serviceName)[METADATA]
+    criterion = {}
+    if queryPairs and isinstance(queryPairs, dict):
+        criterion = queryPairs
+    metadataElements = collection.find(criterion)
+    metadataElements.skip(offset)
+    metadataElements.limit(number)
+    return metadataElements 
