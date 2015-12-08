@@ -16,7 +16,7 @@ class TestFindMetadata(TestCase):
         VALID_LENGTH = 1
         VALID_ID = ObjectId('552833515404411781370723')
 
-        result = findMetadata(TEST_SERVICE, TEST_QUERY,
-                              TEST_NUMBER, TEST_OFFSET)
+        result = findMetadata(TEST_SERVICE, TEST_NUMBER,
+                              TEST_OFFSET, TEST_QUERY)
         self.assertEquals(len(result), VALID_LENGTH)
         self.assertEquals(result[0]['_id'], VALID_ID)
