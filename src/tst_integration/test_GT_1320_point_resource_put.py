@@ -4,7 +4,7 @@ from basic_integration_test import BasicIntegrationTest
 TEST_SERVICE = 'testservice'
 TEST_URL = '/instance/service/testservice/point/552833515c0dd1178d37f7bb'
 BAD_TEST_URL = '/instance/service/testservice/point/111117a47ec8115da7551111'
-VALID_RESPONSE_CODE = 200
+VALID_RESPONSE_CODE = 400
 VALID_RESPONSE_TEXT = '{}'
 NOT_VALID_RESPONSE_CODE = 404
 NOT_VALID_RESPONSE_TEXT = "Point does not exist"
