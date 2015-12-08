@@ -524,6 +524,7 @@ def getMetadataById(serviceName, _id):
         return obj
     raise MetadataDoesNotExistException()
 
+
 def findMetadata(serviceName, number, offset, queryPairs):
     collection = getDbObject(serviceName)[METADATA]
     criterion = {}
@@ -532,4 +533,4 @@ def findMetadata(serviceName, number, offset, queryPairs):
     metadataElements = collection.find(criterion)
     metadataElements.skip(offset)
     metadataElements.limit(number)
-    return metadataElements 
+    return metadataElements
