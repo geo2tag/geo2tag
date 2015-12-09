@@ -245,12 +245,12 @@ def main(name, ports):
         write_env_var(FAIL_REASON,
                       build_test_fail_message(t_int, t_unit, t_sel))
         try:
-            sys.exit(1) # Or something that calls sys.exit()
+            sys.exit(1)  # Or something that calls sys.exit()
         except SystemExit:
             print '----EXIT----'
             f = open('propsfile', 'r')
             print f.read()
-            f.close()            
+            f.close()
     write_log(container_start_name, container_value)
 
     write_log(container_start_name, "Done")
