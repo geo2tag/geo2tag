@@ -244,6 +244,7 @@ def main(name, ports):
     if t_int != 0 or t_unit != 0 or t_sel != 0:
         write_env_var(FAIL_REASON,
                       build_test_fail_message(t_int, t_unit, t_sel))
+        sys.exit(-1)
     else:
         write_log(container_start_name, container_value)
 
@@ -268,4 +269,4 @@ if __name__ == "__main__":
         usage()
     else:
         main(parsed_args.name, parsed_args.ports)
-    sys.exit(1)
+    sys.exit(0)
