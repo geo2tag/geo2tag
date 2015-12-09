@@ -244,18 +244,11 @@ def main(name, ports):
     if t_int != 0 or t_unit != 0 or t_sel != 0:
         write_env_var(FAIL_REASON,
                       build_test_fail_message(t_int, t_unit, t_sel))
-        try:
-            sys.exit(1)
-        except SystemExit:
-                print '----EXIT----'
-                f = open('propsfile', 'r')
-                print f.read()
-                f.close()
-                raise
-    write_log(container_start_name, container_value)
+    else:
+        write_log(container_start_name, container_value)
 
-    write_log(container_start_name, "Done")
-    write_env_var(FAIL_REASON, SUCCESS_MSG)
+        write_log(container_start_name, "Done")
+        write_env_var(FAIL_REASON, SUCCESS_MSG)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
