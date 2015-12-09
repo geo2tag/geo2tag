@@ -244,7 +244,13 @@ def main(name, ports):
     if t_int != 0 or t_unit != 0 or t_sel != 0:
         write_env_var(FAIL_REASON,
                       build_test_fail_message(t_int, t_unit, t_sel))
-        os._exit(1)
+        sys.exit(1)  # Or something that calls sys.exit()
+            except SystemExit:
+                print '----EXIT----'
+                f = open('propsfile', 'r')
+                print f.read()
+                f.close()
+                raise
     write_log(container_start_name, container_value)
 
     write_log(container_start_name, "Done")
