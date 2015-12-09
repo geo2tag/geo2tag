@@ -268,4 +268,4 @@ if __name__ == "__main__":
         usage()
     else:
         main(parsed_args.name, parsed_args.ports)
-    sys.exit(0)
+    sys.exit(1)
