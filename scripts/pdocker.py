@@ -27,10 +27,22 @@ CONTAINER_PORT = "port"
 CONTAINER_START = "start"
 CONTAINER_ID = "_id"
 
+# env variables
+CONTAINER_ENV = "CONTAINER"
+FAIL_REASON = "FAIL_REASON"
+
+# fail reasons
+SUCCESS_MSG = "SUCCESS"
+TESTS_FAILED_MSG = "tests failed ( unit {}, integration {}, selenium {})"
+NO_PORTS_MSG = "Free port not found exit"
+
+FAILED = 'failed'
+SUCCEED = 'succeed'
+
 
 def usage():
     print "-n [container name] -p [ports range]"
-    sys.exit(1)
+    sys.exit(0)
 
 
 def write_log(name, log_str):
@@ -59,7 +71,7 @@ def start_container(name, port):
     rc = manage_script(
         name, [CREATE_CONTAINER, '-p', unicode(port), '-n', name])
     if rc != 0:
-        sys.exit(rc)
+        sys.exit(0)
 
 
 def stop_container(name):
@@ -96,7 +108,7 @@ def mongo_start_waiter(name):
             break
         elif counter_start == 10:
             write_log(name, "Container start fail")
-            sys.exit(1)
+            sys.exit(0)
         else:
             write_log(name, "Waiting mongo")
             sleep(3)
@@ -176,6 +188,34 @@ def parse_string_time_to_timestamp(parsing_str):
     return result
 
 
+def create_container_env_var(container_start_port):
+    container_env = "http://" + \
+                    os.environ["SERVER"] + ":" \
+                    + unicode(container_start_port) + \
+                    "/instance/tests"
+    return container_env
+
+
+def write_env_var(variable, value):
+    f = open('propsfile', 'aw')
+    f.write(variable + '=' + value + '\n')
+    f.close()
+
+
+def getTestStatus(boolCode):
+    if boolCode == 0:
+        return SUCCEED
+
+    return FAILED
+
+
+def build_test_fail_message(t_int, t_unit, t_sel):
+
+    result = TESTS_FAILED_MSG.format(
+        getTestStatus(t_unit), getTestStatus(t_int), getTestStatus(t_sel))
+    return result
+
+
 def main(name, ports):
     container_start_name = name.replace('/', '_')
     if "origin_" not in container_start_name:
@@ -187,8 +227,9 @@ def main(name, ports):
     container_start_result, container_start_port = find_port_and_start(
         container_start_name, ports)
     if not container_start_result:
-        write_log(container_start_name, "Free port not found exit")
-        sys.exit(1)
+        write_log(container_start_name, NO_PORTS_MSG)
+        write_env_var(FAIL_REASON, NO_PORTS_MSG)
+        sys.exit(0)
 
     mongo_start_waiter(container_start_name)
     write_log(
@@ -207,21 +248,19 @@ def main(name, ports):
     write_log(container_start_name, "Run sel tests")
     t_sel = run_selenium_tests(container_start_name)
 
+    container_value = create_container_env_var(container_start_port)
+
+    write_env_var(CONTAINER_ENV, container_value)
+
     if t_int != 0 or t_unit != 0 or t_sel != 0:
-        sys.exit(1)
+        write_env_var(FAIL_REASON,
+                      build_test_fail_message(t_int, t_unit, t_sel))
+        sys.exit(0)
 
-    container_env = "http://" + \
-                    os.environ["SERVER"] + ":" \
-                    + unicode(container_start_port) + \
-                    "/instance/tests"
-
-    f = open('propsfile', 'w')
-    f.write('CONTAINER=' + container_env + '\n')
-    f.close()
-    write_log(container_start_name, container_env)
+    write_log(container_start_name, container_value)
 
     write_log(container_start_name, "Done")
-
+    write_env_var(FAIL_REASON, SUCCESS_MSG)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
