@@ -53,6 +53,7 @@ from test_plugin_config_resource import TestPluginConfigResource
 from test_GT_1792_check_config_geocoder import \
     TestPluginConfigGeocoder
 from test_GT_1858_service_substr import TestServiceSearchBySubstr
+from test_metadata_list_resource import TestMetadataListResource
 
 
 def main(host):
@@ -244,6 +245,10 @@ def main(host):
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestServiceSearchBySubstr,
+            param=host))
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestMetadataListResource,
             param=host))
 
 ###################################################
