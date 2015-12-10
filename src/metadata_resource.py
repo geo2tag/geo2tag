@@ -3,8 +3,6 @@ from possible_exception import possibleException
 from db_model import getMetadataById, setMetadata, deleteMetadataById
 from metadata_resource_parser import MetadataParser
 
-JSON = 'json'
-
 
 class MetadataResource(Resource):
 
@@ -17,7 +15,7 @@ class MetadataResource(Resource):
     def put(self, serviceName, metadata_id):
         print metadata_id
         listArgs = MetadataParser.parsePutParameters()
-        setMetadata(serviceName, listArgs.get(JSON), metadata_id)
+        setMetadata(serviceName, listArgs, metadata_id)
         return {}, 200
 
     @possibleException

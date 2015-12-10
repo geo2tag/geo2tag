@@ -500,15 +500,12 @@ def getAllChannelIds(serviceName):
     return all_channel_ids_array
 
 
-def setMetadata(serviceName, data, _id):
+def setMetadata(serviceName, data, _id=None):
+    obj = data
+    if _id is not None:
+        obj[ID] = ObjectId(_id)
     db_set_metadata = getDbObject(serviceName)
-    obj = db_set_metadata[METADATA].find_one({ID: ObjectId(unicode(_id))})
-    if obj is None:
-        db_set_metadata[METADATA].save(
-            {ID: ObjectId(unicode(_id)), JSON: data})
-    else:
-        obj[JSON] = data
-        db_set_metadata[METADATA].save(obj)
+    return db_set_metadata[METADATA].save(obj)
 
 
 def deleteMetadataById(serviceName, _id):

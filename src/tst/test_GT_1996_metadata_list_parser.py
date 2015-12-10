@@ -12,13 +12,14 @@ OFFSET = 'offset'
 OFFSET_VALUE = 0
 JSON = 'json'
 QUERY = 'query'
-QUERY_VALUE = '{"a":"1", "b":"2"}'
+QUERY_VALUE = {"a": "1", "b": "2"}
+QUERY_VALUE_STRING = '{"a":"1", "b":"2"}'
 JSON_VALUE = {"a": "1", "b": "2"}
 JSON_VALUE_STRING = '{"a":"1", "b":"2"}'
 
 CORRECT_GET_ARGS = NUMBER + '=' + unicode(NUMBER_VALUE) + \
     '&' + OFFSET + '=' + unicode(OFFSET_VALUE) + \
-    '&' + QUERY + '=' + unicode(QUERY_VALUE)
+    '&' + QUERY + '=' + unicode(QUERY_VALUE_STRING)
 CORRECT_POST_ARGS = unicode(JSON_VALUE_STRING)
 INCORRECT_GET_ARGS = 'incorrect='
 INCORRECT_POST_ARGS = {}
