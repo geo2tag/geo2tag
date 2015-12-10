@@ -10,6 +10,7 @@ NOT_VALID_POST_ARGS = "not_valid_data"
 VALID_GET_ARGS = "?number=1&offset=0&query={\"a\":1}"
 NOT_VALID_GET_ARGS = "?arg=1"
 
+
 class TestMetadataListResource(BasicIntegrationTest):
 
     def testMetadataListResourceGet(self):
@@ -29,4 +30,3 @@ class TestMetadataListResource(BasicIntegrationTest):
             data=NOT_VALID_POST_ARGS)
         responseCode = response.status_code
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
-
