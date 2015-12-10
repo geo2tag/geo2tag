@@ -39,7 +39,7 @@ NO_PORTS_MSG = "Free port not found exit"
 
 def usage():
     print "-n [container name] -p [ports range]"
-    sys.exit(1)
+    sys.exit(0)
 
 
 def write_log(name, log_str):
@@ -68,7 +68,7 @@ def start_container(name, port):
     rc = manage_script(
         name, [CREATE_CONTAINER, '-p', unicode(port), '-n', name])
     if rc != 0:
-        sys.exit(rc)
+        sys.exit(0)
 
 
 def stop_container(name):
@@ -105,7 +105,7 @@ def mongo_start_waiter(name):
             break
         elif counter_start == 10:
             write_log(name, "Container start fail")
-            sys.exit(1)
+            sys.exit(0)
         else:
             write_log(name, "Waiting mongo")
             sleep(3)
@@ -218,7 +218,7 @@ def main(name, ports):
     if not container_start_result:
         write_log(container_start_name, NO_PORTS_MSG)
         write_env_var(FAIL_REASON, NO_PORTS_MSG)
-        sys.exit(1)
+        sys.exit(0)
 
     mongo_start_waiter(container_start_name)
     write_log(
@@ -245,11 +245,11 @@ def main(name, ports):
         write_env_var(FAIL_REASON,
                       build_test_fail_message(t_int, t_unit, t_sel))
         sys.exit(1)
-    else:
-        write_log(container_start_name, container_value)
 
-        write_log(container_start_name, "Done")
-        write_env_var(FAIL_REASON, SUCCESS_MSG)
+    write_log(container_start_name, container_value)
+
+    write_log(container_start_name, "Done")
+    write_env_var(FAIL_REASON, SUCCESS_MSG)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
