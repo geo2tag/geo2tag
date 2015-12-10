@@ -31,7 +31,6 @@ class TestValidatePlugin(TestCase):
             stdin=subprocess.PIPE)
         print process.communicate()
         os.chdir('src/tst')
-        print '------'
         self.assertEquals(0, process.poll())
 
     def testValidatePlugin_MakePlugin(self):
