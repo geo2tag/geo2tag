@@ -39,6 +39,7 @@ NO_PORTS_MSG = "Free port not found exit"
 FAILED = 'failed'
 SUCCEED = 'succeed'
 
+
 def usage():
     print "-n [container name] -p [ports range]"
     sys.exit(0)
@@ -206,6 +207,7 @@ def getTestStatus(boolCode):
         return SUCCEED
 
     return FAILED
+
 
 def build_test_fail_message(t_int, t_unit, t_sel):
 

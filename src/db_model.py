@@ -514,7 +514,6 @@ def deleteMetadataById(serviceName, _id):
     collection.remove({ID: ObjectId(unicode(_id))})
 
 
-
 def getMetadataById(serviceName, _id):
     obj = getDbObject(serviceName)[METADATA].find_one(
         {ID: ObjectId(unicode(_id))})
