@@ -7,9 +7,10 @@ from werkzeug.exceptions import BadRequest
 from metadata_resource_parser import MetadataParser
 
 JSON = 'json'
-JSON_VALUE = "{'a':'1', 'b':'2'}"
+JSON_VALUE = {'a': '1', 'b': '2'}
+JSON_VALUE_STRING = unicode('{"a":"1", "b":"2"}')
 
-CORRECT_ARGS = {JSON: JSON_VALUE}
+CORRECT_ARGS = JSON_VALUE_STRING
 INCORRECT_ARGS = {}
 
 URL = '/testservice/metadata'
@@ -24,7 +25,7 @@ class TestMetadataResourceParser(TestCase):
         with app.test_request_context(URL, data=CORRECT_ARGS,
                                       method='PUT'):
             args = MetadataParser.parsePutParameters()
-            self.assertEquals(args[JSON], JSON_VALUE)
+            self.assertEquals(args, JSON_VALUE)
 
         with app.test_request_context(URL, data=INCORRECT_ARGS,
                                       method='PUT'):
