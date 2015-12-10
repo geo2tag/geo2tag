@@ -1,12 +1,35 @@
 {% extends "base.html" %}
 {% block styles%}
-<link rel="stylesheet" href="{{ getStaticUrl('css/service_list.css') }}">
+<link href="{{ getStaticUrl('css/service_list.css') }}" rel="stylesheet">
+
+<!-- Macros css -->
+<link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
 {% endblock %}
 {% block scripts %}
 <script src="{{ getStaticUrl('js/service_list.js') }}"></script>
+
+<!-- Macros js -->
+<script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
+ <script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
 {% endblock %}
 {% block content %}
-<header>
+<div class='container'>     
     <h2>Services</h2>
-</header>
+    <button type="button" class="btn btn-primary btn-lg btn-success" id="create_new_service">Create new service</button>
+    <h3>Filter</h3>
+    <div class='well'>
+        {% from "macros/autocomplete_input.html" import AutocompleteInput with context %}
+        {{ AutocompleteInput('owner_id', 'Owner login', 'Start typing to select user') }}
+
+        <div class="form-group">
+            <label for="service_name">Service name:</label>
+            <input type="text" class="form-control" id="service_name">
+        </div>
+    </div>
+    <h3>Results</h3>
+    <div class='well'>
+        {% from "macros/pagination.html" import pagination with context %}
+        {{pagination('service_list')}}
+    </div>
+</div>
 {% endblock %}

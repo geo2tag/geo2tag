@@ -500,16 +500,35 @@ def getAllChannelIds(serviceName):
     return all_channel_ids_array
 
 
+def setMetadata(serviceName, data, _id=None):
+    obj = data
+    if _id is not None:
+        obj[ID] = ObjectId(_id)
+    db_set_metadata = getDbObject(serviceName)
+    return db_set_metadata[METADATA].save(obj)
+
+
 def deleteMetadataById(serviceName, _id):
     collection = getDbObject(serviceName)[METADATA]
-    try:
-        collection.remove({ID: _id})
-    except:
-        MetadataDoesNotExistException()
+    getMetadataById(serviceName, _id)
+    collection.remove({ID: ObjectId(unicode(_id))})
+
 
 
 def getMetadataById(serviceName, _id):
-    obj = getDbObject(serviceName)[METADATA].find_one({ID: _id})
+    obj = getDbObject(serviceName)[METADATA].find_one(
+        {ID: ObjectId(unicode(_id))})
     if obj is not None:
         return obj
     raise MetadataDoesNotExistException()
+
+
+def findMetadata(serviceName, number, offset, queryPairs):
+    collection = getDbObject(serviceName)[METADATA]
+    criterion = {}
+    if queryPairs and isinstance(queryPairs, dict):
+        criterion = queryPairs
+    metadataElements = collection.find(criterion)
+    metadataElements.skip(offset)
+    metadataElements.limit(number)
+    return metadataElements

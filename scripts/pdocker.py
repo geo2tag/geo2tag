@@ -36,6 +36,8 @@ SUCCESS_MSG = "SUCCESS"
 TESTS_FAILED_MSG = "tests failed ( unit {}, integration {}, selenium {})"
 NO_PORTS_MSG = "Free port not found exit"
 
+FAILED = 'failed'
+SUCCEED = 'succeed'
 
 def usage():
     print "-n [container name] -p [ports range]"
@@ -199,9 +201,16 @@ def write_env_var(variable, value):
     f.close()
 
 
+def getTestStatus(boolCode):
+    if boolCode == 0:
+        return SUCCEED
+
+    return FAILED
+
 def build_test_fail_message(t_int, t_unit, t_sel):
+
     result = TESTS_FAILED_MSG.format(
-        t_unit != 0, t_int != 0, t_sel != 0)
+        getTestStatus(t_unit), getTestStatus(t_int), getTestStatus(t_sel))
     return result
 
 
