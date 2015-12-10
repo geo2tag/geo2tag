@@ -24,6 +24,7 @@ from test_GT_1918_service_page_macroses import \
     TestAdminServiceMacroses
 from test_GT_1985_check_display_data_service_page import \
     TestCheckDisplayDataServicePage
+from test_service_list_page import TestServiceListResource
 
 
 def main(host):
@@ -81,6 +82,10 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestCheckDisplayDataServicePage,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestServiceListResource,
             param=host))
 
 ###################################################
