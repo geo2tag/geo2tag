@@ -13,12 +13,12 @@ OFFSET_VALUE = 0
 JSON = 'json'
 QUERY = 'query'
 QUERY_VALUE = '{"a":"1", "b":"2"}'
-JSON_VALUE = '{"a":"1", "b":"2"}'
+JSON_VALUE = {"a":"1", "b":"2"}
 
 CORRECT_GET_ARGS = NUMBER + '=' + unicode(NUMBER_VALUE) + \
     '&' + OFFSET + '=' + unicode(OFFSET_VALUE) + \
     '&' + QUERY + '=' + unicode(QUERY_VALUE)
-CORRECT_POST_ARGS = {JSON: unicode(JSON_VALUE)}
+CORRECT_POST_ARGS = unicode(JSON_VALUE)
 INCORRECT_GET_ARGS = 'incorrect='
 INCORRECT_POST_ARGS = {}
 
@@ -47,7 +47,7 @@ class TestParserMetadataListResource(TestCase):
         with app.test_request_context(URL,
                                       data=CORRECT_POST_ARGS, method='POST'):
             args = MetadataListResourceParser.parsePostParameters()
-            self.assertEquals(args[JSON], JSON_VALUE)
+            self.assertEquals(args, JSON_VALUE)
 
         with app.test_request_context(URL,
                                       data=INCORRECT_POST_ARGS, method='POST'):

@@ -1,4 +1,5 @@
 from flask_restful import reqparse
+from flask import request
 
 ARGS_NUMBER = 'number'
 ARGS_OFFSET = 'offset'
@@ -19,7 +20,4 @@ class MetadataListResourceParser():
 
     @staticmethod
     def parsePostParameters():
-        parser = reqparse.RequestParser()
-        parser.add_argument(ARGS_JSON, type=unicode, required=True)
-        args = parser.parse_args()
-        return args
+        return request.get_json(force=True)
