@@ -1,13 +1,8 @@
 {% macro pagination(macroId) %}
-	<div class="row" name="pagination-block">
-        <ul class="pagination" id="{{macroId}}">
-            <li><a href="#">«</a></li>
-            <li id="p1"><a href="#">1</a></li>
-            <li class="active" id="p2"><a href="#">2</a></li>
-            <li id="p3"><a href="#">3</a></li>
-            <li id="p4"><a href="#">4</a></li>
-            <li id="p5"><a href="#">5</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
-    </div>
+    {% from "macros/get_static_url.html" import getStaticUrl with context %}
+    <link type="text/css" rel="stylesheet" href="{{ getStaticUrl('css/simplePagination.css') }}"/>
+
+    <script type="text/javascript" src="{{ getStaticUrl('js/jquery.simplePagination.js') }}"></script>
+
+    <div id="{{macroId}}" class="pagination"></div>
 {% endmacro %}
