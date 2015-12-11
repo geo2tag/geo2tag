@@ -7,6 +7,7 @@ function Pagination(macroId, viewFunction){
             cssStyle: 'light-theme'
         });
     this.setViewFunction(viewFunction);
+    this.jqueryObject.bind('click', function() {});
 }
 
 /*
@@ -14,6 +15,7 @@ function Pagination(macroId, viewFunction){
        (json) representation of single pagination object. viewFunction
        returns html view of single pagination object.
 */
+
 Pagination.prototype.setViewFunction = function (viewFunction){
     this.viewFunction = viewFunction;
 }
