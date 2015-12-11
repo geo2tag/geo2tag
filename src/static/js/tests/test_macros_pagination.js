@@ -8,4 +8,11 @@ QUnit.test('pagination macros test', function( assert ) {
     assert.equal(unf,pagination.getActiveUlId());
     pagination.setActiveUl(set_active);
     assert.equal(set_active,pagination.getActiveUlId());
+
+    function testFunction(json){
+        return "<div>" + json.name + "</div>"
+    }
+
+    pagination.setViewFunction(testFunction);
+    assert.equal(pagination.getViewFunction(), testFunction);
 });

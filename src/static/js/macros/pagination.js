@@ -1,7 +1,22 @@
-function Pagination(macroId){
+function Pagination(macroId, viewFunction){
     this.macroId = macroId;
     this.jqueryObject = $('#'+macroId.toString());
+    this.setViewFunction(viewFunction);
 }
+
+/*
+   viewFunction - function with single argument json, which is a 
+       (json) representation of single pagination object. viewFunction
+       returns html view of single pagination object.
+*/
+Pagination.prototype.setViewFunction = function (viewFunction){
+    this.viewFunction = viewFunction;
+}
+
+Pagination.prototype.getViewFunction = function (){
+    return this.viewFunction;
+}
+
 Pagination.prototype.setActiveUl = function(ulId){
     this.removeActivePage();
     this.jqueryObject.children('#' + ulId).addClass('active');
