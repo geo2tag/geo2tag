@@ -1,4 +1,7 @@
 {% macro pagination(macroId) %}
+<div id='macro_pagination_{{macroId}}'>
+    <div class='container' id='container_{{macroId}}'>
+    </div>
 	<div class="row" name="pagination-block">
         <ul class="pagination" id="{{macroId}}">
             <li><a href="#">«</a></li>
@@ -10,4 +13,5 @@
             <li><a href="#">»</a></li>
         </ul>
     </div>
+</div>
 {% endmacro %}
