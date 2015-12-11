@@ -24,7 +24,7 @@ QUnit.test('pagination macros viewFunction', function( assert ) {
     
 });
 
-QUnit.test('pagination macros viewFunction', function( assert ) {
+QUnit.test('pagination macros drawPage', function( assert ) {
     pagination.setViewFunction(testFunction);
     
     pagination.drawPage(testElementsArray);
