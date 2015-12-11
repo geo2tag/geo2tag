@@ -1,8 +1,3 @@
 {% macro pagination(macroId) %}
-    {% from "macros/get_static_url.html" import getStaticUrl with context %}
-    <link type="text/css" rel="stylesheet" href="{{ getStaticUrl('css/simplePagination.css') }}"/>
-
-    <script type="text/javascript" src="{{ getStaticUrl('js/jquery.simplePagination.js') }}"></script>
-
     <div id="{{macroId}}" class="pagination"></div>
 {% endmacro %}
