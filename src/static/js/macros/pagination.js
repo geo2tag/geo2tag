@@ -7,7 +7,7 @@ function Pagination(macroId, viewFunction){
             cssStyle: 'light-theme'
         });
     this.setViewFunction(viewFunction);
-    this.jqueryObject.bind('click', function() {});
+    this.jqueryObject.bind('click', function(){});
 }
 
 /*
