@@ -10,7 +10,7 @@ NOT_VALID_URL = '/instance/service' + \
     '/testservice/metadata/552833515404411781370710'
 NOT_VALID_RESPONSE_CODE = 400
 NOT_VALID_RESPONSE_CODE_NOT_FOUND = 404
-LIST_ARGS = {"json": {"name": "test_metadata_put"}}
+LIST_ARGS = '{"json": {"name": "test_metadata_put"}}'
 NOT_VALID_LIST_ARGS = "not_valid_data"
 
 
