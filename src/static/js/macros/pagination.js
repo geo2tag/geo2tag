@@ -2,8 +2,18 @@ function Pagination(macroId, viewFunction){
     this.macroId = macroId;
     this.jqueryObject = $('#'+macroId.toString());
     this.container = $('#container_' + macroId.toString());
-
+    this.initPagination(100, 10);
     this.setViewFunction(viewFunction);
+}
+
+Pagination.prototype.initPagination = function (totalNum, elPerPage){
+    this.jqueryObject.pagination({
+            items: totalNum,
+            itemsOnPage: elPerPage,
+            cssStyle: 'light-theme'
+        });
+    var elementsArray = [];
+    this.drawPage(elementsArray);
 }
 
 /*
