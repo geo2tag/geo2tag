@@ -1,23 +1,21 @@
 { "_id" : { "$oid" : "55671ae113293c504d515a33" }, "name" : "testservice", "owner_id" : "", "config" : { "log_size" : 1048576 } }
-{ "_id" : { "$oid" : "11671be113293a504d515aaa" }, "name" : "testservice_1", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "22671be113293b504d515a33" }, "name" : "testservice_2", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "336711e113293c504d515a33" }, "name" : "testservice_3", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "446711e113293c504d515a33" }, "name" : "testservice_4", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "666712e113293c444d515a33" }, "name" : "testservice_5", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "776713e1132938504d515a33" }, "name" : "testservice_6", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "886711e1132930504d515a33" }, "name" : "testservice_7", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "996719e113293c504d515a33" }, "name" : "testservice_8", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "aa6716e113293c504d515a33" }, "name" : "testservice_9", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "bb6715e113293c5a4d515a33" }, "name" : "testservice_10", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "cc671ae113293c504d515a33" }, "name" : "testservice_11", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "dd671ae113293c504d515a33" }, "name" : "testservice_12", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "ee671ae113293c504d515a33" }, "name" : "testservice_13", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "12671ce113293c594d515a33" }, "name" : "testservice_14", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "32671ce113293c504d515a33" }, "name" : "testservice_15", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "42671ae113293c504d515a33" }, "name" : "testservice_16", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "52671a2113293c504d515a33" }, "name" : "testservice_17", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "62671a2113293c504d515a33" }, "name" : "testservice_18", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "a2671a3113293c504d515a33" }, "name" : "testservice_19", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "b3671af113293c504d515a33" }, "name" : "testservice_20", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "c2671ae113293c504d515a33" }, "name" : "testservice_21", "owner_id" : "", "config" : { "log_size" : 1024 } }
-{ "_id" : { "$oid" : "d2671ae113293c504d515a33" }, "name" : "testservice_22", "owner_id" : "", "config" : { "log_size" : 1024 } }
+{ "_id" : ObjectId("566eeff8ffd1f3661115b0b3"), "config" : { "log_size" : 1024 }, "name" : "test_service_name_1", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef055ffd1f3661115b0b6"), "config" : { "log_size" : 1024 }, "name" : "test_service_name_2", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef071ffd1f3661115b0bb"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_3", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef07dffd1f3661115b0be"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_4", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef089ffd1f3661115b0c1"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_5", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef095ffd1f3661115b0c4"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_6", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef0a5ffd1f3661115b0c7"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_7", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef0b6ffd1f3661115b0ca"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_8", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef0c2ffd1f3661115b0cd"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_9", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef0cdffd1f3661115b0d0"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_10", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef0f8ffd1f3661115b0d3"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_11", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef106ffd1f3661115b0d6"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_12", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef111ffd1f3661115b0d9"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_13", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef11cffd1f3661115b0dc"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_14", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef127ffd1f3661115b0df"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_15", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef131ffd1f3661115b0e2"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_16", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef13cffd1f3661115b0e5"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_17", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef146ffd1f3661115b0e8"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_18", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef14fffd1f3661115b0eb"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_19", "owner_id" : "new_test_ownerId" }
+{ "_id" : ObjectId("566ef15cffd1f3661115b0ee"), "config" : { "log_size" : 1324 }, "name" : "test_service_name_20", "owner_id" : "new_test_ownerId" }
