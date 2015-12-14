@@ -5,15 +5,9 @@ function testFunction(json){
 var testElementsArray = [{name:1}, {name:2}, {name:3}];
 
 QUnit.test('pagination macros init', function( assert ) {
-    var active_ul = 'p2';
-    var set_active = 'p5';
-    var unf = undefined;
-    assert.equal(active_ul,pagination.getActiveUlId());
-    pagination.removeActivePage();
-    assert.equal(unf,pagination.getActiveUlId());
-    pagination.setActiveUl(set_active);
-    assert.equal(set_active,pagination.getActiveUlId());
-
+    pagination.initPagination(100, 10);
+    console.log($('#container').children())
+//    assert.equal()
 
 });
 

@@ -2,7 +2,6 @@ function Pagination(macroId, viewFunction){
     this.macroId = macroId;
     this.jqueryObject = $('#'+macroId.toString());
     this.container = $('#container_' + macroId.toString());
-    this.initPagination(100, 10);
     this.setViewFunction(viewFunction);
 }
 
