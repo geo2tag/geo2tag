@@ -4,13 +4,15 @@
 
 <!-- Macros css -->
 <link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="{{ getStaticUrl('css/simplePagination.css') }}"/>
 {% endblock %}
 {% block scripts %}
 <script src="{{ getStaticUrl('js/service_list.js') }}"></script>
 
 <!-- Macros js -->
 <script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
- <script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
+<script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
+<script src="{{ getStaticUrl('js/jquery.simplePagination.js') }}"></script>
 {% endblock %}
 {% block content %}
 <div class='container'>     
@@ -29,7 +31,7 @@
     <h3>Results</h3>
     <div class='well'>
         {% from "macros/pagination.html" import pagination with context %}
-        {{pagination('service_list')}}
+        {{ pagination('service_list') }}
     </div>
 </div>
 {% endblock %}

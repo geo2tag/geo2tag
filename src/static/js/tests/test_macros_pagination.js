@@ -1,4 +1,5 @@
 var pagination = new Pagination('pagintaion_block');
+
 function testFunction(json){
     return "<div class='row'>" + json.name + "</div>"
 }
@@ -29,4 +30,8 @@ QUnit.test('pagination macros drawPage', function( assert ) {
     var elements = $('#container_pagintaion_block').children();
     assert.equal( elements.length, 0);
     
+});
+
+QUnit.test('pagination macros test', function( assert ) {
+    assert.ok($('#pagintaion_block').children().children().length > 0);
 });
