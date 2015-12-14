@@ -1,4 +1,5 @@
-var pagination = new Pagination('pagintaion_block');
+var test_id = 'pagintaion_block'
+var pagination = new Pagination(test_id);
 
 function testFunction(json){
     return "<div class='row'>" + json.name + "</div>"
@@ -6,9 +7,9 @@ function testFunction(json){
 var testElementsArray = [{name:1}, {name:2}, {name:3}];
 
 QUnit.test('pagination macros init', function( assert ) {
-    pagination.initPagination(100, 10);
-    console.log($('#container').children())
-//    assert.equal()
+    var elements_count = 10;
+    pagination.initPagination(100, elements_count);
+    assert.equal($('#' + test_id).children().children().length, elements_count)
 
 });
 
