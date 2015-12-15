@@ -50,7 +50,7 @@ var service_page = new ServicePageView({model: service_list_page.services});
 
 function get_service_display(json){
     var service_name = json.name;
-    var service_id = json._id;
+    var service_id = json._id.$oid;
     var service_link = getUrlWithPrefix('/admin/service/');
     var result = '<div class="row" id="' + service_id + '"><div class="col-xs-8"><h3><a href = ' + service_link + service_id + '>' + service_name + '</a></h3></div>';
     result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" service_id="' + service_id + '">DELETE</button></div></div>';
