@@ -2,14 +2,12 @@ var Service = Backbone.Model.extend({});
 
 service = new Service({
     title: "Service"
-    // получить json c инф о сервисе
 });
 
 
 var ServiceList = Backbone.Collection.extend({
     model: Service
     // filter: function(){} 
-
 });
 
 var service_list = new ServiceList();
@@ -21,11 +19,23 @@ service_list.add({
 var ServiceView = Backbone.View.extend({
     tagName: "div",
     className: "container",
-    render: function() { // отрисовка вида (одного сервиса)
+    render: function() {
         $(this.el).html(get_service_display(this.model.json))
     }
 //    initialize: function(){    }
 });
+
+var ServicePageModel = Backbone.Model.extend({
+    initialize: function() {
+        this.services = new ServiceList();
+    }
+});
+
+var ServicesPageView = Backbone.View.extend({
+
+});
+
+var Page = new PageView;
 
 function get_service_display(json){
     var service_name = json.name;
