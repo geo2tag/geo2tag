@@ -2,7 +2,6 @@
 {% block styles%}
 <!-- Lib's styles -->
 <link rel="stylesheet" href="{{ getStaticUrl('css/qunit-1.18.0.css') }}">
-
 <!-- Test styles -->
 {% endblock %}
 {% block scripts %}
@@ -10,12 +9,15 @@
 <script src="{{ getStaticUrl('js/qunit-1.18.0.js') }}"></script>
 <script src="{{ getStaticUrl('js/geo2tag.js') }}"></script>
 <script src="{{ getStaticUrl('js/popup.js') }}"></script>
+<script src="{{ getStaticUrl('js/service_list.js') }}"></script>
 
 <!-- Tests -->
 <script src="{{ getStaticUrl('js/tests/geo2tag_requests_tests.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/global_instance_prefix_test.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/popup_map_resource_tests.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/geo2tag_requests_bc_tests.js') }}"></script>
+<script src="{{ getStaticUrl('js/tests/service_list_tests.js') }}"></script>
+
 {% endblock %}
 {% block content %}
 <header>
@@ -23,5 +25,5 @@
 </header>
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>
-
+<div id='service_list_test'></div>
 {% endblock %}
