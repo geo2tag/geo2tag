@@ -1,7 +1,3 @@
-$(document).ready(function(){
-    var pagination = new Pagination('service_list');
-});
-
 var Service = Backbone.Model.extend({});
 
 service = new Service({
