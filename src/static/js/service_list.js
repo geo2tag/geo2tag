@@ -15,9 +15,10 @@ var ServiceList = Backbone.Collection.extend({
 var ServiceView = Backbone.View.extend({
     tagName: "div",
     className: "container",
+    id: "container_service_list",
+
     render: function(json) {
-        console.log(json)
-        $(this.el).html(get_service_display(json))
+        this.$el.append(get_service_display(json));
     }
 });
 
