@@ -31,11 +31,11 @@ var ServicePageModel = Backbone.Model.extend({
     }
 });
 
-var ServicesPageView = Backbone.View.extend({
+var ServicePageView = Backbone.View.extend({
 
 });
 
-var Page = new PageView;
+var service_page = new ServicePageView;
 
 function get_service_display(json){
     var service_name = json.name;
