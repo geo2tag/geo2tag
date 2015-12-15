@@ -4,38 +4,49 @@ service = new Service({
     title: "Service"
 });
 
-
 var ServiceList = Backbone.Collection.extend({
-    model: Service
-    // filter: function(){} 
+    model: Service,
+    url: function(){
+        var number = 5;
+        return '/instance/service?number=' + number;
+    }
 });
 
 var service_list = new ServiceList();
 
-service_list.add({
-    title: "Service List"
-});
-
 var ServiceView = Backbone.View.extend({
     tagName: "div",
     className: "container",
-    render: function() {
-        $(this.el).html(get_service_display(this.model.json))
+    render: function(json) {
+        console.log(json)
+        $(this.el).html(get_service_display(json))
     }
-//    initialize: function(){    }
 });
+
+service_view = new ServiceView;
 
 var ServicePageModel = Backbone.Model.extend({
     initialize: function() {
         this.services = new ServiceList();
+        this.services.fetch(); // get services list from server using url
     }
 });
 
+service_list_page = new ServicePageModel;
+
 var ServicePageView = Backbone.View.extend({
+    initialize: function() {
+        this.render();
+    },
+    render: function() {
+        console.log(this.model.toJSON())
+        for(var i = 0; i < 0; i++)
+            service_view.render();
+    }
 
 });
 
-var service_page = new ServicePageView;
+var service_page = new ServicePageView({model: service_list_page});
 
 function get_service_display(json){
     var service_name = json.name;
