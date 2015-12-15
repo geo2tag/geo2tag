@@ -41,8 +41,8 @@ var ServicePageView = Backbone.View.extend({
         });
     },
     render: function() {
-        for(var i = 0; i < 0; i++)
-            service_view.render(this.model.at(i));
+        for(var i = 0; i < this.model.length; i++)
+            service_view.render(this.model.at(i).attributes);
     }
 });
 
