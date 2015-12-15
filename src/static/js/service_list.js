@@ -1,6 +1,6 @@
 var Service = Backbone.Model.extend({});
 
-service = new Service({
+var service = new Service({
     title: "Service"
 });
 
@@ -12,8 +12,6 @@ var ServiceList = Backbone.Collection.extend({
     }
 });
 
-var service_list = new ServiceList();
-
 var ServiceView = Backbone.View.extend({
     tagName: "div",
     className: "container",
@@ -23,12 +21,11 @@ var ServiceView = Backbone.View.extend({
     }
 });
 
-service_view = new ServiceView;
+service_view = new ServiceView({'model' : service});
 
 var ServicePageModel = Backbone.Model.extend({
     initialize: function() {
-        this.services = new ServiceList();
-        this.services.fetch(); // get services list from server using url
+        this.services = new ServiceList();       
     }
 });
 
@@ -36,16 +33,20 @@ service_list_page = new ServicePageModel;
 
 var ServicePageView = Backbone.View.extend({
     initialize: function() {
-        this.render();
+        this_ = this;
+        this.model.fetch({
+            success: function(){
+                this_.render();
+            }
+        });
     },
     render: function() {
-        console.log(this.model.toJSON())
         for(var i = 0; i < 0; i++)
-            service_view.render();
+            service_view.render(this.model.at(i));
     }
 });
 
-var service_page = new ServicePageView({model: service_list_page});
+var service_page = new ServicePageView({model: service_list_page.services});
 
 function get_service_display(json){
     var service_name = json.name;
