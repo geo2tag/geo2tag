@@ -27,7 +27,6 @@ class TestServiceListGetRequest(BasicIntegrationTest):
         removeService(TEST_NAME)
         responseText = response.text
         responseCode = response.status_code
-        self.assertEquals(responseText, VALID_RESPONSE_TEXT)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(
             self.getUrl(TEST_URL),
