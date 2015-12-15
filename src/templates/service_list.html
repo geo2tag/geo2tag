@@ -6,11 +6,14 @@
 <link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
 {% endblock %}
 {% block scripts %}
+<script src="{{ getStaticUrl('js/underscore.js') }}"></script>
+<script src="{{ getStaticUrl('js/backbone.js') }}"></script>
+
 <script src="{{ getStaticUrl('js/service_list.js') }}"></script>
 
 <!-- Macros js -->
 <script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
- <script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
+<script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
 {% endblock %}
 {% block content %}
 <div class='container'>     

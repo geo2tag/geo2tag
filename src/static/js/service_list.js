@@ -1,3 +1,42 @@
+var Service = Backbone.Model.extend({});
+
+service = new Service({
+    title: "Service"
+});
+
+
+var ServiceList = Backbone.Collection.extend({
+    model: Service
+    // filter: function(){} 
+});
+
+var service_list = new ServiceList();
+
+service_list.add({
+    title: "Service List"
+});
+
+var ServiceView = Backbone.View.extend({
+    tagName: "div",
+    className: "container",
+    render: function() {
+        $(this.el).html(get_service_display(this.model.json))
+    }
+//    initialize: function(){    }
+});
+
+var ServicePageModel = Backbone.Model.extend({
+    initialize: function() {
+        this.services = new ServiceList();
+    }
+});
+
+var ServicePageView = Backbone.View.extend({
+
+});
+
+var service_page = new ServicePageView;
+
 function get_service_display(json){
     var service_name = json.name;
     var service_id = json._id;
