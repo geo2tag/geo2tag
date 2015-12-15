@@ -43,7 +43,6 @@ var ServicePageView = Backbone.View.extend({
         for(var i = 0; i < 0; i++)
             service_view.render();
     }
-
 });
 
 var service_page = new ServicePageView({model: service_list_page});
