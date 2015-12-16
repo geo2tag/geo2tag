@@ -8,7 +8,7 @@ For  ubuntu 14.04
 
 > sudo apt-get install mongodb python-pip python-dev git apache2 libapache2-mod-wsgi
 
-> git clone git@bitbucket.org:osll/geomongo.git
+> git clone https://github.com/geo2tag/geo2tag.git
 
 ## How to deploy locally ##
 
@@ -30,7 +30,7 @@ Running command curl http://geomongo/instance/status should return
 
 > sudo apt-get install mongodb python-pip python-dev git apache2 libapache2-mod-wsgi
 
-> git clone git@bitbucket.org:osll/geomongo.git
+> git clone https://github.com/geo2tag/geo2tag.git
 
 ## Как локально развертывать ##
 
