@@ -7,9 +7,18 @@ function Pagination(macroId, viewFunction){
             cssStyle: 'light-theme'
         });
     this.container = $('#container_' + macroId.toString());
-
     this.setViewFunction(viewFunction);
     this.jqueryObject.bind('click', function(){});
+}
+
+Pagination.prototype.initPagination = function (totalNum, elPerPage){
+    this.jqueryObject.pagination({
+            items: totalNum,
+            itemsOnPage: elPerPage,
+            cssStyle: 'light-theme'
+        });
+    var elementsArray = [];
+    this.drawPage(elementsArray);
 }
 
 /*
