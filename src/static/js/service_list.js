@@ -56,12 +56,3 @@ function get_service_display(json){
     result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" service_id="' + service_id + '">DELETE</button></div></div>';
     return result;
 }
-
-urlBuilder = new UrlBuilder('/instance/service?',  {'number':10, 'offset':0});
-urlBuilder.setParameterOnChangeListener('offset', pagination.setOnChangeListener, pagination.getPageNumber);
-
-
-urlBuilder.onChange(function(){
-    service_list_page.url = this.getUrl();
-    service_list_page.refresh(); //?
-});
