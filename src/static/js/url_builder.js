@@ -14,7 +14,7 @@ UrlBuilder.prototype.getUrl = function(){
     this.url = baseUrl;
     for(var key in keys){
         if(key in this.parameterDicts){
-            this.url += key + this.parameterDicts.key;
+            this.url += key + this.parameterDicts[key];
         }
     }
     return this.url;
