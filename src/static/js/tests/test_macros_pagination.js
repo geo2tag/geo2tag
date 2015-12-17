@@ -1,13 +1,17 @@
-var pagination = new Pagination('pagintaion_block');
-
-QUnit.test('pagination macros test', function( assert ) {
-    assert.ok($('#pagintaion_block').children().children().length > 0);
-});
+var test_id = 'pagintaion_block'
+var pagination = new Pagination(test_id);
 
 function testFunction(json){
     return "<div class='row'>" + json.name + "</div>"
 }
 var testElementsArray = [{name:1}, {name:2}, {name:3}];
+
+QUnit.test('pagination macros init', function( assert ) {
+    var elements_count = 10;
+    pagination.initPagination(100, elements_count);
+    assert.equal($('#' + test_id).children().children().length, elements_count)
+
+});
 
 QUnit.test('pagination macros viewFunction', function( assert ) {
 
@@ -27,4 +31,8 @@ QUnit.test('pagination macros drawPage', function( assert ) {
     var elements = $('#container_pagintaion_block').children();
     assert.equal( elements.length, 0);
     
+});
+
+QUnit.test('pagination macros test', function( assert ) {
+    assert.ok($('#pagintaion_block').children().children().length > 0);
 });
