@@ -57,8 +57,7 @@ function get_service_display(json){
     return result;
 }
 
-urlBuilder = new UrlBuilder('/instance/service?');
-urlBuilder.setParameterOnChangeListener('number', $('#number_per_page').change, $('#number_per_page').val);
+urlBuilder = new UrlBuilder('/instance/service?',  {'number':10, 'offset':0});
 urlBuilder.setParameterOnChangeListener('offset', pagination.setOnChangeListener, pagination.getPageNumber);
 
 

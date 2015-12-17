@@ -10,8 +10,16 @@ UrlBuilder.prototype.setParameterOnChangeListener = function(parameterName, setM
 }
 
 UrlBuilder.prototype.getUrl = function(){
+    var keys = ['number', 'offset', 'substring']
+    this.url = baseUrl;
+    for(var key in keys){
+        if(key in this.parameterDicts){
+            this.url += key + this.parameterDicts.key;
+        }
+    }
     return this.url;
 }
+
 
 UrlBuilder.onChange(listener) 
 
