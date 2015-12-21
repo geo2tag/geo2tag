@@ -176,18 +176,18 @@ def getServiceById(id_service):
     raise ServiceNotExistException()
 
 
-def getServiceList(number, offset, serviceSubstr):
+def getServiceList(number, offset, serviceSubstr, ownerId):
     db_getservicelist = getDbObject()
+    criterion = {}
+    collection = db_getservicelist[COLLECTION]
     if number is None:
-        number = db_getservicelist[COLLECTION].count()
-    if offset is None:
-        offset = 0
+        number = collection.count()
     if serviceSubstr is not None:
-        return list(db_getservicelist[COLLECTION].find(
-            {'name': {'$regex': serviceSubstr}}).sort(NAME, 1).skip(
-            offset).limit(number))
-    return list(db_getservicelist[COLLECTION].find().sort(
-        NAME, 1).skip(offset).limit(number))
+        criterion['name'] = {'$regex': serviceSubstr}
+    if ownerId is not None: 
+        criterion['owner_id'] = ownerId
+    coursor = collection.find(criterion)
+    return list(coursor.sort(NAME, 1).skip(offset).limit(number))
 
 
 def getChannelsList(serviceName, substring, number, offset):
