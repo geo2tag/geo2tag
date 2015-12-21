@@ -184,7 +184,7 @@ def getServiceList(number, offset, serviceSubstr, ownerId):
         number = collection.count()
     if serviceSubstr is not None:
         criterion['name'] = {'$regex': serviceSubstr}
-    if ownerId is not None: 
+    if ownerId:
         criterion['owner_id'] = ownerId
     coursor = collection.find(criterion)
     return list(coursor.sort(NAME, 1).skip(offset).limit(number))
