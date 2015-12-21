@@ -2,6 +2,7 @@
    baseUrl - url for parameters concatenaiton. must be ended with ? or &
    initialParameters - dict of parameters initial values 
 */
+
 function UrlBuilder(baseUrl, initialParameters){
     this.baseUrl = baseUrl;
     this.parameterDicts = initialParameters;

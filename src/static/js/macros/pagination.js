@@ -1,24 +1,34 @@
 function Pagination(macroId, viewFunction){
     this.macroId = macroId;
     this.jqueryObject = $('#'+macroId.toString());
-    this.jqueryObject.pagination({
-            items: 100,
-            itemsOnPage: 10,
-            cssStyle: 'light-theme'
-        });
     this.container = $('#container_' + macroId.toString());
     this.setViewFunction(viewFunction);
     this.jqueryObject.bind('click', function(){});
+    this.pageNumber = 1;
 }
 
 Pagination.prototype.initPagination = function (totalNum, elPerPage){
+    var this_ = this;
     this.jqueryObject.pagination({
             items: totalNum,
             itemsOnPage: elPerPage,
             cssStyle: 'light-theme'
+            onPageClick: function(pageNumber){
+                this.setPageNumber(pageNumber);
+                if (this_.onChangeListener!= undefined) 
+                    this_.onChangeListener;
+            }
         });
     var elementsArray = [];
     this.drawPage(elementsArray);
+}
+
+Pagination.prototype.getPageNumber = function (){
+    return this.pageNumber;
+}
+
+Pagination.prototype.setPageNumber = function (pageNumber){ 
+    this.pageNumber = pageNumber;
 }
 
 /*
