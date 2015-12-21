@@ -36,3 +36,31 @@ QUnit.test('pagination macros drawPage', function( assert ) {
 QUnit.test('pagination macros test', function( assert ) {
     assert.ok($('#pagintaion_block').children().children().length > 0);
 });
+
+QUnit.test('pagination macros change page', function( assert ) {
+    var done = assert.async();
+    var service_list_id = 'service_list'
+    var pagination_service_list = new Pagination(service_list_id);
+    pagination_service_list.initPagination(20, 5);
+    urlBuilder = new UrlBuilder('/instance/service?',  
+        {'number':5, 'offset':0});
+    urlBuilder.setParameterOnChangeListener('offset',
+        pagination_service_list.setOnChangeListener.bind(pagination_service_list),
+        pagination_service_list.getPageNumber.bind(pagination_service_list));
+
+    urlBuilder.setOnChangeListener(function(){
+        service_page.model.url = this.getUrl();
+        service_page.refresh();
+    });
+    var test_service_list_id = 'macro_pagination_service_list'
+    var test_id_first_page = $('#' + test_service_list_id).children().children().attr('id');
+    console.log(test_id_first_page)
+    console.log($('#' + test_service_list_id).children())
+    $('a.next').trigger('click');
+    setTimeout(function(){
+        var test_id_second_page = $('#' + test_service_list_id).children().children().attr('id'); 
+        assert.ok(test_id_first_page != test_id_second_page);
+        done();
+    }, 1000);
+    
+});
