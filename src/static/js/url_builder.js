@@ -14,7 +14,7 @@ UrlBuilder.prototype.setParameterOnChangeListener = function(parameterName,
     var this_ = this;
     setMethodForElementOnChange( function (){
         console.log(this_.parameterDicts);
-        this_.parameterDicts[parameterName] = getValueMethod();  
+        this_.parameterDicts[parameterName] = this.getValueMethod();  
         this_.onChangeListener();
     });
 }

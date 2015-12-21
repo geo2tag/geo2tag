@@ -15,9 +15,9 @@ Pagination.prototype.initPagination = function (totalNum, elPerPage){
             cssStyle: 'light-theme',
             onPageClick: function(pageNumber){
                 this_.setPageNumber(pageNumber);
-                console.log(pageNumber);
-                if (this_.onChangeListener!= undefined) 
-                    this_.onChangeListener;
+                if (this_.onChangeListener!= undefined) {
+                    this_.onChangeListener();
+                }
             }
         });
     var elementsArray = [];
@@ -25,7 +25,9 @@ Pagination.prototype.initPagination = function (totalNum, elPerPage){
 }
 
 Pagination.prototype.setOnChangeListener = function(){
-   this.onChangeListener = true;
+    this.onChangeListener = function (){
+        console.log('callback')
+    }
 }
 
 Pagination.prototype.getPageNumber = function (){
