@@ -23,6 +23,10 @@ Pagination.prototype.initPagination = function (totalNum, elPerPage){
     this.drawPage(elementsArray);
 }
 
+Pagination.prototype.setOnChangeListener = function(){
+   this.onChangeListener = true;
+}
+
 Pagination.prototype.getPageNumber = function (){
     return this.pageNumber;
 }
