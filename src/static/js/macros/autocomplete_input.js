@@ -13,8 +13,8 @@ function AutocompliteInput(macroId, url, externalValueKey, internalValueKey, sel
     this.url = url; //'http://geomongo/instance/user?login=';
     this.externalValueKey = externalValueKey;
     this.internalValueKey = internalValueKey;
-    this.selectListener = selectListener;
-    this.setupAutocomplite();
+    if (selectListener != undefined)
+       this.setSelectListener(selectListener);
 }
 
 AutocompliteInput.prototype.setExternalValue = function(externalValue){
@@ -42,6 +42,8 @@ AutocompliteInput.prototype.buildUrl = function (){
 
 AutocompliteInput.prototype.setupAutocomplite = function(){
     var fn = this;
+    console.log(fn);
+    console.log(this.jQueryObject);
     $( this.jQueryObject).autocomplete({
         source: function(request, response) {
             $.get( fn.buildUrl(), function( data ) {
@@ -66,4 +68,9 @@ AutocompliteInput.prototype.setupAutocomplite = function(){
                 fn.selectListener(e, ui);
         }
     }); 
+}
+
+AutocompliteInput.prototype.setSelectListener = function(selectListener){
+    this.selectListener = selectListener;
+    this.setupAutocomplite();
 }

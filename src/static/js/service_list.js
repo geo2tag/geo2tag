@@ -32,7 +32,11 @@ var ServicePageModel = Backbone.Model.extend({
 service_list_page = new ServicePageModel;
 
 var ServicePageView = Backbone.View.extend({
-    initialize: function() {
+    initialize:function(){
+        this.refresh();
+    },
+
+    refresh: function() {
         this_ = this;
         this.model.fetch({
             success: function(){
