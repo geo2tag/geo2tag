@@ -7,11 +7,10 @@ $(document).ready(function(){
     urlBuilder.setParameterOnChangeListener('offset', 
         pagination.setOnChangeListener, 
         pagination.getPageNumber);
-
-
     urlBuilder.onChange(function(){
         service_list_page.url = this.getUrl();
-        service_list_page.refresh(); 
+        service_list_page.refresh();
     });
+    pagination.bind('setOnChangeListener',urlBuilder.onChange)
 });
 
