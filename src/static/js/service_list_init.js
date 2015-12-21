@@ -9,7 +9,7 @@ $(document).ready(function(){
         service_list_page.refresh();
     });
     urlBuilder.setParameterOnChangeListener('offset', 
-        urlBuilder.onChange.bind(setOnChangeListener), 
-        pagination.getPageNumber);
+        pagination.setOnChangeListener.bind(pagination), 
+        pagination.getPageNumber.bind(pagination));
 });
 
