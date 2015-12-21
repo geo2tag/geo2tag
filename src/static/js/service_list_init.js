@@ -1,11 +1,12 @@
 $(document).ready(function(){
     var pagination = new Pagination('service_list');
-    pagination.initPagination(5, 20);
+    pagination.initPagination(20, 5);
 
     urlBuilder = new UrlBuilder('/instance/service?',  
         {'number':5, 'offset':0});
     urlBuilder.setOnChangeListener(function(){
-        service_list_page.url = this.getUrl();
+        service_list_page.model.url = this.getUrl();
+        console.log(service_list_page.model.url)
         service_list_page.refresh();
     });
     urlBuilder.setParameterOnChangeListener('offset', 

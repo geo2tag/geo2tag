@@ -4,7 +4,7 @@ function Pagination(macroId, viewFunction){
     this.container = $('#container_' + macroId.toString());
     this.setViewFunction(viewFunction);
     this.jqueryObject.bind('click', function(){});
-    this.pageNumber = 1;
+    this.setPageNumber(1);
 }
 
 Pagination.prototype.initPagination = function (totalNum, elPerPage){
@@ -14,7 +14,8 @@ Pagination.prototype.initPagination = function (totalNum, elPerPage){
             itemsOnPage: elPerPage,
             cssStyle: 'light-theme',
             onPageClick: function(pageNumber){
-                this.setPageNumber(pageNumber);
+                this_.setPageNumber(pageNumber);
+                console.log(pageNumber);
                 if (this_.onChangeListener!= undefined) 
                     this_.onChangeListener;
             }
