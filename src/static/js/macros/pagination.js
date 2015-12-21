@@ -12,7 +12,7 @@ Pagination.prototype.initPagination = function (totalNum, elPerPage){
     this.jqueryObject.pagination({
             items: totalNum,
             itemsOnPage: elPerPage,
-            cssStyle: 'light-theme'
+            cssStyle: 'light-theme',
             onPageClick: function(pageNumber){
                 this.setPageNumber(pageNumber);
                 if (this_.onChangeListener!= undefined) 
