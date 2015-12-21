@@ -13,7 +13,7 @@ $(document).ready(function(){
         ownerId.setSelectListener.bind(ownerId), 
         ownerId.getExternalValue.bind(ownerId));
 
-    urlBuilder.setParameterOnChangeListener('service_name', 
+    urlBuilder.setParameterOnChangeListener('substring', 
         serviceName.keyup.bind(serviceName), 
         serviceName.val.bind(serviceName));
 
