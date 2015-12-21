@@ -18,6 +18,9 @@ var ServiceView = Backbone.View.extend({
     render: function(json) {
         $('#' + this.id).append(get_service_display(json));
         return this;
+    },
+    clear: function(){
+        $('#' + this.id).empty();
     }
 });
 
@@ -32,7 +35,11 @@ var ServicePageModel = Backbone.Model.extend({
 service_list_page = new ServicePageModel;
 
 var ServicePageView = Backbone.View.extend({
-    initialize: function() {
+    initialize:function(){
+        this.refresh();
+    },
+
+    refresh: function() {
         this_ = this;
         this.model.fetch({
             success: function(){
@@ -41,6 +48,7 @@ var ServicePageView = Backbone.View.extend({
         });
     },
     render: function() {
+        service_view.clear();
         for(var i = 0; i < this.model.length; i++)
             service_view.render(this.model.at(i).attributes);
     }
