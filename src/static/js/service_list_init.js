@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     urlBuilder = new UrlBuilder('/instance/service?',  
         {'number':5, 'offset':0});
-    urlBuilder.onChange(function(){
+    urlBuilder.setOnChangeListener(function(){
         service_list_page.url = this.getUrl();
         service_list_page.refresh();
     });
