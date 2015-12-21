@@ -14,7 +14,7 @@ function AutocompliteInput(macroId, url, externalValueKey, internalValueKey, sel
     this.externalValueKey = externalValueKey;
     this.internalValueKey = internalValueKey;
     if (selectListener != undefined)
-       this.setSelectListener(selectListener);
+        this.setSelectListener(selectListener);
 }
 
 AutocompliteInput.prototype.setExternalValue = function(externalValue){
