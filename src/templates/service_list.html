@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block styles%}
-<link href="{{ getStaticUrl('css/service_list.css') }}" rel="stylesheet">
+<!-- External Css -->
+<link rel="stylesheet" href="{{ getStaticUrl('css/jquery-ui.css') }}">
+
+<!-- Internal Css -->
+<link rel="stylesheet" href="{{ getStaticUrl('css/service_list.css') }}">
 
 <!-- Macros css -->
-<link href="{{ getStaticUrl('css/macros/pagination.css') }}" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="{{ getStaticUrl('css/simplePagination.css') }}"/>
+<link rel="stylesheet" href="{{ getStaticUrl('css/macros/pagination.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/simplePagination.css') }}">
 {% endblock %}
 {% block scripts %}
+<!-- External Libs -->
+<script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
 <script src="{{ getStaticUrl('js/underscore.js') }}"></script>
 <script src="{{ getStaticUrl('js/backbone.js') }}"></script>
 
+<!-- Project Libs -->
 <script src="{{ getStaticUrl('js/service_list_init.js') }}"></script>
 <script src="{{ getStaticUrl('js/service_list.js') }}"></script>
+<script src="{{ getStaticUrl('js/url_builder.js') }}"></script>
 
 <!-- Macros js -->
 <script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
