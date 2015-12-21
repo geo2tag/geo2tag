@@ -4,13 +4,12 @@ $(document).ready(function(){
 
     urlBuilder = new UrlBuilder('/instance/service?',  
         {'number':5, 'offset':0});
-    urlBuilder.setParameterOnChangeListener('offset', 
-        pagination.setOnChangeListener, 
-        pagination.getPageNumber);
     urlBuilder.onChange(function(){
         service_list_page.url = this.getUrl();
         service_list_page.refresh();
     });
-    pagination.bind('setOnChangeListener',urlBuilder.onChange)
+    urlBuilder.setParameterOnChangeListener('offset', 
+        urlBuilder.onChange.bind(setOnChangeListener), 
+        pagination.getPageNumber);
 });
 
