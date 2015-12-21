@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from unittest import TestCase
-from open_karelia_objects_loader import OpenKareliaObjectsLoader
+# from open_karelia_objects_loader import OpenKareliaObjectsLoader
 
 
 class Test_GT_1509_open_karelia_objects_loader(TestCase):
