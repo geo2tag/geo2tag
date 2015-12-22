@@ -31,14 +31,20 @@ class TestServiceListResource(BasicSeleniumTest):
         URL = self.getUrl('/instance/admin/service')
         SERVICE_URL = 'service_url'
         self.getDriver().get(URL)
-        serviceNames = self.getDriver().find_elements_by_class_name(SERVICE_URL)
+        serviceNames = self.getDriver().\
+            find_elements_by_class_name(SERVICE_URL)
         self.assertNotEqual(len(serviceNames), 0)
         firstService = serviceNames[0]
 
         firstServiceName = firstService.get_attribute('innerHTML')
 
-        deleteButton = self.getDriver().find_element_by_id('delete_' + firstServiceName)
+        deleteButton = self.getDriver().\
+            find_element_by_id('delete_' + firstServiceName)
         deleteButton.click()
-        successAlert = self.getDriver().find_element_by_class_name('alert-success')
-        validText = '<strong> ' + firstServiceName + ' was deleted successfully</strong>'
-        self.assertEquals(successAlert.get_attribute('innerHTML'), validText)
+        successAlert = self.getDriver().\
+            find_element_by_class_name('alert-success')
+        validText = '<strong> ' + \
+                    firstServiceName + \
+                    ' was deleted successfully</strong>'
+        alertText = successAlert.get_attribute('innerHTML')
+        self.assertEquals(alertText, validText)
