@@ -44,7 +44,7 @@ class TestParserServiceList(TestCase):
 
         with app.test_request_context('/?' + INCORRECT_ARGS):
             args = ServiceListParser.parseGetParameters()
-            self.assertIsNone(args.get(OFFSET))
+            self.assertEqual(args.get(OFFSET), 0)
             self.assertIsNone(args.get(NUMBER))
 
     def testPostParser(self):

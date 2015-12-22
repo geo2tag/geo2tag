@@ -20,7 +20,12 @@ UrlBuilder.prototype.setParameterOnChangeListener = function(parameterName,
     });
 }
 
-UrlBuilder.prototype.getUrl = function(){
+/*
+  Parameter @offset@ is needed for handling situation when page count changed and current offset became invalid
+*/
+UrlBuilder.prototype.getUrl = function(offset){
+    if (offset != undefined)
+        this.parameterDicts.offset = offset;
     var params = [];
     for (var key in this.parameterDicts){
         params.push(key + '=' + this.parameterDicts[key]);
