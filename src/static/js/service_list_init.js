@@ -30,6 +30,7 @@ $(document).ready(function(){
      
 });
 
+// SHOULD BE reused as a part of Pagination macros
 function refreshServiceList(){
     var url = urlBuilder.getUrl();
     console.log(url);

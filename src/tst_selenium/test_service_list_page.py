@@ -1,4 +1,5 @@
 from basic_selenium_test import BasicSeleniumTest
+from time import sleep
 
 
 class TestServiceListResource(BasicSeleniumTest):
@@ -19,7 +20,31 @@ class TestServiceListResource(BasicSeleniumTest):
         SERVICE_LIST = 'container_service_list'
         NON_EXISTENT_SERVICE = 'NON_EXISTENT_SERVICE'
         self.getDriver().get(URL)
+        self.getDriver().implicitly_wait(30)
         serviceNameInput = self.getDriver().find_element_by_id(SERVICE_NAME)
         serviceNameInput.send_keys(NON_EXISTENT_SERVICE)
+        sleep(2)
         serviceList = self.getDriver().find_element_by_id(SERVICE_LIST)
         self.assertEquals(serviceList.get_attribute('innerHTML'), '')
+
+    def testServiceDelete(self):
+        URL = self.getUrl('/instance/admin/service')
+        SERVICE_URL = 'service_url'
+        self.getDriver().get(URL)
+        serviceNames = self.getDriver().\
+            find_elements_by_class_name(SERVICE_URL)
+        self.assertNotEqual(len(serviceNames), 0)
+        firstService = serviceNames[0]
+
+        firstServiceName = firstService.get_attribute('innerHTML')
+
+        deleteButton = self.getDriver().\
+            find_element_by_id('delete_' + firstServiceName)
+        deleteButton.click()
+        successAlert = self.getDriver().\
+            find_element_by_class_name('alert-success')
+        validText = '<strong> ' + \
+                    firstServiceName + \
+                    ' was deleted successfully</strong>'
+        alertText = successAlert.get_attribute('innerHTML')
+        self.assertEquals(alertText, validText)
