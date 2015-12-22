@@ -1,14 +1,17 @@
 var urlBuilder = undefined;
+var pagination = undefined;
+
+var SERVICES_PER_PAGE = 5;
 
 $(document).ready(function(){
-    var pagination = new Pagination('service_list');
-    pagination.initPagination(5, 20);
+    pagination = new Pagination('service_list');
 
     var ownerId = new AutocompliteInput('owner_id', '/instance/user?login=' , 'login', '_id');
+
     var serviceName = $('#service_name');
 
     urlBuilder = new UrlBuilder('/instance/service?',  
-        {'number':5, 'offset':0});
+        {'number':SERVICES_PER_PAGE, 'offset':0});
     urlBuilder.setParameterOnChangeListener('ownerId', 
         ownerId.setSelectListener.bind(ownerId), 
         ownerId.getInternalValue.bind(ownerId));
@@ -17,11 +20,25 @@ $(document).ready(function(){
         serviceName.keyup.bind(serviceName), 
         serviceName.val.bind(serviceName));
 
+    urlBuilder.setParameterOnChangeListener('offset',
+        pagination.setOnChangeListener.bind(pagination),
+        pagination.getOffsetValue.bind(pagination));
 
-    urlBuilder.setOnChangeListener(function(){
-        console.log(this.getUrl());
-        service_page.model.url = this.getUrl();
-        service_page.refresh();
-    });
+    urlBuilder.setOnChangeListener(refreshServiceList);
+
+    refreshServiceList();
+     
 });
 
+function refreshServiceList(){
+    var url = urlBuilder.getUrl();
+    console.log(url);
+    calculateListRequestLength(url, function (length){
+        var offset = undefined;
+        if (pagination.isPageNumberChanged(length, SERVICES_PER_PAGE)){
+            offset = pagination.initPagination(length, SERVICES_PER_PAGE);
+        }
+        service_page.model.url = urlBuilder.getUrl(offset);
+        service_page.refresh();
+    }, function(){});
+}
