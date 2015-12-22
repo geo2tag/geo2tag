@@ -15,6 +15,8 @@ function AutocompliteInput(macroId, url, externalValueKey, internalValueKey, sel
     this.internalValueKey = internalValueKey;
     if (selectListener != undefined)
         this.setSelectListener(selectListener);
+
+    this.setupInputAutoclean();
 }
 
 AutocompliteInput.prototype.setExternalValue = function(externalValue){
@@ -73,4 +75,16 @@ AutocompliteInput.prototype.setupAutocomplite = function(){
 AutocompliteInput.prototype.setSelectListener = function(selectListener){
     this.selectListener = selectListener;
     this.setupAutocomplite();
+}
+
+AutocompliteInput.prototype.setupInputAutoclean = function(){
+    var this_ = this;
+    function callback(){
+        this_.setInternalValue('');
+        if (this_.selectListener != undefined)
+            this_.selectListener();
+    }
+
+    this.jQueryObject.change(callback);
+    this.jQueryObject.keyup(callback);
 }
