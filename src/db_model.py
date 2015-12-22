@@ -186,6 +186,8 @@ def getServiceList(number, offset, serviceSubstr, ownerId):
         criterion['name'] = {'$regex': serviceSubstr}
     if ownerId:
         criterion['owner_id'] = ownerId
+    print 'getServiceList(number, offset, serviceSubstr, ownerId):'
+    print criterion
     coursor = collection.find(criterion)
     return list(coursor.sort(NAME, 1).skip(offset).limit(number))
 

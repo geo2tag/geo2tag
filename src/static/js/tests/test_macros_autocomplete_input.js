@@ -19,7 +19,9 @@ QUnit.test('search autocompliteinput test', function( assert ) {
        // Called when menu is shown
        open: function( event, ui ) {
            console.log('open');
-           $("a:contains('"+ testLogin +"')").trigger('mouseover').trigger('click');
+           var elements = $("a:contains('"+ testLogin +"')");
+           var firstElement = $(elements[0]);
+           firstElement.trigger('mouseover').trigger('click');
        }
  
     });
