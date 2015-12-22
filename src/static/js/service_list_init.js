@@ -23,5 +23,6 @@ $(document).ready(function(){
         service_page.model.url = this.getUrl();
         service_page.refresh();
     });
+
 });
 

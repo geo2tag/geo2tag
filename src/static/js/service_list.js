@@ -61,6 +61,33 @@ function get_service_display(json){
     var service_id = json._id.$oid;
     var service_link = getUrlWithPrefix('/admin/service/');
     var result = '<div class="row" id="' + service_id + '"><div class="col-xs-8"><h3><a href = ' + service_link + service_id + '>' + service_name + '</a></h3></div>';
-    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" service_id="' + service_id + '">DELETE</button></div></div>';
+    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" service_id="' + service_id + '" onclick=btn_delete_listener(service_name)>DELETE</button></div></div>';
     return result;
 }
+
+
+function printBootstrapAlert(class_alert, msg){
+    result = '<div class="alert alert-' + class_alert + '">';
+    result += '<strong>' + status + ' ' + msg + '</strong>';
+    result += '</div>';
+    console.log(result);
+    $('#results_service_search').prepend(result);
+}
+
+function btn_delete_listener(serviceName){
+    $.ajax({
+       type: "DELETE",
+       url: getUrlWithPrefix('/service/') + serviceName,
+       success: function(json, status){
+          printBootstrapAlert(status,'Deleting is finished successfully'); 
+          console.log('service is successfully deleted');
+       },
+       error: function(request, textStatus, errorThrown){
+           msg = 'Deleting is finished unsuccessfully ' + textStatus + ': ' + request.status;
+           printBootstrapAlert('danger', msg);
+           console.log('ERRROR service is unsuccessfully deleted');
+       }
+     });
+
+}
+
