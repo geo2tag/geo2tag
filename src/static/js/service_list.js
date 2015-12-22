@@ -60,8 +60,8 @@ function get_service_display(json){
     var service_name = json.name;
     var service_id = json._id.$oid;
     var service_link = getUrlWithPrefix('/admin/service/');
-    var result = '<div class="row" id="' + service_id + '"><div class="col-xs-8"><h3><a href = ' + service_link + service_id + '>' + service_name + '</a></h3></div>';
-    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" service_id="' + service_id + '" onclick=btn_delete_listener("' + service_name + '")>DELETE</button></div></div>';
+    var result = '<div class="row" id="' + service_id + '"><div class="col-xs-8"><h3><a href = ' + service_link + service_id + ' class="service_url">' + service_name + '</a></h3></div>';
+    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" service_id="' + service_id + '" id="delete_' + service_name + '" onclick=deleteService("' + service_name + '")>DELETE</button></div></div>';
     return result;
 }
 
@@ -74,13 +74,17 @@ function printBootstrapAlert(class_alert, msg){
     $('#results_service_search').prepend(result);
 }
 
-function btn_delete_listener(serviceName){
+function deleteService(serviceName){
     $.ajax({
        type: "DELETE",
        url: getUrlWithPrefix('/service/') + serviceName,
        success: function(json, status){
-          printBootstrapAlert(status,'Deleting is finished successfully'); 
+          printBootstrapAlert(status,serviceName+' was deleted successfully'); 
           console.log('service is successfully deleted');
+          var tryToKeepPageNumber = true;
+          // TODO ability to save active page number after update of URL
+          // https://geo2tag.atlassian.net/browse/GT-2112
+          refreshServiceList(tryToKeepPageNumber);
        },
        error: function(request, textStatus, errorThrown){
            msg = 'Deleting is finished unsuccessfully ' + textStatus + ': ' + request.status;

@@ -11,6 +11,7 @@ class JsQUnitTestsWrapper(BasicSeleniumTest):
 
     def checkTestPage(self, pageRelativeUrl):
         driver = self.getDriver()
+        self.getDriver().implicitly_wait(30)
         driver.get(pageRelativeUrl)
         WebDriverWait(driver, 10).until(
             expected_conditions.text_to_be_present_in_element(
