@@ -1,6 +1,7 @@
 import jenkins
 import argparse
 from jira import JIRA
+from check_test_scenario_field import check_test_scenario_field
 
 JOB = 'geo2tag-test'
 JENKINS_URL = 'http://jenkins.osll.ru'
@@ -28,7 +29,7 @@ LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
 def find_unsuccessfull_build_for_branch(branch):
     server = get_jenkins_server()
-    last_build_number = server.get_job_info(
+    '''last_build_number = server.get_job_info(
         JOB)[LAST_COMPLETED_BUILD][NUMBER]
     print "Last Build Number: ", last_build_number
     for i in range(last_build_number, 0, -1):
@@ -50,8 +51,15 @@ def find_unsuccessfull_build_for_branch(branch):
             else:
                 print 'This task', branch, 'is unsuccessfully completed'
                 reopened_task(branch)
-            break
+            break'''
+    issue = get_jira_issue(branch)
+    check_test_scenario_field(issue)
 
+def get_jira_issue(branch):
+    branch = branch[0:7]
+    jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
+    issue = jira.issue(branch)
+    return issue
 
 def reopened_task(branch):
     branch = branch[0:7]
