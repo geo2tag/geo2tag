@@ -1,0 +1,43 @@
+#! /bin/bash
+#
+# copy-any-rootfs
+#
+# Environment variables that control backup:
+#
+#    SITE		mandatory: host name to back up
+#    MAILTO		optional: list of addresses to send report to
+#    SSH		optional: command to log into the host
+#    BACKUP_DIRS:	optional: list of directories to back up
+#
+
+cd ~/backups/${SITE}-rootfs
+TAIL=`date +%F-%T`
+MAILTO=${MAILTO:-"jcmvbkbc@gmail.com kirill.krinkin@gmail.com"}
+SSH=${SSH:-"ssh jcmvbkbc@${SITE}"}
+
+for (( i=0 ; i < 4; i++ ))
+do
+    ${SSH} "uptime ; echo ; df -h ; echo" > headline
+    ${SSH} "echo ; top -b -n 1" > bottomline
+    ${SSH} "sudo tar -c --one-file-system -C / ${BACKUP_DIRS:-.} | nice gzip -3" > ${SITE}-${TAIL}.tgz 2>log-${TAIL}
+
+    if cat ${SITE}-${TAIL}.tgz | tar -tz >fl-new 2>err
+    then
+        diff -bu fl fl-new > fl-diff
+        echo "Changed: $(grep '^[+-][^+-]' fl-diff | wc -l)" >> headline
+        cat headline fl-diff bottomline | mail -s "${SITE} backup diff" ${MAILTO}
+        mv fl-new fl
+        break
+    else
+        rm -f ${SITE}-${TAIL}.tgz
+        cat headline bottomline err | mail -s "${SITE} backup failed" ${MAILTO}
+    fi
+
+    sleep 900
+
+done
+
+
+find -name "${SITE}*" -type f | sort | head -n -14 | xargs rm -f
+find -name 'log*' -type f | sort | head -n -14 | xargs rm -f
+find -name 'filelist*' -type f | sort | head -n -14 | xargs rm -f
