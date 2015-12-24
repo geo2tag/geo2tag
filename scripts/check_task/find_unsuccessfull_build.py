@@ -33,6 +33,7 @@ def check_issue(branch):
     if test_scenario_field:
         find_unsuccessfull_build_for_branch(branch, issue)
 
+
 def find_unsuccessfull_build_for_branch(branch, issue):
     server = get_jenkins_server()
     last_build_number = server.get_job_info(
@@ -59,11 +60,13 @@ def find_unsuccessfull_build_for_branch(branch, issue):
                 reopened_task(issue)
             break
 
+
 def get_jira_issue(branch):
     branch = branch[0:7]
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = jira.issue(branch)
     return issue
+
 
 def reopened_task(issue):
     jira.transition_issue(issue, u'Reopened')
