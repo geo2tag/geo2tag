@@ -28,13 +28,14 @@ LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
 
 def check_issue(branch):
-    issue = get_jira_issue(branch)
+    jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
+    issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
     if test_scenario_field:
-        find_unsuccessfull_build_for_branch(branch, issue)
+        find_unsuccessfull_build_for_branch(jira, branch, issue)
 
 
-def find_unsuccessfull_build_for_branch(branch, issue):
+def find_unsuccessfull_build_for_branch(jira, branch, issue):
     server = get_jenkins_server()
     last_build_number = server.get_job_info(
         JOB)[LAST_COMPLETED_BUILD][NUMBER]
@@ -57,18 +58,17 @@ def find_unsuccessfull_build_for_branch(branch, issue):
                 print 'This task', branch, 'is successfully completed'
             else:
                 print 'This task', branch, 'is unsuccessfully completed'
-                reopened_task(issue)
+                reopened_task(jira, issue, branch)
             break
 
 
-def get_jira_issue(branch):
+def get_jira_issue(jira, branch):
     branch = branch[0:7]
-    jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = jira.issue(branch)
     return issue
 
 
-def reopened_task(issue):
+def reopened_task(jira, issue, branch):
     jira.transition_issue(issue, u'Reopened')
     jira.add_comment(branch, 'Autotest fail')
 
