@@ -18,7 +18,6 @@ ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
 NAME = u'name'
 BRANCH = u'branch'
-
 RESULT = u'result'
 SUCCESS = u'SUCCESS'
 FIXED = u'FIXED'
