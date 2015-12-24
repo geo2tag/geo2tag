@@ -32,10 +32,10 @@ def check_issue(branch):
     issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
     if test_scenario_field:
-        find_unsuccessfull_build_for_branch(jira, branch, issue)
+        find_unsuccessfull_build_for_branch(jira, issue, branch)
 
 
-def find_unsuccessfull_build_for_branch(jira, branch, issue):
+def find_unsuccessfull_build_for_branch(jira, issue, branch):
     server = get_jenkins_server()
     last_build_number = server.get_job_info(
         JOB)[LAST_COMPLETED_BUILD][NUMBER]
