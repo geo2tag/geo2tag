@@ -3,7 +3,6 @@ import webbrowser
 
 USERNAME = 'tankBerlin'
 PASSWORD = '13_HbReIf29'
-
 URL = 'https://bitbucket.org/osll/geomongo'
 CONSUMER_KEY = '7QzrFCqGNcag4sfe9S'
 CONSUMER_SECRET	= 'xKXuDB7Yz5nfNZ8ZPEe9gASGkLvacBaK'
