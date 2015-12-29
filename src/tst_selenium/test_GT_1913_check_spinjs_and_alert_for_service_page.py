@@ -21,7 +21,8 @@ class TestCheckSpinjsAndAlertForServicePage(BasicSeleniumTest):
         self.assertEqual(result, 0)
         self.driver.find_element_by_id(TEST_LOG_SIZE_ID).send_keys(TEST_DATA)
         self.driver.find_element_by_id(TEST_BTN_SAVE_ID).click()
-        result = self.driver.find_element_by_class_name(TEST_CLASS_ALERT_SUCCESS)
+        result = self.driver.find_element_by_class_name(
+            TEST_CLASS_ALERT_SUCCESS)
         self.assertEqual(result.text, TEST_MSG)
 
     def testBadScenarioForServicePage(self):
