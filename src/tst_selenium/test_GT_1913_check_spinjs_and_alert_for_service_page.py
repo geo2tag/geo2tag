@@ -32,3 +32,5 @@ class TestCheckSpinjsAndAlertForServicePage(BasicSeleniumTest):
         self.driver.find_element_by_id(TEST_BTN_SAVE_ID).click()
         result = self.driver.find_element_by_class_name(TEST_CLASS_ALERT_ERROR)
         self.assertEqual(result.text, TEST_MSG_ERROR)
+        result = self.driver.execute_script(TEST_SCRIPT_SPIN)
+        self.assertNotEqual(result, 0)
