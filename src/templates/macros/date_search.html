@@ -1,0 +1,12 @@
+{% macro date_search(macroId, bc) %}
+    <div class="row">
+        <div class="col-xs-2 {{macroId}}"><input type="text" name="date-begin" class="form-control" id="date-begin_{{macroId}}" placeholder="Date begin"></div>
+        {% if bc == True %}
+        <div class="col-xs-2"><input type="checkbox" name="bc_begin" id="bc_begin_{{macroId}}" class=bc_{{macroId}}>BC date begin</div>
+        {% endif %}
+        <br><br><div class="col-xs-2 {{macroId}}"><input type="text" name="date-end" class="form-control" id="date-end_{{macroId}}" placeholder="Date end"></div>
+        {% if bc == True %}
+        <div class="col-xs-2"><input type="checkbox" name="bc_end" id="bc_end_{{macroId}}" class=bc_{{macroId}}>BC date end</div>
+        {% endif %}
+    </div>
+{% endmacro %}

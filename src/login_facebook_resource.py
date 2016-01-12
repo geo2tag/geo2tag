@@ -40,8 +40,9 @@ def saveUserData(userDict):
     return addUser(
         userDict[_ID],
         userDict["name"][0:space],
-        userDict["name"][space+2::],
-        userDict[EMAIL])
+        userDict["name"][space + 2::],
+        userDict[EMAIL],
+        userDict[EMAIL][0:userDict[EMAIL].find("@")])
 
 
 @facebook_oauth.route(getPathWithPrefix(AUTHORIZED_URL))

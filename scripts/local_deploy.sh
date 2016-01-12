@@ -9,6 +9,7 @@
 CATALOG='geomongo'
 ERROR_LOG_NAME='error'
 SERVER_NAME='geomongo'
+SERVER_PORT='80'
 HOSTS_STRING="127.0.0.1 geomongo"
 DEBUG_FILE="/var/www/geomongo/DEBUG"
 CONFIG_FILE="geomongo.conf"
@@ -16,7 +17,7 @@ FLAG_KEEP_CONFIG_INI=false
 CONFIG_INI_FILE='config/config.ini'
 CONFIG_INI_FILE_FINAL='config.ini'
 
-while getopts ":c:d:e:f:ef:s:" opt ;
+while getopts ":c:d:e:f:ef:s:p:" opt ;
 do
     case $opt in
         c) CATALOG=$OPTARG;
@@ -31,6 +32,8 @@ do
             ;;
         s) SERVER_NAME=$OPTARG;
             ;;
+        p) SERVER_PORT=$OPTARG;
+            ;;
         *) echo "the option is incorrect";
             exit 1
             ;;
@@ -42,7 +45,7 @@ then
 fi
 
 #generate config for apache
-./scripts/papache_conf_generator.py -n "$SERVER_NAME" -o "$CONFIG_FILE" -f "$CATALOG" -e "$ERROR_LOG_NAME"
+./scripts/papache_conf_generator.py -n "$SERVER_NAME" -o "$CONFIG_FILE" -f "$CATALOG" -e "$ERROR_LOG_NAME" -p "$SERVER_PORT"
 
 rm -rf /var/www/"$CATALOG"
 

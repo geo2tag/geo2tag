@@ -1,16 +1,30 @@
 {% extends "base.html" %}
 {% block styles%}
+<!-- Lib's styles -->
 <link rel="stylesheet" href="{{ getStaticUrl('css/qunit-1.18.0.css') }}">
+<!-- Test styles -->
 {% endblock %}
 {% block scripts %}
+<!-- Libs -->
 <script src="{{ getStaticUrl('js/qunit-1.18.0.js') }}"></script>
-<script type="text/javascript">function getUrlWithPrefix(url) { return '/{{ instancePrefix }}' + url; }</script>
 <script src="{{ getStaticUrl('js/geo2tag.js') }}"></script>
+<script src="{{ getStaticUrl('js/popup.js') }}"></script>
+<script src="{{ getStaticUrl('js/underscore.js') }}"></script>
+<script src="{{ getStaticUrl('js/backbone.js') }}"></script>
+<script src="{{ getStaticUrl('js/service_list.js') }}"></script>
+<script src="{{ getStaticUrl('js/calculate_list_request_length.js') }}"></script>
+<script src="{{ getStaticUrl('js/url_builder.js') }}"></script>
+
+
+<!-- Tests -->
 <script src="{{ getStaticUrl('js/tests/geo2tag_requests_tests.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/global_instance_prefix_test.js') }}"></script>
-<script src="{{ getStaticUrl('js/popup.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/popup_map_resource_tests.js') }}"></script>
 <script src="{{ getStaticUrl('js/tests/geo2tag_requests_bc_tests.js') }}"></script>
+<script src="{{ getStaticUrl('js/tests/service_list_tests.js') }}"></script>
+<script src="{{ getStaticUrl('js/tests/calculate_list_request_length_test.js') }}"></script>
+<script src="{{ getStaticUrl('js/tests/url_builder_test.js') }}"></script>
+
 {% endblock %}
 {% block content %}
 <header>
@@ -18,5 +32,10 @@
 </header>
 <div id="qunit"></div>
 <div id="qunit-fixture"></div>
-
+<div id='service_list_test'></div>
+<input type='text' id='number' value=12>
+<select id='offset'>
+  <option value="1">1</option>
+  <option value="4">4</option>
+</select>
 {% endblock %}

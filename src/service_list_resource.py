@@ -2,15 +2,9 @@ from possible_exception import possibleException
 from flask_restful import Resource
 from db_model import addService, getServiceList
 from bson.json_util import dumps
-from service_list_parsers import ServiceListParser
-
-GET_ARGS_NUMBER = "number"
-GET_ARGS_OFFSET = "offset"
-POST_ARGS_NAME = "name"
-POST_ARGS_LOG_SIZE = "logSize"
-POST_ARGS_OWNER_ID = "ownerId"
-DEFAULT_OWNER_ID = 'STUB'
-SERVICE_ALREADY_EXIST_MSG = "Service already exists"
+from service_list_parsers import ServiceListParser, GET_ARGS_NUMBER, \
+    GET_ARGS_OFFSET, POST_ARGS_NAME, POST_ARGS_LOG_SIZE, \
+    POST_ARGS_OWNER_ID, GET_ARGS_SUBSTR, GET_ARGS_OWNER_ID
 
 
 class ServiceListResource(Resource):
@@ -18,15 +12,11 @@ class ServiceListResource(Resource):
     @possibleException
     def get(self):
         args = ServiceListParser.parseGetParameters()
-        if GET_ARGS_NUMBER in args:
-            number = args[GET_ARGS_NUMBER]
-        else:
-            number = None
-        if GET_ARGS_OFFSET in args:
-            offset = args[GET_ARGS_OFFSET]
-        else:
-            offset = None
-        serviceList = getServiceList(number, offset)
+        number = args[GET_ARGS_NUMBER]
+        offset = args[GET_ARGS_OFFSET]
+        substring = args[GET_ARGS_SUBSTR]
+        ownerId = args[GET_ARGS_OWNER_ID]
+        serviceList = getServiceList(number, offset, substring, ownerId)
         return serviceList
 
     @possibleException

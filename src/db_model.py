@@ -10,6 +10,7 @@ from channel_does_not_exist import ChannelDoesNotExist
 from point_does_not_exist import PointDoesNotExist
 from geo_json_type import GEOJSON_TYPE, GEOJSON_POLYGON_TYPES, \
     GEOJSON_COORDINATES
+from metadata_does_not_exist_exception import MetadataDoesNotExistException
 
 # getLog constants
 COLLECTION_LOG_NAME = "log"
@@ -33,6 +34,8 @@ OWNERID = 'owner_id'
 ID = '_id'
 LOG = 'log'
 BC = 'bc'
+METADATA = 'metadata'
+
 # db initialisation
 MONGO_CLIENT = None  # MongoClient(getHost(), getPort())
 
@@ -93,6 +96,7 @@ def addService(name, logSize, ownerld):
     except ServiceNotExistException:
         obj_id = db_addservice[COLLECTION].save(
             {NAME: name, CONFIG: {LOG_SIZE: logSize}, OWNERID: ownerld})
+        addServiceDb(name)
         if obj_id is None:
             return None
         else:
@@ -173,15 +177,20 @@ def getServiceById(id_service):
     raise ServiceNotExistException()
 
 
-def getServiceList(number, offset):
+def getServiceList(number, offset, serviceSubstr, ownerId):
     db_getservicelist = getDbObject()
+    criterion = {}
+    collection = db_getservicelist[COLLECTION]
     if number is None:
-        number = db_getservicelist[COLLECTION].count()
-    if offset is None:
-        offset = 0
-    result = list(db_getservicelist[COLLECTION].find().sort(
-        NAME, 1).skip(offset).limit(number))
-    return result
+        number = collection.count()
+    if serviceSubstr is not None:
+        criterion['name'] = {'$regex': serviceSubstr}
+    if ownerId:
+        criterion['owner_id'] = ownerId
+    print 'getServiceList(number, offset, serviceSubstr, ownerId):'
+    print criterion
+    coursor = collection.find(criterion)
+    return list(coursor.sort(NAME, 1).skip(offset).limit(number))
 
 
 def getChannelsList(serviceName, substring, number, offset):
@@ -339,6 +348,8 @@ def addServiceDb(dbName):
         [("location", pymongo.GEOSPHERE)])
     db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("date", pymongo.DESCENDING)])
+    db_addservicedb[COLLECTION_POINTS_NAME].create_index(
+        [("name", pymongo.ASCENDING)])
 
 
 def applyFromToCriterion(field, value_from, value_to, criterion):
@@ -490,3 +501,36 @@ def getAllChannelIds(serviceName):
     for result in obj:
         all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
+
+
+def setMetadata(serviceName, data, _id=None):
+    obj = data
+    if _id is not None:
+        obj[ID] = ObjectId(_id)
+    db_set_metadata = getDbObject(serviceName)
+    return db_set_metadata[METADATA].save(obj)
+
+
+def deleteMetadataById(serviceName, _id):
+    collection = getDbObject(serviceName)[METADATA]
+    getMetadataById(serviceName, _id)
+    collection.remove({ID: ObjectId(unicode(_id))})
+
+
+def getMetadataById(serviceName, _id):
+    obj = getDbObject(serviceName)[METADATA].find_one(
+        {ID: ObjectId(unicode(_id))})
+    if obj is not None:
+        return obj
+    raise MetadataDoesNotExistException()
+
+
+def findMetadata(serviceName, number, offset, queryPairs):
+    collection = getDbObject(serviceName)[METADATA]
+    criterion = {}
+    if queryPairs and isinstance(queryPairs, dict):
+        criterion = queryPairs
+    metadataElements = collection.find(criterion)
+    metadataElements.skip(offset)
+    metadataElements.limit(number)
+    return metadataElements
