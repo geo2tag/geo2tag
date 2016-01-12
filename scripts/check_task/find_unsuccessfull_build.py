@@ -30,13 +30,13 @@ LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
 def check_issue(branch):
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
-    sess_get = jira._session.get
     DEV_STATUS = 'https://geo2tag.atlassian.net/rest/dev-status/1.0'
-    _issue = 'issue/detail?issueID=23309'
+    issue = get_jira_issue(jira, branch)
+    _issue = 'issue/detail?issueID=%s' % issue.id
     _args = 'applicationType=bitbucket&dataType=pullrequest&_=%s' % int(time.time())
 
     req_url = '%s/%s&%s' % (DEV_STATUS, _issue, _args)
-    response = sess_get(req_url)
+    response = jira._session.get(req_url)
     raw_data = json.loads(response.content)
  
     for req in raw_data['detail'][0]['pullRequests']:
