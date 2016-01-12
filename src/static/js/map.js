@@ -4,10 +4,17 @@ var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = 
 function fixMapSize(){
     var content = $("#map");
     var viewHeight = $(window).height() - content.offset().top;
+    console.log('Window width = '+$(window).width());
     if(viewHeight < 0)
         viewHeight = viewHeight + 300;
     content.height(viewHeight);
-    content.parent().width($(window).width())
+    console.log('Window width = '+$(window).width());
+//    content.parent().width($(window).width())
+    console.log('Window width = '+$(window).width());
+    console.log('Content width = '+content.width());
+    console.log('Content.parent width = '+content.parent().width());
+    console.log('content.parent()');
+    console.log(content.parent());
     map.invalidateSize();
 }
 
