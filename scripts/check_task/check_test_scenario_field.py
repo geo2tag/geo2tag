@@ -10,11 +10,7 @@ CONSUMER_SECRET	= 'xKXuDB7Yz5nfNZ8ZPEe9gASGkLvacBaK'
 
 
 def check_test_scenario_field(issue):
-    bb = Bitbucket(USERNAME, PASSWORD)
-    success, repositories = bb.repository.all()
-    print success, repositories
-    print bb.get('geomongo')
-
+    
     test_scenario_field = issue.fields.customfield_10800
     print issue.fields().__dict__
     if test_scenario_field is None:

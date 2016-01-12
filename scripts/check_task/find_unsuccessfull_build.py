@@ -1,7 +1,9 @@
+import time
 import jenkins
 import argparse
 from jira import JIRA
 from check_test_scenario_field import check_test_scenario_field
+import time
 
 JOB = 'geo2tag-test'
 JENKINS_URL = 'http://jenkins.osll.ru'
@@ -28,6 +30,18 @@ LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
 def check_issue(branch):
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
+    sess_get = jira._session.get
+    DEV_STATUS = 'https://geo2tag.atlassian.net/rest/dev-status/1.0'
+    _issue = 'issue/detail?issueID=23309'
+    _args = 'applicationType=bitbucket&dataType=pullrequest&_=%s' % int(time.time())
+
+    req_url = '%s/%s&%s' % (DEV_STATUS, _issue, _args)
+    response = sess_get(req_url)
+    raw_data = json.loads(response.content)
+ 
+    for req in raw_data['detail'][0]['pullRequests']:
+        print('%s\n%s\n\n' % (req['name'], req['url']))
+
     issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
     if test_scenario_field:
