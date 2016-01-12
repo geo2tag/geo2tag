@@ -1,8 +1,9 @@
 from requests import get
 from argparse import ArgumentParser
-from sys import exit
+import sys
 
 SUCCESS_CODE = 200
+
 
 def checkSingleUrl(hostName, url):
     fullUrl = hostName + url
@@ -11,12 +12,14 @@ def checkSingleUrl(hostName, url):
     print "Checking url={} , code={}".format(fullUrl, code)
     if code != SUCCESS_CODE:
         print "Error!"
-        exit(1)
+        sys.exit(1)
+
 
 def checkUrlList(hostName, fileName):
     with open(fileName) as urlFile:
         for url in urlFile:
             checkSingleUrl(hostName, url)
+
 
 def parseArguments():
     parser = ArgumentParser(description='Url list checker (by return code)')
