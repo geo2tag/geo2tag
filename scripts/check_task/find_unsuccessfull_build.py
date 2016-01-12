@@ -1,6 +1,7 @@
 import jenkins
 import argparse
 from jira import JIRA
+from check_test_scenario_field import check_test_scenario_field
 
 JOB = 'geo2tag-test'
 JENKINS_URL = 'http://jenkins.osll.ru'
@@ -17,7 +18,6 @@ ACTIONS = u'actions'
 LAST_BUILD_REVISION = u'lastBuiltRevision'
 NAME = u'name'
 BRANCH = u'branch'
-
 RESULT = u'result'
 SUCCESS = u'SUCCESS'
 FIXED = u'FIXED'
@@ -26,7 +26,15 @@ NUMBER = 'number'
 LAST_COMPLETED_BUILD = 'lastCompletedBuild'
 
 
-def find_unsuccessfull_build_for_branch(branch):
+def check_issue(branch):
+    jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
+    issue = get_jira_issue(jira, branch)
+    test_scenario_field = check_test_scenario_field(issue)
+    if test_scenario_field:
+        find_unsuccessfull_build_for_branch(jira, issue, branch)
+
+
+def find_unsuccessfull_build_for_branch(jira, issue, branch):
     server = get_jenkins_server()
     last_build_number = server.get_job_info(
         JOB)[LAST_COMPLETED_BUILD][NUMBER]
@@ -49,14 +57,17 @@ def find_unsuccessfull_build_for_branch(branch):
                 print 'This task', branch, 'is successfully completed'
             else:
                 print 'This task', branch, 'is unsuccessfully completed'
-                reopened_task(branch)
+                reopened_task(jira, issue, branch)
             break
 
 
-def reopened_task(branch):
+def get_jira_issue(jira, branch):
     branch = branch[0:7]
-    jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = jira.issue(branch)
+    return issue
+
+
+def reopened_task(jira, issue, branch):
     jira.transition_issue(issue, u'Reopened')
     jira.add_comment(branch, 'Autotest fail')
 
@@ -79,4 +90,4 @@ def get_jenkins_server():
 
 
 if __name__ == '__main__':
-    find_unsuccessfull_build_for_branch(get_branch_number())
+    check_issue(get_branch_number())
