@@ -1,0 +1,30 @@
+#! /bin/bash
+#
+# copy-any-rootfs
+#
+# Environment variables that control backup:
+#
+#    SITE		mandatory: host name to back up
+#    MAILTO		optional: list of addresses to send report to
+#    SSH		optional: command to log into the host
+#    BACKUP_DIRS:	optional: list of directories to back up
+#
+mkdir -p ~/backups/${SITE}-rootfs
+cd ~/backups/${SITE}-rootfs
+TAIL=`date +%F-%T`
+SSH=${SSH:-"ssh jcmvbkbc@${SITE}"}
+PRE_COMMAND=${PRE_COMMAND:-ls}
+BACKUPS_TO_KEEP=28
+
+echo "Backup started"
+
+${SSH} ${PRE_COMMAND}
+${SSH} "uptime ; echo ; df -h ; echo" > headline
+${SSH} "ls -lha ${BACKUP_DIRS}" >> headline
+${SSH} "tar -cz ${BACKUP_DIRS}" >${SITE}-${TAIL}.tgz 2>log-${TAIL}
+
+cat headline
+
+find -name "${SITE}*" -type f | sort | head -n -${BACKUPS_TO_KEEP} | xargs rm -f
+find -name 'log*' -type f | sort | head -n -${BACKUPS_TO_KEEP} | xargs rm -f
+find -name 'filelist*' -type f | sort | head -n -${BACKUPS_TO_KEEP} | xargs rm -f
