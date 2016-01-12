@@ -96,6 +96,7 @@ def addService(name, logSize, ownerld):
     except ServiceNotExistException:
         obj_id = db_addservice[COLLECTION].save(
             {NAME: name, CONFIG: {LOG_SIZE: logSize}, OWNERID: ownerld})
+        addServiceDb(name)
         if obj_id is None:
             return None
         else:
@@ -347,7 +348,7 @@ def addServiceDb(dbName):
         [("location", pymongo.GEOSPHERE)])
     db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("date", pymongo.DESCENDING)])
-    db_addservicedb[COLLECTION_SERVICES_NAME].create_index(
+    db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("name", pymongo.ASCENDING)])
 
 
