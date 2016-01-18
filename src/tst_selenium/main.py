@@ -88,7 +88,10 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestServiceListResource,
             param=host))
-
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestAdminPluginListPage,
+            param=host))
 ###################################################
 
 #
