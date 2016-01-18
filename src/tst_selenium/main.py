@@ -25,6 +25,7 @@ from test_GT_1918_service_page_macroses import \
 from test_GT_1985_check_display_data_service_page import \
     TestCheckDisplayDataServicePage
 from test_service_list_page import TestServiceListResource
+from test_GT_2001_admin_plugin_list_page import TestAdminPluginListPage
 
 
 def main(host):
