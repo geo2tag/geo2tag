@@ -7,7 +7,15 @@ var plugin = new Plugin({
 var PluginList = Backbone.Collection.extend({
     model: Plugin,
     url: function(){
-        return '/instance/plugins;
+        return '/instance/plugin';
+    },
+    parse: function (response) {
+        var keys = Object.keys(response);
+        var result = [];
+        for (var i in keys){
+             result.push({'name':keys[i]})
+        }
+        return result;
     }
 });
 
@@ -57,9 +65,8 @@ var plugin_page = new PluginPageView({model: plugin_list_page.plugins});
 
 function get_plugin_display(json){
     var plugin_name = json.name;
-    var plugin_id = json.id;
-    var result = '<div class="row" id="' + plugin_id + '"><div class="col-xs-8"><h3>' + plugin_name + '</h3></div>';
-    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg" plugin_id="' + plugin_id + '">X</button>';
-    result += '<button type="button" class="btn btn-primary btn-lg btn-config-plugin" plugin_id="' + plugin_id + '">C</button>' + '</div></div>';
+    var result = '<div class="row"><div class="col-xs-8"><h3>' + plugin_name + '</h3></div>';
+    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg">X</button>';
+    result += '<button type="button" class="btn btn-primary btn-lg btn-config-plugin">C</button>' + '</div></div>';
     return result;
 }
