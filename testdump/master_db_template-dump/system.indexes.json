@@ -1,1 +1,2 @@
-{ "v" : 1, "key" : { "login" : 1 }, "ns" : "geomongo.users", "name" : "login_" }
+{ "v" : 1, "key" : { "login" : 1 }, "ns" : "master_db_template.users", "name" : "login_" }
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "master_db_template.users", "name" : "login" }
