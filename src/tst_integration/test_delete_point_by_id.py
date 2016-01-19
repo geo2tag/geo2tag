@@ -20,6 +20,10 @@ CHANNEL_ID = 'channel_id'
 TEST_URL_DEL = '/instance/service/testservice/point/'
 
 
+def getObjectIdFromResponse(response):
+    return response._content[2:26]
+
+
 class TestPointResourceDelete(BasicIntegrationTest):
 
     def testPointResourceDelete(self):
@@ -31,7 +35,7 @@ class TestPointResourceDelete(BasicIntegrationTest):
                 JSON: {'ac': 'dc'},
                 CHANNEL_ID: 'test_channel_id_value'
             }]))
-        obj_id = response._content[2:26]
+        obj_id = getObjectIdFromResponse(response)
         response = requests.delete(self.getUrl(TEST_URL_DEL + unicode(obj_id)))
         responseText = response.text
         responseCode = response.status_code
