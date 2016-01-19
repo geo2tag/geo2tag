@@ -66,7 +66,7 @@ var plugin_page = new PluginPageView({model: plugin_list_page.plugins});
 function get_plugin_display(json){
     var plugin_name = json.name;
     var result = '<div class="row"><div class="col-xs-8"><h3>' + plugin_name + '</h3></div>';
-    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg">X</button>';
+    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg btn-delete-plugin">X</button>';
     result += '<button type="button" class="btn btn-primary btn-lg btn-config-plugin">C</button>' + '</div></div>';
     return result;
 }
