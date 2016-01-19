@@ -29,13 +29,28 @@ LOGOUT_REQUEST_CONTEXT = '/' + getInstancePrefix() + "/logout"
 REQUEST_PARAM = "?user_id=" + TEST_ID + '&user_login=' + TEST_LOGIN
 
 TEST_NUMBER = 1
+TEST_NUMBER_10 = 10
 TEST_OFFSET = 0
+TEST_LOGIN_SUBSTRING_TEST = u'test'
 TEST_LOGIN_SUBSTRING = u'345'
 TEST_OBJ = {'login': 'test_login_12345_qwerty'}
+TEST_OBJ_1 = {'login': 'test_login_qwerty'}
+TEST_OBJ_2 = {'login': 'test_login_333'}
+TEST_OBJ_3 = {'login': 'test_login_222'}
+TEST_OBJ_4 = {'login': 'test_login_111'}
 VALID_RESULT = u'test_login_12345_qwerty'
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
+
+
+def isSorted(lst, key=lambda x, y: x < y):
+    print lst
+    print key
+    for i, el in enumerate(lst[1:]):
+        if key(el, lst[i-1]):
+            return False
+    return True
 
 
 class TestUserRoutines(unittest.TestCase):
@@ -73,3 +88,11 @@ class TestUserRoutines(unittest.TestCase):
         COLLECTION_USERS.insert(TEST_OBJ)
         RESULT = findUsers(TEST_NUMBER, TEST_OFFSET, TEST_LOGIN_SUBSTRING)[0]
         self.assertEquals(RESULT[LOGIN], VALID_RESULT)
+        COLLECTION_USERS.insert(TEST_OBJ_1)
+        COLLECTION_USERS.insert(TEST_OBJ_2)
+        COLLECTION_USERS.insert(TEST_OBJ_3)
+        COLLECTION_USERS.insert(TEST_OBJ_4)
+        RESULT = findUsers(TEST_NUMBER_10, TEST_OFFSET, TEST_LOGIN_SUBSTRING_TEST)
+        print '------!_!_!_!!_!_!_-----'
+        print isSorted(RESULT, LOGIN)
+
