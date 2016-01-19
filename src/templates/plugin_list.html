@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block styles%}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/plugin_list.css') }}">
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/plugin_list.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class='container'>
+<header>
+    <h2>Плагины</h2>
+</header>
+    <div class='well'>
+        <div class="form-group">
+            <h3><label for="plugin_config">Состояние плагина</label></h3>
+            <select>
+                <option>Не задано</option>
+                <option>Вкл</option>
+                <option>Выкл</option>
+            </select>
+            <h3><label for="plugin_name">Название</label></h3>
+            <input type="text" class="form-control" id="service_name">
+        </div>
+    </div>
+    <div class='well' id='results_plugin_search'>
+    <h3>Результаты поиска</h3>
+    </div>
+{% endblock %}
