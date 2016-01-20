@@ -44,14 +44,14 @@ app = Flask(__name__)
 app.secret_key = urandom(32)
 
 
-def isSorted(lst, key=lambda x, y: x < y):
-    print lst
-    print key
-    for i, el in enumerate(lst[1:]):
-        if key(el, lst[i-1]):
+def isSorted(L, key):
+    tmp = L[0][key]
+    for i in L:
+        if i[key] < tmp:
             return False
+        else:
+            tmp = i[key]
     return True
-
 
 class TestUserRoutines(unittest.TestCase):
 
@@ -93,6 +93,5 @@ class TestUserRoutines(unittest.TestCase):
         COLLECTION_USERS.insert(TEST_OBJ_3)
         COLLECTION_USERS.insert(TEST_OBJ_4)
         RESULT = findUsers(TEST_NUMBER_10, TEST_OFFSET, TEST_LOGIN_SUBSTRING_TEST)
-        print '------!_!_!_!!_!_!_-----'
-        print isSorted(RESULT, LOGIN)
+        self.assertTrue(isSorted(RESULT, LOGIN))
 
