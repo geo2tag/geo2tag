@@ -118,7 +118,7 @@ def addResources():
     getApi().add_resource(AdminPluginListResource, getPathWithPrefix(
         '/admin/plugin'))
     getApi().add_resource(AdminPluginConfigResource, getPathWithPrefix(
-        '/admin/plugin/config/<string:plugin_name>'))
+        '/admin/plugin/config/<string:pluginName>'))
 
     # end of the list of imported resources
 

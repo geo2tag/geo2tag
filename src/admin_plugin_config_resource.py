@@ -3,9 +3,10 @@ from flask import render_template
 from flask import make_response
 
 
-class AdminPluginListResource(Resource):
+class AdminPluginConfigResource(Resource):
 
-    def get(self):
+    def get(self, pluginName):
+        print pluginName
         return make_response(
             render_template(
                 'plugin_config.html'))
