@@ -33,7 +33,7 @@ from test_GT_2148_check_config_plugin_btn import TestCheckConfigPluginBtn
 
 def main(host):
     suite = unittest.TestSuite()
-    '''suite.addTest(BasicSeleniumTest.parametrize(
+    suite.addTest(BasicSeleniumTest.parametrize(
         TestGT1776AdminTemplate,
         param=host)
     )
@@ -102,7 +102,7 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestPluginConfigPage,
-            param=host))'''
+            param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestCheckConfigPluginBtn,
