@@ -93,6 +93,10 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestAdminPluginListPage,
             param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestPluginConfigPage,
+            param=host))
 ###################################################
 
 #
