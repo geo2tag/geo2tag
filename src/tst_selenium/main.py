@@ -31,7 +31,7 @@ from test_GT_2149_unable_plugin import TestCheckUnablePluginBtn
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(BasicSeleniumTest.parametrize(
+    '''suite.addTest(BasicSeleniumTest.parametrize(
         TestGT1776AdminTemplate,
         param=host)
     )
@@ -92,7 +92,7 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminPluginListPage,
-            param=host))
+            param=host))'''
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestCheckUnablePluginBtn,
