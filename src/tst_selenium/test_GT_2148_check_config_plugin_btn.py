@@ -1,6 +1,6 @@
 from basic_selenium_test import BasicSeleniumTest
 
-TEST_URL = '/instance/admin/plugin'
+TEST_URL = 'instance/admin/plugin'
 TEST_CLASS_BTN_CONFIG = '.btn-config-plugin'
 TEST_CLASS_NAME_SELECTOR = '.name-config-plugin'
 TEST_CONFIG = '/config/'
