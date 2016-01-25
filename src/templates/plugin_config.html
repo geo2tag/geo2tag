@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block styles%}
+<!-- Lib's css -->
+<link rel="stylesheet" href="{{ getStaticUrl('css/plugin_config.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/jquery-ui.css') }}">
+
+<!-- Macros css -->
+
+
+{% endblock %}
+{% block scripts %}
+ <!-- Libs -->
+ <script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
+ 
+ <!-- Scripts -->
+ <script src="{{ getStaticUrl('js/plugin_config.js') }}"></script>
+ 
+ <!-- Macroses -->
+
+{% endblock %}
+{% block content %}
+<header>
+    <h2>Конфиг плагина</h2>
+</header>
+    <div class="row well">
+        <div>
+            <h2>Секция</h2>
+        </div>
+        <div class="row buttons-service">
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-primary" id="save_plugin_btn">Save</button>
+            </div>
+            <div class="col-xs-2">
+                <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+            <div class="col-xs-4">
+            </div>
+        </div>
+    </div>
+{% endblock %}

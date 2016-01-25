@@ -33,6 +33,7 @@ from metadata_resource import MetadataResource
 from plugin_config_resource import PluginConfigResource
 from metadata_list_resource import MetadataListResource
 from admin_plugin_list_resource import AdminPluginListResource
+from admin_plugin_config_resource import AdminPluginConfigResource
 
 API = None
 
@@ -116,6 +117,9 @@ def addResources():
             '/service/<string:serviceName>/metadata'))
     getApi().add_resource(AdminPluginListResource, getPathWithPrefix(
         '/admin/plugin'))
+    getApi().add_resource(AdminPluginConfigResource, getPathWithPrefix(
+        '/admin/plugin/config/<string:pluginName>'))
+
     # end of the list of imported resources
 
     atexit.register(closeConnection)
