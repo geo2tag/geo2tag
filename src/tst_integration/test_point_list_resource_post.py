@@ -1,8 +1,8 @@
 import requests
-import json
+import unittest
+import sys
 from basic_integration_test import BasicIntegrationTest
-from db_model import getDbObject
-import ast
+from json import loads, dumps
 DB = "testservice"
 COLLECTION = 'points'
 JSON = 'json'
@@ -19,9 +19,8 @@ NOT_VALID_RESPONSE_CODE = 400
 
 class TestPointListPostRequest(BasicIntegrationTest):
 
-    def testPointListPostRequest(self):
-        db = getDbObject(DB)
-        response = requests.post(self.getUrl(TEST_URL), data=json.dumps(
+    def testPointListPostRequestValid(self):
+        pointAddResponse = requests.post(self.getUrl(TEST_URL), data=dumps(
             [{
                 LAT: 1.1,
                 LON: 1.1,
@@ -29,15 +28,32 @@ class TestPointListPostRequest(BasicIntegrationTest):
                 JSON: {'a': 'b'},
                 CHANNEL_ID: 'channel_id_value'
             }]))
-        responseCode = response.status_code
-        responseText = response.text
-        obj1 = db[COLLECTION].find_one({CHANNEL_ID: CHANNEL_IDS_VALUE})
-        self.assertEquals([unicode(obj1['_id'])],
-                          ast.literal_eval(responseText))
+        responseCode = pointAddResponse.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
-        response = requests.post(self.getUrl(TEST_URL), data=json.dumps(
+        responseText = pointAddResponse.text
+        print responseText
+        validId = loads(responseText)[0]
+        # Check if added points are available at REST interfaces
+        singlePointResponse = requests.get(
+            self.getUrl(TEST_URL + '/' + validId))
+        recievedPointCode = singlePointResponse.status_code
+        self.assertEquals(recievedPointCode, VALID_RESPONSE_CODE)
+
+    def testPointListPostRequestInvalid(self):
+        response = requests.post(self.getUrl(TEST_URL), data=dumps(
             [{LAT: '1.1', LON: 1.1, ALT: 1.1, JSON: [], CHANNEL_ID:''}]))
         responseCode = response.status_code
         responseText = response.text
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
         self.assertEquals(responseText, '{}')
+
+
+if __name__ == '__main__':
+    suite = unittest.TestSuite()
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestPointListPostRequest, param='http://geomongo/'))
+    returnCode = not unittest.TextTestRunner(
+        verbosity=2).run(suite).wasSuccessful()
+
+    sys.exit(returnCode)
