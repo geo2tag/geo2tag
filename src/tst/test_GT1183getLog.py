@@ -33,7 +33,7 @@ class TestGetLog(TestCase):
         print "Test for dates"
         prepareDb()
         # Test when dateFrom and dateTo vars are equal to None
-        self.assertEqual(list(getLog(DB, 1, None, None, None)), [])
+        self.assertEqual(len(list(getLog(DB, 1, None, None, None)), 1)
         # Test when dateTo is equal to None
         log = getLog(DB, None, None, DATE_FROM, None)
         self.assertTrue(log.count(True) > 0)
