@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
 
-TEST_URL = '/instance/admin/plugin'
+TEST_URL = '/instance/admin/plugin/config/test_plugin'
 H2 = u'Конфиг плагина'
 
 
