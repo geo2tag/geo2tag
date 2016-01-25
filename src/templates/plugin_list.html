@@ -1,9 +1,28 @@
 {% extends "base.html" %}
 {% block styles%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/plugin_list.css') }}">
+<!-- External Css -->
+<link rel="stylesheet" href="{{ getStaticUrl('css/jquery-ui.css') }}">
+
+<!-- Internal Css -->
+<link rel="stylesheet" href="{{ getStaticUrl('css/plugin_list.css') }}">
+
+<!-- Macros css -->
+<link rel="stylesheet" href="{{ getStaticUrl('css/macros/pagination.css') }}">
+<link rel="stylesheet" href="{{ getStaticUrl('css/simplePagination.css') }}">
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/plugin_list.js') }}"></script>
+<!-- External Libs -->
+<script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
+<script src="{{ getStaticUrl('js/underscore.js') }}"></script>
+<script src="{{ getStaticUrl('js/backbone.js') }}"></script>
+
+<!-- Project Libs -->
+<script src="{{ getStaticUrl('js/plugin_list.js') }}"></script>
+<script src="{{ getStaticUrl('js/plugin_list_init.js') }}"></script>
+
+<!-- Macros js -->
+<script src="{{ getStaticUrl('js/macros/pagination.js') }}"></script>
+<script src="{{ getStaticUrl('js/jquery.simplePagination.js') }}"></script>
 {% endblock %}
 {% block content %}
 <div class='container'>
@@ -24,5 +43,7 @@
     </div>
     <div class='well' id='results_plugin_search'>
     <h3>Результаты поиска</h3>
+        {% from "macros/pagination.html" import pagination with context %}
+        {{ pagination('plugin_list') }}
     </div>
 {% endblock %}
