@@ -111,7 +111,9 @@ def getLog(dbName, number, offset, dateFrom, dateTo):
     number = 0 if (number is None or number < 0) else number
     offset = 0 if (offset is None or offset < 0) else offset
     if (dateFrom is None and dateTo is None):
-        return []
+        return collection.find(
+            {}, None, offset,
+            number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
     elif dateFrom is None:
         return collection.find(
             {FIND_AND_SORT_KEY: {"$lte": dateTo}},
