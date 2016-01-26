@@ -13,7 +13,7 @@ var PluginList = Backbone.Collection.extend({
         var keys = Object.keys(response);
         var result = [];
         for (var i in keys){
-            var enabled = response[keys[i]];
+            var enabled = response[keys[i]]['enabled'];
             result.push({'name':keys[i], 'enabled': enabled})
         }
         return result;
@@ -40,7 +40,7 @@ var PluginPageModel = Backbone.Model.extend({
     }
 });
 
-plugin_list_page = new PluginPageModel;
+var plugin_list_page = new PluginPageModel;
 
 var PluginPageView = Backbone.View.extend({
     initialize:function(){
@@ -72,22 +72,27 @@ function get_plugin_enable_button_text(json){
 }
 
 function get_plugin_display(json){
+    console.log(json);
     var plugin_name = json.name;
+    
     var result = '<div class="row"><div class="col-xs-8 name-config-plugin"><h3>' + plugin_name + '</h3></div>';
-    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg btn-delete-plugin" onclick=unable_plugin("' + plugin_name + '")>' + get_plugin_enable_button_text(json) + '</button>';
+    result += '<div class="col-xs-4"><button type="button" class="btn btn-primary btn-lg btn-delete-plugin" onclick=unable_plugin("' + plugin_name + '",'+json.enabled +')>' + get_plugin_enable_button_text(json) + '</button>';
     result += '<a href=' + getUrlWithPrefix('/admin/plugin/config/' + plugin_name) + '><button type="button" class="btn btn-primary btn-lg btn-config-plugin">C</button>' + '</a></div></div>';
     return result;
 }
 
-function unable_plugin(pluginName){
+function unable_plugin(pluginName, enabled){
+    var state = !enabled; 
     $.ajax({
        type: "GET",
-       url: getUrlWithPrefix('/manage_plugins?') + pluginName + '=false',
+       url: getUrlWithPrefix('/manage_plugins?') + pluginName + '=' + state,
        success: function(json, status){
+          plugin_page.refresh();
           console.log('plugin is successfully unabled');
        },
        error: function(request, textStatus, errorThrown){
-           console.log('ERRROR plugin is unsuccessfully unabled');
+          plugin_page.refresh();
+          console.log('ERRROR plugin is unsuccessfully unabled');
        }
      });
 
