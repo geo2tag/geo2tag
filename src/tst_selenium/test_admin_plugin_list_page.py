@@ -23,3 +23,18 @@ class TestAdminPluginListPage(BasicSeleniumTest):
         self.assertNotEquals(res, None)
         res = self.driver.find_element_by_tag_name("head")
         self.assertNotEquals(res, None)
+
+    def testCheckEnableButton(self):
+        DISABLE = 'Disable'
+        ENABLE = 'Enable'
+        URL = self.getUrl(TEST_URL)
+        self.driver.get(URL)
+
+        button = self.driver.find_element_by_css_selector('[onclick="unable_plugin("ok_import",true)"]')
+        self.assertEquals(button.get_attribute('innerHTML'), DISABLE);
+
+        button.click()
+
+        button = self.driver.find_element_by_css_selector('[onclick="unable_plugin("ok_import",false)"]')
+        self.assertEquals(button.get_attribute('innerHTML'), ENABLE);
+
