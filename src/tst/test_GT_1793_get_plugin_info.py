@@ -1,15 +1,13 @@
 import unittest
-from db_model import getPluginInfo, getDbObject
+from db_model import getPluginInfo, getDbObject, ENABLED, CONFIGURABLE
 
 
 TEST_PLUGIN_NAME = 'test_plugin_name_gt_1793'
-TEST_VALID_RESULT_FALSE = False
+TEST_VALID_RESULT_FALSE = {ENABLED: False, CONFIGURABLE: True} 
 TEST_PLUGINS_COLLECTION = 'plugins'
 TEST_VALUE = True
 db = getDbObject()
 NAME = 'name'
-ENABLED = 'enabled'
-CONFIGURABLE = 'configurable'
 TEST_VALID_RESULT = {ENABLED: TEST_VALUE, CONFIGURABLE: TEST_VALUE}
 
 
