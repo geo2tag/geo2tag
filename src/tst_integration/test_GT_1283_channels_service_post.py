@@ -19,7 +19,7 @@ class TestChannelServicePostRequest(BasicIntegrationTest):
         responseText = response.text
         responseCode = response.status_code
         ID = json.loads(responseText)
-        response = requests.delete(self.getUrl(TEST_URL + '/' + ID[ID_KEY]))  
+        response = requests.delete(self.getUrl(TEST_URL + '/' + ID[ID_KEY]))
         self.assertNotEquals(responseText, [])
         self.assertNotEquals(responseText, {})
         self.assertEquals(responseCode, 200)
