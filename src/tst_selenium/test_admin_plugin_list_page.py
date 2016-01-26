@@ -31,11 +31,15 @@ class TestAdminPluginListPage(BasicSeleniumTest):
         self.driver.get(URL)
 
         button = self.driver.find_element_by_css_selector(
-            '[onclick="unable_plugin("ok_import",true)"]')
+            '[plugin_name="ok_import"]')
         self.assertEquals(button.get_attribute('innerHTML'), DISABLE)
 
         button.click()
+        WebDriverWait(self.driver, 10).until(
+            expected_conditions.text_to_be_present_in_element(
+                (By.CSS_SELECTOR, '[plugin_name="ok_import"]'), ENABLE)
+        )
 
-        button = self.driver.find_element_by_css_selector(
-            '[onclick="unable_plugin("ok_import",false)"]')
-        self.assertEquals(button.get_attribute('innerHTML'), ENABLE)
+        button1 = self.driver.find_element_by_css_selector(
+            '[plugin_name="ok_import"]')
+        self.assertEquals(button1.get_attribute('innerHTML'), ENABLE)
