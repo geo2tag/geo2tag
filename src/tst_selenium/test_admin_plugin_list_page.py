@@ -30,11 +30,12 @@ class TestAdminPluginListPage(BasicSeleniumTest):
         URL = self.getUrl(TEST_URL)
         self.driver.get(URL)
 
-        button = self.driver.find_element_by_css_selector('[onclick="unable_plugin("ok_import",true)"]')
-        self.assertEquals(button.get_attribute('innerHTML'), DISABLE);
+        button = self.driver.find_element_by_css_selector(
+            '[onclick="unable_plugin("ok_import",true)"]')
+        self.assertEquals(button.get_attribute('innerHTML'), DISABLE)
 
         button.click()
 
-        button = self.driver.find_element_by_css_selector('[onclick="unable_plugin("ok_import",false)"]')
-        self.assertEquals(button.get_attribute('innerHTML'), ENABLE);
-
+        button = self.driver.find_element_by_css_selector(
+            '[onclick="unable_plugin("ok_import",false)"]')
+        self.assertEquals(button.get_attribute('innerHTML'), ENABLE)
