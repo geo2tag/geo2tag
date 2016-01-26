@@ -26,6 +26,7 @@ from test_GT_1985_check_display_data_service_page import \
     TestCheckDisplayDataServicePage
 from test_service_list_page import TestServiceListResource
 from test_GT_2001_admin_plugin_list_page import TestAdminPluginListPage
+from test_GT_2149_unable_plugin import TestCheckUnablePluginBtn
 from test_GT_2145_plugin_config_check_page import TestPluginConfigPage
 from test_GT_2148_check_config_plugin_btn import TestCheckConfigPluginBtn
 
@@ -93,6 +94,10 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestAdminPluginListPage,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestCheckUnablePluginBtn,
             param=host))
     suite.addTest(
         BasicSeleniumTest.parametrize(
