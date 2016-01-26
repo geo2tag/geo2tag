@@ -3,7 +3,7 @@ from db_model import getPluginInfo, getDbObject, ENABLED, CONFIGURABLE
 
 
 TEST_PLUGIN_NAME = 'test_plugin_name_gt_1793'
-TEST_VALID_RESULT_FALSE = {ENABLED: False, CONFIGURABLE: True} 
+TEST_VALID_RESULT_FALSE = {ENABLED: False, CONFIGURABLE: True}
 TEST_PLUGINS_COLLECTION = 'plugins'
 TEST_VALUE = True
 db = getDbObject()
