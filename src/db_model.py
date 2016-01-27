@@ -461,14 +461,14 @@ def closeConnection():
 def getPluginInfo(pluginName):
     db_getpluginstate = getDbObject()
     obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
+    plugin_state = {ENABLED: False, CONFIGURABLE: True}
     if obj is not None:
         if CONFIGURABLE in obj:
             plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE:
                             obj[CONFIGURABLE]}
         else:
             plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
-        return plugin_state
-    return False
+    return plugin_state
 
 
 def getPluginState(pluginName):
