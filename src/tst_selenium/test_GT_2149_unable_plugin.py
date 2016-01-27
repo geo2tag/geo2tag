@@ -35,16 +35,17 @@ class TestCheckUnablePluginBtn(BasicSeleniumTest):
         self.assertIs(type(pluginStatus), bool)
         VALID_RESULT = not pluginStatus
 
-        if pluginStatus == True:
+        if pluginStatus:
             VALID_STATUS_TEXT = ENABLED
-        elif pluginStatus == False:
+        elif not pluginStatus:
             VALID_STATUS_TEXT = DISABLED
 
         BTN = self.getDriver().find_element_by_css_selector(
             BUTTON_SELECTOR)
         BTN.click()
 
-        print "Plugin status = {}, VALID_STATUS_TEXT = {}".format(pluginStatus, VALID_STATUS_TEXT) 
+        print "Plugin status = {}, VALID_STATUS_TEXT = {}". \
+            format(pluginStatus, VALID_STATUS_TEXT)
         WebDriverWait(self.driver, 10).until(
             expected_conditions.text_to_be_present_in_element(
                 (By.CSS_SELECTOR, BUTTON_SELECTOR), VALID_STATUS_TEXT)
