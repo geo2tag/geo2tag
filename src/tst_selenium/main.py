@@ -25,6 +25,11 @@ from test_GT_1918_service_page_macroses import \
 from test_GT_1985_check_display_data_service_page import \
     TestCheckDisplayDataServicePage
 from test_service_list_page import TestServiceListResource
+# Commented because of https://geo2tag.atlassian.net/browse/GT-2186
+# from test_admin_plugin_list_page import TestAdminPluginListPage
+from test_GT_2149_unable_plugin import TestCheckUnablePluginBtn
+from test_GT_2145_plugin_config_check_page import TestPluginConfigPage
+from test_GT_2148_check_config_plugin_btn import TestCheckConfigPluginBtn
 
 
 def main(host):
@@ -87,7 +92,23 @@ def main(host):
         BasicSeleniumTest.parametrize(
             TestServiceListResource,
             param=host))
-
+# Commented because of https://geo2tag.atlassian.net/browse/GT-2186
+#    suite.addTest(
+#        BasicSeleniumTest.parametrize(
+#            TestAdminPluginListPage,
+#            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestCheckUnablePluginBtn,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestPluginConfigPage,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestCheckConfigPluginBtn,
+            param=host))
 ###################################################
 
 #

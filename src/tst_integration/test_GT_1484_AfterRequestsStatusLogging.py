@@ -1,23 +1,22 @@
-from pymongo import DESCENDING
 import requests
+from json import loads
 from basic_integration_test import BasicIntegrationTest
-from config_reader import getInstancePrefix
-from db_model import getDbObject
 
-URL = '/' + getInstancePrefix() + '/status'
+URL = '/instance/status'
 
 LOG = 'log'
 ID = '_id'
 
-log = getDbObject()[LOG]
-
 MESSAGE_FIELD = 'message'
 MESSAGE = 'Status_code: 200, response: [\'OK\']'
+LOG_URL = '/instance/log?number=1'
 
 
 class TestAfterRequestStatusLogging(BasicIntegrationTest):
 
     def testAfterRequestStatusLogging(self):
         requests.get(self.getUrl(URL))
-        last_doc = log.find().sort(ID, DESCENDING).limit(1)
-        self.assertEqual(list(last_doc)[0][MESSAGE_FIELD], MESSAGE)
+        response = requests.get(self.getUrl(LOG_URL))
+        logEntries = loads(response.text)
+        lastEntry = logEntries[0]
+        self.assertEqual(lastEntry[MESSAGE_FIELD], MESSAGE)

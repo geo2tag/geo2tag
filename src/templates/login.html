@@ -5,12 +5,12 @@
 			</header>
 			<button> 
 				<a href='/{{instance_prefix}}/login/google'>
-					<img class="google_authorized" src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png" alt="Sign in with Google">
+					<img class="google_authorized" src="{{ getStaticUrl('img/login_google_img.png')}}" alt="Sign in with Google">
 				</a>
 			</button>
 			<button>
 				<a href='/{{instance_prefix}}/login/facebook'>
-      				<img class="facebook_authorized" src="https://scontent.xx.fbcdn.net/hphotos-xaf1/t39.2178-6/851579_209602122530903_1060396115_n.png" alt="Sign in with Facebook">
+      				<img class="facebook_authorized" src="{{ getStaticUrl('img/login_facebook_img.png')}} alt="Sign in with Facebook">
    				</a>
 </button>
 {% endblock %}
