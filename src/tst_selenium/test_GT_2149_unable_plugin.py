@@ -11,8 +11,8 @@ TEST_URL_LIST_PLUGIN = 'instance/plugin'
 TEST_CLASS_NAME_SELECTOR = '.name-config-plugin'
 TEST_URL_MANAGE = 'instance/manage_plugins?'
 TEST_ENABLED = u'enabled'
-ENABLED = 'Enabled'
-DISABLED = 'Disabled'
+ENABLED = 'Enable'
+DISABLED = 'Disable'
 
 
 class TestCheckUnablePluginBtn(BasicSeleniumTest):
@@ -44,8 +44,8 @@ class TestCheckUnablePluginBtn(BasicSeleniumTest):
             BUTTON_SELECTOR)
         BTN.click()
 
-        print "Plugin status = {}, VALID_STATUS_TEXT = {}". \
-            format(pluginStatus, VALID_STATUS_TEXT)
+        print "Name = {}, Plugin status = {}, VALID_STATUS_TEXT = {}". \
+            format(NAME, pluginStatus, VALID_STATUS_TEXT)
         WebDriverWait(self.driver, 10).until(
             expected_conditions.text_to_be_present_in_element(
                 (By.CSS_SELECTOR, BUTTON_SELECTOR), VALID_STATUS_TEXT)
