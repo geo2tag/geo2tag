@@ -1,7 +1,6 @@
 from db_model import getDbObject
 from unittest import TestCase
 import os
-import config_reader
 
 TEST_PATH = os.getcwd()
 DB_TAG = '--dbName '
