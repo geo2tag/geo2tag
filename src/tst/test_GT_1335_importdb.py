@@ -4,6 +4,7 @@ import config_reader
 
 TEST_PATH = os.getcwd()
 
+
 class TestImportDb(TestCase):
 
     def setUp(self):
