@@ -8,9 +8,8 @@ VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
 LOGIN = 'login'
 
+
 def isSorted(L, key):
-    print L
-    print L[0][1:-1].split(',')
     tmp = L[0][key]
     for i in L:
         if i[key] < tmp:
@@ -28,9 +27,7 @@ class TestUserListResource(BasicIntegrationTest):
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         responseText = response.text
         user_list = json.loads(responseText)
-        print user_list
         self.assertTrue(isSorted(user_list, LOGIN))
         response = requests.get(self.getUrl(TEST_NOT_VALID_URL))
         responseCode = response.status_code
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
-        

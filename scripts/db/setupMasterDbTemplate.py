@@ -23,17 +23,11 @@ def getDbName(config_name):
 
 
 def run():
-
     parser = argparse.ArgumentParser(description='Setup master db')
     parser.add_argument('--dbName', help='Name db')
     parser.add_argument('--config', help='Config name')
     args = parser.parse_args()
-    if unicode(args.config) != 'None':
-        CONFIG_PATH = os.path.dirname(os.path.realpath(
-            __file__)) + '/' + unicode(args.config + '.ini')
-        db_name = getDbName(CONFIG_PATH)
-        import_db(unicode(db_name))
-    else:
+    if unicode(args.config) == 'None':
         import_db(unicode(args.dbName))
 
 if __name__ == '__main__':

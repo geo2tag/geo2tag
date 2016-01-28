@@ -53,6 +53,7 @@ def isSorted(L, key):
             tmp = i[key]
     return True
 
+
 class TestUserRoutines(unittest.TestCase):
 
     def testUserRoutins(self):
@@ -92,6 +93,8 @@ class TestUserRoutines(unittest.TestCase):
         COLLECTION_USERS.insert(TEST_OBJ_2)
         COLLECTION_USERS.insert(TEST_OBJ_3)
         COLLECTION_USERS.insert(TEST_OBJ_4)
-        RESULT = findUsers(TEST_NUMBER_10, TEST_OFFSET, TEST_LOGIN_SUBSTRING_TEST)
+        RESULT = findUsers(
+            TEST_NUMBER_10,
+            TEST_OFFSET,
+            TEST_LOGIN_SUBSTRING_TEST)
         self.assertTrue(isSorted(RESULT, LOGIN))
-
