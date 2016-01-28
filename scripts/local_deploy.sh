@@ -66,6 +66,7 @@ cp config/"$CONFIG_FILE" /etc/apache2/sites-available/
 
 ./scripts/setup_pip_dependencies.sh
 
+./scripts/db/drop_test_db.sh
 python scripts/db/setupMasterDbTemplate.py --config ${CONFIG_INI_FILE}
 
 COMMIT=$(git rev-parse HEAD)
