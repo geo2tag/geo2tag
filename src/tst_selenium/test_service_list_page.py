@@ -27,7 +27,7 @@ class TestServiceListResource(BasicSeleniumTest):
         serviceList = self.getDriver().find_element_by_id(SERVICE_LIST)
         self.assertEquals(serviceList.get_attribute('innerHTML'), '')
 
-    def testServiceDelete(self):
+    '''def testServiceDelete(self):
         URL = self.getUrl('/instance/admin/service')
         SERVICE_URL = 'service_url'
         self.getDriver().get(URL)
@@ -47,4 +47,4 @@ class TestServiceListResource(BasicSeleniumTest):
                     firstServiceName + \
                     ' was deleted successfully</strong>'
         alertText = successAlert.get_attribute('innerHTML')
-        self.assertEquals(alertText, validText)
+        self.assertEquals(alertText, validText)'''
