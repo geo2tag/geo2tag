@@ -27,17 +27,11 @@ def run():
     parser.add_argument('--dbName', help='Name db')
     parser.add_argument('--config', help='Config name')
     args = parser.parse_args()
-    print '========'
-    print args
     if unicode(args.config) == 'None':
         import_db(unicode(args.dbName))
     else:
-        print args.config
         db_name = getDbName(args.config)
-        print db_name
-        print '-----!!_!_------'
         import_db(unicode(db_name))
 
 if __name__ == '__main__':
-    print 'RUN'
     run()
