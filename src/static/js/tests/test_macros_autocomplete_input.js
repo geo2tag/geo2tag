@@ -1,6 +1,6 @@
 QUnit.test('search autocompliteinput test', function( assert ) {
     var done = assert.async();
-    var testLogin = 'test_user';
+    var testLogin = 'new_test_user';
     var testId = 'ZzKPM5GJQ1';
     var validUrl = '/instance/user?login='+testLogin+'&number=3&offset=0';
     console.log('validUrl: '+validUrl);
