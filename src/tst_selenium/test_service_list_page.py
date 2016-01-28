@@ -37,7 +37,7 @@ class TestServiceListResource(BasicSeleniumTest):
         firstService = serviceNames[0]
 
         firstServiceName = firstService.get_attribute('innerHTML')
-
+        print 'delete_' + firstServiceName
         deleteButton = self.getDriver().\
             find_element_by_id('delete_' + firstServiceName)
         deleteButton.click()
