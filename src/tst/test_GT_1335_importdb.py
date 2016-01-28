@@ -20,7 +20,7 @@ class TestImportDb(TestCase):
         os.chdir('../../')
         os.system('./scripts/db/drop_test_db.sh')
         self.db_master = getDbObject(TEST_DB)
-    
+
     def tearDown(self):
         os.system('./scripts/db/import_test_db.sh')
         os.chdir(TEST_PATH)
