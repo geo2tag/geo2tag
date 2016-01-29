@@ -13,6 +13,7 @@ TEST_URL_MANAGE = 'instance/manage_plugins?'
 TEST_ENABLED = u'enabled'
 ENABLED = 'Enable'
 DISABLED = 'Disable'
+ALERT_SELECTOR = '.alert'
 
 
 class TestCheckUnablePluginBtn(BasicSeleniumTest):
@@ -53,3 +54,8 @@ class TestCheckUnablePluginBtn(BasicSeleniumTest):
 
         pluginStatus = self.getPluginStatus(NAME)
         self.assertEqual(pluginStatus, VALID_RESULT)
+
+        # Added for GT-2164 - checking that alert appears
+        alert = self.getDriver().find_element_by_css_selector(
+            ALERT_SELECTOR)
+        self.assertIsNotNone(alert)
