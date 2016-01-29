@@ -48,8 +48,8 @@ class TestCheckUnablePluginBtn(BasicSeleniumTest):
         print "Name = {}, Plugin status = {}, VALID_STATUS_TEXT = {}". \
             format(NAME, pluginStatus, VALID_STATUS_TEXT)
         WebDriverWait(self.driver, 10).until(
-            expected_conditions.text_to_be_present_in_element(
-                (By.CSS_SELECTOR, BUTTON_SELECTOR), VALID_STATUS_TEXT)
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, ALERT_SELECTOR))
         )
 
         pluginStatus = self.getPluginStatus(NAME)
