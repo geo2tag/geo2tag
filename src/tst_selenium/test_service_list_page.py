@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from basic_selenium_test import BasicSeleniumTest
 from time import sleep
 
@@ -43,8 +44,10 @@ class TestServiceListResource(BasicSeleniumTest):
         deleteButton.click()
         successAlert = self.getDriver().\
             find_element_by_class_name('alert-success')
-        validText = '<strong> ' + \
-                    firstServiceName + \
-                    ' was deleted successfully</strong>'
+        validText = '<div class="alert alert-success"><a href="#"'+ \
+            ' class="close" data-dismiss="alert"'+ \
+            ' aria-label="close">×</a><strong>' + \
+            firstServiceName + \
+            ' was deleted successfully</strong>'
         alertText = successAlert.get_attribute('innerHTML')
         self.assertEquals(alertText, validText)
