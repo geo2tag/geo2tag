@@ -44,8 +44,8 @@ class TestServiceListResource(BasicSeleniumTest):
         deleteButton.click()
         successAlert = self.getDriver().\
             find_element_by_class_name('alert-success')
-        validText = '<div class="alert alert-success"><a href="#"'+ \
-            ' class="close" data-dismiss="alert"'+ \
+        validText = '<div class="alert alert-success"><a href="#"' + \
+            ' class="close" data-dismiss="alert"' + \
             ' aria-label="close">×</a><strong>' + \
             firstServiceName + \
             ' was deleted successfully</strong>'
