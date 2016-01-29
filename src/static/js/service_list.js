@@ -66,32 +66,26 @@ function get_service_display(json){
 }
 
 
-function printBootstrapAlert(class_alert, msg){
-    result = '<div class="alert alert-' + class_alert + '">';
-    result += '<strong>' + status + ' ' + msg + '</strong>';
-    result += '</div>';
-    console.log(result);
-    $('#results_service_search').prepend(result);
-}
 
 function deleteService(serviceName){
     $.ajax({
        type: "DELETE",
        url: getUrlWithPrefix('/service/') + serviceName,
        success: function(json, status){
-          printBootstrapAlert(status,serviceName+' was deleted successfully'); 
-          console.log('service is successfully deleted');
+          var message = serviceName + ' was deleted successfully';
+          printSuccessAlert(message); 
+          console.log(message);
           var tryToKeepPageNumber = true;
           // TODO ability to save active page number after update of URL
           // https://geo2tag.atlassian.net/browse/GT-2112
           refreshServiceList(tryToKeepPageNumber);
        },
        error: function(request, textStatus, errorThrown){
-           msg = 'Deleting is finished unsuccessfully ' + textStatus + ': ' + request.status;
-           printBootstrapAlert('danger', msg);
+           var message = 'Deleting is finished unsuccessfully for ' + serviceName + ': ' +
+               textStatus + ', ' + request.status;
+           printDangerAlert(message);
            console.log('ERRROR service is unsuccessfully deleted');
        }
      });
-
 }
 

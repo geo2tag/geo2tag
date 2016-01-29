@@ -43,6 +43,7 @@
     </div>
     <h3>Results</h3>
     <div class='well' id='results_service_search'>
+        <div id='alert_div'></div>
         {% from "macros/pagination.html" import pagination with context %}
         {{ pagination('service_list') }}
     </div>

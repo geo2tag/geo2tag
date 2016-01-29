@@ -83,16 +83,26 @@ function get_plugin_display(json){
 
 function unable_plugin(pluginName, enabled){
     var state = !enabled; 
+    stateText = '';
+    if (state)
+        stateText = 'enabled';
+    else
+        stateText = 'disabled';
     $.ajax({
        type: "GET",
        url: getUrlWithPrefix('/manage_plugins?') + pluginName + '=' + state,
        success: function(json, status){
           plugin_page.refresh();
-          console.log('plugin is successfully unabled');
+          var message = pluginName + ' was ' + stateText + ' successfuly';
+          printSuccessAlert(message);
+          console.log(message);
        },
        error: function(request, textStatus, errorThrown){
           plugin_page.refresh();
-          console.log('ERRROR plugin is unsuccessfully unabled');
+          message = 'An error occured while set ' + pluginName + ' ' + 
+              stateText + ':' + textStatus;
+          printDangerAlert(message);
+          console.log(message);
        }
      });
 
