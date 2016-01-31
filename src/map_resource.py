@@ -8,17 +8,24 @@ NUMBER_VALUE = 1000
 SERVICE_NAME = 'serviceName'
 CHANNEL_IDS = 'channel_ids'
 NUMBER = 'number'
+LATITUDE = 'latitude'
+LONGITUDE = 'longitude'
 
 
 class MapResource(Resource):
 
     def get(self, serviceName=None):
+        print '==============='
         try:
+            print 1
             args = PointListResourceParser.parseGetParameters()
+            print 2
             args[SERVICE_NAME] = serviceName
             get_param = args
+            print get_param
             return make_response(render_template('map.html', params=get_param))
         except Exception:
+            print Exception
             get_param = getDefaultMapParams(serviceName)
             return make_response(render_template('map.html', params=get_param))
 
