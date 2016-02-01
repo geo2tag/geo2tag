@@ -44,7 +44,6 @@ class PointListResourceParser():
         parser.add_argument(LATITUDE, type=float)
         parser.add_argument(LONGITUDE, type=float)
         args = parser.parse_args()
-        print '-----------------'
         # Generating dict with error array for 'bc_from' and 'bc_to' parameters
         # if error appeared
         res = {
