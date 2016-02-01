@@ -19,8 +19,8 @@ function fixMapSize(){
 }
 
 $(document).ready(function (){
-    if(par.args.latitude != null && par.args.longitude != null)
-        map = createMap('map', false, par.args.latitude, par.args.longitude);
+    if(par.latitude != null && par.longitude != null)
+        map = createMap('map', false, par.latitude, par.longitude);
     else
         map = createMap('map', true)
     $(window).on('resize', fixMapSize());

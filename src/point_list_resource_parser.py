@@ -19,7 +19,6 @@ BC_TO = 'bc_to'
 LATITUDE = 'latitude'
 LONGITUDE = 'longitude'
 
-BC_DATES_FLAG_CHECK_ARGS_KEY = 'args'
 BC_DATES_FLAG_CHECK_ERR_KEY = 'err'
 
 
@@ -46,9 +45,8 @@ class PointListResourceParser():
         args = parser.parse_args()
         # Generating dict with error array for 'bc_from' and 'bc_to' parameters
         # if error appeared
-        res = {
-            BC_DATES_FLAG_CHECK_ARGS_KEY: args,
-            BC_DATES_FLAG_CHECK_ERR_KEY: []}
+        res = args
+        res[BC_DATES_FLAG_CHECK_ERR_KEY] = []
         if args[DATE_FROM] is not None and args[BC_FROM] is None:
             res[BC_DATES_FLAG_CHECK_ERR_KEY].append(BC_FROM)
         if args[DATE_TO] is not None and args[BC_TO] is None:
