@@ -19,7 +19,10 @@ function fixMapSize(){
 }
 
 $(document).ready(function (){
-    map = createMap('map', true);
+    if(par.latitude != null && par.longitude != null)
+        map = createMap('map', false, par.latitude, par.longitude);
+    else
+        map = createMap('map', true)
     $(window).on('resize', fixMapSize());
     var path_marker = '../../../static/img';
     var COORDINATES = 'coordinates'
