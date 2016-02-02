@@ -1,13 +1,13 @@
 function convertJsonToIni(json){
-    var ini = [];
+    var ini = '';
     for(var obj in json){
         var category = '[' + obj + ']' + '\n'; 
-        var parametrs = ''
+        var parametrs = '';
         for (var par in json[obj]){
             parametrs += String(par) + '=' + String(json[obj][par]) + '\n';
         }
-        ini.push(category);
-        ini.push(parametrs)
+        ini += category;
+        ini += parametrs;
     }
     return ini;
 }
@@ -15,18 +15,30 @@ function convertJsonToIni(json){
 function convertIniToJson(ini){
     var json = {};
     var category = {};
-    for(var i = ini.length-1; i >= 0; i--){
-        if(ini[i].charAt(0) == '['){
-            json[ini[i].substring(1,ini[i].length-1)] = category;      
+    var index = ini.length-1;
+    var pos = ini.length-2;
+    var flag = true;
+    while (flag) {
+     if((pos = ini.lastIndexOf('\n', pos-1)) != -1){
+        str = ini.substring(pos, index);
+        if(str.charAt(1) == '['){
+            json[str.substring(2,str.length-1)] = category;
             category = {};
         }
         else {
-            var index = ini[i].indexOf('=');
-            var par = ini[i].substring(0, index);
-            var val = ini[i].substring(index+1, ini[i].length);
-            category[par] = val;    
+            var i = str.indexOf('=');
+            var par = str.substring(0, i);
+            var val = str.substring(i+1, str.length);
+            category[par] = val;
         }
+        index = pos;
+      }
+      else{
+          str = ini.substring(pos, index);
+          json[str.substring(1,str.length-1)] = category;
+          flag = false;
+      }
     }
-    return(json)
+    return json
 }
 
