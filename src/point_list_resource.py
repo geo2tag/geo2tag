@@ -10,7 +10,6 @@ from date_utils import dateDeserialiser
 BC_DATES_FLAGS_ERR_VAL = ': Missing required parameter in the JSON body ' \
                          'or the post body or the query string'
 BC_DATES_FLAGS_ERR_KEY = 'message'
-POINT_LIST_PARSER_ARGS_KEY = 'args'
 POINT_LIST_PARSER_ERRS_KEY = 'err'
 
 
@@ -30,7 +29,7 @@ class PointListResource(Resource):
             return {BC_DATES_FLAGS_ERR_KEY: err_str +
                     BC_DATES_FLAGS_ERR_VAL}, 400
 
-        params = params_with_errs[POINT_LIST_PARSER_ARGS_KEY]
+        params = params_with_errs
         result = findPoints(
             serviceName,
             params[CHANNEL_IDS],
