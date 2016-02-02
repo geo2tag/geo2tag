@@ -106,7 +106,6 @@ function saveServiceChange(service_id) {
         data: page_data,
         success: function(json, status) {
             console.log("save service success" );
-            alert('this alert must be deleted');
             spinner.stop(target);
             printBootstrapAlert(status,'Saving is finished successfully');
         },

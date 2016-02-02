@@ -8,7 +8,6 @@ from point_list_resource_parser import PointListResourceParser
 import geo_json_type
 from date_utils import dateDeserialiser
 
-POINT_LIST_PARSER_ARGS_KEY = 'args'
 
 NUMBER = 'number'
 NUMBER_VALUE = 0
@@ -45,8 +44,7 @@ class TestParserPointListGetResource(TestCase):
     def testParserPointListGetResource(self):
         with app.test_request_context(
                 '/instance/service/testservice/point/?' + CORRECT_ARGS):
-            args_with_errs = PointListResourceParser.parseGetParameters()
-            args = args_with_errs[POINT_LIST_PARSER_ARGS_KEY]
+            args = PointListResourceParser.parseGetParameters()
             self.assertEquals(args[OFFSET], OFFSET_VALUE)
             self.assertEquals(args[NUMBER], NUMBER_VALUE)
             loadedDatetime_from = json.loads(

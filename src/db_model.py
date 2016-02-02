@@ -96,6 +96,7 @@ def addService(name, logSize, ownerld):
     except ServiceNotExistException:
         obj_id = db_addservice[COLLECTION].save(
             {NAME: name, CONFIG: {LOG_SIZE: logSize}, OWNERID: ownerld})
+        addServiceDb(name)
         if obj_id is None:
             return None
         else:
@@ -110,7 +111,9 @@ def getLog(dbName, number, offset, dateFrom, dateTo):
     number = 0 if (number is None or number < 0) else number
     offset = 0 if (offset is None or offset < 0) else offset
     if (dateFrom is None and dateTo is None):
-        return []
+        return collection.find(
+            {}, None, offset,
+            number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
     elif dateFrom is None:
         return collection.find(
             {FIND_AND_SORT_KEY: {"$lte": dateTo}},
@@ -347,7 +350,7 @@ def addServiceDb(dbName):
         [("location", pymongo.GEOSPHERE)])
     db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("date", pymongo.DESCENDING)])
-    db_addservicedb[COLLECTION_SERVICES_NAME].create_index(
+    db_addservicedb[COLLECTION_POINTS_NAME].create_index(
         [("name", pymongo.ASCENDING)])
 
 
@@ -458,14 +461,14 @@ def closeConnection():
 def getPluginInfo(pluginName):
     db_getpluginstate = getDbObject()
     obj = db_getpluginstate[PLUGINS].find_one({NAME: pluginName})
+    plugin_state = {ENABLED: False, CONFIGURABLE: True}
     if obj is not None:
         if CONFIGURABLE in obj:
             plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE:
                             obj[CONFIGURABLE]}
         else:
             plugin_state = {ENABLED: obj[ENABLED], CONFIGURABLE: True}
-        return plugin_state
-    return False
+    return plugin_state
 
 
 def getPluginState(pluginName):
