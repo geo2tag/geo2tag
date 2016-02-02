@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from basic_selenium_test import BasicSeleniumTest
 from time import sleep
 
