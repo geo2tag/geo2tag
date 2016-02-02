@@ -13,6 +13,7 @@ NAME = "test_get_channel_by_id"
 JSON = "{'a':'aa'}"
 DATA = {'name': NAME, 'json': JSON, 'acl': 777}
 ID_KEY = u'$oid'
+NAME_KEY = 'name'
 
 
 class TestChannelGetRequest(BasicIntegrationTest):
@@ -24,7 +25,7 @@ class TestChannelGetRequest(BasicIntegrationTest):
         response = requests.get(self.getUrl(TEST_URL + '/' + unicode(ID)))
         responseText = json.loads(response.text)
         responseCode = response.status_code
-        self.assertEquals(responseText['name'], NAME)
+        self.assertEquals(responseText[NAME_KEY], NAME)
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         response = requests.get(self.getUrl(BAD_TEST_URL))
         responseText = response.text
