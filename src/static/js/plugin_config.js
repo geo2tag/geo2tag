@@ -27,7 +27,7 @@ function convertIniToJson(ini){
         }
         else {
             var i = str.indexOf('=');
-            var par = str.substring(0, i);
+            var par = str.substring(1, i);
             var val = str.substring(i+1, str.length);
             category[par] = val;
         }
