@@ -1,9 +1,9 @@
-import time
+import json
 import jenkins
 import argparse
 from jira import JIRA
 from check_test_scenario_field import check_test_scenario_field
-import time
+import requests
 
 JOB = 'geo2tag-test'
 JENKINS_URL = 'http://jenkins.osll.ru'
@@ -14,6 +14,7 @@ JIRA_PROJECT = 'https://geo2tag.atlassian.net'
 options = {
     'server': JIRA_PROJECT
 }
+URL = 'https://api.bitbucket.org/2.0/repositories/osll/geomongo/pullrequests?state=[OPEN]'
 
 # for search branch number
 ACTIONS = u'actions'
@@ -26,26 +27,28 @@ FIXED = u'FIXED'
 ARG_BRANCH = '--branch'
 NUMBER = 'number'
 LAST_COMPLETED_BUILD = 'lastCompletedBuild'
+VALUES = u'values'
+SOURCE = u'source'
 
 
 def check_issue(branch):
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
-    DEV_STATUS = 'https://geo2tag.atlassian.net/rest/dev-status/1.0'
-    issue = get_jira_issue(jira, branch)
-    _issue = 'issue/detail?issueID=%s' % issue.id
-    _args = 'applicationType=bitbucket&dataType=pullrequest&_=%s' % int(time.time())
-
-    req_url = '%s/%s&%s' % (DEV_STATUS, _issue, _args)
-    response = jira._session.get(req_url)
-    raw_data = json.loads(response.content)
- 
-    for req in raw_data['detail'][0]['pullRequests']:
-        print('%s\n%s\n\n' % (req['name'], req['url']))
-
     issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
+    prq = check_pullrequest(branch) # if git branch exists
+    print 'Pullrequest ', prq
     if test_scenario_field:
         find_unsuccessfull_build_for_branch(jira, issue, branch)
+
+def check_pullrequest(branch):
+    response = requests.get(URL)
+    responseText = json.loads(response.text)
+    for prq in responseText[VALUES]:
+            if BRANCH in prq[SOURCE]:
+                if NAME in prq[SOURCE][BRANCH]:
+                    if unicode(branch, 'unicode-escape') == prq[SOURCE][BRANCH][NAME]:
+                        return True
+    return False
 
 
 def find_unsuccessfull_build_for_branch(jira, issue, branch):
