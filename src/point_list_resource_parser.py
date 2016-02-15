@@ -18,6 +18,7 @@ BC_FROM = 'bc_from'
 BC_TO = 'bc_to'
 LATITUDE = 'latitude'
 LONGITUDE = 'longitude'
+ZOOM = 'zoom'
 
 BC_DATES_FLAG_CHECK_ERR_KEY = 'err'
 
@@ -42,6 +43,7 @@ class PointListResourceParser():
         parser.add_argument(BC_TO, type=inputs.boolean)
         parser.add_argument(LATITUDE, type=float)
         parser.add_argument(LONGITUDE, type=float)
+        parser.add_argument(ZOOM, type=int, default = 14)
         args = parser.parse_args()
         # Generating dict with error array for 'bc_from' and 'bc_to' parameters
         # if error appeared

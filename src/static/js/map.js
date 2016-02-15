@@ -20,9 +20,9 @@ function fixMapSize(){
 
 $(document).ready(function (){
     if(par.latitude != null && par.longitude != null)
-        map = createMap('map', false, par.latitude, par.longitude);
+        map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
-        map = createMap('map', true)
+        map = createMap('map', true, par.zoom)
     $(window).on('resize', fixMapSize());
     var path_marker = '../../../static/img';
     var COORDINATES = 'coordinates'
