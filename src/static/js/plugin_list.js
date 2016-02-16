@@ -1,5 +1,16 @@
 var Plugin = Backbone.Model.extend({});
 
+var ConfigPlugin = Backbone.Model.extend({
+    url: function(){
+        plugin_name = this.plugin_name
+        return '/instance/plugin_config/' + plugin_name;
+    },
+    constructor: function(plugin_name) {
+        this.plugin_name = plugin_name;
+        Backbone.Model.apply(this, arguments);
+    }
+});
+
 var plugin = new Plugin({
     title: "Plugin"
 });
@@ -17,6 +28,30 @@ var PluginList = Backbone.Collection.extend({
             result.push({'name':keys[i], 'enabled': enabled})
         }
         return result;
+    }
+});
+
+var ConfigPluginView = Backbone.View.extend({
+    tagName: "div",
+    id: "container_config_plugin",
+    initialize:function(){
+        this.refresh();
+    },
+    refresh: function() {
+        this_ = this;
+        this.model.fetch({
+            success: function(json){
+                this_.render(json.attributes);
+            }
+        });
+    },
+    render: function(json) {
+        this.clear();
+        $('#' + this.id).append(get_config_plugin_display(json));
+        return this;
+    },
+    clear: function(){
+        $('#' + this.id).empty();
     }
 });
 
@@ -42,11 +77,11 @@ var PluginPageModel = Backbone.Model.extend({
 
 var plugin_list_page = new PluginPageModel;
 
+
 var PluginPageView = Backbone.View.extend({
     initialize:function(){
         this.refresh();
     },
-
     refresh: function() {
         this_ = this;
         this.model.fetch({
@@ -69,6 +104,13 @@ function get_plugin_enable_button_text(json){
         return 'Disable';
 
     return 'Enable';
+}
+
+function get_config_plugin_display(json){
+    var ini = convertJsonToIni(json)
+    ini = ini.replace('\n', '<br>');
+    result = '<div><h3>' + ini + '</h3><br></div>';
+    return result;
 }
 
 function get_plugin_display(json){
