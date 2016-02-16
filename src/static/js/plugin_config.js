@@ -41,11 +41,11 @@ function convertIniToJson(ini){
     }
     return json
 }
-var url = window.location.toString();
-var index = url.lastIndexOf('/');
-var plugin_name = url.substring(index+1)
-var config_plugin = new ConfigPlugin(plugin_name)
-console.log(config_plugin)
-var config_pluginview = new ConfigPluginView({'model' : config_plugin})
-// fetch
-//обновление view
+
+$(document).ready(function(){
+    var url = window.location.toString();
+    var index = url.lastIndexOf('/');
+    var plugin_name = url.substring(index+1)
+    var config_plugin = new ConfigPlugin(plugin_name)
+    var config_pluginview = new ConfigPluginView({'model' : config_plugin})
+});
