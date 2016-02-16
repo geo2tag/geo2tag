@@ -43,21 +43,39 @@ function convertJsonToIni(json){
 }
 
 function convertIniToJson(ini){
-    ini = ini.replace('=', '":"')
-    ini = ini.replace('[', '"')
-    ini = ini.replace(']\n', '":{"')
-    ini = ini.replace('\n', '"}')
-    ini = '{' + ini + '}'
-    console.log(ini)
-    result = JSON.parse(ini)
-    console.log(result)
-    return result;
+    var json = {};
+    var category = {};
+    var index = ini.length-1;
+    var pos = ini.length-2;
+    var flag = true;
+    while (flag) {
+     if((pos = ini.lastIndexOf('\n', pos-1)) != -1){
+        str = ini.substring(pos, index);
+        if(str.charAt(1) == '['){
+            json[str.substring(2,str.length-1)] = category;
+            category = {};
+        }
+        else {
+            var i = str.indexOf('=');
+            var par = str.substring(1, i);
+            var val = str.substring(i+1, str.length);
+            category[par] = val;
+        }
+        index = pos;
+      }
+      else{
+          str = ini.substring(pos, index);
+          json[str.substring(1,str.length-1)] = category;
+          flag = false;
+      }
+    }
+    return json
 }
 
 $(document).ready(function(){
     var url = window.location.toString();
     var index = url.lastIndexOf('/');
-    var plugin_name = url.substring(index+1)
-    var config_plugin = new ConfigPlugin(plugin_name)
-    var config_pluginview = new ConfigPluginView({'model' : config_plugin})
+    var plugin_name = url.substring(index+1);
+    var config_plugin = new ConfigPlugin(plugin_name);
+    var config_pluginview = new ConfigPluginView({'model' : config_plugin});
 });
