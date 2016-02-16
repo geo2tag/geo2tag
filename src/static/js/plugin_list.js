@@ -1,6 +1,6 @@
 var Plugin = Backbone.Model.extend({});
 
-ConfigPlugin = Backbone.Model.extend({
+var ConfigPlugin = Backbone.Model.extend({
     url: function(){
         plugin_name = this.plugin_name
         return '/instance/plugin_config/' + plugin_name;
@@ -41,12 +41,12 @@ var ConfigPluginView = Backbone.View.extend({
         this_ = this;
         this.model.fetch({
             success: function(json){
-                console.log(json)
                 this_.render(json.attributes);
             }
         });
     },
     render: function(json) {
+        this.clear();
         $('#' + this.id).append(get_config_plugin_display(json));
         return this;
     },
