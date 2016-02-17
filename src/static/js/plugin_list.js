@@ -56,7 +56,7 @@ var ConfigPluginView = Backbone.View.extend({
 });
 
 var PluginView = Backbone.View.extend({
-    tagName: "div",
+    tagName: "textarea",
     id: "container_plugin_list",
     render: function(json) {
         $('#' + this.id).append(get_plugin_display(json));
@@ -108,9 +108,7 @@ function get_plugin_enable_button_text(json){
 
 function get_config_plugin_display(json){
     var ini = convertJsonToIni(json)
-    ini = ini.replace('\n', '<br>');
-    result = '<div><h3>' + ini + '</h3><br></div>';
-    return result;
+    return ini;
 }
 
 function get_plugin_display(json){
