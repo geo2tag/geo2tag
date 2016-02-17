@@ -21,9 +21,9 @@ class TestAdminPluginListPage(BasicSeleniumTest):
         res = self.driver.find_element_by_tag_name("h2")
         self.assertEqual(res.text, H2)
         res = self.driver.find_element_by_tag_name("body")
-        self.assertNotEquals(res, None)
+        self.assertNotNone(res)
         res = self.driver.find_element_by_tag_name("head")
-        self.assertNotEquals(res, None)
+        self.assertNotNone(res)
 
     def testCheckEnableButton(self):
         DISABLE = 'Disable'
