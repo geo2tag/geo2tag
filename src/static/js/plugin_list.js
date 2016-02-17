@@ -47,7 +47,7 @@ var ConfigPluginView = Backbone.View.extend({
     },
     render: function(json) {
         this.clear();
-        $('#' + this.id).append(get_config_plugin_display(json));
+        $('#' + this.id).html(get_config_plugin_display(json));
         return this;
     },
     clear: function(){
