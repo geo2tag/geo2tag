@@ -11,8 +11,11 @@
 {% block scripts %}
  <!-- Libs -->
  <script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
- 
+ <script src="{{ getStaticUrl('js/underscore.js') }}"></script>
+ <script src="{{ getStaticUrl('js/backbone.js') }}"></script> 
+
  <!-- Scripts -->
+ <script src="{{ getStaticUrl('js/plugin_list.js') }}"></script>
  <script src="{{ getStaticUrl('js/plugin_config.js') }}"></script>
  
  <!-- Macroses -->
@@ -23,9 +26,7 @@
     <h2>Конфиг плагина</h2>
 </header>
     <div class="row well">
-        <div>
-            <h2>Секция</h2>
-        </div>
+       <textarea rows="10" cols="45" id='container_config_plugin'></textarea>        
         <div class="row buttons-service">
             <div class="col-xs-2">
                 <button type="button" class="btn btn-primary" id="save_plugin_btn">Save</button>
