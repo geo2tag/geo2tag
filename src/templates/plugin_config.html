@@ -11,6 +11,7 @@
 {% block scripts %}
  <!-- Libs -->
  <script src="{{ getStaticUrl('js/jquery-ui.min.js') }}"></script>
+ <script src="{{ getStaticUrl('js/spin.min.js') }}"></script> 
  <script src="{{ getStaticUrl('js/underscore.js') }}"></script>
  <script src="{{ getStaticUrl('js/backbone.js') }}"></script> 
 
@@ -29,7 +30,7 @@
        <textarea rows="10" cols="45" id='container_config_plugin'></textarea>        
         <div class="row buttons-service">
             <div class="col-xs-2">
-                <button type="button" class="btn btn-primary" id="save_plugin_btn">Save</button>
+                <button type="button" class="btn btn-primary" id="save_plugin_btn" onclick='saveConfigPluginChange("{{plugin_name}}")'>Save</button>
             </div>
             <div class="col-xs-2">
                 <button type="button" class="btn btn-danger">Cancel</button>
@@ -38,4 +39,6 @@
             </div>
         </div>
     </div>
+        <div id="alert_div"></div>
+        <div id="spin"></div>
 {% endblock %}

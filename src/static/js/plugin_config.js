@@ -1,3 +1,41 @@
+function getConfigDataFromPage(){
+    data = $('#container_config_plugin').html();
+    data = data.replace('<br>', '\n');
+    data = data.replace(/<\/?[^>]+>/g,'');
+    data = convertIniToJson(data);
+    console.log(data)
+    return data;
+}
+
+function addSaveServiceHandler(){
+    $('#save_plugin_btn').click(function(){
+        target = document.getElementById('spin')
+        spinner = new Spinner().spin(target);
+    });
+}
+
+function saveConfigPluginChange(plugin_name) {
+     page_data = getConfigDataFromPage();
+     $.ajax({
+        type: "PUT",
+        url: "/instance/plugin_config/" + plugin_name,
+        timeout: 150000,
+        crossDomain: true,
+        data: page_data,
+        success: function(json, status) {
+            console.log("save plugin config success" );
+            spinner.stop(target);
+            var msg = plugin_name + ' was saved successfully';
+            printSuccessAlert(msg);
+        },
+        error: function (request, textStatus, errorThrown){
+            console.log("save plugin config result: " + textStatus);
+            var msg = 'Saving is finished unsuccessfully ' + textStatus + ': ' + request.status;
+            printDangerAlert(msg);
+        }
+    }); 
+}
+
 function convertJsonToIni(json){
     var ini = '';
     for(var obj in json){
@@ -39,13 +77,14 @@ function convertIniToJson(ini){
           flag = false;
       }
     }
-    return json
+    return JSON.stringify(json)
 }
 
 $(document).ready(function(){
     var url = window.location.toString();
     var index = url.lastIndexOf('/');
-    var plugin_name = url.substring(index+1)
-    var config_plugin = new ConfigPlugin(plugin_name)
-    var config_pluginview = new ConfigPluginView({'model' : config_plugin})
+    var plugin_name = url.substring(index+1);
+    var config_plugin = new ConfigPlugin(plugin_name);
+    var config_pluginview = new ConfigPluginView({'model' : config_plugin});
+    addSaveServiceHandler();
 });
