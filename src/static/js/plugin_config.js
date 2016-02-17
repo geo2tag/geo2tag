@@ -27,7 +27,6 @@ function saveConfigPluginChange(plugin_name) {
             spinner.stop(target);
             var msg = plugin_name + ' was saved successfully';
             printSuccessAlert(msg);
-console.log('qq')
         },
         error: function (request, textStatus, errorThrown){
             console.log("save plugin config result: " + textStatus);
