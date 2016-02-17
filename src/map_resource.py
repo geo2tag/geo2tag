@@ -8,6 +8,8 @@ NUMBER_VALUE = 1000
 SERVICE_NAME = 'serviceName'
 CHANNEL_IDS = 'channel_ids'
 NUMBER = 'number'
+LATITUDE = 'latitude'
+LONGITUDE = 'longitude'
 
 
 class MapResource(Resource):

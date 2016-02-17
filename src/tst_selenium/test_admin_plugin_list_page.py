@@ -6,6 +6,7 @@ from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = '/instance/admin/plugin'
 H2 = u'Плагины'
+LINE_XPATH = ".//*[@id='container_plugin_list']/hr"
 
 
 class TestAdminPluginListPage(BasicSeleniumTest):
@@ -45,3 +46,9 @@ class TestAdminPluginListPage(BasicSeleniumTest):
         button1 = self.driver.find_element_by_css_selector(
             BUTTON_SELECTOR)
         self.assertEquals(button1.get_attribute('innerHTML'), ENABLE)
+
+    def testCheckLine(self):
+        URL = self.getUrl(TEST_URL)
+        self.driver.get(URL)
+        result = self.driver.find_element_by_xpath(LINE_XPATH)
+        self.assertNotNone(result)
