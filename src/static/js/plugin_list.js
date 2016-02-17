@@ -32,7 +32,7 @@ var PluginList = Backbone.Collection.extend({
 });
 
 var ConfigPluginView = Backbone.View.extend({
-    tagName: "div",
+    tagName: "textarea",
     id: "container_config_plugin",
     initialize:function(){
         this.refresh();
@@ -47,7 +47,7 @@ var ConfigPluginView = Backbone.View.extend({
     },
     render: function(json) {
         this.clear();
-        $('#' + this.id).append(get_config_plugin_display(json));
+        $('#' + this.id).html(get_config_plugin_display(json));
         return this;
     },
     clear: function(){
@@ -108,9 +108,7 @@ function get_plugin_enable_button_text(json){
 
 function get_config_plugin_display(json){
     var ini = convertJsonToIni(json)
-    ini = ini.replace('\n', '<br>');
-    result = '<div><h3>' + ini + '</h3><br></div>';
-    return result;
+    return ini;
 }
 
 function get_plugin_display(json){
@@ -119,7 +117,7 @@ function get_plugin_display(json){
     
     var result = '<div class="row"><div class="col-xs-8 name-config-plugin"><h3>' + plugin_name + '</h3></div>';
     result += '<div class="col-xs-4"><button plugin_name="' + plugin_name + '" type="button" class="btn btn-primary btn-lg btn-delete-plugin" onclick=unable_plugin("' + plugin_name + '",'+json.enabled +')>' + get_plugin_enable_button_text(json) + '</button>';
-    result += '<a target="_blank" href=' + getUrlWithPrefix('/admin/plugin/config/' + plugin_name) + '><button type="button" class="btn btn-primary btn-lg btn-config-plugin">C</button>' + '</a></div></div>';
+    result += '<a target="_blank" href=' + getUrlWithPrefix('/admin/plugin/config/' + plugin_name) + '><button type="button" class="btn btn-primary btn-lg btn-config-plugin">C</button>' + '</a></div></div><hr>';
     return result;
 }
 
