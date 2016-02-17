@@ -9,4 +9,4 @@ class AdminPluginConfigResource(Resource):
         print pluginName
         return make_response(
             render_template(
-                'plugin_config.html'))
+                'plugin_config.html', plugin_name=pluginName))
