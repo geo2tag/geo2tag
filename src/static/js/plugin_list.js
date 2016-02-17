@@ -32,7 +32,7 @@ var PluginList = Backbone.Collection.extend({
 });
 
 var ConfigPluginView = Backbone.View.extend({
-    tagName: "div",
+    tagName: "textarea",
     id: "container_config_plugin",
     initialize:function(){
         this.refresh();
@@ -56,7 +56,7 @@ var ConfigPluginView = Backbone.View.extend({
 });
 
 var PluginView = Backbone.View.extend({
-    tagName: "textarea",
+    tagName: "div",
     id: "container_plugin_list",
     render: function(json) {
         $('#' + this.id).append(get_plugin_display(json));
