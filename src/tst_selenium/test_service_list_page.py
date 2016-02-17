@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from basic_selenium_test import BasicSeleniumTest
 from time import sleep
 
@@ -26,7 +27,6 @@ class TestServiceListResource(BasicSeleniumTest):
         sleep(2)
         serviceList = self.getDriver().find_element_by_id(SERVICE_LIST)
         self.assertEquals(serviceList.get_attribute('innerHTML'), '')
-
 #    def testServiceDelete(self):
 #        URL = self.getUrl('/instance/admin/service')
 #        SERVICE_URL = 'service_url'

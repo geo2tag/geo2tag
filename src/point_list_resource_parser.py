@@ -16,8 +16,10 @@ RADIUS = 'radius'
 BC = 'bc'
 BC_FROM = 'bc_from'
 BC_TO = 'bc_to'
+LATITUDE = 'latitude'
+LONGITUDE = 'longitude'
+ZOOM = 'zoom'
 
-BC_DATES_FLAG_CHECK_ARGS_KEY = 'args'
 BC_DATES_FLAG_CHECK_ERR_KEY = 'err'
 
 
@@ -39,13 +41,14 @@ class PointListResourceParser():
         parser.add_argument(RADIUS, type=float, default=1000)
         parser.add_argument(BC_FROM, type=inputs.boolean)
         parser.add_argument(BC_TO, type=inputs.boolean)
+        parser.add_argument(LATITUDE, type=float)
+        parser.add_argument(LONGITUDE, type=float)
+        parser.add_argument(ZOOM, type=int, default=14)
         args = parser.parse_args()
-
         # Generating dict with error array for 'bc_from' and 'bc_to' parameters
         # if error appeared
-        res = {
-            BC_DATES_FLAG_CHECK_ARGS_KEY: args,
-            BC_DATES_FLAG_CHECK_ERR_KEY: []}
+        res = args
+        res[BC_DATES_FLAG_CHECK_ERR_KEY] = []
         if args[DATE_FROM] is not None and args[BC_FROM] is None:
             res[BC_DATES_FLAG_CHECK_ERR_KEY].append(BC_FROM)
         if args[DATE_TO] is not None and args[BC_TO] is None:
