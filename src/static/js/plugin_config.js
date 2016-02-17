@@ -7,6 +7,13 @@ function getConfigDataFromPage(){
     return data;
 }
 
+function addSaveServiceHandler(){
+    $('#save_plugin_btn').click(function(){
+        target = document.getElementById('spin')
+        spinner = new Spinner().spin(target);
+    });
+}
+
 function saveConfigPluginChange(plugin_name) {
      page_data = getConfigDataFromPage();
      $.ajax({
@@ -69,7 +76,7 @@ function convertIniToJson(ini){
           flag = false;
       }
     }
-    return json
+    return JSON.stringify(json)
 }
 
 $(document).ready(function(){
@@ -78,4 +85,5 @@ $(document).ready(function(){
     var plugin_name = url.substring(index+1);
     var config_plugin = new ConfigPlugin(plugin_name);
     var config_pluginview = new ConfigPluginView({'model' : config_plugin});
+    addSaveServiceHandler();
 });
