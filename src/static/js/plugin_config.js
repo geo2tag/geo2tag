@@ -25,12 +25,14 @@ function saveConfigPluginChange(plugin_name) {
         success: function(json, status) {
             console.log("save plugin config success" );
             spinner.stop(target);
-            printBootstrapAlert(status,'Saving is finished successfully');
+            var msg = plugin_name + ' was saved successfully';
+            printSuccessAlert(msg);
+console.log('qq')
         },
         error: function (request, textStatus, errorThrown){
             console.log("save plugin config result: " + textStatus);
-            msg = 'Saving is finished unsuccessfully ' + textStatus + ': ' + request.status;
-            printBootstrapAlert('danger', msg);
+            var msg = 'Saving is finished unsuccessfully ' + textStatus + ': ' + request.status;
+            printDangerAlert(msg);
         }
     }); 
 }
