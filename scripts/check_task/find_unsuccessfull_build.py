@@ -14,8 +14,8 @@ JIRA_PROJECT = 'https://geo2tag.atlassian.net'
 options = {
     'server': JIRA_PROJECT
 }
-URL = 'https://api.bitbucket.org/2.0/repositories/osll/geomongo/' + \
-    'pullrequests?state=[OPEN]'
+BITBUCKET_URL = 'https://api.bitbucket.org/2.0/repositories/'
+URL = BITBUCKET_URL + 'osll/geomongo/pullrequests?state=[OPEN]'
 
 un_esc = 'unicode-escape'
 # for search branch number
@@ -47,10 +47,10 @@ def check_pullrequest(branch):
     response = requests.get(URL)
     responseText = json.loads(response.text)
     for prq in responseText[VALUES]:
-            if BRANCH in prq[SOURCE]:
-                if NAME in prq[SOURCE][BRANCH]:
-                    if unicode(branch, un_esc) == prq[SOURCE][BRANCH][NAME]:
-                        return True
+        if BRANCH in prq[SOURCE]:
+            if NAME in prq[SOURCE][BRANCH]:
+                if unicode(branch, un_esc) == prq[SOURCE][BRANCH][NAME]:
+                    return True
     return False
 
 
