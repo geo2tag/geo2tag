@@ -16,6 +16,7 @@
  <!-- Scripts -->
  <script src="{{ getStaticUrl('js/service.js') }}"></script>
  <script src="{{ getStaticUrl('js/ajax-queries.js') }}"></script>
+ <script src="{{ getStaticUrl('js/cancel_btn_function.js') }}"></script>
  
  <!-- Macroses -->
  <script src="{{ getStaticUrl('js/macros/autocomplete_input.js') }}"></script>
@@ -66,7 +67,7 @@
                 <div id ="spin"></div>
         </div>
         <div class="col-xs-2">
-            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="button" class="btn btn-danger" onclick="TransferToPrevPage()">Cancel</button>
         </div>
         <div class="col-xs-4">
         </div>
