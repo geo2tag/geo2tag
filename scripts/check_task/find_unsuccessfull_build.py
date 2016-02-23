@@ -14,7 +14,8 @@ JIRA_PROJECT = 'https://geo2tag.atlassian.net'
 options = {
     'server': JIRA_PROJECT
 }
-URL = 'https://api.bitbucket.org/2.0/repositories/osll/geomongo/pullrequests?state=[OPEN]'
+BITBUCKET_URL = 'https://api.bitbucket.org/2.0/repositories/'
+URL = BITBUCKET_URL + 'osll/geomongo/pullrequests?state=[OPEN]'
 
 # for search branch number
 ACTIONS = u'actions'
@@ -35,19 +36,22 @@ def check_issue(branch):
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
     issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
-    prq = check_pullrequest(branch) # if git branch exists
+    prq = check_pullrequest(branch)  # if git branch exists
     print 'Pullrequest ', prq
     if test_scenario_field:
         find_unsuccessfull_build_for_branch(jira, issue, branch)
+
 
 def check_pullrequest(branch):
     response = requests.get(URL)
     responseText = json.loads(response.text)
     for prq in responseText[VALUES]:
-            if BRANCH in prq[SOURCE]:
-                if NAME in prq[SOURCE][BRANCH]:
-                    if unicode(branch, 'unicode-escape') == prq[SOURCE][BRANCH][NAME]:
-                        return True
+        if BRANCH in prq[SOURCE]:
+            if NAME in prq[SOURCE][BRANCH]:
+                if unicode(
+                        branch,
+                        'unicode-escape') == prq[SOURCE][BRANCH][NAME]:
+                    return True
     return False
 
 
