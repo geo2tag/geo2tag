@@ -13,7 +13,7 @@ class TestBtnCancelCheck(BasicSeleniumTest):
         URL = self.getUrl(TEST_URL)
         driver = self.getDriver()
         driver.get(URL)
-        services = driver.find_elements_by_tag_name(H3)
+        services = driver.find_elements_by_tag_name(TEST_H3)
         services[len(services)-1].click()
         btn = driver.find_element_by_css_selector(TEST_BTN_CLASS_NAME)
         btn.click()
