@@ -88,7 +88,7 @@ def find_unsuccessfull_build_for_branch(jira, issue, branch):
                 print 'This issue', branch, 'is successfully completed'
             else:
                 print 'This issue', branch, 'is unsuccessfully completed'
-                reopen_issue(jira, issue, branch, comment)
+                reopen_issue(jira, issue, branch)
             break
 
 
@@ -99,15 +99,15 @@ def get_jira_issue(jira, branch):
 
 
 def reopen_issue(jira, issue, branch, comment='Autotest fail'):
-    transition_issue(issue, u'Reopened')
-    add_comment(branch, comment)
+    transition_issue(jira, issue, u'Reopened')
+    add_comment(jira, branch, comment)
 
 
-def transition_issue(issue, status):
+def transition_issue(jira, issue, status):
     jira.transition_issue(issue, status)
 
 
-def add_comment(branch, comment):
+def add_comment(jira, branch, comment):
     jira.add_comment(branch, comment)
 
 
