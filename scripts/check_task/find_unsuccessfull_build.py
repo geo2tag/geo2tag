@@ -57,11 +57,8 @@ def check_pullrequest(branch):
     response = requests.get(get_url(TEAM, REPOSITORY))
     responseText = json.loads(response.text)
     for pullrequest in responseText[VALUES]:
-        print pullrequest
-        if BRANCH in [SOURCE]:
-            print '0'
+        if BRANCH in pullrequest[SOURCE]:
             if NAME in pullrequest[SOURCE][BRANCH]:
-                print unicode(branch, un_esc)
                 if unicode(branch, un_esc) == pullrequest[
                         SOURCE][BRANCH][NAME]:
                     return True
