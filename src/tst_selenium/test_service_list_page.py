@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
 from basic_selenium_test import BasicSeleniumTest
 from time import sleep
 
@@ -32,7 +29,7 @@ class TestServiceListResource(BasicSeleniumTest):
         sleep(2)
         serviceList = self.getDriver().find_element_by_id(SERVICE_LIST)
         self.assertEquals(serviceList.get_attribute('innerHTML'), '')
-    
+
     def testCheckLine(self):
         URL = self.getUrl('/instance/admin/service')
         self.getDriver().get(URL)
