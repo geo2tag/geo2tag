@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
 if ARGV[0] == 'up'
     $LOAD_PATH.unshift(File.expand_path("#{File.dirname(__FILE__)}/plugins/vagrant-host-shell/lib"))
     require "vagrant-host-shell"
@@ -9,8 +10,8 @@ end
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu14.04"
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box = ubuntu14.04
+  config.vm.box_url = https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 1024
     vb.cpus = 2
@@ -53,7 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ###################################################################
   config.vm.provision :host_shell do |host_shell|
     if ARGV[0] == 'up'
-        host_shell.inline = './resize_storage.sh 40960'
+        host_shell.inline = './resize_storage.sh ' + 40960
     end
   end  
 end
