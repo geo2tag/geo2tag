@@ -21,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Next lines fixing error with github private repo authentication #
   # and used in git_sync recipe                                     #
   ###################################################################
-  config.vm.provision :file, source: "~/.ssh/id_rsa", destination: "/home/vagrant/id_rsa"
+  config.vm.provision :file, source: "SOURCE", destination: "/home/vagrant/id_rsa"
   config.vm.provision :shell do |sh|
     sh.inline = "#!/bin/bash 
                 mv /home/vagrant/id_rsa /root/.ssh/id_rsa 
