@@ -15,8 +15,8 @@ options = {
     'server': JIRA_PROJECT
 }
 BITBUCKET_URL = 'https://api.bitbucket.org/2.0/repositories/'
-URL = BITBUCKET_URL + 'osll/geomongo/pullrequests?state=[OPEN]'
-
+TEAM = 'osll'
+REPOSITORY = 'geomongo'
 un_esc = 'unicode-escape'
 # for search branch number
 ACTIONS = u'actions'
@@ -33,23 +33,34 @@ VALUES = u'values'
 SOURCE = u'source'
 
 
-def check_issue(branch):
+def get_url(team, repository):
+    return BITBUCKET_URL + team + '/' + repository + \
+        '/pullrequests?state=[OPEN]'
+
+
+def get_jira_server():
     jira = JIRA(options, basic_auth=(JIRA_USERNAME, PASSWORD))
+    return jira
+
+
+def check_issue(branch):
+    jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
-    prq = check_pullrequest(branch)
-    print 'Pullrequest ', prq
+    pullrequest = check_pullrequest(branch)
+    print 'Pullrequest ', pullrequest
     if test_scenario_field:
         find_unsuccessfull_build_for_branch(jira, issue, branch)
 
 
 def check_pullrequest(branch):
-    response = requests.get(URL)
+    response = requests.get(get_url(TEAM, REPOSITORY))
     responseText = json.loads(response.text)
-    for prq in responseText[VALUES]:
-        if BRANCH in prq[SOURCE]:
-            if NAME in prq[SOURCE][BRANCH]:
-                if unicode(branch, un_esc) == prq[SOURCE][BRANCH][NAME]:
+    for pullrequest in responseText[VALUES]:
+        if BRANCH in pullrequest[SOURCE]:
+            if NAME in pullrequest[SOURCE][BRANCH]:
+                if unicode(branch, un_esc) == pullrequest[
+                        SOURCE][BRANCH][NAME]:
                     return True
     return False
 
@@ -74,10 +85,10 @@ def find_unsuccessfull_build_for_branch(jira, issue, branch):
             BRANCH][0][NAME][index_branch:index_branch + 7]
         if found_branch == branch:
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
-                print 'This task', branch, 'is successfully completed'
+                print 'This issue', branch, 'is successfully completed'
             else:
-                print 'This task', branch, 'is unsuccessfully completed'
-                reopened_task(jira, issue, branch)
+                print 'This issue', branch, 'is unsuccessfully completed'
+                reopen_issue(jira, issue, branch)
             break
 
 
@@ -87,9 +98,17 @@ def get_jira_issue(jira, branch):
     return issue
 
 
-def reopened_task(jira, issue, branch):
-    jira.transition_issue(issue, u'Reopened')
-    jira.add_comment(branch, 'Autotest fail')
+def reopen_issue(jira, issue, branch, comment='Autotest fail'):
+    transition_issue(jira, issue, u'Reopened')
+    add_comment(jira, branch, comment)
+
+
+def transition_issue(jira, issue, status):
+    jira.transition_issue(issue, status)
+
+
+def add_comment(jira, branch, comment):
+    jira.add_comment(branch, comment)
 
 
 def get_branch_number():
