@@ -17,7 +17,8 @@ def check_issue(branch):
         conflict = check_git_conflict(branch)
         pullrequest = check_pullrequest(branch)
         success_build = find_unsuccessfull_build_for_branch(branch)
-        if not conflict and pullrequest and success_build and test_scenario_field:
+        if not conflict and pullrequest and success_build and \
+                test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
