@@ -1,4 +1,5 @@
-from find_unsuccessfull_build_in_jenkins import find_unsuccessfull_build_for_branch
+from find_unsuccessfull_build_in_jenkins import \
+    find_unsuccessfull_build_for_branch
 from check_test_scenario_field import check_test_scenario_field
 from check_pullrequest import check_pullrequest
 from check_git_conflict import check_git_conflict
