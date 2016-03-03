@@ -13,7 +13,7 @@ def check_issue(branch):
     jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
     test_scenario_field = check_test_scenario_field(issue)
-    if check_git_branch(branch) == True: 
+    if check_git_branch(branch) == True:
         conflict = check_git_conflict(branch)
         pullrequest = check_pullrequest(branch)
         success_build = find_unsuccessfull_build_for_branch(branch)
