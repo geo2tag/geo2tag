@@ -7,7 +7,12 @@ from url_routines import getInstancePrefix
 URL_STATUS = '/' + getInstancePrefix() + '/status'
 URL_INSTANCE_LOG = '/' + getInstancePrefix() + '/log'
 MESSAGE_FIELD = 'message'
-VALID_MESSAGE = 'Request url: http://geomongo/instance/status, request data: '
+
+
+def getValidMessage(url):
+    VALID_MESSAGE = 'Request url: ' + url + getInstancePrefix() + '/status' + \
+    ', request data: '
+    return VALID_MESSAGE
 
 
 class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
@@ -24,6 +29,10 @@ class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
                              'date_to': unicode(datetime_to.isoformat())
         })
         import ast
+        print self.__dict__
+        print self.param
+        VALID_MESSAGE = getValidMessage(self.param)
+
         self.assertEqual(
             ast.literal_eval(
                 r.text)[0][MESSAGE_FIELD],
