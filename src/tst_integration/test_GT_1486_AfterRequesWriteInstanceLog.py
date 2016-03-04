@@ -3,7 +3,6 @@ from datetime import datetime
 from basic_integration_test import BasicIntegrationTest
 from url_routines import getInstancePrefix
 
-
 URL_STATUS = '/' + getInstancePrefix() + '/status'
 URL_INSTANCE_LOG = '/' + getInstancePrefix() + '/log'
 MESSAGE_FIELD = 'message'
@@ -30,7 +29,6 @@ class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
         })
         import ast
         VALID_MESSAGE = getValidMessage(self.param)
-
         self.assertEqual(
             ast.literal_eval(
                 r.text)[0][MESSAGE_FIELD],
