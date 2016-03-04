@@ -11,7 +11,7 @@ MESSAGE_FIELD = 'message'
 
 def getValidMessage(url):
     VALID_MESSAGE = 'Request url: ' + url + getInstancePrefix() + '/status' + \
-    ', request data: '
+        ', request data: '
     return VALID_MESSAGE
 
 
