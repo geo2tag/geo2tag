@@ -29,8 +29,6 @@ class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
                              'date_to': unicode(datetime_to.isoformat())
         })
         import ast
-        print self.__dict__
-        print self.param
         VALID_MESSAGE = getValidMessage(self.param)
 
         self.assertEqual(
