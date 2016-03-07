@@ -52,9 +52,9 @@ def get_branch_number():
 def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
                 success_build=False):
     result = 'Autotest fail. "True" means existence. \n'
-    result += 'testscenario', tuple(test_scenario_field), 'conflict', \
-        tuple(conflict), 'pullrequest', tuple(pullrequest), \
-        'success_build', tuple(success_build)
+    result += 'testscenario ' + tuple(test_scenario_field) + ' conflict ' + \
+        tuple(conflict) + ' pullrequest ' + tuple(pullrequest) + \
+        'success_build ' + tuple(success_build)
     return result
 
 
