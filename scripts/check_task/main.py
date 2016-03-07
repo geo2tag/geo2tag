@@ -23,13 +23,21 @@ def check_issue(branch):
             print 'This issue', branch, 'is successfully completed'
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
-            reopen_issue(jira, issue, branch)
+            reopen_issue(
+                jira,
+                issue,
+                branch,
+                get_comment(
+                    test_scenario_field,
+                    conflict,
+                    pullrequest,
+                    success_build))
     else:
         if test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
-            reopen_issue(jira, issue, branch)
+            reopen_issue(jira, issue, branch, get_comment(False))
 
 
 def get_branch_number():
@@ -39,6 +47,15 @@ def get_branch_number():
         required=True)
     args = parser.parse_args()
     return args.branch
+
+
+def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
+                success_build=False):
+    result = 'Autotest fail. "True" means existence. \n'
+    result += 'testscenario ' + test_scenario_field + ' conflict ' + \
+        conflict, ' pullrequest ' + pullrequest + ' success_build ' + \
+        success_build
+    return result
 
 
 if __name__ == '__main__':
