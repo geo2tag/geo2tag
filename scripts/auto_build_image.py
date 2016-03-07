@@ -17,7 +17,7 @@ def getDateImage(name_img):
 
 
 def getDateEditFile(path_file):
-    sec = os.path.getatime(path_file)
+    sec = os.path.getmtime(path_file)
     return datetime.fromtimestamp(sec)
 
 
