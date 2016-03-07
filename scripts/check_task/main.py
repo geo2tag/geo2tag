@@ -49,12 +49,17 @@ def get_branch_number():
     return args.branch
 
 
-def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
-                success_build=True):
+def get_comment(test_scenario_field='', conflict='', pullrequest='',
+                success_build=''):
     result = 'Autotest fail. "True" means existence. \n'
-    result += 'testscenario ' + str(test_scenario_field) + ' conflict ' + \
-        str(conflict) + ' pullrequest ' + str(pullrequest) + \
-        ' success_build ' + str(success_build)
+    if test_scenario_field != '':
+        result += 'testscenario ' + str(test_scenario_field)
+    if conflict != '':
+        result += ' conflict ' + str(conflict)
+    if pullrequest != '':
+        result += ' pullrequest ' + str(pullrequest)
+    if success_build != '':
+        result += ' success_build ' + str(success_build)
     return result
 
 
