@@ -1,5 +1,5 @@
 var pagination = undefined;
-var length = 10
+var length = 5
 var PLUGINS_PER_PAGE = 5;
 
 $(document).ready(function(){
