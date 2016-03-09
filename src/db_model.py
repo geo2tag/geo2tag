@@ -117,11 +117,11 @@ def getLog(dbName, number, offset, dateFrom, dateTo):
     elif dateFrom is None:
         return collection.find(
             {FIND_AND_SORT_KEY: {"$lte": dateTo}},
-            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
+            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
     elif dateTo is None:
         return collection.find(
             {FIND_AND_SORT_KEY: {"$gte": dateFrom}},
-            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
+            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
     else:
         if dateFrom > dateTo:
             return []
@@ -134,7 +134,7 @@ def getLog(dbName, number, offset, dateFrom, dateTo):
             offset,
             number).sort(
                 FIND_AND_SORT_KEY,
-            pymongo.ASCENDING)
+            pymongo.DESCENDING)
 
 
 def updateService(name, config):
