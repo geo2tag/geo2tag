@@ -27,13 +27,12 @@ def prepareDb():
         collection.insert(post)
 
 
-def tearDown(self):
-    collection.remove(
-        {"message": MESSAGE})
-
-
 class TestGetLog(TestCase):
 
+    def tearDown(self):
+        collection.remove(
+            {"message": MESSAGE})
+    
     def testForDates(self):
         prepareDb()
         logList = list(getLog(DB, 10, None, None, None))
