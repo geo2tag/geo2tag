@@ -26,9 +26,11 @@ def prepareDb():
                 "service": "testservice"}
         collection.insert(post)
 
+
 def tearDown(self):
     collection.remove(
         {"message": MESSAGE})
+
 
 class TestGetLog(TestCase):
 
