@@ -15,4 +15,4 @@ class TestAutoBuild(unittest.TestCase):
         date_1 = datetime.strptime(date1, "%Y-%m-%d %H:%M:%S")
         date_2 = datetime.strptime(date2, "%Y-%m-%d %H:%M:%S")
         res = compDate(date_1, date_2)
-        assertTrue(res)
+        self.assertTrue(res)
