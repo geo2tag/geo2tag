@@ -48,4 +48,3 @@ class TestGetLog(TestCase):
         logList = list(getLog(DB, 10, None, None, DATE_TO))
         for i in range(len(logList) - 1):
             self.assertTrue(logList[i]['date'] > logList[i + 1]['date'])
-        self.tearDown()
