@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 import subprocess
 from datetime import datetime
@@ -32,28 +33,35 @@ def buildImage(date_img):
     date1 = getDateEditFile('dockerfile')
     date2 = getDateEditFile('scripts/setup_pip_dependencies.sh')
     date3 = getDateEditFile('scripts/requirements.txt')
+    num_code = 0
     if compDate(date1, date_img) or compDate(date2, date_img) or \
        compDate(date3, date_img):
         print 'Start build'
-        os.system('./scripts/build_docker.sh')
+        os.system('./scripts/docker_build.sh')
         print 'Date image: ' + str(date_img)
         print 'Date dockefile: ' + str(date1)
         print 'Date setup_pip_dependencies.sh: ' + str(date2)
         print 'Date requirements.txt ' + str(date3)
+        num_code = 1
     else:
         print 'It does not require rebuilding'
         print 'Date image: ' + str(date_img)
         print 'Date dockefile: ' + str(date1)
         print 'Date setup_pip_dependencies.sh: ' + str(date2)
         print 'Date requirements.txt: ' + str(date3)
+        num_code = 0
+    sys.exit(num_code)
 
 
 def run():
     parser = argparse.ArgumentParser(description='Auto build image docker')
     parser.add_argument('--name', help='Name image')
     args = parser.parse_args()
-    date0 = getDateImage(args.name)
-    buildImage(date0)
+    if args.name is not None:
+        date0 = getDateImage(args.name)
+        buildImage(date0)
+    else:
+        print 'No argument image'
 
 if __name__ == '__main__':
     run()
