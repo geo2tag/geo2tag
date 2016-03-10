@@ -24,6 +24,8 @@ def check_issue(branch):
         if not conflict and pullrequest and success_build and \
                 test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
+            comment = 'Test success'
+            add_comment(jira, branch, comment)
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
             reopen_issue(
