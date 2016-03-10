@@ -37,4 +37,4 @@ def find_unsuccessfull_build_for_branch(branch):
                 return (True, 0)
             else:
                 return (False, i)
-    return (False, i)
+    return (False, 0)
