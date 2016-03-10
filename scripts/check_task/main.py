@@ -12,7 +12,6 @@ ARG_BRANCH = '--branch'
 JOB_URL = 'jenkins.osll.ru/job/geo2tag-test/'
 
 
-
 def check_issue(branch):
     jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
@@ -20,7 +19,8 @@ def check_issue(branch):
     if check_git_branch(branch) == True:
         conflict = check_git_conflict(branch)
         pullrequest = check_pullrequest(branch)
-        success_build, build_number = find_unsuccessfull_build_for_branch(branch)
+        success_build, build_number = find_unsuccessfull_build_for_branch(
+            branch)
         if not conflict and pullrequest and success_build and \
                 test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
@@ -40,7 +40,7 @@ def check_issue(branch):
         if test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
             comment = 'Test success'
-            add_comment(jira, branch, comment)            
+            add_comment(jira, branch, comment)
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
             reopen_issue(jira, issue, branch, get_comment(False))
@@ -62,7 +62,7 @@ def get_comment(test_scenario_field=True, conflict=True, pullrequest=True,
         result += 'test scenario is missing\n'
     if conflict:
         result += 'conflicts exist at branch\n'
-    if not  pullrequest:
+    if not pullrequest:
         result += 'pullrequest is missing\n'
     if not success_build:
         result += 'auto tests failed, link '
