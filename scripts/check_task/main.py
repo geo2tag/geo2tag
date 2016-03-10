@@ -4,7 +4,8 @@ from check_test_scenario_field import check_test_scenario_field
 from check_pullrequest import check_pullrequest
 from check_git_conflict import check_git_conflict
 from check_git_branch import check_git_branch
-from jira_api import get_jira_server, get_jira_issue, reopen_issue
+from jira_api import get_jira_server, get_jira_issue, reopen_issue, \
+    add_comment
 import argparse
 
 ARG_BRANCH = '--branch'
@@ -38,6 +39,8 @@ def check_issue(branch):
     else:
         if test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
+            comment = 'Test success'
+            add_comment(jira, branch, comment)            
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
             reopen_issue(jira, issue, branch, get_comment(False))
