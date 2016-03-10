@@ -8,6 +8,8 @@ from jira_api import get_jira_server, get_jira_issue, reopen_issue
 import argparse
 
 ARG_BRANCH = '--branch'
+JOB_URL = 'jenkins.osll.ru/job/geo2tag-test/'
+
 
 
 def check_issue(branch):
@@ -17,7 +19,7 @@ def check_issue(branch):
     if check_git_branch(branch) == True:
         conflict = check_git_conflict(branch)
         pullrequest = check_pullrequest(branch)
-        success_build = find_unsuccessfull_build_for_branch(branch)
+        success_build, build_number = find_unsuccessfull_build_for_branch(branch)
         if not conflict and pullrequest and success_build and \
                 test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
@@ -31,7 +33,8 @@ def check_issue(branch):
                     test_scenario_field,
                     conflict,
                     pullrequest,
-                    success_build))
+                    success_build,
+                    build_number))
     else:
         if test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
@@ -49,17 +52,23 @@ def get_branch_number():
     return args.branch
 
 
-def get_comment(test_scenario_field='', conflict='', pullrequest='',
-                success_build=''):
-    result = 'Autotest fail. "True" means existence. \n'
-    if test_scenario_field != '':
-        result += 'testscenario ' + str(test_scenario_field)
-    if conflict != '':
-        result += ' conflict ' + str(conflict)
-    if pullrequest != '':
-        result += ' pullrequest ' + str(pullrequest)
-    if success_build != '':
-        result += ' success_build ' + str(success_build)
+def get_comment(test_scenario_field=True, conflict=True, pullrequest=True,
+                success_build=True, build_number=0):
+    result = 'Test failed. \n'
+    if not test_scenario_field:
+        result += 'test scenario is missing '
+    if not conflict:
+        result += 'conflicts exist at branch '
+    if not  pullrequest:
+        result += 'pullrequest is missing'
+    if not success_build:
+        result += 'auto tests failed, link '
+        result += get_jenkins_build_result(build_number)
+    return result
+
+
+def get_jenkins_build_result(build_number):
+    result = JOB_URL + str(build_number) + '/console'
     return result
 
 
