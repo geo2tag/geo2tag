@@ -56,11 +56,11 @@ def get_comment(test_scenario_field=True, conflict=True, pullrequest=True,
                 success_build=True, build_number=0):
     result = 'Test failed. \n'
     if not test_scenario_field:
-        result += 'test scenario is missing '
-    if not conflict:
-        result += 'conflicts exist at branch '
+        result += 'test scenario is missing\n'
+    if conflict:
+        result += 'conflicts exist at branch\n'
     if not  pullrequest:
-        result += 'pullrequest is missing'
+        result += 'pullrequest is missing\n'
     if not success_build:
         result += 'auto tests failed, link '
         result += get_jenkins_build_result(build_number)
