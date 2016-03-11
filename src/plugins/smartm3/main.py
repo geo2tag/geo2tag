@@ -2,7 +2,7 @@ from smartm3_resource import SmartM3Resource
 
 
 def getPluginResources():
-    result = {'service/<string:serviceName>/point': SmartM3Resource}
+    result = {'smartm3/service/<string:serviceName>/point': SmartM3Resource}
     return result
 
 
