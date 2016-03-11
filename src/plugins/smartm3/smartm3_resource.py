@@ -46,4 +46,3 @@ class SmartM3Resource(Resource):
             params[RADIUS])
         # convert points to json-ld
         return result
-
