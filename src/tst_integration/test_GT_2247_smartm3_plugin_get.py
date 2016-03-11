@@ -15,12 +15,10 @@ class TestSmartM3Plugin(BasicIntegrationTest):
 
     def testValid(self):
         response = requests.get(self.getUrl(TEST_URL + VALID_PARAMS))
-        responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
 
     def testInvalid(self):
         response = requests.get(self.getUrl(TEST_URL + INVALID_PARAMS))
-        responseText = response.text
         responseCode = response.status_code
         self.assertEquals(responseCode, INVALID_RESPONSE_CODE)
