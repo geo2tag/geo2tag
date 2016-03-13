@@ -52,7 +52,7 @@ $(document).ready(function (){
             console.log(data.length);
         }
     });*/
-    //map.addLayer(jsonLayer);
+    //map.addLayer(jsonLayer); 
 
     var getPointForMap = new Geo2TagRequests('map', 'map');
     getPointForMap.getPoints(par[SERVICE_NAME], callbackSuccess, callbackFail, par[CHANNEL_IDS], 1000);
