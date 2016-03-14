@@ -14,7 +14,7 @@ LATITUDE = 'latitude'
 LONGITUDE = 'longitude'
 ALTITUDE = 'altitude'
 
-#Changed keys
+# Changed keys
 CHANNEL_ID = 'channel_id'
 DATE = 'date'
 
@@ -26,9 +26,10 @@ UNCHANGED_KEYS = [BC, JSON]
 CONTEXT = '@context'
 CONTEXT_PATH = '/instance/plugins/smartm3/point.jsonld'
 
+
 def getJsonLDContext():
     CONTEXT_FILE_NAME = 'points.jsonld'
-    localDir = path.dirname(__file__)    
+    localDir = path.dirname(__file__)
     jsonldFullPath = path.join(localDir, CONTEXT_FILE_NAME)
     jsonldFile = open(jsonldFullPath, 'r')
     jsonldContent = jsonldFile.readlines()
@@ -46,7 +47,7 @@ def convertPointToJsonLD(point):
     jsonldPoint[DATE] = dateSerialiser(point[DATE])
 
     # Renaming existing keys
-    jsonldPoint[POINT_ID] = unicode(point[ID]) 
+    jsonldPoint[POINT_ID] = unicode(point[ID])
     jsonldPoint[ALTITUDE] = point[ALT]
     coordinates = point[LOCATION][COORDINATES]
     jsonldPoint[LONGITUDE] = coordinates[0]
@@ -54,7 +55,8 @@ def convertPointToJsonLD(point):
 
     jsonldPoint[CONTEXT] = CONTEXT_PATH
 
-    return jsonldPoint 
+    return jsonldPoint
+
 
 def convertPointsToJsonLD(points):
     return [convertPointToJsonLD(x) for x in points]

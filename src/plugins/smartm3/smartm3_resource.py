@@ -1,5 +1,6 @@
 from point_list_resource import PointListResource
-from jsonld_converter import convertPointsToJsonLD 
+from jsonld_converter import convertPointsToJsonLD
+
 
 class SmartM3Resource(PointListResource):
 
