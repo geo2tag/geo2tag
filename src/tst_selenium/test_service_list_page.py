@@ -2,6 +2,8 @@
 from basic_selenium_test import BasicSeleniumTest
 from time import sleep
 
+LINE_XPATH = ".//*[@id='container_service_list']/hr"
+
 
 class TestServiceListResource(BasicSeleniumTest):
 
@@ -27,6 +29,12 @@ class TestServiceListResource(BasicSeleniumTest):
         sleep(2)
         serviceList = self.getDriver().find_element_by_id(SERVICE_LIST)
         self.assertEquals(serviceList.get_attribute('innerHTML'), '')
+
+    def testCheckLine(self):
+        URL = self.getUrl('/instance/admin/service')
+        self.getDriver().get(URL)
+        result = self.getDriver().find_element_by_xpath(LINE_XPATH)
+        self.assertNotEquals(result, None)
 #
 #    def testServiceDelete(self):
 #        URL = self.getUrl('/instance/admin/service')
