@@ -5,13 +5,6 @@ from url_routines import getInstancePrefix
 
 URL_STATUS = '/' + getInstancePrefix() + '/status'
 URL_INSTANCE_LOG = '/' + getInstancePrefix() + '/log'
-MESSAGE_FIELD = 'message'
-
-
-def getValidMessage(url):
-    VALID_MESSAGE = 'Request url: ' + url + getInstancePrefix() + '/status' + \
-        ', request data: '
-    return VALID_MESSAGE
 
 
 class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
@@ -27,9 +20,4 @@ class TestAfterRequestWriteInstanceLog(BasicIntegrationTest):
                              'date_from': unicode(datetime_from.isoformat()),
                              'date_to': unicode(datetime_to.isoformat())
         })
-        import ast
-        VALID_MESSAGE = getValidMessage(self.param)
-        self.assertEqual(
-            ast.literal_eval(
-                r.text)[0][MESSAGE_FIELD],
-            VALID_MESSAGE)
+        self.assertEqual(r.status_code, 200)
