@@ -35,4 +35,4 @@ class TestGetLogRefactoring(TestCase):
         self.assertEqual(log_data[0][USER_ID], USER_TESTSERVICE_ID_VALUE)
 
     def testForNoneDb(self):
-        self.assertEqual((getLog(FAKE_DB, 0, 0, DATE_FROM, DATE_TO)), [])
+        self.assertEqual(len(list((getLog(FAKE_DB, 0, 0, DATE_FROM, DATE_TO)))), 0)
