@@ -1,8 +1,10 @@
 from smartm3_resource import SmartM3Resource
+from context_resource import ContextResource
 
 
 def getPluginResources():
-    result = {'service/<string:serviceName>/point': SmartM3Resource}
+    result = {'service/<string:serviceName>/point': SmartM3Resource,
+              'point.jsonld': ContextResource}
     return result
 
 

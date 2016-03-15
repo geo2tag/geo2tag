@@ -28,7 +28,7 @@ CONTEXT_PATH = '/instance/plugins/smartm3/point.jsonld'
 
 
 def getJsonLDContext():
-    CONTEXT_FILE_NAME = 'points.jsonld'
+    CONTEXT_FILE_NAME = 'point.jsonld'
     localDir = path.dirname(__file__)
     jsonldFullPath = path.join(localDir, CONTEXT_FILE_NAME)
     jsonldFile = open(jsonldFullPath, 'r')

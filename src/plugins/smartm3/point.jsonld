@@ -8,7 +8,8 @@
     "longitude": "https://schema.org/longitude",
     "altitude" : "https://schema.org/elevation",
     "bc"
-    "date":{ 
+    "date":
+    { 
 	"@type": "DateTime", 
 	"@description": "DateTime in format %Y-%m-%dT%H:%M:%S.%f, 2005-08-09T18:31:42.201000" 
     },
