@@ -104,37 +104,17 @@ def addService(name, logSize, ownerld):
 
 
 def getLog(dbName, number, offset, dateFrom, dateTo):
-    db_getlog = getDbObject(dbName)
-    collection = db_getlog[COLLECTION_LOG_NAME]
-    if collection.count() == 0:
-        return []
+    dbLog = getDbObject(dbName)
+    criterion = {}
+    print  dateFrom
+    print dateTo
+    print 111111111111
     number = 0 if (number is None or number < 0) else number
     offset = 0 if (offset is None or offset < 0) else offset
-    if (dateFrom is None and dateTo is None):
-        return collection.find(
-            {}, None, offset,
-            number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
-    elif dateFrom is None:
-        return collection.find(
-            {FIND_AND_SORT_KEY: {"$lte": dateTo}},
-            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
-    elif dateTo is None:
-        return collection.find(
-            {FIND_AND_SORT_KEY: {"$gte": dateFrom}},
-            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.ASCENDING)
-    else:
-        if dateFrom > dateTo:
-            return []
-        return collection.find(
-            {
-                FIND_AND_SORT_KEY: {
-                    "$gte": dateFrom,
-                    "$lte": dateTo}},
-            None,
-            offset,
-            number).sort(
-                FIND_AND_SORT_KEY,
-            pymongo.ASCENDING)
+    applyDateCriterion(DATE, dateFrom, False, dateTo, False, criterion)
+    criterion.pop('bc', None)
+    return dbLog[COLLECTION_LOG_NAME].find(
+        criterion, None,offset,number).sort(DATE, pymongo.ASCENDING)
 
 
 def updateService(name, config):
