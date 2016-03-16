@@ -50,19 +50,16 @@ def checker_pylint(name_plugin):
     stdout, stderr = data_init.communicate()
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
-    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
     data_main = subprocess.Popen(STR_PYLINT_FILE_MAIN,
                                  shell=True,
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE,
                                  stdin=subprocess.PIPE)
     stdout, stderr = data_main.communicate()
-    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
     data_pylint_main = os.popen(STR_PYLINT_FUNCTIONS_FIND).read()
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
         print data_pylint_main
-    print num_error
 
 
 def run():
