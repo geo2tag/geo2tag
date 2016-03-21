@@ -14,7 +14,7 @@ class MetadataListResourceParser():
         parser = reqparse.RequestParser()
         parser.add_argument(ARGS_NUMBER, type=int, required=True)
         parser.add_argument(ARGS_OFFSET, type=int, required=True)
-        parser.add_argument(ARGS_QUERY, type=unicode)
+        parser.add_argument(ARGS_QUERY, type=unicode, default='{}')
         args = parser.parse_args()
         args[ARGS_QUERY] = loads(args[ARGS_QUERY])
         return args
