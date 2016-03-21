@@ -10,6 +10,7 @@ REQUREMENTS = 'scripts/requirements.txt'
 BUILD_DOCKER = './scripts/docker_build.sh'
 STR_DOCKER_IMG = 'docker images --format "{{.CreatedAt}}" '
 
+
 def getDateImage(name_img):
     str_dockerimg = STR_DOCKER_IMG + name_img
     date = subprocess.Popen(str_dockerimg,
