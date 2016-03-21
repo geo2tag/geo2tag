@@ -1,0 +1,26 @@
+{
+    "point_id":
+    {
+        "@type": "@id",
+        "@description": "id for current point"
+    },
+    "latitude" : "https://schema.org/latitude",
+    "longitude": "https://schema.org/longitude",
+    "altitude" : "https://schema.org/elevation",
+    "bc"
+    "date":
+    { 
+	"@type": "DateTime", 
+	"@description": "DateTime in format %Y-%m-%dT%H:%M:%S.%f, 2005-08-09T18:31:42.201000" 
+    },
+    "channel_id":
+    {
+	"@type": "@id",
+	"@description": "Id for current point channel"
+    },
+    "json":
+    {
+	"@type": "json"
+	"@description": "Json description of point"
+    }
+}
