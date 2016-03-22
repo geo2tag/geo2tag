@@ -33,8 +33,10 @@ def find_unsuccessfull_build_for_branch(branch):
         found_branch = inf[ACTIONS][number][LAST_BUILD_REVISION][
             BRANCH][0][NAME][index_branch:index_branch + 7]
         if found_branch == branch:
+            print inf[RESULT], 'build'
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
                 return (True, 0)
             else:
                 return (False, i)
+    print 'build was not found'
     return (False, 0)
