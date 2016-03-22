@@ -34,7 +34,7 @@ def find_unsuccessfull_build_for_branch(branch):
             BRANCH][0][NAME][index_branch:index_branch + 7]
         if found_branch == branch:
             if inf[RESULT] == SUCCESS or inf[RESULT] == FIXED:
-                return True
+                return (True, 0)
             else:
-                return False
-    return False
+                return (False, i)
+    return (False, 0)
