@@ -57,7 +57,7 @@ def get_branch_number():
     return args.branch
 
 
-def get_comment(test_scenario_field=True, conflict=True, pullrequest=True,
+def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
                 success_build=True, build_number=0):
     result = 'Test failed. \n'
     if not test_scenario_field:
