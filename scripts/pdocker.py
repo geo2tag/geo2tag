@@ -9,7 +9,6 @@ from time import sleep
 import time
 import re
 from env_variable_api import write_env_var
-from db_model import getObject
 
 HOST = 'localhost'
 PORT = 27017
