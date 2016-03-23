@@ -8,6 +8,7 @@ import os
 from time import sleep
 import time
 import re
+from env_variable_api import write_env_var
 
 
 HOST = 'localhost'
@@ -194,12 +195,6 @@ def create_container_env_var(container_start_port):
                     + unicode(container_start_port) + \
                     "/instance/tests"
     return container_env
-
-
-def write_env_var(variable, value):
-    f = open('propsfile', 'aw')
-    f.write(variable + '=' + value + '\n')
-    f.close()
 
 
 def getTestStatus(boolCode):

@@ -7,9 +7,12 @@ from check_git_branch import check_git_branch
 from jira_api import get_jira_server, get_jira_issue, reopen_issue, \
     add_comment
 import argparse
+from env_variable_api import write_env_var
 
 ARG_BRANCH = '--branch'
 JOB_URL = 'jenkins.osll.ru/job/geo2tag-test/'
+FAIL_REASON = "FAIL_REASON"
+SUCCESS_MSG = "SUCCESS"
 
 
 def check_issue(branch):
@@ -26,26 +29,31 @@ def check_issue(branch):
             print 'This issue', branch, 'is successfully completed'
             comment = 'Test success'
             add_comment(jira, branch, comment)
+            write_env_var(FAIL_REASON, SUCCESS_MSG)
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
-            reopen_issue(
-                jira,
-                issue,
-                branch,
-                get_comment(
+            comment = get_comment(
                     test_scenario_field,
                     conflict,
                     pullrequest,
                     success_build,
-                    build_number))
+                    build_number)
+            reopen_issue(
+                jira,
+                issue,
+                branch,
+                comment)
+            write_env_var(FAIL_REASON, comment)
     else:
         if test_scenario_field:
             print 'This issue', branch, 'is successfully completed'
             comment = 'Test success'
             add_comment(jira, branch, comment)
+            write_env_var(FAIL_REASON, SUCCESS_MSG)
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
             reopen_issue(jira, issue, branch, get_comment(False))
+            write_env_var(FAIL_REASON, comment)
 
 
 def get_branch_number():
