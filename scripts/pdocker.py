@@ -9,7 +9,6 @@ from time import sleep
 import time
 import re
 
-
 HOST = 'localhost'
 PORT = 27017
 DBNAME = 'docker-client'
@@ -38,6 +37,12 @@ NO_PORTS_MSG = "Free port not found exit"
 
 FAILED = 'failed'
 SUCCEED = 'succeed'
+
+
+def write_env_var(variable, value):
+    f = open('propsfile', 'aw')
+    f.write(variable + '=' + value + '\n')
+    f.close()
 
 
 def usage():
@@ -194,12 +199,6 @@ def create_container_env_var(container_start_port):
                     + unicode(container_start_port) + \
                     "/instance/tests"
     return container_env
-
-
-def write_env_var(variable, value):
-    f = open('propsfile', 'aw')
-    f.write(variable + '=' + value + '\n')
-    f.close()
 
 
 def getTestStatus(boolCode):
