@@ -24,5 +24,7 @@ def check_pullrequest(branch):
             if NAME in pullrequest[SOURCE][BRANCH]:
                 if unicode(branch, un_esc) == pullrequest[
                         SOURCE][BRANCH][NAME]:
+                    print 'pullrequest exists'
                     return True
+    print 'pullrequest is missed'
     return False

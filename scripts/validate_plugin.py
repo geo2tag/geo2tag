@@ -16,10 +16,11 @@ MAIN = '/main.py'
 INIT = '/__init__.py'
 PYTHONPATH = 'PYTHONPATH='
 TEXT_GOOD = 'No config file found, using default configuration\n'
+num_error = 0
 
 
 def make_reqpep8(name_plugin, type_format):
-    num_error = 0
+    global num_error
     str_pep8 = PEP8 + PATH_PLUGIN_DIR + \
         unicode(name_plugin) + TAIL_PEP8 + FORMAT + type_format
     process = subprocess.Popen(str_pep8,
@@ -31,10 +32,10 @@ def make_reqpep8(name_plugin, type_format):
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
     print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
-    return num_error
 
 
-def checker_pylint(name_plugin, num_error):
+def checker_pylint(name_plugin):
+    global num_error
     STR_PYLINT_FILE_MAIN = PYLINT_CHECK_FILE + \
         PATH_PLUGIN_DIR + str(name_plugin) + MAIN
     STR_PYLINT_FILE_INIT = PYLINT_CHECK_FILE + \
@@ -49,23 +50,16 @@ def checker_pylint(name_plugin, num_error):
     stdout, stderr = data_init.communicate()
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
-    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
     data_main = subprocess.Popen(STR_PYLINT_FILE_MAIN,
                                  shell=True,
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.PIPE,
                                  stdin=subprocess.PIPE)
     stdout, stderr = data_main.communicate()
-    print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
-    if len(stdout) == 0 and len(stderr) == 0:
-        data_pylint_main = os.popen(STR_PYLINT_FUNCTIONS_FIND).read()
-        if len(stdout) > 0 or len(stderr) > 0:
-            num_error = 1
-            print data_pylint_main
-    else:
+    data_pylint_main = os.popen(STR_PYLINT_FUNCTIONS_FIND).read()
+    if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
-        print data_main
-    return num_error
+        print data_pylint_main
 
 
 def run():
@@ -74,8 +68,8 @@ def run():
     parser.add_argument('-type_format', nargs='?',
                         default=DEFAULT, type=str, help='Type format')
     args = parser.parse_args()
-    num_error = make_reqpep8(args.name, args.type_format)
-    checker_pylint(args.name, num_error)
+    make_reqpep8(args.name, args.type_format)
+    checker_pylint(args.name)
     sys.exit(num_error)
 
 
