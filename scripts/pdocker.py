@@ -8,7 +8,6 @@ import os
 from time import sleep
 import time
 import re
-from env_variable_api import write_env_var
 
 HOST = 'localhost'
 PORT = 27017
@@ -38,6 +37,12 @@ NO_PORTS_MSG = "Free port not found exit"
 
 FAILED = 'failed'
 SUCCEED = 'succeed'
+
+
+def write_env_var(variable, value):
+    f = open('propsfile', 'aw')
+    f.write(variable + '=' + value + '\n')
+    f.close()
 
 
 def usage():
