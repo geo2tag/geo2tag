@@ -46,15 +46,13 @@ $(document).ready(function (){
     var callbackFail = function () {
 
     };
-    var jsonLayer = new L.LayerJSON({url: "http://geomongo/instance/service/testservice/point?number=1000&channel_ids=55dc620fbe9b3bf61be83f93",
-        propertyLoc:['coordinates'],
-        callData: function(data) {
-            console.log(data)
-        
-        }   
-    });
-    map.addLayer(jsonLayer); 
-
+    var l = new L.LayerJSON({url: "http://geomongo/instance/service/testservice/point?number=1000&channel_ids=55dc620fbe9b3bf61be83f93",
+        propertyLoc: ['location.coordinates.0','location.coordinates.1'],
+        buildPopup: function(data) {
+            return data.json.name || null;
+        } 
+    }); 
+    map.addLayer(l);
     var getPointForMap = new Geo2TagRequests('map', 'map');
     //getPointForMap.getPoints(par[SERVICE_NAME], callbackSuccess, callbackFail, par[CHANNEL_IDS], 1000);
 });
