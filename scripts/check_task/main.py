@@ -33,11 +33,11 @@ def check_issue(branch):
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
             comment = get_comment(
-                    test_scenario_field,
-                    conflict,
-                    pullrequest,
-                    success_build,
-                    build_number)
+                test_scenario_field,
+                conflict,
+                pullrequest,
+                success_build,
+                build_number)
             reopen_issue(
                 jira,
                 issue,
