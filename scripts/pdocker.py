@@ -10,7 +10,6 @@ import time
 import re
 from env_variable_api import write_env_var
 
-
 HOST = 'localhost'
 PORT = 27017
 DBNAME = 'docker-client'
