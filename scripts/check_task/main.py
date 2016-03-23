@@ -50,6 +50,7 @@ def check_issue(branch):
             comment = 'Test success'
             add_comment(jira, branch, comment)
             write_env_var(FAIL_REASON, SUCCESS_MSG)
+            print '----'
         else:
             print 'This issue', branch, 'is unsuccessfully completed'
             reopen_issue(jira, issue, branch, get_comment(False))
