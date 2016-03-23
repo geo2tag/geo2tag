@@ -12,13 +12,14 @@ def check_git_conflict(branch):
     result = subprocess.Popen(
         CHECKOUT_SCRIPT +
         branch +
-        PULL_SCRIPT + 
+        PULL_SCRIPT +
         branch +
         MERGE_SCRIPT,
         shell=True,
         stdin=PIPE,
         stdout=PIPE)
     str_result = result.stdout.read()
+    print '-------'
     print str_result
     if str_result.find(ERROR_1) != -1 or str_result.find(ERROR_2) != -1:
         return True
