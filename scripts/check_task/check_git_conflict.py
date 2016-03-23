@@ -19,6 +19,7 @@ def check_git_conflict(branch):
         stdin=PIPE,
         stdout=PIPE)
     str_result = result.stdout.read()
+    print '---'
     print str_result
     if str_result.find(ERROR_1) != -1 or str_result.find(ERROR_2) != -1:
         return True
