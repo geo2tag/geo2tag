@@ -25,6 +25,7 @@ def write_env_var(variable, value):
 def check_issue(branch):
     jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
+    print issue.fields.status
     if issue.fields.status == 'Done':
         test_scenario_field = check_test_scenario_field(issue)
         if check_git_branch(branch) == True:
