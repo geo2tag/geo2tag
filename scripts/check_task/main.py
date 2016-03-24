@@ -63,6 +63,7 @@ def check_issue(branch):
                 comment = get_comment(False)
                 reopen_issue(jira, issue, branch, comment)
                 write_env_var(FAIL_REASON, comment)
+    write_env_var(FAIL_REASON, SUCCESS_MSG)
 
 
 def get_branch_number():
