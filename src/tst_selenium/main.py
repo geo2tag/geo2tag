@@ -32,6 +32,7 @@ from test_GT_2145_plugin_config_check_page import TestPluginConfigPage
 from test_GT_2148_check_config_plugin_btn import TestCheckConfigPluginBtn
 from test_GT_2188_check_map_center import TestCheckMapCenter
 from test_GT_1912_btn_cancel_check import TestBtnCancelCheck
+from test_config_plugin import TestConfigPlugin
 
 
 def main(host):
@@ -118,6 +119,10 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestBtnCancelCheck,
+            param=host))
+    suite.addTest(
+        BasicSeleniumTest.parametrize(
+            TestConfigPlugin,
             param=host))
 ###################################################
 
