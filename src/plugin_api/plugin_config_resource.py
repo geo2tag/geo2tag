@@ -10,6 +10,8 @@ class PluginConfigResource(Resource):
     @possibleException
     def get(self, pluginName):
         checkConfigPlugin(pluginName)
+        print '==============!!==============='
+        print PluginConfigReader(pluginName).getConfigContent()
         return PluginConfigReader(pluginName).getConfigContent()
 
     @possibleException
