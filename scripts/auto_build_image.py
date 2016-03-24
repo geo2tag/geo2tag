@@ -4,9 +4,15 @@ import argparse
 import subprocess
 from datetime import datetime
 
+DOCKERFILE = 'dockerfile'
+SETUP_PIP_DEPENDENCIES = 'scripts/setup_pip_dependencies.sh'
+REQUREMENTS = 'scripts/requirements.txt'
+BUILD_DOCKER = './scripts/docker_build.sh'
+STR_DOCKER_IMG = 'docker images --format "{{.CreatedAt}}" '
+
 
 def getDateImage(name_img):
-    str_dockerimg = 'docker images --format "{{.CreatedAt}}" ' + name_img
+    str_dockerimg = STR_DOCKER_IMG + name_img
     date = subprocess.Popen(str_dockerimg,
                             shell=True,
                             stdout=subprocess.PIPE,
@@ -30,14 +36,14 @@ def compDate(date1, date2):
 
 
 def buildImage(date_img):
-    date1 = getDateEditFile('dockerfile')
-    date2 = getDateEditFile('scripts/setup_pip_dependencies.sh')
-    date3 = getDateEditFile('scripts/requirements.txt')
+    date1 = getDateEditFile(DOCKERFILE)
+    date2 = getDateEditFile(SETUP_PIP_DEPENDENCIES)
+    date3 = getDateEditFile(REQUREMENTS)
     num_code = 0
     if compDate(date1, date_img) or compDate(date2, date_img) or \
        compDate(date3, date_img):
         print 'Start build'
-        os.system('./scripts/docker_build.sh')
+        os.system(BUILD_DOCKER)
         print 'Date image: ' + str(date_img)
         print 'Date dockefile: ' + str(date1)
         print 'Date setup_pip_dependencies.sh: ' + str(date2)
