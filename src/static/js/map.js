@@ -46,7 +46,8 @@ $(document).ready(function (){
     var callbackFail = function () {
 
     };
-    var l = new L.LayerJSON({url: getUrlWithPrefix('/service/') + "/" + par[SERVICE_NAME] + "/point?number=1000&channel_ids=55dc620fbe9b3bf61be83f93",
+    var url = MakeUrlByChannelIds(par[SERVICE_NAME],par[CHANNEL_IDS],1000);
+    var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
             return data.json.name || null;
