@@ -46,7 +46,7 @@ $(document).ready(function (){
     var callbackFail = function () {
 
     };
-    var l = new L.LayerJSON({url: "http://geomongo/instance/service/testservice/point?number=1000&channel_ids=55dc620fbe9b3bf61be83f93",
+    var l = new L.LayerJSON({url: getUrlWithPrefix('/service/') + "/" + par[SERVICE_NAME] + "/point?number=1000&channel_ids=55dc620fbe9b3bf61be83f93",
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
             return data.json.name || null;
