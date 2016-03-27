@@ -46,14 +46,16 @@ $(document).ready(function (){
     var callbackFail = function () {
 
     };
+    
     var url = MakeUrlByChannelIds(par[SERVICE_NAME],par[CHANNEL_IDS],1000);
+    var markers = new L.MarkerClusterGroup();
     var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
-            return data.json.name || null;
-        } 
-    }); 
-    map.addLayer(l); 
-    var getPointForMap = new Geo2TagRequests('map', 'map');
-    //getPointForMap.getPoints(par[SERVICE_NAME], callbackSuccess, callbackFail, par[CHANNEL_IDS], 1000);
+            var text = getPointPopupHtml(data);
+            return text;
+            //markers.addLayer(L.marker([data[LOCATION][COORDINATES][0], data[LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
+        }
+    });
+    map.addLayer(l);
 });
