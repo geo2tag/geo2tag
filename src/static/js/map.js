@@ -34,27 +34,13 @@ $(document).ready(function (){
         shadowUrl: path_marker + '/marker-shadow.png',
         popupAnchor:  [11, 0]
     });
-    var callbackSuccess = function (data) {
-        var len = data.length;
-        var markers = new L.MarkerClusterGroup();
-        for(var i = 0; i < len; i++ ){
-            var text = getPointPopupHtml(data[i]);
-            markers.addLayer(L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
-        }
-        map.addLayer(markers);
-    };
-    var callbackFail = function () {
-
-    };
-    
     var url = MakeUrlByChannelIds(par[SERVICE_NAME],par[CHANNEL_IDS],1000);
     var markers = new L.MarkerClusterGroup();
     var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
-        buildPopup: function(data) {
+        dataToMarker:function(data,a){
             var text = getPointPopupHtml(data);
-            return text;
-            //markers.addLayer(L.marker([data[LOCATION][COORDINATES][0], data[LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
+            return markers.addLayer(L.marker([data[LOCATION][COORDINATES][0], data[LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
         }
     });
     map.addLayer(l);
