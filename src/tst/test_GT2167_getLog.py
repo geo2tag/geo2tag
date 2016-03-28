@@ -14,7 +14,7 @@ SERVICE = "service"
 TEST_SERVICE = "testservice"
 DATE_TO = datetime(2100, 1, 1)
 DATE_FROM = datetime(2000, 1, 1)
-MESSAGE = 'testGT_2167'
+MESSAGE = "testGT_2167"
 db = getDbObject()
 collection = db[COLLECTION]
 
