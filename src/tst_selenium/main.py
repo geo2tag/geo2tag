@@ -37,7 +37,7 @@ from test_config_plugin import TestConfigPlugin
 
 def main(host):
     suite = unittest.TestSuite()
-    suite.addTest(BasicSeleniumTest.parametrize(
+    '''suite.addTest(BasicSeleniumTest.parametrize(
         TestGT1776AdminTemplate,
         param=host)
     )
@@ -119,7 +119,7 @@ def main(host):
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestBtnCancelCheck,
-            param=host))
+            param=host))'''
     suite.addTest(
         BasicSeleniumTest.parametrize(
             TestConfigPlugin,

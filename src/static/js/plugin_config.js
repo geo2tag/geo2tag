@@ -1,7 +1,5 @@
 function getConfigDataFromPage(){
-    data = $('#container_config_plugin').html();
-    data = data.replace('<br>', '\n');
-    data = data.replace(/<\/?[^>]+>/g,'');
+    data = $('#container_config_plugin').val();
     data = convertIniToJson(data);
     console.log(data)
     return data;
@@ -16,6 +14,7 @@ function addSaveServiceHandler(){
 
 function saveConfigPluginChange(plugin_name) {
      page_data = getConfigDataFromPage();
+     console.log('SAVING')
      $.ajax({
         type: "PUT",
         url: "/instance/plugin_config/" + plugin_name,
