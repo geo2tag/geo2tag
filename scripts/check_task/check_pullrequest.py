@@ -12,7 +12,6 @@ un_esc = 'unicode-escape'
 URL_ENDING = '?page='
 
 
-
 def get_url(team, repository, page):
     if page == 1:
         return BITBUCKET_URL + team + '/' + repository + \
