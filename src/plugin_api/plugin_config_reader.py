@@ -8,8 +8,6 @@ class PluginConfigReader:
         self.file_path = os.path.dirname(os.path.realpath(__file__)) + \
             '/../plugins/' + pluginName + '/config.ini'
         self.plugin_name = pluginName
-        self.local_file_path = '../' + \
-            'plugins/' + pluginName + '/config.ini'
 
     # Return content of the config.ini in a form of a dictionary
     def getConfigContent(self):
@@ -37,5 +35,3 @@ class PluginConfigReader:
                     conf.add_section(section)
                 conf.set(section, option, value)
         conf.write(open(self.file_path, "w"))
-        print os.getcwd() 
-        conf.write(open(self.local_file_path, "w"))
