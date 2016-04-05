@@ -1,8 +1,8 @@
 import requests
 from basic_integration_test import BasicIntegrationTest
 
-TEST_URL = "/instance/admin/log?" \
-            "number=10&subsrting=plugin"
+TEST_URL = "/instance/admin/log?service_name=testservice" \
+            "&number=10&subsrting=plugin"
 VALID_RESPONSE_CODE = 200
 
 

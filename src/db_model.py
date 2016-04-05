@@ -103,17 +103,19 @@ def addService(name, logSize, ownerld):
             return obj_id
 
 
-def getLog(dbName, number, offset, dateFrom, dateTo):
+def getLog(dbName, number, offset, dateFrom, dateTo, substring=''):
     dbLog = getDbObject(dbName)
     criterion = {}
     number = 0 if (number is None or number < 0) else number
     offset = 0 if (offset is None or offset < 0) else offset
+    substring = '' if (substring is None) else substring
     dateFrom = datetime(2000, 1, 1, 0, 0) if (dateFrom is None) else dateFrom
     dateTo = datetime.now() if (dateTo is None) else dateTo
     if dateFrom > dateTo:
         return []
     applyDateCriterion(DATE, dateFrom, False, dateTo, False, criterion)
     criterion.pop('bc', None)
+    criterion.update({'message': substring})
     return dbLog[COLLECTION_LOG_NAME].find(
         criterion, None, offset, number).sort(DATE, pymongo.DESCENDING)
 
