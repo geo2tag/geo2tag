@@ -26,7 +26,7 @@ class AdminLogResource(Resource):
             dateDeserialiser(
             parser_dict,
             DATE_TO),
-               parser_dict[SUBSTRING])
+            parser_dict[SUBSTRING])
         return make_response(
             render_template(
                 'log.html'))
