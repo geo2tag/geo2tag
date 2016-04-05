@@ -55,6 +55,7 @@ from test_GT_1792_check_config_geocoder import \
 from test_GT_1858_service_substr import TestServiceSearchBySubstr
 from test_metadata_list_resource import TestMetadataListResource
 from test_smartm3_plugin import TestSmartM3Plugin
+from test_GT_2345_admin_log_resource import TestAdminLogResource
 
 
 def main(host):
@@ -255,7 +256,10 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestSmartM3Plugin,
             param=host))
-
+    suite.addTest(
+        BasicIntegrationTest.parametrize(
+            TestAdminLogResource,
+            param=host))
 ###################################################
 # Place tests above this line ^^
 ###################################################
