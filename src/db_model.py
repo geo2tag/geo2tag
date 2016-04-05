@@ -115,7 +115,8 @@ def getLog(dbName, number, offset, dateFrom, dateTo, substring=''):
         return []
     applyDateCriterion(DATE, dateFrom, False, dateTo, False, criterion)
     criterion.pop('bc', None)
-    criterion.update({'message': {'$regex': substring}})
+    if substring != '':
+        criterion.update({'message': {'$regex': substring}})
     return dbLog[COLLECTION_LOG_NAME].find(
         criterion, None, offset, number).sort(DATE, pymongo.DESCENDING)
 
