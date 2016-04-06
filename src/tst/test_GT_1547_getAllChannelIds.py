@@ -7,7 +7,7 @@ from db_model import getAllChannelIds
 import config_reader
 
 SERVICE_NAME = 'testservice'
-TEST_ID = u'5704f32902c1c90072955867'
+TEST_ID = u'556721a52a2e7febd2744200'
 db = MongoClient(config_reader.getHost(),
                  config_reader.getPort())[SERVICE_NAME]
 CHANNELS_COLLECTION = 'channels'
