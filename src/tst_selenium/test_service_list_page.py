@@ -35,7 +35,7 @@ class TestServiceListResource(BasicSeleniumTest):
         URL = self.getUrl(INSTANCE_ADMIN)
         self.getDriver().get(URL)
         result = self.getDriver().find_element_by_xpath(LINE_XPATH)
-        self.assertNotNone(result)
+        self.assertIsNotNone(result)
 #
 #    def testServiceDelete(self):
 #        URL = self.getUrl('/instance/admin/service')
