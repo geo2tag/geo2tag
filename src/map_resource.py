@@ -16,11 +16,14 @@ class MapResource(Resource):
 
     def get(self, serviceName=None):
         try:
+            print '111111111111111'
             args = PointListResourceParser.parseGetParameters()
+            print '111111111111111'
             args[SERVICE_NAME] = serviceName
             get_param = args
             return make_response(render_template('map.html', params=get_param))
         except Exception:
+            print '22222222222222'
             get_param = getDefaultMapParams(serviceName)
             return make_response(render_template('map.html', params=get_param))
 
