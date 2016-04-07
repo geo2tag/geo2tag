@@ -20,7 +20,6 @@ function fixMapSize(){
 
 $(document).ready(function (){
     par = getArgsQuery(getUrlPage());
-    console.log(par)
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
