@@ -87,7 +87,7 @@ def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
         result += 'pullrequest is missing\n'
     if not success_build:
         result += 'auto tests failed, link '
-        result += get_jenkins_build_result(build_number)
+        result += 'http://' + get_jenkins_build_result(build_number)
     return result
 
 
