@@ -18,81 +18,77 @@ HTML = '.html'
 HTTP = 'http://'
 
 
-def getConfigParser(config_name):
+def get_config_parser(config_name):
     config = SafeConfigParser(
         {HOST: DEFAULT_HOST, INSTANCE_PREFI: DEFAULT_PREFIX})
     config.read(config_name)
     return config
 
 
-def getHost(config_name):
-    return getConfigParser(config_name).get(SECTION, HOST)
+def get_host(config_name):
+    return get_config_parser(config_name).get(SECTION, HOST)
 
 
-def getInstancePrefix(config_name):
-    return getConfigParser(config_name).get(SECTION, INSTANCE_PREFI)
+def get_instance_prefix(config_name):
+    return get_config_parser(config_name).get(SECTION, INSTANCE_PREFI)
 
 
-def getInstancePrefix(config_name):
-    return getConfigParser(config_name).get(SECTION, INSTANCE_PREFI)
+def get_str(config_name):
+    return get_config_parser(config_name).get(SECTION, STR)
 
 
-def getStr(config_name):
-    return getConfigParser(config_name).get(SECTION, STR)
-
-
-def getListParserParam(str):
+def get_list_parser_param(str):
     return str.split(' ')
 
 
-def readFiles(path_file):
+def read_files(path_file):
     new_file = open(path_file)
     new_str = new_file.read()
     new_file.close()
     return new_str
 
 
-def makeListPathFile(name_dir, listfile):
-    ch = ''
+def make_list_pathfile(name_dir, listfile):
+    char = ''
     if name_dir[-1] != CH_SLASH:
-        ch = CH_SLASH
+        char = CH_SLASH
     i = 0
     while i < len(listfile):
-        listfile[i] = name_dir + ch + listfile[i]
+        listfile[i] = name_dir + char + listfile[i]
         i += 1
     return listfile
 
 
-def LocaleScanning(name_dir, listfile):
+def locale_scanning(name_dir, listfile):
     if name_dir is not None:
         files = os.listdir(name_dir)
-        html_filter = mytxt = filter(lambda x: x.endswith(HTML), files)
-        html_filter = makeListPathFile(name_dir, html_filter)
-        for file in html_filter:
-            validate_file = readFiles(file)
-            ValidateTidy(validate_file, file)
+        html_filter = filter(lambda x: x.endswith(HTML), files)
+        html_filter_list = make_list_pathfile(name_dir, html_filter)
+        for file in html_filter_list:
+            validate_file = read_files(file)
+            validate_tidy(validate_file, file)
     else:
-        files = getListParserParam(listfile)
-        ValidateTidy(files)
+        files = get_list_parser_param(listfile)
+        validate_tidy(files)
 
 
-def readUrlRequest(host, list_str):
+def read_url_request(host, list_str):
     for i in list_str:
-        file = host + i
-        f = urllib.urlopen(file)
-        ValidateTidy(f.read(), file)
+        file1 = host + i
+        fread = urllib.urlopen(file1)
+        validate_tidy(fread.read(), file1)
 
 
-def WebScanning(conf, list_url):
+def web_scanning(conf, list_url):
     url_without_str = HTTP + \
-        getHost(conf) + CH_SLASH + getInstancePrefix(conf) + CH_SLASH
+        get_host(conf) + CH_SLASH + get_instance_prefix(conf) + CH_SLASH
     if list_url is not None:
-        readUrlRequest(url_without_str, getListParserParam(list_url))
+        read_url_request(url_without_str, get_list_parser_param(list_url))
     else:
-        readUrlRequest(url_without_str, getListParserParam(getStr(conf)))
+        read_url_request(url_without_str, get_list_parser_param(get_str(conf)))
 
 
-def ValidateTidy(file_context, file):
+def validate_tidy(file_context, file):
     print '========================' + file + '========================'
     document, errors = tidy_document(
         file_context, options={"literal-attributes": '0'})
@@ -108,9 +104,9 @@ def run():
     parser.add_argument('--conf', help='Config name')
     args = parser.parse_args()
     if args.locale == ARG_YES or args.locale == '1':
-        LocaleScanning(args.directory, args.files)
+        locale_scanning(args.directory, args.files)
     if args.locale == ARG_NO or args.locale == '0':
-        WebScanning(args.conf, args.url)
+        web_scanning(args.conf, args.url)
 
 if __name__ == '__main__':
     run()
