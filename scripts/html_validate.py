@@ -41,13 +41,6 @@ def get_list_parser_param(strs):
     return strs.split(' ')
 
 
-def read_files(path_file):
-    new_file = open(path_file)
-    new_str = new_file.read()
-    new_file.close()
-    return new_str
-
-
 def make_list_pathfile(name_dir, listfile):
     char = ''
     if name_dir[-1] != CH_SLASH:
@@ -59,26 +52,6 @@ def make_list_pathfile(name_dir, listfile):
     return listfile
 
 
-def locale_scanning(name_dir, listfile):
-    html_filter_list = []
-    if name_dir is not None:
-        files = os.listdir(name_dir)
-        html_filter = filter(lambda x: x.endswith(HTML), files)
-        html_filter_list = make_list_pathfile(name_dir, html_filter)
-    else:
-        html_filter_list = get_list_parser_param(listfile)
-    for filear in html_filter_list:
-        validate_file = read_files(filear)
-        validate_tidy(validate_file, filear)
-
-
-def read_url_request(host, list_str):
-    for i in list_str:
-        file1 = host + i
-        fread = urllib.urlopen(file1)
-        validate_tidy(fread.read(), file1)
-
-
 def web_scanning(conf, list_url):
     url_without_str = HTTP + \
         get_host(conf) + CH_SLASH + get_instance_prefix(conf) + CH_SLASH
@@ -88,8 +61,8 @@ def web_scanning(conf, list_url):
         read_url_request(url_without_str, get_list_parser_param(get_str(conf)))
 
 
-def validate_tidy(file_context, file):
-    print '========================' + file + '========================'
+def validate_tidy(file_context, file_name):
+    print '========================' + file_name + '========================'
     document, errors = tidy_document(
         file_context, options={"literal-attributes": '0'})
     print document, errors
@@ -97,16 +70,9 @@ def validate_tidy(file_context, file):
 
 def run():
     parser = argparse.ArgumentParser(description='Script HTML lint')
-    parser.add_argument('--locale', help='Locale validate')
-    parser.add_argument('--directory', help='Directory containing files')
-    parser.add_argument('--files', help='List file name')
     parser.add_argument('--url', help='List url')
     parser.add_argument('--conf', help='Config name')
-    args = parser.parse_args()
-    if args.locale == ARG_YES or args.locale == '1':
-        locale_scanning(args.directory, args.files)
-    if args.locale == ARG_NO or args.locale == '0':
-        web_scanning(args.conf, args.url)
+    web_scanning(args.conf, args.url)
 
 if __name__ == '__main__':
     run()
