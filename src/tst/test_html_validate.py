@@ -18,7 +18,6 @@ class TestFunctionScriptHtmlValidate(TestCase):
         self.assertEqual(
             html_validate.get_list_parser_param(TEST_FOR_LIST), TEST_LIST)
 
-
     def testmakeListPathFile(self):
         str1 = html_validate.make_list_pathfile(NAME_DIR, TEST_LIST)
         self.assertEqual(TEST_LIST_1, str1)
