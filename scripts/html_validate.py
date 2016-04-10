@@ -37,8 +37,8 @@ def get_str(config_name):
     return get_config_parser(config_name).get(SECTION, STR)
 
 
-def get_list_parser_param(str):
-    return str.split(' ')
+def get_list_parser_param(strs):
+    return strs.split(' ')
 
 
 def read_files(path_file):
@@ -60,16 +60,16 @@ def make_list_pathfile(name_dir, listfile):
 
 
 def locale_scanning(name_dir, listfile):
+    html_filter_list = []
     if name_dir is not None:
         files = os.listdir(name_dir)
         html_filter = filter(lambda x: x.endswith(HTML), files)
         html_filter_list = make_list_pathfile(name_dir, html_filter)
-        for file in html_filter_list:
-            validate_file = read_files(file)
-            validate_tidy(validate_file, file)
     else:
-        files = get_list_parser_param(listfile)
-        validate_tidy(files)
+        html_filter_list = get_list_parser_param(listfile)
+    for filear in html_filter_list:
+        validate_file = read_files(filear)
+        validate_tidy(validate_file, filear)
 
 
 def read_url_request(host, list_str):
