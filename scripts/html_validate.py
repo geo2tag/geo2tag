@@ -94,8 +94,8 @@ def WebScanning(conf, list_url):
 
 def ValidateTidy(file_context, file):
     print '========================' + file + '========================'
-    document, errors = tidy_document(file_context, options=
-                                     {"literal-attributes": '0'})
+    document, errors = tidy_document(
+        file_context, options={"literal-attributes": '0'})
     print document, errors
 
 
