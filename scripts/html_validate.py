@@ -1,5 +1,4 @@
 import argparse
-import os
 import urllib
 from configparser import SafeConfigParser
 from tidylib import tidy_document
@@ -12,9 +11,6 @@ DEFAULT_PREFIX = 'instance'
 STR = 'str'
 DEFAULT_STR = 'status'
 CH_SLASH = '/'
-ARG_YES = 'yes'
-ARG_NO = 'no'
-HTML = '.html'
 HTTP = 'http://'
 
 
@@ -52,6 +48,13 @@ def make_list_pathfile(name_dir, listfile):
     return listfile
 
 
+def read_url_request(host, list_str):
+    for i in list_str:
+        file1 = host + i
+        fread = urllib.urlopen(file1)
+        validate_tidy(fread.read(), file1)
+
+
 def web_scanning(conf, list_url):
     url_without_str = HTTP + \
         get_host(conf) + CH_SLASH + get_instance_prefix(conf) + CH_SLASH
@@ -72,6 +75,7 @@ def run():
     parser = argparse.ArgumentParser(description='Script HTML lint')
     parser.add_argument('--url', help='List url')
     parser.add_argument('--conf', help='Config name')
+    args = parser.parse_args()
     web_scanning(args.conf, args.url)
 
 if __name__ == '__main__':

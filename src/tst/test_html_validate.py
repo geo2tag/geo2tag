@@ -14,10 +14,10 @@ TEST_LIST_1 = ['test/123', 'test/123']
 
 class TestFunctionScriptHtmlValidate(TestCase):
 
-    def testgetListParserParam(self):
+    def testGetListParserParam(self):
         self.assertEqual(
             html_validate.get_list_parser_param(TEST_FOR_LIST), TEST_LIST)
 
-    def testmakeListPathFile(self):
+    def testMakeListPathFile(self):
         str1 = html_validate.make_list_pathfile(NAME_DIR, TEST_LIST)
         self.assertEqual(TEST_LIST_1, str1)
