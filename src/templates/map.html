@@ -26,11 +26,14 @@
 <script src="{{ getStaticUrl('js/geo2tag.js') }}"></script>
 <script src="{{ getStaticUrl('js/leaflet-layerjson.min.js') }}"></script>
 <script type="text/javascript">
+    var channel_ids;
 {% if params %}
-    var par = {{params|tojson}};
-{% else %}
-    var par = getArgsQuery(getUrlPage());
+    channel_ids = {{params|tojson}};
 {% endif %}
+    if(channel_ids != undefined)
+        par = getArgsQueryForMap(getUrlPage(), channel_ids.channel_ids);
+    else
+        par = getArgsQueryForMap(getUrlPage(), []);
 </script>
 {% endblock %}
 {% block content %}
