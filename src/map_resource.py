@@ -13,8 +13,7 @@ class MapResource(Resource):
         args = MapParser.parseGetParameters()
         result = {}
         if args[CHANNEL_IDS] is None:
-            result.update(getDefaultChannelIds(serviceName))
-        
+            result.update(getDefaultChannelIds(serviceName))        
         return make_response(render_template('map.html', params=result))
 
 
