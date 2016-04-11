@@ -1,8 +1,8 @@
 from flask_restful import Resource
 from flask import render_template
 from flask import make_response
-from point_list_resource_parser import PointListResourceParser
 from db_model import getAllChannelIds
+from map_resource_parser import MapParser
 
 NUMBER_VALUE = 1000
 SERVICE_NAME = 'serviceName'
@@ -16,14 +16,10 @@ class MapResource(Resource):
 
     def get(self, serviceName=None):
         try:
-            print '111111111111111'
-            args = PointListResourceParser.parseGetParameters()
-            print '111111111111111'
-            args[SERVICE_NAME] = serviceName
-            get_param = args
-            return make_response(render_template('map.html', params=get_param))
+            args = MapParser.parseGetParameters()
+            print args
+            return make_response(render_template('map.html'))
         except Exception:
-            print '22222222222222'
             get_param = getDefaultMapParams(serviceName)
             return make_response(render_template('map.html', params=get_param))
 
