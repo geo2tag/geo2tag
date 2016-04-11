@@ -4,12 +4,16 @@ from flask import make_response
 from db_model import getAllChannelIds
 from map_resource_parser import MapParser
 
+RADIUS_VALUE = 1000
 NUMBER_VALUE = 1000
 SERVICE_NAME = 'serviceName'
 CHANNEL_IDS = 'channel_ids'
+ZOOM_VALUE = 14
 NUMBER = 'number'
 LATITUDE = 'latitude'
 LONGITUDE = 'longitude'
+ZOOM = 'zoom'
+RADIUS = 'radius'
 
 
 class MapResource(Resource):
@@ -29,4 +33,6 @@ def getDefaultMapParams(serviceName):
     result[CHANNEL_IDS] = all_channel_ids
     result[SERVICE_NAME] = serviceName
     result[NUMBER] = NUMBER_VALUE
+    result[ZOOM] = ZOOM_VALUE
+    result[RADIUS] = RADIUS_VALUE
     return result
