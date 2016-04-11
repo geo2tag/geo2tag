@@ -37,6 +37,6 @@ class MapParser():
         parser.add_argument(BC_TO, type=inputs.boolean)
         parser.add_argument(LATITUDE, type=float)
         parser.add_argument(LONGITUDE, type=float)
-        parser.add_argument(ZOOM, type=int)        
+        parser.add_argument(ZOOM, type=int)
         args = parser.parse_args()
         return args
