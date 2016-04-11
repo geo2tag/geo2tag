@@ -19,7 +19,7 @@ function getArgsQueryForMap(url, channel_ids){ // return json
         result[ZOOM] = 14;
     if(channel_ids.length != 0)
         result[CHANNEL_IDS] = channel_ids
-    else
+    else if(result[CHANNEL_IDS] != undefined)
         result[CHANNEL_IDS] = JSON.parse(result[CHANNEL_IDS])
     return result;
 }
