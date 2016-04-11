@@ -17,7 +17,7 @@ class MapResource(Resource):
     def get(self, serviceName=None):
         args = MapParser.parseGetParameters()
         for val in args.values():
-            if val != None:
+            if val is not None:
                 return make_response(render_template('map.html'))
         get_param = getDefaultMapParams(serviceName)
         return make_response(render_template('map.html', params=get_param))
