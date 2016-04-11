@@ -15,13 +15,12 @@ LONGITUDE = 'longitude'
 class MapResource(Resource):
 
     def get(self, serviceName=None):
-        try:
-            args = MapParser.parseGetParameters()
-            print args
-            return make_response(render_template('map.html'))
-        except Exception:
-            get_param = getDefaultMapParams(serviceName)
-            return make_response(render_template('map.html', params=get_param))
+        args = MapParser.parseGetParameters()
+        for val in args.values():
+            if val != None:
+                return make_response(render_template('map.html'))
+        get_param = getDefaultMapParams(serviceName)
+        return make_response(render_template('map.html', params=get_param))
 
 
 def getDefaultMapParams(serviceName):

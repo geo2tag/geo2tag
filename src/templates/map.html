@@ -25,6 +25,13 @@
 <script src="{{ getStaticUrl('js/map.js') }}"></script>
 <script src="{{ getStaticUrl('js/geo2tag.js') }}"></script>
 <script src="{{ getStaticUrl('js/leaflet-layerjson.min.js') }}"></script>
+<script type="text/javascript">
+{% if params %}
+    var par = {{params|tojson}};
+{% else %}
+    var par = getArgsQuery(getUrlPage());
+{% endif %}
+</script>
 {% endblock %}
 {% block content %}
 <div style="height: 500px; align: center" id="map" class="leaflet-container width-container"></div>
