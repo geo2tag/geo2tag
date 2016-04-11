@@ -10,7 +10,7 @@ LAT = 'lat'
 LON = 'lon'
 CHANNEL_ID = 'channel_id'
 ALT = 'alt'
-CHANNEL_IDS_VALUE = 'channel_id_value'
+CHANNEL_IDS_VALUE = '55671ae113293c504d514a53'
 TEST_URL = '/instance/service/testservice/point'
 BAD_TEST_URL = '/instance/service/testservice/point'
 VALID_RESPONSE_CODE = 200
@@ -26,7 +26,7 @@ class TestPointListPostRequest(BasicIntegrationTest):
                 LON: 1.1,
                 ALT: 1.1,
                 JSON: {'a': 'b'},
-                CHANNEL_ID: 'channel_id_value'
+                CHANNEL_ID: '55671ae113293c504d514a53'
             }]))
         responseCode = pointAddResponse.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)

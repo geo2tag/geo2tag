@@ -21,7 +21,7 @@ class TestBcParametrPointListPost(BasicIntegrationTest):
     def testBcPatametrPointListPost(self):
         response = requests.post(self.getUrl(TEST_URL), data=json.dumps(
             [{LAT: 1.1, LON: 1.1, ALT: 1.1, JSON: {'a': 'b'},
-              CHANNEL_ID: 'channel_id_value'}]))
+              CHANNEL_ID: '55671ae110293c504d514a53'}]))
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         responseText = response.text[2:-2]
@@ -31,15 +31,13 @@ class TestBcParametrPointListPost(BasicIntegrationTest):
                 responseText))
         self.assertEquals(getResponse.status_code, VALID_RESPONSE_CODE)
         self.assertEquals(json.loads(getResponse.text)['bc'], VALID_BC_VALUE)
-
-        response = requests.post(self.getUrl(TEST_URL),
-                                 data=json.dumps([{LAT: 1.1,
-                                                   LON: 1.1,
-                                                   ALT: 1.1,
-                                                   JSON: {'a': 'b'},
-                                                   CHANNEL_ID:
-                                                       'channel_id_value',
-                                                   'bc': True}]))
+        DATA = json.dumps([{LAT: 1.1,
+                          LON: 1.1,
+                          ALT: 1.1,
+                          JSON: {'a': 'b'},
+                          CHANNEL_ID: '55671ae110293c504d514a53',
+                          'bc': True}])
+        response = requests.post(self.getUrl(TEST_URL), data=DATA)
         responseCode = response.status_code
         self.assertEquals(responseCode, VALID_RESPONSE_CODE)
         responseText = response.text[2:-2]

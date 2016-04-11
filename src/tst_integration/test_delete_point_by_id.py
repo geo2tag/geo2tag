@@ -33,7 +33,7 @@ class TestPointResourceDelete(BasicIntegrationTest):
                 LON: 1.1,
                 ALT: 1.1,
                 JSON: {'ac': 'dc'},
-                CHANNEL_ID: 'test_channel_id_value'
+                CHANNEL_ID: '55671ae113293c504d515a53'
             }]))
         obj_id = getObjectIdFromResponse(response)
         response = requests.delete(self.getUrl(TEST_URL_DEL + unicode(obj_id)))
