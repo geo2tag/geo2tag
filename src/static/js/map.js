@@ -19,6 +19,7 @@ function fixMapSize(){
 }
 
 $(document).ready(function (){
+    par = getArgsQuery(getUrlPage());
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
@@ -34,18 +35,6 @@ $(document).ready(function (){
         shadowUrl: path_marker + '/marker-shadow.png',
         popupAnchor:  [11, 0]
     });
-    var callbackSuccess = function (data) {
-        var len = data.length;
-        var markers = new L.MarkerClusterGroup();
-        for(var i = 0; i < len; i++ ){
-            var text = getPointPopupHtml(data[i]);
-            markers.addLayer(L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
-        }
-        map.addLayer(markers);
-    };
-    var callbackFail = function () {
-
-    };
     var url = MakeUrlByChannelIds(par[SERVICE_NAME],par[CHANNEL_IDS],1000);
     var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
@@ -53,7 +42,5 @@ $(document).ready(function (){
             return data.json.name || null;
         } 
     }); 
-    map.addLayer(l); 
-    var getPointForMap = new Geo2TagRequests('map', 'map');
-    //getPointForMap.getPoints(par[SERVICE_NAME], callbackSuccess, callbackFail, par[CHANNEL_IDS], 1000);
+    map.addLayer(l);
 });
