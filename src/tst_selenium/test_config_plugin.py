@@ -2,7 +2,7 @@
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = '/instance/admin/plugin/config/plugin_for_test_config'
-VALID_CONFIG = '[SECTION2]\nopt21=val21\nopt22=val22\nopt23=val23\n' + \
+VALID_CONFIG = u'[SECTION2]\nopt21=val21\nopt22=val22\nopt23=val23\n' + \
     '[SECTION1]\nopt11=val11\n'
 TEST_TEXTAREA_ID = 'container_config_plugin'
 TEST_SCRIPT_RETURN_VALUE = 'return $("#' + TEST_TEXTAREA_ID + '").val()'
