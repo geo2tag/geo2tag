@@ -30,7 +30,6 @@ class TestConfigPlugin(BasicSeleniumTest):
     def testConfigPluginSave(self):
         URL = self.getUrl(TEST_URL)
         self.getDriver().get(URL)
-        self.getDriver().implicitly_wait(30)
         TEST_TEXTAREA = self.getDriver().find_element_by_id(TEST_TEXTAREA_ID)
         TEST_TEXTAREA.send_keys(TEST_TEST_ADD)
         self.getDriver().find_element_by_id(BTN_SAVE_CONFIG).click()
