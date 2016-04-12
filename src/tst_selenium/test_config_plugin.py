@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from basic_selenium_test import BasicSeleniumTest
+import sleep
 
 TEST_URL = '/instance/admin/plugin/config/plugin_for_test_config'
 VALID_CONFIG = u'[SECTION2]\nopt21=val21\nopt22=val22\nopt23=val23\n' + \
@@ -22,8 +23,7 @@ class TestConfigPlugin(BasicSeleniumTest):
         URL = self.getUrl(TEST_URL)
         self.getDriver().get(URL)
         self.getDriver().implicitly_wait(30)
-        f = open('/app/src/plugins/plugin_for_test_config/config.ini', 'r')
-        print f.read(1)
+        sleep(3)
         result = self.driver.execute_script(TEST_SCRIPT_RETURN_VALUE)
         self.assertEqual(result, VALID_CONFIG)
 
