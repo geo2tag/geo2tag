@@ -34,7 +34,7 @@ $(document).ready(function (){
         shadowUrl: path_marker + '/marker-shadow.png',
         popupAnchor:  [11, 0]
     });
-    var url = MakeUrlByChannelIds(par[SERVICE_NAME],par[CHANNEL_IDS],1000);
+    var url = MakeUrlByChannelIds(par);
     var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
