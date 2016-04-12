@@ -1,0 +1,2 @@
+It's pytift - PYthon Tool of Issue Formal Testing - allows to automate task formal check. To use:
+./scripts/check_task/main.py --branch <branch_name>
