@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from basic_selenium_test import BasicSeleniumTest
-import sleep
+from time import sleep
 
 TEST_URL = '/instance/admin/plugin/config/plugin_for_test_config'
 VALID_CONFIG = u'[SECTION2]\nopt21=val21\nopt22=val22\nopt23=val23\n' + \
