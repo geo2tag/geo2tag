@@ -9,8 +9,8 @@ TEST_SCRIPT_RETURN_VALUE = 'return $("#' + TEST_TEXTAREA_ID + '").val()'
 TEST_TEST_ADD = 'opt31=val31\n'
 BTN_SAVE_CONFIG = 'save_plugin_btn'
 VALID_CONFIG_AFTER_SAVING = \
-    '[SECTION2]\nopt21=val21\nopt22=val22\nopt23=val23\n' + \
-    '[SECTION1]\nopt11=val11\nopt31=val31\n'
+    u'[SECTION2]\nopt21=val21\nopt22=val22\nopt23=val23\n' + \
+    '[SECTION1]\nopt31=val31\nopt11=val11\n'
 TEST_SCRIPT_CLEAR_VAL = '$("#' + TEST_TEXTAREA_ID + '").val("")'
 TEST_SCRIPT_CHANGE_VAL = 'return $("#' + TEST_TEXTAREA_ID + '").val("' + \
     VALID_CONFIG + '")'
