@@ -22,7 +22,7 @@ class TestConfigPlugin(BasicSeleniumTest):
         URL = self.getUrl(TEST_URL)
         self.getDriver().get(URL)
         self.getDriver().implicitly_wait(30)
-        f = open('src/plugins/plugin_for_test_config/config.ini', 'r')
+        f = open('/app/src/plugins/plugin_for_test_config/config.ini', 'r')
         print f.read(1)
         result = self.driver.execute_script(TEST_SCRIPT_RETURN_VALUE)
         self.assertEqual(result, VALID_CONFIG)
