@@ -16,7 +16,6 @@ TEST_SCRIPT_CHANGE_VAL = 'return $("#' + TEST_TEXTAREA_ID + '").val("' + \
     VALID_CONFIG + '")'
 
 
-
 class TestConfigPlugin(BasicSeleniumTest):
 
     def testConfigPluginOpen(self):
@@ -40,4 +39,4 @@ class TestConfigPlugin(BasicSeleniumTest):
         self.getDriver().find_element_by_id(BTN_SAVE_CONFIG).click()
         self.getDriver().get(URL)
         result = self.driver.execute_script(TEST_SCRIPT_RETURN_VALUE)
-        self.assertEqual(result, VALID_CONFIG) 
+        self.assertEqual(result, VALID_CONFIG)
