@@ -19,6 +19,7 @@ function fixMapSize(){
 }
 
 $(document).ready(function (){
+    par = getArgsQuery(getUrlPage());
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
@@ -34,26 +35,14 @@ $(document).ready(function (){
         shadowUrl: path_marker + '/marker-shadow.png',
         popupAnchor:  [11, 0]
     });
-    var callbackSuccess = function (data) {
-        var len = data.length;
-        var markers = new L.MarkerClusterGroup();
-        for(var i = 0; i < len; i++ ){
-            var text = getPointPopupHtml(data[i]);
-            markers.addLayer(L.marker([data[i][LOCATION][COORDINATES][0], data[i][LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
+    var url = MakeUrlByChannelIds(par[SERVICE_NAME],par[CHANNEL_IDS],1000);
+    var markers = new L.MarkerClusterGroup();
+    var l = new L.LayerJSON({url: url,
+        propertyLoc: ['location.coordinates.0','location.coordinates.1'],
+        dataToMarker:function(data,a){
+            var text = getPointPopupHtml(data);
+            return markers.addLayer(L.marker([data[LOCATION][COORDINATES][0], data[LOCATION][COORDINATES][1]], {icon: mapIcon}).bindPopup(text).openPopup());
         }
-        map.addLayer(markers);
-    };
-    var callbackFail = function () {
-
-    };
-    /*var jsonLayer = new L.LayerJSON({url: "http://geomongo/instance/service/testservice/point?number=1000&channel_ids=55dc620fbe9b3bf61be83f93",
-        filterData: function(data) {
-            console.log(data);
-            console.log(data.length);
-        }
-    });*/
-    //map.addLayer(jsonLayer); 
-
-    var getPointForMap = new Geo2TagRequests('map', 'map');
-    getPointForMap.getPoints(par[SERVICE_NAME], callbackSuccess, callbackFail, par[CHANNEL_IDS], 1000);
+    });
+    map.addLayer(l);
 });

@@ -25,43 +25,46 @@ def write_env_var(variable, value):
 def check_issue(branch):
     jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
-    test_scenario_field = check_test_scenario_field(issue)
-    if check_git_branch(branch) == True:
-        conflict = check_git_conflict(branch)
-        pullrequest = check_pullrequest(branch)
-        success_build, build_number = find_unsuccessfull_build_for_branch(
-            branch)
-        if not conflict and pullrequest and success_build and \
-                test_scenario_field:
-            print 'This issue', branch, 'is successfully completed'
-            comment = 'Test success'
-            add_comment(jira, branch, comment)
-            write_env_var(FAIL_REASON, SUCCESS_MSG)
+    if str(issue.fields.status) == 'Resolved':
+        test_scenario_field = check_test_scenario_field(issue)
+        if check_git_branch(branch) == True:
+            conflict = check_git_conflict(branch)
+            pullrequest = check_pullrequest(branch)
+            success_build, build_number = find_unsuccessfull_build_for_branch(
+                branch)
+            if not conflict and pullrequest and success_build and \
+                    test_scenario_field:
+                print 'This issue', branch, 'is successfully completed'
+                comment = 'Test success'
+                add_comment(jira, branch, comment)
+                write_env_var(FAIL_REASON, SUCCESS_MSG)
+            else:
+                print 'This issue', branch, 'is unsuccessfully completed'
+                comment = get_comment(
+                    test_scenario_field,
+                    conflict,
+                    pullrequest,
+                    success_build,
+                    build_number)
+                reopen_issue(
+                    jira,
+                    issue,
+                    branch,
+                    comment)
+                write_env_var(FAIL_REASON, comment)
         else:
-            print 'This issue', branch, 'is unsuccessfully completed'
-            comment = get_comment(
-                test_scenario_field,
-                conflict,
-                pullrequest,
-                success_build,
-                build_number)
-            reopen_issue(
-                jira,
-                issue,
-                branch,
-                comment)
-            write_env_var(FAIL_REASON, comment)
+            if test_scenario_field:
+                print 'This issue', branch, 'is successfully completed'
+                comment = 'Test success'
+                add_comment(jira, branch, comment)
+                write_env_var(FAIL_REASON, SUCCESS_MSG)
+            else:
+                print 'This issue', branch, 'is unsuccessfully completed'
+                comment = get_comment(False)
+                reopen_issue(jira, issue, branch, comment)
+                write_env_var(FAIL_REASON, comment)
     else:
-        if test_scenario_field:
-            print 'This issue', branch, 'is successfully completed'
-            comment = 'Test success'
-            add_comment(jira, branch, comment)
-            write_env_var(FAIL_REASON, SUCCESS_MSG)
-        else:
-            print 'This issue', branch, 'is unsuccessfully completed'
-            comment = get_comment(False)
-            reopen_issue(jira, issue, branch, comment)
-            write_env_var(FAIL_REASON, comment)
+        write_env_var(FAIL_REASON, SUCCESS_MSG)
 
 
 def get_branch_number():
@@ -84,7 +87,7 @@ def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
         result += 'pullrequest is missing\n'
     if not success_build:
         result += 'auto tests failed, link '
-        result += get_jenkins_build_result(build_number)
+        result += 'http://' + get_jenkins_build_result(build_number)
     return result
 
 

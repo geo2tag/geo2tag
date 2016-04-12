@@ -103,38 +103,22 @@ def addService(name, logSize, ownerld):
             return obj_id
 
 
-def getLog(dbName, number, offset, dateFrom, dateTo):
-    db_getlog = getDbObject(dbName)
-    collection = db_getlog[COLLECTION_LOG_NAME]
-    if collection.count() == 0:
-        return []
+def getLog(dbName, number, offset, dateFrom, dateTo, substring=''):
+    dbLog = getDbObject(dbName)
+    criterion = {}
     number = 0 if (number is None or number < 0) else number
     offset = 0 if (offset is None or offset < 0) else offset
-    if (dateFrom is None and dateTo is None):
-        return collection.find(
-            {}, None, offset,
-            number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
-    elif dateFrom is None:
-        return collection.find(
-            {FIND_AND_SORT_KEY: {"$lte": dateTo}},
-            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
-    elif dateTo is None:
-        return collection.find(
-            {FIND_AND_SORT_KEY: {"$gte": dateFrom}},
-            None, offset, number).sort(FIND_AND_SORT_KEY, pymongo.DESCENDING)
-    else:
-        if dateFrom > dateTo:
-            return []
-        return collection.find(
-            {
-                FIND_AND_SORT_KEY: {
-                    "$gte": dateFrom,
-                    "$lte": dateTo}},
-            None,
-            offset,
-            number).sort(
-                FIND_AND_SORT_KEY,
-            pymongo.DESCENDING)
+    substring = '' if (substring is None) else substring
+    dateFrom = datetime(2000, 1, 1, 0, 0) if (dateFrom is None) else dateFrom
+    dateTo = datetime.now() if (dateTo is None) else dateTo
+    if dateFrom > dateTo:
+        return []
+    applyDateCriterion(DATE, dateFrom, False, dateTo, False, criterion)
+    criterion.pop('bc', None)
+    if substring != '':
+        criterion.update({'message': {'$regex': substring}})
+    return dbLog[COLLECTION_LOG_NAME].find(
+        criterion, None, offset, number).sort(DATE, pymongo.DESCENDING)
 
 
 def updateService(name, config):
@@ -318,7 +302,7 @@ def addPoints(serviceName, pointsArray):
         obj[JSON] = point[JSON]
         obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
         obj[ALT] = point[ALT]
-        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[CHANNEL_ID] = ObjectId(point[CHANNEL_ID])
         obj[DATE] = datetime.now()
         obj[BC] = point[BC]
         list_id.append(unicode(db_addpoint.save(obj)))
