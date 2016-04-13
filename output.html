@@ -1,0 +1,445 @@
+
+<HTML>
+    <HEAD>
+        <TITLE> CloneDigger Report </TITLE>
+        <script type="text/javascript">
+        function unhide(divID) {
+            var item = document.getElementById(divID);
+            if (item) {
+                item.className=(item.className=='hidden')?'unhidden':'hidden';
+            }
+        }
+</script>
+
+<style type="text/css">
+.hidden { display: none; }
+.unhidden { display: block; }
+.preformatted {
+        border: 1px dashed #3c78b5;
+    font-size: 11px;
+        font-family: Courier;
+    margin: 10px;
+        line-height: 13px;
+}
+.preformattedHeader {
+    background-color: #f0f0f0;
+        border-bottom: 1px dashed #3c78b5;
+    padding: 3px;
+        text-align: center;
+}
+.preformattedContent {
+    background-color: #f0f0f0;
+    padding: 3px;
+}
+<!--
+<div class="preformatted"><div class="preformattedContent">
+<pre>Clone Digger
+</pre>
+</div></div>
+-->
+
+</style>
+
+    </HEAD>
+    <BODY>
+    
+    
+    <P>Source files: 68</P>
+        <a href = "javascript:unhide('files');">Click here to show/hide file names</a><div id="files" class="hidden"><P><B>Source files:</B><BR>src/UserListResourceParser.py, <BR>src/__init__.py, <BR>src/admin_log_resource.py, <BR>src/admin_plugin_config_resource.py, <BR>src/admin_plugin_list_resource.py, <BR>src/admin_resource.py, <BR>src/admin_service_list_resource.py, <BR>src/admin_service_resource.py, <BR>src/authorization_error.py, <BR>src/base_geo2tag_exception.py, <BR>src/channel_already_exists.py, <BR>src/channel_does_not_exist.py, <BR>src/channel_parsers.py, <BR>src/channel_resource.py, <BR>src/channels_list_parsers.py, <BR>src/channels_list_resource.py, <BR>src/config_reader.py, <BR>src/date_utils.py, <BR>src/db_model.py, <BR>src/debug_info_resource.py, <BR>src/debug_login_resource.py, <BR>src/env_variable_api.py, <BR>src/geo_json_type.py, <BR>src/internal_tests_resource.py, <BR>src/json_response.py, <BR>src/log.py, <BR>src/log_parsers.py, <BR>src/log_resource.py, <BR>src/login_facebook_resource.py, <BR>src/login_google_resource.py, <BR>src/login_resource.py, <BR>src/logout_resource.py, <BR>src/macros_test_resource.py, <BR>src/main.py, <BR>src/manage_plugins_resource.py, <BR>src/map_resource.py, <BR>src/metadata_does_not_exist_exception.py, <BR>src/metadata_list_resource.py, <BR>src/metadata_list_resource_parser.py, <BR>src/metadata_resource.py, <BR>src/metadata_resource_parser.py, <BR>src/plugin_does_not_exist_exception.py, <BR>src/plugin_list_resource.py, <BR>src/plugin_not_enabled_exception.py, <BR>src/plugin_parsers.py, <BR>src/plugin_routines.py, <BR>src/point_does_not_exist.py, <BR>src/point_list_resource.py, <BR>src/point_list_resource_parser.py, <BR>src/point_resource.py, <BR>src/point_resource_parsers.py, <BR>src/possible_exception.py, <BR>src/rest_api_routines.py, <BR>src/service_already_exists_exception.py, <BR>src/service_list_parsers.py, <BR>src/service_list_resource.py, <BR>src/service_not_exist_exception.py, <BR>src/service_parsers.py, <BR>src/service_resource.py, <BR>src/status_resource.py, <BR>src/tests_resource.py, <BR>src/url_routines.py, <BR>src/url_utils.py, <BR>src/user_does_not_exist.py, <BR>src/user_find_resource.py, <BR>src/user_list_resource.py, <BR>src/user_list_resource_parser.py, <BR>src/user_routines.py</P></div>
+        <P>Clones detected: 26</P>
+        <P>129 of 1314 lines are duplicates (9.82%) </P>
+<P>
+<B>Parameters<BR> </B>
+clustering_threshold = 10<BR>
+distance_threshold = 5<BR>
+size_threshold = 5<BR>
+hashing_depth = 1<BR>
+clusterize_using_hash = False<BR>
+clusterize_using_dcup = False<BR>
+</P> 
+        
+    <B>Time elapsed</B><BR>Construction of AST : 0.31 seconds<BR>
+Building statement hash : 0.01 seconds<BR>
+Building patterns : 0.82 seconds<BR>
+Marking similar statements : 0.96 seconds<BR>
+Finding similar sequences of statements : 0.12 seconds<BR>
+Refining candidates : 1.42 seconds<BR>
+ Total time: 3.63<BR>
+ Started at: Wed Apr 13 20:49:55 2016<BR>
+ Finished at: Wed Apr 13 20:49:57 2016
+    <P><B>Clone # 1</B><BR>Distance between two fragments = 4 <BR>Clone size = 14<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 90</TD><TD></TD><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 83</TD></TR><TR>
+<TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);">'lon'</span>], int)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);">'lon'</span>], float)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);">"'lon' - Incorrect type"</span>)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);">'lat'</span>], int)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);">'lat'</span>], float)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);">"'lat' - Incorrect type"</span>)</TD>
+</TR>
+<TR>
+<TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);">'alt'</span>], int)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);">'alt'</span>], float)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);">"'alt' - Incorrect type"</span>)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lon'</span></span>], int)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lon'</span></span>], float)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'lon' - Incorrect type"</span></span>)</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 2</B><BR>Distance between two fragments = 4 <BR>Clone size = 11<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/user_list_resource_parser.py"<BR>The first line is 4</TD><TD></TD><TD>Source file "src/UserListResourceParser.py"<BR>The first line is 4</TD></TR><TR>
+<TD>
+GET_ARGS_NUMBER = 'number'</TD>
+<TD style="width: 10px;" BGCOLOR=AQUA> </TD><TD>
+GET_ARGS_NUMBER = 'number'</TD>
+</TR>
+<TR>
+<TD>
+GET_ARGS_OFFSET = 'offset'</TD>
+<TD style="width: 10px;" BGCOLOR=AQUA> </TD><TD>
+GET_ARGS_OFFSET = 'offset'</TD>
+</TR>
+<TR>
+<TD>
+GET_ARGS_LOGIN = 'login'</TD>
+<TD style="width: 10px;" BGCOLOR=AQUA> </TD><TD>
+GET_ARGS_LOGIN = 'login'</TD>
+</TR>
+<TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);">UserListResourceParser</span>:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def parseGetParameters():<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser = reqparse.RequestParser()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.add_argument(GET_ARGS_NUMBER, type=int, <span style="color: rgb(255, 0, 0);">required</span>=<span style="color: rgb(255, 0, 0);">True</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.add_argument(GET_ARGS_OFFSET, type=int, <span style="color: rgb(255, 0, 0);">required</span>=<span style="color: rgb(255, 0, 0);">True</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.add_argument(GET_ARGS_LOGIN, type=<span style="color: rgb(255, 0, 0);">unicode</span>, <span style="color: rgb(255, 0, 0);">required</span>=<span style="color: rgb(255, 0, 0);">True</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args = parser.parse_args()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return args<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);">Userlistresourceparser</span>:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def parseGetParameters():<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser = reqparse.RequestParser()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.add_argument(GET_ARGS_NUMBER, type=int, <span style="color: rgb(255, 0, 0);">default</span>=<span style="color: rgb(255, 0, 0);">None</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.add_argument(GET_ARGS_OFFSET, type=int, <span style="color: rgb(255, 0, 0);">default</span>=<span style="color: rgb(255, 0, 0);">None</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.add_argument(GET_ARGS_LOGIN, type=<span style="color: rgb(255, 0, 0);">str</span>, <span style="color: rgb(255, 0, 0);">default</span>=<span style="color: rgb(255, 0, 0);">None</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args = parser.parse_args()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return args<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 3</B><BR>Distance between two fragments = 2 <BR>Clone size = 7<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 97</TD><TD></TD><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 83</TD></TR><TR>
+<TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'alt'</span></span>], int)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'alt'</span></span>], float)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'alt' - Incorrect type"</span></span>)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lat'</span></span>], int)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lat'</span></span>], float)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'lat' - Incorrect type"</span></span>)</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 4</B><BR>Distance between two fragments = 4 <BR>Clone size = 7<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 106</TD><TD></TD><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 97</TD></TR><TR>
+<TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);">'channel_id'</span>], <span style="color: rgb(255, 0, 0);">str</span>)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);">'channel_id'</span>], <span style="color: rgb(255, 0, 0);">unicode</span>)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);">"'channel_id' - Incorrect type"</span>)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'alt'</span></span></span>], <span style="color: rgb(255, 0, 0);">int</span>)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'alt'</span></span></span>], <span style="color: rgb(255, 0, 0);">float</span>)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'alt' - Incorrect type"</span></span></span>)</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 5</B><BR>Distance between two fragments = 4 <BR>Clone size = 7<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 106</TD><TD></TD><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 90</TD></TR><TR>
+<TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'channel_id'</span></span>], <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">str</span></span>)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'channel_id'</span></span>], <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">unicode</span></span>)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'channel_id' - Incorrect type"</span></span>)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lon'</span></span></span>], <span style="color: rgb(255, 0, 0);">int</span>)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lon'</span></span></span>], <span style="color: rgb(255, 0, 0);">float</span>)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'lon' - Incorrect type"</span></span></span>)</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 6</B><BR>Distance between two fragments = 4 <BR>Clone size = 7<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 83</TD><TD></TD><TD>Source file "src/point_list_resource_parser.py"<BR>The first line is 106</TD></TR><TR>
+<TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lat'</span></span></span>], <span style="color: rgb(255, 0, 0);">int</span>)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'lat'</span></span></span>], <span style="color: rgb(255, 0, 0);">float</span>)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'lat' - Incorrect type"</span></span></span>)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+if not (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'channel_id'</span></span></span>], <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">str</span></span></span>)) or (isinstance(obj[<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'channel_id'</span></span></span>], <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">unicode</span></span></span>)):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">"'channel_id' - Incorrect type"</span></span></span>)</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 7</B><BR>Distance between two fragments = 4 <BR>Clone size = 6<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 98</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 101</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">UserFindResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/user/<string:user_id>'</span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">PluginConfigResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/plugin_config/<string:pluginName>'</span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">PluginConfigResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/plugin_config/<string:pluginName>'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">UserListResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/user'</span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 8</B><BR>Distance between two fragments = 4 <BR>Clone size = 7<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 104</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 107</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserListResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">MacrosTestsResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/macros_tests'</span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/macros_tests'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">MetadataResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata/<string:metadata_id>'</span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 9</B><BR>Distance between two fragments = 4 <BR>Clone size = 8<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 110</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 114</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata/<string:metadata_id>'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">MetadataListResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata'</span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataListResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);">AdminPluginListResource</span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);">'/admin/plugin'</span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 10</B><BR>Distance between two fragments = 4 <BR>Clone size = 6<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 98</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 104</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserFindResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user/<string:user_id>'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserListResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user'</span></span></span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">PluginConfigResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/plugin_config/<string:pluginName>'</span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/macros_tests'</span></span></span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 11</B><BR>Distance between two fragments = 4 <BR>Clone size = 8<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 104</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 110</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserListResource</span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user'</span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata/<string:metadata_id>'</span></span></span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/macros_tests'</span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataListResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata'</span></span></span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 12</B><BR>Distance between two fragments = 4 <BR>Clone size = 7<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 98</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 107</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserFindResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user/<string:user_id>'</span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/macros_tests'</span></span></span></span></span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">PluginConfigResource</span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/plugin_config/<string:pluginName>'</span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataResource</span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata/<string:metadata_id>'</span></span></span></span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 13</B><BR>Distance between two fragments = 4 <BR>Clone size = 6<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 104</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 114</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserListResource</span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user'</span></span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataListResource</span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata'</span></span></span></span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/macros_tests'</span></span></span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminPluginListResource</span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/admin/plugin'</span></span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 14</B><BR>Distance between two fragments = 4 <BR>Clone size = 8<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 98</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 110</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserFindResource</span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user/<string:user_id>'</span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataResource</span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata/<string:metadata_id>'</span></span></span></span></span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">PluginConfigResource</span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/plugin_config/<string:pluginName>'</span></span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataListResource</span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata'</span></span></span></span></span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 15</B><BR>Distance between two fragments = 4 <BR>Clone size = 6<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/main.py"<BR>The first line is 98</TD><TD></TD><TD>Source file "src/main.py"<BR>The first line is 114</TD></TR><TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">UserFindResource</span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/user/<string:user_id>'</span></span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MetadataListResource</span></span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/service/<string:serviceName>/metadata'</span></span></span></span></span></span>))</TD>
+</TR>
+<TR>
+<TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">PluginConfigResource</span></span></span></span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/plugin_config/<string:pluginName>'</span></span></span></span></span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+getApi().add_resource(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminPluginListResource</span></span></span>, getPathWithPrefix(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'/admin/plugin'</span></span></span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 16</B><BR>Distance between two fragments = 2 <BR>Clone size = 6<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/tests_resource.py"<BR>The first line is 7</TD><TD></TD><TD>Source file "src/internal_tests_resource.py"<BR>The first line is 7</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);">TestsResource</span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'tests.html'</span>, instancePrefix=getInstancePrefix()))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);">InternalTestsResource</span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'internal_tests.html'</span>, instancePrefix=getInstancePrefix()))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 17</B><BR>Distance between two fragments = 4 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/tests_resource.py"<BR>The first line is 9</TD><TD></TD><TD>Source file "src/login_resource.py"<BR>The first line is 8</TD></TR><TR>
+<TD>
+def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'tests.html'</span></span>, <span style="color: rgb(255, 0, 0);">instancePrefix</span>=<span style="color: rgb(255, 0, 0);">getInstancePrefix()</span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'login.html'</span>, <span style="color: rgb(255, 0, 0);">instance_prefix</span>=<span style="color: rgb(255, 0, 0);">'instance'</span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 18</B><BR>Distance between two fragments = 4 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/login_resource.py"<BR>The first line is 8</TD><TD></TD><TD>Source file "src/internal_tests_resource.py"<BR>The first line is 9</TD></TR><TR>
+<TD>
+def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'login.html'</span></span>, <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">instance_prefix</span></span>=<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'instance'</span></span>))</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'internal_tests.html'</span></span>, <span style="color: rgb(255, 0, 0);">instancePrefix</span>=<span style="color: rgb(255, 0, 0);">getInstancePrefix()</span>))</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 19</B><BR>Distance between two fragments = 3 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/db_model.py"<BR>The first line is 361</TD><TD></TD><TD>Source file "src/db_model.py"<BR>The first line is 355</TD></TR><TR>
+<TD>
+fieldCriterion[<span style="color: rgb(255, 0, 0);">'$gte'</span>] = date_from</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+fieldCriterion[<span style="color: rgb(255, 0, 0);">'$lte'</span>] = date_from</TD>
+</TR>
+<TR>
+<TD>
+fieldCriterion[<span style="color: rgb(255, 0, 0);">'$lte'</span>] = date_to</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+fieldCriterion[<span style="color: rgb(255, 0, 0);">'$gte'</span>] = date_to</TD>
+</TR>
+<TR>
+<TD>
+criterion[field] = fieldCriterion</TD>
+<TD style="width: 10px;" BGCOLOR=AQUA> </TD><TD>
+criterion[field] = fieldCriterion</TD>
+</TR>
+<TR>
+<TD>
+criterion['bc'] = <span style="color: rgb(255, 0, 0);">False</span></TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+criterion['bc'] = <span style="color: rgb(255, 0, 0);">True</span></TD>
+</TR>
+<TR>
+<TD>
+return None</TD>
+<TD style="width: 10px;" BGCOLOR=AQUA> </TD><TD>
+return None</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 20</B><BR>Distance between two fragments = 4 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/db_model.py"<BR>The first line is 249</TD><TD></TD><TD>Source file "src/db_model.py"<BR>The first line is 310</TD></TR><TR>
+<TD>
+<span style="color: rgb(255, 0, 0);">db_updatechannel</span> = getDbObject(serviceName)</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+<span style="color: rgb(255, 0, 0);">db_updatepoint</span> = getDbObject(serviceName)</TD>
+</TR>
+<TR>
+<TD>
+try:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;obj = <span style="color: rgb(255, 0, 0);">db_updatechannel</span>[<span style="color: rgb(255, 0, 0);">CHANNELS_COLLECTION</span>].find_one({ID: ObjectId(<span style="color: rgb(255, 0, 0);">channelId</span>)})<BR>
+except:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise <span style="color: rgb(255, 0, 0);">ChannelDoesNotExist</span>()</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+try:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;obj = <span style="color: rgb(255, 0, 0);">db_updatepoint</span>[<span style="color: rgb(255, 0, 0);">POINTS_COLLECTION</span>].find_one({ID: ObjectId(<span style="color: rgb(255, 0, 0);">pointId</span>)})<BR>
+except:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;raise <span style="color: rgb(255, 0, 0);">PointDoesNotExist</span>()</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 21</B><BR>Distance between two fragments = 2 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/macros_test_resource.py"<BR>The first line is 6</TD><TD></TD><TD>Source file "src/admin_service_list_resource.py"<BR>The first line is 6</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);">MacrosTestsResource</span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'macros_test.html'</span>))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);">AdminServiceListResource</span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'service_list.html'</span>))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 22</B><BR>Distance between two fragments = 2 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/macros_test_resource.py"<BR>The first line is 6</TD><TD></TD><TD>Source file "src/admin_plugin_list_resource.py"<BR>The first line is 6</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'macros_test.html'</span></span>))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);">AdminPluginListResource</span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'plugin_list.html'</span>))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 23</B><BR>Distance between two fragments = 2 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/macros_test_resource.py"<BR>The first line is 6</TD><TD></TD><TD>Source file "src/admin_log_resource.py"<BR>The first line is 6</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">MacrosTestsResource</span></span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'macros_test.html'</span></span></span>))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);">AdminLogResource</span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);">'log.html'</span>))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 24</B><BR>Distance between two fragments = 2 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/admin_service_list_resource.py"<BR>The first line is 6</TD><TD></TD><TD>Source file "src/admin_plugin_list_resource.py"<BR>The first line is 6</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminServiceListResource</span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'service_list.html'</span></span>))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminPluginListResource</span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'plugin_list.html'</span></span>))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 25</B><BR>Distance between two fragments = 2 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/admin_service_list_resource.py"<BR>The first line is 6</TD><TD></TD><TD>Source file "src/admin_log_resource.py"<BR>The first line is 6</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminServiceListResource</span></span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'service_list.html'</span></span></span>))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminLogResource</span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'log.html'</span></span>))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR><BR>
+<P><B>Clone # 26</B><BR>Distance between two fragments = 2 <BR>Clone size = 5<TABLE NOWRAP WIDTH=100% BORDER=1><TD>Source file "src/admin_plugin_list_resource.py"<BR>The first line is 6</TD><TD></TD><TD>Source file "src/admin_log_resource.py"<BR>The first line is 6</TD></TR><TR>
+<TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminPluginListResource</span></span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'plugin_list.html'</span></span></span>))<BR>
+</TD>
+<TD style="width: 10px;" BGCOLOR=RED> </TD><TD>
+class <span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">AdminLogResource</span></span></span>(Resource):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;def get(self):<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return make_response(render_template(<span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(255, 0, 0);">'log.html'</span></span></span>))<BR>
+</TD>
+</TR>
+</TABLE> </P> <HR>
+    
+    
+    <HR>
+    Clone Digger is aimed to find software clones in Python and Java programs. It is provided under the GPL license and can be downloaded from the site <a href="http://clonedigger.sourceforge.net">http://clonedigger.sourceforge.net</a>
+    </BODY>
+</HTML>
