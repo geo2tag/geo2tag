@@ -1,13 +1,12 @@
 import re
 import sys
-import glob
 import argparse
 import subprocess
 
 TAIL_CLONE = '*.py'
-num_error = 0
 CLONEDIGGER = "clonedigger "
 PATTERN = "Refining candidates... (.*) clones were found"
+num_error = 0
 
 
 def check_directory(name_directory):
@@ -21,6 +20,7 @@ def check_file(name_file):
 
 
 def clone_digger_run(name):
+    global num_error
     process = subprocess.Popen(CLONEDIGGER + name,
                                shell=True,
                                stdout=subprocess.PIPE,
@@ -28,13 +28,14 @@ def clone_digger_run(name):
                                stdin=subprocess.PIPE)
     stdout, stderr = process.communicate()
     regx = re.findall(PATTERN, stdout)
-    if int(regx[0]) == 0:
-        num_error = 0
-        print "Clone not found"
-    else:
-        num_error = 1
-        print "Clone in you directory/file: " + name + " equally " + regx[0]
-        print "Check file output.html"
+    if len(stdout) > 0 or len(stderr) > 0:
+        if int(regx[0]) == 0:
+            num_error = 0
+            print "Clone not found"
+        else:
+            num_error = 1
+            print "Clone in you directory/file: " + name + " equally " + regx[0]
+            print "Check file output.html"
 
 
 def run():
