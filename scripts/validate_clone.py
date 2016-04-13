@@ -34,7 +34,8 @@ def clone_digger_run(name):
             print "Clone not found"
         else:
             num_error = 1
-            print "Clone in you directory/file: " + name + " equally " + regx[0]
+            print "Clone in you directory/file: " + name + \
+                " equally " + regx[0]
             print "Check file output.html"
 
 
