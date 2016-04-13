@@ -28,7 +28,7 @@ def make_reqpep8(name_plugin, type_format):
                                stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE,
                                stdin=subprocess.PIPE)
-    stdout = process.communicate()
+    stdout, stderr = process.communicate()
     if len(stdout) > 0 or len(stderr) > 0:
         num_error = 1
     print("stdout='{}'\nstderr='{}'".format(stdout, stderr))
