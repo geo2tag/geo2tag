@@ -302,7 +302,7 @@ def addPoints(serviceName, pointsArray):
         obj[JSON] = point[JSON]
         obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
         obj[ALT] = point[ALT]
-        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[CHANNEL_ID] = ObjectId(point[CHANNEL_ID])
         obj[DATE] = datetime.now()
         obj[BC] = point[BC]
         list_id.append(unicode(db_addpoint.save(obj)))
