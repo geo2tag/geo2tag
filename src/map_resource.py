@@ -11,7 +11,7 @@ class MapResource(Resource):
 
     def get(self, serviceName=None):
         args = MapParser.parseGetParameters()
-        result = {}
+        result = {'channel_ids': []}
         if args[CHANNEL_IDS] is None:
             result.update(getDefaultChannelIds(serviceName))
         print result
