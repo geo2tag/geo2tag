@@ -30,7 +30,7 @@
 {% if params %}
     channel_ids = {{params|tojson}};
 {% endif %}
-    if(channel_ids != undefined)
+    if(channel_ids.channel_ids.length != 0)
         par = getArgsQueryForMap(getUrlPage(), channel_ids.channel_ids);
     else
         par = getArgsQueryForMap(getUrlPage(), []);

@@ -14,6 +14,7 @@ class MapResource(Resource):
         result = {}
         if args[CHANNEL_IDS] is None:
             result.update(getDefaultChannelIds(serviceName))
+        print result
         return make_response(render_template('map.html', params=result))
 
 
