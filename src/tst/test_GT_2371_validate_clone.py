@@ -8,7 +8,10 @@ import subprocess
 
 PY_SCRIPT = 'python scripts/validate_clone.py --file '
 NAME_FILE = 'test_forclonedigger.py'
-TEXT_PROG_NO_CLONE = 'def fibonacci(max):\n    a = 1\n    b = 1\n    print(a+b)'
+TEXT_PROG_NO_CLONE = 'def fibonacci(max):\n    \
+a = 1\n    \
+b = 1\n    \
+print(a+b)'
 PATH_MAIN_FILE = 'src/main.py'
 PATH_TEST_FILE = 'src/tst/' + NAME_FILE
 
