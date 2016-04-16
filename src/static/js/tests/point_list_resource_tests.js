@@ -4,7 +4,7 @@ var point_list_resource_tests = {
         url : '/' + getInstancePrefix() + '/service/testservice/point'
     },
     'POST':{
-        data:{'lat':1.1, 'lon':1.1,  'alt':1.1,  'json':{'a':'b'}, 'channel_id':'channel_id_value'},
+        data:{'lat':1.1, 'lon':1.1,  'alt':1.1,  'json':{'a':'b'}, 'channel_id':'556721a52a2e7febd2744202'},
         url : '/' + getInstancePrefix() + '/service/testservice/point'
     }
 };
