@@ -29,7 +29,7 @@ def clone_digger_run(name):
     stdout, stderr = process.communicate()
     regx = re.findall(PATTERN, stdout)
     if len(stdout) > 0 or len(stderr) > 0:
-        if int(regx[0]) == 0:
+        if len(regx) == 0:
             num_error = 0
             print "Clone not found"
         else:
