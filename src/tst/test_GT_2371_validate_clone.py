@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 import os
-import shutil
 import subprocess
 
 PY_SCRIPT = 'python scripts/validate_clone.py --file '
