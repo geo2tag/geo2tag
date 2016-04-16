@@ -27,6 +27,8 @@ class PluginConfigReader:
     # Sets plugin config.ini content to content dictionary
     def setConfigContent(self, content):
         conf = RawConfigParser()
+        conf_file = open(self.file_path, 'w')
+        conf_file.write('')
         conf.read(self.file_path)
         for section in content:
             section_items = content[section].items()
