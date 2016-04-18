@@ -19,8 +19,7 @@ class MapResource(Resource):
         return make_response(
             render_template(
                 'map.html',
-                params=result,
-                template=template))
+                params=result))
 
 
 def getDefaultChannelIds(serviceName):
