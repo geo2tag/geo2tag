@@ -16,7 +16,11 @@ class MapResource(Resource):
         if args[CHANNEL_IDS] is None:
             result.update(getDefaultChannelIds(serviceName))
         print result
-        return make_response(render_template('map.html', params=result, template=template))
+        return make_response(
+            render_template(
+                'map.html',
+                params=result,
+                template=template))
 
 
 def getDefaultChannelIds(serviceName):
@@ -29,10 +33,11 @@ def getDefaultChannelIds(serviceName):
 def generateMarkerSvgCode(marker, radius, channel_id):
     template = u'<svg><circle cx="X_PH" cy="Y_PH" r="RADIUS_PH" ' + \
         'transform="matrix(1 0 0 1 0 0)" ' + \
-        'style="fill: rgb("R_PH", "G_PH", "B_PH"); cursor: move;"></circle></svg>'
+        'style="fill: rgb("R_PH", "G_PH", "B_PH"); ' + \
+        'cursor: move;"></circle></svg>'
     colors = getColorsFromChannelId(channel_id)
-    placeHolders = {'X_PH' : 'x', 'Y_PH' : 'y', 'R_PH' : 'R', \
-                    'G_PH' : 'G', 'B_PH' : 'B'}
+    placeHolders = {'X_PH': 'x', 'Y_PH': 'y', 'R_PH': 'R',
+                    'G_PH': 'G', 'B_PH': 'B'}
     marker.update(colors)
     for placeHolder in placeHolders:
         field = placeHolders[placeHolder]
@@ -42,6 +47,6 @@ def generateMarkerSvgCode(marker, radius, channel_id):
 
 
 def getColorsFromChannelId(channel_id):
-    hdigest = hashlib.md5(channel_id).hexdigest()    
-    colors = {"R" : hdigest[:2], "G" : hdigest[3:5], "B" : hdigest[6:8]}
+    hdigest = hashlib.md5(channel_id).hexdigest()
+    colors = {"R": hdigest[:2], "G": hdigest[3:5], "B": hdigest[6:8]}
     return colors
