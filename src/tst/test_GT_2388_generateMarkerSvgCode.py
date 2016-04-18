@@ -13,4 +13,4 @@ class TestGenerateMarkerSvgCode(TestCase):
 
     def testGenerateMarkerSvgCode(self):
         res = generateMarkerSvgCode(TEST_MARKER, TEST_RADIUS, TEST_CHANNEL_ID)
-        print res
+        self.assertEqual(TEST_VALID_RESULT, res)
