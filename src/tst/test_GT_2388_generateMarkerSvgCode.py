@@ -1,5 +1,5 @@
 from unittest import TestCase
-from map_resource import generateMarkerSvgCode
+from icon_resource import generateMarkerSvgCode
 
 TEST_CHANNEL_ID = u'556721a52a2e7febd2744200'
 TEST_RADIUS = '13'
