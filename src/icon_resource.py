@@ -3,6 +3,7 @@ from flask import render_template
 from possible_exception import possibleException
 from icon_resource_parser import IconResourceParser, CHANNEL_ID
 import hashlib
+from rest_api_routines import app
 
 
 class IconResource(Resource):
@@ -12,6 +13,11 @@ class IconResource(Resource):
         args = IconResourceParser.parseGetParameters()
         color = getColorsFromChannelId(args[CHANNEL_ID])
         return render_template("icon.svg", color = color)
+
+@app.after_request
+def after_request(response):
+    response.mimetype = 'text/html, charset=utf-8'
+    return response
 
 
 def getColorsFromChannelId(channel_id):
