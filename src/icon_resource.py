@@ -16,7 +16,7 @@ class IconResource(Resource):
 
 @app.after_request
 def after_request(response):
-    response.mimetype = 'text/html, charset=utf-8'
+    response.mimetype = 'text/html'
     return response
 
 
