@@ -9,6 +9,7 @@ class IconResource(Resource):
 
     @possibleException
     def get(self, serviceName):
+        print serviceName
         args = IconResourceParser.parseGetParameters()
         color = getColorsFromChannelId(args[CHANNEL_ID])
         return make_response(render_template('icon.svg', color=color), 200,
