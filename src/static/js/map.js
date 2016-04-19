@@ -29,8 +29,6 @@ $(document).ready(function (){
     var LOCATION = 'location'
     var SERVICE_NAME ='serviceName'
     var CHANNEL_IDS = 'channel_ids'
-    var MARKER = '{"x" : "7", "y" : "7"}'
-    var RADIUS = 10
     
     var url = MakeUrlByChannelIds(par);
     var l = new L.LayerJSON({url: url,
@@ -40,8 +38,7 @@ $(document).ready(function (){
         }, 
         buildIcon: function(data, title) {
             return new L.Icon({
-                iconUrl : "get_icon?marker=" + MARKER + "&radius=" + RADIUS + "&channel_id=" + par[CHANNEL_IDS][0],
-                iconSize: new L.Point(30, 30)
+                iconUrl : "get_icon?channel_id=" + data.channel_id.$oid
             });
         }
     }); 
