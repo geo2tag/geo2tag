@@ -37,8 +37,9 @@ $(document).ready(function (){
             return data.json.name || null;
         }, 
         buildIcon: function(data, title) {
+            var url_icon = "get_icon?channel_id=" + data.channel_id.$oid
             return new L.Icon({
-                iconUrl : "get_icon?channel_id=" + data.channel_id.$oid
+                iconUrl : url_icon
             });
         }
     }); 
