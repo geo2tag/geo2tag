@@ -29,17 +29,19 @@ $(document).ready(function (){
     var LOCATION = 'location'
     var SERVICE_NAME ='serviceName'
     var CHANNEL_IDS = 'channel_ids'
-    var mapIcon = L.icon({
-        iconUrl: path_marker + '/marker-icon.png',
-        shadowUrl: path_marker + '/marker-shadow.png',
-        popupAnchor:  [11, 0]
-    });
+    
     var url = MakeUrlByChannelIds(par);
     var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
             return data.json.name || null;
-        } 
+        }, 
+        buildIcon: function(data, title) {
+            var url_icon = "get_icon?channel_id=" + data.channel_id.$oid
+            return new L.Icon({
+                iconUrl : url_icon
+            });
+        }
     }); 
     map.addLayer(l);
 });

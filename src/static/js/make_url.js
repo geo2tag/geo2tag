@@ -12,7 +12,7 @@ function MakeUrlByChannelIds(par){
         }
     }
     url = url + '/' + POINT + '?' + NUMBER + '=' + par[NUMBER] + str_channel_ids + jsoolayer_additive;
-    console.log(par);
+    console.log(url);
     return url;
 }
 
