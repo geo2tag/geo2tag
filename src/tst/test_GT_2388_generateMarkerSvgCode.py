@@ -2,7 +2,7 @@ from unittest import TestCase
 from icon_resource import getColorsFromChannelId
 
 TEST_CHANNEL_ID = u'556721a52a2e7febd2744200'
-TEST_VALID_RESULT = 'a45489'
+TEST_VALID_RESULT = 'a49546'
 
 
 class TestGenerateMarkerSvgCode(TestCase):
