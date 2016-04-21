@@ -5,6 +5,7 @@
 # use option -e <config_file_name> to using new config file instead config/geomongo.conf
 # use option -el <error_log_name> to using new apache error log name
 # use option -s <server_name> to set server name
+# use option -m without arguments to call drop_db.sh and setupMasterDbTemplate.py
 
 CATALOG='geomongo'
 ERROR_LOG_NAME='error'
@@ -16,8 +17,9 @@ CONFIG_FILE="geomongo.conf"
 FLAG_KEEP_CONFIG_INI=false
 CONFIG_INI_FILE='config/config.ini'
 CONFIG_INI_FILE_FINAL='config.ini'
+FLAG_DROP_DB_AND_SETUP_DB_TEMPLATE=false
 
-while getopts ":c:d:e:f:ef:s:p:" opt ;
+while getopts ":c:d:e:f:ef:s:p:m" opt ;
 do
     case $opt in
         c) CATALOG=$OPTARG;
@@ -33,6 +35,8 @@ do
         s) SERVER_NAME=$OPTARG;
             ;;
         p) SERVER_PORT=$OPTARG;
+            ;;
+        m) FLAG_DROP_DB_AND_SETUP_DB_TEMPLATE=true;
             ;;
         *) echo "the option is incorrect";
             exit 1
@@ -66,8 +70,11 @@ cp config/"$CONFIG_FILE" /etc/apache2/sites-available/
 
 ./scripts/setup_pip_dependencies.sh
 
-./scripts/db/drop_test_db.sh
-python scripts/db/setupMasterDbTemplate.py --config ${CONFIG_INI_FILE}
+if $FLAG_DROP_DB_AND_SETUP_DB_TEMPLATE
+then
+    ./scripts/db/drop_test_db.sh
+    python scripts/db/setupMasterDbTemplate.py --config ${CONFIG_INI_FILE}
+fi
 
 COMMIT=$(git rev-parse HEAD)
 BRANCH=$(git status |head -1| cut -d' ' -f 3)
