@@ -483,7 +483,7 @@ def setPluginState(pluginName, state):
 def getAllChannelIds(serviceName):
     all_channel_ids_array = []
     db_getallchanelids = getDbObject(serviceName)
-    obj = db_getallchanelids[CHANNELS_COLLECTION].find()
+    obj = list(db_getallchanelids[CHANNELS_COLLECTION].find())
     for result in obj:
         all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
