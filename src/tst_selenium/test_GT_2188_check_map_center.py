@@ -5,6 +5,8 @@ TEST_URL = '/instance/service/testservice/map?longitude=10' + \
 TEST_SCRIPT = 'return map.getCenter()'
 LAT = u'lat'
 LNG = u'lng'
+VALID_LAT = 3
+VALID_LNG = 10
 
 
 class TestCheckMapCenter(BasicSeleniumTest):
@@ -15,5 +17,5 @@ class TestCheckMapCenter(BasicSeleniumTest):
         result = self.driver.execute_script(TEST_SCRIPT)
         lat = round(result[LAT])
         lng = round(result[LNG])
-        self.assertEqual(lat, 3)
-        self.assertEqual(lng, 10)
+        self.assertEqual(lat, VALID_LAT)
+        self.assertEqual(lng, VALID_LNG)
