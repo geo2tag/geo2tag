@@ -34,6 +34,7 @@ from plugin_config_resource import PluginConfigResource
 from metadata_list_resource import MetadataListResource
 from admin_plugin_list_resource import AdminPluginListResource
 from admin_plugin_config_resource import AdminPluginConfigResource
+from icon_resource import IconResource
 
 API = None
 
@@ -119,6 +120,8 @@ def addResources():
         '/admin/plugin'))
     getApi().add_resource(AdminPluginConfigResource, getPathWithPrefix(
         '/admin/plugin/config/<string:pluginName>'))
+    getApi().add_resource(IconResource, getPathWithPrefix(
+        '/service/<string:serviceName>/get_icon'))
 
     # end of the list of imported resources
 
