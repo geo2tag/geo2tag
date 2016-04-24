@@ -3,6 +3,7 @@ from basic_selenium_test import BasicSeleniumTest
 from time import sleep
 
 LINE_XPATH = ".//*[@id='container_service_list']/hr"
+INSTANCE_ADMIN = '/instance/admin/service'
 
 
 class TestServiceListResource(BasicSeleniumTest):
@@ -10,7 +11,7 @@ class TestServiceListResource(BasicSeleniumTest):
     def testServiceListResource(self):
         ELEMENT_IDS = ['create_new_service', 'service_name',
                        'service_list', 'autocomplite_owner_id']
-        URL = self.getUrl('/instance/admin/service')
+        URL = self.getUrl(INSTANCE_ADMIN)
         self.getDriver().get(URL)
         self.getDriver().implicitly_wait(30)
         for elementId in ELEMENT_IDS:
@@ -18,7 +19,7 @@ class TestServiceListResource(BasicSeleniumTest):
             self.assertNotEquals(obj, None)
 
     def testFormImmidiateUpdate(self):
-        URL = self.getUrl('/instance/admin/service')
+        URL = self.getUrl(INSTANCE_ADMIN)
         SERVICE_NAME = 'service_name'
         SERVICE_LIST = 'container_service_list'
         NON_EXISTENT_SERVICE = 'NON_EXISTENT_SERVICE'
@@ -31,10 +32,10 @@ class TestServiceListResource(BasicSeleniumTest):
         self.assertEquals(serviceList.get_attribute('innerHTML'), '')
 
     def testCheckLine(self):
-        URL = self.getUrl('/instance/admin/service')
+        URL = self.getUrl(INSTANCE_ADMIN)
         self.getDriver().get(URL)
         result = self.getDriver().find_element_by_xpath(LINE_XPATH)
-        self.assertNotEquals(result, None)
+        self.assertIsNotNone(result)
 #
 #    def testServiceDelete(self):
 #        URL = self.getUrl('/instance/admin/service')

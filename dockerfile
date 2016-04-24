@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y \
 		x11vnc \
 		xvfb \
 		firefox \
+                tidy \
 		&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 #Create the MongoDB data directory
