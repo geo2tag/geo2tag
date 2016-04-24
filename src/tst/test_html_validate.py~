@@ -55,10 +55,7 @@ This is\
   </body>\
 </html>'
 FILE_NAME = 'testfile.py'
-PY_SCRIPT = "python scripts/html_validate.py --conf \
-scripts/validhtml.ini --url 'status'"
-PATH = '../..'
-PATH_HOME = 'src/tst'
+PY_SCRIPT = "python scripts/html_validate.py --conf scripts/validhtml.ini --url 'status'"
 
 
 class TestFunctionScriptHtmlValidate(TestCase):
@@ -79,8 +76,8 @@ class TestFunctionScriptHtmlValidate(TestCase):
         res = html_validate.validate_tidy(TEXT_STR2, FILE_NAME)
         self.assertEqual(res, 1)
 
-    def testScriptRun(self):
-        os.chdir(PATH)
+ 	def testScriptRun(self):
+     	os.chdir('../..')
         process = subprocess.Popen(
             PY_SCRIPT,
             shell=True,
@@ -88,5 +85,5 @@ class TestFunctionScriptHtmlValidate(TestCase):
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE)
         process.communicate()
-        os.chdir(PATH_HOME)
+        os.chdir('src/tst')
         self.assertEquals(1, process.poll())

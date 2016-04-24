@@ -1,3 +1,4 @@
+import sys
 import argparse
 import urllib
 from configparser import SafeConfigParser
@@ -37,22 +38,21 @@ def get_list_parser_param(strs):
     return strs.split(' ')
 
 
-def make_list_pathfile(name_dir, listfile):
-    char = ''
-    if name_dir[-1] != CH_SLASH:
-        char = CH_SLASH
-    i = 0
-    while i < len(listfile):
-        listfile[i] = name_dir + char + listfile[i]
-        i += 1
-    return listfile
-
-
 def read_url_request(host, list_str):
+    num_error = 0
     for i in list_str:
         file1 = host + i
-        fread = urllib.urlopen(file1)
-        validate_tidy(fread.read(), file1)
+        fread = url_request(file1)
+        num_error = validate_tidy(fread.read(), file1)
+    if num_error == 0:
+        print 'HTML files not contain warning or errors'
+    else:
+        print 'HTML files contain warning or errors'
+    sys.exit(num_error)
+
+
+def url_request(url):
+    return urllib.urlopen(url)
 
 
 def web_scanning(conf, list_url):
@@ -65,10 +65,14 @@ def web_scanning(conf, list_url):
 
 
 def validate_tidy(file_context, file_name):
+    num_error = 0
     print '========================' + file_name + '========================'
     document, errors = tidy_document(
         file_context, options={"literal-attributes": '0'})
     print document, errors
+    if len(errors) != 0:
+        num_error = 1
+    return num_error
 
 
 def run():
