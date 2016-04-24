@@ -17,7 +17,7 @@ HTTP = 'http://'
 
 def get_config_parser(config_name):
     config = SafeConfigParser(
-        {HOST: DEFAULT_HOST, INSTANCE_PREFI: DEFAULT_PREFIX})
+        {HOST: DEFAULT_HOST, DEFAULT_PREFIX: DEFAULT_STR})
     config.read(config_name)
     return config
 
