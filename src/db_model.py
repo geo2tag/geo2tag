@@ -302,7 +302,7 @@ def addPoints(serviceName, pointsArray):
         obj[JSON] = point[JSON]
         obj[LOCATION] = {TYPE: POINT, COORDINATES: [point[LON], point[LAT]]}
         obj[ALT] = point[ALT]
-        obj[CHANNEL_ID] = point[CHANNEL_ID]
+        obj[CHANNEL_ID] = ObjectId(point[CHANNEL_ID])
         obj[DATE] = datetime.now()
         obj[BC] = point[BC]
         list_id.append(unicode(db_addpoint.save(obj)))
@@ -483,7 +483,7 @@ def setPluginState(pluginName, state):
 def getAllChannelIds(serviceName):
     all_channel_ids_array = []
     db_getallchanelids = getDbObject(serviceName)
-    obj = db_getallchanelids[CHANNELS_COLLECTION].find()
+    obj = list(db_getallchanelids[CHANNELS_COLLECTION].find())
     for result in obj:
         all_channel_ids_array.append(unicode(result[ID]))
     return all_channel_ids_array
