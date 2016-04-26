@@ -19,7 +19,6 @@ function fixMapSize(){
 }
 
 function getLayer(url){
-    console.log('layer')
     var l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
@@ -43,14 +42,22 @@ $(document).ready(function (){
     $(window).on('resize', fixMapSize());
     var url = MakeUrlByChannelIds(par);
     if(par.refresh != 0){
-        setInterval(function() {refreshMap(url)}, par.refresh * 1000);
+        last_layer = refreshMap(url);
+        console.log(last_layer)
+        var deleteLayerAndRefreshMap = function() {
+//                        map.removeLayer(last_layer);
+                        var last_layer = refreshMap(url);
+                   }
+        setInterval(deleteLayerAndRefreshMap, par.refresh * 1000);
     }
     else
         refreshMap(url);
 });
 
 function refreshMap(url){
+    console.log('-----------------------------------')
     var l = getLayer(url);
     map.addLayer(l);
+    return l;
 }
 
