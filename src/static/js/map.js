@@ -1,5 +1,6 @@
 var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = null, 
-    controls = null, positionMarker=null;
+    controls = null, positionMarker=null, l=null;
+
 
 function fixMapSize(){
     var content = $("#map");
@@ -42,22 +43,17 @@ $(document).ready(function (){
     $(window).on('resize', fixMapSize());
     var url = MakeUrlByChannelIds(par);
     if(par.refresh != 0){
-        last_layer = refreshMap(url);
-        console.log(last_layer)
-        var deleteLayerAndRefreshMap = function() {
-//                        map.removeLayer(last_layer);
-                        var last_layer = refreshMap(url);
-                   }
-        setInterval(deleteLayerAndRefreshMap, par.refresh * 1000);
+        setInterval(function() {
+                        //map.removeLayer(l);
+                        refreshMap(url)}, par.refresh * 1000);
     }
     else
         refreshMap(url);
 });
 
 function refreshMap(url){
-    console.log('-----------------------------------')
-    var l = getLayer(url);
+    l = getLayer(url);
+    console.log(l)
     map.addLayer(l);
-    return l;
 }
 
