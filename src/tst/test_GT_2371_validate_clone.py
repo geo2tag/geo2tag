@@ -5,9 +5,9 @@ from unittest import TestCase
 import os
 import subprocess
 
-PY_SCRIPT = 'python scripts/validate_clone.py --file '
+PY_SCRIPT = 'python ../../scripts/validate_clone.py --file '
 NAME_FILE = 'test_forclonedigger.py'
-PATH_TEST_FILE = 'src/tst/' + NAME_FILE
+PATH_TEST_FILE = NAME_FILE
 TEXT_PROG_NO_CLONE = 'def fibonacci(max):\n    \
 a = 1\n    \
 b = 1\n    \
@@ -24,8 +24,6 @@ while i<n:\n        \
 if i%2 != 0:\n            \
 print i\n    \
 i = i + 1\n'
-PATH = '../..'
-SRC_TST = 'src/tst'
 SRC_W = 'w+'
 
 
@@ -35,7 +33,6 @@ class TestValidateClone(TestCase):
         file_main = open(NAME_FILE, SRC_W)
         file_main.write(TEXT_PROG_WITH_CLONE)
         file_main.close()
-        os.chdir(PATH)
         process = subprocess.Popen(
             PY_SCRIPT + PATH_TEST_FILE,
             shell=True,
@@ -45,13 +42,11 @@ class TestValidateClone(TestCase):
         process.communicate()
         self.assertEquals(1, process.poll())
         os.remove(PATH_TEST_FILE)
-        os.chdir(SRC_TST)
 
     def testValidatePlugin_MakeFileNoClone(self):
         file_main = open(NAME_FILE, SRC_W)
         file_main.write(TEXT_PROG_NO_CLONE)
         file_main.close()
-        os.chdir(PATH)
         process = subprocess.Popen(
             PY_SCRIPT + PATH_TEST_FILE,
             shell=True,
@@ -61,4 +56,3 @@ class TestValidateClone(TestCase):
         process.communicate()
         self.assertEquals(0, process.poll())
         os.remove(PATH_TEST_FILE)
-        os.chdir(SRC_TST)
