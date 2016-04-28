@@ -1,7 +1,7 @@
 from basic_selenium_test import BasicSeleniumTest
 
 TEST_URL = '/instance/service/testservice/map?longitude=1' + \
-    '&latitude=1&zoom=17'
+    '&latitude=1&zoom=17&refresh=0'
 SELECTOR_CSS = ".leaflet-marker-pane img"
 
 
