@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 import html_validate
-import os
 import subprocess
 
 TEST_FOR_LIST = '123 123'
