@@ -15,8 +15,4 @@ jira==0.50
 python-jenkins==0.4.11
 logilab-common==1.1.0
 pytidylib==0.2.4    
-<<<<<<< HEAD
 clonedigger
-=======
-clonedigger 
->>>>>>> master
