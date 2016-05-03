@@ -17,7 +17,7 @@ invalidateMapSizeWhenVisible = function(map) {
 };
 
 
-createMap = function(elementId, locate, zoom, lat, lon) {
+createMap = function(elementId, locate, zoom, layers, lat, lon) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
@@ -28,7 +28,8 @@ createMap = function(elementId, locate, zoom, lat, lon) {
   }
   map = L.map(elementId, {
     center: [lat, lon],
-    zoom: zoom
+    zoom: zoom,
+    layers: layers
   });
 
   if (locate == true){

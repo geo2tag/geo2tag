@@ -1,6 +1,6 @@
 var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = null, 
     controls = null, positionMarker=null, l=null;
-
+var CHANNEL_IDS = 'channel_ids'
 
 function fixMapSize(){
     var content = $("#map");
@@ -20,7 +20,7 @@ function fixMapSize(){
 }
 
 function getLayer(url){
-    var l = new L.LayerJSON({url: url,
+    l = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
             return data.json.name || null;
@@ -35,13 +35,25 @@ function getLayer(url){
     return l;
 }
 
+
 $(document).ready(function (){
+    var channel_layers_array = [];
+    console.log(par[CHANNEL_IDS])
+    for(var channel_id in par[CHANNEL_IDS]){
+        layer = L.tileLayer({id: channel_id});
+        console.log(layer)
+        var baseMaps = {"channel_id" : layer}
+        channel_layers_array.push(layer);
+        L.control.layers(layer).addTo(map);
+    }
+    console.log(channel_layers_array)
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
-        map = createMap('map', true, par.zoom)
+        map = createMap('map', true, par.zoom, channel_layers_array)
     $(window).on('resize', fixMapSize());
     var url = MakeUrlByChannelIds(par);
+
     if(par.refresh != 0){
         setInterval(function() {
                         //map.removeLayer(l);
@@ -49,6 +61,7 @@ $(document).ready(function (){
     }
     else
         refreshMap(url);
+    
 });
 
 function refreshMap(url){
