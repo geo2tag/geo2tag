@@ -10,7 +10,6 @@ function fixMapSize(){
         viewHeight = viewHeight + 300;
     content.height(viewHeight);
     console.log('Window width = '+$(window).width());
-//    content.parent().width($(window).width())
     console.log('Window width = '+$(window).width());
     console.log('Content width = '+content.width());
     console.log('Content.parent width = '+content.parent().width());
@@ -52,8 +51,7 @@ $(document).ready(function (){
 });
 
 function refreshMap(url){
-    l = getLayer(url);
-    console.log(l)
+    var l = getLayer(url);
     map.addLayer(l);
 }
 
