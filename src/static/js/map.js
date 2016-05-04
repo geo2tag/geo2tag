@@ -37,26 +37,15 @@ function getLayer(url){
 
 
 $(document).ready(function (){
-    var channel_layers_array = [];
-    console.log(par[CHANNEL_IDS])
-    for(var channel_id in par[CHANNEL_IDS]){
-        layer = L.tileLayer({id: channel_id});
-        console.log(layer)
-        var baseMaps = {"channel_id" : layer}
-        channel_layers_array.push(layer);
-        L.control.layers(layer).addTo(map);
-    }
-    console.log(channel_layers_array)
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
-        map = createMap('map', true, par.zoom, channel_layers_array)
+        map = createMap('map', true, par.zoom, par[CHANNEL_IDS])
     $(window).on('resize', fixMapSize());
     var url = MakeUrlByChannelIds(par);
 
     if(par.refresh != 0){
         setInterval(function() {
-                        //map.removeLayer(l);
                         refreshMap(url)}, par.refresh * 1000);
     }
     else

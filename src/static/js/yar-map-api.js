@@ -17,7 +17,7 @@ invalidateMapSizeWhenVisible = function(map) {
 };
 
 
-createMap = function(elementId, locate, zoom, layers, lat, lon) {
+createMap = function(elementId, locate, zoom, channel_layers, lat, lon) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
@@ -28,8 +28,7 @@ createMap = function(elementId, locate, zoom, layers, lat, lon) {
   }
   map = L.map(elementId, {
     center: [lat, lon],
-    zoom: zoom,
-    layers: layers
+    zoom: zoom
   });
 
   if (locate == true){
@@ -53,7 +52,11 @@ createMap = function(elementId, locate, zoom, layers, lat, lon) {
     'Google спутник': new L.Google(),
     'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
   };
-  map.addControl(new L.Control.Layers(layers));
+  var overlayMaps = {};
+  for(layer in channel_layers){
+      overlayMaps[layer] = new L.Google('ROADMAP')
+  }
+  map.addControl(new L.Control.Layers(layers, overlayMaps));
   mapType = cookies.readCookie('maptype');
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');
