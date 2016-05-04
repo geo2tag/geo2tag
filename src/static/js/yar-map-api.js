@@ -56,6 +56,7 @@ createMap = function(elementId, locate, zoom, channel_layers, lat, lon) {
   for(layer in channel_layers){
       overlayMaps[layer] = new L.Google('ROADMAP')
   }
+  console.log(overlayMaps)
   map.addControl(new L.Control.Layers(layers, overlayMaps));
   mapType = cookies.readCookie('maptype');
   if (mapType === void 0 || layers[mapType] === void 0) {
