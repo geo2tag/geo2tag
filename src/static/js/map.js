@@ -55,7 +55,6 @@ $(document).ready(function (){
 
 function refreshMap(url){
     l = getLayer(url);
-    console.log(l)
     map.addLayer(l);
 }
 
