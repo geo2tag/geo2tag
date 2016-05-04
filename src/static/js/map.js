@@ -34,15 +34,29 @@ function getLayer(url){
     return l;
 }
 
+function deleteLastLayer(){
+    var layers = map.eachLayer(function(l){})
+    var del_layer;
+    for(layer in layers._layers){
+        if (layer._hashUrl == url)
+            del_layer = layer._leaflet_id;
+            break;
+    }
+    if(del_layer != undefined){
+        map.removeLayer(del_layer);
+    }
+}
+
 $(document).ready(function (){
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, par.latitude, par.longitude);
     else
         map = createMap('map', true, par.zoom)
     $(window).on('resize', fixMapSize());
-    var url = MakeUrlByChannelIds(par);
+    url = MakeUrlByChannelIds(par);
     if(par.refresh != 0){
         setInterval(function() {
+                        deleteLastLayer()
                         //map.removeLayer(l);
                         refreshMap(url)}, par.refresh * 1000);
     }
