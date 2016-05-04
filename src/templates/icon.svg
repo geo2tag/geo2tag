@@ -1,8 +1,8 @@
 <svg 
-height="10"
-width="10"
+height="22"
+width="22"
 xmlns="http://www.w3.org/2000/svg">
 
-<circle cx="5" cy="5" r="5" transform="matrix(1 0 0 1 0 0)" fill="#{{color}}"/>
+<circle cx="11" cy="11" r="10" transform="matrix(1 0 0 1 0 0)" stroke="black" stroke-width="1" fill="#{{color}}"/>
 </svg>
 

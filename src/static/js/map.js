@@ -19,7 +19,7 @@ function fixMapSize(){
 }
 
 function getLayer(url){
-    var l = new L.LayerJSON({url: url,
+    var layer = new L.LayerJSON({url: url,
         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
         buildPopup: function(data) {
             return data.json.name || null;
@@ -31,7 +31,7 @@ function getLayer(url){
             });
         }
     });
-    return l;
+    return layer;
 }
 
 function deleteLastLayer(){
@@ -54,18 +54,15 @@ $(document).ready(function (){
         map = createMap('map', true, par.zoom)
     $(window).on('resize', fixMapSize());
     url = MakeUrlByChannelIds(par);
-    if(par.refresh != 0){
-        setInterval(function() {
-                        deleteLastLayer()
-                        //map.removeLayer(l);
-                        refreshMap(url)}, par.refresh * 1000);
-    }
-    else
-        refreshMap(url);
+    refreshMap(url);
+    setInterval(function() {
+                   deleteLastLayer()
+                   refreshMap(url)}, par.refresh * 1000);
+    
 });
 
 function refreshMap(url){
-    var l = getLayer(url);
-    map.addLayer(l);
+    var layer = getLayer(url);
+    map.addLayer(layer);
 }
 
