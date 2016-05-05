@@ -14,6 +14,7 @@ do
     esac
 done
 
+echo "$FLAG_DROP_ALL_DB"
 mongo geomongo --eval "db.dropDatabase()"
 
 if $FLAG_DROP_ALL_DB

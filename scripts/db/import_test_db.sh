@@ -8,7 +8,4 @@ for db in ${dbs[*]}; do
         echo 'Error occured while imorting database: '${db}'.'
         exit 1
     fi
-    echo "------"
-    echo "${db}"
 done
-echo "Import done"
