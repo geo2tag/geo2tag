@@ -63,6 +63,8 @@ def manage_script(name, args):
     err = child.stderr.read()
     child.communicate()
     rc = child.returncode
+    print '-----------------------------------'
+    print name, output,  err
     if rc == 0:
         write_log(name, output)
     else:
