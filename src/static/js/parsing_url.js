@@ -17,6 +17,7 @@ function getArgsQueryForMap(url, channel_ids){ // return json
     var index_beg = url.indexOf(SERVICE) + SERVICE.length;
     var index_end = url.indexOf(MAP);
     var SERVICE_NAME = url.substring(index_beg, index_end)
+    var REFRESH = 'refresh'
     result = URI.parseQuery(params);
     result[SERVICE_NAME_FIELD] = SERVICE_NAME;
     if(result[NUMBER] == undefined)
@@ -27,5 +28,7 @@ function getArgsQueryForMap(url, channel_ids){ // return json
         result[CHANNEL_IDS] = channel_ids
     else if(result[CHANNEL_IDS] != undefined)
         result[CHANNEL_IDS] = JSON.parse(result[CHANNEL_IDS])
+    if(result[REFRESH] == undefined)
+        result[REFRESH] = 30;
     return result;
 }
