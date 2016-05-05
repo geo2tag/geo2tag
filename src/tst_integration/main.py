@@ -240,10 +240,10 @@ def main(host):
         Test_GT_1511, param=host))
     suite.addTest(BasicIntegrationTest.parametrize(
         TestPluginConfigGeocoder, param=host))
-    suite.addTest(
+    '''suite.addTest(
         BasicIntegrationTest.parametrize(
             TestGeocoderImport,
-            param=host))
+            param=host))'''
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestServiceSearchBySubstr,
