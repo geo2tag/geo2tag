@@ -106,11 +106,13 @@ def wait_mongo_start(name):
     child.communicate()
     return child.returncode
 
+
 def wait_local_deploy(name):
-    child = Popen(['docker', 'exec', name, GET_LOCAL_DEPLOY_LOG_FILE], 
+    child = Popen(['docker', 'exec', name, GET_LOCAL_DEPLOY_LOG_FILE],
                   stdout=PIPE, stderr=PIPE)
     child.communicate()
     return child.returncode
+
 
 def mongo_start_waiter(name):
     counter_start = 0
@@ -137,6 +139,7 @@ def local_deploy_waiter(name):
         else:
             write_log(name, "Waiting local deploy")
             sleep(3)
+
 
 def find_port_and_start(container_start_name, ports):
     container_start_port = 0
