@@ -106,6 +106,8 @@ def wait_mongo_start(name):
 
 
 def mongo_start_waiter(name):
+    Popen(['docker', 'exec', '/bin/bash', -c, CAT_LOCAL_DEPLOY_LOG],
+          stdout=PIPE, stderr=PIPE)
     counter_start = 0
     while True:
         counter_start += 1
@@ -270,9 +272,6 @@ if __name__ == "__main__":
     parser.add_argument('-k', '--kill', action='store_true')
     parser.add_argument('-t', '--time', default='1w')
     parsed_args = parser.parse_args()
-    container_name = parsed_args.name.replace('/', '_')
-    Popen(['docker', 'exec', container_name, CAT_LOCAL_DEPLOY_LOG],
-          stdout=PIPE, stderr=PIPE)
     print '===================='
     if parsed_args.kill is not False:
         timestamp = 0
