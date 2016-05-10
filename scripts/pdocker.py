@@ -20,6 +20,8 @@ db = MongoClient(HOST, PORT)[DBNAME]
 CREATE_CONTAINER = "scripts/docker_create.sh"
 MANAGE_CONTAINER = "scripts/docker_manage.sh"
 CAT_LOCAL_DEPLOY_LOG = 'cat /tmp/local_deploy.log'
+GET_LOCAL_DEPLOY_LOG_FILE = 'test -e /tmp/local_deploy.log'
+RM_LOCAL_DEPLOY_LOG = 'rm /tmp/local_deploy.log'
 
 # keys
 CONTAINER_NAME = "name"
@@ -104,6 +106,11 @@ def wait_mongo_start(name):
     child.communicate()
     return child.returncode
 
+def wait_local_deploy(name):
+    child = Popen(['docker', 'exec', name, GET_LOCAL_DEPLOY_LOG_FILE], 
+                  stdout=PIPE, stderr=PIPE)
+    child.communicate()
+    return child.returncode
 
 def mongo_start_waiter(name):
     counter_start = 0
@@ -119,6 +126,17 @@ def mongo_start_waiter(name):
             write_log(name, "Waiting mongo")
             sleep(3)
 
+
+def local_deploy_waiter(name):
+    counter_start = 0
+    while True:
+        counter_start += 1
+        if wait_local_deploy(name) == 0:
+            write_log(name, "local deploy has finished work")
+            break
+        else:
+            write_log(name, "Waiting local deploy")
+            sleep(3)
 
 def find_port_and_start(container_start_name, ports):
     container_start_port = 0
@@ -234,6 +252,7 @@ def main(name, ports):
                   ['docker', 'exec', container_start_name,
                    '/bin/bash', '-c', CAT_LOCAL_DEPLOY_LOG])
     mongo_start_waiter(container_start_name)
+    local_deploy_waiter(container_start_name)
     write_log(
         container_start_name,
         "Container " +
@@ -263,6 +282,11 @@ def main(name, ports):
 
     write_log(container_start_name, "Done")
     write_env_var(FAIL_REASON, SUCCESS_MSG)
+
+    manage_script(container_start_name,
+                  ['docker', 'exec', container_start_name,
+                   '/bin/bash', '-c', RM_LOCAL_DEPLOY_LOG])
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
