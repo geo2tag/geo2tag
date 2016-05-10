@@ -106,7 +106,7 @@ def wait_mongo_start(name):
 
 
 def mongo_start_waiter(name):
-    Popen(['docker', 'exec', '/bin/bash', -c, CAT_LOCAL_DEPLOY_LOG],
+    Popen(['docker', 'exec', '/bin/bash', '-c', CAT_LOCAL_DEPLOY_LOG],
           stdout=PIPE, stderr=PIPE)
     counter_start = 0
     while True:
