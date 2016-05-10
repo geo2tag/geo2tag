@@ -23,9 +23,6 @@ class TestGeocoderImport(BasicIntegrationTest):
                 self.getUrl(GET_POST_JOB_URL + '/' + jobId.text)
             ).text
         )
-        print jobJson
-        print '--------'
-        print jobId.text
         while jobJson[DONE] is not True:
             jobJson = json.loads(
                 requests.get(
