@@ -136,6 +136,9 @@ def local_deploy_waiter(name):
         if wait_local_deploy(name) == 0:
             write_log(name, "local deploy has finished work")
             break
+        elif counter_start == 10:
+            write_log(name, "Container start fail")
+            sys.exit(0)
         else:
             write_log(name, "Waiting local deploy")
             sleep(3)
