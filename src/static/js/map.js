@@ -57,8 +57,7 @@ $(document).ready(function (){
     refreshMap(url);
     setInterval(function() {
                    deleteLastLayer()
-                   refreshMap(url)}, par.refresh * 1000);
-    
+                   refreshMap(url)}, par.refresh * 1000);    
 });
 
 function refreshMap(url){
