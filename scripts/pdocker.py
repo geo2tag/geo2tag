@@ -19,6 +19,7 @@ db = MongoClient(HOST, PORT)[DBNAME]
 # scripts
 CREATE_CONTAINER = "scripts/docker_create.sh"
 MANAGE_CONTAINER = "scripts/docker_manage.sh"
+CAT_LOCAL_DEPLOY_LOG = 'cat /var/log/local_deploy.log'
 
 # keys
 CONTAINER_NAME = "name"
@@ -229,7 +230,8 @@ def main(name, ports):
         write_log(container_start_name, NO_PORTS_MSG)
         write_env_var(FAIL_REASON, NO_PORTS_MSG)
         sys.exit(0)
-
+    manage_script(name, ['docker', 'exec', '/bin/bash', '-c',
+                         CAT_LOCAL_DEPLOY_LOG])
     mongo_start_waiter(container_start_name)
     write_log(
         container_start_name,
@@ -269,7 +271,7 @@ if __name__ == "__main__":
     parser.add_argument('-k', '--kill', action='store_true')
     parser.add_argument('-t', '--time', default='1w')
     parsed_args = parser.parse_args()
-
+    print '===================='
     if parsed_args.kill is not False:
         timestamp = 0
         if parsed_args.time is not None:

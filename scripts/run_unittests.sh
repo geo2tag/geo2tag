@@ -33,14 +33,7 @@ if [ $? -gt 0 ]; then
 fi
 
 # Run tests
-
 cd src/tst
-result=`python -m unittest discover -v 2>&1`
-exit_code=$?
-echo "$result" 
-
-testState=`echo "$result" | grep -iE "FAILED|Error|CRITICAL" || true` ;
-if [[ -n $testState  ]]
-then
-        exit 1
-fi
+python -m unittest discover -v 2>&1 | tee unittest.log
+exit_code="${PIPESTATUS[0]}"
+cat unittest.log
