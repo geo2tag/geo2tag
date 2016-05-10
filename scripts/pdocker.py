@@ -19,7 +19,7 @@ db = MongoClient(HOST, PORT)[DBNAME]
 # scripts
 CREATE_CONTAINER = "scripts/docker_create.sh"
 MANAGE_CONTAINER = "scripts/docker_manage.sh"
-CAT_LOCAL_DEPLOY_LOG = 'cat /var/log/local_deploy.log'
+CAT_LOCAL_DEPLOY_LOG = 'cat /tmp/local_deploy.log'
 
 # keys
 CONTAINER_NAME = "name"
