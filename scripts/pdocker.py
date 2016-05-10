@@ -126,7 +126,7 @@ def mongo_start_waiter(name):
             sys.exit(0)
         else:
             write_log(name, "Waiting mongo")
-            sleep(3)
+            sleep(4)
 
 
 def local_deploy_waiter(name):
