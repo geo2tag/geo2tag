@@ -106,8 +106,6 @@ def wait_mongo_start(name):
 
 
 def mongo_start_waiter(name):
-    Popen(['docker', 'exec', '/bin/bash', '-c', CAT_LOCAL_DEPLOY_LOG],
-          stdout=PIPE, stderr=PIPE)
     counter_start = 0
     while True:
         counter_start += 1
@@ -232,7 +230,8 @@ def main(name, ports):
         write_log(container_start_name, NO_PORTS_MSG)
         write_env_var(FAIL_REASON, NO_PORTS_MSG)
         sys.exit(0)
-
+    manage_script(name, ['docker', 'exec', '/bin/bash', '-c', 
+                  CAT_LOCAL_DEPLOY_LOG])
     mongo_start_waiter(container_start_name)
     write_log(
         container_start_name,
