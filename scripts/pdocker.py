@@ -271,7 +271,8 @@ if __name__ == "__main__":
     parser.add_argument('-t', '--time', default='1w')
     parsed_args = parser.parse_args()
     name = parsed_args.name.replace('/', '_')
-    Popen(['docker', 'exec', name, CAT_LOCAL_DEPLOY_LOG], stdout=PIPE, stderr=PIPE)
+    Popen(['docker', 'exec', name, CAT_LOCAL_DEPLOY_LOG],
+          stdout=PIPE, stderr=PIPE)
     print '===================='
     if parsed_args.kill is not False:
         timestamp = 0
