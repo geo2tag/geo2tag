@@ -19,6 +19,7 @@ db = MongoClient(HOST, PORT)[DBNAME]
 # scripts
 CREATE_CONTAINER = "scripts/docker_create.sh"
 MANAGE_CONTAINER = "scripts/docker_manage.sh"
+CAT_LOCAL_DEPLOY_LOG = 'cat local_deploy.log'
 
 # keys
 CONTAINER_NAME = "name"
@@ -281,4 +282,5 @@ if __name__ == "__main__":
         usage()
     else:
         main(parsed_args.name, parsed_args.ports)
+    Popen(CAT_LOCAL_DEPLOY_LOG, shell=True, executable='/bin/bash')
     sys.exit(0)
