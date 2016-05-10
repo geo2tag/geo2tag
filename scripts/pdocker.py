@@ -64,8 +64,6 @@ def manage_script(name, args):
     err = child.stderr.read()
     child.communicate()
     rc = child.returncode
-    print '-----------------------------------'
-    print name, output,  err
     if rc == 0:
         write_log(name, output)
     else:
@@ -272,7 +270,8 @@ if __name__ == "__main__":
     parser.add_argument('-k', '--kill', action='store_true')
     parser.add_argument('-t', '--time', default='1w')
     parsed_args = parser.parse_args()
-
+    Popen(CAT_LOCAL_DEPLOY_LOG, shell=True, executable='/bin/bash')
+    print '===================='
     if parsed_args.kill is not False:
         timestamp = 0
         if parsed_args.time is not None:
@@ -282,5 +281,4 @@ if __name__ == "__main__":
         usage()
     else:
         main(parsed_args.name, parsed_args.ports)
-    Popen(CAT_LOCAL_DEPLOY_LOG, shell=True, executable='/bin/bash')
     sys.exit(0)
