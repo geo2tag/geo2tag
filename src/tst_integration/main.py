@@ -75,14 +75,14 @@ def main(host):
         BasicIntegrationTest.parametrize(
             TestGT1697,
             param=host))
-    suite.addTest(
-        BasicIntegrationTest.parametrize(
-            TestGeocodingPluginReady,
-            param=host))
-    suite.addTest(
-        BasicIntegrationTest.parametrize(
-            TestGeocodingJobListResource,
-            param=host))
+    # suite.addTest(
+    #    BasicIntegrationTest.parametrize(
+    #        TestGeocodingPluginReady,
+    #        param=host))
+    # suite.addTest(
+    #    BasicIntegrationTest.parametrize(
+    #        TestGeocodingJobListResource,
+    #        param=host))
     suite.addTest(
         BasicIntegrationTest.parametrize(
             TestPluginListResource,
