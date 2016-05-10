@@ -270,7 +270,8 @@ if __name__ == "__main__":
     parser.add_argument('-k', '--kill', action='store_true')
     parser.add_argument('-t', '--time', default='1w')
     parsed_args = parser.parse_args()
-    Popen(CAT_LOCAL_DEPLOY_LOG, shell=True, executable='/bin/bash')
+    name = parsed_args.name.replace('/', '_')
+    Popen(['docker', 'exec', name, CAT_LOCAL_DEPLOY_LOG], stdout=PIPE, stderr=PIPE)
     print '===================='
     if parsed_args.kill is not False:
         timestamp = 0
@@ -281,5 +282,4 @@ if __name__ == "__main__":
         usage()
     else:
         main(parsed_args.name, parsed_args.ports)
-    print '====================='
     sys.exit(0)
