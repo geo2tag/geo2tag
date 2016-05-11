@@ -7,10 +7,6 @@
 # use option -s <server_name> to set server name
 # use option -m without arguments to call drop_db.sh and setupMasterDbTemplate.py
 
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
-
 CATALOG='geomongo'
 ERROR_LOG_NAME='error'
 SERVER_NAME='geomongo'
@@ -25,9 +21,6 @@ FLAG_DROP_DB_AND_SETUP_DB_TEMPLATE=false
 
 while getopts ":c:d:e:f:ef:s:p:m" opt ;
 do
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
     case $opt in
         c) CATALOG=$OPTARG;
             ;;
@@ -55,24 +48,12 @@ then
 	echo "$HOSTS_STRING" >> /etc/hosts
 fi
 
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
-
 #generate config for apache
 ./scripts/papache_conf_generator.py -n "$SERVER_NAME" -o "$CONFIG_FILE" -f "$CATALOG" -e "$ERROR_LOG_NAME" -p "$SERVER_PORT"
 
 rm -rf /var/www/"$CATALOG"
 
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
-
 mkdir /var/www/"$CATALOG"
-
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
 
 cp src/*.py  /var/www/"$CATALOG"
 cp src/*.wsgi /var/www/"$CATALOG"
@@ -81,20 +62,12 @@ then
     cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"/"$CONFIG_INI_FILE_FINAL"
 fi
 
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
-
 cp -r src/static /var/www/"$CATALOG"/static/
 cp -r src/templates /var/www/"$CATALOG"/templates/
 cp -r src/plugins /var/www/"$CATALOG"/plugins/
 cp -r src/open_data_import/ /var/www/"$CATALOG"/open_data_import/
 cp -r src/plugin_api/ /var/www/"$CATALOG"/plugin_api/
 cp config/"$CONFIG_FILE" /etc/apache2/sites-available/
-
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
 
 ./scripts/setup_pip_dependencies.sh
 
@@ -114,16 +87,8 @@ echo "{
 'version' : '$VERSION'
 }" > $DEBUG_FILE
 
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
-
 chown -R www-data:www-data /var/www/"$CATALOG"
 
 a2ensite $CONFIG_FILE
 
 service apache2 restart
-
-mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
-echo 'IN LOCAL DEPLOY'
-echo $mdate
