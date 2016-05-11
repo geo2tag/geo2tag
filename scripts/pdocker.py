@@ -143,7 +143,7 @@ def local_deploy_waiter(name):
             sys.exit(0)
         else:
             write_log(name, "Waiting local deploy")
-            sleep(4)
+            sleep(6)
             print datetime.datetime.now()
 
 
