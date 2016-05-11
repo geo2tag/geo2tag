@@ -52,6 +52,10 @@ then
 	echo "$HOSTS_STRING" >> /etc/hosts
 fi
 
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
+
 #generate config for apache
 ./scripts/papache_conf_generator.py -n "$SERVER_NAME" -o "$CONFIG_FILE" -f "$CATALOG" -e "$ERROR_LOG_NAME" -p "$SERVER_PORT"
 
