@@ -72,6 +72,10 @@ cp -r src/open_data_import/ /var/www/"$CATALOG"/open_data_import/
 cp -r src/plugin_api/ /var/www/"$CATALOG"/plugin_api/
 cp config/"$CONFIG_FILE" /etc/apache2/sites-available/
 
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
+
 ./scripts/setup_pip_dependencies.sh
 
 ./scripts/db/drop_test_db.sh -g
@@ -89,6 +93,10 @@ echo "{
 'branch' : '$BRANCH'
 'version' : '$VERSION'
 }" > $DEBUG_FILE
+
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
 
 chown -R www-data:www-data /var/www/"$CATALOG"
 
