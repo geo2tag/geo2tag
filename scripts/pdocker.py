@@ -22,6 +22,7 @@ MANAGE_CONTAINER = "scripts/docker_manage.sh"
 CAT_LOCAL_DEPLOY_LOG = 'cat /tmp/local_deploy.log'
 GET_LOCAL_DEPLOY_LOG_FILE = 'test -e /tmp/local_deploy.log'
 RM_LOCAL_DEPLOY_LOG = 'rm /tmp/local_deploy.log'
+LOCAL_DEPLOY = './scripts/local_deploy.sh -e 000-default.conf -s localhost 2>&1 | tee /tmp/local_deploy.log'
 
 # keys
 CONTAINER_NAME = "name"
@@ -257,11 +258,13 @@ def main(name, ports):
         write_log(container_start_name, NO_PORTS_MSG)
         write_env_var(FAIL_REASON, NO_PORTS_MSG)
         sys.exit(0)
+    mongo_start_waiter(container_start_name)
+    manage_script(container_start_name, 
+                  ['docker', 'exec', container_start_name,
+                  '/bin/bash', '-c', LOCAL_DEPLOY])
     manage_script(container_start_name,
                   ['docker', 'exec', container_start_name,
                    '/bin/bash', '-c', CAT_LOCAL_DEPLOY_LOG])
-    mongo_start_waiter(container_start_name)
-    local_deploy_waiter(container_start_name)
     write_log(
         container_start_name,
         "Container " +
