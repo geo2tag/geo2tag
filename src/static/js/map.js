@@ -55,9 +55,11 @@ $(document).ready(function (){
     $(window).on('resize', fixMapSize());
     url = MakeUrlByChannelIds(par);
     refreshMap(url);
-    setInterval(function() {
+    if(par.refresh != 0){
+        setInterval(function() {
                    deleteLastLayer()
-                   refreshMap(url)}, par.refresh * 1000);    
+                   refreshMap(url)}, par.refresh * 1000);
+    }
 });
 
 function refreshMap(url){
