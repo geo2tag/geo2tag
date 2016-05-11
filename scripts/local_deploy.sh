@@ -25,6 +25,9 @@ FLAG_DROP_DB_AND_SETUP_DB_TEMPLATE=false
 
 while getopts ":c:d:e:f:ef:s:p:m" opt ;
 do
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
     case $opt in
         c) CATALOG=$OPTARG;
             ;;
