@@ -128,6 +128,8 @@ def mongo_start_waiter(name):
         else:
             write_log(name, "Waiting mongo")
             sleep(4)
+            print '---------------------'
+            print datetime.datetime.now()
 
 
 def local_deploy_waiter(name):

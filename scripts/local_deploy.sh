@@ -8,6 +8,7 @@
 # use option -m without arguments to call drop_db.sh and setupMasterDbTemplate.py
 
 mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
 echo $mdate
 
 CATALOG='geomongo'
@@ -96,4 +97,5 @@ a2ensite $CONFIG_FILE
 service apache2 restart
 
 mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
 echo $mdate
