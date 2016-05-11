@@ -115,7 +115,7 @@ def wait_local_deploy(name):
 
 
 def mongo_start_waiter(name):
-    print datetime.now()
+    print datetime.datetime.now()
     counter_start = 0
     while True:
         counter_start += 1
