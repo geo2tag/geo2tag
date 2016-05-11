@@ -115,7 +115,6 @@ def wait_local_deploy(name):
 
 
 def mongo_start_waiter(name):
-    print datetime.datetime.now()
     counter_start = 0
     while True:
         counter_start += 1
@@ -127,12 +126,12 @@ def mongo_start_waiter(name):
             sys.exit(0)
         else:
             write_log(name, "Waiting mongo")
-            sleep(4)
-            print '---------------------'
-            print datetime.datetime.now()
+            sleep(3)
 
 
 def local_deploy_waiter(name):
+    print '---------------------'
+    print datetime.datetime.now()
     counter_start = 0
     while True:
         counter_start += 1
@@ -145,6 +144,7 @@ def local_deploy_waiter(name):
         else:
             write_log(name, "Waiting local deploy")
             sleep(4)
+            print datetime.datetime.now()
 
 
 def find_port_and_start(container_start_name, ports):
