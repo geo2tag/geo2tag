@@ -23,7 +23,7 @@ CAT_LOCAL_DEPLOY_LOG = 'cat /tmp/local_deploy.log'
 GET_LOCAL_DEPLOY_LOG_FILE = 'test -e /tmp/local_deploy.log'
 RM_LOCAL_DEPLOY_LOG = 'rm /tmp/local_deploy.log'
 LOCAL_DEPLOY = './scripts/local_deploy.sh -e 000-default.conf -s' +
-    ' localhost 2>&1 | tee /tmp/local_deploy.log'
+' localhost 2>&1 | tee /tmp/local_deploy.log'
 
 # keys
 CONTAINER_NAME = "name"
