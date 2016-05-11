@@ -61,6 +61,7 @@ if ! $FLAG_KEEP_CONFIG_INI
 then
     cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"/"$CONFIG_INI_FILE_FINAL"
 fi
+
 cp -r src/static /var/www/"$CATALOG"/static/
 cp -r src/templates /var/www/"$CATALOG"/templates/
 cp -r src/plugins /var/www/"$CATALOG"/plugins/
