@@ -61,7 +61,15 @@ echo $mdate
 
 rm -rf /var/www/"$CATALOG"
 
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
+
 mkdir /var/www/"$CATALOG"
+
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
 
 cp src/*.py  /var/www/"$CATALOG"
 cp src/*.wsgi /var/www/"$CATALOG"
@@ -69,6 +77,11 @@ if ! $FLAG_KEEP_CONFIG_INI
 then
     cp "$CONFIG_INI_FILE" /var/www/"$CATALOG"/"$CONFIG_INI_FILE_FINAL"
 fi
+
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo 'IN LOCAL DEPLOY'
+echo $mdate
+
 cp -r src/static /var/www/"$CATALOG"/static/
 cp -r src/templates /var/www/"$CATALOG"/templates/
 cp -r src/plugins /var/www/"$CATALOG"/plugins/
