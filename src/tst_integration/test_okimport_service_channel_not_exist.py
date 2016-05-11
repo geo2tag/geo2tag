@@ -25,7 +25,6 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
     def test_AService_POST_VALID(self):
         # Srevice POST
         # VALID
-
         response = requests.post(
             self.getUrl(VALID_TEST_URL),
             data=json.dumps(DATA))
