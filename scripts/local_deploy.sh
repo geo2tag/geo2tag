@@ -7,6 +7,9 @@
 # use option -s <server_name> to set server name
 # use option -m without arguments to call drop_db.sh and setupMasterDbTemplate.py
 
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo $mdate
+
 CATALOG='geomongo'
 ERROR_LOG_NAME='error'
 SERVER_NAME='geomongo'
@@ -91,3 +94,6 @@ chown -R www-data:www-data /var/www/"$CATALOG"
 a2ensite $CONFIG_FILE
 
 service apache2 restart
+
+mdate=" $(date +%d-%m-%Y\ %H:%M:%S) "
+echo $mdate
