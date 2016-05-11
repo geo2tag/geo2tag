@@ -25,7 +25,6 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
     def test_AService_POST_VALID(self):
         # Srevice POST
         # VALID
-        print 'Service POST'
         response = requests.post(
             self.getUrl(VALID_TEST_URL),
             data=json.dumps(DATA))
@@ -38,7 +37,6 @@ class Test_OKImportJob_not_exist(BasicIntegrationTest):
 
     def test_BService_POST_INVALID(self):
         # INVALID
-        print 'Invalid'
         response = requests.post(
             self.getUrl(INVALID_TEST_URL),
             data=json.dumps(DATA))
