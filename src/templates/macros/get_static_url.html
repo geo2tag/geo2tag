@@ -1,3 +1,1 @@
-{% macro getStaticUrl(static_url) %}
-	{{ url_for('static', filename=static_url) }}?{{g.cache_invalidator}}
-{% endmacro %}
+{% macro getStaticUrl(static_url) %}{{ url_for('static', filename=static_url) }}?{{g.cache_invalidator}}{% endmacro %}
