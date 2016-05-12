@@ -47,14 +47,36 @@ function deleteLastLayer(){
     }
 }
 
+function getLayerForChannelId(channel_id){
+    var url = getUrlWithPrefix('/service/testservice') + '/point?number=1000&channel_ids=' + channel_id;
+    var layer = new L.LayerJSON({url: url,
+         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
+         buildPopup: function(data) {
+             return data.json.name || null;
+         },
+         buildIcon: function(data, title) {
+             var url_icon = "get_icon?channel_id=" + channel_id;
+             return new L.Icon({
+                 iconUrl : url_icon
+             });
+         }
+     });
+     return layer;
+}
+
 
 $(document).ready(function (){
-    if(par.latitude != null && par.longitude != null)
-        map = createMap('map', false, par.zoom, par.latitude, par.longitude);
-    else
-        map = createMap('map', true, par.zoom, par[CHANNEL_IDS])
-    $(window).on('resize', fixMapSize());
+    overlayMaps = {}
     url = MakeUrlByChannelIds(par);
+    for(var i = 0; i < par[CHANNEL_IDS].length; i++){
+        channel_id = par[CHANNEL_IDS][i];
+        overlayMaps[channel_id] = getLayerForChannelId(url, channel_id);
+    }
+    if(par.latitude != null && par.longitude != null)
+        map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude);
+    else
+        map = createMap('map', true, par.zoom, overlayMaps)
+    $(window).on('resize', fixMapSize());
     refreshMap(url);
     if(par.refresh != 0){
         setInterval(function() {
