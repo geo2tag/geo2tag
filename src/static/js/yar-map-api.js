@@ -53,8 +53,9 @@ createMap = function(elementId, locate, zoom, channel_layers, lat, lon) {
     'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
   };
   var overlayMaps = {};
-  for(layer in channel_layers){
-      overlayMaps[layer] = new L.Google('ROADMAP')
+  console.log(channel_layers)
+  for(var i = 0; i < channel_layers.length; i++){
+      overlayMaps[channel_layers[i]] = new L.Google('ROADMAP')
   }
   console.log(overlayMaps)
   map.addControl(new L.Control.Layers(layers, overlayMaps));
