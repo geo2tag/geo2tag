@@ -6,21 +6,22 @@ import subprocess
 TAIL_CLONE = '*.py'
 CLONEDIGGER = "clonedigger "
 PATTERN = "Refining candidates... (.*) clones were found"
-num_error = 0
 
 
 def check_directory(name_directory):
     if name_directory[-1] != '/':
         name_directory = name_directory + "/"
-    clone_digger_run(name_directory + TAIL_CLONE)
+    num_error = clone_digger_run(name_directory + TAIL_CLONE)
+    return num_error
 
 
 def check_file(name_file):
-    clone_digger_run(name_file)
+    num_error = clone_digger_run(name_file)
+    return num_error
 
 
 def clone_digger_run(name):
-    global num_error
+    num_error = 0
     process = subprocess.Popen(CLONEDIGGER + name,
                                shell=True,
                                stdout=subprocess.PIPE,
@@ -37,17 +38,19 @@ def clone_digger_run(name):
             print "Clone in you directory/file: " + name + \
                 " equally " + regx[0]
             print "Check file output.html"
+    return num_error
 
 
 def run():
+    num_error = 0
     parser = argparse.ArgumentParser(description='Validate Clone')
     parser.add_argument('--directory', help='Name directory')
     parser.add_argument('--file', help='Name file')
     args = parser.parse_args()
     if args.directory is not None:
-        check_directory(args.directory)
+        num_error = check_directory(args.directory)
     else:
-        check_file(args.file)
+        num_error = check_file(args.file)
     sys.exit(num_error)
 
 

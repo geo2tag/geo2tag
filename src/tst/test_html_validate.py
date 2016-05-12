@@ -3,7 +3,6 @@
 
 from unittest import TestCase
 import html_validate
-import os
 import subprocess
 
 TEST_FOR_LIST = '123 123'
@@ -55,10 +54,8 @@ This is\
   </body>\
 </html>'
 FILE_NAME = 'testfile.py'
-PY_SCRIPT = "python scripts/html_validate.py --conf \
+PY_SCRIPT = "python ../../scripts/html_validate.py --conf \
 scripts/validhtml.ini --url 'status'"
-PATH = '../..'
-PATH_HOME = 'src/tst'
 
 
 class TestFunctionScriptHtmlValidate(TestCase):
@@ -80,7 +77,6 @@ class TestFunctionScriptHtmlValidate(TestCase):
         self.assertEqual(res, 1)
 
     def testScriptRun(self):
-        os.chdir(PATH)
         process = subprocess.Popen(
             PY_SCRIPT,
             shell=True,
@@ -88,5 +84,4 @@ class TestFunctionScriptHtmlValidate(TestCase):
             stderr=subprocess.PIPE,
             stdin=subprocess.PIPE)
         process.communicate()
-        os.chdir(PATH_HOME)
         self.assertEquals(1, process.poll())
