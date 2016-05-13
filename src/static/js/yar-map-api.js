@@ -17,7 +17,7 @@ invalidateMapSizeWhenVisible = function(map) {
 };
 
 
-createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
+createMap = function(elementId, locate, zoom, lat, lon) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
@@ -52,8 +52,6 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
     'Google спутник': new L.Google(),
     'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
   };
-  console.log(overlayMaps)
-  map.addControl(new L.Control.Layers(layers, overlayMaps));
   mapType = cookies.readCookie('maptype');
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');

@@ -18,22 +18,6 @@ function fixMapSize(){
     map.invalidateSize();
 }
 
-function getLayer(url){
-    var layer = new L.LayerJSON({url: url,
-        propertyLoc: ['location.coordinates.0','location.coordinates.1'],
-        buildPopup: function(data) {
-            return data.json.name || null;
-        },
-        buildIcon: function(data, title) {
-            var url_icon = "get_icon?channel_id=" + data.channel_id.$oid
-            return new L.Icon({
-                iconUrl : url_icon
-            });
-        }
-    });
-    return layer;
-}
-
 function deleteLastLayer(){
     var layers = map.eachLayer(function(l){})
     var del_layer;
@@ -47,8 +31,7 @@ function deleteLastLayer(){
     }
 }
 
-function getLayerForChannelId(channel_id){
-    var url = getUrlWithPrefix('/service/testservice') + '/point?number=1000&channel_ids=' + channel_id;
+function getLayerForChannelId(channel_id, url){
     var layer = new L.LayerJSON({url: url,
          propertyLoc: ['location.coordinates.0','location.coordinates.1'],
          buildPopup: function(data) {
@@ -64,29 +47,35 @@ function getLayerForChannelId(channel_id){
      return layer;
 }
 
-
-$(document).ready(function (){
+function getOverlayMaps(){
     overlayMaps = {}
-    url = MakeUrlByChannelIds(par);
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         channel_id = par[CHANNEL_IDS][i];
-        overlayMaps[channel_id] = getLayerForChannelId(url, channel_id);
+        url = MakeUrlForChannelId(par, channel_id);
+        overlayMaps[channel_id] = getLayerForChannelId(channel_id, url);
     }
+}
+
+
+$(document).ready(function (){
+    overlayMaps = getOverlayMaps();
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude);
     else
         map = createMap('map', true, par.zoom, overlayMaps)
     $(window).on('resize', fixMapSize());
+    var control = new L.Control.Layers(layers, overlayMaps)
+    map.addControl(control);
     refreshMap(url);
     if(par.refresh != 0){
         setInterval(function() {
-                   deleteLastLayer()
+                                       
                    refreshMap(url)}, par.refresh * 1000);
     }
 });
 
 function refreshMap(url){
-    var layer = getLayer(url);
-    map.addLayer(layer);
+    overlayMapshttp://leafletjs.com/reference.html#control-layers-addoverlay = getOverlayMaps();
+    addOverlay()
 }
 
