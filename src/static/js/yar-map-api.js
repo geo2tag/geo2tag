@@ -13,6 +13,7 @@ cookies = window.NM.cookies;
 function addNewControlToMap(layers, overlayMaps){
     var control = new L.Control.Layers(layers, overlayMaps)
     map.addControl(control);
+    map['control'] = control;
 }
 
 function getLayers(){
@@ -29,16 +30,33 @@ function getLayers(){
 function getOverlayMaps(){
     var overlayMaps = {};
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
-        channel_id = par[CHANNEL_IDS][i];
-        url = MakeUrlForChannelId(par, channel_id);
+        var channel_id = par[CHANNEL_IDS][i];
+        var url = MakeUrlForChannelId(par, channel_id);
         overlayMaps[channel_id] = getLayerForChannelId(channel_id, url);
     }
     return overlayMaps;
 }
 
+function setOverlayMaps(control){
+    for(var i = 0; i < par[CHANNEL_IDS].length; i++){
+        var channel_id = par[CHANNEL_IDS][i];
+        var url = MakeUrlForChannelId(par, channel_id);
+        control.addOverlay(getLayerForChannelId(channel_id, url), channel_id);
+    }
+    return control;
+}
+
+function redrawOverlayMaps(overlayMaps){
+    for(var layer_name in overlayMaps){
+        console.log(overlayMaps[layer_name])
+        overlayMaps[layer_name]._layers.redraw();
+    }
+}
+
 /**
 # Invalidates map size when map tab is opened
 */
+
 invalidateMapSizeWhenVisible = function(map) {
     return setTimeout(invalidateMapSizeWhenVisible, 300, map);
 };
