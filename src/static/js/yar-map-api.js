@@ -9,15 +9,60 @@ var __indexOf = Array.prototype.indexOf || function(item) {
   return -1;
 };
 cookies = window.NM.cookies;
+
+function addNewControlToMap(layers, overlayMaps){
+    var control = new L.Control.Layers(layers, overlayMaps)
+    map.addControl(control);
+    map['control'] = control;
+}
+
+function getLayers(){
+    var layers = {
+        'Яндекс': new L.Yandex(),
+        'Google карта': new L.Google('ROADMAP'),
+        'Google гибрид': new L.Google('HYBRID'),
+        'Google спутник': new L.Google(),
+        'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+    };
+    return layers;
+}
+
+function getOverlayMaps(){
+    var overlayMaps = {};
+    for(var i = 0; i < par[CHANNEL_IDS].length; i++){
+        var channel_id = par[CHANNEL_IDS][i];
+        var url = MakeUrlForChannelId(par, channel_id);
+        overlayMaps[channel_id] = getLayerForChannelId(channel_id, url);
+    }
+    return overlayMaps;
+}
+
+function setOverlayMaps(control){
+    for(var i = 0; i < par[CHANNEL_IDS].length; i++){
+        var channel_id = par[CHANNEL_IDS][i];
+        var url = MakeUrlForChannelId(par, channel_id);
+        control.addOverlay(getLayerForChannelId(channel_id, url), channel_id);
+    }
+    return control;
+}
+
+function redrawOverlayMaps(overlayMaps){
+    for(var layer_name in overlayMaps){
+        console.log(overlayMaps[layer_name])
+        overlayMaps[layer_name]._layers.redraw();
+    }
+}
+
 /**
 # Invalidates map size when map tab is opened
 */
+
 invalidateMapSizeWhenVisible = function(map) {
     return setTimeout(invalidateMapSizeWhenVisible, 300, map);
 };
 
 
-createMap = function(elementId, locate, zoom, lat, lon) {
+createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
@@ -44,15 +89,9 @@ createMap = function(elementId, locate, zoom, lat, lon) {
       map.on('locationerror', onLocationError);
       map.locate({setView: true, maxZoom: 18});
   }
+  var layers = getLayers();
   map.invalidateSize();
-  layers = {
-    'Яндекс': new L.Yandex(),
-    'Google карта': new L.Google('ROADMAP'),
-    'Google гибрид': new L.Google('HYBRID'),
-    'Google спутник': new L.Google(),
-    'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-  };
-  map.addControl(new L.Control.Layers(layers));
+  addNewControlToMap(layers, overlayMaps);
   mapType = cookies.readCookie('maptype');
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');
