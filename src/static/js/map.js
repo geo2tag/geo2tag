@@ -18,18 +18,6 @@ function fixMapSize(){
     map.invalidateSize();
 }
 
-function deleteLastLayer(){
-    var layers = map.eachLayer(function(l){})
-    var del_layer;
-    for(layer in layers._layers){
-        if (layer._hashUrl == url)
-            del_layer = layer._leaflet_id;
-            break;
-    }
-    if(del_layer != undefined){
-        map.removeLayer(del_layer);
-    }
-}
 
 function getLayerForChannelId(channel_id, url){
     var layer = new L.LayerJSON({url: url,
@@ -43,17 +31,8 @@ function getLayerForChannelId(channel_id, url){
                  iconUrl : url_icon
              });
          }
-     });
-     return layer;
-}
-
-function getOverlayMaps(){
-    overlayMaps = {}
-    for(var i = 0; i < par[CHANNEL_IDS].length; i++){
-        channel_id = par[CHANNEL_IDS][i];
-        url = MakeUrlForChannelId(par, channel_id);
-        overlayMaps[channel_id] = getLayerForChannelId(channel_id, url);
-    }
+    });
+    return layer;
 }
 
 
@@ -64,18 +43,15 @@ $(document).ready(function (){
     else
         map = createMap('map', true, par.zoom, overlayMaps)
     $(window).on('resize', fixMapSize());
-    var control = new L.Control.Layers(layers, overlayMaps)
-    map.addControl(control);
-    refreshMap(url);
+    refreshMap(getControl());
     if(par.refresh != 0){
         setInterval(function() {
-                                       
-                   refreshMap(url)}, par.refresh * 1000);
+               refreshMap(url)}, par.refresh * 1000);
     }
 });
 
-function refreshMap(url){
-    overlayMapshttp://leafletjs.com/reference.html#control-layers-addoverlay = getOverlayMaps();
-    addOverlay()
+function refreshMap(control){
+    map.removeControl(control)
+    //setOverlayMaps(control)
 }
 

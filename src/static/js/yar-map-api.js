@@ -9,6 +9,33 @@ var __indexOf = Array.prototype.indexOf || function(item) {
   return -1;
 };
 cookies = window.NM.cookies;
+
+function addNewControlToMap(layers, overlayMaps){
+    var control = new L.Control.Layers(layers, overlayMaps)
+    map.addControl(control);
+}
+
+function getLayers(){
+    var layers = {
+        'Яндекс': new L.Yandex(),
+        'Google карта': new L.Google('ROADMAP'),
+        'Google гибрид': new L.Google('HYBRID'),
+        'Google спутник': new L.Google(),
+        'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+    };
+    return layers;
+}
+
+function getOverlayMaps(){
+    var overlayMaps = {};
+    for(var i = 0; i < par[CHANNEL_IDS].length; i++){
+        channel_id = par[CHANNEL_IDS][i];
+        url = MakeUrlForChannelId(par, channel_id);
+        overlayMaps[channel_id] = getLayerForChannelId(channel_id, url);
+    }
+    return overlayMaps;
+}
+
 /**
 # Invalidates map size when map tab is opened
 */
@@ -17,7 +44,7 @@ invalidateMapSizeWhenVisible = function(map) {
 };
 
 
-createMap = function(elementId, locate, zoom, lat, lon) {
+createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
@@ -45,14 +72,9 @@ createMap = function(elementId, locate, zoom, lat, lon) {
       map.locate({setView: true, maxZoom: 18});
   }
   map.invalidateSize();
-  layers = {
-    'Яндекс': new L.Yandex(),
-    'Google карта': new L.Google('ROADMAP'),
-    'Google гибрид': new L.Google('HYBRID'),
-    'Google спутник': new L.Google(),
-    'Open street maps': new L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-  };
+  addNewControlToMap(layers, overlayMaps);
   mapType = cookies.readCookie('maptype');
+  var layers = getLayers();
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');
     if(cookies.readCookie('maptype') == ''){
