@@ -89,10 +89,10 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
       map.on('locationerror', onLocationError);
       map.locate({setView: true, maxZoom: 18});
   }
+  var layers = getLayers();
   map.invalidateSize();
   addNewControlToMap(layers, overlayMaps);
   mapType = cookies.readCookie('maptype');
-  var layers = getLayers();
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');
     if(cookies.readCookie('maptype') == ''){
