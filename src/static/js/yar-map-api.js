@@ -31,8 +31,9 @@ function getOverlayMaps(){
     var overlayMaps = {};
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
+        var logo_channel_id = "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "'/>" + channel_id ;
         var url = MakeUrlForChannelId(par, channel_id);
-        overlayMaps[channel_id] = getLayerForChannelId(channel_id, url);
+        overlayMaps[logo_channel_id] = getLayerForChannelId(channel_id, url);
     }
     return overlayMaps;
 }
