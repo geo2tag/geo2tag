@@ -43,7 +43,7 @@ $(document).ready(function (){
     else
         map = createMap('map', true, par.zoom, overlayMaps)
     $(window).on('resize', fixMapSize());
-//    refreshMap(overlayMaps);
+    refreshMap(overlayMaps);
     if(par.refresh != 0){
         setInterval(function() {
                refreshMap(url)}, par.refresh * 1000);
