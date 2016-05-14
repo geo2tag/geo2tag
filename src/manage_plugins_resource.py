@@ -19,7 +19,7 @@ class ManagePluginsResource(Resource):
             if pluginsDict[plugin].lower() == u'true' and isPluginEnabled(
                     plugin, getApp()) == False:
                 dirs = os.walk("plugins").next()
-                if plugin not in dirs:
+                if plugin not in dirs[1]:
                     raise PluginDoesNotExistException(plugin)
                 else:
                     enablePlugin(getApi(), plugin)
