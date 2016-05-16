@@ -61,7 +61,7 @@ class PointListResourceParser():
     @staticmethod
     def parsePostParameters():
         jsonData = request.get_json(force=True, silent=True)
-        if jsonData == None:
+        if jsonData is None:
             raise DecodingOfTheJsonDataFailedException
         args = parseBcParametr(validatePointsList(jsonData))
         return args
