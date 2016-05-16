@@ -7,6 +7,6 @@ URL = "https://tools.ietf.org/html/rfc7159"
 class DecodingOfTheJsonDataFailedException(BaseGeo2TagException, BadRequest):
 
     def getReturnObject(self):
-        ERROR = "Decoding of the JSON data failed: JSON data request" + \
+        ERROR = "Decoding of the JSON data failed: JSON data request " + \
             "doesn't conform to the standard " + URL
         return ERROR, 400
