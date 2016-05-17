@@ -27,11 +27,15 @@ function getLayers(){
     return layers;
 }
 
+function getLogoChannelId(channel_id){
+    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "'/>" + channel_id ;
+}
+
 function getOverlayMaps(){
     var overlayMaps = {};
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
-        var logo_channel_id = "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "'/>" + channel_id ;
+        var logo_channel_id = getLogoChannelId(channel_id);
         var url = MakeUrlForChannelId(par, channel_id);
         overlayMaps[logo_channel_id] = getLayerForChannelId(channel_id, url);
     }
@@ -42,7 +46,7 @@ function setOverlayMaps(control){
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
         var url = MakeUrlForChannelId(par, channel_id);
-        control.addOverlay(getLayerForChannelId(channel_id, url), channel_id);
+        control.addOverlay(getLayerForChannelId(channel_id, url), getLogoChannelId(channel_id));
     }
     return control;
 }

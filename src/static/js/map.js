@@ -1,7 +1,6 @@
 var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = null, 
     controls = null, positionMarker=null, l=null;
 var CHANNEL_IDS = 'channel_ids';
-var layers_checked_list = []
 
 function fixMapSize(){
     var content = $("#map");
@@ -44,14 +43,12 @@ $(document).ready(function (){
     else
         map = createMap('map', true, par.zoom, overlayMaps)
     $(window).on('resize', fixMapSize());
-    map.on('overlayadd', function(l){
+    /*map.on('overlayadd', function(l){
         layers_checked_list.push(l._leaflet_id);
-        console.log('---- ', l)
     })
     map.on('overlayremove', function(l){
-     //   layers_checked_list.push(l._leaflet_id);
-        console.log('---- ', layers_checked_list)
-    })
+        layers_checked_list.pop(l._leaflet_id);
+    })*/
     refreshMap(overlayMaps);
     if(par.refresh != 0){
         setInterval(function() {
@@ -59,8 +56,7 @@ $(document).ready(function (){
     }
 });
 
-function refreshMap(overlayMaps){    
-    
+function deleteOverlayMap(){    
     for(var key in map['control']._layers){
         if(map['control']._layers[key].overlay){
             map['control'].removeLayer(map['control']._layers[key].layer)
@@ -70,6 +66,9 @@ function refreshMap(overlayMaps){
         if(l._hashUrl)
             map.removeLayer(l);
     });    
+}
+function refreshMap(overlayMaps){
+    deleteOverlayMap();
     map['control'] = setOverlayMaps(map['control']);
 }
 
