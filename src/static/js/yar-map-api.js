@@ -28,7 +28,7 @@ function getLayers(){
 }
 
 function getLogoChannelId(channel_id){
-    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "'/>" + channel_id ;
+    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "' id='" + channel_id + "'/>" + channel_id;
 }
 
 function getOverlayMaps(){

@@ -35,20 +35,27 @@ function getLayerForChannelId(channel_id, url){
     return layer;
 }
 
+function changeCheckboxListener(){
+    $('input.leaflet-control-layers-selector').change(function() {
+         if(this.checked){
+             chNodes = $(this).parent()[0].childNodes[1];
+             chNodes_1 = $(chNodes)[0].childNodes[1];
+             console.log($(chNodes_1)[0]['attributes']['id']['value']) // add el to list
+         }
+         else{}// remove el from list
+    })
+}
 
 $(document).ready(function (){
+
     var overlayMaps = getOverlayMaps();
     if(par.latitude != null && par.longitude != null)
         map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude);
     else
         map = createMap('map', true, par.zoom, overlayMaps)
+    changeCheckboxListener();
     $(window).on('resize', fixMapSize());
-    /*map.on('overlayadd', function(l){
-        layers_checked_list.push(l._leaflet_id);
-    })
-    map.on('overlayremove', function(l){
-        layers_checked_list.pop(l._leaflet_id);
-    })*/
+ 
     refreshMap(overlayMaps);
     if(par.refresh != 0){
         setInterval(function() {
@@ -67,6 +74,8 @@ function deleteOverlayMap(){
             map.removeLayer(l);
     });    
 }
+
+
 function refreshMap(overlayMaps){
     deleteOverlayMap();
     map['control'] = setOverlayMaps(map['control']);
