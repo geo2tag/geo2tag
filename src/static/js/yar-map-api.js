@@ -47,13 +47,6 @@ function setOverlayMaps(control){
     return control;
 }
 
-function redrawOverlayMaps(overlayMaps){
-    for(var layer_name in overlayMaps){
-        console.log(overlayMaps[layer_name])
-        overlayMaps[layer_name]._layers.redraw();
-    }
-}
-
 /**
 # Invalidates map size when map tab is opened
 */
