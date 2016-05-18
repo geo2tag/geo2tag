@@ -199,7 +199,7 @@ def create_container_env_var(container_start_port):
     container_env = "http://" + \
                     os.environ["SERVER"] + ":" \
                     + unicode(container_start_port) + \
-                    "/instance/tests"
+                    "/instance"
     return container_env
 
 
