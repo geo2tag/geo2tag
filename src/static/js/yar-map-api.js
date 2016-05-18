@@ -3,7 +3,6 @@ var markerLayer = undefined;
 var positionLayer = undefined;
 var cookies, createMap, invalidateMapSizeWhenVisible;
 var list_checked_layers = [];
-
 var __indexOf = Array.prototype.indexOf || function(item) {
   for (var i = 0, l = this.length; i < l; i++) {
     if (this[i] === item) return i;
@@ -44,7 +43,7 @@ function changeCheckboxListener(){
              if(!flag)
                  list_checked_layers.push(channel_id);
          }
-         else{
+         else {
              for(var i = 0; i < list_checked_layers.length; i++){
                  if(list_checked_layers[i] == channel_id){
                      list_checked_layers.splice(i, 1);
@@ -52,8 +51,20 @@ function changeCheckboxListener(){
                  }
              }
          }
-         console.log(list_checked_layers)
     });
+}
+
+function checkCheckboxOnControl(){
+    for(var i = 0; i < list_checked_layers.length; i++){
+        $('input.leaflet-control-layers-selector').each(function(){
+            var span = $(this).parent()[0].childNodes[1].childNodes[1];
+            if($(span)[0]){
+                var id = $(span)[0]['id'];
+                if(id == list_checked_layers[i])
+                    $(this).trigger('click');
+            }
+        });
+    }
 }
 
 function deleteOverlayMap(){
@@ -72,6 +83,7 @@ function deleteOverlayMap(){
 function refreshMap(overlayMaps){
     deleteOverlayMap();
     map['control'] = setOverlayMaps(map['control']);
+    checkCheckboxOnControl();
     changeCheckboxListener();
 }
 
