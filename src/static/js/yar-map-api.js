@@ -2,6 +2,8 @@ var map;
 var markerLayer = undefined;
 var positionLayer = undefined;
 var cookies, createMap, invalidateMapSizeWhenVisible;
+var list_checked_layers = [];
+
 var __indexOf = Array.prototype.indexOf || function(item) {
   for (var i = 0, l = this.length; i < l; i++) {
     if (this[i] === item) return i;
@@ -9,6 +11,85 @@ var __indexOf = Array.prototype.indexOf || function(item) {
   return -1;
 };
 cookies = window.NM.cookies;
+
+function fixMapSize(){
+    var content = $("#map");
+    var viewHeight = $(window).height() - content.offset().top;
+    console.log('Window width = '+$(window).width());
+    if(viewHeight < 0)
+        viewHeight = viewHeight + 300;
+    content.height(viewHeight);
+    console.log('Window width = '+$(window).width());
+    console.log('Window width = '+$(window).width());
+    console.log('Content width = '+content.width());
+    console.log('Content.parent width = '+content.parent().width());
+    console.log('content.parent()');
+    console.log(content.parent());
+    map.invalidateSize();
+}
+
+function changeCheckboxListener(){
+    $('input.leaflet-control-layers-selector').change(function() {
+         var child_nodes_layer = $(this).parent()[0].childNodes[1];
+         var child_nodes_span = $(child_nodes_layer)[0].childNodes[1];
+         var channel_id = $(child_nodes_span)[0]['attributes']['id']['value'];
+         if(this.checked){
+             var flag = false;
+             for(var i = 0; i < list_checked_layers.length; i++){
+                 if(list_checked_layers[i] == channel_id){
+                     flag = true;
+                     break;
+                 }
+             }
+             if(!flag)
+                 list_checked_layers.push(channel_id);
+         }
+         else{
+             for(var i = 0; i < list_checked_layers.length; i++){
+                 if(list_checked_layers[i] == channel_id){
+                     list_checked_layers.splice(i, 1);
+                     break;
+                 }
+             }
+         }
+         console.log(list_checked_layers)
+    });
+}
+
+function deleteOverlayMap(){
+    for(var key in map['control']._layers){
+        if(map['control']._layers[key].overlay){
+            map['control'].removeLayer(map['control']._layers[key].layer)
+       }
+    }
+    map.eachLayer(function(l){
+        if(l._hashUrl)
+            map.removeLayer(l);
+    });
+}
+
+
+function refreshMap(overlayMaps){
+    deleteOverlayMap();
+    map['control'] = setOverlayMaps(map['control']);
+    changeCheckboxListener();
+}
+
+function getLayerForChannelId(channel_id, url){
+    var layer = new L.LayerJSON({url: url,
+         propertyLoc: ['location.coordinates.0','location.coordinates.1'],
+         buildPopup: function(data) {
+             return data.json.name || null;
+         },
+         buildIcon: function(data, title) {
+             var url_icon = "get_icon?channel_id=" + channel_id;
+             return new L.Icon({
+                 iconUrl : url_icon
+             });
+         }
+    });
+    return layer;
+}
 
 function addNewControlToMap(layers, overlayMaps){
     var control = new L.Control.Layers(layers, overlayMaps)
