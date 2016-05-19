@@ -49,8 +49,9 @@ class PointListResource(Resource):
         return result
 
 
-    @possibleException
+#    @possibleException
     def post(self, serviceName):
         pointList = PointListResourceParser.parsePostParameters()
+        print '----------'
         result = addPoints(serviceName, pointList)
         return result
