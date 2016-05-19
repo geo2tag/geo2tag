@@ -1,9 +1,14 @@
 from flask_restful import reqparse, inputs
+from bson.errors import InvalidId
+from bson.objectid import ObjectId
 import geo_json_type
 from flask import request
 from date_utils import datetime_from_iso8601
-from decoding_of_the_json_data_failed_excertion \
+from decoding_of_the_json_data_failed_exception \
     import DecodingOfTheJsonDataFailedException
+from possible_exception import possibleException
+from value_json_exception import ValueJSONException
+
 
 CHANNEL_IDS = 'channel_ids'
 NUMBER = 'number'
@@ -58,12 +63,14 @@ class PointListResourceParser():
 
         return res
 
+
     @staticmethod
     def parsePostParameters():
         jsonData = request.get_json(force=True, silent=True)
         if jsonData is None:
             raise DecodingOfTheJsonDataFailedException
-        args = parseBcParametr(validatePointsList(jsonData))
+        jsonData = validatePointsList(jsonData)
+        args = parseBcParametr(jsonData)
         return args
 
 
@@ -76,12 +83,12 @@ def parseBcParametr(json):
 
 def validatePointsList(json):
     if not isinstance(json, list):
-        raise ValueError('Value is not a list')
+        raise ValueJSONException('Value is not a list')
     for obj in json:
         if not ('lon' in obj.keys() and 'lat' in obj.keys() and
                 'alt' in obj.keys() and 'json' in obj.keys() and
                 'channel_id' in obj.keys()):
-            raise ValueError('Incorrect keys')
+            raise ValueJSONException('Incorrect keys')
         else:
             if not (
                 isinstance(
@@ -89,30 +96,34 @@ def validatePointsList(json):
                     int) or isinstance(
                     obj['lat'],
                     float)):
-                raise ValueError("'lat' - Incorrect type")
+                raise ValueJSONException("'lat' - Incorrect type")
             if not (
                 isinstance(
                     obj['lon'],
                     int) or isinstance(
                     obj['lon'],
                     float)):
-                raise ValueError("'lon' - Incorrect type")
+                raise ValueJSONException("'lon' - Incorrect type")
             if not (
                 isinstance(
                     obj['alt'],
                     int) or isinstance(
                     obj['alt'],
                     float)):
-                raise ValueError("'alt' - Incorrect type")
+                raise ValueJSONException("'alt' - Incorrect type")
             if not isinstance(obj['json'], dict):
-                raise ValueError("'json' - Incorrect type")
+                raise ValueJSONException("'json' - Incorrect type")
             if not (
                 isinstance(
                     obj['channel_id'],
                     str) or isinstance(
                     obj['channel_id'],
                     unicode)):
-                raise ValueError("'channel_id' - Incorrect type")
+                raise ValueJSONException("'channel_id' - Incorrect type")
             if ('bc' in obj.keys() and not isinstance(obj['bc'], bool)):
-                raise ValueError("'bc' - Incorrect type")
+                raise ValueJSONException("'bc' - Incorrect type")
+            try:
+                ObjectId(obj['channel_id'])
+            except InvalidId:
+                raise ValueJSONException(obj['channel_id'] + ' is not a valid ObjectId')
     return json

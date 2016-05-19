@@ -48,11 +48,9 @@ class PointListResource(Resource):
             params[RADIUS])
         return result
 
+
     @possibleException
     def post(self, serviceName):
-        try:
-            poinList = PointListResourceParser.parsePostParameters()
-        except ValueError:
-            return {}, 400
-        result = addPoints(serviceName, poinList)
+        pointList = PointListResourceParser.parsePostParameters()
+        result = addPoints(serviceName, pointList)
         return result
