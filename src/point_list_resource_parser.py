@@ -120,9 +120,10 @@ def validatePointsList(json):
                 raise ValueJSONException("'channel_id' - Incorrect type")
             if ('bc' in obj.keys() and not isinstance(obj['bc'], bool)):
                 raise ValueJSONException("'bc' - Incorrect type")
-            try:
-                ObjectId(obj['channel_id'])
-            except InvalidId:
-                raise ValueJSONException(
-                    obj['channel_id'] + ' is not a valid ObjectId')
+            if obj['channel_id'] != '':
+                try:
+                    ObjectId(obj['channel_id'])
+                except InvalidId:
+                    raise ValueJSONException(
+                        obj['channel_id'] + ' is not a valid ObjectId')
     return json
