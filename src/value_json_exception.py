@@ -1,7 +1,7 @@
 from base_geo2tag_exception import BaseGeo2TagException
 
 
-class ValueJSONException(BaseGeo2TagException, ValueError):
+class ValueJSONException(BaseGeo2TagException):
 
     def getReturnObject(self):
-        return '------', 400
+        return unicode(self), 400

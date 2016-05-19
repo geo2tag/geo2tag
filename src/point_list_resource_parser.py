@@ -126,4 +126,5 @@ def validatePointsList(json):
                 ObjectId(obj['channel_id'])
             except InvalidId:
                 raise ValueJSONException(obj['channel_id'] + ' is not a valid ObjectId')
+    print '-----------'
     return json
