@@ -6,7 +6,6 @@ from flask import request
 from date_utils import datetime_from_iso8601
 from decoding_of_the_json_data_failed_exception \
     import DecodingOfTheJsonDataFailedException
-from possible_exception import possibleException
 from value_json_exception import ValueJSONException
 
 
