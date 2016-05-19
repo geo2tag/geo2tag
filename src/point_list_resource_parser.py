@@ -63,7 +63,6 @@ class PointListResourceParser():
 
         return res
 
-
     @staticmethod
     def parsePostParameters():
         jsonData = request.get_json(force=True, silent=True)
@@ -125,6 +124,6 @@ def validatePointsList(json):
             try:
                 ObjectId(obj['channel_id'])
             except InvalidId:
-                raise ValueJSONException(obj['channel_id'] + ' is not a valid ObjectId')
-    print '-----------'
+                raise ValueJSONException(
+                    obj['channel_id'] + ' is not a valid ObjectId')
     return json

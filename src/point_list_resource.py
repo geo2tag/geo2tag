@@ -48,7 +48,6 @@ class PointListResource(Resource):
             params[RADIUS])
         return result
 
-
     @possibleException
     def post(self, serviceName):
         pointList = PointListResourceParser.parsePostParameters()
