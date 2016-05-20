@@ -1,5 +1,5 @@
 from github import Github
-from main import get_branch_number
+from script_api import get_branch_number
 
 GITHUB_USERNAME = 'TestUserGeomongoGithub'
 PASSWORD = 'ND3GyNHCpxweSqC2'
