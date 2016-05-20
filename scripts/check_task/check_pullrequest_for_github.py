@@ -6,13 +6,13 @@ PASSWORD = 'ND3GyNHCpxweSqC2'
 OPEN = 'open'
 
 
-def get_github_server():
+def get_github_instance():
     github = Github(GITHUB_USERNAME, PASSWORD)
     return github
 
 
 def main(branch):
-    ghs = get_github_server()
+    ghs = get_github_instance()
     repo = ghs.get_user().get_repos()[0]
     list_pulls = repo.get_pulls(OPEN)
     for pullrequest in list_pulls:
