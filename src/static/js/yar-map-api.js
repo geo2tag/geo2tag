@@ -94,7 +94,7 @@ function getLayerForChannelId(channel_id, url){
              return data.json.name || null;
          },
          buildIcon: function(data, title) {
-             var url_icon = "get_icon?channel_id=" + channel_id;
+             var url_icon = '/' + getInstancePrefix() + "/service/testservice/get_icon?channel_id=" + channel_id;
              return new L.Icon({
                  iconUrl : url_icon
              });
