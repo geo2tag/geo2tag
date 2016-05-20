@@ -13,12 +13,14 @@ def get_github_server():
 
 def main(branch):
     ghs = get_github_server()
-    repo = g.get_user().get_repos()[0]
+    repo = ghs.get_user().get_repos()[0]
     list_pulls = repo.get_pulls(OPEN)
     for pullrequest in list_pulls:
         if pullrequest.title == branch:
+            print 'pullrequest exists'
             return True
     else:
+         print 'pullrequest is missed'
          return False
 
 
