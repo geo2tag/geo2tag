@@ -20,8 +20,8 @@ def main(branch):
             print 'pullrequest exists'
             return True
     else:
-         print 'pullrequest is missed'
-         return False
+        print 'pullrequest is missed'
+        return False
 
 
 if __name__ == '__main__':
