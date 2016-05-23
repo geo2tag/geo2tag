@@ -67,6 +67,15 @@ function checkCheckboxOnControl(){
     }
 }
 
+function checkAllCheckBoxes(){
+    $('input.leaflet-control-layers-selector').each(function(){
+        var span = $(this).parent()[0].childNodes[1].childNodes[1];
+            if($(span)[0]){
+                $(this).trigger('click');
+            }
+    });
+}
+
 function deleteOverlayMap(){
     for(var key in map['control']._layers){
         if(map['control']._layers[key].overlay){
@@ -196,7 +205,8 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   }
   else
      map.addLayer(layers['Яндекс']);
-
+  changeCheckboxListener();
+  checkAllCheckBoxes();
   return map;
 };
 
