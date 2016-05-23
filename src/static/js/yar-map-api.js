@@ -11,6 +11,11 @@ var __indexOf = Array.prototype.indexOf || function(item) {
 };
 cookies = window.NM.cookies;
 
+function getIcon(channel_id){
+    console.log("get_icon?channel_id=" + channel_id)
+    return "get_icon?channel_id=" + channel_id;
+}
+
 function fixMapSize(){
     var content = $("#map");
     var viewHeight = $(window).height() - content.offset().top;
@@ -25,6 +30,27 @@ function fixMapSize(){
     console.log('content.parent()');
     console.log(content.parent());
     map.invalidateSize();
+}
+
+function setLayerWithCluster(){
+  var callbackSuccess = function (data) {
+      var len = data.length;
+      var markers = new L.MarkerClusterGroup();
+      for(var i = 0; i < len; i++ ){
+          var text = getPointPopupHtml(data[i]);
+          var mapIcon = getMapIcon(par.channel_id);
+          markers.addLayer(L.marker([
+                               data[i][LOCATION][COORDINATES][0],
+                               data[i][LOCATION][COORDINATES][1]],
+                               {icon: mapIcon}).bindPopup(text).openPopup());
+      }
+      map.addLayer(markers);
+  };
+  var callbackFail = function () {
+ 
+  };
+  var getPointForMap = new Geo2TagRequests('map', 'map');
+  getPointForMap.getPoints(par.service_name, callbackSuccess, callbackFail, par.channel_ids, 1000);
 }
 
 function changeCheckboxListener(){
@@ -94,9 +120,8 @@ function getLayerForChannelId(channel_id, url){
              return data.json.name || null;
          },
          buildIcon: function(data, title) {
-             var url_icon = "get_icon?channel_id=" + channel_id;
              return new L.Icon({
-                 iconUrl : url_icon
+                 iconUrl : getIcon(data.channel_id)
              });
          }
     });
@@ -181,21 +206,7 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
       map.locate({setView: true, maxZoom: 18});
   }
   var layers = getLayers();
-
-  var callbackSuccess = function (data) {
-      var len = data.length;
-      var markers = new L.MarkerClusterGroup();
-      for(var i = 0; i < len; i++ ){
-          var text = getPointPopupHtml(data[i]);
-          var mapIcon = getMapIcon();
-          markers.addLayer(L.marker([
-                               data[i][LOCATION][COORDINATES][0], 
-                               data[i][LOCATION][COORDINATES][1]], 
-                               {icon: mapIcon}).bindPopup(text).openPopup());
-      }
-      map.addLayer(markers);
-  };
-
+  setLayerWithCluster();
   map.invalidateSize();
   addNewControlToMap(layers, overlayMaps);
   mapType = cookies.readCookie('maptype');
