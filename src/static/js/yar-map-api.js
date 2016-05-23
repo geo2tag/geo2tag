@@ -35,9 +35,11 @@ function fixMapSize(){
 function setLayerWithCluster(){
   var callbackSuccess = function (data) {
       var len = data.length;
+      console.log(data)
       var markers = new L.MarkerClusterGroup();
       for(var i = 0; i < len; i++ ){
           var text = getPointPopupHtml(data[i]);
+          console.log(par)
           var mapIcon = getMapIcon(par.channel_id);
           markers.addLayer(L.marker([
                                data[i][LOCATION][COORDINATES][0],
@@ -45,9 +47,10 @@ function setLayerWithCluster(){
                                {icon: mapIcon}).bindPopup(text).openPopup());
       }
       map.addLayer(markers);
+      console.log('success')
   };
   var callbackFail = function () {
- 
+     console.log('fail')
   };
   var getPointForMap = new Geo2TagRequests('map', 'map');
   getPointForMap.getPoints(par.service_name, callbackSuccess, callbackFail, par.channel_ids, 1000);
@@ -125,6 +128,29 @@ function getLayerForChannelId(channel_id, url){
              });
          }
     });
+  var callbackSuccess = function (data) {
+      var len = data.length;
+      console.log(data)
+      var markers = new L.MarkerClusterGroup();
+      for(var i = 0; i < len; i++ ){
+          var text = getPointPopupHtml(data[i]);
+          console.log(par)
+          var mapIcon = getMapIcon(par.channel_id);
+          markers.addLayer(L.marker([
+                               data[i][LOCATION][COORDINATES][0],
+                               data[i][LOCATION][COORDINATES][1]],
+                               {icon: mapIcon}).bindPopup(text).openPopup());
+      }
+      map.addLayer(markers);
+      console.log('success')
+  };
+  var callbackFail = function () {
+     console.log('fail')
+  };
+  var getPointForMap = new Geo2TagRequests('map', 'map');
+  getPointForMap.getPoints(par.service_name, callbackSuccess, callbackFail, par.channel_ids, 1000);
+
+
     return layer;
 }
 
@@ -206,7 +232,6 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
       map.locate({setView: true, maxZoom: 18});
   }
   var layers = getLayers();
-  setLayerWithCluster();
   map.invalidateSize();
   addNewControlToMap(layers, overlayMaps);
   mapType = cookies.readCookie('maptype');
