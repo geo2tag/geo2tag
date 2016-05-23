@@ -9,10 +9,13 @@ var __indexOf = Array.prototype.indexOf || function(item) {
   }
   return -1;
 };
+var LOCATION = 'location';
+var COORDINATES = 'coordinates'
+
 cookies = window.NM.cookies;
 
-function getIcon(channel_id){
-    console.log("get_icon?channel_id=" + channel_id)
+function getMapIcon(channel_id){
+    console.log(channel_id)
     return "get_icon?channel_id=" + channel_id;
 }
 
@@ -32,29 +35,31 @@ function fixMapSize(){
     map.invalidateSize();
 }
 
-function setLayerWithCluster(){
+function setLayerWithCluster(channel_id){
   var callbackSuccess = function (data) {
       var len = data.length;
-      console.log(data)
       var markers = new L.MarkerClusterGroup();
-      for(var i = 0; i < len; i++ ){
-          var text = getPointPopupHtml(data[i]);
-          console.log(par)
-          var mapIcon = getMapIcon(par.channel_id);
+      for(var i = 0; i < len; i++){
+          var mapIcon = getMapIcon(channel_id);
           markers.addLayer(L.marker([
                                data[i][LOCATION][COORDINATES][0],
                                data[i][LOCATION][COORDINATES][1]],
-                               {icon: mapIcon}).bindPopup(text).openPopup());
+                               {icon: mapIcon}));
       }
       map.addLayer(markers);
-      console.log('success')
+      console.log('success set layer with cluster')
   };
   var callbackFail = function () {
-     console.log('fail')
+     console.log('fail set layer with cluster')
   };
   var getPointForMap = new Geo2TagRequests('map', 'map');
-  getPointForMap.getPoints(par.service_name, callbackSuccess, callbackFail, par.channel_ids, 1000);
+  getPointForMap.getPoints(par.serviceName, callbackSuccess, callbackFail, channel_id, 1000);
 }
+
+
+
+
+
 
 function changeCheckboxListener(){
     $('input.leaflet-control-layers-selector').change(function() {
@@ -124,33 +129,11 @@ function getLayerForChannelId(channel_id, url){
          },
          buildIcon: function(data, title) {
              return new L.Icon({
-                 iconUrl : getIcon(data.channel_id)
+                 iconUrl : getMapIcon(channel_id)
              });
          }
     });
-  var callbackSuccess = function (data) {
-      var len = data.length;
-      console.log(data)
-      var markers = new L.MarkerClusterGroup();
-      for(var i = 0; i < len; i++ ){
-          var text = getPointPopupHtml(data[i]);
-          console.log(par)
-          var mapIcon = getMapIcon(par.channel_id);
-          markers.addLayer(L.marker([
-                               data[i][LOCATION][COORDINATES][0],
-                               data[i][LOCATION][COORDINATES][1]],
-                               {icon: mapIcon}).bindPopup(text).openPopup());
-      }
-      map.addLayer(markers);
-      console.log('success')
-  };
-  var callbackFail = function () {
-     console.log('fail')
-  };
-  var getPointForMap = new Geo2TagRequests('map', 'map');
-  getPointForMap.getPoints(par.service_name, callbackSuccess, callbackFail, par.channel_ids, 1000);
-
-
+    setLayerWithCluster(channel_id);
     return layer;
 }
 
@@ -250,10 +233,6 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
 
   return map;
 };
-
-
-
-
 
 window.NM.maps = {
   createMap: createMap,
