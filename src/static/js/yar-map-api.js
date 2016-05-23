@@ -181,6 +181,21 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
       map.locate({setView: true, maxZoom: 18});
   }
   var layers = getLayers();
+
+  var callbackSuccess = function (data) {
+      var len = data.length;
+      var markers = new L.MarkerClusterGroup();
+      for(var i = 0; i < len; i++ ){
+          var text = getPointPopupHtml(data[i]);
+          var mapIcon = getMapIcon();
+          markers.addLayer(L.marker([
+                               data[i][LOCATION][COORDINATES][0], 
+                               data[i][LOCATION][COORDINATES][1]], 
+                               {icon: mapIcon}).bindPopup(text).openPopup());
+      }
+      map.addLayer(markers);
+  };
+
   map.invalidateSize();
   addNewControlToMap(layers, overlayMaps);
   mapType = cookies.readCookie('maptype');
