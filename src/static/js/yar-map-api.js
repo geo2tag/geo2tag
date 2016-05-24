@@ -15,7 +15,6 @@ var COORDINATES = 'coordinates'
 cookies = window.NM.cookies;
 
 function getMapIcon(channel_id){
-    console.log("get_icon?channel_id=" + channel_id)
     return "get_icon?channel_id=" + channel_id;
 }
 
@@ -108,6 +107,10 @@ function checkAllCheckBoxes(){
     });
 }
 
+function deleteClusterFromMap(){
+    map['markers'].clearLayers();
+}
+
 function deleteOverlayMap(){
     for(var key in map['control']._layers){
         if(map['control']._layers[key].overlay){
@@ -120,9 +123,12 @@ function deleteOverlayMap(){
     });
 }
 
+function refreshMapWithClustering(){
+    deleteClusterFromMap();
+    setLayerWithCluster();
+}
 
-function refreshMap(overlayMaps){
-    console.log('REFRESH')
+function refreshMapWithoutClustering(){
     deleteOverlayMap();
     map['control'] = setOverlayMaps(map['control']);
     checkCheckboxOnControl();

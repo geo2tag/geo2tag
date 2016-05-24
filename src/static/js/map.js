@@ -10,9 +10,14 @@ $(document).ready(function (){
     else
         map = createMap('map', false, par.zoom, undefined, par.latitude, par.longitude, par.clustering);    
     $(window).on('resize', fixMapSize());
+    console.log(par)
     if(par.refresh != 0){
-        setInterval(function() {
-               refreshMap(url)}, par.refresh * 1000);
+        if(!par.clustering)
+            setInterval(function() {
+                refreshMapWithoutClustering()}, par.refresh * 1000);
+        else
+            setInterval(function() {
+                refreshMapWithClustering()}, par.refresh * 1000);
     }
 });
 
