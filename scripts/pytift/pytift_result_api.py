@@ -1,5 +1,4 @@
 from jenkins_api import get_jenkins_build_result
-import argparse
 
 PROPSFILE = 'propsfile'
 MODE_AW = 'aw'
