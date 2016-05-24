@@ -38,7 +38,7 @@ function fixMapSize(){
 function setLayerWithCluster(channel_id){
   var callbackSuccess = function (data) {
       var len = data.length;
-      var markers = new L.MarkerClusterGroup();
+      markers = new L.MarkerClusterGroup();
       for(var i = 0; i < len; i++){
           var mapIcon = getMapIcon(channel_id);
           markers.addLayer(L.marker([
@@ -47,6 +47,8 @@ function setLayerWithCluster(channel_id){
                                {icon: mapIcon}));
       }
       map.addLayer(markers);
+      map['markers'] = markers;
+      console.log(map)
       console.log('success set layer with cluster')
   };
   var callbackFail = function () {
@@ -56,10 +58,10 @@ function setLayerWithCluster(channel_id){
   getPointForMap.getPoints(par.serviceName, callbackSuccess, callbackFail, channel_id, 1000);
 }
 
+function removeLayerWithCluster(){
+    console.log(map)
 
-
-
-
+}
 
 function changeCheckboxListener(){
     $('input.leaflet-control-layers-selector').change(function() {
