@@ -15,7 +15,7 @@ var COORDINATES = 'coordinates'
 cookies = window.NM.cookies;
 
 function getMapIcon(channel_id){
-    console.log(channel_id)
+    console.log("get_icon?channel_id=" + channel_id)
     return "get_icon?channel_id=" + channel_id;
 }
 
@@ -35,33 +35,29 @@ function fixMapSize(){
     map.invalidateSize();
 }
 
-function setLayerWithCluster(channel_id){
-  var callbackSuccess = function (data) {
-      var len = data.length;
-      markers = new L.MarkerClusterGroup();
-      for(var i = 0; i < len; i++){
-          var mapIcon = getMapIcon(channel_id);
-          markers.addLayer(L.marker([
-                               data[i][LOCATION][COORDINATES][0],
-                               data[i][LOCATION][COORDINATES][1]],
-                               {icon: mapIcon}));
-      }
-      map.addLayer(markers);
-      map['markers'] = markers;
-      console.log(map)
-      console.log('success set layer with cluster')
-  };
-  var callbackFail = function () {
-     console.log('fail set layer with cluster')
-  };
-  var getPointForMap = new Geo2TagRequests('map', 'map');
-  getPointForMap.getPoints(par.serviceName, callbackSuccess, callbackFail, channel_id, 1000);
+function setLayerWithCluster(){
+    var getPointForMap = new Geo2TagRequests('map', 'map');
+    var callbackSuccess = function (data) {
+        var data_len = data.length;
+        markers = new L.MarkerClusterGroup();
+        for(var i = 0; i < data_len; i++){
+            var mapIcon = L.icon({
+                iconUrl: getMapIcon(data[i]['channel_id']['$oid'])});
+            markers.addLayer(L.marker([
+                data[i][LOCATION][COORDINATES][0],
+                data[i][LOCATION][COORDINATES][1]],
+                {icon: mapIcon}));
+        }
+        map.addLayer(markers);
+        map['markers'] = markers;
+        console.log('success set layer with cluster')
+    };
+    var callbackFail = function () {
+        console.log('fail set layer with cluster')
+    };
+    getPointForMap.getPoints(par.serviceName, callbackSuccess, callbackFail, par.channel_ids, 1000);
 }
 
-function removeLayerWithCluster(){
-    console.log(map)
-
-}
 
 function changeCheckboxListener(){
     $('input.leaflet-control-layers-selector').change(function() {
@@ -126,6 +122,7 @@ function deleteOverlayMap(){
 
 
 function refreshMap(overlayMaps){
+    console.log('REFRESH')
     deleteOverlayMap();
     map['control'] = setOverlayMaps(map['control']);
     checkCheckboxOnControl();
@@ -144,7 +141,6 @@ function getLayerForChannelId(channel_id, url){
              });
          }
     });
-    setLayerWithCluster(channel_id);
     return layer;
 }
 
@@ -198,20 +194,15 @@ invalidateMapSizeWhenVisible = function(map) {
 };
 
 
-createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
+createMap = function(elementId, locate, zoom, overlayMaps, lat, lon, clustering) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
-  }
-  if (lat == undefined || lon == undefined) {
-    lat = 63.377;
-    lon = 28.938 ;
   }
   map = L.map(elementId, {
     center: [lat, lon],
     zoom: zoom
   });
-
   if (locate == true){
       function onLocationFound(e) {
           map.panTo(e.latlng);
@@ -227,7 +218,17 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   }
   var layers = getLayers();
   map.invalidateSize();
-  addNewControlToMap(layers, overlayMaps);
+  if(!clustering){
+      console.log('---------------------')
+      addNewControlToMap(layers, overlayMaps);
+      changeCheckboxListener();
+      checkAllCheckBoxes();
+  }
+  else{
+      console.log('Clustering is turned on');
+      map.addControl(new L.Control.Layers(layers));
+      setLayerWithCluster();
+  }
   mapType = cookies.readCookie('maptype');
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');
@@ -241,8 +242,6 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   }
   else
      map.addLayer(layers['Яндекс']);
-  changeCheckboxListener();
-  checkAllCheckBoxes();
   return map;
 };
 

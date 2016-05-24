@@ -3,12 +3,13 @@ var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = 
 var CHANNEL_IDS = 'channel_ids';
 
 $(document).ready(function (){
-    var overlayMaps = getOverlayMaps();
-    if(par.latitude != null && par.longitude != null)
-        map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude);
+    console.log(par)
+    if(!par.clustering){
+        var overlayMaps = getOverlayMaps();
+        map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude, par.clustering);
+    }
     else
-        map = createMap('map', true, par.zoom, overlayMaps)
-    changeCheckboxListener();
+        map = createMap('map', false, par.zoom, undefined, par.latitude, par.longitude, par.clustering);    
     $(window).on('resize', fixMapSize());
     if(par.refresh != 0){
         setInterval(function() {
