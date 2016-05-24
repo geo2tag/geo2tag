@@ -3,7 +3,6 @@ var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = 
 var CHANNEL_IDS = 'channel_ids';
 
 $(document).ready(function (){
-    console.log(par)
     if(!par.clustering){
         var overlayMaps = getOverlayMaps();
         map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude, par.clustering);
