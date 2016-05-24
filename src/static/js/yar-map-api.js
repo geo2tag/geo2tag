@@ -225,7 +225,6 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon, clustering)
   var layers = getLayers();
   map.invalidateSize();
   if(!clustering){
-      console.log('---------------------')
       addNewControlToMap(layers, overlayMaps);
       changeCheckboxListener();
       checkAllCheckBoxes();
