@@ -3,22 +3,12 @@ import argparse
 
 PROPSFILE = 'propsfile'
 MODE_AW = 'aw'
-ARG_BRANCH = '--branch'
 
 
 def write_env_var(variable, value):
     f = open(PROPSFILE, MODE_AW)
     f.write(variable + '=' + value + '\n')
     f.close()
-
-
-def get_branch_number():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        ARG_BRANCH,
-        required=True)
-    args = parser.parse_args()
-    return args.branch
 
 
 def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
