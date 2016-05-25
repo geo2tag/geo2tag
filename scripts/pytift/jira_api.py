@@ -19,6 +19,10 @@ def get_jira_issue(jira, branch):
     return issue
 
 
+def get_test_scenario_field(issue):
+    return issue.fields.customfield_10800
+
+
 def reopen_issue(jira, issue, branch, comment='Autotest fail'):
     transition_issue(jira, issue, u'Reopened')
     add_comment(jira, branch, comment)

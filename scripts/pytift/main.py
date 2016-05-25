@@ -18,7 +18,8 @@ def check_issue(branch):
     jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
     if str(issue.fields.status) == 'Resolved':
-        test_scenario_field = check_test_scenario_field(issue)
+        test_scenario_field = check_test_scenario_field(
+            get_test_scenario_field(issue))
         if check_git_branch(branch) == True:
             conflict = check_git_conflict(branch)
             pullrequest = check_pullrequest(branch)
