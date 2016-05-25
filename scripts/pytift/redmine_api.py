@@ -1,35 +1,33 @@
-import requests
 from redmine import Redmine
+from get_args_pytift import get_branch_number
 
 USER = 'pytift.test.bot'
 PASSWORD = 'pytift.test.bot'
-PROJECT = 'pytift-test-project'
-COMPANY = 'http://dev.osll.ru'
-URL = ''
-LIST_ARGS = {"issue": {"subject": "Subject changed","notes": "The subject was changed"}}
+COMPANY = 'https://dev.osll.ru'
+TEST_COMMENT = 'test comment'
 
-
-def get_redmine_project(redmine):
-    project = redmine.project.get(PROJECT)
-    return project
 
 def get_redmine_server():
     redmine = Redmine(COMPANY, username=USER, password=PASSWORD)
     return redmine
 
-def main():
-    redmine = get_redmine_server()
-    project = get_redmine_project(redmine)
-    #response = requests.put(self.getUrl(URL))
-    #responseText = response.text
-    #responseCode = response.status_code
-    #print responseText, responseCode
-    issue = redmine.issue.get(7006)
-    print issue
-    issue.notes = 'NOTES'    
+
+def get_redmine_issue(redmine, branch):
+    issue = redmine.issue.get(branch)
+    return issue
+
+
+def add_comment(issue, comment):
+    issue.notes = comment
     issue.save()
-    print issue
+
+
+def main(branch):
+    redmine = get_redmine_server()
+    issue = get_redmine_issue(redmine, branch)
+    comment = TEST_COMMENT
+    add_comment(issue, comment)
 
 
 if __name__ == '__main__':
-    main()
+    main(get_branch_number())
