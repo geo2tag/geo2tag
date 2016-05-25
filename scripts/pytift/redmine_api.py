@@ -5,6 +5,8 @@ USER = 'pytift.test.bot'
 PASSWORD = 'pytift.test.bot'
 COMPANY = 'https://dev.osll.ru'
 TEST_COMMENT = 'test comment'
+REOPENED = 14
+DONE = 3
 
 
 def get_redmine_server():
@@ -22,12 +24,22 @@ def add_comment(issue, comment):
     issue.save()
 
 
-def main(branch):
+def is_issue_resolved(issue):
+    return issue.status_id == DONE
+
+
+def transition_issue(issue, status):
+    issue.status_id = status
+    issue.save()
+
+
+# for tests
+def main(branch): 
     redmine = get_redmine_server()
     issue = get_redmine_issue(redmine, branch)
-    comment = TEST_COMMENT
-    add_comment(issue, comment)
-
+    transition_issue(issue, DONE)
+    if is_issue_resolved(issue):
+        transition_issue(issue, REOPENED)
 
 if __name__ == '__main__':
     main(get_branch_number())
