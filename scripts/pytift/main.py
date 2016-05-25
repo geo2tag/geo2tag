@@ -6,7 +6,8 @@ from check_git_conflict import check_git_conflict
 from check_git_branch import check_git_branch
 from jira_api import get_jira_server, get_jira_issue, reopen_issue, \
     add_comment
-from script_api import get_comment, get_branch_number, write_env_var
+from pytift_result_api import get_comment, write_env_var
+from get_args_pytift import get_branch_number
 
 
 FAIL_REASON = "FAIL_REASON"
