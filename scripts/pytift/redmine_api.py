@@ -40,6 +40,9 @@ def main(branch):
     transition_issue(issue, DONE)
     if is_issue_resolved(issue):
         transition_issue(issue, REOPENED)
+    comment = TEST_COMMENT
+    add_comment(issue, comment)
+
 
 if __name__ == '__main__':
     main(get_branch_number())
