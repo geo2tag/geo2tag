@@ -34,7 +34,7 @@ def transition_issue(issue, status):
 
 
 # for tests
-def main(branch): 
+def main(branch):
     redmine = get_redmine_server()
     issue = get_redmine_issue(redmine, branch)
     transition_issue(issue, DONE)
