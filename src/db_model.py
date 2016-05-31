@@ -179,28 +179,22 @@ def getServiceList(number, offset, serviceSubstr, ownerId):
     return list(coursor.sort(NAME, 1).skip(offset).limit(number))
 
 
+def applySubstringCriterion(substring, criterion):
+    if substring:
+         criterion[NAME] = {'$regex': substring}
+
+
 def getChannelsList(serviceName, substring, number, offset):
     db_getchannellist = getDbObject(serviceName)
-    if substring is not None and number is not None and offset is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}}).skip(offset).limit(number)
-    elif substring is not None and offset is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}}).skip(offset)
-    elif substring is not None and number is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}}).limit(number)
-    elif offset is not None and number is not None:
-        return db_getchannellist[
-            CHANNELS_COLLECTION].find().skip(offset).limit(number)
-    elif substring is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}})
-    elif number is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find().limit(number)
-    elif offset is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find().skip(offset)
 
+    applySubstringCriterion(substring, criterion)
+    print criterion    
+    channel_list = db_findepoint[CHANNELS_COLLECTION].find(
+        criterion)
+    if offset:
+        channel_list.skip(offset)
+    channel_list.limit(number)
+    return channel_list
 
 def getChannelById(serviceName, channelId):
     db_channelbyid = getDbObject(serviceName)
