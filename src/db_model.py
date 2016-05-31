@@ -195,6 +195,7 @@ def getChannelsList(serviceName, substring, number, offset):
     channel_list.limit(number)
     return channel_list
 
+
 def getChannelById(serviceName, channelId):
     db_channelbyid = getDbObject(serviceName)
     if isinstance(channelId, str) or isinstance(channelId, unicode):
