@@ -3,6 +3,8 @@
 
 import unittest
 from point_list_resource_parser import validatePointsList
+from value_json_exception import ValueJSONException
+
 
 TEST_ARGS = [{'lat': 1.1, 'lon': 1.1, 'alt': 5, 'json': {}, 'channel_id': ''}]
 TEST_ARGS2 = [{'lat': 1.1, 'lon': 1.1, 'alt': 5,
@@ -20,7 +22,7 @@ class TestValidatePointsList(unittest.TestCase):
         self.assertEqual(args, TEST_ARGS)
         args = validatePointsList(TEST_ARGS2)
         self.assertEqual(args, TEST_ARGS2)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueJSONException):
             args = validatePointsList(INCORRECT_ARGS1)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValueJSONException):
             args = validatePointsList(INCORRECT_ARGS2)

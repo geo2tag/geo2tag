@@ -3,6 +3,7 @@ import unittest
 import sys
 from basic_integration_test import BasicIntegrationTest
 from json import loads, dumps
+
 DB = "testservice"
 COLLECTION = 'points'
 JSON = 'json'
@@ -15,6 +16,7 @@ TEST_URL = '/instance/service/testservice/point'
 BAD_TEST_URL = '/instance/service/testservice/point'
 VALID_RESPONSE_CODE = 200
 NOT_VALID_RESPONSE_CODE = 400
+RESPONSE_TEXT_INVALID = u'"\'lat\' - Incorrect type"'
 
 
 class TestPointListPostRequest(BasicIntegrationTest):
@@ -45,7 +47,7 @@ class TestPointListPostRequest(BasicIntegrationTest):
         responseCode = response.status_code
         responseText = response.text
         self.assertEquals(responseCode, NOT_VALID_RESPONSE_CODE)
-        self.assertEquals(responseText, '{}')
+        self.assertEquals(responseText, RESPONSE_TEXT_INVALID)
 
 
 if __name__ == '__main__':
