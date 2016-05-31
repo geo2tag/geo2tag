@@ -180,15 +180,13 @@ def getServiceList(number, offset, serviceSubstr, ownerId):
 
 
 def applySubstringCriterion(substring, criterion):
-    if substring:
-         criterion[NAME] = {'$regex': substring}
+    if substring != '':
+        criterion.update({NAME: {'$regex': substring}})
 
 
 def getChannelsList(serviceName, substring, number, offset):
     db_getchannellist = getDbObject(serviceName)
-
-    applySubstringCriterion(substring, criterion)
-    print criterion    
+    criterion = {}
     channel_list = db_findepoint[CHANNELS_COLLECTION].find(
         criterion)
     if offset:
