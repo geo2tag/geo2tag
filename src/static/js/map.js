@@ -3,16 +3,21 @@ var map = null, proj4326 = null, projmerc = null, markers = null, vectorLayer = 
 var CHANNEL_IDS = 'channel_ids';
 
 $(document).ready(function (){
-    var overlayMaps = getOverlayMaps();
-    if(par.latitude != null && par.longitude != null)
-        map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude);
+    if(!par.clustering){
+        var overlayMaps = getOverlayMaps();
+        map = createMap('map', false, par.zoom, overlayMaps, par.latitude, par.longitude, par.clustering);
+        changeCheckboxListener();
+    }
     else
-        map = createMap('map', true, par.zoom, overlayMaps)
-    changeCheckboxListener();
+        map = createMap('map', false, par.zoom, undefined, par.latitude, par.longitude, par.clustering);    
     $(window).on('resize', fixMapSize());
     if(par.refresh != 0){
-        setInterval(function() {
-               refreshMap(url)}, par.refresh * 1000);
+        if(!par.clustering)
+            setInterval(function() {
+                refreshMapWithoutClustering()}, par.refresh * 1000);
+        else
+            setInterval(function() {
+                refreshMapWithClustering()}, par.refresh * 1000);
     }
 });
 
