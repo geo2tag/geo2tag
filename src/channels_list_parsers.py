@@ -13,7 +13,7 @@ class ChannelsListResourceParser():
     def parseGetParameters():
         parser = reqparse.RequestParser()
         parser.add_argument(ARGS_SUBSTRING, type=unicode)
-        parser.add_argument(ARGS_NUMBER, type=int)
+        parser.add_argument(ARGS_NUMBER, type=int, required=True)
         parser.add_argument(ARGS_OFFSET, type=int)
         args = parser.parse_args()
         return args
