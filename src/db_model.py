@@ -187,7 +187,8 @@ def applySubstringCriterion(substring, criterion):
 def getChannelsList(serviceName, substring, number, offset):
     db_getchannellist = getDbObject(serviceName)
     criterion = {}
-    channel_list = db_findepoint[CHANNELS_COLLECTION].find(
+    applySubstringCriterion(substring, criterion)
+    channel_list = db_getchannellist[CHANNELS_COLLECTION].find(
         criterion)
     if offset:
         channel_list.skip(offset)
