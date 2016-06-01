@@ -139,7 +139,7 @@ function getLayerForChannelId(channel_id, url){
     var layer = new L.LayerJSON({url: url,
          propertyLoc: ['location.coordinates.0','location.coordinates.1'],
          buildPopup: function(data) {
-             return data.json.name || null;
+             return data.json.name || 'Название отсутствует';
          },
          buildIcon: function(data, title) {
              return new L.Icon({
