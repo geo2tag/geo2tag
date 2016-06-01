@@ -171,13 +171,35 @@ function getLogoChannelId(channel_id){
     return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "' id='" + channel_id + "'/>" + channel_id;
 }
 
+function isPointExistsForChannelId(channel_id){
+     $.ajax({
+        type: "GET",
+        url: "/instance/service/testservice/point?number=1&channel_ids=" + channel_id,
+        timeout: 150000,
+        crossDomain: true,
+        async: false,
+        success: function(json, status) {
+            if(json.length != 0)
+                result = true;
+            else 
+                result = false;
+        },
+        error: function (request, textStatus, errorThrown){
+            console.log("ERROR FIND POINT FOR CHANNEL " + channel_id)
+        }
+    });
+    return result;
+}
+
 function getOverlayMaps(){
     var overlayMaps = {};
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
-        var logo_channel_id = getLogoChannelId(channel_id);
-        var url = MakeUrlForChannelId(par, channel_id);
-        overlayMaps[logo_channel_id] = getLayerForChannelId(channel_id, url);
+        if(isPointExistsForChannelId(channel_id)){
+            var logo_channel_id = getLogoChannelId(channel_id);
+            var url = MakeUrlForChannelId(par, channel_id);
+            overlayMaps[logo_channel_id] = getLayerForChannelId(channel_id, url);
+        }
     }
     return overlayMaps;
 }
