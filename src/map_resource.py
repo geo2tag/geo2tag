@@ -2,7 +2,7 @@ from possible_exception import possibleException
 from flask_restful import Resource
 from flask import render_template
 from flask import make_response
-from db_model import getAllChannelIds
+from db_model import getNotEmptyChannelIds
 from map_resource_parser import MapParser
 
 
@@ -25,6 +25,6 @@ class MapResource(Resource):
 
 def getDefaultChannelIds(serviceName):
     result = {}
-    all_channel_ids = getAllChannelIds(serviceName)
+    all_channel_ids = getNotEmptyChannelIds(serviceName)
     result[CHANNEL_IDS] = all_channel_ids
     return result
