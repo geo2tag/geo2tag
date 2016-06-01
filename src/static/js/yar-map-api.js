@@ -42,10 +42,11 @@ function setLayerWithCluster(){
         for(var i = 0; i < data_len; i++){
             var mapIcon = L.icon({
                 iconUrl: getMapIcon(data[i]['channel_id']['$oid'])});
+            var text = data[i].json.name || 'Название отсутствует';
             markers.addLayer(L.marker([
                 data[i][LOCATION][COORDINATES][0],
                 data[i][LOCATION][COORDINATES][1]],
-                {icon: mapIcon}));
+                {icon: mapIcon}).bindPopup(text).openPopup());
         }
         map.addLayer(markers);
         map['markers'] = markers;
