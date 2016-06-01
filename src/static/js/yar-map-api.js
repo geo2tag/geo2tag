@@ -207,8 +207,10 @@ function getOverlayMaps(){
 function setOverlayMaps(control){
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
-        var url = MakeUrlForChannelId(par, channel_id);
-        control.addOverlay(getLayerForChannelId(channel_id, url), getLogoChannelId(channel_id));
+        if(isPointExistsForChannelId(channel_id)){
+            var url = MakeUrlForChannelId(par, channel_id);
+            control.addOverlay(getLayerForChannelId(channel_id, url), getLogoChannelId(channel_id));
+        }
     }
     return control;
 }
