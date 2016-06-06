@@ -157,6 +157,23 @@ function addNewControlToMap(layers, overlayMaps){
     map['control'] = control;
 }
 
+function getNameForChannelId(channel_id){
+    $.ajax({
+        type: "GET",
+        url: "/instance/service/testservice/channel/" + channel_id,
+        timeout: 150000,
+        crossDomain: true,
+        async: false,
+        success: function(json, status) {
+            result = json.name;
+        },
+        error: function (request, textStatus, errorThrown){
+            console.log("ERROR FIND POINT FOR CHANNEL " + channel_id)
+        }
+    });
+    return result;
+}
+
 function getLayers(){
     var layers = {
         'Яндекс': new L.Yandex(),
@@ -169,7 +186,8 @@ function getLayers(){
 }
 
 function getLogoChannelId(channel_id){
-    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "' id='" + channel_id + "'/>" + channel_id;
+    var name = getNameForChannelId(channel_id);
+    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "' id='" + channel_id + "'/>" + name;
 }
 
 function getOverlayMaps(){
