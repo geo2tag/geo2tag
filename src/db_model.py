@@ -474,6 +474,17 @@ def setPluginState(pluginName, state):
         db_setplugin[PLUGINS].save(obj)
 
 
+def getNotEmptyChannelIds(serviceName):
+    channel_ids_array = []
+    db_getallchanelids = getDbObject(serviceName)
+    obj = list(db_getallchanelids[CHANNELS_COLLECTION].find())
+    for result in obj:
+        if list(db_getallchanelids[POINTS_COLLECTION].find({
+                CHANNEL_ID: ObjectId(result[ID])})) != []:
+            channel_ids_array.append(unicode(result[ID]))
+    return channel_ids_array
+
+
 def getAllChannelIds(serviceName):
     all_channel_ids_array = []
     db_getallchanelids = getDbObject(serviceName)
