@@ -5,28 +5,21 @@ from check_pullrequest import check_pullrequest
 from check_git_conflict import check_git_conflict
 from check_git_branch import check_git_branch
 from jira_api import get_jira_server, get_jira_issue, reopen_issue, \
-    add_comment
-import argparse
+    add_comment, get_test_scenario_field
+from pytift_result_api import get_comment, write_env_var
+from get_args_pytift import get_branch_number
 
-ARG_BRANCH = '--branch'
-JOB_URL = 'jenkins.osll.ru/job/geo2tag-test/'
+
 FAIL_REASON = "FAIL_REASON"
 SUCCESS_MSG = "SUCCESS"
-PROPSFILE = 'propsfile'
-MODE_AW = 'aw'
-
-
-def write_env_var(variable, value):
-    f = open(PROPSFILE, MODE_AW)
-    f.write(variable + '=' + value + '\n')
-    f.close()
 
 
 def check_issue(branch):
     jira = get_jira_server()
     issue = get_jira_issue(jira, branch)
     if str(issue.fields.status) == 'Resolved':
-        test_scenario_field = check_test_scenario_field(issue)
+        test_scenario_field = check_test_scenario_field(
+            get_test_scenario_field(issue))
         if check_git_branch(branch) == True:
             conflict = check_git_conflict(branch)
             pullrequest = check_pullrequest(branch)
@@ -65,35 +58,6 @@ def check_issue(branch):
                 write_env_var(FAIL_REASON, comment)
     else:
         write_env_var(FAIL_REASON, SUCCESS_MSG)
-
-
-def get_branch_number():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        ARG_BRANCH,
-        required=True)
-    args = parser.parse_args()
-    return args.branch
-
-
-def get_comment(test_scenario_field=True, conflict=False, pullrequest=True,
-                success_build=True, build_number=0):
-    result = 'Test failed. \n'
-    if not test_scenario_field:
-        result += 'test scenario is missing\n'
-    if conflict:
-        result += 'conflicts exist at branch\n'
-    if not pullrequest:
-        result += 'pullrequest is missing\n'
-    if not success_build:
-        result += 'auto tests failed, link '
-        result += 'http://' + get_jenkins_build_result(build_number)
-    return result
-
-
-def get_jenkins_build_result(build_number):
-    result = JOB_URL + str(build_number) + '/console'
-    return result
 
 
 if __name__ == '__main__':

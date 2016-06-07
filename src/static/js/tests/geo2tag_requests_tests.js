@@ -10,7 +10,7 @@ QUnit.test( 'Get channels test',
     	    done();
     	};
         var testgetChannels = new Geo2TagRequests('test', 'test');
-    	testgetChannels.getChannels('testservice', callbackSuccess, callbackFail);
+    	testgetChannels.getChannels('testservice', callbackSuccess, callbackFail, '', 5);
     }); 
 
 QUnit.test( 'Get points test',

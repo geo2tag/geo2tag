@@ -9,7 +9,14 @@ var __indexOf = Array.prototype.indexOf || function(item) {
   }
   return -1;
 };
+var LOCATION = 'location';
+var COORDINATES = 'coordinates'
+
 cookies = window.NM.cookies;
+
+function getMapIcon(channel_id){
+    return "get_icon?channel_id=" + channel_id;
+}
 
 function fixMapSize(){
     var content = $("#map");
@@ -26,6 +33,31 @@ function fixMapSize(){
     console.log(content.parent());
     map.invalidateSize();
 }
+
+function setLayerWithCluster(){
+    var getPointForMap = new Geo2TagRequests('map', 'map');
+    var callbackSuccess = function (data) {
+        var data_len = data.length;
+        markers = new L.MarkerClusterGroup();
+        for(var i = 0; i < data_len; i++){
+            var mapIcon = L.icon({
+                iconUrl: getMapIcon(data[i]['channel_id']['$oid'])});
+            var text = data[i].json.name || 'Название отсутствует';
+            markers.addLayer(L.marker([
+                data[i][LOCATION][COORDINATES][0],
+                data[i][LOCATION][COORDINATES][1]],
+                {icon: mapIcon}).bindPopup(text).openPopup());
+        }
+        map.addLayer(markers);
+        map['markers'] = markers;
+        console.log('success set layer with cluster')
+    };
+    var callbackFail = function () {
+        console.log('fail set layer with cluster')
+    };
+    getPointForMap.getPoints(par.serviceName, callbackSuccess, callbackFail, par.channel_ids, 1000);
+}
+
 
 function changeCheckboxListener(){
     $('input.leaflet-control-layers-selector').change(function() {
@@ -67,6 +99,19 @@ function checkCheckboxOnControl(){
     }
 }
 
+function checkAllCheckBoxes(){
+    $('input.leaflet-control-layers-selector').each(function(){
+        var span = $(this).parent()[0].childNodes[1].childNodes[1];
+            if($(span)[0]){
+                $(this).trigger('click');
+            }
+    });
+}
+
+function deleteClusterFromMap(){
+    map['markers'].clearLayers();
+}
+
 function deleteOverlayMap(){
     for(var key in map['control']._layers){
         if(map['control']._layers[key].overlay){
@@ -79,8 +124,12 @@ function deleteOverlayMap(){
     });
 }
 
+function refreshMapWithClustering(){
+    deleteClusterFromMap();
+    setLayerWithCluster();
+}
 
-function refreshMap(overlayMaps){
+function refreshMapWithoutClustering(){
     deleteOverlayMap();
     map['control'] = setOverlayMaps(map['control']);
     checkCheckboxOnControl();
@@ -91,12 +140,11 @@ function getLayerForChannelId(channel_id, url){
     var layer = new L.LayerJSON({url: url,
          propertyLoc: ['location.coordinates.0','location.coordinates.1'],
          buildPopup: function(data) {
-             return data.json.name || null;
+             return data.json.name || 'Название отсутствует';
          },
          buildIcon: function(data, title) {
-             var url_icon = '/' + getInstancePrefix() + "/service/testservice/get_icon?channel_id=" + channel_id;
              return new L.Icon({
-                 iconUrl : url_icon
+                 iconUrl : getMapIcon(channel_id)
              });
          }
     });
@@ -107,6 +155,23 @@ function addNewControlToMap(layers, overlayMaps){
     var control = new L.Control.Layers(layers, overlayMaps)
     map.addControl(control);
     map['control'] = control;
+}
+
+function getNameForChannelId(channel_id){
+    $.ajax({
+        type: "GET",
+        url: "/instance/service/testservice/channel/" + channel_id,
+        timeout: 150000,
+        crossDomain: true,
+        async: false,
+        success: function(json, status) {
+            result = json.name;
+        },
+        error: function (request, textStatus, errorThrown){
+            console.log("ERROR FIND POINT FOR CHANNEL " + channel_id)
+        }
+    });
+    return result;
 }
 
 function getLayers(){
@@ -121,16 +186,39 @@ function getLayers(){
 }
 
 function getLogoChannelId(channel_id){
-    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "' id='" + channel_id + "'/>" + channel_id;
+    var name = getNameForChannelId(channel_id);
+    return "<img src = '/instance/service/testservice/get_icon?channel_id="  +  channel_id + "' id='" + channel_id + "'/>" + name;
+}
+
+function isPointExistsForChannelId(channel_id){
+     $.ajax({
+        type: "GET",
+        url: "/instance/service/testservice/point?number=1&channel_ids=" + channel_id,
+        timeout: 150000,
+        crossDomain: true,
+        async: false,
+        success: function(json, status) {
+            if(json.length != 0)
+                result = true;
+            else 
+                result = false;
+        },
+        error: function (request, textStatus, errorThrown){
+            console.log("ERROR FIND POINT FOR CHANNEL " + channel_id)
+        }
+    });
+    return result;
 }
 
 function getOverlayMaps(){
     var overlayMaps = {};
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
-        var logo_channel_id = getLogoChannelId(channel_id);
-        var url = MakeUrlForChannelId(par, channel_id);
-        overlayMaps[logo_channel_id] = getLayerForChannelId(channel_id, url);
+        if(isPointExistsForChannelId(channel_id)){
+            var logo_channel_id = getLogoChannelId(channel_id);
+            var url = MakeUrlForChannelId(par, channel_id);
+            overlayMaps[logo_channel_id] = getLayerForChannelId(channel_id, url);
+        }
     }
     return overlayMaps;
 }
@@ -138,8 +226,10 @@ function getOverlayMaps(){
 function setOverlayMaps(control){
     for(var i = 0; i < par[CHANNEL_IDS].length; i++){
         var channel_id = par[CHANNEL_IDS][i];
-        var url = MakeUrlForChannelId(par, channel_id);
-        control.addOverlay(getLayerForChannelId(channel_id, url), getLogoChannelId(channel_id));
+        if(isPointExistsForChannelId(channel_id)){
+            var url = MakeUrlForChannelId(par, channel_id);
+            control.addOverlay(getLayerForChannelId(channel_id, url), getLogoChannelId(channel_id));
+        }
     }
     return control;
 }
@@ -153,20 +243,15 @@ invalidateMapSizeWhenVisible = function(map) {
 };
 
 
-createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
+createMap = function(elementId, locate, zoom, overlayMaps, lat, lon, clustering) {
   var layers, mapType;
   if (elementId == null) {
     elementId = 'map';
-  }
-  if (lat == undefined || lon == undefined) {
-    lat = 63.377;
-    lon = 28.938 ;
   }
   map = L.map(elementId, {
     center: [lat, lon],
     zoom: zoom
   });
-
   if (locate == true){
       function onLocationFound(e) {
           map.panTo(e.latlng);
@@ -182,7 +267,16 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   }
   var layers = getLayers();
   map.invalidateSize();
-  addNewControlToMap(layers, overlayMaps);
+  if(!clustering){
+      addNewControlToMap(layers, overlayMaps);
+      changeCheckboxListener();
+      checkAllCheckBoxes();
+  }
+  else{
+      console.log('Clustering is turned on');
+      map.addControl(new L.Control.Layers(layers));
+      setLayerWithCluster();
+  }
   mapType = cookies.readCookie('maptype');
   if (mapType === void 0 || layers[mapType] === void 0) {
     cookies.createCookie('maptype', 'Яндекс');
@@ -196,13 +290,8 @@ createMap = function(elementId, locate, zoom, overlayMaps, lat, lon) {
   }
   else
      map.addLayer(layers['Яндекс']);
-
   return map;
 };
-
-
-
-
 
 window.NM.maps = {
   createMap: createMap,

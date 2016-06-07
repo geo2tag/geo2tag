@@ -179,27 +179,21 @@ def getServiceList(number, offset, serviceSubstr, ownerId):
     return list(coursor.sort(NAME, 1).skip(offset).limit(number))
 
 
+def applySubstringCriterion(substring, criterion):
+    if substring != '':
+        criterion.update({NAME: {'$regex': substring}})
+
+
 def getChannelsList(serviceName, substring, number, offset):
     db_getchannellist = getDbObject(serviceName)
-    if substring is not None and number is not None and offset is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}}).skip(offset).limit(number)
-    elif substring is not None and offset is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}}).skip(offset)
-    elif substring is not None and number is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}}).limit(number)
-    elif offset is not None and number is not None:
-        return db_getchannellist[
-            CHANNELS_COLLECTION].find().skip(offset).limit(number)
-    elif substring is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find(
-            {'name': {'$regex': substring}})
-    elif number is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find().limit(number)
-    elif offset is not None:
-        return db_getchannellist[CHANNELS_COLLECTION].find().skip(offset)
+    criterion = {}
+    applySubstringCriterion(substring, criterion)
+    channel_list = db_getchannellist[CHANNELS_COLLECTION].find(
+        criterion)
+    if offset:
+        channel_list.skip(offset)
+    channel_list.limit(number)
+    return channel_list
 
 
 def getChannelById(serviceName, channelId):
@@ -478,6 +472,17 @@ def setPluginState(pluginName, state):
     else:
         obj[ENABLED] = state
         db_setplugin[PLUGINS].save(obj)
+
+
+def getNotEmptyChannelIds(serviceName):
+    channel_ids_array = []
+    db_getallchanelids = getDbObject(serviceName)
+    obj = list(db_getallchanelids[CHANNELS_COLLECTION].find())
+    for result in obj:
+        if list(db_getallchanelids[POINTS_COLLECTION].find({
+                CHANNEL_ID: ObjectId(result[ID])})) != []:
+            channel_ids_array.append(unicode(result[ID]))
+    return channel_ids_array
 
 
 def getAllChannelIds(serviceName):
